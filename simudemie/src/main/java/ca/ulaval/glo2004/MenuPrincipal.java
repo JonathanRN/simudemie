@@ -1,27 +1,33 @@
 package ca.ulaval.glo2004;
 
-import static com.formdev.flatlaf.FlatClientProperties.TABBED_PANE_MINIMUM_TAB_WIDTH;
 import static com.formdev.flatlaf.FlatClientProperties.TABBED_PANE_TAB_AREA_ALIGNMENT;
 import static com.formdev.flatlaf.FlatClientProperties.TABBED_PANE_TAB_HEIGHT;
 import static com.formdev.flatlaf.FlatClientProperties.TABBED_PANE_TAB_ICON_PLACEMENT;
 import com.formdev.flatlaf.intellijthemes.FlatNordIJTheme;
 import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.UIManager;
 
 public class MenuPrincipal extends javax.swing.JFrame {
-
+    private static final String ICON_PATH = "/icon_virus_64px.png";
+    private static final String LOGO_PATH = "/simudemie_logo_100px_63px.png";
+    
     public MenuPrincipal() {
         initComponents();
+        initTabbedPaneProperties();
+    }
+    
+    private void initTabbedPaneProperties() {
         TabbedPane.putClientProperty(TABBED_PANE_TAB_AREA_ALIGNMENT, "leading");
         TabbedPane.putClientProperty(TABBED_PANE_TAB_HEIGHT, 75);
-        TabbedPane.putClientProperty(TABBED_PANE_MINIMUM_TAB_WIDTH, 87);
         TabbedPane.putClientProperty(TABBED_PANE_TAB_ICON_PLACEMENT, 1);
         
         TabbedPane.setEnabledAt(0, false);
-        TabbedPane.setDisabledIconAt(0, new javax.swing.ImageIcon(getClass().getResource("/icons8_virus_50px.png")));
-        //TabbedPane.setForegroundAt(0, Color.WHITE);
+        TabbedPane.setDisabledIconAt(0, new ImageIcon(getClass().getResource(LOGO_PATH)));
+        QuitButton.setPreferredSize(new Dimension(TabbedPane.getBoundsAt(0).width, QuitButton.getHeight()));
     }
 
     /**
@@ -45,18 +51,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simudémie");
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
         QuitPannel.setOpaque(false);
 
         QuitButton.setToolTipText("Quitter l'application");
-        QuitButton.setPreferredSize(new java.awt.Dimension(87, 75));
+        QuitButton.setPreferredSize(new java.awt.Dimension(120, 75));
         QuitButton.setLayout(new java.awt.BorderLayout());
 
         QuitLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         QuitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon_exit_25px.png"))); // NOI18N
         QuitLabel.setToolTipText("Quitter l'application");
-        QuitLabel.setPreferredSize(new java.awt.Dimension(87, 75));
+        QuitLabel.setPreferredSize(new java.awt.Dimension(120, 75));
         QuitLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 QuitLabelMouseClicked(evt);
@@ -76,12 +83,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
             QuitPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(QuitPannelLayout.createSequentialGroup()
                 .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 1914, Short.MAX_VALUE))
         );
         QuitPannelLayout.setVerticalGroup(
             QuitPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(QuitPannelLayout.createSequentialGroup()
-                .addContainerGap(408, Short.MAX_VALUE)
+                .addContainerGap(731, Short.MAX_VALUE)
                 .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -95,9 +102,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TabbedPane.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         Title.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        Title.setAlignmentY(0.0F);
         Title.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Title.setOpaque(true);
-        TabbedPane.addTab("SIMUDÉMIE\n", new javax.swing.ImageIcon(getClass().getResource("/icons8_coronavirus_48px.png")), Title); // NOI18N
+        TabbedPane.addTab("", new javax.swing.ImageIcon(getClass().getResource("/simudemie_logo_100px_63px.png")), Title); // NOI18N
 
         jPanel3.setBackground(new java.awt.Color(59, 66, 82));
         jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -107,11 +115,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 895, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 479, Short.MAX_VALUE)
+            .addGap(0, 802, Short.MAX_VALUE)
         );
 
         TabbedPane.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icon_play_25px.png")), jPanel3, "Scénarios"); // NOI18N
@@ -124,11 +132,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 895, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 479, Short.MAX_VALUE)
+            .addGap(0, 802, Short.MAX_VALUE)
         );
 
         TabbedPane.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icon_add_25px.png")), jPanel4, "Création"); // NOI18N
@@ -178,7 +186,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
 		// enable/disable window decoration for later created frames/dialogs
 		frame.setDefaultLookAndFeelDecorated(true);
-                frame.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/virus_64px.png")).getImage());
+                frame.setIconImage(new javax.swing.ImageIcon(getClass().getResource(ICON_PATH)).getImage());
             }
         });
     }

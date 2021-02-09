@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>ca.ulaval.glo2004</groupId>
-  <artifactId>pationator</artifactId>
+  <artifactId>Simudemie</artifactId>
   <version>1.0-SNAPSHOT</version>
 
 
-  <name>pationator</name>
+  <name>Simudemie</name>
 
   <properties>
     <java.version>1.8</java.version>

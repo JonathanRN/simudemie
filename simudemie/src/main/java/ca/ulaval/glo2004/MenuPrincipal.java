@@ -124,12 +124,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Projets.setBackground(new java.awt.Color(59, 66, 82));
         Projets.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Projets.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        Projets.setLayout(new java.awt.BorderLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Scénarios");
-        Projets.add(jLabel1, java.awt.BorderLayout.PAGE_START);
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jScrollPane1.setBackground(new java.awt.Color(59, 66, 82));
         jScrollPane1.setMaximumSize(new java.awt.Dimension(100, 100));
@@ -138,7 +136,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ProjectPanelContainer.setBackground(new java.awt.Color(59, 66, 82));
         jScrollPane1.setViewportView(ProjectPanelContainer);
 
-        Projets.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout ProjetsLayout = new javax.swing.GroupLayout(Projets);
+        Projets.setLayout(ProjetsLayout);
+        ProjetsLayout.setHorizontalGroup(
+            ProjetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProjetsLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 922, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        ProjetsLayout.setVerticalGroup(
+            ProjetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProjetsLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE))
+        );
 
         TabbedPane.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icon_play_25px.png")), Projets, "Scénarios"); // NOI18N
 

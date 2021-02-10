@@ -43,56 +43,161 @@ public class ProjetPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         Background = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        date = new javax.swing.JLabel();
+        NomSIm = new javax.swing.JLabel();
+        nomVIr = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         Carte = new javax.swing.JPanel();
-        ImageBackground = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(350, 350));
         setMinimumSize(new java.awt.Dimension(350, 350));
         setPreferredSize(new java.awt.Dimension(350, 350));
-        setLayout(new java.awt.GridLayout(0, 1));
 
         Background.setBackground(new java.awt.Color(46, 52, 64));
         Background.setMaximumSize(new java.awt.Dimension(260, 130));
         Background.setMinimumSize(new java.awt.Dimension(260, 130));
 
+        date.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        date.setForeground(new java.awt.Color(236, 239, 244));
+        date.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        date.setText("30 Décembre 2020");
+        date.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        NomSIm.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        NomSIm.setForeground(new java.awt.Color(236, 239, 244));
+        NomSIm.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        NomSIm.setText("Ferado");
+        NomSIm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        nomVIr.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nomVIr.setForeground(new java.awt.Color(236, 239, 244));
+        nomVIr.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        nomVIr.setText("Corona-19");
+        nomVIr.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        nomVIr.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jPanel3.setBackground(new java.awt.Color(163, 190, 140));
+        jPanel3.setMinimumSize(new java.awt.Dimension(50, 50));
+        jPanel3.setPreferredSize(new java.awt.Dimension(60, 60));
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 56)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(236, 239, 244));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("L");
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel3.add(jLabel5, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(nomVIr, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(NomSIm, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(date)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(nomVIr)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NomSIm, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout BackgroundLayout = new javax.swing.GroupLayout(Background);
         Background.setLayout(BackgroundLayout);
         BackgroundLayout.setHorizontalGroup(
             BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(BackgroundLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
         BackgroundLayout.setVerticalGroup(
             BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(BackgroundLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
         );
 
-        add(Background);
-
-        Carte.setBackground(new java.awt.Color(255, 102, 51));
+        Carte.setBackground(new java.awt.Color(216, 222, 233));
         Carte.setMaximumSize(new java.awt.Dimension(0, 0));
         Carte.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        ImageBackground.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ImageBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/simudemie_logo_100px_63px.png"))); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(216, 222, 233));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(46, 52, 64));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel4.setText("USA");
+        jPanel2.add(jLabel4, java.awt.BorderLayout.PAGE_END);
 
         javax.swing.GroupLayout CarteLayout = new javax.swing.GroupLayout(Carte);
         Carte.setLayout(CarteLayout);
         CarteLayout.setHorizontalGroup(
             CarteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ImageBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CarteLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                .addGap(28, 28, 28))
         );
         CarteLayout.setVerticalGroup(
             CarteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ImageBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CarteLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                .addGap(28, 28, 28))
         );
 
-        add(Carte);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(Carte, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Carte, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
     private javax.swing.JPanel Carte;
-    private javax.swing.JLabel ImageBackground;
+    private javax.swing.JLabel NomSIm;
+    private javax.swing.JLabel date;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel nomVIr;
     // End of variables declaration//GEN-END:variables
 }

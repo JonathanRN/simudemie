@@ -18,12 +18,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public MenuPrincipal() {
         initComponents();
         initTabbedPaneProperties();
+        
+        ProjectPanelContainer.setLayout(new WrapLayout(0, 50, 50));
+        
+        for (int i = 0; i < 4; i++) {
+            ProjectPanelContainer.add(new ProjetPanel());
+        }
+        
+        // todo, trouver meilleure facon de caller ca
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
     }
     
     private void initTabbedPaneProperties() {
         TabbedPane.putClientProperty(TABBED_PANE_TAB_AREA_ALIGNMENT, "leading");
         TabbedPane.putClientProperty(TABBED_PANE_TAB_HEIGHT, 75);
         TabbedPane.putClientProperty(TABBED_PANE_TAB_ICON_PLACEMENT, 1);
+        TabbedPane.setSelectedIndex(1);
         
         TabbedPane.setEnabledAt(0, false);
         TabbedPane.setDisabledIconAt(0, new ImageIcon(getClass().getResource(LOGO_PATH)));
@@ -45,12 +55,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Main = new javax.swing.JPanel();
         TabbedPane = new javax.swing.JTabbedPane();
         Title = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        Projets = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ProjectPanelContainer = new javax.swing.JPanel();
+        Creation = new javax.swing.JPanel();
         TitleMenuBar = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simudémie");
+        setMinimumSize(new java.awt.Dimension(640, 480));
         setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
@@ -83,12 +97,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
             QuitPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(QuitPannelLayout.createSequentialGroup()
                 .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1914, Short.MAX_VALUE))
+                .addGap(0, 973, Short.MAX_VALUE))
         );
         QuitPannelLayout.setVerticalGroup(
             QuitPannelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(QuitPannelLayout.createSequentialGroup()
-                .addContainerGap(731, Short.MAX_VALUE)
+                .addContainerGap(517, Short.MAX_VALUE)
                 .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -107,41 +121,43 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Title.setOpaque(true);
         TabbedPane.addTab("", new javax.swing.ImageIcon(getClass().getResource("/simudemie_logo_100px_63px.png")), Title); // NOI18N
 
-        jPanel3.setBackground(new java.awt.Color(59, 66, 82));
-        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel3.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        Projets.setBackground(new java.awt.Color(59, 66, 82));
+        Projets.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Projets.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        Projets.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Scénarios");
+        Projets.add(jLabel1, java.awt.BorderLayout.PAGE_START);
+
+        jScrollPane1.setBackground(new java.awt.Color(59, 66, 82));
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(100, 100));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(100, 100));
+
+        ProjectPanelContainer.setBackground(new java.awt.Color(59, 66, 82));
+        jScrollPane1.setViewportView(ProjectPanelContainer);
+
+        Projets.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        TabbedPane.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icon_play_25px.png")), Projets, "Scénarios"); // NOI18N
+
+        Creation.setBackground(new java.awt.Color(59, 66, 82));
+        Creation.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Creation.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+
+        javax.swing.GroupLayout CreationLayout = new javax.swing.GroupLayout(Creation);
+        Creation.setLayout(CreationLayout);
+        CreationLayout.setHorizontalGroup(
+            CreationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 972, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 802, Short.MAX_VALUE)
+        CreationLayout.setVerticalGroup(
+            CreationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 588, Short.MAX_VALUE)
         );
 
-        TabbedPane.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icon_play_25px.png")), jPanel3, "Scénarios"); // NOI18N
-
-        jPanel4.setBackground(new java.awt.Color(59, 66, 82));
-        jPanel4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 802, Short.MAX_VALUE)
-        );
-
-        TabbedPane.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icon_add_25px.png")), jPanel4, "Création"); // NOI18N
-
-        TabbedPane.setSelectedIndex(1);
+        TabbedPane.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icon_add_25px.png")), Creation, "Création"); // NOI18N
 
         Main.add(TabbedPane, java.awt.BorderLayout.CENTER);
 
@@ -192,14 +208,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Creation;
     private javax.swing.JPanel Main;
+    private javax.swing.JPanel ProjectPanelContainer;
+    private javax.swing.JPanel Projets;
     private javax.swing.JPanel QuitButton;
     private javax.swing.JLabel QuitLabel;
     private javax.swing.JPanel QuitPannel;
     private javax.swing.JTabbedPane TabbedPane;
     private javax.swing.JLabel Title;
     private javax.swing.JMenuBar TitleMenuBar;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

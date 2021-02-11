@@ -30,81 +30,28 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,82,0,0,4,69"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,82,0,0,4,99"/>
   </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="QuitPannel">
+    <Container class="javax.swing.JPanel" name="MainMenu">
       <Properties>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="QuitButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="973" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="517" max="32767" attributes="0"/>
-                  <Component id="QuitButton" min="-2" max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Container class="javax.swing.JPanel" name="QuitButton">
-          <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Quitter l&apos;application"/>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[120, 75]"/>
-            </Property>
-          </Properties>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="QuitLabel">
-              <Properties>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icon_exit_25px.png"/>
-                </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Quitter l&apos;application"/>
-                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[120, 75]"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="QuitLabelMouseClicked"/>
-                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="QuitLabelMouseEntered"/>
-                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="QuitLabelMouseExited"/>
-              </Events>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                  <BorderConstraints direction="Center"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-          </SubComponents>
-        </Container>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JPanel" name="Main">
-      <Properties>
-        <Property name="opaque" type="boolean" value="false"/>
-      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="Center"/>
+        </Constraint>
+      </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JTabbedPane" name="TabbedPane">
+        <Container class="javax.swing.JTabbedPane" name="TabMenu">
           <Properties>
             <Property name="tabPlacement" type="int" value="2"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Wait Cursor"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="0"/>
@@ -118,28 +65,43 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="Title">
+            <Container class="javax.swing.JPanel" name="TitleMenu">
               <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="36" style="1"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="52" green="42" red="3b" type="rgb"/>
                 </Property>
-                <Property name="alignmentY" type="float" value="0.0"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Default Cursor"/>
                 </Property>
-                <Property name="opaque" type="boolean" value="true"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Dialog" size="24" style="0"/>
+                </Property>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="">
+                  <JTabbedPaneConstraints tabName="" toolTip="Accueil">
                     <Property name="tabTitle" type="java.lang.String" value=""/>
                     <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/simudemie_logo_100px_63px.png"/>
                     </Property>
+                    <Property name="tabToolTip" type="java.lang.String" value="Accueil"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
-            </Component>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="1002" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="588" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
             <Container class="javax.swing.JPanel" name="Projets">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -164,38 +126,9 @@
                 </Constraint>
               </Constraints>
 
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" pref="922" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="475" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="jLabel1">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Dialog" size="36" style="1"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Sc&#xe9;narios"/>
-                    <Property name="verticalAlignment" type="int" value="3"/>
-                  </Properties>
-                </Component>
-                <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+                <Container class="javax.swing.JScrollPane" name="ScrollPane">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="52" green="42" red="3b" type="rgb"/>
@@ -207,6 +140,11 @@
                       <Dimension value="[100, 100]"/>
                     </Property>
                   </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                      <BorderConstraints direction="Center"/>
+                    </Constraint>
+                  </Constraints>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
@@ -218,6 +156,66 @@
                       </Properties>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                    </Container>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="TopBar">
+                  <Properties>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                        <EmptyBorder bottom="0" left="0" right="0" top="0"/>
+                      </Border>
+                    </Property>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[50, 75]"/>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                      <BorderConstraints direction="South"/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                  <SubComponents>
+                    <Container class="javax.swing.JPanel" name="AddButton">
+                      <Properties>
+                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="bb" green="bc" red="8f" type="rgb"/>
+                        </Property>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[45, 45]"/>
+                        </Property>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                          <BorderConstraints direction="Center"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JLabel" name="Icon">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="cc" green="cc" red="0" type="rgb"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="cc" green="ff" red="0" type="rgb"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/icons8_sum_40px_1.png"/>
+                            </Property>
+                            <Property name="horizontalTextPosition" type="int" value="0"/>
+                          </Properties>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                              <BorderConstraints direction="Center"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                      </SubComponents>
                     </Container>
                   </SubComponents>
                 </Container>
@@ -250,7 +248,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="972" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1002" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -265,37 +263,4 @@
       </SubComponents>
     </Container>
   </SubComponents>
-  <LayoutCode>
-    <CodeStatement>
-      <CodeExpression id="1">
-        <ExpressionOrigin>
-          <CodeExpression id="2">
-            <ExpressionOrigin>
-              <ExpressionProvider type="ComponentRef">
-                <ComponentRef name="."/>
-              </ExpressionProvider>
-            </ExpressionOrigin>
-          </CodeExpression>
-          <ExpressionProvider type="CodeMethod">
-            <CodeMethod name="getContentPane" class="javax.swing.JFrame" parameterTypes=""/>
-          </ExpressionProvider>
-        </ExpressionOrigin>
-      </CodeExpression>
-      <StatementProvider type="CodeMethod">
-        <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
-      </StatementProvider>
-      <Parameters>
-        <CodeExpression id="3">
-          <ExpressionOrigin>
-            <ExpressionProvider type="CodeConstructor">
-              <CodeConstructor class="javax.swing.OverlayLayout" parameterTypes="java.awt.Container"/>
-            </ExpressionProvider>
-            <Parameters>
-              <CodeExpression id="1"/>
-            </Parameters>
-          </ExpressionOrigin>
-        </CodeExpression>
-      </Parameters>
-    </CodeStatement>
-  </LayoutCode>
 </Form>

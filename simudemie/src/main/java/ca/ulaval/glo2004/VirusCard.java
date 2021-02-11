@@ -14,12 +14,12 @@ import java.awt.event.ComponentEvent;
  *
  * @author Jonathan
  */
-public class ProjetPanel extends javax.swing.JPanel {
+public class VirusCard extends javax.swing.JPanel {
 
     /**
      * Creates new form ProjetPane
      */
-    public ProjetPanel() {
+    public VirusCard() {
         initComponents();
         
 //        this.addComponentListener(new ComponentAdapter() {
@@ -70,17 +70,17 @@ public class ProjetPanel extends javax.swing.JPanel {
         NomSIm.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         NomSIm.setForeground(new java.awt.Color(236, 239, 244));
         NomSIm.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        NomSIm.setText("Ferado");
+        NomSIm.setText("Rona Virus");
         NomSIm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         nomVIr.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nomVIr.setForeground(new java.awt.Color(236, 239, 244));
         nomVIr.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        nomVIr.setText("Corona-19");
+        nomVIr.setText("Propagation : 85%");
         nomVIr.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         nomVIr.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jPanel3.setBackground(new java.awt.Color(163, 190, 140));
+        jPanel3.setBackground(new java.awt.Color(191, 97, 106));
         jPanel3.setMinimumSize(new java.awt.Dimension(50, 50));
         jPanel3.setPreferredSize(new java.awt.Dimension(60, 60));
         jPanel3.setLayout(new java.awt.BorderLayout());
@@ -88,7 +88,7 @@ public class ProjetPanel extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 56)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(236, 239, 244));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("L");
+        jLabel5.setText("R");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jPanel3.add(jLabel5, java.awt.BorderLayout.CENTER);
 
@@ -102,12 +102,10 @@ public class ProjetPanel extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(nomVIr, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(NomSIm, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NomSIm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -116,7 +114,7 @@ public class ProjetPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(date)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(nomVIr)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(NomSIm, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -139,17 +137,18 @@ public class ProjetPanel extends javax.swing.JPanel {
                 .addGap(10, 10, 10))
         );
 
-        Carte.setBackground(new java.awt.Color(216, 222, 233));
+        Carte.setBackground(new java.awt.Color(46, 52, 64));
         Carte.setMaximumSize(new java.awt.Dimension(0, 0));
         Carte.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        jPanel2.setBackground(new java.awt.Color(216, 222, 233));
+        jPanel2.setBackground(new java.awt.Color(46, 52, 64));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
+        jLabel4.setBackground(new java.awt.Color(236, 239, 244));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(46, 52, 64));
+        jLabel4.setForeground(new java.awt.Color(236, 239, 244));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel4.setText("USA");
+        jLabel4.setText("Taux de décès : 20%");
         jPanel2.add(jLabel4, java.awt.BorderLayout.PAGE_END);
 
         javax.swing.GroupLayout CarteLayout = new javax.swing.GroupLayout(Carte);
@@ -158,8 +157,8 @@ public class ProjetPanel extends javax.swing.JPanel {
             CarteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CarteLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                .addGap(28, 28, 28))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(112, 112, 112))
         );
         CarteLayout.setVerticalGroup(
             CarteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,16 +172,14 @@ public class ProjetPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(Background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(Carte, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(Background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(196, 196, 196)
                 .addComponent(Carte, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents

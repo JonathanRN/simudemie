@@ -27,18 +27,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Component id="Background" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="Background" max="32767" attributes="0"/>
           <Component id="Carte" pref="350" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="Background" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+          <Component id="Background" min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="196" pref="196" max="-2" attributes="0"/>
               <Component id="Carte" pref="154" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -48,7 +45,7 @@
     <Container class="javax.swing.JPanel" name="Background">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="40" green="34" red="2e" type="rgb"/>
+          <Color blue="e9" green="de" red="d8" type="rgb"/>
         </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[260, 130]"/>
@@ -80,6 +77,11 @@
       </Layout>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="jPanel1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e9" green="de" red="d8" type="rgb"/>
+            </Property>
+          </Properties>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -90,15 +92,12 @@
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="nomVIr" min="-2" pref="299" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="NomSIm" min="-2" pref="281" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jPanel3" min="-2" pref="60" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="date" min="-2" pref="144" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="NomSIm" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -111,7 +110,7 @@
                           <Component id="date" min="-2" max="-2" attributes="0"/>
                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="46" max="32767" attributes="0"/>
+                      <EmptySpace pref="56" max="32767" attributes="0"/>
                       <Component id="nomVIr" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="NomSIm" min="-2" pref="20" max="-2" attributes="0"/>
@@ -126,7 +125,7 @@
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f4" green="ef" red="ec" type="rgb"/>
+                  <Color blue="40" green="34" red="2e" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="text" type="java.lang.String" value="30 D&#xe9;cembre 2020"/>
@@ -139,10 +138,10 @@
                   <Font name="Segoe UI" size="24" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f4" green="ef" red="ec" type="rgb"/>
+                  <Color blue="40" green="34" red="2e" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Ferado"/>
+                <Property name="text" type="java.lang.String" value="La terre"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
               </Properties>
             </Component>
@@ -152,10 +151,10 @@
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="f4" green="ef" red="ec" type="rgb"/>
+                  <Color blue="40" green="34" red="2e" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Corona-19"/>
+                <Property name="text" type="java.lang.String" value="Population : 8 milliards"/>
                 <Property name="verticalAlignment" type="int" value="3"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
               </Properties>
@@ -217,8 +216,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jPanel2" pref="294" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="jPanel2" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -244,6 +243,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f4" green="ef" red="ec" type="rgb"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
@@ -251,7 +253,7 @@
                   <Color blue="40" green="34" red="2e" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="USA"/>
+                <Property name="text" type="java.lang.String" value="Nb. de pays : 197"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

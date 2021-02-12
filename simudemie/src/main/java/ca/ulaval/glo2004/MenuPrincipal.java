@@ -3,7 +3,13 @@ package ca.ulaval.glo2004;
 import static com.formdev.flatlaf.FlatClientProperties.TABBED_PANE_TAB_AREA_ALIGNMENT;
 import static com.formdev.flatlaf.FlatClientProperties.TABBED_PANE_TAB_HEIGHT;
 import com.formdev.flatlaf.intellijthemes.FlatNordIJTheme;
-import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.UIManager;
@@ -15,10 +21,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         initComponents();
         initTabbedPaneProperties();
         
-        ProjectPanelContainer.setLayout(new WrapLayout(0, 50, 50));
-        
         for (int i = 0; i < 4; i++) {
-            ProjectPanelContainer.add(new ProjetCard());
+            ProjectPanelContainer.add(new SimulationCard());
         }
         
         // todo, trouver meilleure facon de caller ca
@@ -43,18 +47,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TabMenu = new javax.swing.JTabbedPane();
         TitleMenu = new javax.swing.JPanel();
         Projets = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         ScrollPane = new javax.swing.JScrollPane();
         ProjectPanelContainer = new javax.swing.JPanel();
-        TopBar = new javax.swing.JPanel();
-        AddButton = new javax.swing.JPanel();
-        Icon = new javax.swing.JLabel();
         Creation = new javax.swing.JPanel();
         TitleMenuBar = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simudémie");
         setMinimumSize(new java.awt.Dimension(640, 480));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
 
         MainMenu.setOpaque(false);
         MainMenu.setLayout(new java.awt.BorderLayout());
@@ -71,47 +72,49 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TitleMenu.setLayout(TitleMenuLayout);
         TitleMenuLayout.setHorizontalGroup(
             TitleMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1002, Short.MAX_VALUE)
+            .addGap(0, 1030, Short.MAX_VALUE)
         );
         TitleMenuLayout.setVerticalGroup(
             TitleMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 588, Short.MAX_VALUE)
+            .addGap(0, 594, Short.MAX_VALUE)
         );
 
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/simudemie_logo_100px_63px.png")), TitleMenu, "Accueil"); // NOI18N
 
-        Projets.setBackground(new java.awt.Color(59, 66, 82));
         Projets.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Projets.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        Projets.setLayout(new java.awt.BorderLayout());
 
-        ScrollPane.setBackground(new java.awt.Color(59, 66, 82));
-        ScrollPane.setMaximumSize(new java.awt.Dimension(100, 100));
-        ScrollPane.setMinimumSize(new java.awt.Dimension(100, 100));
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setText("Scénarios");
 
-        ProjectPanelContainer.setBackground(new java.awt.Color(59, 66, 82));
+        ScrollPane.setBorder(null);
+        ScrollPane.setMaximumSize(new java.awt.Dimension(75, 275));
+        ScrollPane.setMinimumSize(new java.awt.Dimension(75, 275));
+        ScrollPane.setPreferredSize(new java.awt.Dimension(75, 275));
+
+        ProjectPanelContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -75, 0, 0));
+        ProjectPanelContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 75, 5));
         ScrollPane.setViewportView(ProjectPanelContainer);
 
-        Projets.add(ScrollPane, java.awt.BorderLayout.CENTER);
-
-        TopBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        TopBar.setPreferredSize(new java.awt.Dimension(50, 75));
-        TopBar.setLayout(new java.awt.BorderLayout());
-
-        AddButton.setForeground(new java.awt.Color(143, 188, 187));
-        AddButton.setPreferredSize(new java.awt.Dimension(45, 45));
-        AddButton.setLayout(new java.awt.BorderLayout());
-
-        Icon.setBackground(new java.awt.Color(0, 204, 204));
-        Icon.setForeground(new java.awt.Color(0, 255, 204));
-        Icon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_sum_40px_1.png"))); // NOI18N
-        Icon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        AddButton.add(Icon, java.awt.BorderLayout.CENTER);
-
-        TopBar.add(AddButton, java.awt.BorderLayout.CENTER);
-
-        Projets.add(TopBar, java.awt.BorderLayout.SOUTH);
+        javax.swing.GroupLayout ProjetsLayout = new javax.swing.GroupLayout(Projets);
+        Projets.setLayout(ProjetsLayout);
+        ProjetsLayout.setHorizontalGroup(
+            ProjetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProjetsLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(ProjetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        ProjetsLayout.setVerticalGroup(
+            ProjetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProjetsLayout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(278, Short.MAX_VALUE))
+        );
 
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icon_play_25px.png")), Projets, "Scénarios"); // NOI18N
 
@@ -123,11 +126,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Creation.setLayout(CreationLayout);
         CreationLayout.setHorizontalGroup(
             CreationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1002, Short.MAX_VALUE)
+            .addGap(0, 1030, Short.MAX_VALUE)
         );
         CreationLayout.setVerticalGroup(
             CreationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 588, Short.MAX_VALUE)
+            .addGap(0, 594, Short.MAX_VALUE)
         );
 
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icon_add_25px.png")), Creation, "Création"); // NOI18N
@@ -143,10 +146,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public static void main(String args[]) {
         FlatNordIJTheme.install();
         UIManager.put("TabbedPaneUI", "ca.ulaval.glo2004.CustomTabbedPaneUI");
+        UIManager.put("RootPaneUI", "ca.ulaval.glo2004.CustomRootPaneUI");
         
         UIManager.put("TabbedPane.tabSelectionHeight", 5);
         UIManager.put("TabbedPane.showTabSeparators", true);
         UIManager.put("TabbedPane.tabSeparatorsFullHeight", true);
+        
+        // TODO NE PAS CALL CA ICI
+        FontRegister.register();
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -165,9 +172,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel AddButton;
     private javax.swing.JPanel Creation;
-    private javax.swing.JLabel Icon;
     private javax.swing.JPanel MainMenu;
     private javax.swing.JPanel ProjectPanelContainer;
     private javax.swing.JPanel Projets;
@@ -175,6 +180,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane TabMenu;
     private javax.swing.JPanel TitleMenu;
     private javax.swing.JMenuBar TitleMenuBar;
-    private javax.swing.JPanel TopBar;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

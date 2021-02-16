@@ -92,7 +92,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ScrollPane.setMinimumSize(new java.awt.Dimension(75, 275));
         ScrollPane.setPreferredSize(new java.awt.Dimension(75, 275));
 
-        ProjectPanelContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -75, 0, 0));
+        ProjectPanelContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -75, 0, -75));
         ProjectPanelContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 75, 5));
         ScrollPane.setViewportView(ProjectPanelContainer);
 

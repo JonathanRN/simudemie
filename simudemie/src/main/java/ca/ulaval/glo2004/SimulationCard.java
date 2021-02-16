@@ -37,6 +37,38 @@ public class SimulationCard extends javax.swing.JPanel {
         setBackground(new Color(216, 222, 233, 38));
     }
     
+    public void setSimulationName(String name) {
+        SimulationName.setText(name);
+    }
+    
+    public void setDays(String days) {
+        Day.setText(days);
+    }
+    
+    public void setMapName(String name) {
+        MapName.setText(name);
+    }
+    
+    public void setVirusName(String name) {
+        VirusName.setText(name);
+    }
+    
+    public void setInfectedPercent(int percent) {
+        InfectedProgressBar.setValue(percent);
+    }
+    
+    public void setCuredPercent(int percent) {
+        CuredProgressBar.setValue(percent);
+    }
+    
+    public void setImmunedPercent(int percent) {
+        ImmunedProgressBar.setValue(percent);
+    }
+    
+    public void setDeadPercent(int percent) {
+        DeadProgressBar.setValue(percent);
+    }
+    
     @Override
     protected void paintComponent(Graphics g) {
         Dimension arcs = new Dimension(15,15); //Border corners arcs {width,height}, change this to whatever you want
@@ -63,10 +95,10 @@ public class SimulationCard extends javax.swing.JPanel {
         Day = new javax.swing.JLabel();
         DiagramPanel = new javax.swing.JPanel();
         Bars = new javax.swing.JPanel();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jProgressBar2 = new javax.swing.JProgressBar();
-        jProgressBar3 = new javax.swing.JProgressBar();
-        jProgressBar4 = new javax.swing.JProgressBar();
+        InfectedProgressBar = new javax.swing.JProgressBar();
+        CuredProgressBar = new javax.swing.JProgressBar();
+        ImmunedProgressBar = new javax.swing.JProgressBar();
+        DeadProgressBar = new javax.swing.JProgressBar();
         MapName = new javax.swing.JLabel();
         VirusName = new javax.swing.JLabel();
 
@@ -91,33 +123,33 @@ public class SimulationCard extends javax.swing.JPanel {
         Bars.setBackground(new java.awt.Color(59, 66, 82));
         Bars.setLayout(new java.awt.GridLayout(4, 0));
 
-        jProgressBar1.setBackground(new java.awt.Color(59, 66, 82));
-        jProgressBar1.setForeground(new java.awt.Color(191, 97, 106));
-        jProgressBar1.setValue(25);
-        jProgressBar1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
-        jProgressBar1.setBorderPainted(false);
-        Bars.add(jProgressBar1);
+        InfectedProgressBar.setBackground(new java.awt.Color(59, 66, 82));
+        InfectedProgressBar.setForeground(new java.awt.Color(191, 97, 106));
+        InfectedProgressBar.setValue(25);
+        InfectedProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
+        InfectedProgressBar.setBorderPainted(false);
+        Bars.add(InfectedProgressBar);
 
-        jProgressBar2.setBackground(new java.awt.Color(59, 66, 82));
-        jProgressBar2.setForeground(new java.awt.Color(163, 190, 140));
-        jProgressBar2.setValue(100);
-        jProgressBar2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
-        jProgressBar2.setBorderPainted(false);
-        Bars.add(jProgressBar2);
+        CuredProgressBar.setBackground(new java.awt.Color(59, 66, 82));
+        CuredProgressBar.setForeground(new java.awt.Color(163, 190, 140));
+        CuredProgressBar.setValue(100);
+        CuredProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
+        CuredProgressBar.setBorderPainted(false);
+        Bars.add(CuredProgressBar);
 
-        jProgressBar3.setBackground(new java.awt.Color(59, 66, 82));
-        jProgressBar3.setForeground(new java.awt.Color(136, 192, 208));
-        jProgressBar3.setValue(75);
-        jProgressBar3.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
-        jProgressBar3.setBorderPainted(false);
-        Bars.add(jProgressBar3);
+        ImmunedProgressBar.setBackground(new java.awt.Color(59, 66, 82));
+        ImmunedProgressBar.setForeground(new java.awt.Color(136, 192, 208));
+        ImmunedProgressBar.setValue(75);
+        ImmunedProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
+        ImmunedProgressBar.setBorderPainted(false);
+        Bars.add(ImmunedProgressBar);
 
-        jProgressBar4.setBackground(new java.awt.Color(59, 66, 82));
-        jProgressBar4.setForeground(new java.awt.Color(180, 142, 173));
-        jProgressBar4.setValue(50);
-        jProgressBar4.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
-        jProgressBar4.setBorderPainted(false);
-        Bars.add(jProgressBar4);
+        DeadProgressBar.setBackground(new java.awt.Color(59, 66, 82));
+        DeadProgressBar.setForeground(new java.awt.Color(180, 142, 173));
+        DeadProgressBar.setValue(50);
+        DeadProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
+        DeadProgressBar.setBorderPainted(false);
+        Bars.add(DeadProgressBar);
 
         javax.swing.GroupLayout DiagramPanelLayout = new javax.swing.GroupLayout(DiagramPanel);
         DiagramPanel.setLayout(DiagramPanelLayout);
@@ -181,15 +213,14 @@ public class SimulationCard extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Bars;
+    private javax.swing.JProgressBar CuredProgressBar;
     private javax.swing.JLabel Day;
+    private javax.swing.JProgressBar DeadProgressBar;
     private javax.swing.JPanel DiagramPanel;
+    private javax.swing.JProgressBar ImmunedProgressBar;
+    private javax.swing.JProgressBar InfectedProgressBar;
     private javax.swing.JLabel MapName;
     private javax.swing.JLabel SimulationName;
     private javax.swing.JLabel VirusName;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JProgressBar jProgressBar2;
-    private javax.swing.JProgressBar jProgressBar3;
-    private javax.swing.JProgressBar jProgressBar4;
     // End of variables declaration//GEN-END:variables
 }

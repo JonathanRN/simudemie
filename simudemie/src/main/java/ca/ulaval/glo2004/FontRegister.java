@@ -25,7 +25,6 @@ public final class FontRegister {
             RobotoLight = Font.createFont(Font.TRUETYPE_FONT, new File(Thread.currentThread().getContextClassLoader().getResource("fonts\\Roboto-Light.ttf").toURI()));
             RobotoThin = Font.createFont(Font.TRUETYPE_FONT, new File(Thread.currentThread().getContextClassLoader().getResource("fonts\\Roboto-Thin.ttf").toURI()));
             RobotoRegular = Font.createFont(Font.TRUETYPE_FONT, new File(Thread.currentThread().getContextClassLoader().getResource("fonts\\Roboto-Regular.ttf").toURI()));
-            ge.registerFont(RobotoLight);
         } catch (IOException e) {
             e.printStackTrace();
         } catch(FontFormatException e) {

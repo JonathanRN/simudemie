@@ -1,15 +1,6 @@
 package ca.ulaval.glo2004;
 
-import static com.formdev.flatlaf.FlatClientProperties.TABBED_PANE_TAB_AREA_ALIGNMENT;
-import static com.formdev.flatlaf.FlatClientProperties.TABBED_PANE_TAB_HEIGHT;
 import com.formdev.flatlaf.intellijthemes.FlatNordIJTheme;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.UIManager;
@@ -18,8 +9,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private static final String ICON_PATH = "/icon_virus_64px.png";
     
     public MenuPrincipal() {
-        initComponents();
         initTabbedPaneProperties();
+        initComponents();
         
         for (int i = 0; i < 4; i++) {
             ProjectPanelContainer.add(new SimulationCard());
@@ -29,9 +20,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ScrollPane.getVerticalScrollBar().setUnitIncrement(16);
     }
     
+    /*
+    * Doit être appelé avant la création du TabbedPane
+    */
     private void initTabbedPaneProperties() {
-        TabMenu.putClientProperty(TABBED_PANE_TAB_AREA_ALIGNMENT, "leading");
-        TabMenu.putClientProperty(TABBED_PANE_TAB_HEIGHT, 100);
+        UIManager.put("TabbedPaneUI", "ca.ulaval.glo2004.CustomTabbedPaneUI");
+        UIManager.put("RootPaneUI", "ca.ulaval.glo2004.CustomRootPaneUI");
+        
+        UIManager.put("TabbedPane.tabSelectionHeight", 5);
+        UIManager.put("TabbedPane.showTabSeparators", true);
+        UIManager.put("TabbedPane.tabSeparatorsFullHeight", true);
+        UIManager.put("TabbedPane.tabAreaAlignment", "leading");
+        UIManager.put("TabbedPane.tabHeight", 100);
     }
 
     /**
@@ -145,12 +145,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         FlatNordIJTheme.install();
-        UIManager.put("TabbedPaneUI", "ca.ulaval.glo2004.CustomTabbedPaneUI");
-        UIManager.put("RootPaneUI", "ca.ulaval.glo2004.CustomRootPaneUI");
-        
-        UIManager.put("TabbedPane.tabSelectionHeight", 5);
-        UIManager.put("TabbedPane.showTabSeparators", true);
-        UIManager.put("TabbedPane.tabSeparatorsFullHeight", true);
         
         // TODO NE PAS CALL CA ICI
         FontRegister.register();

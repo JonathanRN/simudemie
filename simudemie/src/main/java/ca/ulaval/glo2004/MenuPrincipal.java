@@ -112,8 +112,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ScrollPane.setPreferredSize(new java.awt.Dimension(75, 275));
 
         ProjectPanelContainer.setBackground(new java.awt.Color(46, 52, 64));
-        ProjectPanelContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -75, 0, 0));
-        ProjectPanelContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 75, 5));
+        ProjectPanelContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -49, 0, 0));
+        ProjectPanelContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 50, 5));
         ScrollPane.setViewportView(ProjectPanelContainer);
 
         javax.swing.GroupLayout ProjetsLayout = new javax.swing.GroupLayout(Projets);

@@ -1,6 +1,7 @@
 package ca.ulaval.glo2004;
 
 import com.formdev.flatlaf.IntelliJTheme;
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.UIManager;
@@ -17,6 +18,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
         
         ScenariosLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
+        AddScenarioButton.setBackground(new Color(216, 222, 233, 38));
     }
     
     /*
@@ -43,6 +45,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TabMenu = new javax.swing.JTabbedPane();
         TitleMenu = new javax.swing.JPanel();
         Projets = new javax.swing.JPanel();
+        ProjetsTitle = new javax.swing.JPanel();
         ScenariosLabel = new javax.swing.JLabel();
         AddScenarioButton = new javax.swing.JButton();
         ScrollPane = new javax.swing.JScrollPane();
@@ -53,6 +56,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setTitle("Simudémie");
         setBackground(new java.awt.Color(0, 255, 0));
         setMinimumSize(new java.awt.Dimension(640, 480));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
 
         MainMenu.setBackground(new java.awt.Color(46, 52, 64));
         MainMenu.setOpaque(false);
@@ -83,15 +87,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Projets.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Projets.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
 
+        ProjetsTitle.setBackground(new java.awt.Color(46, 52, 64));
+        ProjetsTitle.setLayout(new javax.swing.BoxLayout(ProjetsTitle, javax.swing.BoxLayout.X_AXIS));
+
         ScenariosLabel.setBackground(new java.awt.Color(46, 52, 64));
         ScenariosLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         ScenariosLabel.setText("Scénarios");
-        ScenariosLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        ScenariosLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 10));
+        ProjetsTitle.add(ScenariosLabel);
 
         AddScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_plus_math_20px.png"))); // NOI18N
         AddScenarioButton.setFocusable(false);
         AddScenarioButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AddScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
+        AddScenarioButton.setMinimumSize(new java.awt.Dimension(75, 30));
+        AddScenarioButton.setPreferredSize(new java.awt.Dimension(100, 36));
+        ProjetsTitle.add(AddScenarioButton);
 
         ScrollPane.setBackground(new java.awt.Color(46, 52, 64));
         ScrollPane.setBorder(null);
@@ -108,28 +120,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Projets.setLayout(ProjetsLayout);
         ProjetsLayout.setHorizontalGroup(
             ProjetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProjetsLayout.createSequentialGroup()
+            .addGroup(ProjetsLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(ProjetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(ProjetsLayout.createSequentialGroup()
-                        .addComponent(ScenariosLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 778, Short.MAX_VALUE)))
+                .addGroup(ProjetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
+                    .addComponent(ProjetsTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         ProjetsLayout.setVerticalGroup(
             ProjetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ProjetsLayout.createSequentialGroup()
-                .addGroup(ProjetsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ScenariosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProjetsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)))
-                .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(ProjetsTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(277, Short.MAX_VALUE))
         );
 
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icon_play_25px.png")), Projets, "Scénarios"); // NOI18N
@@ -171,6 +176,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel MainMenu;
     private javax.swing.JPanel ProjectPanelContainer;
     private javax.swing.JPanel Projets;
+    private javax.swing.JPanel ProjetsTitle;
     private javax.swing.JLabel ScenariosLabel;
     private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JTabbedPane TabMenu;

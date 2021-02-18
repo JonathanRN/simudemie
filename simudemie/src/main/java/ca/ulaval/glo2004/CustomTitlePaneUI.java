@@ -8,8 +8,6 @@ package ca.ulaval.glo2004;
 import com.formdev.flatlaf.ui.FlatTitlePane;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.util.Objects;
 import javax.swing.JRootPane;
 
 /**
@@ -24,7 +22,7 @@ public class CustomTitlePaneUI extends FlatTitlePane {
     
     @Override
     protected void paintComponent(Graphics g) {
-        g.setColor(getBackground());
+        g.setColor(new Color(59, 66, 82));
 	g.fillRect(0, 0, getWidth(), getHeight());
     }
     

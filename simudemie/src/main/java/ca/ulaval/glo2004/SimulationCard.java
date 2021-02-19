@@ -75,9 +75,7 @@ public class SimulationCard extends javax.swing.JPanel {
         int height = getHeight();
         Graphics2D graphics = (Graphics2D) g;
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        //Draws the rounded panel with borders.
         graphics.setColor(getBackground());
-        //paint background
         graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height);
     }
 

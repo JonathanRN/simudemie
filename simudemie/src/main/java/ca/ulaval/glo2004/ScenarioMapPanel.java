@@ -20,7 +20,11 @@ public class ScenarioMapPanel extends RoundedPanel {
         initComponents();
         
         setBackground(new Color(216, 222, 233, 38));
-        MapNameLabel.setFont(FontRegister.RobotoThin.deriveFont(21f));
+        try {
+            MapNameLabel.setFont(FontRegister.RobotoThin.deriveFont(21f));
+        }
+        catch(Exception e) {
+        }
     }
 
     /**
@@ -37,7 +41,7 @@ public class ScenarioMapPanel extends RoundedPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
         setLayout(new java.awt.BorderLayout());
 
         MapPanelHeader.setOpaque(false);

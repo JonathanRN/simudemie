@@ -2,8 +2,6 @@ package ca.ulaval.glo2004;
 
 import com.formdev.flatlaf.IntelliJTheme;
 import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.UIManager;
@@ -22,6 +20,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ScenariosLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
         InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
         AddScenarioButton.setBackground(new Color(216, 222, 233, 38));
+        ImportScenarioButton.setBackground(new Color(216, 222, 233, 38));
     }
     
     /*
@@ -52,13 +51,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ScenariosTitle = new javax.swing.JPanel();
         ScenariosLabel = new javax.swing.JLabel();
         AddScenarioButton = new javax.swing.JButton();
+        ImportScenarioButton = new javax.swing.JButton();
         ScenariosScrollPane = new javax.swing.JScrollPane();
         ProjectPanelContainer = new javax.swing.JPanel();
         Informations = new javax.swing.JPanel();
         InformationsLabel = new javax.swing.JLabel();
         Layout = new ca.ulaval.glo2004.RoundedPanel();
-        MapPanel = new ca.ulaval.glo2004.ScenarioMapPanel();
-        StatsPanel = new ca.ulaval.glo2004.RoundedPanel();
+        scenarioMapPanel1 = new ca.ulaval.glo2004.ScenarioMapPanel();
+        scenarioStatsPanel1 = new ca.ulaval.glo2004.ScenarioStatsPanel();
         TitleMenuBar = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,7 +83,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TitleMenu.setLayout(TitleMenuLayout);
         TitleMenuLayout.setHorizontalGroup(
             TitleMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1041, Short.MAX_VALUE)
+            .addGap(0, 1059, Short.MAX_VALUE)
         );
         TitleMenuLayout.setVerticalGroup(
             TitleMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,14 +106,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ScenariosTitle.setMaximumSize(new java.awt.Dimension(974, 50));
         ScenariosTitle.setMinimumSize(new java.awt.Dimension(974, 50));
         ScenariosTitle.setPreferredSize(new java.awt.Dimension(974, 35));
-        ScenariosTitle.setLayout(new javax.swing.BoxLayout(ScenariosTitle, javax.swing.BoxLayout.X_AXIS));
 
         ScenariosLabel.setBackground(new java.awt.Color(46, 52, 64));
         ScenariosLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         ScenariosLabel.setText("Scénarios");
         ScenariosLabel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        ScenariosLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 10));
-        ScenariosTitle.add(ScenariosLabel);
 
         AddScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_plus_math_20px.png"))); // NOI18N
@@ -122,7 +119,39 @@ public class MenuPrincipal extends javax.swing.JFrame {
         AddScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
         AddScenarioButton.setMinimumSize(new java.awt.Dimension(75, 30));
         AddScenarioButton.setPreferredSize(new java.awt.Dimension(100, 36));
-        ScenariosTitle.add(AddScenarioButton);
+
+        ImportScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        ImportScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_download_20px.png"))); // NOI18N
+        ImportScenarioButton.setFocusable(false);
+        ImportScenarioButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ImportScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
+        ImportScenarioButton.setMinimumSize(new java.awt.Dimension(75, 30));
+        ImportScenarioButton.setPreferredSize(new java.awt.Dimension(100, 36));
+
+        javax.swing.GroupLayout ScenariosTitleLayout = new javax.swing.GroupLayout(ScenariosTitle);
+        ScenariosTitle.setLayout(ScenariosTitleLayout);
+        ScenariosTitleLayout.setHorizontalGroup(
+            ScenariosTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ScenariosTitleLayout.createSequentialGroup()
+                .addComponent(ScenariosLabel)
+                .addGap(20, 20, 20)
+                .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        ScenariosTitleLayout.setVerticalGroup(
+            ScenariosTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ScenariosTitleLayout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addComponent(ScenariosLabel))
+            .addGroup(ScenariosTitleLayout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(ScenariosTitleLayout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         Scenarios.add(ScenariosTitle, java.awt.BorderLayout.NORTH);
 
@@ -155,22 +184,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Layout.setBackground(new java.awt.Color(46, 52, 64));
         Layout.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
         Layout.setLayout(new java.awt.GridLayout(1, 2, 25, 0));
-
-        MapPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        Layout.add(MapPanel);
-
-        javax.swing.GroupLayout StatsPanelLayout = new javax.swing.GroupLayout(StatsPanel);
-        StatsPanel.setLayout(StatsPanelLayout);
-        StatsPanelLayout.setHorizontalGroup(
-            StatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 549, Short.MAX_VALUE)
-        );
-        StatsPanelLayout.setVerticalGroup(
-            StatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        Layout.add(StatsPanel);
+        Layout.add(scenarioMapPanel1);
+        Layout.add(scenarioStatsPanel1);
 
         Informations.add(Layout, java.awt.BorderLayout.CENTER);
 
@@ -212,20 +227,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddScenarioButton;
+    private javax.swing.JButton ImportScenarioButton;
     private javax.swing.JPanel Informations;
     private javax.swing.JLabel InformationsLabel;
     private ca.ulaval.glo2004.RoundedPanel Layout;
     private javax.swing.JPanel MainMenu;
-    private ca.ulaval.glo2004.ScenarioMapPanel MapPanel;
     private javax.swing.JPanel ProjectPanelContainer;
     private javax.swing.JPanel Scenarios;
     private javax.swing.JLabel ScenariosLabel;
     private javax.swing.JScrollPane ScenariosScrollPane;
     private javax.swing.JPanel ScenariosTab;
     private javax.swing.JPanel ScenariosTitle;
-    private ca.ulaval.glo2004.RoundedPanel StatsPanel;
     private javax.swing.JTabbedPane TabMenu;
     private javax.swing.JPanel TitleMenu;
     private javax.swing.JMenuBar TitleMenuBar;
+    private ca.ulaval.glo2004.ScenarioMapPanel scenarioMapPanel1;
+    private ca.ulaval.glo2004.ScenarioStatsPanel scenarioStatsPanel1;
     // End of variables declaration//GEN-END:variables
 }

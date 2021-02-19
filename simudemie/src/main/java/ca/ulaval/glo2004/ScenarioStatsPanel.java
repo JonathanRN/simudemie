@@ -23,7 +23,9 @@ public class ScenarioStatsPanel extends javax.swing.JPanel {
             StatsLabel.setFont(FontRegister.RobotoThin.deriveFont(21f));
             Main.setBackground(new Color(216, 222, 233, 38));
             DeleteButton.setBackground(new Color(216, 222, 233, 38));
+            DeleteButton.setFont(FontRegister.RobotoLight.deriveFont(15f));
             ResumeButton.setBackground(new Color(216, 222, 233, 38));
+            ResumeButton.setFont(FontRegister.RobotoLight.deriveFont(15f));
         }
         catch(Exception e) {
         }

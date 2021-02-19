@@ -57,7 +57,7 @@ public class ScenarioMapPanel extends RoundedPanel {
         add(MapPanelHeader, java.awt.BorderLayout.NORTH);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simudemie_logo_100px_63px.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logo3.130.png"))); // NOI18N
         add(jLabel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

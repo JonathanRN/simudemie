@@ -90,7 +90,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGap(0, 594, Short.MAX_VALUE)
         );
 
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/simudemie_logo_100px_63px.png")), TitleMenu, "Accueil"); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/Logo3.130.png")), TitleMenu, "Accueil"); // NOI18N
 
         ScenariosTab.setBackground(new java.awt.Color(46, 52, 64));
         ScenariosTab.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 35, 35));
@@ -191,7 +191,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         ScenariosTab.add(Informations, java.awt.BorderLayout.CENTER);
 
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icon_play_25px.png")), ScenariosTab, "Scénarios"); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_play_50px.png")), ScenariosTab, "Scénarios"); // NOI18N
 
         MainMenu.add(TabMenu, java.awt.BorderLayout.CENTER);
 

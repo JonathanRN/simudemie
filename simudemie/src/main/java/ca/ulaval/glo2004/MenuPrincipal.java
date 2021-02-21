@@ -17,6 +17,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             ProjectPanelContainer.add(new SimulationCard());
         }
         
+        ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
+        
+        // todo plus clean
         ScenariosLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
         InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
         AddScenarioButton.setBackground(new Color(216, 222, 233, 38));
@@ -59,10 +62,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Layout = new ca.ulaval.glo2004.RoundedPanel();
         scenarioMapPanel1 = new ca.ulaval.glo2004.ScenarioMapPanel();
         scenarioStatsPanel1 = new ca.ulaval.glo2004.ScenarioStatsPanel();
-        jPanel1 = new javax.swing.JPanel();
+        MapTab = new javax.swing.JPanel();
+        Scenarios1 = new javax.swing.JPanel();
+        ScenariosTitle2 = new javax.swing.JPanel();
+        ScenariosLabel2 = new javax.swing.JLabel();
+        AddScenarioButton2 = new javax.swing.JButton();
+        ImportScenarioButton2 = new javax.swing.JButton();
+        ScenariosScrollPane2 = new javax.swing.JScrollPane();
+        ProjectPanelContainer2 = new javax.swing.JPanel();
+        Informations1 = new javax.swing.JPanel();
+        InformationsLabel2 = new javax.swing.JLabel();
+        Layout2 = new ca.ulaval.glo2004.RoundedPanel();
+        scenarioMapPanel3 = new ca.ulaval.glo2004.ScenarioMapPanel();
+        scenarioStatsPanel3 = new ca.ulaval.glo2004.ScenarioStatsPanel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        QuitButton = new javax.swing.JPanel();
         TitleMenuBar = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,6 +92,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TabMenu.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         TabMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         TabMenu.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        TabMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                TabMenuMousePressed(evt);
+            }
+        });
 
         TitleMenu.setBackground(new java.awt.Color(46, 52, 64));
         TitleMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -87,14 +106,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         TitleMenu.setLayout(TitleMenuLayout);
         TitleMenuLayout.setHorizontalGroup(
             TitleMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1059, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         TitleMenuLayout.setVerticalGroup(
             TitleMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 594, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/Logo3.150.png")), TitleMenu, "Accueil"); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/Logo3.130.png")), TitleMenu, "Accueil"); // NOI18N
 
         ScenariosTab.setBackground(new java.awt.Color(46, 52, 64));
         ScenariosTab.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 35, 35));
@@ -125,7 +144,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         AddScenarioButton.setPreferredSize(new java.awt.Dimension(100, 36));
 
         ImportScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        ImportScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_download_20px.png"))); // NOI18N
+        ImportScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_installing_updates_20px.png"))); // NOI18N
         ImportScenarioButton.setFocusable(false);
         ImportScenarioButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ImportScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
@@ -195,59 +214,134 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         ScenariosTab.add(Informations, java.awt.BorderLayout.CENTER);
 
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_play_50px.png")), ScenariosTab, "Scénarios"); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_play_40px.png")), ScenariosTab, "Scénarios"); // NOI18N
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1059, Short.MAX_VALUE)
+        MapTab.setBackground(new java.awt.Color(46, 52, 64));
+        MapTab.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 35, 35));
+        MapTab.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        MapTab.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        MapTab.setLayout(new java.awt.BorderLayout());
+
+        Scenarios1.setBackground(new java.awt.Color(46, 52, 64));
+        Scenarios1.setBorder(javax.swing.BorderFactory.createEmptyBorder(35, 0, 0, 0));
+        Scenarios1.setLayout(new java.awt.BorderLayout());
+
+        ScenariosTitle2.setBackground(new java.awt.Color(46, 52, 64));
+        ScenariosTitle2.setMaximumSize(new java.awt.Dimension(974, 50));
+        ScenariosTitle2.setMinimumSize(new java.awt.Dimension(974, 50));
+        ScenariosTitle2.setPreferredSize(new java.awt.Dimension(974, 35));
+
+        ScenariosLabel2.setBackground(new java.awt.Color(46, 52, 64));
+        ScenariosLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        ScenariosLabel2.setText("Scénarios");
+        ScenariosLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        AddScenarioButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        AddScenarioButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_plus_math_20px.png"))); // NOI18N
+        AddScenarioButton2.setFocusable(false);
+        AddScenarioButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AddScenarioButton2.setMaximumSize(new java.awt.Dimension(75, 30));
+        AddScenarioButton2.setMinimumSize(new java.awt.Dimension(75, 30));
+        AddScenarioButton2.setPreferredSize(new java.awt.Dimension(100, 36));
+
+        ImportScenarioButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        ImportScenarioButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_installing_updates_20px.png"))); // NOI18N
+        ImportScenarioButton2.setFocusable(false);
+        ImportScenarioButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ImportScenarioButton2.setMaximumSize(new java.awt.Dimension(75, 30));
+        ImportScenarioButton2.setMinimumSize(new java.awt.Dimension(75, 30));
+        ImportScenarioButton2.setPreferredSize(new java.awt.Dimension(100, 36));
+
+        javax.swing.GroupLayout ScenariosTitle2Layout = new javax.swing.GroupLayout(ScenariosTitle2);
+        ScenariosTitle2.setLayout(ScenariosTitle2Layout);
+        ScenariosTitle2Layout.setHorizontalGroup(
+            ScenariosTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ScenariosTitle2Layout.createSequentialGroup()
+                .addComponent(ScenariosLabel2)
+                .addGap(20, 20, 20)
+                .addComponent(AddScenarioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ImportScenarioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 594, Short.MAX_VALUE)
+        ScenariosTitle2Layout.setVerticalGroup(
+            ScenariosTitle2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ScenariosTitle2Layout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addComponent(ScenariosLabel2))
+            .addGroup(ScenariosTitle2Layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(AddScenarioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(ScenariosTitle2Layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(ImportScenarioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_map_50px_1.png")), jPanel1); // NOI18N
+        Scenarios1.add(ScenariosTitle2, java.awt.BorderLayout.NORTH);
+
+        ScenariosScrollPane2.setBackground(new java.awt.Color(46, 52, 64));
+        ScenariosScrollPane2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        ScenariosScrollPane2.setMaximumSize(new java.awt.Dimension(75, 250));
+        ScenariosScrollPane2.setMinimumSize(new java.awt.Dimension(75, 250));
+        ScenariosScrollPane2.setPreferredSize(new java.awt.Dimension(75, 250));
+
+        ProjectPanelContainer2.setBackground(new java.awt.Color(46, 52, 64));
+        ProjectPanelContainer2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -49, 0, 0));
+        ProjectPanelContainer2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 50, 5));
+        ScenariosScrollPane2.setViewportView(ProjectPanelContainer2);
+
+        Scenarios1.add(ScenariosScrollPane2, java.awt.BorderLayout.CENTER);
+
+        MapTab.add(Scenarios1, java.awt.BorderLayout.NORTH);
+
+        Informations1.setBorder(javax.swing.BorderFactory.createEmptyBorder(35, 0, 0, 0));
+        Informations1.setOpaque(false);
+        Informations1.setLayout(new java.awt.BorderLayout());
+
+        InformationsLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        InformationsLabel2.setText("Informations");
+        InformationsLabel2.setMaximumSize(new java.awt.Dimension(146, 35));
+        InformationsLabel2.setMinimumSize(new java.awt.Dimension(146, 35));
+        InformationsLabel2.setPreferredSize(new java.awt.Dimension(146, 35));
+        Informations1.add(InformationsLabel2, java.awt.BorderLayout.NORTH);
+
+        Layout2.setBackground(new java.awt.Color(46, 52, 64));
+        Layout2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        Layout2.setLayout(new java.awt.GridLayout(1, 2, 25, 0));
+        Layout2.add(scenarioMapPanel3);
+        Layout2.add(scenarioStatsPanel3);
+
+        Informations1.add(Layout2, java.awt.BorderLayout.CENTER);
+
+        MapTab.add(Informations1, java.awt.BorderLayout.CENTER);
+
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_country_40px.png")), MapTab, "Scénarios"); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1059, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 594, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_coronavirus_50px_1.png")), jPanel2); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_microorganisms_40px.png")), jPanel2); // NOI18N
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1059, Short.MAX_VALUE)
+        javax.swing.GroupLayout QuitButtonLayout = new javax.swing.GroupLayout(QuitButton);
+        QuitButton.setLayout(QuitButtonLayout);
+        QuitButtonLayout.setHorizontalGroup(
+            QuitButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 594, Short.MAX_VALUE)
-        );
-
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_gallery_50px_1.png")), jPanel3); // NOI18N
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1059, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 594, Short.MAX_VALUE)
+        QuitButtonLayout.setVerticalGroup(
+            QuitButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_exit_50px_2.png")), jPanel5); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_exit_35px.png")), QuitButton); // NOI18N
 
         MainMenu.add(TabMenu, java.awt.BorderLayout.CENTER);
 
@@ -256,6 +350,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void TabMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabMenuMousePressed
+        if (TabMenu.getSelectedIndex() == TabMenu.getTabCount() - 1) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_TabMenuMousePressed
 
     public static void main(String args[]) {
         IntelliJTheme.install(MenuPrincipal.class.getResourceAsStream("/themes/nord.theme.json"));
@@ -283,25 +383,36 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddScenarioButton;
+    private javax.swing.JButton AddScenarioButton2;
     private javax.swing.JButton ImportScenarioButton;
+    private javax.swing.JButton ImportScenarioButton2;
     private javax.swing.JPanel Informations;
+    private javax.swing.JPanel Informations1;
     private javax.swing.JLabel InformationsLabel;
+    private javax.swing.JLabel InformationsLabel2;
     private ca.ulaval.glo2004.RoundedPanel Layout;
+    private ca.ulaval.glo2004.RoundedPanel Layout2;
     private javax.swing.JPanel MainMenu;
+    private javax.swing.JPanel MapTab;
     private javax.swing.JPanel ProjectPanelContainer;
+    private javax.swing.JPanel ProjectPanelContainer2;
+    private javax.swing.JPanel QuitButton;
     private javax.swing.JPanel Scenarios;
+    private javax.swing.JPanel Scenarios1;
     private javax.swing.JLabel ScenariosLabel;
+    private javax.swing.JLabel ScenariosLabel2;
     private javax.swing.JScrollPane ScenariosScrollPane;
+    private javax.swing.JScrollPane ScenariosScrollPane2;
     private javax.swing.JPanel ScenariosTab;
     private javax.swing.JPanel ScenariosTitle;
+    private javax.swing.JPanel ScenariosTitle2;
     private javax.swing.JTabbedPane TabMenu;
     private javax.swing.JPanel TitleMenu;
     private javax.swing.JMenuBar TitleMenuBar;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
     private ca.ulaval.glo2004.ScenarioMapPanel scenarioMapPanel1;
+    private ca.ulaval.glo2004.ScenarioMapPanel scenarioMapPanel3;
     private ca.ulaval.glo2004.ScenarioStatsPanel scenarioStatsPanel1;
+    private ca.ulaval.glo2004.ScenarioStatsPanel scenarioStatsPanel3;
     // End of variables declaration//GEN-END:variables
 }

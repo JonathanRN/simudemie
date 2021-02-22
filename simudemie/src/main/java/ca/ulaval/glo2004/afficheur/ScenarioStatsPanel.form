@@ -111,6 +111,9 @@
             <Property name="text" type="java.lang.String" value="R&#xe9;sumer"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ResumeButtonMouseReleased"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

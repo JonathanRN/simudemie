@@ -35,6 +35,10 @@ public class SimulationCard extends RoundedPanel {
         SimulationName.setText(name);
     }
     
+    public String getSimulationName() {
+        return SimulationName.getText();
+    }
+    
     public void setDays(String days) {
         Day.setText(days);
     }

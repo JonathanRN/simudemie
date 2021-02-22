@@ -6,10 +6,6 @@
 package ca.ulaval.glo2004.afficheur;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import javax.swing.UIManager;
 
 
@@ -17,12 +13,12 @@ import javax.swing.UIManager;
  * Adapte depuis https://stackoverflow.com/questions/15025092/border-with-rounded-corners-transparency
  * @author Jonathan
  */
-public class SimulationCard extends javax.swing.JPanel {
-
-    /**
-     * Creates new form SimulationCard
-     */
-    public SimulationCard() {
+public class SimulationCard extends RoundedPanel {
+    private boolean toggled = false;
+    private final ScenarioTab tab;
+    
+    public SimulationCard(ScenarioTab tab) {
+        this.tab = tab;
         UIManager.put("ProgressBar.arc", 999);
         initComponents();
         
@@ -32,7 +28,7 @@ public class SimulationCard extends javax.swing.JPanel {
         VirusName.setFont(FontRegister.RobotoLight.deriveFont(12f));
         
         // Rend le panel translucide
-        setBackground(new Color(216, 222, 233, 38));
+        setBackground(defaultColor);
     }
     
     public void setSimulationName(String name) {
@@ -67,15 +63,16 @@ public class SimulationCard extends javax.swing.JPanel {
         DeadProgressBar.setValue(percent);
     }
     
-    @Override
-    protected void paintComponent(Graphics g) {
-        Dimension arcs = new Dimension(15,15); //Border corners arcs {width,height}, change this to whatever you want
-        int width = getWidth();
-        int height = getHeight();
-        Graphics2D graphics = (Graphics2D) g;
-        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics.setColor(getBackground());
-        graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height);
+    public void setToggled(boolean toggled) {
+        this.toggled = toggled;
+        if (toggled) {
+            setBackground(new Color(104,125,135));
+            setBorderColor(new Color(136, 192, 208));
+        }
+        else {
+            setBackground(defaultColor);
+            setBorderColor(defaultColor);
+        }
     }
 
     /**
@@ -107,6 +104,9 @@ public class SimulationCard extends javax.swing.JPanel {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 formMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
             }
         });
 
@@ -183,7 +183,6 @@ public class SimulationCard extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DiagramPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,6 +195,7 @@ public class SimulationCard extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(VirusName)
                 .addGap(41, 41, 41))
+            .addComponent(DiagramPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,16 +213,24 @@ public class SimulationCard extends javax.swing.JPanel {
                 .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-        setBackground(Color.RED);
-        paintComponent(getGraphics());
+        if (!toggled) {
+            setBackground(new Color(104,125,135));
+        }
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
-        setBackground(Color.GREEN);
-        paintComponent(getGraphics());
+        if (!toggled) {
+            setBackground(defaultColor);
+        }
     }//GEN-LAST:event_formMouseExited
+
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        if (!toggled) {
+          tab.onSimulationCardClicked(this);  
+        }
+    }//GEN-LAST:event_formMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,11 +1,12 @@
 package ca.ulaval.glo2004.afficheur;
 
 import com.formdev.flatlaf.IntelliJTheme;
+import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.UIManager;
 
-public class MenuPrincipal extends javax.swing.JFrame {
+public class MenuPrincipal extends javax.swing.JFrame {    
     private static final String ICON_PATH = "/icons/icon_virus_64px.png";
     
     public MenuPrincipal() {
@@ -154,4 +155,5 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar TitleMenuBar;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
+
 }

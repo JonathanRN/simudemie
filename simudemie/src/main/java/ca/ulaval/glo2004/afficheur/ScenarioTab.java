@@ -6,6 +6,7 @@
 package ca.ulaval.glo2004.afficheur;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,14 +14,14 @@ import java.awt.Color;
  */
 public class ScenarioTab extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ScenarioTab
-     */
+    private ArrayList<SimulationCard> simulationCards = new ArrayList<SimulationCard>(); 
+    private SimulationCard currentToggled;
+    
     public ScenarioTab() {
         initComponents();
         
         try {
-            ProjectPanelContainer.add(new SimulationCard());
+            addSimulationCard();
         
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
 
@@ -28,9 +29,44 @@ public class ScenarioTab extends javax.swing.JPanel {
             Sce_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             AddScenarioButton.setBackground(new Color(216, 222, 233, 38));
             ImportScenarioButton.setBackground(new Color(216, 222, 233, 38));
+            
+            scenarioStatsPanel1.setScenarioTab(this);
         } catch (Exception e) {
         }
         
+    }
+    
+    public void addSimulationCard() {
+        SimulationCard card = new SimulationCard(this);
+        card.setSimulationName("" + simulationCards.size());
+        simulationCards.add(card);
+        if (simulationCards.size() == 1) {
+            onSimulationCardClicked(card);
+        }
+        ProjectPanelContainer.add(card);
+        updateUI();
+    }
+    
+    public void removeSimulationCard() {
+        simulationCards.remove(currentToggled);
+        ProjectPanelContainer.remove(currentToggled);
+        updateUI();
+        
+        if (!simulationCards.isEmpty()) {
+            onSimulationCardClicked(simulationCards.get(0));
+        }
+    }
+    
+    public void onSimulationCardClicked(SimulationCard card) {
+        if (currentToggled != null &&
+            card != currentToggled) {
+            currentToggled.setToggled(false);
+        }
+        
+        currentToggled = card;
+        
+        // Voir dans la liste et toggle le bon avec le bon index
+        currentToggled.setToggled(true);
     }
 
     /**
@@ -128,8 +164,8 @@ public class ScenarioTab extends javax.swing.JPanel {
         ScenariosScrollPane.setPreferredSize(new java.awt.Dimension(75, 250));
 
         ProjectPanelContainer.setBackground(new java.awt.Color(46, 52, 64));
-        ProjectPanelContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -49, 0, 0));
-        ProjectPanelContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 50, 5));
+        ProjectPanelContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -25, 0, 0));
+        ProjectPanelContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 25, 5));
         ScenariosScrollPane.setViewportView(ProjectPanelContainer);
 
         Scenarios.add(ScenariosScrollPane, java.awt.BorderLayout.CENTER);
@@ -159,8 +195,7 @@ public class ScenarioTab extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddScenarioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseClicked
-        ProjectPanelContainer.add(new SimulationCard());
-        updateUI();
+        addSimulationCard();
     }//GEN-LAST:event_AddScenarioButtonMouseClicked
 
 

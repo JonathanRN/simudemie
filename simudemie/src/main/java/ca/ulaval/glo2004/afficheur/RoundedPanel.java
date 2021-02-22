@@ -5,17 +5,22 @@
  */
 package ca.ulaval.glo2004.afficheur;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author Jonathan
  */
 public class RoundedPanel extends javax.swing.JPanel {
-
+    
+    private Color bgColor, borderColor;
+    protected final Color defaultColor = new Color(216, 222, 233, 38);
     /**
      * Creates new form RoundedPanel
      */
@@ -30,10 +35,39 @@ public class RoundedPanel extends javax.swing.JPanel {
         int height = getHeight();
         Graphics2D graphics = (Graphics2D) g;
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics.setColor(getBackground());
+        
+        // Draw background
+        graphics.setColor(bgColor);
         graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height);
+        
+        // Draw border
+        graphics.setColor(borderColor);
+        graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height);//paint border
     }
-
+    
+    @Override
+    public void setBackground(Color color) {
+        bgColor = color;
+        
+        // Force un repaint sur le JFrame pour redessiner
+        try {
+            JFrame topFrame = (JFrame)SwingUtilities.getWindowAncestor(this);
+            topFrame.repaint();
+        } catch (Exception e) {   
+        }
+    }
+    
+    protected void setBorderColor(Color color) {
+        borderColor = color;
+        
+        // Force un repaint sur le JFrame pour redessiner
+        try {
+            JFrame topFrame = (JFrame)SwingUtilities.getWindowAncestor(this);
+            topFrame.repaint();
+        } catch (Exception e) {   
+        }
+    }
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

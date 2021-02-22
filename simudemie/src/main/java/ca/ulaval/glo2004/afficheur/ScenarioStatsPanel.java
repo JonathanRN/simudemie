@@ -13,9 +13,8 @@ import java.awt.Color;
  */
 public class ScenarioStatsPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ScenarioStatsPanel
-     */
+    private ScenarioTab tab; 
+    
     public ScenarioStatsPanel() {
         initComponents();
         
@@ -29,6 +28,10 @@ public class ScenarioStatsPanel extends javax.swing.JPanel {
         }
         catch(Exception e) {
         }
+    }
+    
+    public void setScenarioTab(ScenarioTab tab) {
+        this.tab = tab;
     }
 
     /**
@@ -74,6 +77,11 @@ public class ScenarioStatsPanel extends javax.swing.JPanel {
 
         DeleteButton.setText("Supprimer");
         DeleteButton.setFocusable(false);
+        DeleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                DeleteButtonMouseReleased(evt);
+            }
+        });
         Buttons.add(DeleteButton);
 
         ResumeButton.setText("Résumer");
@@ -82,6 +90,10 @@ public class ScenarioStatsPanel extends javax.swing.JPanel {
 
         add(Buttons, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void DeleteButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseReleased
+        tab.removeSimulationCard();
+    }//GEN-LAST:event_DeleteButtonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,10 +5,10 @@ import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.UIManager;
 
-public class MenuPrincipal extends javax.swing.JFrame {    
+public class FramePrincipal extends javax.swing.JFrame {    
     private static final String ICON_PATH = "/icons/icon_virus_64px.png";
     
-    public MenuPrincipal() {
+    public FramePrincipal() {
         initTabbedPaneProperties();
         initComponents();
     }
@@ -121,16 +121,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_TabMenuMousePressed
 
     public static void main(String args[]) {
-        IntelliJTheme.install(MenuPrincipal.class.getResourceAsStream("/themes/nord.theme.json"));
+        IntelliJTheme.install(FramePrincipal.class.getResourceAsStream("/themes/nord.theme.json"));
         UIManager.put("RootPaneUI", "ca.ulaval.glo2004.afficheur.CustomRootPaneUI");
         UIManager.put("Button.arc", 15);
         
-        // TODO NE PAS CALL CA ICI
         FontRegister.register();
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFrame frame = new MenuPrincipal();
+                JFrame frame = new FramePrincipal();
                 
 		frame.dispose();
 		frame.setUndecorated(true);

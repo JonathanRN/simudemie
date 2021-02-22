@@ -5,10 +5,13 @@
  */
 package ca.ulaval.glo2004.domaine;
 
-/**
- *
- * @author Fred
- */
+import java.util.List;
+
 public class Pays {
+    
+    private String nom;
+    private List<Region> listePays; 
+    private int jour;
+    
     
 }

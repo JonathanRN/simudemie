@@ -6,7 +6,11 @@
 package ca.ulaval.glo2004.afficheur;
 
 import java.awt.Color;
+import java.awt.Window;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -47,6 +51,27 @@ public class ScenarioTab extends javax.swing.JPanel {
         updateUI();
     }
     
+    public void onStartSimulation() {
+        JOptionPane optionPane = new JOptionPane();
+        optionPane.setMessage("Voulez-vous commencer cette simulation?");
+        optionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
+        optionPane.setOptionType(JOptionPane.YES_NO_CANCEL_OPTION);
+        
+        int result = JOptionPane.showOptionDialog(
+            SwingUtilities.windowForComponent(this),
+            optionPane.getMessage(),
+            "Commencer la simulation?",
+            optionPane.getOptionType(),
+            optionPane.getMessageType(),
+            optionPane.getIcon(),
+            optionPane.getOptions(),
+            optionPane.getInitialValue());
+        
+        if (result == JOptionPane.YES_OPTION) {
+            System.out.println("start");
+        }
+    }
+    
     public void removeSimulationCard() {
         simulationCards.remove(currentToggled);
         ProjectPanelContainer.remove(currentToggled);
@@ -67,6 +92,8 @@ public class ScenarioTab extends javax.swing.JPanel {
         
         // Voir dans la liste et toggle le bon avec le bon index
         currentToggled.setToggled(true);
+        
+        scenarioMapPanel2.setMapName(currentToggled.getSimulationName());
     }
 
     /**

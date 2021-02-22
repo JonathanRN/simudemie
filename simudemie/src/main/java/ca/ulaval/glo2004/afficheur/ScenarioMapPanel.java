@@ -26,6 +26,10 @@ public class ScenarioMapPanel extends RoundedPanel {
         catch(Exception e) {
         }
     }
+    
+    public void setMapName(String text) {
+        MapNameLabel.setText(text);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

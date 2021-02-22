@@ -86,6 +86,11 @@ public class ScenarioStatsPanel extends javax.swing.JPanel {
 
         ResumeButton.setText("Résumer");
         ResumeButton.setFocusable(false);
+        ResumeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ResumeButtonMouseReleased(evt);
+            }
+        });
         Buttons.add(ResumeButton);
 
         add(Buttons, java.awt.BorderLayout.SOUTH);
@@ -94,6 +99,10 @@ public class ScenarioStatsPanel extends javax.swing.JPanel {
     private void DeleteButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseReleased
         tab.removeSimulationCard();
     }//GEN-LAST:event_DeleteButtonMouseReleased
+
+    private void ResumeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResumeButtonMouseReleased
+        tab.onStartSimulation();
+    }//GEN-LAST:event_ResumeButtonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

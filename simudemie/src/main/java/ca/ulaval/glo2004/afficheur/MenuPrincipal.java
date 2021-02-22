@@ -1,7 +1,6 @@
 package ca.ulaval.glo2004.afficheur;
 
 import com.formdev.flatlaf.IntelliJTheme;
-import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.UIManager;
@@ -74,7 +73,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         TitleMenuLayout.setVerticalGroup(
             TitleMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 916, Short.MAX_VALUE)
         );
 
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/Logo3.130FINAL.png")), TitleMenu, "Accueil"); // NOI18N
@@ -89,7 +88,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1162, Short.MAX_VALUE)
+            .addGap(0, 916, Short.MAX_VALUE)
         );
 
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_microorganisms_40px.png")), jPanel2); // NOI18N
@@ -102,7 +101,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         QuitButtonLayout.setVerticalGroup(
             QuitButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 916, Short.MAX_VALUE)
         );
 
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_exit_35px.png")), QuitButton); // NOI18N

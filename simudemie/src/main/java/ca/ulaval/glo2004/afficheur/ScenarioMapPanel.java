@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004;
+package ca.ulaval.glo2004.afficheur;
 
 import java.awt.Color;
 
@@ -51,13 +51,12 @@ public class ScenarioMapPanel extends RoundedPanel {
         MapNameLabel.setText("Nom de la carte");
         MapPanelHeader.add(MapNameLabel, java.awt.BorderLayout.CENTER);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_more_20px.png"))); // NOI18N
-        MapPanelHeader.add(jLabel2, java.awt.BorderLayout.LINE_END);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
+        MapPanelHeader.add(jLabel2, java.awt.BorderLayout.EAST);
 
         add(MapPanelHeader, java.awt.BorderLayout.NORTH);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Logo3.130.png"))); // NOI18N
         add(jLabel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

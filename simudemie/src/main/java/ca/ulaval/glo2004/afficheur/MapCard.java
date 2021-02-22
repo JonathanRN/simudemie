@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004;
+package ca.ulaval.glo2004.afficheur;
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
@@ -13,13 +13,13 @@ public class MapCard extends RoundedPanel {
     public MapCard() {
         initComponents();
         
-        //MapName.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
+        MapName.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
         
         setBackground(new Color(216, 222, 233, 38));
     }
     
     public void setMapName(String name) {
-        //MapName.setText(name);
+        MapName.setText(name);
     }
     
     public void setMapImage(ImageIcon image) {

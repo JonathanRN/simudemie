@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004;
+package ca.ulaval.glo2004.afficheur;
 
 import java.awt.Color;
 
@@ -40,8 +40,10 @@ public class ScenarioStatsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Main = new ca.ulaval.glo2004.RoundedPanel();
+        Main = new ca.ulaval.glo2004.afficheur.RoundedPanel();
+        StatsHeader = new javax.swing.JPanel();
         StatsLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         Buttons = new javax.swing.JPanel();
         DeleteButton = new javax.swing.JButton();
         ResumeButton = new javax.swing.JButton();
@@ -52,9 +54,17 @@ public class ScenarioStatsPanel extends javax.swing.JPanel {
         Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 25, 15));
         Main.setLayout(new java.awt.BorderLayout());
 
+        StatsHeader.setOpaque(false);
+        StatsHeader.setLayout(new java.awt.BorderLayout());
+
         StatsLabel.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
         StatsLabel.setText("Statistiques");
-        Main.add(StatsLabel, java.awt.BorderLayout.PAGE_START);
+        StatsHeader.add(StatsLabel, java.awt.BorderLayout.CENTER);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
+        StatsHeader.add(jLabel1, java.awt.BorderLayout.EAST);
+
+        Main.add(StatsHeader, java.awt.BorderLayout.NORTH);
 
         add(Main, java.awt.BorderLayout.CENTER);
 
@@ -77,8 +87,10 @@ public class ScenarioStatsPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Buttons;
     private javax.swing.JButton DeleteButton;
-    private ca.ulaval.glo2004.RoundedPanel Main;
+    private ca.ulaval.glo2004.afficheur.RoundedPanel Main;
     private javax.swing.JButton ResumeButton;
+    private javax.swing.JPanel StatsHeader;
     private javax.swing.JLabel StatsLabel;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

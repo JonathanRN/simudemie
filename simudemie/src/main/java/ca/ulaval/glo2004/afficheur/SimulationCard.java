@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004;
+package ca.ulaval.glo2004.afficheur;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -26,7 +26,6 @@ public class SimulationCard extends javax.swing.JPanel {
         UIManager.put("ProgressBar.arc", 999);
         initComponents();
         
-        // todo valeurs hardcodes
         SimulationName.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
         Day.setFont(FontRegister.RobotoLight.deriveFont(15.98f));
         MapName.setFont(FontRegister.RobotoLight.deriveFont(12f));
@@ -102,6 +101,14 @@ public class SimulationCard extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(351, 215));
         setMinimumSize(new java.awt.Dimension(351, 215));
         setPreferredSize(new java.awt.Dimension(351, 215));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                formMouseExited(evt);
+            }
+        });
 
         SimulationName.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
         SimulationName.setText("Nom de la simulation");
@@ -206,6 +213,16 @@ public class SimulationCard extends javax.swing.JPanel {
                 .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+        setBackground(Color.RED);
+        paintComponent(getGraphics());
+    }//GEN-LAST:event_formMouseEntered
+
+    private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
+        setBackground(Color.GREEN);
+        paintComponent(getGraphics());
+    }//GEN-LAST:event_formMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

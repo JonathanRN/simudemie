@@ -5,6 +5,8 @@
  */
 package ca.ulaval.glo2004.controleur;
 
+import ca.ulaval.glo2004.domaine.Pays;
+import ca.ulaval.glo2004.domaine.VoieLiaison;
 
 public class GestionnaireCreation {
     
@@ -28,12 +30,12 @@ public class GestionnaireCreation {
         //TODO Appel au constructeur 
     }
         
-    private void CreerLiaison(enum type, Pays paysOrigine, Pays paysDestination)
+    private void CreerLiaison(VoieLiaison voie, Pays paysOrigine, Pays paysDestination)
     {
         //TODO Appel au constructeur 
     }
             
-    private void CreerMaladie(String nom, float tauxInf, float, tauxMort, float tauxGuerison)
+    private void CreerMaladie(String nom, float tauxInf, float tauxMort, float tauxGuerison)
     {
         //TODO Appel au constructeur 
     }

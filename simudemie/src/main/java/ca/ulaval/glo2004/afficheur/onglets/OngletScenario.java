@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004.afficheur;
+package ca.ulaval.glo2004.afficheur.onglets;
 
+import ca.ulaval.glo2004.afficheur.FontRegister;
+import ca.ulaval.glo2004.afficheur.FramePrincipal;
+import ca.ulaval.glo2004.afficheur.objetsUI.ObjetScenario;
+import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -103,7 +107,7 @@ public class OngletScenario extends OngletUI {
         ProjectPanelContainer = new javax.swing.JPanel();
         Sce_Informations = new javax.swing.JPanel();
         Sce_InformationsLabel = new javax.swing.JLabel();
-        Layout5 = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        Layout = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         scenarioMapPanel2 = new ca.ulaval.glo2004.afficheur.CarteScenarioPanel();
         scenarioStatsPanel1 = new ca.ulaval.glo2004.afficheur.StatsScenarioPanel();
 
@@ -199,14 +203,13 @@ public class OngletScenario extends OngletUI {
         Sce_InformationsLabel.setPreferredSize(new java.awt.Dimension(146, 35));
         Sce_Informations.add(Sce_InformationsLabel, java.awt.BorderLayout.NORTH);
 
-        Layout5.setBackground(new java.awt.Color(46, 52, 64));
-        Layout5.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
-        Layout5.setOpaque(false);
-        Layout5.setLayout(new java.awt.GridLayout(1, 2, 25, 0));
-        Layout5.add(scenarioMapPanel2);
-        Layout5.add(scenarioStatsPanel1);
+        Layout.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        Layout.setOpaque(false);
+        Layout.setLayout(new java.awt.GridLayout(1, 2, 25, 0));
+        Layout.add(scenarioMapPanel2);
+        Layout.add(scenarioStatsPanel1);
 
-        Sce_Informations.add(Layout5, java.awt.BorderLayout.CENTER);
+        Sce_Informations.add(Layout, java.awt.BorderLayout.CENTER);
 
         add(Sce_Informations, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -219,7 +222,7 @@ public class OngletScenario extends OngletUI {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddScenarioButton;
     private javax.swing.JButton ImportScenarioButton;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi Layout5;
+    private ca.ulaval.glo2004.afficheur.PanelArrondi Layout;
     private javax.swing.JPanel ProjectPanelContainer;
     private javax.swing.JPanel Sce_Informations;
     private javax.swing.JLabel Sce_InformationsLabel;

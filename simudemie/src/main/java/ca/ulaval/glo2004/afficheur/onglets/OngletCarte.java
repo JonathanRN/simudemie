@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004.afficheur;
+package ca.ulaval.glo2004.afficheur.onglets;
 
+import ca.ulaval.glo2004.afficheur.FontRegister;
+import ca.ulaval.glo2004.afficheur.objetsUI.ObjetCarte;
+import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 import java.awt.Color;
 
 /**
@@ -28,6 +31,8 @@ public class OngletCarte extends OngletUI {
             Map_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             AddMapButton.setBackground(new Color(216, 222, 233, 38));
             ImportMapButton.setBackground(new Color(216, 222, 233, 38));
+            
+            Layout.setOpaque(false);
         }
         catch (Exception e) {
         }
@@ -79,9 +84,9 @@ public class OngletCarte extends OngletUI {
         MapPanelContainer = new javax.swing.JPanel();
         Map_Informations = new javax.swing.JPanel();
         Map_InformationsLabel = new javax.swing.JLabel();
-        Layout5 = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        Layout = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         scenarioMapPanel1 = new ca.ulaval.glo2004.afficheur.CarteScenarioPanel();
-        mapStatsPanel1 = new ca.ulaval.glo2004.afficheur.CarteStatsPanel();
+        mapStatsPanel1 = new ca.ulaval.glo2004.afficheur.StatsCartePanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 35, 35));
@@ -175,13 +180,13 @@ public class OngletCarte extends OngletUI {
         Map_InformationsLabel.setPreferredSize(new java.awt.Dimension(146, 35));
         Map_Informations.add(Map_InformationsLabel, java.awt.BorderLayout.NORTH);
 
-        Layout5.setBackground(new java.awt.Color(46, 52, 64));
-        Layout5.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
-        Layout5.setLayout(new java.awt.GridLayout(1, 2, 25, 0));
-        Layout5.add(scenarioMapPanel1);
-        Layout5.add(mapStatsPanel1);
+        Layout.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        Layout.setOpaque(false);
+        Layout.setLayout(new java.awt.GridLayout(1, 2, 25, 0));
+        Layout.add(scenarioMapPanel1);
+        Layout.add(mapStatsPanel1);
 
-        Map_Informations.add(Layout5, java.awt.BorderLayout.CENTER);
+        Map_Informations.add(Layout, java.awt.BorderLayout.CENTER);
 
         add(Map_Informations, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -195,14 +200,14 @@ public class OngletCarte extends OngletUI {
     private javax.swing.JButton AddMapButton;
     private javax.swing.JPanel Cartes;
     private javax.swing.JButton ImportMapButton;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi Layout5;
+    private ca.ulaval.glo2004.afficheur.PanelArrondi Layout;
     private javax.swing.JPanel MapPanelContainer;
     private javax.swing.JPanel MapTitlePanel;
     private javax.swing.JPanel Map_Informations;
     private javax.swing.JLabel Map_InformationsLabel;
     private javax.swing.JLabel MapsLabel;
     private javax.swing.JScrollPane MapsScrollPane;
-    private ca.ulaval.glo2004.afficheur.CarteStatsPanel mapStatsPanel1;
+    private ca.ulaval.glo2004.afficheur.StatsCartePanel mapStatsPanel1;
     private ca.ulaval.glo2004.afficheur.CarteScenarioPanel scenarioMapPanel1;
     // End of variables declaration//GEN-END:variables
 }

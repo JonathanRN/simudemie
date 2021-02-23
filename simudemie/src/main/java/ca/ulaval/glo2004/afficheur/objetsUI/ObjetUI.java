@@ -1,5 +1,7 @@
-package ca.ulaval.glo2004.afficheur;
+package ca.ulaval.glo2004.afficheur.objetsUI;
 
+import ca.ulaval.glo2004.afficheur.PanelArrondi;
+import ca.ulaval.glo2004.afficheur.onglets.OngletUI;
 import java.awt.Color;
 
 public abstract class ObjetUI extends PanelArrondi {

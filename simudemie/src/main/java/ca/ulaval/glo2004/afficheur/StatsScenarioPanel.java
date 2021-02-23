@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur;
 
+import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
 import java.awt.Color;
 
 /**

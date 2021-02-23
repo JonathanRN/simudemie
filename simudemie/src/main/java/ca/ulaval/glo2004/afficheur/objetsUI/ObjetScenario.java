@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004.afficheur;
+package ca.ulaval.glo2004.afficheur.objetsUI;
+
+import ca.ulaval.glo2004.afficheur.FontRegister;
+import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
 
 /**
  * Adapte depuis https://stackoverflow.com/questions/15025092/border-with-rounded-corners-transparency
@@ -93,54 +96,41 @@ public class ObjetScenario extends ObjetUI {
         DiagramPanel.setMaximumSize(new java.awt.Dimension(349, 85));
         DiagramPanel.setMinimumSize(new java.awt.Dimension(349, 85));
         DiagramPanel.setPreferredSize(new java.awt.Dimension(349, 85));
+        DiagramPanel.setLayout(new java.awt.BorderLayout());
 
         Bars.setBackground(new java.awt.Color(59, 66, 82));
+        Bars.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 42, 4, 42));
         Bars.setLayout(new java.awt.GridLayout(4, 0));
 
-        InfectedProgressBar.setBackground(new java.awt.Color(59, 66, 82));
         InfectedProgressBar.setForeground(new java.awt.Color(191, 97, 106));
         InfectedProgressBar.setValue(25);
         InfectedProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
         InfectedProgressBar.setBorderPainted(false);
+        InfectedProgressBar.setString("Infectés");
         Bars.add(InfectedProgressBar);
 
-        CuredProgressBar.setBackground(new java.awt.Color(59, 66, 82));
         CuredProgressBar.setForeground(new java.awt.Color(163, 190, 140));
         CuredProgressBar.setValue(100);
         CuredProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
         CuredProgressBar.setBorderPainted(false);
+        CuredProgressBar.setString("Guéris");
         Bars.add(CuredProgressBar);
 
-        ImmunedProgressBar.setBackground(new java.awt.Color(59, 66, 82));
         ImmunedProgressBar.setForeground(new java.awt.Color(136, 192, 208));
         ImmunedProgressBar.setValue(75);
         ImmunedProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
         ImmunedProgressBar.setBorderPainted(false);
+        ImmunedProgressBar.setString("Immunisés");
         Bars.add(ImmunedProgressBar);
 
-        DeadProgressBar.setBackground(new java.awt.Color(59, 66, 82));
         DeadProgressBar.setForeground(new java.awt.Color(180, 142, 173));
         DeadProgressBar.setValue(50);
         DeadProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
         DeadProgressBar.setBorderPainted(false);
+        DeadProgressBar.setString("Morts");
         Bars.add(DeadProgressBar);
 
-        javax.swing.GroupLayout DiagramPanelLayout = new javax.swing.GroupLayout(DiagramPanel);
-        DiagramPanel.setLayout(DiagramPanelLayout);
-        DiagramPanelLayout.setHorizontalGroup(
-            DiagramPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DiagramPanelLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(Bars, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        DiagramPanelLayout.setVerticalGroup(
-            DiagramPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DiagramPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Bars, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        DiagramPanel.add(Bars, java.awt.BorderLayout.CENTER);
 
         MapName.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
         MapName.setText("Nom de la carte");
@@ -165,7 +155,7 @@ public class ObjetScenario extends ObjetUI {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(VirusName)
                 .addGap(41, 41, 41))
-            .addComponent(DiagramPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+            .addComponent(DiagramPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

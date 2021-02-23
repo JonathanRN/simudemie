@@ -29,10 +29,10 @@ public class MenuPrincipal extends javax.swing.JPanel {
 
         TabMenu = new javax.swing.JTabbedPane();
         TitleMenu = new javax.swing.JPanel();
-        ScenarioTab = new ca.ulaval.glo2004.afficheur.OngletScenario();
-        MapTab = new ca.ulaval.glo2004.afficheur.OngletCarte();
-        jPanel2 = new javax.swing.JPanel();
-        QuitButton = new javax.swing.JPanel();
+        OngletScenario = new ca.ulaval.glo2004.afficheur.onglets.OngletScenario();
+        OngletCarte = new ca.ulaval.glo2004.afficheur.onglets.OngletCarte();
+        OngletMaladie = new ca.ulaval.glo2004.afficheur.onglets.OngletMaladie();
+        BoutonQuitter = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -57,38 +57,26 @@ public class MenuPrincipal extends javax.swing.JPanel {
         );
         TitleMenuLayout.setVerticalGroup(
             TitleMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 575, Short.MAX_VALUE)
+            .addGap(0, 735, Short.MAX_VALUE)
         );
 
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/Logo3.130FINAL.png")), TitleMenu, "Accueil"); // NOI18N
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_play_40px.png")), ScenarioTab); // NOI18N
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_country_40px.png")), MapTab); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_play_40px.png")), OngletScenario); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_country_40px.png")), OngletCarte); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_microorganisms_40px.png")), OngletMaladie); // NOI18N
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1059, Short.MAX_VALUE)
+        javax.swing.GroupLayout BoutonQuitterLayout = new javax.swing.GroupLayout(BoutonQuitter);
+        BoutonQuitter.setLayout(BoutonQuitterLayout);
+        BoutonQuitterLayout.setHorizontalGroup(
+            BoutonQuitterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1071, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 575, Short.MAX_VALUE)
-        );
-
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_microorganisms_40px.png")), jPanel2); // NOI18N
-
-        javax.swing.GroupLayout QuitButtonLayout = new javax.swing.GroupLayout(QuitButton);
-        QuitButton.setLayout(QuitButtonLayout);
-        QuitButtonLayout.setHorizontalGroup(
-            QuitButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        QuitButtonLayout.setVerticalGroup(
-            QuitButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 575, Short.MAX_VALUE)
+        BoutonQuitterLayout.setVerticalGroup(
+            BoutonQuitterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 735, Short.MAX_VALUE)
         );
 
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_exit_35px.png")), QuitButton); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_exit_35px.png")), BoutonQuitter); // NOI18N
 
         add(TabMenu, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -101,11 +89,11 @@ public class MenuPrincipal extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private ca.ulaval.glo2004.afficheur.OngletCarte MapTab;
-    private javax.swing.JPanel QuitButton;
-    private ca.ulaval.glo2004.afficheur.OngletScenario ScenarioTab;
+    private javax.swing.JPanel BoutonQuitter;
+    private ca.ulaval.glo2004.afficheur.onglets.OngletCarte OngletCarte;
+    private ca.ulaval.glo2004.afficheur.onglets.OngletMaladie OngletMaladie;
+    private ca.ulaval.glo2004.afficheur.onglets.OngletScenario OngletScenario;
     private javax.swing.JTabbedPane TabMenu;
     private javax.swing.JPanel TitleMenu;
-    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

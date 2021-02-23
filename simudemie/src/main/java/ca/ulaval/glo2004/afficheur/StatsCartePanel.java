@@ -5,17 +5,18 @@
  */
 package ca.ulaval.glo2004.afficheur;
 
+import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
 import java.awt.Color;
 
 /**
  *
  * @author Jonathan
  */
-public class CarteStatsPanel extends javax.swing.JPanel {
+public class StatsCartePanel extends javax.swing.JPanel {
     
     private OngletCarte onglet;
     
-    public CarteStatsPanel() {
+    public StatsCartePanel() {
         initComponents();
         
         try {

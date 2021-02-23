@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004.afficheur;
+package ca.ulaval.glo2004.afficheur.onglets;
 
+import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +19,10 @@ public abstract class OngletUI extends javax.swing.JPanel {
     
     public OngletUI() {
         initComponents();
+    }
+    
+    public ObjetUI getCourant() {
+        return courant;
     }
 
     public void ajouterObjetUI() {

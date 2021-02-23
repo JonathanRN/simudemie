@@ -54,7 +54,7 @@ public class MapTab extends javax.swing.JPanel {
         Map_InformationsLabel = new javax.swing.JLabel();
         Layout5 = new ca.ulaval.glo2004.afficheur.RoundedPanel();
         scenarioMapPanel1 = new ca.ulaval.glo2004.afficheur.ScenarioMapPanel();
-        scenarioStatsPanel1 = new ca.ulaval.glo2004.afficheur.ScenarioStatsPanel();
+        mapStatsPanel1 = new ca.ulaval.glo2004.afficheur.MapStatsPanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 35, 35));
@@ -147,7 +147,7 @@ public class MapTab extends javax.swing.JPanel {
         Layout5.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
         Layout5.setLayout(new java.awt.GridLayout(1, 2, 25, 0));
         Layout5.add(scenarioMapPanel1);
-        Layout5.add(scenarioStatsPanel1);
+        Layout5.add(mapStatsPanel1);
 
         Map_Informations.add(Layout5, java.awt.BorderLayout.CENTER);
 
@@ -166,7 +166,7 @@ public class MapTab extends javax.swing.JPanel {
     private javax.swing.JLabel Map_InformationsLabel;
     private javax.swing.JLabel MapsLabel;
     private javax.swing.JScrollPane MapsScrollPane;
+    private ca.ulaval.glo2004.afficheur.MapStatsPanel mapStatsPanel1;
     private ca.ulaval.glo2004.afficheur.ScenarioMapPanel scenarioMapPanel1;
-    private ca.ulaval.glo2004.afficheur.ScenarioStatsPanel scenarioStatsPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -266,7 +266,7 @@
           <SubComponents>
             <Component class="ca.ulaval.glo2004.afficheur.ScenarioMapPanel" name="scenarioMapPanel1">
             </Component>
-            <Component class="ca.ulaval.glo2004.afficheur.ScenarioStatsPanel" name="scenarioStatsPanel1">
+            <Component class="ca.ulaval.glo2004.afficheur.MapStatsPanel" name="mapStatsPanel1">
             </Component>
           </SubComponents>
         </Container>

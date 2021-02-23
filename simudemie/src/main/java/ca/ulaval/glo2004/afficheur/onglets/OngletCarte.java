@@ -161,8 +161,8 @@ public class OngletCarte extends OngletUI {
         MapsScrollPane.setPreferredSize(new java.awt.Dimension(75, 250));
 
         MapPanelContainer.setBackground(new java.awt.Color(46, 52, 64));
-        MapPanelContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -49, 0, 0));
-        MapPanelContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 50, 5));
+        MapPanelContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -25, 0, 0));
+        MapPanelContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 25, 5));
         MapsScrollPane.setViewportView(MapPanelContainer);
 
         Cartes.add(MapsScrollPane, java.awt.BorderLayout.CENTER);

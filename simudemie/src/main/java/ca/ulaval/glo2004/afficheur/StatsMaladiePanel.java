@@ -103,6 +103,18 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         Main.add(StatsHeader, java.awt.BorderLayout.NORTH);
 
         Parent.setOpaque(false);
+
+        javax.swing.GroupLayout ParentLayout = new javax.swing.GroupLayout(Parent);
+        Parent.setLayout(ParentLayout);
+        ParentLayout.setHorizontalGroup(
+            ParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 661, Short.MAX_VALUE)
+        );
+        ParentLayout.setVerticalGroup(
+            ParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 357, Short.MAX_VALUE)
+        );
+
         Main.add(Parent, java.awt.BorderLayout.CENTER);
 
         add(Main, java.awt.BorderLayout.CENTER);
@@ -116,7 +128,8 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         this.requestFocusInWindow();
         updateUI();
         
-        sauvegarderMaladie();
+        ObjetMaladie maladie = (ObjetMaladie)onglet.getCourant();
+        setNomMaladie(maladie.getNom());
     }//GEN-LAST:event_formMouseReleased
 
     private void MaladieInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaladieInputKeyReleased

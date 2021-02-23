@@ -61,9 +61,9 @@ public class MenuPrincipal extends javax.swing.JPanel {
         );
 
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/Logo3.130FINAL.png")), TitleMenu, "Accueil"); // NOI18N
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_play_40px.png")), OngletScenario); // NOI18N
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_country_40px.png")), OngletCarte); // NOI18N
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_microorganisms_40px.png")), OngletMaladie); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_play_40px.png")), OngletScenario, "Scénarios"); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_country_40px.png")), OngletCarte, "Cartes Mondiales"); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_microorganisms_40px.png")), OngletMaladie, "Maladies"); // NOI18N
 
         javax.swing.GroupLayout BoutonQuitterLayout = new javax.swing.GroupLayout(BoutonQuitter);
         BoutonQuitter.setLayout(BoutonQuitterLayout);
@@ -76,7 +76,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
             .addGap(0, 735, Short.MAX_VALUE)
         );
 
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_exit_35px.png")), BoutonQuitter); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_exit_35px.png")), BoutonQuitter, "Quitter Simudémie"); // NOI18N
 
         add(TabMenu, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents

@@ -117,6 +117,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/icons8_plus_math_20px.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Cr&#xe9;er un nouveau sc&#xe9;nario"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -141,6 +142,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/icons8_installing_updates_20px.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Importer un sc&#xe9;nario"/>
                 <Property name="focusable" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -265,9 +267,9 @@
             <Property name="rows" type="int" value="1"/>
           </Layout>
           <SubComponents>
-            <Component class="ca.ulaval.glo2004.afficheur.CarteScenarioPanel" name="scenarioMapPanel2">
+            <Component class="ca.ulaval.glo2004.afficheur.panels.CarteScenarioPanel" name="scenarioMapPanel2">
             </Component>
-            <Component class="ca.ulaval.glo2004.afficheur.StatsScenarioPanel" name="scenarioStatsPanel1">
+            <Component class="ca.ulaval.glo2004.afficheur.panels.StatsScenarioPanel" name="scenarioStatsPanel1">
             </Component>
           </SubComponents>
         </Container>

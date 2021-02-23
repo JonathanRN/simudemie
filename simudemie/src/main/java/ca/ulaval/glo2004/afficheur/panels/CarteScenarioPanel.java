@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004.afficheur;
+package ca.ulaval.glo2004.afficheur.panels;
 
+import ca.ulaval.glo2004.afficheur.PanelArrondi;
+import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import java.awt.Color;
 
 /**
@@ -56,6 +58,7 @@ public class CarteScenarioPanel extends PanelArrondi {
         MapPanelHeader.add(MapNameLabel, java.awt.BorderLayout.CENTER);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
+        jLabel2.setToolTipText("Exporter la carte du scénario");
         MapPanelHeader.add(jLabel2, java.awt.BorderLayout.EAST);
 
         add(MapPanelHeader, java.awt.BorderLayout.NORTH);

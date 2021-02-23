@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004.afficheur;
+package ca.ulaval.glo2004.afficheur.utilsUI;
 
 import java.awt.Font;
 import java.awt.FontFormatException;

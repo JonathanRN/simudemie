@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004.afficheur;
+package ca.ulaval.glo2004.afficheur.panels;
 
+import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetMaladie;
 import ca.ulaval.glo2004.afficheur.onglets.OngletMaladie;
 import java.awt.Color;

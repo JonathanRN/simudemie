@@ -5,7 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.onglets;
 
-import ca.ulaval.glo2004.afficheur.FontRegister;
+import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetMaladie;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
@@ -107,7 +107,7 @@ public class OngletMaladie extends OngletUI {
         Mal_Informations = new javax.swing.JPanel();
         Mal_InformationsLabel = new javax.swing.JLabel();
         Layout = new ca.ulaval.glo2004.afficheur.PanelArrondi();
-        statsMaladiePanel1 = new ca.ulaval.glo2004.afficheur.StatsMaladiePanel();
+        statsMaladiePanel1 = new ca.ulaval.glo2004.afficheur.panels.StatsMaladiePanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 35, 35));
@@ -227,6 +227,6 @@ public class OngletMaladie extends OngletUI {
     private javax.swing.JLabel ScenariosLabel;
     private javax.swing.JScrollPane ScenariosScrollPane;
     private javax.swing.JPanel ScenariosTitle;
-    private ca.ulaval.glo2004.afficheur.StatsMaladiePanel statsMaladiePanel1;
+    private ca.ulaval.glo2004.afficheur.panels.StatsMaladiePanel statsMaladiePanel1;
     // End of variables declaration//GEN-END:variables
 }

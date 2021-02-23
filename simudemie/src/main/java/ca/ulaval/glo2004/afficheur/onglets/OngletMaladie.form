@@ -265,7 +265,7 @@
             <Property name="rows" type="int" value="1"/>
           </Layout>
           <SubComponents>
-            <Component class="ca.ulaval.glo2004.afficheur.StatsMaladiePanel" name="statsMaladiePanel1">
+            <Component class="ca.ulaval.glo2004.afficheur.panels.StatsMaladiePanel" name="statsMaladiePanel1">
             </Component>
           </SubComponents>
         </Container>

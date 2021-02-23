@@ -101,7 +101,7 @@
             <Property name="verticalGap" type="int" value="10"/>
           </Layout>
           <SubComponents>
-            <Component class="ca.ulaval.glo2004.afficheur.SimulationBouton" name="AddButton">
+            <Component class="ca.ulaval.glo2004.afficheur.boutons.SimulationBouton" name="AddButton">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -117,7 +117,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="ca.ulaval.glo2004.afficheur.SimulationBouton" name="LinkButton">
+            <Component class="ca.ulaval.glo2004.afficheur.boutons.SimulationBouton" name="LinkButton">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -157,7 +157,7 @@
                 </DimensionLayout>
               </Layout>
             </Container>
-            <Component class="ca.ulaval.glo2004.afficheur.SimulationBouton" name="StatsButton">
+            <Component class="ca.ulaval.glo2004.afficheur.boutons.SimulationBouton" name="StatsButton">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -173,7 +173,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="ca.ulaval.glo2004.afficheur.SimulationBouton" name="HelpButton">
+            <Component class="ca.ulaval.glo2004.afficheur.boutons.SimulationBouton" name="HelpButton">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
@@ -189,7 +189,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="ca.ulaval.glo2004.afficheur.SimulationBouton" name="HomeButton">
+            <Component class="ca.ulaval.glo2004.afficheur.boutons.SimulationBouton" name="HomeButton">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>

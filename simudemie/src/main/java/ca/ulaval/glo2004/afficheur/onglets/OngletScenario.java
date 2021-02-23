@@ -5,7 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.onglets;
 
-import ca.ulaval.glo2004.afficheur.FontRegister;
+import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetScenario;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
@@ -108,8 +108,8 @@ public class OngletScenario extends OngletUI {
         Sce_Informations = new javax.swing.JPanel();
         Sce_InformationsLabel = new javax.swing.JLabel();
         Layout = new ca.ulaval.glo2004.afficheur.PanelArrondi();
-        scenarioMapPanel2 = new ca.ulaval.glo2004.afficheur.CarteScenarioPanel();
-        scenarioStatsPanel1 = new ca.ulaval.glo2004.afficheur.StatsScenarioPanel();
+        scenarioMapPanel2 = new ca.ulaval.glo2004.afficheur.panels.CarteScenarioPanel();
+        scenarioStatsPanel1 = new ca.ulaval.glo2004.afficheur.panels.StatsScenarioPanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 35, 35));
@@ -131,6 +131,7 @@ public class OngletScenario extends OngletUI {
 
         AddScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_plus_math_20px.png"))); // NOI18N
+        AddScenarioButton.setToolTipText("Créer un nouveau scénario");
         AddScenarioButton.setFocusable(false);
         AddScenarioButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         AddScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
@@ -144,6 +145,7 @@ public class OngletScenario extends OngletUI {
 
         ImportScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         ImportScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_installing_updates_20px.png"))); // NOI18N
+        ImportScenarioButton.setToolTipText("Importer un scénario");
         ImportScenarioButton.setFocusable(false);
         ImportScenarioButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ImportScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
@@ -230,7 +232,7 @@ public class OngletScenario extends OngletUI {
     private javax.swing.JLabel ScenariosLabel;
     private javax.swing.JScrollPane ScenariosScrollPane;
     private javax.swing.JPanel ScenariosTitle;
-    private ca.ulaval.glo2004.afficheur.CarteScenarioPanel scenarioMapPanel2;
-    private ca.ulaval.glo2004.afficheur.StatsScenarioPanel scenarioStatsPanel1;
+    private ca.ulaval.glo2004.afficheur.panels.CarteScenarioPanel scenarioMapPanel2;
+    private ca.ulaval.glo2004.afficheur.panels.StatsScenarioPanel scenarioStatsPanel1;
     // End of variables declaration//GEN-END:variables
 }

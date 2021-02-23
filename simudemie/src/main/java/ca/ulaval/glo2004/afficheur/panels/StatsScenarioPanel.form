@@ -67,6 +67,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/icons8_upload_20px.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Exporter les statistiques du sc&#xe9;nario"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -100,19 +101,21 @@
         <Component class="javax.swing.JButton" name="DeleteButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Supprimer"/>
+            <Property name="toolTipText" type="java.lang.String" value="Supprimer le sc&#xe9;nario "/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DeleteButtonMouseClicked"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DeleteButtonMouseReleased"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="ModifyButton">
+        <Component class="javax.swing.JButton" name="ResumeButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Modifier"/>
+            <Property name="text" type="java.lang.String" value="R&#xe9;sumer"/>
+            <Property name="toolTipText" type="java.lang.String" value="R&#xe9;sumer le sc&#xe9;nario"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ModifyButtonMouseClicked"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ResumeButtonMouseReleased"/>
           </Events>
         </Component>
       </SubComponents>

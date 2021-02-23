@@ -5,7 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.onglets;
 
-import ca.ulaval.glo2004.afficheur.FontRegister;
+import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetCarte;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 import java.awt.Color;
@@ -85,8 +85,8 @@ public class OngletCarte extends OngletUI {
         Map_Informations = new javax.swing.JPanel();
         Map_InformationsLabel = new javax.swing.JLabel();
         Layout = new ca.ulaval.glo2004.afficheur.PanelArrondi();
-        scenarioMapPanel1 = new ca.ulaval.glo2004.afficheur.CarteScenarioPanel();
-        mapStatsPanel1 = new ca.ulaval.glo2004.afficheur.StatsCartePanel();
+        scenarioMapPanel1 = new ca.ulaval.glo2004.afficheur.panels.CarteScenarioPanel();
+        mapStatsPanel1 = new ca.ulaval.glo2004.afficheur.panels.StatsCartePanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 35, 35));
@@ -207,7 +207,7 @@ public class OngletCarte extends OngletUI {
     private javax.swing.JLabel Map_InformationsLabel;
     private javax.swing.JLabel MapsLabel;
     private javax.swing.JScrollPane MapsScrollPane;
-    private ca.ulaval.glo2004.afficheur.StatsCartePanel mapStatsPanel1;
-    private ca.ulaval.glo2004.afficheur.CarteScenarioPanel scenarioMapPanel1;
+    private ca.ulaval.glo2004.afficheur.panels.StatsCartePanel mapStatsPanel1;
+    private ca.ulaval.glo2004.afficheur.panels.CarteScenarioPanel scenarioMapPanel1;
     // End of variables declaration//GEN-END:variables
 }

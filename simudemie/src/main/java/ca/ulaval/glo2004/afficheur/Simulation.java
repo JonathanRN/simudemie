@@ -69,12 +69,12 @@ public class Simulation extends javax.swing.JPanel {
         jSlider1 = new javax.swing.JSlider();
         Buttons = new javax.swing.JPanel();
         SidePanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
-        AddButton = new ca.ulaval.glo2004.afficheur.SimulationBouton();
-        LinkButton = new ca.ulaval.glo2004.afficheur.SimulationBouton();
+        AddButton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
+        LinkButton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         Spacing = new javax.swing.JPanel();
-        StatsButton = new ca.ulaval.glo2004.afficheur.SimulationBouton();
-        HelpButton = new ca.ulaval.glo2004.afficheur.SimulationBouton();
-        HomeButton = new ca.ulaval.glo2004.afficheur.SimulationBouton();
+        StatsButton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
+        HelpButton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
+        HomeButton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
 
         setBackground(new java.awt.Color(46, 52, 64));
         setLayout(new javax.swing.OverlayLayout(this));
@@ -177,15 +177,15 @@ public class Simulation extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private ca.ulaval.glo2004.afficheur.SimulationBouton AddButton;
+    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton AddButton;
     private javax.swing.JPanel Buttons;
-    private ca.ulaval.glo2004.afficheur.SimulationBouton HelpButton;
-    private ca.ulaval.glo2004.afficheur.SimulationBouton HomeButton;
-    private ca.ulaval.glo2004.afficheur.SimulationBouton LinkButton;
+    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HelpButton;
+    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HomeButton;
+    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton LinkButton;
     private ca.ulaval.glo2004.afficheur.PanelArrondi SidePanel;
     private javax.swing.JPanel Slider;
     private javax.swing.JPanel Spacing;
-    private ca.ulaval.glo2004.afficheur.SimulationBouton StatsButton;
+    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton StatsButton;
     private javax.swing.JSlider jSlider1;
     // End of variables declaration//GEN-END:variables
 }

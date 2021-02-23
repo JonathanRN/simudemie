@@ -5,7 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.objetsUI;
 
-import ca.ulaval.glo2004.afficheur.FontRegister;
+import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
 import javax.swing.ImageIcon;
 

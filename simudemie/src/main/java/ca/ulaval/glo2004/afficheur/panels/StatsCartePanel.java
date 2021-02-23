@@ -3,20 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004.afficheur;
+package ca.ulaval.glo2004.afficheur.panels;
 
-import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
+import ca.ulaval.glo2004.afficheur.FramePrincipal;
+import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
+import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
 import java.awt.Color;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author Jonathan
  */
-public class StatsScenarioPanel extends javax.swing.JPanel {
-
-    private OngletScenario onglet; 
+public class StatsCartePanel extends javax.swing.JPanel {
     
-    public StatsScenarioPanel() {
+    private OngletCarte onglet;
+    
+    public StatsCartePanel() {
         initComponents();
         
         try {
@@ -24,14 +27,14 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
             Main.setBackground(new Color(216, 222, 233, 38));
             DeleteButton.setBackground(new Color(216, 222, 233, 38));
             DeleteButton.setFont(FontRegister.RobotoLight.deriveFont(15f));
-            ResumeButton.setBackground(new Color(216, 222, 233, 38));
-            ResumeButton.setFont(FontRegister.RobotoLight.deriveFont(15f));
+            ModifyButton.setBackground(new Color(216, 222, 233, 38));
+            ModifyButton.setFont(FontRegister.RobotoLight.deriveFont(15f));
         }
         catch(Exception e) {
         }
     }
     
-    public void setOnglet(OngletScenario onglet) {
+    public void setOnglet(OngletCarte onglet) {
         this.onglet = onglet;
     }
 
@@ -50,7 +53,7 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         Buttons = new javax.swing.JPanel();
         DeleteButton = new javax.swing.JButton();
-        ResumeButton = new javax.swing.JButton();
+        ModifyButton = new javax.swing.JButton();
 
         setOpaque(false);
         setLayout(new java.awt.BorderLayout(0, 25));
@@ -79,38 +82,46 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         DeleteButton.setText("Supprimer");
         DeleteButton.setFocusable(false);
         DeleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                DeleteButtonMouseReleased(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeleteButtonMouseClicked(evt);
             }
         });
         Buttons.add(DeleteButton);
 
-        ResumeButton.setText("Résumer");
-        ResumeButton.setFocusable(false);
-        ResumeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        ModifyButton.setText("Modifier");
+        ModifyButton.setFocusable(false);
+        ModifyButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ModifyButtonMouseClicked(evt);
+            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                ResumeButtonMouseReleased(evt);
+                ModifyButtonMouseReleased(evt);
             }
         });
-        Buttons.add(ResumeButton);
+        Buttons.add(ModifyButton);
 
         add(Buttons, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DeleteButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseReleased
-        onglet.retirerCourant();
-    }//GEN-LAST:event_DeleteButtonMouseReleased
+    private void ModifyButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifyButtonMouseClicked
+        // TODO ALLER DANS MENU CARTE
+    }//GEN-LAST:event_ModifyButtonMouseClicked
 
-    private void ResumeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResumeButtonMouseReleased
-        onglet.onStartSimulation();
-    }//GEN-LAST:event_ResumeButtonMouseReleased
+    private void DeleteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseClicked
+        onglet.retirerCourant();
+    }//GEN-LAST:event_DeleteButtonMouseClicked
+
+    private void ModifyButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifyButtonMouseReleased
+        FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
+        frame.startCreationCarte();
+    }//GEN-LAST:event_ModifyButtonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Buttons;
     private javax.swing.JButton DeleteButton;
     private ca.ulaval.glo2004.afficheur.PanelArrondi Main;
-    private javax.swing.JButton ResumeButton;
+    private javax.swing.JButton ModifyButton;
     private javax.swing.JPanel StatsHeader;
     private javax.swing.JLabel StatsLabel;
     private javax.swing.JLabel jLabel1;

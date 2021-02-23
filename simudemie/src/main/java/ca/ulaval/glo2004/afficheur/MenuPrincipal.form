@@ -77,11 +77,12 @@
         <Component class="ca.ulaval.glo2004.afficheur.onglets.OngletScenario" name="OngletScenario">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="">
+              <JTabbedPaneConstraints tabName="" toolTip="Sc&#xe9;narios">
                 <Property name="tabTitle" type="java.lang.String" value=""/>
                 <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/icons8_play_40px.png"/>
                 </Property>
+                <Property name="tabToolTip" type="java.lang.String" value="Sc&#xe9;narios"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -89,11 +90,12 @@
         <Component class="ca.ulaval.glo2004.afficheur.onglets.OngletCarte" name="OngletCarte">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="">
+              <JTabbedPaneConstraints tabName="" toolTip="Cartes Mondiales">
                 <Property name="tabTitle" type="java.lang.String" value=""/>
                 <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/icons8_country_40px.png"/>
                 </Property>
+                <Property name="tabToolTip" type="java.lang.String" value="Cartes Mondiales"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -101,11 +103,12 @@
         <Component class="ca.ulaval.glo2004.afficheur.onglets.OngletMaladie" name="OngletMaladie">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="">
+              <JTabbedPaneConstraints tabName="" toolTip="Maladies">
                 <Property name="tabTitle" type="java.lang.String" value=""/>
                 <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/icons8_microorganisms_40px.png"/>
                 </Property>
+                <Property name="tabToolTip" type="java.lang.String" value="Maladies"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -113,11 +116,12 @@
         <Container class="javax.swing.JPanel" name="BoutonQuitter">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="">
+              <JTabbedPaneConstraints tabName="" toolTip="Quitter Simud&#xe9;mie">
                 <Property name="tabTitle" type="java.lang.String" value=""/>
                 <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/icons8_exit_35px.png"/>
                 </Property>
+                <Property name="tabToolTip" type="java.lang.String" value="Quitter Simud&#xe9;mie"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>

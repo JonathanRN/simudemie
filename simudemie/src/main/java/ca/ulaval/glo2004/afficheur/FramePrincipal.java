@@ -1,5 +1,6 @@
 package ca.ulaval.glo2004.afficheur;
 
+import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import com.formdev.flatlaf.IntelliJTheme;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
@@ -8,6 +9,7 @@ import javax.swing.UIManager;
 public class FramePrincipal extends javax.swing.JFrame {  
     private MenuPrincipal menu;
     private Simulation simulation;
+    private CreationCarte creationCarte;
     
     private static final String ICON_PATH = "/icons/icon_virus_64px.png";
     
@@ -22,7 +24,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     * Doit être appelé avant la création du TabbedPane
     */
     private void initTabbedPaneProperties() {
-        UIManager.put("TabbedPaneUI", "ca.ulaval.glo2004.afficheur.CustomTabbedPaneUI");
+        UIManager.put("TabbedPaneUI", "ca.ulaval.glo2004.afficheur.utilsUI.CustomTabbedPaneUI");
         
         UIManager.put("TabbedPane.tabSelectionHeight", 5);
         UIManager.put("TabbedPane.tabAreaAlignment", "leading");
@@ -37,9 +39,23 @@ public class FramePrincipal extends javax.swing.JFrame {
         repaint();
     }
     
+    public void startCreationCarte() {
+        remove(menu);
+        creationCarte = new CreationCarte();
+        add(creationCarte);
+        revalidate();
+        repaint();
+    }
+    
     public void returnToHome() {
         if (simulation != null) {
             remove(simulation);
+            simulation = null;
+            add(menu);
+        }
+        else if (creationCarte != null) {
+            remove(creationCarte);
+            creationCarte = null;
             add(menu);
         }
         revalidate();
@@ -71,7 +87,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     public static void main(String args[]) {
         IntelliJTheme.install(FramePrincipal.class.getResourceAsStream("/themes/nord.theme.json"));
-        UIManager.put("RootPaneUI", "ca.ulaval.glo2004.afficheur.CustomRootPaneUI");
+        UIManager.put("RootPaneUI", "ca.ulaval.glo2004.afficheur.utilsUI.CustomRootPaneUI");
         UIManager.put("Button.arc", 15);
         UIManager.put("ProgressBar.arc", 999);
         

@@ -102,6 +102,9 @@
             <Property name="text" type="java.lang.String" value="Supprimer"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DeleteButtonMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="ModifyButton">
           <Properties>

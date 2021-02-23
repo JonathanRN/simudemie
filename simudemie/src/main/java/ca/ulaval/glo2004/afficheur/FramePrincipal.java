@@ -73,6 +73,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         IntelliJTheme.install(FramePrincipal.class.getResourceAsStream("/themes/nord.theme.json"));
         UIManager.put("RootPaneUI", "ca.ulaval.glo2004.afficheur.CustomRootPaneUI");
         UIManager.put("Button.arc", 15);
+        UIManager.put("ProgressBar.arc", 999);
         
         FontRegister.register();
 

@@ -5,21 +5,23 @@
  */
 package ca.ulaval.glo2004.afficheur;
 
-import java.awt.Color;
 import javax.swing.ImageIcon;
 
 
-public class MapCard extends RoundedPanel {
-    public MapCard() {
+public class MapCard extends ObjetUI {    
+    public MapCard(MapTab tab) {
+        super(tab);
         initComponents();
         
         MapName.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
-        
-        setBackground(new Color(216, 222, 233, 38));
     }
     
     public void setMapName(String name) {
         MapName.setText(name);
+    }
+    
+    public String getNomCarte() {
+        return MapName.getText();
     }
     
     public void setMapImage(ImageIcon image) {

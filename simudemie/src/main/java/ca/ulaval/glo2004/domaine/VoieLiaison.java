@@ -8,7 +8,7 @@ package ca.ulaval.glo2004.domaine;
 
 public class VoieLiaison {
     
-    private enum type {
+    private enum Voie {
         voieTerrestre,
         voieMaritime,
         voieAerienne
@@ -25,7 +25,7 @@ public class VoieLiaison {
         //TODO  Constructeur
     }
     
-    public String getType(){return this.toString();} //Pas certain du tout -- Est-ce utile?
+    //public String getType(){return this.toString();} //Pas certain du tout -- Est-ce utile?
     
     public Pays getPaysOrigine(){return paysOrigine;}
     
@@ -33,10 +33,10 @@ public class VoieLiaison {
     
     public boolean getAccessible(){return accessible;}
         
-    private void setType(enum type) //Pas certain -- Est-ce utile?
-    {
-        this.type = type;
-    } 
+//    private void setType(Voie voie) //Pas certain -- Est-ce utile?
+//    {
+//        this.type = type;
+//    } 
     
     private void setPaysOrigine(Pays paysOrigine)
     {

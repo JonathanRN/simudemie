@@ -11,7 +11,7 @@ import java.awt.Color;
  *
  * @author Jonathan
  */
-public class MapTab extends javax.swing.JPanel {
+public class MapTab extends OngletUI {
 
     /**
      * Creates new form ScenarioTab
@@ -20,9 +20,8 @@ public class MapTab extends javax.swing.JPanel {
         initComponents();
         
         try {
-            for (int i = 0; i < 4; i++) {
-                MapPanelContainer.add(new MapCard());
-            }
+            ajouterObjetUI();
+            mapStatsPanel1.setOnglet(this);
             
             MapsScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             MapsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
@@ -32,6 +31,34 @@ public class MapTab extends javax.swing.JPanel {
         }
         catch (Exception e) {
         }
+    }
+    
+    @Override
+    public void ajouterObjetUI() {
+        super.ajouterObjetUI();
+        MapCard card = new MapCard(this);
+        card.setMapName("Carte: " + objets.size());
+        objets.add(card);
+        if (objets.size() == 1) {
+            onClickObjetUI(card);
+        }
+        MapPanelContainer.add(card);
+        updateUI();
+    }
+
+    @Override
+    public void retirerCourant() {
+        MapPanelContainer.remove(courant);
+        updateUI();
+        
+        super.retirerCourant();
+    }
+
+    @Override
+    public void onClickObjetUI(ObjetUI objet) {
+        super.onClickObjetUI(objet);
+        MapCard objetCarte = (MapCard)objet;
+        scenarioMapPanel1.setMapName(objetCarte.getNomCarte());
     }
 
     /**
@@ -81,6 +108,11 @@ public class MapTab extends javax.swing.JPanel {
         AddMapButton.setMaximumSize(new java.awt.Dimension(75, 30));
         AddMapButton.setMinimumSize(new java.awt.Dimension(75, 30));
         AddMapButton.setPreferredSize(new java.awt.Dimension(100, 36));
+        AddMapButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AddMapButtonMouseClicked(evt);
+            }
+        });
 
         ImportMapButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         ImportMapButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_installing_updates_20px.png"))); // NOI18N
@@ -153,6 +185,10 @@ public class MapTab extends javax.swing.JPanel {
 
         add(Map_Informations, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void AddMapButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddMapButtonMouseClicked
+        ajouterObjetUI();
+    }//GEN-LAST:event_AddMapButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

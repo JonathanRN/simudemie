@@ -12,10 +12,9 @@ import java.awt.Color;
  * @author Jonathan
  */
 public class MapStatsPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form ScenarioStatsPanel
-     */
+    
+    private MapTab onglet;
+    
     public MapStatsPanel() {
         initComponents();
         
@@ -29,6 +28,10 @@ public class MapStatsPanel extends javax.swing.JPanel {
         }
         catch(Exception e) {
         }
+    }
+    
+    public void setOnglet(MapTab onglet) {
+        this.onglet = onglet;
     }
 
     /**
@@ -74,6 +77,11 @@ public class MapStatsPanel extends javax.swing.JPanel {
 
         DeleteButton.setText("Supprimer");
         DeleteButton.setFocusable(false);
+        DeleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeleteButtonMouseClicked(evt);
+            }
+        });
         Buttons.add(DeleteButton);
 
         ModifyButton.setText("Modifier");
@@ -89,8 +97,12 @@ public class MapStatsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ModifyButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifyButtonMouseClicked
-        
+        // TODO ALLER DANS MENU CARTE
     }//GEN-LAST:event_ModifyButtonMouseClicked
+
+    private void DeleteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseClicked
+        onglet.retirerCourant();
+    }//GEN-LAST:event_DeleteButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

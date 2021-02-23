@@ -13,7 +13,7 @@ import java.awt.Color;
  */
 public class ScenarioStatsPanel extends javax.swing.JPanel {
 
-    private ScenarioTab tab; 
+    private ScenarioTab onglet; 
     
     public ScenarioStatsPanel() {
         initComponents();
@@ -30,8 +30,8 @@ public class ScenarioStatsPanel extends javax.swing.JPanel {
         }
     }
     
-    public void setScenarioTab(ScenarioTab tab) {
-        this.tab = tab;
+    public void setOnglet(ScenarioTab onglet) {
+        this.onglet = onglet;
     }
 
     /**
@@ -97,11 +97,11 @@ public class ScenarioStatsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DeleteButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseReleased
-        tab.removeSimulationCard();
+        onglet.retirerCourant();
     }//GEN-LAST:event_DeleteButtonMouseReleased
 
     private void ResumeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResumeButtonMouseReleased
-        tab.onStartSimulation();
+        onglet.onStartSimulation();
     }//GEN-LAST:event_ResumeButtonMouseReleased
 
 

@@ -5,30 +5,19 @@
  */
 package ca.ulaval.glo2004.afficheur;
 
-import java.awt.Color;
-import javax.swing.UIManager;
-
-
 /**
  * Adapte depuis https://stackoverflow.com/questions/15025092/border-with-rounded-corners-transparency
  * @author Jonathan
  */
-public class SimulationCard extends RoundedPanel {
-    private boolean toggled = false;
-    private final ScenarioTab tab;
-    
+public class SimulationCard extends ObjetUI {    
     public SimulationCard(ScenarioTab tab) {
-        this.tab = tab;
-        UIManager.put("ProgressBar.arc", 999);
+        super(tab);
         initComponents();
         
         SimulationName.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
         Day.setFont(FontRegister.RobotoLight.deriveFont(15.98f));
         MapName.setFont(FontRegister.RobotoLight.deriveFont(12f));
         VirusName.setFont(FontRegister.RobotoLight.deriveFont(12f));
-        
-        // Rend le panel translucide
-        setBackground(defaultColor);
     }
     
     public void setSimulationName(String name) {
@@ -66,18 +55,6 @@ public class SimulationCard extends RoundedPanel {
     public void setDeadPercent(int percent) {
         DeadProgressBar.setValue(percent);
     }
-    
-    public void setToggled(boolean toggled) {
-        this.toggled = toggled;
-        if (toggled) {
-            setBackground(new Color(104,125,135));
-            setBorderColor(new Color(136, 192, 208));
-        }
-        else {
-            setBackground(defaultColor);
-            setBorderColor(defaultColor);
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,17 +79,6 @@ public class SimulationCard extends RoundedPanel {
         setMaximumSize(new java.awt.Dimension(351, 215));
         setMinimumSize(new java.awt.Dimension(351, 215));
         setPreferredSize(new java.awt.Dimension(351, 215));
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                formMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                formMouseExited(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                formMouseReleased(evt);
-            }
-        });
 
         SimulationName.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
         SimulationName.setText("Nom de la simulation");
@@ -218,24 +184,6 @@ public class SimulationCard extends RoundedPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     
-    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-        if (!toggled) {
-            setBackground(new Color(104,125,135));
-        }
-    }//GEN-LAST:event_formMouseEntered
-
-    private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
-        if (!toggled) {
-            setBackground(defaultColor);
-        }
-    }//GEN-LAST:event_formMouseExited
-
-    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
-        if (!toggled) {
-          tab.onSimulationCardClicked(this);  
-        }
-    }//GEN-LAST:event_formMouseReleased
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Bars;
@@ -249,4 +197,5 @@ public class SimulationCard extends RoundedPanel {
     private javax.swing.JLabel SimulationName;
     private javax.swing.JLabel VirusName;
     // End of variables declaration//GEN-END:variables
+  
 }

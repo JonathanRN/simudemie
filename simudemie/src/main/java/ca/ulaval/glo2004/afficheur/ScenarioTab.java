@@ -6,9 +6,6 @@
 package ca.ulaval.glo2004.afficheur;
 
 import java.awt.Color;
-import java.awt.Window;
-import java.util.ArrayList;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -16,16 +13,13 @@ import javax.swing.SwingUtilities;
  *
  * @author Jonathan
  */
-public class ScenarioTab extends javax.swing.JPanel {
-
-    private ArrayList<SimulationCard> simulationCards = new ArrayList<SimulationCard>(); 
-    private SimulationCard currentToggled;
+public class ScenarioTab extends OngletUI {
     
     public ScenarioTab() {
         initComponents();
         
         try {
-            addSimulationCard();
+            ajouterObjetUI();
         
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
 
@@ -34,21 +28,39 @@ public class ScenarioTab extends javax.swing.JPanel {
             AddScenarioButton.setBackground(new Color(216, 222, 233, 38));
             ImportScenarioButton.setBackground(new Color(216, 222, 233, 38));
             
-            scenarioStatsPanel1.setScenarioTab(this);
+            // TODO
+            scenarioStatsPanel1.setOnglet(this);
         } catch (Exception e) {
         }
         
     }
     
-    public void addSimulationCard() {
+    @Override
+    public void ajouterObjetUI() {
+        super.ajouterObjetUI();
         SimulationCard card = new SimulationCard(this);
-        card.setSimulationName("Simulation: " + simulationCards.size());
-        simulationCards.add(card);
-        if (simulationCards.size() == 1) {
-            onSimulationCardClicked(card);
+        card.setSimulationName("Simulation: " + objets.size());
+        objets.add(card);
+        if (objets.size() == 1) {
+            onClickObjetUI(card);
         }
         ProjectPanelContainer.add(card);
         updateUI();
+    }
+
+    @Override
+    public void retirerCourant() {
+        ProjectPanelContainer.remove(courant);
+        updateUI();
+        
+        super.retirerCourant();
+    }
+
+    @Override
+    public void onClickObjetUI(ObjetUI objet) {
+        super.onClickObjetUI(objet);
+        SimulationCard objetSimulation = (SimulationCard)courant;
+        scenarioMapPanel2.setMapName(objetSimulation.getMapName());
     }
     
     public void onStartSimulation() {
@@ -71,30 +83,6 @@ public class ScenarioTab extends javax.swing.JPanel {
             FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
             frame.startSimulation();
         }
-    }
-    
-    public void removeSimulationCard() {
-        simulationCards.remove(currentToggled);
-        ProjectPanelContainer.remove(currentToggled);
-        updateUI();
-        
-        if (!simulationCards.isEmpty()) {
-            onSimulationCardClicked(simulationCards.get(0));
-        }
-    }
-    
-    public void onSimulationCardClicked(SimulationCard card) {
-        if (currentToggled != null &&
-            card != currentToggled) {
-            currentToggled.setToggled(false);
-        }
-        
-        currentToggled = card;
-        
-        // Voir dans la liste et toggle le bon avec le bon index
-        currentToggled.setToggled(true);
-        
-        scenarioMapPanel2.setMapName(currentToggled.getMapName());
     }
 
     /**
@@ -213,6 +201,7 @@ public class ScenarioTab extends javax.swing.JPanel {
 
         Layout5.setBackground(new java.awt.Color(46, 52, 64));
         Layout5.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        Layout5.setOpaque(false);
         Layout5.setLayout(new java.awt.GridLayout(1, 2, 25, 0));
         Layout5.add(scenarioMapPanel2);
         Layout5.add(scenarioStatsPanel1);
@@ -223,7 +212,7 @@ public class ScenarioTab extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddScenarioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseClicked
-        addSimulationCard();
+        this.ajouterObjetUI();
     }//GEN-LAST:event_AddScenarioButtonMouseClicked
 
 

@@ -78,6 +78,8 @@ public class MenuPrincipal extends javax.swing.JPanel {
 
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_exit_35px.png")), BoutonQuitter); // NOI18N
 
+        TabMenu.setSelectedIndex(1);
+
         add(TabMenu, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 

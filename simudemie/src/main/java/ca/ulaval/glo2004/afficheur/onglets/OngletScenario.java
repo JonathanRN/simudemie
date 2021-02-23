@@ -31,6 +31,7 @@ public class OngletScenario extends OngletUI {
             Sce_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             AddScenarioButton.setBackground(new Color(216, 222, 233, 38));
             ImportScenarioButton.setBackground(new Color(216, 222, 233, 38));
+            BoutonExport.setBackground(new Color(216, 222, 233, 38));
             
             // TODO
             scenarioStatsPanel1.setOnglet(this);
@@ -103,6 +104,7 @@ public class OngletScenario extends OngletUI {
         ScenariosLabel = new javax.swing.JLabel();
         AddScenarioButton = new javax.swing.JButton();
         ImportScenarioButton = new javax.swing.JButton();
+        BoutonExport = new javax.swing.JButton();
         ScenariosScrollPane = new javax.swing.JScrollPane();
         ProjectPanelContainer = new javax.swing.JPanel();
         Sce_Informations = new javax.swing.JPanel();
@@ -150,6 +152,14 @@ public class OngletScenario extends OngletUI {
         ImportScenarioButton.setMinimumSize(new java.awt.Dimension(75, 30));
         ImportScenarioButton.setPreferredSize(new java.awt.Dimension(100, 36));
 
+        BoutonExport.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        BoutonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
+        BoutonExport.setFocusable(false);
+        BoutonExport.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BoutonExport.setMaximumSize(new java.awt.Dimension(75, 30));
+        BoutonExport.setMinimumSize(new java.awt.Dimension(75, 30));
+        BoutonExport.setPreferredSize(new java.awt.Dimension(100, 36));
+
         javax.swing.GroupLayout ScenariosTitleLayout = new javax.swing.GroupLayout(ScenariosTitle);
         ScenariosTitle.setLayout(ScenariosTitleLayout);
         ScenariosTitleLayout.setHorizontalGroup(
@@ -160,19 +170,20 @@ public class OngletScenario extends OngletUI {
                 .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 609, Short.MAX_VALUE)
+                .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         ScenariosTitleLayout.setVerticalGroup(
             ScenariosTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ScenariosTitleLayout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addComponent(ScenariosLabel))
-            .addGroup(ScenariosTitleLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(ScenariosTitleLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(ScenariosTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ScenariosTitleLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(ScenariosLabel))
+                    .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
 
         Scenarios.add(ScenariosTitle, java.awt.BorderLayout.NORTH);
@@ -221,6 +232,7 @@ public class OngletScenario extends OngletUI {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddScenarioButton;
+    private javax.swing.JButton BoutonExport;
     private javax.swing.JButton ImportScenarioButton;
     private ca.ulaval.glo2004.afficheur.PanelArrondi Layout;
     private javax.swing.JPanel ProjectPanelContainer;

@@ -27,10 +27,11 @@ public class OngletMaladie extends OngletUI {
         
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
 
-            ScenariosLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
+            MaladieLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             Mal_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             AddScenarioButton.setBackground(new Color(216, 222, 233, 38));
             ImportScenarioButton.setBackground(new Color(216, 222, 233, 38));
+            BoutonExport.setBackground(new Color(216, 222, 233, 38));
             
             statsMaladiePanel1.setOnglet(this);
         } catch (Exception e) {
@@ -98,10 +99,11 @@ public class OngletMaladie extends OngletUI {
     private void initComponents() {
 
         Maladies = new javax.swing.JPanel();
-        ScenariosTitle = new javax.swing.JPanel();
-        ScenariosLabel = new javax.swing.JLabel();
+        MaladieTitle = new javax.swing.JPanel();
+        MaladieLabel = new javax.swing.JLabel();
         AddScenarioButton = new javax.swing.JButton();
         ImportScenarioButton = new javax.swing.JButton();
+        BoutonExport = new javax.swing.JButton();
         ScenariosScrollPane = new javax.swing.JScrollPane();
         MaladiesContainer = new javax.swing.JPanel();
         Mal_Informations = new javax.swing.JPanel();
@@ -117,15 +119,15 @@ public class OngletMaladie extends OngletUI {
         Maladies.setBorder(javax.swing.BorderFactory.createEmptyBorder(35, 0, 0, 0));
         Maladies.setLayout(new java.awt.BorderLayout());
 
-        ScenariosTitle.setBackground(new java.awt.Color(46, 52, 64));
-        ScenariosTitle.setMaximumSize(new java.awt.Dimension(974, 50));
-        ScenariosTitle.setMinimumSize(new java.awt.Dimension(974, 50));
-        ScenariosTitle.setPreferredSize(new java.awt.Dimension(974, 35));
+        MaladieTitle.setBackground(new java.awt.Color(46, 52, 64));
+        MaladieTitle.setMaximumSize(new java.awt.Dimension(974, 50));
+        MaladieTitle.setMinimumSize(new java.awt.Dimension(974, 50));
+        MaladieTitle.setPreferredSize(new java.awt.Dimension(974, 35));
 
-        ScenariosLabel.setBackground(new java.awt.Color(46, 52, 64));
-        ScenariosLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        ScenariosLabel.setText("Maladies");
-        ScenariosLabel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        MaladieLabel.setBackground(new java.awt.Color(46, 52, 64));
+        MaladieLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        MaladieLabel.setText("Maladies");
+        MaladieLabel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         AddScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_plus_math_20px.png"))); // NOI18N
@@ -148,32 +150,41 @@ public class OngletMaladie extends OngletUI {
         ImportScenarioButton.setMinimumSize(new java.awt.Dimension(75, 30));
         ImportScenarioButton.setPreferredSize(new java.awt.Dimension(100, 36));
 
-        javax.swing.GroupLayout ScenariosTitleLayout = new javax.swing.GroupLayout(ScenariosTitle);
-        ScenariosTitle.setLayout(ScenariosTitleLayout);
-        ScenariosTitleLayout.setHorizontalGroup(
-            ScenariosTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ScenariosTitleLayout.createSequentialGroup()
-                .addComponent(ScenariosLabel)
+        BoutonExport.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        BoutonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
+        BoutonExport.setFocusable(false);
+        BoutonExport.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BoutonExport.setMaximumSize(new java.awt.Dimension(75, 30));
+        BoutonExport.setMinimumSize(new java.awt.Dimension(75, 30));
+        BoutonExport.setPreferredSize(new java.awt.Dimension(100, 36));
+
+        javax.swing.GroupLayout MaladieTitleLayout = new javax.swing.GroupLayout(MaladieTitle);
+        MaladieTitle.setLayout(MaladieTitleLayout);
+        MaladieTitleLayout.setHorizontalGroup(
+            MaladieTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MaladieTitleLayout.createSequentialGroup()
+                .addComponent(MaladieLabel)
                 .addGap(20, 20, 20)
                 .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 621, Short.MAX_VALUE)
+                .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        ScenariosTitleLayout.setVerticalGroup(
-            ScenariosTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ScenariosTitleLayout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addComponent(ScenariosLabel))
-            .addGroup(ScenariosTitleLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(ScenariosTitleLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        MaladieTitleLayout.setVerticalGroup(
+            MaladieTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MaladieTitleLayout.createSequentialGroup()
+                .addGroup(MaladieTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(MaladieTitleLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(MaladieLabel))
+                    .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
 
-        Maladies.add(ScenariosTitle, java.awt.BorderLayout.NORTH);
+        Maladies.add(MaladieTitle, java.awt.BorderLayout.NORTH);
 
         ScenariosScrollPane.setBackground(new java.awt.Color(46, 52, 64));
         ScenariosScrollPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
@@ -218,15 +229,16 @@ public class OngletMaladie extends OngletUI {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddScenarioButton;
+    private javax.swing.JButton BoutonExport;
     private javax.swing.JButton ImportScenarioButton;
     private ca.ulaval.glo2004.afficheur.PanelArrondi Layout;
     private javax.swing.JPanel Mal_Informations;
     private javax.swing.JLabel Mal_InformationsLabel;
+    private javax.swing.JLabel MaladieLabel;
+    private javax.swing.JPanel MaladieTitle;
     private javax.swing.JPanel Maladies;
     private javax.swing.JPanel MaladiesContainer;
-    private javax.swing.JLabel ScenariosLabel;
     private javax.swing.JScrollPane ScenariosScrollPane;
-    private javax.swing.JPanel ScenariosTitle;
     private ca.ulaval.glo2004.afficheur.StatsMaladiePanel statsMaladiePanel1;
     // End of variables declaration//GEN-END:variables
 }

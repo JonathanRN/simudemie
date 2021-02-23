@@ -31,6 +31,7 @@ public class OngletCarte extends OngletUI {
             Map_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             AddMapButton.setBackground(new Color(216, 222, 233, 38));
             ImportMapButton.setBackground(new Color(216, 222, 233, 38));
+            BoutonExport.setBackground(new Color(216, 222, 233, 38));
             
             Layout.setOpaque(false);
         }
@@ -80,6 +81,7 @@ public class OngletCarte extends OngletUI {
         MapsLabel = new javax.swing.JLabel();
         AddMapButton = new javax.swing.JButton();
         ImportMapButton = new javax.swing.JButton();
+        BoutonExport = new javax.swing.JButton();
         MapsScrollPane = new javax.swing.JScrollPane();
         MapPanelContainer = new javax.swing.JPanel();
         Map_Informations = new javax.swing.JPanel();
@@ -127,6 +129,14 @@ public class OngletCarte extends OngletUI {
         ImportMapButton.setMinimumSize(new java.awt.Dimension(75, 30));
         ImportMapButton.setPreferredSize(new java.awt.Dimension(100, 36));
 
+        BoutonExport.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        BoutonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
+        BoutonExport.setFocusable(false);
+        BoutonExport.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BoutonExport.setMaximumSize(new java.awt.Dimension(75, 30));
+        BoutonExport.setMinimumSize(new java.awt.Dimension(75, 30));
+        BoutonExport.setPreferredSize(new java.awt.Dimension(100, 36));
+
         javax.swing.GroupLayout MapTitlePanelLayout = new javax.swing.GroupLayout(MapTitlePanel);
         MapTitlePanel.setLayout(MapTitlePanelLayout);
         MapTitlePanelLayout.setHorizontalGroup(
@@ -137,19 +147,20 @@ public class OngletCarte extends OngletUI {
                 .addComponent(AddMapButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ImportMapButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 650, Short.MAX_VALUE)
+                .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         MapTitlePanelLayout.setVerticalGroup(
             MapTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MapTitlePanelLayout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addComponent(MapsLabel))
-            .addGroup(MapTitlePanelLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(AddMapButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(MapTitlePanelLayout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(ImportMapButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(MapTitlePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(MapTitlePanelLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(MapsLabel))
+                    .addComponent(AddMapButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ImportMapButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
         );
 
         Cartes.add(MapTitlePanel, java.awt.BorderLayout.NORTH);
@@ -198,6 +209,7 @@ public class OngletCarte extends OngletUI {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddMapButton;
+    private javax.swing.JButton BoutonExport;
     private javax.swing.JPanel Cartes;
     private javax.swing.JButton ImportMapButton;
     private ca.ulaval.glo2004.afficheur.PanelArrondi Layout;

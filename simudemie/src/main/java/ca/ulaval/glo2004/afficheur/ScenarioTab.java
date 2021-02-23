@@ -42,7 +42,7 @@ public class ScenarioTab extends javax.swing.JPanel {
     
     public void addSimulationCard() {
         SimulationCard card = new SimulationCard(this);
-        card.setSimulationName("" + simulationCards.size());
+        card.setSimulationName("Simulation: " + simulationCards.size());
         simulationCards.add(card);
         if (simulationCards.size() == 1) {
             onSimulationCardClicked(card);
@@ -94,7 +94,7 @@ public class ScenarioTab extends javax.swing.JPanel {
         // Voir dans la liste et toggle le bon avec le bon index
         currentToggled.setToggled(true);
         
-        scenarioMapPanel2.setMapName(currentToggled.getSimulationName());
+        scenarioMapPanel2.setMapName(currentToggled.getMapName());
     }
 
     /**

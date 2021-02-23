@@ -10,19 +10,13 @@ import java.util.List;
 public class Pays {
     
     private String nom;
-    private List<Region> listePays; 
-    private int jour;
-    
+    private int populationTotale;
+    private List<VoieLiaison> frontieres;
+    private List<Region> listeRegions;
     
     public Pays()
     {
-        //TODO Constructeur de la classe pays
-    }
-    
-    
-    void AvancerJour()
-    {
-        //TODO Fonction qui applique tous les effets sur les populations des régions
+        //TODO Constructeur Pays
     }
     
     private void AjouterRegion(Region nouvelleRegion)
@@ -30,25 +24,33 @@ public class Pays {
         //TODO Ajout d'une region à la liste
     }
     
-     private void RetirerRegion(Region ancienneRegion)
+    private void RetirerRegion(Region ancienneRegion)
+    {
+        //TODO Retrait d'une region à la liste
+    }
+    
+    private void AjouterVoie(VoieLiaison nouvelleVoie)
+    {
+        //TODO Ajout d'une region à la liste
+    }
+    
+    private void RetirerVoie(VoieLiaison ancienneVoie)
     {
         //TODO Retrait d'une region à la liste
     }
     
     public String getNom(){return nom;}
     
-    public List<Region> getListePays(){return listePays;}
-      
-    public int getJour(){return jour;}
+    public int getPopTotale(){return populationTotale;}
     
     private void setNom(String nom)
     {
         this.nom = nom;
     }
     
-    private void setJour(int jour)
+    private void setPopTotale(int populationTotale)
     {
-        this.jour = jour;
+        this.populationTotale = populationTotale;
     }
     
 }

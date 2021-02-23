@@ -50,7 +50,6 @@ public class StatsCartePanel extends javax.swing.JPanel {
         Main = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         StatsHeader = new javax.swing.JPanel();
         StatsLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         Buttons = new javax.swing.JPanel();
         DeleteButton = new javax.swing.JButton();
         ModifyButton = new javax.swing.JButton();
@@ -67,9 +66,6 @@ public class StatsCartePanel extends javax.swing.JPanel {
         StatsLabel.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
         StatsLabel.setText("Statistiques");
         StatsHeader.add(StatsLabel, java.awt.BorderLayout.CENTER);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
-        StatsHeader.add(jLabel1, java.awt.BorderLayout.EAST);
 
         Main.add(StatsHeader, java.awt.BorderLayout.NORTH);
 
@@ -124,6 +120,5 @@ public class StatsCartePanel extends javax.swing.JPanel {
     private javax.swing.JButton ModifyButton;
     private javax.swing.JPanel StatsHeader;
     private javax.swing.JLabel StatsLabel;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

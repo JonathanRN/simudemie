@@ -68,7 +68,8 @@ public class ScenarioTab extends javax.swing.JPanel {
             optionPane.getInitialValue());
         
         if (result == JOptionPane.YES_OPTION) {
-            System.out.println("start");
+            FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
+            frame.startSimulation();
         }
     }
     

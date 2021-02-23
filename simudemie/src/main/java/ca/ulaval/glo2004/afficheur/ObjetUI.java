@@ -2,7 +2,7 @@ package ca.ulaval.glo2004.afficheur;
 
 import java.awt.Color;
 
-public abstract class ObjetUI extends RoundedPanel {
+public abstract class ObjetUI extends PanelArrondi {
     
     private OngletUI onglet;
     private boolean toggled = false;

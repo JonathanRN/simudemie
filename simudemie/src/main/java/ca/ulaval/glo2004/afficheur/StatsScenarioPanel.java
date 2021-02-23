@@ -11,11 +11,11 @@ import java.awt.Color;
  *
  * @author Jonathan
  */
-public class ScenarioStatsPanel extends javax.swing.JPanel {
+public class StatsScenarioPanel extends javax.swing.JPanel {
 
-    private ScenarioTab onglet; 
+    private OngletScenario onglet; 
     
-    public ScenarioStatsPanel() {
+    public StatsScenarioPanel() {
         initComponents();
         
         try {
@@ -30,7 +30,7 @@ public class ScenarioStatsPanel extends javax.swing.JPanel {
         }
     }
     
-    public void setOnglet(ScenarioTab onglet) {
+    public void setOnglet(OngletScenario onglet) {
         this.onglet = onglet;
     }
 
@@ -43,7 +43,7 @@ public class ScenarioStatsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Main = new ca.ulaval.glo2004.afficheur.RoundedPanel();
+        Main = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         StatsHeader = new javax.swing.JPanel();
         StatsLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -108,7 +108,7 @@ public class ScenarioStatsPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Buttons;
     private javax.swing.JButton DeleteButton;
-    private ca.ulaval.glo2004.afficheur.RoundedPanel Main;
+    private ca.ulaval.glo2004.afficheur.PanelArrondi Main;
     private javax.swing.JButton ResumeButton;
     private javax.swing.JPanel StatsHeader;
     private javax.swing.JLabel StatsLabel;

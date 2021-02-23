@@ -17,14 +17,14 @@ import javax.swing.SwingUtilities;
  *
  * @author Jonathan
  */
-public class RoundedPanel extends javax.swing.JPanel {
+public class PanelArrondi extends javax.swing.JPanel {
     
     private Color bgColor, borderColor;
     protected final Color defaultColor = new Color(216, 222, 233, 38);
     /**
      * Creates new form RoundedPanel
      */
-    public RoundedPanel() {
+    public PanelArrondi() {
         initComponents();
     }
     

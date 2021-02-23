@@ -11,12 +11,12 @@ import java.awt.Color;
  *
  * @author Jonathan
  */
-public class MapTab extends OngletUI {
+public class OngletCarte extends OngletUI {
 
     /**
      * Creates new form ScenarioTab
      */
-    public MapTab() {
+    public OngletCarte() {
         initComponents();
         
         try {
@@ -36,7 +36,7 @@ public class MapTab extends OngletUI {
     @Override
     public void ajouterObjetUI() {
         super.ajouterObjetUI();
-        MapCard card = new MapCard(this);
+        ObjetCarte card = new ObjetCarte(this);
         card.setMapName("Carte: " + objets.size());
         objets.add(card);
         if (objets.size() == 1) {
@@ -57,7 +57,7 @@ public class MapTab extends OngletUI {
     @Override
     public void onClickObjetUI(ObjetUI objet) {
         super.onClickObjetUI(objet);
-        MapCard objetCarte = (MapCard)objet;
+        ObjetCarte objetCarte = (ObjetCarte)objet;
         scenarioMapPanel1.setMapName(objetCarte.getNomCarte());
     }
 
@@ -79,9 +79,9 @@ public class MapTab extends OngletUI {
         MapPanelContainer = new javax.swing.JPanel();
         Map_Informations = new javax.swing.JPanel();
         Map_InformationsLabel = new javax.swing.JLabel();
-        Layout5 = new ca.ulaval.glo2004.afficheur.RoundedPanel();
-        scenarioMapPanel1 = new ca.ulaval.glo2004.afficheur.ScenarioMapPanel();
-        mapStatsPanel1 = new ca.ulaval.glo2004.afficheur.MapStatsPanel();
+        Layout5 = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        scenarioMapPanel1 = new ca.ulaval.glo2004.afficheur.CarteScenarioPanel();
+        mapStatsPanel1 = new ca.ulaval.glo2004.afficheur.CarteStatsPanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 35, 35));
@@ -195,14 +195,14 @@ public class MapTab extends OngletUI {
     private javax.swing.JButton AddMapButton;
     private javax.swing.JPanel Cartes;
     private javax.swing.JButton ImportMapButton;
-    private ca.ulaval.glo2004.afficheur.RoundedPanel Layout5;
+    private ca.ulaval.glo2004.afficheur.PanelArrondi Layout5;
     private javax.swing.JPanel MapPanelContainer;
     private javax.swing.JPanel MapTitlePanel;
     private javax.swing.JPanel Map_Informations;
     private javax.swing.JLabel Map_InformationsLabel;
     private javax.swing.JLabel MapsLabel;
     private javax.swing.JScrollPane MapsScrollPane;
-    private ca.ulaval.glo2004.afficheur.MapStatsPanel mapStatsPanel1;
-    private ca.ulaval.glo2004.afficheur.ScenarioMapPanel scenarioMapPanel1;
+    private ca.ulaval.glo2004.afficheur.CarteStatsPanel mapStatsPanel1;
+    private ca.ulaval.glo2004.afficheur.CarteScenarioPanel scenarioMapPanel1;
     // End of variables declaration//GEN-END:variables
 }

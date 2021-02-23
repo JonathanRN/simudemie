@@ -29,8 +29,8 @@ public class MenuPrincipal extends javax.swing.JPanel {
 
         TabMenu = new javax.swing.JTabbedPane();
         TitleMenu = new javax.swing.JPanel();
-        ScenarioTab = new ca.ulaval.glo2004.afficheur.ScenarioTab();
-        MapTab = new ca.ulaval.glo2004.afficheur.MapTab();
+        ScenarioTab = new ca.ulaval.glo2004.afficheur.OngletScenario();
+        MapTab = new ca.ulaval.glo2004.afficheur.OngletCarte();
         jPanel2 = new javax.swing.JPanel();
         QuitButton = new javax.swing.JPanel();
 
@@ -101,9 +101,9 @@ public class MenuPrincipal extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private ca.ulaval.glo2004.afficheur.MapTab MapTab;
+    private ca.ulaval.glo2004.afficheur.OngletCarte MapTab;
     private javax.swing.JPanel QuitButton;
-    private ca.ulaval.glo2004.afficheur.ScenarioTab ScenarioTab;
+    private ca.ulaval.glo2004.afficheur.OngletScenario ScenarioTab;
     private javax.swing.JTabbedPane TabMenu;
     private javax.swing.JPanel TitleMenu;
     private javax.swing.JPanel jPanel2;

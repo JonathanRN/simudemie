@@ -21,7 +21,7 @@
     <Property name="verticalGap" type="int" value="25"/>
   </Layout>
   <SubComponents>
-    <Container class="ca.ulaval.glo2004.afficheur.RoundedPanel" name="Main">
+    <Container class="ca.ulaval.glo2004.afficheur.PanelArrondi" name="Main">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">

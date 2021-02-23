@@ -9,8 +9,8 @@ package ca.ulaval.glo2004.afficheur;
  * Adapte depuis https://stackoverflow.com/questions/15025092/border-with-rounded-corners-transparency
  * @author Jonathan
  */
-public class SimulationCard extends ObjetUI {    
-    public SimulationCard(ScenarioTab tab) {
+public class ObjetScenario extends ObjetUI {    
+    public ObjetScenario(OngletScenario tab) {
         super(tab);
         initComponents();
         

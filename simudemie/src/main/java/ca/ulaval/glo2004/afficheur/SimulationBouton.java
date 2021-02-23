@@ -11,7 +11,7 @@ import java.awt.Color;
  *
  * @author Jonathan
  */
-public class SimulationBouton extends RoundedPanel {
+public class SimulationBouton extends PanelArrondi {
 
     public SimulationBouton() {
         initComponents();

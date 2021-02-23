@@ -11,12 +11,12 @@ import java.awt.Color;
  *
  * @author Jonathan
  */
-public class MapCreationPanel extends javax.swing.JPanel {
+public class CarteCreationPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ScenarioTab
      */
-    public MapCreationPanel() {
+    public CarteCreationPanel() {
         initComponents();
     }
 

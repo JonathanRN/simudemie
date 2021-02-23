@@ -11,12 +11,12 @@ import java.awt.Color;
  *
  * @author Jonathan
  */
-public class ScenarioMapPanel extends RoundedPanel {
+public class CarteScenarioPanel extends PanelArrondi {
 
     /**
      * Creates new form ScenarioMapPanel
      */
-    public ScenarioMapPanel() {
+    public CarteScenarioPanel() {
         initComponents();
         
         setBackground(new Color(216, 222, 233, 38));

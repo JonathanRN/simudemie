@@ -68,7 +68,7 @@ public class Simulation extends javax.swing.JPanel {
         Slider = new javax.swing.JPanel();
         jSlider1 = new javax.swing.JSlider();
         Buttons = new javax.swing.JPanel();
-        SidePanel = new ca.ulaval.glo2004.afficheur.RoundedPanel();
+        SidePanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         AddButton = new ca.ulaval.glo2004.afficheur.SimulationBouton();
         LinkButton = new ca.ulaval.glo2004.afficheur.SimulationBouton();
         Spacing = new javax.swing.JPanel();
@@ -182,7 +182,7 @@ public class Simulation extends javax.swing.JPanel {
     private ca.ulaval.glo2004.afficheur.SimulationBouton HelpButton;
     private ca.ulaval.glo2004.afficheur.SimulationBouton HomeButton;
     private ca.ulaval.glo2004.afficheur.SimulationBouton LinkButton;
-    private ca.ulaval.glo2004.afficheur.RoundedPanel SidePanel;
+    private ca.ulaval.glo2004.afficheur.PanelArrondi SidePanel;
     private javax.swing.JPanel Slider;
     private javax.swing.JPanel Spacing;
     private ca.ulaval.glo2004.afficheur.SimulationBouton StatsButton;

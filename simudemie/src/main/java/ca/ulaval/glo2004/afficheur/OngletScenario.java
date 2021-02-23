@@ -13,9 +13,9 @@ import javax.swing.SwingUtilities;
  *
  * @author Jonathan
  */
-public class ScenarioTab extends OngletUI {
+public class OngletScenario extends OngletUI {
     
-    public ScenarioTab() {
+    public OngletScenario() {
         initComponents();
         
         try {
@@ -38,7 +38,7 @@ public class ScenarioTab extends OngletUI {
     @Override
     public void ajouterObjetUI() {
         super.ajouterObjetUI();
-        SimulationCard card = new SimulationCard(this);
+        ObjetScenario card = new ObjetScenario(this);
         card.setSimulationName("Simulation: " + objets.size());
         objets.add(card);
         if (objets.size() == 1) {
@@ -59,7 +59,7 @@ public class ScenarioTab extends OngletUI {
     @Override
     public void onClickObjetUI(ObjetUI objet) {
         super.onClickObjetUI(objet);
-        SimulationCard objetSimulation = (SimulationCard)courant;
+        ObjetScenario objetSimulation = (ObjetScenario)courant;
         scenarioMapPanel2.setMapName(objetSimulation.getMapName());
     }
     
@@ -103,9 +103,9 @@ public class ScenarioTab extends OngletUI {
         ProjectPanelContainer = new javax.swing.JPanel();
         Sce_Informations = new javax.swing.JPanel();
         Sce_InformationsLabel = new javax.swing.JLabel();
-        Layout5 = new ca.ulaval.glo2004.afficheur.RoundedPanel();
-        scenarioMapPanel2 = new ca.ulaval.glo2004.afficheur.ScenarioMapPanel();
-        scenarioStatsPanel1 = new ca.ulaval.glo2004.afficheur.ScenarioStatsPanel();
+        Layout5 = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        scenarioMapPanel2 = new ca.ulaval.glo2004.afficheur.CarteScenarioPanel();
+        scenarioStatsPanel1 = new ca.ulaval.glo2004.afficheur.StatsScenarioPanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 35, 35));
@@ -219,7 +219,7 @@ public class ScenarioTab extends OngletUI {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddScenarioButton;
     private javax.swing.JButton ImportScenarioButton;
-    private ca.ulaval.glo2004.afficheur.RoundedPanel Layout5;
+    private ca.ulaval.glo2004.afficheur.PanelArrondi Layout5;
     private javax.swing.JPanel ProjectPanelContainer;
     private javax.swing.JPanel Sce_Informations;
     private javax.swing.JLabel Sce_InformationsLabel;
@@ -227,7 +227,7 @@ public class ScenarioTab extends OngletUI {
     private javax.swing.JLabel ScenariosLabel;
     private javax.swing.JScrollPane ScenariosScrollPane;
     private javax.swing.JPanel ScenariosTitle;
-    private ca.ulaval.glo2004.afficheur.ScenarioMapPanel scenarioMapPanel2;
-    private ca.ulaval.glo2004.afficheur.ScenarioStatsPanel scenarioStatsPanel1;
+    private ca.ulaval.glo2004.afficheur.CarteScenarioPanel scenarioMapPanel2;
+    private ca.ulaval.glo2004.afficheur.StatsScenarioPanel scenarioStatsPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,8 +8,8 @@ package ca.ulaval.glo2004.afficheur;
 import javax.swing.ImageIcon;
 
 
-public class MapCard extends ObjetUI {    
-    public MapCard(MapTab tab) {
+public class ObjetCarte extends ObjetUI {    
+    public ObjetCarte(OngletCarte tab) {
         super(tab);
         initComponents();
         

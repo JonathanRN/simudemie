@@ -37,4 +37,17 @@ public class GestionnaireCreation {
     {
         //TODO Appel au constructeur 
     }
+    
+    /*
+    
+    Il va falloir faire des méthodes d'ajout de 
+    
+    Pays -> Carte
+    VoieLiaison -> Pays
+    Region -> Pays
+    Region -> listeDeVoisins
+    
+    Et la même chose pour les retraits
+    
+    */
 }

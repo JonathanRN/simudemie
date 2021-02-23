@@ -5,12 +5,17 @@ import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.UIManager;
 
-public class FramePrincipal extends javax.swing.JFrame {    
+public class FramePrincipal extends javax.swing.JFrame {  
+    private MenuPrincipal menu;
+    private Simulation simulation;
+    
     private static final String ICON_PATH = "/icons/icon_virus_64px.png";
     
     public FramePrincipal() {
         initTabbedPaneProperties();
         initComponents();
+        
+        menu = MenuPrincipal;
     }
     
     /*
@@ -22,6 +27,23 @@ public class FramePrincipal extends javax.swing.JFrame {
         UIManager.put("TabbedPane.tabSelectionHeight", 5);
         UIManager.put("TabbedPane.tabAreaAlignment", "leading");
         UIManager.put("TabbedPane.tabHeight", 100);
+    }
+    
+    public void startSimulation() {
+        remove(menu);
+        simulation = new Simulation();
+        add(simulation);
+        revalidate();
+        repaint();
+    }
+    
+    public void returnToHome() {
+        if (simulation != null) {
+            remove(simulation);
+            add(menu);
+        }
+        revalidate();
+        repaint();
     }
 
     /**

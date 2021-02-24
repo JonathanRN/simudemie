@@ -6,7 +6,7 @@
 package ca.ulaval.glo2004.domaine;
 
 import java.util.List;
-
+import java.awt.Polygon;
 
 public class Carte {
     
@@ -32,12 +32,12 @@ public class Carte {
     {
         //TODO Retrait d'une region à la liste
     }
-    
+    /*
     public Pays trouverPays(Pays aTrouver)
     {
         return new Pays();
     }
-    
+    */
     public String getNom(){return nom;}
     
     public List<Pays> getListePays(){return listePays;}

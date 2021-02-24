@@ -5,75 +5,91 @@
  */
 package ca.ulaval.glo2004.controleur;
 
+import ca.ulaval.glo2004.domaine.Jour;
+import ca.ulaval.glo2004.domaine.Pays;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.Timer;
 
-import ca.ulaval.glo2004.domaine.Carte;
 
-
-public class GestionnaireScenario {
-
-    private Carte carte;
-    private boolean scenarioEnCours = false;
+public class GestionnaireScenario implements ActionListener {
+    private List<Jour> jours;
+    private Jour jourCourant;
     
-    public GestionnaireScenario()
+    private Timer timer;
+    
+    public GestionnaireScenario(int intervalleSecondes)
     {
-        //TODO Constructeur
+        timer = new Timer(intervalleSecondes * 1000, this);
+        Demarrer();
     }
     
-    private void Sauvegarder(String nomCarte)
-    {
-        //TODO
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        avancerJour();
     }
     
-    private void Charger(String nomCarte) //À valider
+    private void chargerJour(Jour jour)
     {
-        //TODO
+        // Charger tous les elements selon la journee
+        jourCourant = jour;
+    }
+    
+    private void avancerJour()
+    {
+        jourCourant.carte.AvancerJour();
+        jours.add(jourCourant);
+        chargerJour(new Jour(jourCourant));
     }
         
     private void Importer(String filePath)
     {
-        //TODO
+        // Importer selon le path et creer une nouvelle liste de journees...? (todo UI)
     }
             
     private void Exporter(String nomCarte, String filePath)
     {
-        //TODO
+        // Exporter dans un fichier qui contient toutes les journees...
+        // RetournerResultats
+    }
+    
+    public void AjouterVoie(Pays origine, Pays destination)
+    {
+        // new Voie...
+        // jourCourant.carte.trouverPays(origine).AjouterVoie(nouvelleVoie);
+        // jourCourant.carte.trouverPays(destination).AjouterVoie(nouvelleVoie);
     }
     
     private void CreerMesure(String nom, float tauxAdhesion, float tauxReduction)
     {
-        //TODO appel au constructeur de Mesure
+        //new Mesure()...
+        //jourCourant.mesures.add(e);
     }
                 
     private void EditerMesure(String nom, float tauxAdhesion, float tauxReduction)
     {
-        //TODO Set les nouveaux parametre des mesures
+        //jourCourant.mesures[]...
     }
                     
     private void EditerMaladie(String nom, float tauxInfection, float tauxMortalite, float tauxGuerison)
     {
-        //TODO Set les nouveaux parametres de la maladie
+        //jourCourant.maladie
     }
                         
-    private void Pauser()
+    public void Pause()
     {
-        if (scenarioEnCours == true){
-            this.scenarioEnCours = false;
-        }else{
-            this.scenarioEnCours = true;
-        }
-        
+        timer.stop();
     }
     
-    private void RetournerResultats()
+    public void Demarrer()
+    {
+        timer.restart();
+    }
+    
+    public List<Jour> RetournerResultats()
     {
         //TODO Retourner les résultats finaux
+        return null;
     }
-    
-    private void Demarrer()
-    {
-        this.scenarioEnCours = true;
-        //TODO démarrer le compteur de jour
-    }
-    
-    
 }

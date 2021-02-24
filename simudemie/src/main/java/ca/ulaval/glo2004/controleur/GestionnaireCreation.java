@@ -29,11 +29,6 @@ public class GestionnaireCreation {
     {
         //TODO Appel au constructeur 
     }
-        
-    private void CreerLiaison(VoieLiaison voie, Pays paysOrigine, Pays paysDestination)
-    {
-        //TODO Appel au constructeur 
-    }
             
     private void CreerMaladie(String nom, float tauxInf, float tauxMort, float tauxGuerison)
     {

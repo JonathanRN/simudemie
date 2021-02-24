@@ -9,35 +9,37 @@ package ca.ulaval.glo2004.domaine;
 public class VoieLiaison {
     
     private Pays paysOrigine;
-    
     private Pays paysDestination;
-    
+    private final String nom;
     private boolean accessible;
     
-    public VoieLiaison()
+    public VoieLiaison(String nom, Pays origine, Pays destination)
     {
-        //TODO  Constructeur
+        this.nom = nom;
+        this.paysOrigine = origine;
+        this.paysDestination = destination;
     }
         
     public Pays getPaysOrigine(){return paysOrigine;}
     
     public Pays getPaysDestination(){return paysDestination;}
     
+    public String getNom() {return nom;}
+    
     public boolean getAccessible(){return accessible;}
     
-    private void setPaysOrigine(Pays paysOrigine)
+    public void setPaysOrigine(Pays paysOrigine)
     {
         this.paysOrigine = paysOrigine;
     }
     
-    private void setPaysDestination(Pays paysDestination)
+    public void setPaysDestination(Pays paysDestination)
     {
         this.paysDestination = paysDestination;
     }
     
-    private void setAccessible(boolean accessible)
+    public void setAccessible(boolean accessible)
     {
         this.accessible = accessible;
     }
-    
 }

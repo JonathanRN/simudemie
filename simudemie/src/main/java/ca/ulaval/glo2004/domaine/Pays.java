@@ -29,12 +29,12 @@ public class Pays {
         //TODO Retrait d'une region à la liste
     }
     
-    private void AjouterVoie(VoieLiaison nouvelleVoie)
+    public void AjouterVoie(VoieLiaison nouvelleVoie)
     {
         //TODO Ajout d'une region à la liste
     }
     
-    private void RetirerVoie(VoieLiaison ancienneVoie)
+    public void RetirerVoie(VoieLiaison ancienneVoie)
     {
         //TODO Retrait d'une region à la liste
     }

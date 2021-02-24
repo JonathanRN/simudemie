@@ -11,44 +11,39 @@ import java.util.List;
 public class Carte {
     
     private String nom;
-    private List<Region> listePays; 
-    private int jour;
-    
+    private List<Pays> listePays;
     
     public Carte()
     {
         //TODO Constructeur de la classe pays
     }    
     
-    void AvancerJour()
+    public void AvancerJour()
     {
         //TODO Fonction qui applique tous les effets sur les populations des régions
     }
     
-    private void AjouterPays(Pays nouveauPays)
+    public void AjouterPays(Pays nouveauPays)
     {
         //TODO Ajout d'une region à la liste
     }
     
-    private void RetirerPays(Pays ancienPays)
+    public void RetirerPays(Pays ancienPays)
     {
         //TODO Retrait d'une region à la liste
     }
     
+    public Pays trouverPays(Pays aTrouver)
+    {
+        return new Pays();
+    }
+    
     public String getNom(){return nom;}
     
-    public List<Region> getListePays(){return listePays;} //Pas certain?
-      
-    public int getJour(){return jour;}
+    public List<Pays> getListePays(){return listePays;}
     
-    private void setNom(String nom)
+    public void setNom(String nom)
     {
         this.nom = nom;
     }
-    
-    private void setJour(int jour)
-    {
-        this.jour = jour;
-    }
-    
 }

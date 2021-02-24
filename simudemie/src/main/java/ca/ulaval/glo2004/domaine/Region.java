@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.domaine;
 
+import java.awt.Polygon;
 import java.util.List;
 
 public class Region {
@@ -15,39 +16,41 @@ public class Region {
     private int populationInfectee;
     private int populationDecedee;
     private List<Region> regionVoisines;
+    private Polygon polygone;
     
-    Region() 
+    public Region(Polygon polygone) 
     {
-    //TODO Constructeur 
+        this.polygone = polygone;
+        //TODO Constructeur
     }
     
-    void DeplacementRegions()
+    public void DeplacementRegions()
     {
         //TODO Déplacement des populations entre les régions
     }
     
-    void Contaminer()
+    public void Contaminer()
     {
         //TODO Appliquer le taux d'infection sur la populationSaine
         //Gestion des Mesures
     }
     
-    void EliminerPopulation()
+    public void EliminerPopulation()
     {
         //TODO Appliquer le taux de mortalite sur la populationInfectee
     }
     
-    void GuerirPop()
+    public void GuerirPop()
     {
         //TODO Appliquer le taux de guérison sur la populationInfectee
     }
     
-    private void AjouterVoisin(Region nouvelleRegion)
+    public void AjouterVoisin(Region nouvelleRegion)
     {
         //TODO Ajouter une region à sa liste de voisin
     }
     
-    private void RetirerVoisin(Region ancienneRegion)
+    public void RetirerVoisin(Region ancienneRegion)
     {
            //TODO Retirer une région de la liste de region voisines
     }

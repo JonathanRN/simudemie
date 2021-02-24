@@ -24,33 +24,33 @@ public class Region {
         //TODO Constructeur
     }
     
-    public void DeplacementRegions()
+    public void deplacementRegions()
     {
         //TODO Déplacement des populations entre les régions
     }
     
-    public void Contaminer()
+    public void contaminer()
     {
         //TODO Appliquer le taux d'infection sur la populationSaine
         //Gestion des Mesures
     }
     
-    public void EliminerPopulation()
+    public void eliminerPopulation()
     {
         //TODO Appliquer le taux de mortalite sur la populationInfectee
     }
     
-    public void GuerirPop()
+    public void guerirPop()
     {
         //TODO Appliquer le taux de guérison sur la populationInfectee
     }
     
-    public void AjouterVoisin(Region nouvelleRegion)
+    public void ajouterVoisin(Region nouvelleRegion)
     {
         //TODO Ajouter une region à sa liste de voisin
     }
     
-    public void RetirerVoisin(Region ancienneRegion)
+    public void retirerVoisin(Region ancienneRegion)
     {
            //TODO Retirer une région de la liste de region voisines
     }

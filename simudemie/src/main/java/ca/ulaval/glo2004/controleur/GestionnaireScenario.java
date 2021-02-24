@@ -21,7 +21,7 @@ public class GestionnaireScenario implements ActionListener {
     public GestionnaireScenario(int intervalleSecondes)
     {
         timer = new Timer(intervalleSecondes * 1000, this);
-        Demarrer();
+        demarrer();
     }
     
     @Override
@@ -37,56 +37,56 @@ public class GestionnaireScenario implements ActionListener {
     
     private void avancerJour()
     {
-        jourCourant.carte.AvancerJour();
+        jourCourant.carte.avancerJour();
         jours.add(jourCourant);
         chargerJour(new Jour(jourCourant));
     }
         
-    private void Importer(String filePath)
+    private void importer(String filePath)
     {
         // Importer selon le path et creer une nouvelle liste de journees...? (todo UI)
     }
             
-    private void Exporter(String nomCarte, String filePath)
+    private void exporter(String nomCarte, String filePath)
     {
         // Exporter dans un fichier qui contient toutes les journees...
         // RetournerResultats
     }
     
-    public void AjouterVoie(Pays origine, Pays destination)
+    public void ajouterVoie(Pays origine, Pays destination)
     {
         // new Voie...
         // jourCourant.carte.trouverPays(origine).AjouterVoie(nouvelleVoie);
         // jourCourant.carte.trouverPays(destination).AjouterVoie(nouvelleVoie);
     }
     
-    private void CreerMesure(String nom, float tauxAdhesion, float tauxReduction)
+    private void creerMesure(String nom, float tauxAdhesion, float tauxReduction)
     {
         //new Mesure()...
         //jourCourant.mesures.add(e);
     }
                 
-    private void EditerMesure(String nom, float tauxAdhesion, float tauxReduction)
+    private void editerMesure(String nom, float tauxAdhesion, float tauxReduction)
     {
         //jourCourant.mesures[]...
     }
                     
-    private void EditerMaladie(String nom, float tauxInfection, float tauxMortalite, float tauxGuerison)
+    private void editerMaladie(String nom, float tauxInfection, float tauxMortalite, float tauxGuerison)
     {
         //jourCourant.maladie
     }
                         
-    public void Pause()
+    public void pause()
     {
         timer.stop();
     }
     
-    public void Demarrer()
+    public void demarrer()
     {
         timer.restart();
     }
     
-    public List<Jour> RetournerResultats()
+    public List<Jour> retournerResultats()
     {
         //TODO Retourner les résultats finaux
         return null;

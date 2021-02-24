@@ -22,27 +22,27 @@ public class Pays {
         //TODO Constructeur
     }
     
-    private void AjouterRegion(Region nouvelleRegion)
+    private void ajouterRegion(Region nouvelleRegion)
     {
         //TODO Ajout d'une region à la liste
     }
     
-    private void RetirerRegion(Region ancienneRegion)
+    private void retirerRegion(Region ancienneRegion)
     {
         //TODO Retrait d'une region à la liste
     }
     
-    public void AjouterVoie(VoieLiaison nouvelleVoie)
+    public void ajouterVoie(VoieLiaison nouvelleVoie)
     {
         //TODO Ajout d'une region à la liste
     }
     
-    public void RetirerVoie(VoieLiaison ancienneVoie)
+    public void retirerVoie(VoieLiaison ancienneVoie)
     {
         //TODO Retrait d'une region à la liste
     }
     
-    public void DeplacementInterPays()
+    public void deplacementInterPays()
     {
     
     }

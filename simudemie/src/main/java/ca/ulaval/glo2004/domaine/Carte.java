@@ -18,17 +18,17 @@ public class Carte {
         //TODO Constructeur de la classe pays
     }    
     
-    public void AvancerJour()
+    public void avancerJour()
     {
         //TODO Fonction qui applique tous les effets sur les populations des régions
     }
     
-    public void AjouterPays(Pays nouveauPays)
+    public void ajouterPays(Pays nouveauPays)
     {
         //TODO Ajout d'une region à la liste
     }
     
-    public void RetirerPays(Pays ancienPays)
+    public void retirerPays(Pays ancienPays)
     {
         //TODO Retrait d'une region à la liste
     }

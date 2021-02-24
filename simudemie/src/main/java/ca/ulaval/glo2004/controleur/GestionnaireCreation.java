@@ -15,22 +15,22 @@ public class GestionnaireCreation {
         //TODO ??? Constructeur?
     }
     
-    private void CreerCarte(String nom)
+    private void creerCarte(String nom)
     {
         //TODO Appel au constructeur de carte
     }
     
-    private void CreerPays(String nom)
+    private void creerPays(String nom)
     {
         //TODO Appel au constructeur 
     }
     
-    private void CreerRegion(String nom, int popSaine)
+    private void creerRegion(String nom, int popSaine)
     {
         //TODO Appel au constructeur 
     }
             
-    private void CreerMaladie(String nom, float tauxInf, float tauxMort, float tauxGuerison)
+    private void creerMaladie(String nom, float tauxInf, float tauxMort, float tauxGuerison)
     {
         //TODO Appel au constructeur 
     }

@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.domaine;
 
+import java.awt.Polygon;
 import java.util.List;
 
 public class Pays {
@@ -13,10 +14,12 @@ public class Pays {
     private int populationTotale;
     private List<VoieLiaison> frontieres;
     private List<Region> listeRegions;
+    private Polygon polygone;
     
-    public Pays()
+    public Pays(Polygon polygone) 
     {
-        //TODO Constructeur Pays
+        this.polygone = polygone;
+        //TODO Constructeur
     }
     
     private void AjouterRegion(Region nouvelleRegion)

@@ -42,6 +42,11 @@ public class Pays {
         //TODO Retrait d'une region à la liste
     }
     
+    public void DeplacementInterPays()
+    {
+    
+    }
+        
     public String getNom(){return nom;}
     
     public int getPopTotale(){return populationTotale;}
@@ -50,6 +55,7 @@ public class Pays {
     {
         this.nom = nom;
     }
+    
     
     private void setPopTotale(int populationTotale)
     {

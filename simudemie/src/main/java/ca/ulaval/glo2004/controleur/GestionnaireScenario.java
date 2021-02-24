@@ -16,7 +16,6 @@ import javax.swing.Timer;
 public class GestionnaireScenario implements ActionListener {
     private List<Jour> jours;
     private Jour jourCourant;
-    
     private Timer timer;
     
     public GestionnaireScenario(int intervalleSecondes)

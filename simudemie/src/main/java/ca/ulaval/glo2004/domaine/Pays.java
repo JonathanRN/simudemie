@@ -15,6 +15,7 @@ public class Pays {
     private List<VoieLiaison> frontieres;
     private List<Region> listeRegions;
     private Polygon polygone;
+    public List<Mesure> mesures;
     
     public Pays(Polygon polygone) 
     {

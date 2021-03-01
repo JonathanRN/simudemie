@@ -6,7 +6,6 @@
 package ca.ulaval.glo2004.afficheur.onglets;
 
 import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -21,66 +20,93 @@ import javax.swing.Timer;
  */
 public class OngletTitre extends javax.swing.JPanel implements ActionListener {
     
-    private final Timer timer;
+    private Timer logoTimer, translateTimer, textTimer;
+    
     private float alphaImage = 0, alphaText = 0;
     private boolean alphaImageDone;
     
-    private final int finalLogoYOffset = 100;
+    private final int finalLogoOffsetY = 100;
     
-    private int centeredLogoX;
-    private int centeredLogoY, logoY;
-    private int initialY;
+    private int logoX;
+    private int logoY, logoOffsetY;
     private Image image, text;
+    
+    private final int DELAY = 16;
     
     public OngletTitre() {
         initComponents();
-        timer = new Timer(16, this);
-        timer.start();
         
         try {
             text = ImageIO.read(getClass().getResource("/icons/simudemie_txt.png"));
             image = ImageIO.read(getClass().getResource("/icons/virus.png"));
         } catch (Exception e) {
         }
+        
+        updateAlphaLogo();
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        alphaImageDone = alphaImage >= 0.99f;
-        
-        if (alphaImage < 0.99f) {
-            alphaImage += 0.02f;
-            
-            initialY = centeredLogoY;
-            logoY = initialY;
-        }
-        else if (initialY - finalLogoYOffset < logoY) {
-            logoY -= 2;
-        }
-        else {
+        repaint();
+    }
+    
+    private void translateLogo() {
+        translateTimer = new Timer(DELAY, listener -> {
+            if (logoOffsetY < finalLogoOffsetY) {
+                logoOffsetY += 2;
+                repaint();
+            }
+            else {
+                updateAlphaText();
+                translateTimer.stop();
+            }
+        });
+        translateTimer.start();
+    }
+    
+    private void updateAlphaLogo() {
+        logoTimer = new Timer(DELAY, listener -> {
+            if (alphaImage < 0.99f) {
+                alphaImage += 0.02f;
+                repaint();
+            }
+            else {
+                alphaImageDone = true;
+                translateLogo();
+                logoTimer.stop();
+            }
+        });
+        logoTimer.start();
+    }
+    
+    private void updateAlphaText() {
+        textTimer = new Timer(DELAY, listener -> {
             if (alphaText < 0.99f) {
                 alphaText += 0.02f;
+                repaint();
             }
-        }
-        centeredLogoX = getBounds().width/2 - image.getWidth(null) / 2;
-        repaint();
+            else {
+                textTimer.stop();
+            }
+        });
+        textTimer.start();
     }
     
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        centeredLogoY = getBounds().height/2 - image.getHeight(null) / 2;
-        centeredLogoX = getBounds().width/2 - image.getWidth(null) / 2;
+        logoX = getBounds().width/2 - image.getWidth(null) / 2;
+        logoY = getBounds().height/2 - image.getHeight(null) / 2;
         
         Graphics2D gr = (Graphics2D)g;
         gr.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaImage));
-        gr.drawImage(image, centeredLogoX, alphaImageDone ? logoY : centeredLogoY, null);
+        gr.drawImage(image, logoX, logoY - logoOffsetY, null);
         
         if (alphaImageDone) {
             Graphics2D textGr = (Graphics2D)g;
             textGr.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaText));
-            textGr.drawImage(text, centeredLogoX - 125, logoY + image.getHeight(null), null);
+            textGr.drawImage(text, logoX - 125, logoY - logoOffsetY + image.getHeight(null), null);
         }
     }
 

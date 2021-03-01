@@ -78,7 +78,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simudémie");
         setBackground(new java.awt.Color(0, 255, 0));
-        setMinimumSize(new java.awt.Dimension(640, 480));
+        setMinimumSize(new java.awt.Dimension(640, 550));
         setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().add(MenuPrincipal, java.awt.BorderLayout.CENTER);
         setJMenuBar(TitleMenuBar);

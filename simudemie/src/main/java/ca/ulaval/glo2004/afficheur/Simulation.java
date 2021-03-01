@@ -21,11 +21,11 @@ public class Simulation extends javax.swing.JPanel {
     public Simulation() {
         initComponents();
         
-        SidePanel.setBackground(SidePanel.defaultColor);
-        LinkButton.setIcon("/icons/icons8_chain_40px.png");
-        StatsButton.setIcon("/icons/icons8_bar_chart_40px.png");
-        HelpButton.setIcon("/icons/icons8_help_40px.png");
-        HomeButton.setIcon("/icons/icons8_home_40px.png");
+        //SidePanel.setBackground(SidePanel.defaultColor);
+        LinkButton.setIcon("/icons/icons8_chain_25px.png");
+        StatsButton.setIcon("/icons/icons8_bar_chart_25px.png");
+        HelpButton.setIcon("/icons/icons8_help_25px.png");
+        HomeButton.setIcon("/icons/icons8_home_25px_1.png");
         
         HomeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -87,13 +87,13 @@ public class Simulation extends javax.swing.JPanel {
             SliderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SliderLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 955, Short.MAX_VALUE)
+                .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addContainerGap())
         );
         SliderLayout.setVerticalGroup(
             SliderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SliderLayout.createSequentialGroup()
-                .addContainerGap(678, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -106,19 +106,9 @@ public class Simulation extends javax.swing.JPanel {
 
         SidePanel.setMaximumSize(new java.awt.Dimension(100, 200));
         SidePanel.setMinimumSize(new java.awt.Dimension(100, 200));
-        SidePanel.setPreferredSize(new java.awt.Dimension(100, 200));
+        SidePanel.setPreferredSize(new java.awt.Dimension(50, 200));
         SidePanel.setLayout(new java.awt.GridLayout(6, 1, 0, 10));
-
-        AddButton.setBorder(null);
-        AddButton.setMaximumSize(new java.awt.Dimension(50, 50));
-        AddButton.setMinimumSize(new java.awt.Dimension(50, 50));
-        AddButton.setPreferredSize(new java.awt.Dimension(50, 50));
         SidePanel.add(AddButton);
-
-        LinkButton.setBorder(null);
-        LinkButton.setMaximumSize(new java.awt.Dimension(50, 50));
-        LinkButton.setMinimumSize(new java.awt.Dimension(50, 50));
-        LinkButton.setPreferredSize(new java.awt.Dimension(50, 50));
         SidePanel.add(LinkButton);
 
         Spacing.setBackground(new java.awt.Color(90, 95, 104));
@@ -129,31 +119,16 @@ public class Simulation extends javax.swing.JPanel {
         Spacing.setLayout(SpacingLayout);
         SpacingLayout.setHorizontalGroup(
             SpacingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
         SpacingLayout.setVerticalGroup(
             SpacingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 67, Short.MAX_VALUE)
+            .addGap(0, 46, Short.MAX_VALUE)
         );
 
         SidePanel.add(Spacing);
-
-        StatsButton.setBorder(null);
-        StatsButton.setMaximumSize(new java.awt.Dimension(50, 50));
-        StatsButton.setMinimumSize(new java.awt.Dimension(50, 50));
-        StatsButton.setPreferredSize(new java.awt.Dimension(50, 50));
         SidePanel.add(StatsButton);
-
-        HelpButton.setBorder(null);
-        HelpButton.setMaximumSize(new java.awt.Dimension(50, 50));
-        HelpButton.setMinimumSize(new java.awt.Dimension(50, 50));
-        HelpButton.setPreferredSize(new java.awt.Dimension(50, 50));
         SidePanel.add(HelpButton);
-
-        HomeButton.setBorder(null);
-        HomeButton.setMaximumSize(new java.awt.Dimension(50, 50));
-        HomeButton.setMinimumSize(new java.awt.Dimension(50, 50));
-        HomeButton.setPreferredSize(new java.awt.Dimension(50, 50));
         SidePanel.add(HomeButton);
 
         javax.swing.GroupLayout ButtonsLayout = new javax.swing.GroupLayout(Buttons);
@@ -161,15 +136,15 @@ public class Simulation extends javax.swing.JPanel {
         ButtonsLayout.setHorizontalGroup(
             ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ButtonsLayout.createSequentialGroup()
-                .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 877, Short.MAX_VALUE))
+                .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 897, Short.MAX_VALUE))
         );
         ButtonsLayout.setVerticalGroup(
             ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ButtonsLayout.createSequentialGroup()
-                .addContainerGap(120, Short.MAX_VALUE)
-                .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE)
+                .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(180, Short.MAX_VALUE))
         );
 
         add(Buttons);

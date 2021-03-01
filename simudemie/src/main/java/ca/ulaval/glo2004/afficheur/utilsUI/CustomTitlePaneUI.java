@@ -25,8 +25,4 @@ public class CustomTitlePaneUI extends FlatTitlePane {
         g.setColor(new Color(59, 66, 82));
 	g.fillRect(0, 0, getWidth(), getHeight());
     }
-    
-    @Override
-    protected void updateIcon() {
-    }
 }

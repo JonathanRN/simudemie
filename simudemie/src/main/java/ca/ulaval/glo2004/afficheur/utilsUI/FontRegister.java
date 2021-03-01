@@ -7,10 +7,7 @@ package ca.ulaval.glo2004.afficheur.utilsUI;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 /**
  *
@@ -21,15 +18,12 @@ public final class FontRegister {
     
     public static void register() {
         try {
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            RobotoLight = Font.createFont(Font.TRUETYPE_FONT, new File(Thread.currentThread().getContextClassLoader().getResource("fonts\\Roboto-Light.ttf").toURI()));
-            RobotoThin = Font.createFont(Font.TRUETYPE_FONT, new File(Thread.currentThread().getContextClassLoader().getResource("fonts\\Roboto-Thin.ttf").toURI()));
-            RobotoRegular = Font.createFont(Font.TRUETYPE_FONT, new File(Thread.currentThread().getContextClassLoader().getResource("fonts\\Roboto-Regular.ttf").toURI()));
+            RobotoLight = Font.createFont(Font.TRUETYPE_FONT, FontRegister.class.getResourceAsStream("/fonts/Roboto-Light.ttf"));
+            RobotoThin = Font.createFont(Font.TRUETYPE_FONT, FontRegister.class.getResourceAsStream("/fonts/Roboto-Thin.ttf"));
+            RobotoRegular = Font.createFont(Font.TRUETYPE_FONT, FontRegister.class.getResourceAsStream("/fonts/Roboto-Regular.ttf"));
         } catch (IOException e) {
             e.printStackTrace();
         } catch(FontFormatException e) {
-            e.printStackTrace();
-        } catch(URISyntaxException e) {
             e.printStackTrace();
         }
     }

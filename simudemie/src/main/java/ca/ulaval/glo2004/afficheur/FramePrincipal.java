@@ -85,18 +85,17 @@ public class FramePrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String args[]) {
-        IntelliJTheme.install(FramePrincipal.class.getResourceAsStream("/themes/nord.theme.json"));
-        UIManager.put("RootPaneUI", "ca.ulaval.glo2004.afficheur.utilsUI.CustomRootPaneUI");
-        UIManager.put("Button.arc", 15);
-        UIManager.put("ProgressBar.arc", 999);
-        
+    public static void main(String args[]) {        
         FontRegister.register();
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFrame frame = new FramePrincipal();
+                IntelliJTheme.install(FramePrincipal.class.getResourceAsStream("/themes/nord.theme.json"));
+                UIManager.put("RootPaneUI", "ca.ulaval.glo2004.afficheur.utilsUI.CustomRootPaneUI");
+                UIManager.put("Button.arc", 15);
+                UIManager.put("ProgressBar.arc", 999);
                 
+                JFrame frame = new FramePrincipal();
 		frame.dispose();
 		frame.setUndecorated(true);
 		frame.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);

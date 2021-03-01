@@ -4,4 +4,4 @@ Tous les fichiers à remettres se situent dans le dossier `remise_2` situé à l
 ## Artefacts remis
 - equipe09.pdf
 - equipe09.vpp
-- equipe09.jar
+- simudemie-livrable-2.jar

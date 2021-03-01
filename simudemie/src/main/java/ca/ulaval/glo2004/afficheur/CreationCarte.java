@@ -5,7 +5,14 @@
  */
 package ca.ulaval.glo2004.afficheur;
 
-import java.awt.Color;
+import ca.ulaval.glo2004.afficheur.carteActions.ActionCarte;
+import ca.ulaval.glo2004.afficheur.carteActions.AjouterPointAction;
+import ca.ulaval.glo2004.afficheur.carteActions.DessinerPolygoneAction;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Polygon;
+import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  *
@@ -13,11 +20,63 @@ import java.awt.Color;
  */
 public class CreationCarte extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ScenarioTab
-     */
+    private Stack<ActionCarte> actionsFaites = new Stack<>();
+    private Stack<ActionCarte> actionsUndo = new Stack<>();
+    private Polygon courant = new Polygon();
+    private ArrayList<Polygon> polygones = new ArrayList<>();
+    
     public CreationCarte() {
         initComponents();
+    }
+    
+    private void placerPoint(int x, int y) {
+        AjouterPointAction action = new AjouterPointAction(courant, x, y);
+        ajouterAction(action);
+    }
+    
+    private void dessinerPolygone() {
+        DessinerPolygoneAction action = new DessinerPolygoneAction(courant, polygones);
+        ajouterAction(action);
+    }
+    
+    private void ajouterAction(ActionCarte action) {
+        actionsFaites.push(action);
+        action.Executer();
+        // On veut pas modifier le futur
+        actionsUndo.clear();
+        repaint();
+    }
+    
+    private void undoAction() {
+        if (!actionsFaites.isEmpty()) {
+            ActionCarte action = actionsFaites.pop();
+            action.Undo();
+            actionsUndo.push(action);
+            repaint();
+        }
+    }
+    
+    private void redoAction() {
+        if (!actionsUndo.isEmpty()) {
+            ActionCarte action = actionsUndo.pop();
+            action.Executer();
+            actionsFaites.push(action);
+            repaint();
+        }
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
+        Graphics2D graphics = (Graphics2D) g;
+        for (int i = 0; i < courant.npoints; i++) {
+            graphics.fillOval(courant.xpoints[i], courant.ypoints[i], 10, 10);
+        }
+        
+        for (Polygon p : polygones) {
+            graphics.fillPolygon(p);
+        }
     }
 
     /**
@@ -52,6 +111,12 @@ public class CreationCarte extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(46, 52, 64));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
+            }
+        });
+        setLayout(new java.awt.BorderLayout());
 
         ToolBar.setBackground(new java.awt.Color(67, 76, 94));
 
@@ -167,6 +232,11 @@ public class CreationCarte extends javax.swing.JPanel {
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_pencil_25px.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel6MouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout BoutonEditionLayout = new javax.swing.GroupLayout(BoutonEdition);
         BoutonEdition.setLayout(BoutonEditionLayout);
@@ -181,8 +251,8 @@ public class CreationCarte extends javax.swing.JPanel {
 
         Undo.setBackground(new java.awt.Color(67, 76, 94));
         Undo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BoutonSelectionMouseEntered(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                UndoMouseReleased(evt);
             }
         });
 
@@ -203,8 +273,8 @@ public class CreationCarte extends javax.swing.JPanel {
         Redo.setBackground(new java.awt.Color(67, 76, 94));
         Redo.setPreferredSize(new java.awt.Dimension(50, 50));
         Redo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BoutonSelectionMouseEntered(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                RedoMouseReleased(evt);
             }
         });
 
@@ -282,11 +352,11 @@ public class CreationCarte extends javax.swing.JPanel {
                 .addComponent(BoutonEfface, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(BoutonEdition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(Undo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(Redo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 490, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 426, Short.MAX_VALUE)
                 .addComponent(BoutonAide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(BoutonRetour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -315,24 +385,30 @@ public class CreationCarte extends javax.swing.JPanel {
 
         ToolBarLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {BoutonAide, BoutonAjout, BoutonCréation, BoutonEdition, BoutonEfface, BoutonRetour, BoutonSelection, Redo, Undo});
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(357, Short.MAX_VALUE)
-                .addComponent(ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-        );
+        add(ToolBar, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BoutonSelectionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonSelectionMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_BoutonSelectionMouseEntered
+
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        placerPoint(evt.getX(), evt.getY());
+    }//GEN-LAST:event_formMouseReleased
+
+    private void UndoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UndoMouseReleased
+        undoAction();
+    }//GEN-LAST:event_UndoMouseReleased
+
+    private void RedoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RedoMouseReleased
+        redoAction();
+    }//GEN-LAST:event_RedoMouseReleased
+
+    private void jLabel6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseReleased
+        // TODO TEMPORAIREMENT, A CHANGER
+        dessinerPolygone();
+        courant.reset();
+    }//GEN-LAST:event_jLabel6MouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -28,7 +28,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
     private void initComponents() {
 
         TabMenu = new javax.swing.JTabbedPane();
-        TitleMenu = new javax.swing.JPanel();
+        OngletTitre = new ca.ulaval.glo2004.afficheur.onglets.OngletTitre();
         OngletScenario = new ca.ulaval.glo2004.afficheur.onglets.OngletScenario();
         OngletCarte = new ca.ulaval.glo2004.afficheur.onglets.OngletCarte();
         OngletMaladie = new ca.ulaval.glo2004.afficheur.onglets.OngletMaladie();
@@ -45,22 +45,8 @@ public class MenuPrincipal extends javax.swing.JPanel {
             }
         });
 
-        TitleMenu.setBackground(new java.awt.Color(46, 52, 64));
-        TitleMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        TitleMenu.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-
-        javax.swing.GroupLayout TitleMenuLayout = new javax.swing.GroupLayout(TitleMenu);
-        TitleMenu.setLayout(TitleMenuLayout);
-        TitleMenuLayout.setHorizontalGroup(
-            TitleMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        TitleMenuLayout.setVerticalGroup(
-            TitleMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 735, Short.MAX_VALUE)
-        );
-
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/Logo3.130FINAL.png")), TitleMenu, "Accueil"); // NOI18N
+        OngletTitre.setFocusable(false);
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_home_40px_1.png")), OngletTitre); // NOI18N
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_play_40px.png")), OngletScenario, "Scénarios"); // NOI18N
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_country_40px.png")), OngletCarte, "Cartes Mondiales"); // NOI18N
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_microorganisms_40px.png")), OngletMaladie, "Maladies"); // NOI18N
@@ -69,16 +55,14 @@ public class MenuPrincipal extends javax.swing.JPanel {
         BoutonQuitter.setLayout(BoutonQuitterLayout);
         BoutonQuitterLayout.setHorizontalGroup(
             BoutonQuitterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1071, Short.MAX_VALUE)
+            .addGap(0, 1161, Short.MAX_VALUE)
         );
         BoutonQuitterLayout.setVerticalGroup(
             BoutonQuitterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 735, Short.MAX_VALUE)
+            .addGap(0, 868, Short.MAX_VALUE)
         );
 
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_exit_35px.png")), BoutonQuitter, "Quitter Simudémie"); // NOI18N
-
-        TabMenu.setSelectedIndex(1);
 
         add(TabMenu, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -95,7 +79,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
     private ca.ulaval.glo2004.afficheur.onglets.OngletCarte OngletCarte;
     private ca.ulaval.glo2004.afficheur.onglets.OngletMaladie OngletMaladie;
     private ca.ulaval.glo2004.afficheur.onglets.OngletScenario OngletScenario;
+    private ca.ulaval.glo2004.afficheur.onglets.OngletTitre OngletTitre;
     private javax.swing.JTabbedPane TabMenu;
-    private javax.swing.JPanel TitleMenu;
     // End of variables declaration//GEN-END:variables
 }

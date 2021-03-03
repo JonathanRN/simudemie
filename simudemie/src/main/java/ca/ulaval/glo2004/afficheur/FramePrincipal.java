@@ -29,6 +29,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         UIManager.put("TabbedPane.tabSelectionHeight", 5);
         UIManager.put("TabbedPane.tabAreaAlignment", "leading");
         UIManager.put("TabbedPane.tabHeight", 100);
+        UIManager.put("TabbedPane.minimumTabWidth", 130);
     }
     
     public void startSimulation() {
@@ -77,7 +78,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simudémie");
         setBackground(new java.awt.Color(0, 255, 0));
-        setMinimumSize(new java.awt.Dimension(640, 480));
+        setMinimumSize(new java.awt.Dimension(640, 550));
         setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().add(MenuPrincipal, java.awt.BorderLayout.CENTER);
         setJMenuBar(TitleMenuBar);
@@ -104,6 +105,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 		// enable/disable window decoration for later created frames/dialogs
 		frame.setDefaultLookAndFeelDecorated(true);
                 frame.setIconImage(new javax.swing.ImageIcon(getClass().getResource(ICON_PATH)).getImage());
+                frame.setLocationRelativeTo(null);
             }
         });
     }

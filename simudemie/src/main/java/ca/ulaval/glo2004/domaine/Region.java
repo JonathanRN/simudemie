@@ -12,10 +12,10 @@ public class Region {
     
     private String nom;
     private int populationSaine;
-    private int populationImmune;
+//    private int populationImmune;
     private int populationInfectee;
     private int populationDecedee;
-    private List<Region> regionVoisines;
+    private List<Region> regionsVoisines;
     private Polygon polygone;
     
     public Region(Polygon polygone) 
@@ -24,42 +24,49 @@ public class Region {
         //TODO Constructeur
     }
     
-    public void deplacementRegions()
+//    public void deplacementRegions()
+//    {
+//        //TODO Déplacement des populations entre les régions
+//    }
+    
+    public void contaminer(float taux)
     {
-        //TODO Déplacement des populations entre les régions
+        int nouveauxInfectes  = (int)(populationSaine * taux);
+        setPopSaine(populationSaine - nouveauxInfectes);
+        setPopInfectee(populationInfectee + nouveauxInfectes);
     }
     
-    public void contaminer()
+    public void eliminerPopulation(float taux)
     {
-        //TODO Appliquer le taux d'infection sur la populationSaine
-        //Gestion des Mesures
+        int deces  = (int)(populationInfectee * taux);
+        setPopInfectee(populationInfectee - deces);
+        setPopDecedee(populationDecedee + deces);
     }
     
-    public void eliminerPopulation()
+    public void guerirPop(float taux)
     {
-        //TODO Appliquer le taux de mortalite sur la populationInfectee
-    }
-    
-    public void guerirPop()
-    {
-        //TODO Appliquer le taux de guérison sur la populationInfectee
+        int gueris = (int)(populationInfectee * taux);
+        setPopInfectee(populationInfectee - gueris);
+        setPopSaine(populationSaine + gueris);
     }
     
     public void ajouterVoisin(Region nouvelleRegion)
     {
-        //TODO Ajouter une region à sa liste de voisin
+        regionsVoisines.add(nouvelleRegion);
     }
     
     public void retirerVoisin(Region ancienneRegion)
     {
-           //TODO Retirer une région de la liste de region voisines
+        if (regionsVoisines.contains(ancienneRegion)){
+            regionsVoisines.remove(ancienneRegion);
+        }
     }
     
     public String getNom(){return nom;}
     
     public int getPopSaine(){return populationSaine;}
     
-    public int getPopImmunisee(){return populationImmune;}
+//    public int getPopImmunisee(){return populationImmune;}
     
     public int getPopInfectee(){return populationInfectee;}
     
@@ -75,10 +82,10 @@ public class Region {
         this.populationSaine = populationSaine;
     }
     
-    private void setPopImmune(int populationImmune)
-    {
-        this.populationImmune = populationImmune;
-    }
+//    private void setPopImmune(int populationImmune)
+//    {
+//        this.populationImmune = populationImmune;
+//    }
         
     private void setPopInfectee(int populationInfectee)
     {

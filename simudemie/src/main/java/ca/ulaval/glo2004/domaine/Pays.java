@@ -23,6 +23,21 @@ public class Pays {
         //TODO Constructeur
     }
     
+    private void avancerJournee(float tauxInf, float tauxMortalite, float tauxGuerison)
+    {
+        float tauxInfAjuste = tauxInf;
+        for (Region region : listeRegions)
+        {
+            for (Mesure m : mesures)
+            {
+                tauxInfAjuste = tauxInfAjuste * (m.getTauxAdhesion() + m.getTauxReductionProp());
+            }
+            region.contaminer(tauxInfAjuste);
+            region.guerirPop(tauxGuerison);
+            region.eliminerPopulation(tauxMortalite);
+        }
+    }
+    
     private void ajouterRegion(Region nouvelleRegion)
     {
         listeRegions.add(nouvelleRegion);

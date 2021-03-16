@@ -2,6 +2,7 @@ package ca.ulaval.glo2004.afficheur;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import com.formdev.flatlaf.IntelliJTheme;
+import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.UIManager;
@@ -93,6 +94,8 @@ public class FramePrincipal extends javax.swing.JFrame {
             public void run() {
                 IntelliJTheme.install(FramePrincipal.class.getResourceAsStream("/themes/nord.theme.json"));
                 UIManager.put("RootPaneUI", "ca.ulaval.glo2004.afficheur.utilsUI.CustomRootPaneUI");
+                UIManager.put("SliderUI", "ca.ulaval.glo2004.afficheur.utilsUI.CustomSliderUI");
+
                 UIManager.put("Button.arc", 15);
                 UIManager.put("ProgressBar.arc", 999);
                 

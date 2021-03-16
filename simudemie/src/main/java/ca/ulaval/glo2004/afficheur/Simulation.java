@@ -6,6 +6,7 @@
 package ca.ulaval.glo2004.afficheur;
 
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -14,10 +15,10 @@ import javax.swing.SwingUtilities;
  * @author Jonathan
  */
 public class Simulation extends javax.swing.JPanel {
-
-    /**
-     * Creates new form Simulation
-     */
+    
+    private boolean estEnDirect;
+    private boolean mouseOver;
+    
     public Simulation() {
         initComponents();
         
@@ -33,6 +34,12 @@ public class Simulation extends javax.swing.JPanel {
             }
         });
     }
+    
+    public void setDirect(boolean direct) {
+        estEnDirect = direct;
+    }
+    
+    public boolean getDirect() { return estEnDirect; }
     
     private void HomeButtonReleased(MouseEvent evt) {
         JOptionPane optionPane = new JOptionPane();
@@ -55,7 +62,14 @@ public class Simulation extends javax.swing.JPanel {
             frame.returnToHome();
         }
     }
-
+    
+    private void updateDirectIcon() {
+        String path = "/icons/";
+        path += estEnDirect ? "pause_button_35px" : "direct_button_35px" ;
+        path += mouseOver ? "_highlight.png" : ".png";
+        DirectIcon.setIcon(new ImageIcon(getClass().getResource(path)));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,8 +79,11 @@ public class Simulation extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        SliderParent = new javax.swing.JPanel();
         Slider = new javax.swing.JPanel();
-        jSlider1 = new javax.swing.JSlider();
+        SliderJour = new javax.swing.JSlider();
+        BoutonDirect = new javax.swing.JPanel();
+        DirectIcon = new javax.swing.JLabel();
         Buttons = new javax.swing.JPanel();
         SidePanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         AddButton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
@@ -79,26 +96,47 @@ public class Simulation extends javax.swing.JPanel {
         setBackground(new java.awt.Color(46, 52, 64));
         setLayout(new javax.swing.OverlayLayout(this));
 
+        SliderParent.setOpaque(false);
+        SliderParent.setLayout(new java.awt.BorderLayout());
+
+        Slider.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 20, 0, 20));
         Slider.setOpaque(false);
+        Slider.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout SliderLayout = new javax.swing.GroupLayout(Slider);
-        Slider.setLayout(SliderLayout);
-        SliderLayout.setHorizontalGroup(
-            SliderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SliderLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        SliderLayout.setVerticalGroup(
-            SliderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SliderLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-        );
+        SliderJour.setSnapToTicks(true);
+        SliderJour.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 10));
+        SliderJour.setPreferredSize(new java.awt.Dimension(200, 70));
+        SliderJour.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                SliderJourMouseReleased(evt);
+            }
+        });
+        Slider.add(SliderJour, java.awt.BorderLayout.CENTER);
 
-        add(Slider);
+        BoutonDirect.setToolTipText("Retour en direct");
+        BoutonDirect.setOpaque(false);
+        BoutonDirect.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BoutonDirectMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BoutonDirectMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BoutonDirectMouseExited(evt);
+            }
+        });
+        BoutonDirect.setLayout(new java.awt.BorderLayout());
+
+        DirectIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DirectIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/direct_button_35px.png"))); // NOI18N
+        BoutonDirect.add(DirectIcon, java.awt.BorderLayout.EAST);
+
+        Slider.add(BoutonDirect, java.awt.BorderLayout.EAST);
+
+        SliderParent.add(Slider, java.awt.BorderLayout.SOUTH);
+
+        add(SliderParent);
 
         Buttons.setBackground(new java.awt.Color(46, 52, 64));
         Buttons.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -150,17 +188,46 @@ public class Simulation extends javax.swing.JPanel {
         add(Buttons);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BoutonDirectMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonDirectMouseEntered
+        mouseOver = true;
+        updateDirectIcon();
+    }//GEN-LAST:event_BoutonDirectMouseEntered
+
+    private void BoutonDirectMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonDirectMouseExited
+        mouseOver = false;
+        updateDirectIcon();
+    }//GEN-LAST:event_BoutonDirectMouseExited
+
+    private void BoutonDirectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonDirectMouseClicked
+        setDirect(!estEnDirect);
+        updateDirectIcon();
+        
+        if (estEnDirect) {
+            SliderJour.setValue(SliderJour.getMaximum());
+        }
+    }//GEN-LAST:event_BoutonDirectMouseClicked
+
+    private void SliderJourMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderJourMouseReleased
+        if (estEnDirect) {
+            setDirect(false);
+            updateDirectIcon();
+        }
+    }//GEN-LAST:event_SliderJourMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton AddButton;
+    private javax.swing.JPanel BoutonDirect;
     private javax.swing.JPanel Buttons;
+    private javax.swing.JLabel DirectIcon;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HelpButton;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HomeButton;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton LinkButton;
     private ca.ulaval.glo2004.afficheur.PanelArrondi SidePanel;
     private javax.swing.JPanel Slider;
+    private javax.swing.JSlider SliderJour;
+    private javax.swing.JPanel SliderParent;
     private javax.swing.JPanel Spacing;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton StatsButton;
-    private javax.swing.JSlider jSlider1;
     // End of variables declaration//GEN-END:variables
 }

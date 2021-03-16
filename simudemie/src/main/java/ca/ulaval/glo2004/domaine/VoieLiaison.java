@@ -18,6 +18,7 @@ public class VoieLiaison {
         this.nom = nom;
         this.paysOrigine = origine;
         this.paysDestination = destination;
+        accessible = true;
     }
         
     public Pays getPaysOrigine(){return paysOrigine;}

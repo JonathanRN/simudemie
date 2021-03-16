@@ -13,9 +13,9 @@ public class Carte {
     private String nom;
     private List<Pays> listePays;
     
-    public Carte()
+    public Carte(String nom)
     {
-        //TODO Constructeur de la classe pays
+        this.nom = nom;
     }    
     
     public void avancerJour()
@@ -25,19 +25,16 @@ public class Carte {
     
     public void ajouterPays(Pays nouveauPays)
     {
-        //TODO Ajout d'une region à la liste
+         listePays.add(nouveauPays);
     }
     
     public void retirerPays(Pays ancienPays)
     {
-        //TODO Retrait d'une region à la liste
+        if (listePays.contains(ancienPays)){
+            listePays.remove(ancienPays);
+        }
     }
-    /*
-    public Pays trouverPays(Pays aTrouver)
-    {
-        return new Pays();
-    }
-    */
+
     public String getNom(){return nom;}
     
     public List<Pays> getListePays(){return listePays;}
@@ -46,4 +43,11 @@ public class Carte {
     {
         this.nom = nom;
     }
+    
+    /*
+    public Pays trouverPays(Pays aTrouver)
+    {
+        return new Pays();
+    }
+    */
 }

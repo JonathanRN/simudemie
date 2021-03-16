@@ -13,9 +13,12 @@ public class Maladie {
     private float tauxMortalite;
     private float tauxGuerison;
     
-    public Maladie()
+    public Maladie(String nom, float tauxInfection, float tauxMortalite, float tauxGuerison)
     {
-        //TODO Constructeur Maladie
+        this.nom = nom;
+        this.tauxInfection = tauxInfection;
+        this.tauxMortalite = tauxMortalite;
+        this.tauxGuerison = tauxGuerison;
     }
     
     public String getNom(){return nom;}

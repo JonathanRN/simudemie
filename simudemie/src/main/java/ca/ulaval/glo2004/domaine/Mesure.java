@@ -12,9 +12,11 @@ public class Mesure {
     private float tauxAdhesion;
     private float tauxReductionProp;
     
-    Mesure()
+    Mesure(String nom, float tauxAdhesion, float tauxReductionProp)
     {
-        //TODO Constructeur Mesure
+        this.nom = nom; 
+        this.tauxAdhesion = tauxAdhesion;
+        this.tauxReductionProp = tauxReductionProp;
     }
     
     public String getNom(){return nom;}

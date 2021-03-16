@@ -25,27 +25,26 @@ public class Pays {
     
     private void ajouterRegion(Region nouvelleRegion)
     {
-        //TODO Ajout d'une region à la liste
+        listeRegions.add(nouvelleRegion);
     }
     
     private void retirerRegion(Region ancienneRegion)
     {
-        //TODO Retrait d'une region à la liste
+        if (listeRegions.contains(ancienneRegion)){
+            listeRegions.remove(ancienneRegion);
+        }
     }
     
     public void ajouterVoie(VoieLiaison nouvelleVoie)
     {
-        //TODO Ajout d'une region à la liste
+        frontieres.add(nouvelleVoie);
     }
     
     public void retirerVoie(VoieLiaison ancienneVoie)
     {
-        //TODO Retrait d'une region à la liste
-    }
-    
-    public void deplacementInterPays()
-    {
-    
+        if (frontieres.contains(ancienneVoie)){
+            frontieres.remove(ancienneVoie);
+        }
     }
         
     public String getNom(){return nom;}
@@ -56,8 +55,7 @@ public class Pays {
     {
         this.nom = nom;
     }
-    
-    
+     
     private void setPopTotale(int populationTotale)
     {
         this.populationTotale = populationTotale;

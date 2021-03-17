@@ -2,7 +2,6 @@ package ca.ulaval.glo2004.afficheur;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import com.formdev.flatlaf.IntelliJTheme;
-import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.UIManager;

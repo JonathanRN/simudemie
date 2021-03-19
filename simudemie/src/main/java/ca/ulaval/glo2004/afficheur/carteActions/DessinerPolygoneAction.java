@@ -13,23 +13,16 @@ import java.util.ArrayList;
  * @author Jonathan
  */
 public class DessinerPolygoneAction extends ActionCarte {
-
-    private Polygon polygon;
+    
     private ArrayList<Polygon> polygons;
     
-    public DessinerPolygoneAction(Polygon polygon, ArrayList<Polygon> polygons) {
-        this.polygon = polygon;
+    public DessinerPolygoneAction(ArrayList<Polygon> polygons) {
         this.polygons = polygons;
     }
     
     @Override
     public void Executer() {
-        // Cree une nouvelle copie a inserer
-        Polygon nouveau = new Polygon();
-        for (int i = 0; i < polygon.npoints; i++) {
-            nouveau.addPoint(polygon.xpoints[i], polygon.ypoints[i]);
-        }
-        polygons.add(nouveau);
+        polygons.add(new Polygon());
     }
 
     @Override

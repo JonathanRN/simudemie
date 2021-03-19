@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004.controleur;
+package ca.ulaval.glo2004.domaine.controleur;
 
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.VoieLiaison;

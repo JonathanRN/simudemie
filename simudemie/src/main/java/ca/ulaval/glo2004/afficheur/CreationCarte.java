@@ -9,17 +9,15 @@ import ca.ulaval.glo2004.afficheur.boutons.CreationCarteToggle;
 import ca.ulaval.glo2004.afficheur.carteActions.ActionCarte;
 import ca.ulaval.glo2004.afficheur.carteActions.AjouterPointAction;
 import ca.ulaval.glo2004.afficheur.carteActions.DessinerPolygoneAction;
-import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Line2D;
 import java.awt.geom.PathIterator;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -37,13 +35,14 @@ public class CreationCarte extends javax.swing.JPanel {
     private CreationCarteToggle toggleCourant;
     private Polygon polygoneSousSouris;
     private int indexSousSouris;
+    private Point pointDragInitial;
     
     private Stack<ActionCarte> actionsFaites = new Stack<>();
     private Stack<ActionCarte> actionsUndo = new Stack<>();
-    private Polygon courant = new Polygon();
     private ArrayList<Polygon> polygones = new ArrayList<>();
+    private ArrayList<Line2D.Double> lignesInvalides = new ArrayList<>();
     
-    private final int rayonPoint = 20;
+    private final int taillePoint = 20;
     private final Color couleurPoint = new Color(136, 192, 208);
     private final Color couleurFill = new Color(85, 91, 100, 100);
     
@@ -51,19 +50,32 @@ public class CreationCarte extends javax.swing.JPanel {
         initComponents();
         BoutonSelection.init(this, Mode.Selection, "icons8_cursor_25px");
         BoutonCrayon.init(this, Mode.Creation, "icons8_pen_25px");
-        onToggleClick(BoutonSelection);        
+        onToggleClick(BoutonSelection);
+        
+       polygones.add(new Polygon());
     }
     
     private void placerPoint(int x, int y) {
-        AjouterPointAction action = new AjouterPointAction(courant, x, y);
+        AjouterPointAction action = new AjouterPointAction(polygones.get(polygones.size() - 1), x, y);
         ajouterAction(action);
+        
+        // Place le point seulement s'il est valide
+        updateLignesInvalides(polygones.get(polygones.size() - 1));
+        if (!lignesInvalides.isEmpty()) {
+            undoAction();
+        }
     }
     
     private void dessinerPolygone() {
-        DessinerPolygoneAction action = new DessinerPolygoneAction(courant, polygones);
-        ajouterAction(action);
-        
-        courant = new Polygon();
+        // Dessine le polygone seulement s'il est valide
+        updateLignesInvalides(polygones.get(polygones.size() - 1));
+        if (lignesInvalides.isEmpty()) {
+            DessinerPolygoneAction action = new DessinerPolygoneAction(polygones);
+            ajouterAction(action);
+        }
+        else {
+            repaint();
+        }
     }
     
     private ArrayList<Line2D.Double> getPolygonLines(Polygon po) {
@@ -98,19 +110,9 @@ public class CreationCarte extends javax.swing.JPanel {
             } 
 
             if (nextElement[0] == PathIterator.SEG_LINETO) {
-                areaSegments.add(
-                    new Line2D.Double(
-                        currentElement[1], currentElement[2],
-                        nextElement[1], nextElement[2]
-                    )
-                );
-            } else if (nextElement[0] == PathIterator.SEG_CLOSE) {
-                areaSegments.add(
-                    new Line2D.Double(
-                        currentElement[1], currentElement[2],
-                        start[1], start[2]
-                    )
-                );
+                areaSegments.add(new Line2D.Double(currentElement[1], currentElement[2], nextElement[1], nextElement[2]));
+            } else if (nextElement[0] == PathIterator.SEG_CLOSE && areaPoints.size() > 3) {
+                areaSegments.add(new Line2D.Double(currentElement[1], currentElement[2], start[1], start[2]));
             }
         }
         return areaSegments;
@@ -145,19 +147,8 @@ public class CreationCarte extends javax.swing.JPanel {
     private void getPointSousSouris(int x, int y) {
         polygoneSousSouris = null;
         indexSousSouris = -1;
-        int offset = rayonPoint/2 + 5;
+        int offset = taillePoint/2 + 5;
         
-        //TODO meilleure facon de gerer courant + polygones
-        // Check le courant
-        for (int i = 0; i < courant.npoints; i++) {
-                if (Math.abs(x - courant.xpoints[i]) <= offset &&
-                    Math.abs(y - courant.ypoints[i]) <= offset) {
-                    polygoneSousSouris = courant;
-                    indexSousSouris = i;
-                }
-            }
-        
-        // Check tous les polygones
         for (Polygon p : polygones) {
             for (int i = 0; i < p.npoints; i++) {
                 if (Math.abs(x - p.xpoints[i]) <= offset &&
@@ -169,19 +160,52 @@ public class CreationCarte extends javax.swing.JPanel {
         }
     }
     
+    private ArrayList<Line2D.Double> getLignesInvalides(Polygon p) {
+        ArrayList<Line2D.Double> invalides = new ArrayList<>();
+        
+        ArrayList<Line2D.Double> lines = getPolygonLines(p);
+        for (Line2D.Double line : lines) {
+            for (int x = 0; x < polygones.size(); x++) {
+                ArrayList<Line2D.Double> linesP2 = getPolygonLines(polygones.get(x));
+                for (Line2D.Double lineP2 : linesP2) {
+                    if (line.intersectsLine(lineP2) &&
+                        line.x1 != lineP2.x1 &&
+                        line.x2 != lineP2.x2 &&
+                        line.y1 != lineP2.y1 &&
+                        line.y2 != lineP2.y2 &&
+                        line.x1 != lineP2.x2 &&
+                        line.y1 != lineP2.y2 &&
+                        lineP2.x1 != line.x2 &&
+                        lineP2.y1 != line.y2) {
+                        
+                        invalides.add(line);
+                        invalides.add(lineP2);
+                    }
+                }
+            }
+        }
+        return invalides;
+    }
+    
+    private void updateLignesInvalides(Polygon g) {
+        lignesInvalides.clear();
+        lignesInvalides = getLignesInvalides(g);
+    }
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Polygon courant = polygones.get(polygones.size() - 1);
         
         Graphics2D graphics = (Graphics2D) g;
         
         graphics.setColor(couleurFill);
-        for (Polygon p : polygones) {
-            graphics.fillPolygon(p);
+        for (int i = 0; i < polygones.size() - 1; i++) {
+            graphics.fillPolygon(polygones.get(i));
         }
         
         graphics.setColor(couleurPoint);
-        if (courant.npoints >= 3) {
+        if (courant.npoints >= 2) {
             ArrayList<Line2D.Double> lines = getPolygonLines(courant);
             for (int i = 0; i < lines.size(); i++) {
                 graphics.drawLine((int)lines.get(i).x1, (int)lines.get(i).y1, (int)lines.get(i).x2, (int)lines.get(i).y2);
@@ -189,22 +213,26 @@ public class CreationCarte extends javax.swing.JPanel {
         }
         
         graphics.setColor(Color.white);
-        for (Polygon p : polygones) {
-            paintPointPolygone(graphics, p);
+        for (int i = 0; i < polygones.size(); i++) {
+            paintPointPolygone(graphics, polygones.get(i));
         }
-        paintPointPolygone(graphics, courant);
         
         if (polygoneSousSouris != null) {
             graphics.setColor(Color.green);
-            graphics.fillOval(polygoneSousSouris.xpoints[indexSousSouris] - rayonPoint/2, polygoneSousSouris.ypoints[indexSousSouris] - rayonPoint/2, rayonPoint, rayonPoint);
+            graphics.fillOval(polygoneSousSouris.xpoints[indexSousSouris] - taillePoint/2, polygoneSousSouris.ypoints[indexSousSouris] - taillePoint/2, taillePoint, taillePoint);
+        }
+        
+        graphics.setColor(Color.red);
+        for (Line2D.Double line : lignesInvalides) {
+            graphics.drawLine((int)line.x1, (int)line.y1, (int)line.x2, (int)line.y2);
         }
     }
     
     private void paintPointPolygone(Graphics2D g, Polygon p) {
         if (p != null) {
             for (int i = 0; i < p.npoints; i++) {
-                g.fillOval(p.xpoints[i] - rayonPoint/2, p.ypoints[i] - rayonPoint/2, rayonPoint, rayonPoint);
-                g.drawString(Integer.toString(i), p.xpoints[i] - rayonPoint/2, p.ypoints[i] - rayonPoint/2 - 10);
+                g.fillOval(p.xpoints[i] - taillePoint/2, p.ypoints[i] - taillePoint/2, taillePoint, taillePoint);
+                g.drawString(Integer.toString(i), p.xpoints[i] - taillePoint/2, p.ypoints[i] - taillePoint/2 - 10);
             }
         }
     }
@@ -227,6 +255,9 @@ public class CreationCarte extends javax.swing.JPanel {
             }
         });
         addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 formMouseReleased(evt);
             }
@@ -265,19 +296,29 @@ public class CreationCarte extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
-        if (mode == Mode.Creation && polygoneSousSouris == null) {
-            placerPoint(evt.getX(), evt.getY());
-            
-            // Dessine le nouveau point comme etant selectionne
-            getPointSousSouris(evt.getX(), evt.getY());
-            repaint();
+        if (polygoneSousSouris == null) {
+            if (mode == Mode.Creation) {
+                placerPoint(evt.getX(), evt.getY());
+            }
         }
-        
+        else {
+            updateLignesInvalides(polygoneSousSouris);
+            
+            if (!lignesInvalides.isEmpty()) {
+                polygoneSousSouris.ypoints[indexSousSouris] = pointDragInitial.y;
+                polygoneSousSouris.xpoints[indexSousSouris] = pointDragInitial.x;
+                lignesInvalides.clear();
+                repaint();
+            }
+        }
+
+        // Dessine le nouveau point comme etant selectionne
+        getPointSousSouris(evt.getX(), evt.getY());
         requestFocusInWindow();
     }//GEN-LAST:event_formMouseReleased
     
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
-        if (courant.npoints >= 3 && evt.getKeyCode() == KeyEvent.VK_SPACE) {
+        if (polygones.get(polygones.size() - 1).npoints >= 3 && evt.getKeyCode() == KeyEvent.VK_SPACE) {
             dessinerPolygone();
         }
     }//GEN-LAST:event_formKeyReleased
@@ -286,6 +327,9 @@ public class CreationCarte extends javax.swing.JPanel {
         if (polygoneSousSouris != null) {
             polygoneSousSouris.xpoints[indexSousSouris] = evt.getX();
             polygoneSousSouris.ypoints[indexSousSouris] = evt.getY();
+            
+            updateLignesInvalides(polygoneSousSouris);
+            
             repaint();
         }
     }//GEN-LAST:event_formMouseDragged
@@ -294,6 +338,10 @@ public class CreationCarte extends javax.swing.JPanel {
         getPointSousSouris(evt.getX(), evt.getY());
         repaint();
     }//GEN-LAST:event_formMouseMoved
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        pointDragInitial = evt.getPoint();
+    }//GEN-LAST:event_formMousePressed
 
     public void onToggleClick(CreationCarteToggle bouton) {
         if (toggleCourant != null) {

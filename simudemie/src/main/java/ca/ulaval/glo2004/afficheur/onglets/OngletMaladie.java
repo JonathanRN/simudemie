@@ -19,8 +19,13 @@ import javax.swing.SwingUtilities;
  */
 public class OngletMaladie extends OngletUI {
     
+    // Si à true, on ne peut pas sélectionner d'autre cartes maladie
+    private boolean cardLocked;
+    
     public OngletMaladie() {
         initComponents();
+        
+        cardLocked = false;
         
         try {
             ajouterObjetUI();
@@ -62,9 +67,11 @@ public class OngletMaladie extends OngletUI {
 
     @Override
     public void onClickObjetUI(ObjetUI objet) {
-        super.onClickObjetUI(objet);
-        ObjetMaladie objetMaladie = (ObjetMaladie)courant;
-        statsMaladiePanel1.setNomMaladie(objetMaladie.getNom());
+        if(!cardLocked) {
+            super.onClickObjetUI(objet);
+            ObjetMaladie objetMaladie = (ObjetMaladie)courant;
+            statsMaladiePanel1.setNomMaladie(objetMaladie.getNom());
+        }
     }
     
     public void onStartSimulation() {
@@ -168,7 +175,7 @@ public class OngletMaladie extends OngletUI {
                 .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 621, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1054, Short.MAX_VALUE)
                 .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         MaladieTitleLayout.setVerticalGroup(
@@ -214,7 +221,7 @@ public class OngletMaladie extends OngletUI {
 
         Layout.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
         Layout.setOpaque(false);
-        Layout.setLayout(new java.awt.GridLayout(1, 2, 25, 0));
+        Layout.setLayout(new java.awt.GridLayout(1, 1));
         Layout.add(statsMaladiePanel1);
 
         Mal_Informations.add(Layout, java.awt.BorderLayout.CENTER);
@@ -226,6 +233,13 @@ public class OngletMaladie extends OngletUI {
         this.ajouterObjetUI();
     }//GEN-LAST:event_AddScenarioButtonMouseClicked
 
+    public boolean getCardLocked() {
+        return cardLocked;
+    }
+    
+    public void setCardLocked(boolean cardLocked) {
+        this.cardLocked = cardLocked;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddScenarioButton;
@@ -239,7 +253,6 @@ public class OngletMaladie extends OngletUI {
     private javax.swing.JPanel Maladies;
     private javax.swing.JPanel MaladiesContainer;
     private javax.swing.JScrollPane ScenariosScrollPane;
-    private javax.swing.JPanel ScenariosTitle;
     private ca.ulaval.glo2004.afficheur.panels.StatsMaladiePanel statsMaladiePanel1;
     // End of variables declaration//GEN-END:variables
 }

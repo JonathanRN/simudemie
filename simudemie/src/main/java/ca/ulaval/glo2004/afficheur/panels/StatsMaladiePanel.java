@@ -59,6 +59,9 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         Space = new javax.swing.JPanel();
         Delete = new javax.swing.JLabel();
         Parent = new javax.swing.JPanel();
+        Buttons = new javax.swing.JPanel();
+        DeleteButton = new javax.swing.JButton();
+        ModifyButton = new javax.swing.JButton();
 
         setOpaque(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -66,7 +69,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
                 formMouseReleased(evt);
             }
         });
-        setLayout(new java.awt.BorderLayout(0, 25));
+        setLayout(new java.awt.GridLayout(1, 2, 20, 0));
 
         Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 25, 15));
         Main.setLayout(new java.awt.BorderLayout());
@@ -77,6 +80,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         MaladieInput.setBackground(new java.awt.Color(71, 76, 88));
         MaladieInput.setFont(new java.awt.Font("Dialog", 0, 21)); // NOI18N
         MaladieInput.setText("Nom de la maladie");
+        MaladieInput.setEnabled(false);
         MaladieInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 MaladieInputKeyReleased(evt);
@@ -109,45 +113,101 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         Parent.setLayout(ParentLayout);
         ParentLayout.setHorizontalGroup(
             ParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 661, Short.MAX_VALUE)
+            .addGap(0, 449, Short.MAX_VALUE)
         );
         ParentLayout.setVerticalGroup(
             ParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 357, Short.MAX_VALUE)
+            .addGap(0, 359, Short.MAX_VALUE)
         );
 
         Main.add(Parent, java.awt.BorderLayout.CENTER);
 
-        add(Main, java.awt.BorderLayout.CENTER);
+        add(Main);
+
+        Buttons.setOpaque(false);
+        Buttons.setPreferredSize(new java.awt.Dimension(691, 431));
+        Buttons.setLayout(new java.awt.GridLayout(2, 1, 0, 25));
+
+        DeleteButton.setText("Supprimer");
+        DeleteButton.setToolTipText("Supprimer la maladie");
+        DeleteButton.setFocusable(false);
+        DeleteButton.setMaximumSize(new java.awt.Dimension(75, 22));
+        DeleteButton.setMinimumSize(new java.awt.Dimension(75, 22));
+        DeleteButton.setPreferredSize(new java.awt.Dimension(75, 22));
+        DeleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                DeleteButtonMouseReleased(evt);
+            }
+        });
+        Buttons.add(DeleteButton);
+
+        ModifyButton.setText("Modifier");
+        ModifyButton.setToolTipText("Modifier la maladie");
+        ModifyButton.setFocusable(false);
+        ModifyButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ModifyButtonMouseReleased(evt);
+            }
+        });
+        Buttons.add(ModifyButton);
+
+        add(Buttons);
     }// </editor-fold>//GEN-END:initComponents
 
     private void DeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteMouseClicked
         onglet.retirerCourant();
     }//GEN-LAST:event_DeleteMouseClicked
 
-    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
-        this.requestFocusInWindow();
-        updateUI();
+    private void DeleteButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseReleased
         
-        ObjetMaladie maladie = (ObjetMaladie)onglet.getCourant();
-        setNomMaladie(maladie.getNom());
-    }//GEN-LAST:event_formMouseReleased
+    }//GEN-LAST:event_DeleteButtonMouseReleased
+
+    private void ModifyButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifyButtonMouseReleased
+        if(onglet.getCardLocked()) { // En modification, mais bouton agis comme sauvegarde
+            ModifyButton.setText("Modifier");
+            ModifyButton.setToolTipText("Modifier les informations");
+            enableFields(false);
+            // Sauvegarde
+            
+            //updateUI();
+
+            sauvegarderMaladie();
+            
+        } else {
+            ModifyButton.setText("Enregistrer");
+            ModifyButton.setToolTipText("Enregistrer les informations");
+            enableFields(true);
+        }
+    }//GEN-LAST:event_ModifyButtonMouseReleased
 
     private void MaladieInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaladieInputKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             this.requestFocusInWindow();
             updateUI();
-            
+
             sauvegarderMaladie();
         }
     }//GEN-LAST:event_MaladieInputKeyReleased
 
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        this.requestFocusInWindow();
+        updateUI();
+    }//GEN-LAST:event_formMouseReleased
+
+    private void enableFields(boolean enabled) {
+        onglet.setCardLocked(enabled);
+        MaladieInput.setEnabled(enabled);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Boutons;
+    private javax.swing.JPanel Buttons;
     private javax.swing.JLabel Delete;
+    private javax.swing.JButton DeleteButton;
     private ca.ulaval.glo2004.afficheur.PanelArrondi Main;
     private javax.swing.JTextField MaladieInput;
+    private javax.swing.JButton ModifyButton;
     private javax.swing.JPanel Parent;
     private javax.swing.JPanel Space;
     private javax.swing.JPanel StatsHeader;

@@ -66,13 +66,17 @@ public class Pays {
     
     public int getPopTotale(){ return populationTotale; }
     
-    private void setNom(String nom)
+    public Polygon getPolygone() { return polygone; };
+    
+    public void setNom(String nom)
     {
+        System.out.println("Pays: " + this.nom + " -> " + nom);
         this.nom = nom;
     }
      
-    private void setPopTotale(int populationTotale)
+    public void setPopTotale(int populationTotale)
     {
+        System.out.println("Pays: " + this.populationTotale + " -> " + populationTotale);
         this.populationTotale = populationTotale;
     }
 }

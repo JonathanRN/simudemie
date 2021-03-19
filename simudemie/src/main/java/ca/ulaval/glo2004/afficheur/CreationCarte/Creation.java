@@ -48,16 +48,6 @@ public class Creation extends Mode {
         
         super.paint(g);
     }
-    
-    @Override
-    public void onDesactive() {
-        super.onDesactive();
-    }
-
-    @Override
-    public void onActive() {
-        super.onActive();
-    }
 
     @Override
     public void onMouseMoved(MouseEvent evt) {

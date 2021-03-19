@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.domaine;
 
+import java.awt.Polygon;
 import java.util.ArrayList;
 
 public class Carte {
@@ -32,6 +33,19 @@ public class Carte {
         if (listePays.contains(ancienPays)){
             listePays.remove(ancienPays);
         }
+    }
+    
+    public Pays getPays(int index) {
+        return listePays.get(index);
+    }
+    
+    public Pays getPays(Polygon p) {
+        for (Pays pays : listePays) {
+            if (pays.getPolygone().equals(p)) {
+                return pays;
+            }
+        }
+        return null;
     }
 
     public String getNom(){return nom;}

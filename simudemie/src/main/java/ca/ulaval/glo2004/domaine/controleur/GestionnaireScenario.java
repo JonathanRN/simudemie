@@ -7,9 +7,8 @@ package ca.ulaval.glo2004.domaine.controleur;
 
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Jour;
-import ca.ulaval.glo2004.domaine.Jour;
 import ca.ulaval.glo2004.domaine.Pays;
-import ca.ulaval.glo2004.domaine.Pays;
+import java.awt.Polygon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -76,6 +75,14 @@ public class GestionnaireScenario implements ActionListener {
     public void creerPays(int index, Pays pays) {
         getCarte(index).ajouterPays(pays);
         System.out.println(String.format("%s -> %s", getCarte(index).getNom(), pays.getNom()));
+    }
+    
+    public Pays getPays(int indexCarte, int index) {
+        return cartes.get(indexCarte).getPays(index);
+    }
+    
+    public Pays getPays(int indexCarte, Polygon p) {
+        return cartes.get(indexCarte).getPays(p);
     }
         
     private void importer(String filePath)

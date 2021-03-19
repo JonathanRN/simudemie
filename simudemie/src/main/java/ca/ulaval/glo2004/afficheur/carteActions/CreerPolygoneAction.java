@@ -18,15 +18,17 @@ public class CreerPolygoneAction extends ActionCarte {
     
     private ArrayList<Polygon> polygons;
     private int index;
+    private Pays pays;
     
-    public CreerPolygoneAction(int index, ArrayList<Polygon> polygons) {
+    public CreerPolygoneAction(int index, Pays pays, ArrayList<Polygon> polygons) {
         this.index = index;
+        this.pays = pays;
         this.polygons = polygons;
     }
     
     @Override
     public void Executer() {
-        GestionnaireScenario.GetInstance().creerPays(index, new Pays("test carte", 0, polygons.get(polygons.size() - 1)));
+        GestionnaireScenario.GetInstance().creerPays(index, pays);
         polygons.add(new Polygon());
     }
 

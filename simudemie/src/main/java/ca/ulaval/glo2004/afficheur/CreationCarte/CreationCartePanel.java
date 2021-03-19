@@ -9,12 +9,19 @@ import ca.ulaval.glo2004.afficheur.boutons.CreationCarteToggle;
 import ca.ulaval.glo2004.afficheur.carteActions.ActionCarte;
 import ca.ulaval.glo2004.afficheur.carteActions.AjouterPointAction;
 import ca.ulaval.glo2004.afficheur.carteActions.CreerPolygoneAction;
+import ca.ulaval.glo2004.domaine.Pays;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Stack;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -32,9 +39,14 @@ public class CreationCartePanel extends javax.swing.JPanel {
     private final ArrayList<Polygon> polygones = new ArrayList<>();
     
     private final Color couleurFill = new Color(85, 91, 100, 100);
+    private final JSpinner PopulationTotale;
     
     public CreationCartePanel(int index) {
         initComponents();
+        
+        PopulationTotale = new JSpinner(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 30));
+        PopPanel.add(PopulationTotale, java.awt.BorderLayout.CENTER);
+        
         carteIndex = index;
         
         BoutonSelection.init(this, new Selection(this), "icons8_cursor_25px");
@@ -65,12 +77,40 @@ public class CreationCartePanel extends javax.swing.JPanel {
     public void creerPolygone() {
         // Dessine le polygone seulement s'il est valide
         if (mode.estPolygoneValide(getCourant())) {
-            CreerPolygoneAction action = new CreerPolygoneAction(carteIndex, polygones);
+            CreerPolygoneAction action = new CreerPolygoneAction(carteIndex, new Pays("test", 0, getCourant()), polygones);
             ajouterAction(action);
         }
         else {
             repaint();
         }
+    }
+    
+    public String getNomPays(Polygon p) {
+        return GestionnaireScenario.GetInstance().getPays(carteIndex, p).getNom();
+    }
+    
+    public int getPopTotale(Polygon p) {
+        return GestionnaireScenario.GetInstance().getPays(carteIndex, p).getPopTotale();
+    }
+    
+    public JPanel getInformationsPaysPanel() {
+        return InformationsPaysPanel;
+    }
+    
+    public JTextField getNomField() {
+        return NomTextField;
+    }
+    
+    public JSpinner getPopField() {
+        return PopulationTotale;
+    }
+    
+    public void setNomPays(String s, Polygon p) {
+        GestionnaireScenario.GetInstance().getPays(carteIndex, p).setNom(s);
+    }
+    
+    public void setPopulationTotale(int pop, Polygon p) {
+        GestionnaireScenario.GetInstance().getPays(carteIndex, p).setPopTotale(pop);
     }
     
     private boolean estRegion(Polygon p) {
@@ -129,9 +169,13 @@ public class CreationCartePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        InformationsPays = new ca.ulaval.glo2004.afficheur.PanelArrondi();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        InformationsParent = new javax.swing.JPanel();
+        InformationsPaysPanel = new javax.swing.JPanel();
+        NomPanel = new javax.swing.JPanel();
+        NomLabel = new javax.swing.JLabel();
+        NomTextField = new javax.swing.JTextField();
+        PopPanel = new javax.swing.JPanel();
+        PopLabel = new javax.swing.JLabel();
         ToolBar = new javax.swing.JPanel();
         BoutonSelection = new ca.ulaval.glo2004.afficheur.boutons.CreationCarteToggle();
         BoutonCrayon = new ca.ulaval.glo2004.afficheur.boutons.CreationCarteToggle();
@@ -160,34 +204,37 @@ public class CreationCartePanel extends javax.swing.JPanel {
         });
         setLayout(new java.awt.BorderLayout());
 
-        InformationsPays.setPreferredSize(new java.awt.Dimension(200, 706));
+        InformationsParent.setOpaque(false);
+        InformationsParent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setText("jTextField1");
+        InformationsPaysPanel.setOpaque(false);
+        InformationsPaysPanel.setLayout(new java.awt.BorderLayout(10, 5));
 
-        jLabel1.setText("Nom");
+        NomPanel.setOpaque(false);
+        NomPanel.setLayout(new java.awt.BorderLayout(5, 0));
 
-        javax.swing.GroupLayout InformationsPaysLayout = new javax.swing.GroupLayout(InformationsPays);
-        InformationsPays.setLayout(InformationsPaysLayout);
-        InformationsPaysLayout.setHorizontalGroup(
-            InformationsPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InformationsPaysLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        InformationsPaysLayout.setVerticalGroup(
-            InformationsPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(InformationsPaysLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(InformationsPaysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addContainerGap(647, Short.MAX_VALUE))
-        );
+        NomLabel.setText("Nom :");
+        NomPanel.add(NomLabel, java.awt.BorderLayout.WEST);
 
-        add(InformationsPays, java.awt.BorderLayout.EAST);
+        NomTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        NomTextField.setPreferredSize(new java.awt.Dimension(200, 25));
+        NomTextField.setSelectionColor(new java.awt.Color(67, 76, 94));
+        NomPanel.add(NomTextField, java.awt.BorderLayout.CENTER);
+
+        InformationsPaysPanel.add(NomPanel, java.awt.BorderLayout.PAGE_START);
+
+        PopPanel.setOpaque(false);
+        PopPanel.setLayout(new java.awt.BorderLayout(5, 0));
+
+        PopLabel.setText("Pop. totale :");
+        PopLabel.setToolTipText("");
+        PopPanel.add(PopLabel, java.awt.BorderLayout.WEST);
+
+        InformationsPaysPanel.add(PopPanel, java.awt.BorderLayout.CENTER);
+
+        InformationsParent.add(InformationsPaysPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 270, -1, -1));
+
+        add(InformationsParent, java.awt.BorderLayout.CENTER);
 
         ToolBar.setBackground(new java.awt.Color(67, 76, 94));
         ToolBar.setPreferredSize(new java.awt.Dimension(968, 50));
@@ -216,6 +263,7 @@ public class CreationCartePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        requestFocusInWindow();
         mode.onMouseReleased(evt);
         repaint();
     }//GEN-LAST:event_formMouseReleased
@@ -237,10 +285,10 @@ public class CreationCartePanel extends javax.swing.JPanel {
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         mode.onMousePressed(evt);
-        requestFocusInWindow();
         repaint();
     }//GEN-LAST:event_formMousePressed
 
+   
     public void onToggleClick(CreationCarteToggle bouton) {
         if (toggleCourant != null) {
             toggleCourant.setToggle(false);
@@ -260,9 +308,13 @@ public class CreationCartePanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ca.ulaval.glo2004.afficheur.boutons.CreationCarteToggle BoutonCrayon;
     private ca.ulaval.glo2004.afficheur.boutons.CreationCarteToggle BoutonSelection;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi InformationsPays;
+    private javax.swing.JPanel InformationsParent;
+    private javax.swing.JPanel InformationsPaysPanel;
+    private javax.swing.JLabel NomLabel;
+    private javax.swing.JPanel NomPanel;
+    private javax.swing.JTextField NomTextField;
+    private javax.swing.JLabel PopLabel;
+    private javax.swing.JPanel PopPanel;
     private javax.swing.JPanel ToolBar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

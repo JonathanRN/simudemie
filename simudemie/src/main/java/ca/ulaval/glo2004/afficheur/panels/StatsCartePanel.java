@@ -87,9 +87,6 @@ public class StatsCartePanel extends javax.swing.JPanel {
         ModifyButton.setText("Modifier");
         ModifyButton.setFocusable(false);
         ModifyButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ModifyButtonMouseClicked(evt);
-            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 ModifyButtonMouseReleased(evt);
             }
@@ -99,17 +96,12 @@ public class StatsCartePanel extends javax.swing.JPanel {
         add(Buttons, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ModifyButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifyButtonMouseClicked
-        // TODO ALLER DANS MENU CARTE
-    }//GEN-LAST:event_ModifyButtonMouseClicked
-
     private void DeleteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseClicked
         onglet.retirerCourant();
     }//GEN-LAST:event_DeleteButtonMouseClicked
 
     private void ModifyButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifyButtonMouseReleased
-        FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
-        frame.startCreationCarte();
+        onglet.goToCreationCarte();
     }//GEN-LAST:event_ModifyButtonMouseReleased
 
 

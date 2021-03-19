@@ -5,11 +5,10 @@
  */
 package ca.ulaval.glo2004.afficheur.boutons;
 
-import ca.ulaval.glo2004.afficheur.CreationCarte;
+import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel;
+import ca.ulaval.glo2004.afficheur.CreationCarte.Mode;
 import ca.ulaval.glo2004.afficheur.PanelArrondi;
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Point;
 import javax.swing.ImageIcon;
 
 /**
@@ -18,8 +17,8 @@ import javax.swing.ImageIcon;
  */
 public class CreationCarteToggle extends PanelArrondi {
 
-    private CreationCarte.Mode mode;
-    private CreationCarte creation;
+    private Mode mode;
+    private CreationCartePanel creation;
     private Color base, highlight;
     private boolean mouseOver;
     private boolean estToggle;
@@ -31,7 +30,7 @@ public class CreationCarteToggle extends PanelArrondi {
         setBackground(base);
     }
     
-    public void init(CreationCarte creation, CreationCarte.Mode mode, String path) {
+    public void init(CreationCartePanel creation, Mode mode, String path) {
         this.creation = creation;
         this.mode = mode;
         
@@ -52,7 +51,7 @@ public class CreationCarteToggle extends PanelArrondi {
         setBackground(couleur);
     }
     
-    public CreationCarte.Mode getMode() { return mode; }
+    public Mode getMode() { return mode; }
 
     /**
      * This method is called from within the constructor to initialize the form.

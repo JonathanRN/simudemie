@@ -5,10 +5,13 @@
  */
 package ca.ulaval.glo2004.afficheur.onglets;
 
+import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetCarte;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.Color;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -43,17 +46,24 @@ public class OngletCarte extends OngletUI {
     public void ajouterObjetUI() {
         super.ajouterObjetUI();
         ObjetCarte card = new ObjetCarte(this);
+        
+        // todo a changer
         card.setMapName("Carte: " + objets.size());
+        
+        GestionnaireScenario.GetInstance().creerCarte(card.getNomCarte());
+        
         objets.add(card);
         if (objets.size() == 1) {
             onClickObjetUI(card);
         }
+        
         MapPanelContainer.add(card);
         updateUI();
     }
 
     @Override
     public void retirerCourant() {
+        GestionnaireScenario.GetInstance().supprimeCarte(getIndexCourant());
         MapPanelContainer.remove(courant);
         updateUI();
         
@@ -65,6 +75,11 @@ public class OngletCarte extends OngletUI {
         super.onClickObjetUI(objet);
         ObjetCarte objetCarte = (ObjetCarte)objet;
         scenarioMapPanel1.setMapName(objetCarte.getNomCarte());
+    }
+    
+    public void goToCreationCarte() {
+        FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
+        frame.startCreationCarte(getIndexCourant());
     }
 
     /**

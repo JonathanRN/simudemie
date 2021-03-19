@@ -21,12 +21,18 @@ public abstract class OngletUI extends javax.swing.JPanel {
         initComponents();
     }
     
+    public int getIndexCourant() {
+        if (courant != null) {
+            return objets.indexOf(courant);
+        }
+        return -1;
+    }
+    
     public ObjetUI getCourant() {
         return courant;
     }
 
     public void ajouterObjetUI() {
-        
     }
     
     public void retirerCourant() {

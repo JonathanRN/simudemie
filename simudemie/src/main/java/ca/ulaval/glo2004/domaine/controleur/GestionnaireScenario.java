@@ -5,25 +5,38 @@
  */
 package ca.ulaval.glo2004.domaine.controleur;
 
+import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Jour;
 import ca.ulaval.glo2004.domaine.Jour;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Pays;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
 
 
 public class GestionnaireScenario implements ActionListener {
-    private List<Jour> jours;
+    private ArrayList<Carte> cartes = new ArrayList<>();
+    private List<Jour> jours = new ArrayList<>();
     private Jour jourCourant;
     private Timer timer;
     
-    public GestionnaireScenario(int intervalleSecondes)
+    private static GestionnaireScenario instance;
+    
+    public static GestionnaireScenario GetInstance() {
+        if (instance == null) {
+            instance = new GestionnaireScenario();
+        }
+        return instance;
+    }
+    
+    private GestionnaireScenario()
     {
-        timer = new Timer(intervalleSecondes * 1000, this);
-        demarrer();
+        // todo change timer
+        //timer = new Timer(3 * 1000, this);
+        //demarrer();
     }
     
     @Override
@@ -42,6 +55,27 @@ public class GestionnaireScenario implements ActionListener {
         jourCourant.carte.avancerJour();
         jours.add(jourCourant);
         chargerJour(new Jour(jourCourant));
+    }
+    
+    public void creerCarte(String nom) {
+        System.out.println("Creer carte: " + nom);
+        cartes.add(new Carte(nom));
+    }
+    
+    public void supprimeCarte(int index) {
+        if (cartes.contains(getCarte(index))) {
+            System.out.println("Supprime carte: " + getCarte(index).getNom());
+            cartes.remove(index);
+        }
+    }
+    
+    public Carte getCarte(int index) {
+        return cartes.get(index);
+    }
+    
+    public void creerPays(int index, Pays pays) {
+        getCarte(index).ajouterPays(pays);
+        System.out.println(String.format("%s -> %s", getCarte(index).getNom(), pays.getNom()));
     }
         
     private void importer(String filePath)

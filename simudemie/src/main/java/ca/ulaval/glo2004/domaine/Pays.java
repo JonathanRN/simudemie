@@ -16,11 +16,11 @@ public class Pays {
     private List<Region> listeRegions;
     private Polygon polygone;
     public List<Mesure> mesures;
-    
-    public Pays(Polygon polygone) 
-    {
+
+    public Pays(String nom, int populationTotale, Polygon polygone) {
+        this.nom = nom;
+        this.populationTotale = populationTotale;
         this.polygone = polygone;
-        //TODO Constructeur
     }
     
     private void avancerJournee(float tauxInf, float tauxMortalite, float tauxGuerison)
@@ -62,9 +62,9 @@ public class Pays {
         }
     }
         
-    public String getNom(){return nom;}
+    public String getNom(){ return nom; }
     
-    public int getPopTotale(){return populationTotale;}
+    public int getPopTotale(){ return populationTotale; }
     
     private void setNom(String nom)
     {
@@ -75,5 +75,4 @@ public class Pays {
     {
         this.populationTotale = populationTotale;
     }
-    
 }

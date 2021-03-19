@@ -1,5 +1,6 @@
 package ca.ulaval.glo2004.afficheur;
 
+import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import com.formdev.flatlaf.IntelliJTheme;
 import javax.swing.JFrame;
@@ -9,7 +10,7 @@ import javax.swing.UIManager;
 public class FramePrincipal extends javax.swing.JFrame {  
     private MenuPrincipal menu;
     private Simulation simulation;
-    private CreationCarte creationCarte;
+    private CreationCartePanel creationCarte;
     
     private static final String ICON_PATH = "/icons/icon_virus_64px.png";
     
@@ -40,9 +41,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         repaint();
     }
     
-    public void startCreationCarte() {
+    public void startCreationCarte(int index) {
         remove(menu);
-        creationCarte = new CreationCarte();
+        creationCarte = new CreationCartePanel(index);
         add(creationCarte);
         revalidate();
         repaint();

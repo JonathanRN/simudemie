@@ -5,13 +5,12 @@
  */
 package ca.ulaval.glo2004.domaine;
 
-import java.util.List;
-import java.awt.Polygon;
+import java.util.ArrayList;
 
 public class Carte {
     
     private String nom;
-    private List<Pays> listePays;
+    private ArrayList<Pays> listePays = new ArrayList<>();
     
     public Carte(String nom)
     {
@@ -37,7 +36,7 @@ public class Carte {
 
     public String getNom(){return nom;}
     
-    public List<Pays> getListePays(){return listePays;}
+    public ArrayList<Pays> getListePays(){return listePays;}
     
     public void setNom(String nom)
     {

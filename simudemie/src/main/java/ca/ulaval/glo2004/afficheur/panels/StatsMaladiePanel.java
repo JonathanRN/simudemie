@@ -70,6 +70,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         objetMaladie.setDeadProgressBar(Math.round(deadRate));
         
         // TODO: Caller contrôleur pour création maladie
+        
     }
 
     /**

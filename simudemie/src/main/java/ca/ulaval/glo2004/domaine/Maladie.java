@@ -5,8 +5,10 @@
  */
 package ca.ulaval.glo2004.domaine;
 
+import java.io.Serializable;
 
-public class Maladie {
+
+public class Maladie implements Serializable {
 
     private String nom;
     private float tauxInfection;

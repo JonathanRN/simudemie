@@ -38,7 +38,7 @@ public class OngletMaladie extends OngletUI {
             ImportScenarioButton.setBackground(new Color(216, 222, 233, 38));
             BoutonExport.setBackground(new Color(216, 222, 233, 38));
             
-            statsMaladiePanel1.setOnglet(this);
+            statsMaladiePanel1.setOnglet(this); // FIXME: this n'est pas encore compètement crée, sortir cette ligne
         } catch (Exception e) {
         }
         
@@ -50,11 +50,14 @@ public class OngletMaladie extends OngletUI {
         ObjetMaladie card = new ObjetMaladie(this);
         card.setNom("Maladie: " + objets.size());
         objets.add(card);
-        if (objets.size() == 1) {
-            onClickObjetUI(card);
-        }
+        onClickObjetUI(card);
         MaladiesContainer.add(card);
+
+        // On débloque les champs pour modification de la nouvelle maladie
+        //statsMaladiePanel1.setModifying(true);
+        
         updateUI();
+
     }
 
     @Override
@@ -71,6 +74,9 @@ public class OngletMaladie extends OngletUI {
             super.onClickObjetUI(objet);
             ObjetMaladie objetMaladie = (ObjetMaladie)courant;
             statsMaladiePanel1.setNomMaladie(objetMaladie.getNom());
+            statsMaladiePanel1.setInfectionInput(Float.toString(objetMaladie.getInfectionRate()));
+            statsMaladiePanel1.setCuredInput(Float.toString(objetMaladie.getCuredRate()));
+            statsMaladiePanel1.setDeadInput(Float.toString(objetMaladie.getDeadRate()));
         }
     }
     

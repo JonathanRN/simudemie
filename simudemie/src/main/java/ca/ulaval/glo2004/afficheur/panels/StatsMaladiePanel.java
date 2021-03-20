@@ -34,13 +34,42 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
        MaladieInput.setText(nom);
     }
     
+    public void setInfectionInput(String value) {
+        InfectionInput.setText(value);
+    }
+    
+    public void setCuredInput(String value) {
+        CuredInput.setText(value);
+    }
+    
+    public void setDeadInput(String value) {
+        DeadInput.setText(value);
+    }
+    
     public void setOnglet(OngletMaladie onglet) {
         this.onglet = onglet;
     }
     
     private void sauvegarderMaladie() {
-        ObjetMaladie maladie = (ObjetMaladie)onglet.getCourant();
-        maladie.setNom(MaladieInput.getText());
+        ObjetMaladie objetMaladie = (ObjetMaladie)onglet.getCourant();
+        float infectionRate = 0;
+        float curedRate = 0;
+        float deadRate = 0;
+        
+        try {
+            infectionRate = Float.parseFloat(InfectionInput.getText());
+            curedRate = Float.parseFloat(CuredInput.getText());
+            deadRate = Float.parseFloat(DeadInput.getText());
+        } catch(NumberFormatException nfe) {
+            // TODO: Afficher erreur conversion
+        }
+        
+        objetMaladie.setNom(MaladieInput.getText());
+        objetMaladie.setInfectedProgressBar(Math.round(infectionRate));
+        objetMaladie.setCuredProgressBar(Math.round(curedRate));
+        objetMaladie.setDeadProgressBar(Math.round(deadRate));
+        
+        // TODO: Caller contrôleur pour création maladie
     }
 
     /**
@@ -55,10 +84,13 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         Main = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         StatsHeader = new javax.swing.JPanel();
         MaladieInput = new javax.swing.JTextField();
-        Boutons = new javax.swing.JPanel();
-        Space = new javax.swing.JPanel();
-        Delete = new javax.swing.JLabel();
         Parent = new javax.swing.JPanel();
+        InfectionLabel = new javax.swing.JLabel();
+        InfectionInput = new javax.swing.JTextField();
+        CuredLabel = new javax.swing.JLabel();
+        CuredInput = new javax.swing.JTextField();
+        DeadLabel = new javax.swing.JLabel();
+        DeadInput = new javax.swing.JTextField();
         Buttons = new javax.swing.JPanel();
         DeleteButton = new javax.swing.JButton();
         ModifyButton = new javax.swing.JButton();
@@ -80,45 +112,62 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         MaladieInput.setBackground(new java.awt.Color(71, 76, 88));
         MaladieInput.setFont(new java.awt.Font("Dialog", 0, 21)); // NOI18N
         MaladieInput.setText("Nom de la maladie");
+        MaladieInput.setToolTipText("");
         MaladieInput.setEnabled(false);
+        MaladieInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MaladieInputActionPerformed(evt);
+            }
+        });
         MaladieInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 MaladieInputKeyReleased(evt);
             }
         });
         StatsHeader.add(MaladieInput, java.awt.BorderLayout.CENTER);
-
-        Boutons.setOpaque(false);
-        Boutons.setLayout(new javax.swing.BoxLayout(Boutons, javax.swing.BoxLayout.LINE_AXIS));
-
-        Space.setOpaque(false);
-        Boutons.add(Space);
-
-        Delete.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        Delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_trash_can_20px.png"))); // NOI18N
-        Delete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DeleteMouseClicked(evt);
-            }
-        });
-        Boutons.add(Delete);
-
-        StatsHeader.add(Boutons, java.awt.BorderLayout.LINE_END);
+        MaladieInput.getAccessibleContext().setAccessibleName("");
 
         Main.add(StatsHeader, java.awt.BorderLayout.NORTH);
 
         Parent.setOpaque(false);
+        Parent.setLayout(new java.awt.GridLayout(6, 0));
 
-        javax.swing.GroupLayout ParentLayout = new javax.swing.GroupLayout(Parent);
-        Parent.setLayout(ParentLayout);
-        ParentLayout.setHorizontalGroup(
-            ParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
-        );
-        ParentLayout.setVerticalGroup(
-            ParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 359, Short.MAX_VALUE)
-        );
+        InfectionLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        InfectionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        InfectionLabel.setText("Taux d'infection");
+        InfectionLabel.setToolTipText("");
+        Parent.add(InfectionLabel);
+
+        InfectionInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        InfectionInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        InfectionInput.setText("0");
+        InfectionInput.setEnabled(false);
+        InfectionInput.setName(""); // NOI18N
+        Parent.add(InfectionInput);
+
+        CuredLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        CuredLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CuredLabel.setText("Taux de guérison");
+        CuredLabel.setToolTipText("");
+        Parent.add(CuredLabel);
+
+        CuredInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        CuredInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        CuredInput.setText("0");
+        CuredInput.setEnabled(false);
+        Parent.add(CuredInput);
+
+        DeadLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        DeadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DeadLabel.setText("Taux de mortalité");
+        DeadLabel.setToolTipText("");
+        Parent.add(DeadLabel);
+
+        DeadInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        DeadInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        DeadInput.setText("0");
+        DeadInput.setEnabled(false);
+        Parent.add(DeadInput);
 
         Main.add(Parent, java.awt.BorderLayout.CENTER);
 
@@ -154,32 +203,35 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         add(Buttons);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteMouseClicked
-        onglet.retirerCourant();
-    }//GEN-LAST:event_DeleteMouseClicked
-
     private void DeleteButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseReleased
-        
+        onglet.retirerCourant();
     }//GEN-LAST:event_DeleteButtonMouseReleased
 
     private void ModifyButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifyButtonMouseReleased
-        if(onglet.getCardLocked()) { // En modification, mais bouton agis comme sauvegarde
-            ModifyButton.setText("Modifier");
-            ModifyButton.setToolTipText("Modifier les informations");
-            enableFields(false);
-            // Sauvegarde
-            
-            //updateUI();
-
-            sauvegarderMaladie();
-            
-        } else {
-            ModifyButton.setText("Enregistrer");
-            ModifyButton.setToolTipText("Enregistrer les informations");
-            enableFields(true);
-        }
+        setModifying(!onglet.getCardLocked());
     }//GEN-LAST:event_ModifyButtonMouseReleased
 
+    public void setModifying(boolean isModifying) {
+        if(isModifying) {
+            ModifyButton.setText("Enregistrer");
+            ModifyButton.setToolTipText("Enregistrer les informations");
+        } else {
+            ModifyButton.setText("Modifier");
+            ModifyButton.setToolTipText("Modifier les informations");
+            sauvegarderMaladie();
+        }
+        
+        enableFields(isModifying);
+    }
+    
+    private void enableFields(boolean enabled) {
+        onglet.setCardLocked(enabled);
+        MaladieInput.setEnabled(enabled);
+        InfectionInput.setEnabled(enabled);
+        CuredInput.setEnabled(enabled);
+        DeadInput.setEnabled(enabled);
+    }
+    
     private void MaladieInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaladieInputKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             this.requestFocusInWindow();
@@ -194,22 +246,25 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         updateUI();
     }//GEN-LAST:event_formMouseReleased
 
-    private void enableFields(boolean enabled) {
-        onglet.setCardLocked(enabled);
-        MaladieInput.setEnabled(enabled);
-    }
+    private void MaladieInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaladieInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MaladieInputActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Boutons;
     private javax.swing.JPanel Buttons;
-    private javax.swing.JLabel Delete;
+    private javax.swing.JTextField CuredInput;
+    private javax.swing.JLabel CuredLabel;
+    private javax.swing.JTextField DeadInput;
+    private javax.swing.JLabel DeadLabel;
     private javax.swing.JButton DeleteButton;
+    private javax.swing.JTextField InfectionInput;
+    private javax.swing.JLabel InfectionLabel;
     private ca.ulaval.glo2004.afficheur.PanelArrondi Main;
     private javax.swing.JTextField MaladieInput;
     private javax.swing.JButton ModifyButton;
     private javax.swing.JPanel Parent;
-    private javax.swing.JPanel Space;
     private javax.swing.JPanel StatsHeader;
     // End of variables declaration//GEN-END:variables
 }

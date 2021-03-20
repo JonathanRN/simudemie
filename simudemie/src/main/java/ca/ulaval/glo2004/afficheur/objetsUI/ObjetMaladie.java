@@ -10,11 +10,19 @@ import ca.ulaval.glo2004.afficheur.onglets.OngletMaladie;
 
 
 public class ObjetMaladie extends ObjetUI {    
+    private float infectedRate;
+    private float curedRate;
+    private float deadRate;
+    
     public ObjetMaladie(OngletMaladie tab) {
         super(tab);
         initComponents();
         
         MaladieNom.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
+        setInfectedProgressBar(0);
+        setCuredProgressBar(0);
+        setDeadProgressBar(0);
+        
     }
     
     public void setNom(String nom) {
@@ -24,7 +32,34 @@ public class ObjetMaladie extends ObjetUI {
     public String getNom() {
         return MaladieNom.getText();
     }
-
+    
+    public void setInfectedProgressBar(float value) {
+        infectedRate = value;
+        InfectedProgressBar.setValue(Math.round(value));
+    }
+    
+    public void setCuredProgressBar(float value) {
+        curedRate = value;
+        CuredProgressBar.setValue(Math.round(value));
+    }
+    
+    public void setDeadProgressBar(float value) {
+        deadRate = value;
+        DeadProgressBar.setValue(Math.round(value));
+    }
+    
+    public float getInfectionRate() {
+        return infectedRate;
+    }
+    
+    public float getCuredRate() {
+        return curedRate;
+    }
+    
+    public float getDeadRate() {
+        return deadRate;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,19 +94,21 @@ public class ObjetMaladie extends ObjetUI {
         Bars.setLayout(new java.awt.GridLayout(3, 0, 0, 10));
 
         InfectedProgressBar.setForeground(new java.awt.Color(191, 97, 106));
-        InfectedProgressBar.setToolTipText("");
+        InfectedProgressBar.setToolTipText("Taux d'infection");
         InfectedProgressBar.setValue(25);
         InfectedProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
         InfectedProgressBar.setBorderPainted(false);
         Bars.add(InfectedProgressBar);
 
         CuredProgressBar.setForeground(new java.awt.Color(163, 190, 140));
+        CuredProgressBar.setToolTipText("Taux de guérison");
         CuredProgressBar.setValue(100);
         CuredProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
         CuredProgressBar.setBorderPainted(false);
         Bars.add(CuredProgressBar);
 
         DeadProgressBar.setForeground(new java.awt.Color(180, 142, 173));
+        DeadProgressBar.setToolTipText("Taux de mortalité");
         DeadProgressBar.setValue(50);
         DeadProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
         DeadProgressBar.setBorderPainted(false);

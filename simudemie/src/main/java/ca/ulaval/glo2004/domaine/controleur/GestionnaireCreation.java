@@ -75,7 +75,9 @@ public class GestionnaireCreation {
     
     private void sauvegarderMaladie(Maladie maladie) {
         try {
-            Path path = Path.of(MALADIE_PATH, maladie.getNom() + "_mal.ser");
+            // TODO probleme de compilation avec Path.of
+            //Path path = Path.resolve(MALADIE_PATH, maladie.getNom() + "_mal.ser");
+            String path = String.format(MALADIE_PATH + "\\%s", maladie.getNom() + "_mal.ser");
             System.out.println(path.toString());
             try (FileOutputStream fos = new FileOutputStream(path.toString()); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 oos.writeObject(maladie);

@@ -288,7 +288,6 @@ public class CreationCartePanel extends javax.swing.JPanel {
         repaint();
     }//GEN-LAST:event_formMousePressed
 
-   
     public void onToggleClick(CreationCarteToggle bouton) {
         if (toggleCourant != null) {
             toggleCourant.setToggle(false);

@@ -51,11 +51,9 @@ public class Mode {
     }
     
     public void onMouseReleased(MouseEvent evt) {
-        
     }
     
     public void onMouseDragged(MouseEvent evt) {
-        updateHighlight(evt);
     }
     
     public void onKeyReleased(KeyEvent evt) {
@@ -172,6 +170,7 @@ public class Mode {
         for (Polygon p : panel.getPolygones()) {
             if (p.contains(evt.getX(), evt.getY())) {
                 highlight = p;
+                return;
             }
         }
     }

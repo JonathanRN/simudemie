@@ -126,6 +126,10 @@ public class CreationCartePanel extends javax.swing.JPanel {
         return PopulationTotale;
     }
     
+    public void setPopTotaleTexte(String string) {
+        PopTotaleLabel.setText("Pop. totale : " + string);
+    }
+    
     private void ajouterAction(ActionCarte action) {
         actionsFaites.push(action);
         action.Executer();
@@ -172,14 +176,16 @@ public class CreationCartePanel extends javax.swing.JPanel {
 
         InformationsParent = new javax.swing.JPanel();
         InformationsPaysPanel = new javax.swing.JPanel();
-        RegionNomPanel = new javax.swing.JPanel();
-        RegionNomLabel = new javax.swing.JLabel();
-        RegionNomTextField = new javax.swing.JTextField();
         PaysNomPanel = new javax.swing.JPanel();
         PaysNomLabel = new javax.swing.JLabel();
         PaysNomTextField = new javax.swing.JTextField();
+        RegionNomPanel = new javax.swing.JPanel();
+        RegionNomLabel = new javax.swing.JLabel();
+        RegionNomTextField = new javax.swing.JTextField();
         PopPanel = new javax.swing.JPanel();
         PopLabel = new javax.swing.JLabel();
+        PopTotalePanel = new javax.swing.JPanel();
+        PopTotaleLabel = new javax.swing.JLabel();
         ToolBar = new javax.swing.JPanel();
         BoutonSelection = new ca.ulaval.glo2004.afficheur.boutons.CreationCarteToggle();
         BoutonCrayon = new ca.ulaval.glo2004.afficheur.boutons.CreationCarteToggle();
@@ -213,18 +219,7 @@ public class CreationCartePanel extends javax.swing.JPanel {
         InformationsParent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         InformationsPaysPanel.setOpaque(false);
-        InformationsPaysPanel.setLayout(new java.awt.BorderLayout(10, 5));
-
-        RegionNomPanel.setOpaque(false);
-        RegionNomPanel.setLayout(new java.awt.BorderLayout(5, 0));
-
-        RegionNomLabel.setText("Région :");
-        RegionNomPanel.add(RegionNomLabel, java.awt.BorderLayout.WEST);
-
-        RegionNomTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        RegionNomTextField.setPreferredSize(new java.awt.Dimension(200, 25));
-        RegionNomTextField.setSelectionColor(new java.awt.Color(67, 76, 94));
-        RegionNomPanel.add(RegionNomTextField, java.awt.BorderLayout.CENTER);
+        InformationsPaysPanel.setLayout(new java.awt.GridLayout(4, 1, 0, 2));
 
         PaysNomPanel.setOpaque(false);
         PaysNomPanel.setLayout(new java.awt.BorderLayout(5, 0));
@@ -237,9 +232,20 @@ public class CreationCartePanel extends javax.swing.JPanel {
         PaysNomTextField.setSelectionColor(new java.awt.Color(67, 76, 94));
         PaysNomPanel.add(PaysNomTextField, java.awt.BorderLayout.CENTER);
 
-        RegionNomPanel.add(PaysNomPanel, java.awt.BorderLayout.PAGE_START);
+        InformationsPaysPanel.add(PaysNomPanel);
 
-        InformationsPaysPanel.add(RegionNomPanel, java.awt.BorderLayout.PAGE_START);
+        RegionNomPanel.setOpaque(false);
+        RegionNomPanel.setLayout(new java.awt.BorderLayout(5, 0));
+
+        RegionNomLabel.setText("Région :");
+        RegionNomPanel.add(RegionNomLabel, java.awt.BorderLayout.WEST);
+
+        RegionNomTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        RegionNomTextField.setPreferredSize(new java.awt.Dimension(200, 25));
+        RegionNomTextField.setSelectionColor(new java.awt.Color(67, 76, 94));
+        RegionNomPanel.add(RegionNomTextField, java.awt.BorderLayout.CENTER);
+
+        InformationsPaysPanel.add(RegionNomPanel);
 
         PopPanel.setOpaque(false);
         PopPanel.setLayout(new java.awt.BorderLayout(5, 0));
@@ -248,7 +254,16 @@ public class CreationCartePanel extends javax.swing.JPanel {
         PopLabel.setToolTipText("");
         PopPanel.add(PopLabel, java.awt.BorderLayout.WEST);
 
-        InformationsPaysPanel.add(PopPanel, java.awt.BorderLayout.CENTER);
+        InformationsPaysPanel.add(PopPanel);
+
+        PopTotalePanel.setOpaque(false);
+        PopTotalePanel.setLayout(new java.awt.BorderLayout(5, 0));
+
+        PopTotaleLabel.setText("Pop. totale  :");
+        PopTotaleLabel.setToolTipText("");
+        PopTotalePanel.add(PopTotaleLabel, java.awt.BorderLayout.WEST);
+
+        InformationsPaysPanel.add(PopTotalePanel);
 
         InformationsParent.add(InformationsPaysPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 270, -1, -1));
 
@@ -317,6 +332,8 @@ public class CreationCartePanel extends javax.swing.JPanel {
     private javax.swing.JTextField PaysNomTextField;
     private javax.swing.JLabel PopLabel;
     private javax.swing.JPanel PopPanel;
+    private javax.swing.JLabel PopTotaleLabel;
+    private javax.swing.JPanel PopTotalePanel;
     private javax.swing.JLabel RegionNomLabel;
     private javax.swing.JPanel RegionNomPanel;
     private javax.swing.JTextField RegionNomTextField;

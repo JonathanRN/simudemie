@@ -66,6 +66,7 @@ public class Selection extends Mode {
             
             panel.getRegionNomField().setText(region.getNom());
             panel.getPopField().setValue(region.getPopTotale());
+            panel.setPopTotaleTexte(Integer.toString(pays.getPopTotale()));
             
             anciennePos = new Point((int)centre.x - paysField.getPreferredSize().width / 2, getHighestPointY(pays.getPolygone()) - panel.getInformationsPaysPanel().getPreferredSize().height - 10);    
         }
@@ -101,20 +102,6 @@ public class Selection extends Mode {
             region.setPopSaine((int)panel.getPopField().getValue());
         } catch (ParseException e) {
         }
-    }
-    
-    private Point2D.Double getCentrePolygone(Polygon p) {
-        double x = 0.;
-        double y = 0.;
-        for (int i = 0; i < p.npoints; i++){
-            x += p.xpoints[i];
-            y += p.ypoints[i];
-        }
-
-        x = x / p.npoints;
-        y = y / p.npoints;
-
-        return new Point2D.Double(x, y);
     }
     
     private int getHighestPointY(Polygon p) {

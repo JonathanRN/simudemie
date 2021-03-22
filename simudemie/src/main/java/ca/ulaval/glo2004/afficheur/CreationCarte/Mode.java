@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
 import java.awt.geom.PathIterator;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 /**
@@ -173,5 +174,19 @@ public class Mode {
                 return;
             }
         }
+    }
+
+    protected Point2D.Double getCentrePolygone(Polygon p) {
+        double x = 0.;
+        double y = 0.;
+        for (int i = 0; i < p.npoints; i++){
+            x += p.xpoints[i];
+            y += p.ypoints[i];
+        }
+
+        x = x / p.npoints;
+        y = y / p.npoints;
+
+        return new Point2D.Double(x, y);
     }
 }

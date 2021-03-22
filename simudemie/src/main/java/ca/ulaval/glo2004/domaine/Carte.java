@@ -12,6 +12,7 @@ public class Carte {
     
     private String nom;
     private ArrayList<Pays> listePays = new ArrayList<>();
+    private Maladie maladie;
     
     public Carte(String nom)
     {
@@ -20,7 +21,9 @@ public class Carte {
     
     public void avancerJour()
     {
-        //TODO Fonction qui applique tous les effets sur les populations des régions
+        for (Pays pays : listePays){
+            pays.avancerJournee(maladie.getTauxInfection(), maladie.getTauxMortalite(), maladie.getTauxGuerison());
+        }
     }
     
     public void ajouterPays(Pays nouveauPays)
@@ -51,6 +54,13 @@ public class Carte {
     public String getNom(){return nom;}
     
     public ArrayList<Pays> getListePays(){return listePays;}
+    
+    public Maladie getMaladie() {return maladie;}
+    
+    public void setMaladie(Maladie maladie)
+    {
+        this.maladie = maladie;
+    }
     
     public void setNom(String nom)
     {

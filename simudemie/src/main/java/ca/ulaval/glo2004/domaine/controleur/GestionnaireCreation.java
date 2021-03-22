@@ -34,7 +34,7 @@ public class GestionnaireCreation {
     
     public GestionnaireCreation()
     {
-        fileHelper = new FileHelper();
+        fileHelper = new FileHelper(MALADIE_PATH);
         chargerMaladies();
     }
     
@@ -61,7 +61,7 @@ public class GestionnaireCreation {
     }
     
     public void chargerMaladies() {
-        maladies = fileHelper.charger(MALADIE_PATH);
+        maladies = fileHelper.charger();
     }
     
     public void supprimerMaladie(String nom) {
@@ -70,9 +70,22 @@ public class GestionnaireCreation {
     }
     
     private void sauvegarderMaladies() {
-        fileHelper.sauvegarder(MALADIE_PATH, maladies);
+        fileHelper.sauvegarder(maladies);
     }
     
+    public void importerMaladie() {
+        Maladie maladie = fileHelper.importer();
+        maladies.add(maladie);
+        sauvegarderMaladies();
+    }
+    
+    public void exporterMaladie(String nom) {
+        for(Maladie maladie : maladies) {
+            if(maladie.getNom().equals(nom)) {
+                fileHelper.exporter(maladie);
+            }
+        }
+    }
     
     /*  Liaison avec la vue   */
     

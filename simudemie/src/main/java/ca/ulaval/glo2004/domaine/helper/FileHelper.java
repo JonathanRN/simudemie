@@ -21,11 +21,13 @@ import java.util.Collection;
  */
 public class FileHelper<T> {
     
-    public FileHelper() {
-        
+    private String path;
+    
+    public FileHelper(String path) {
+        this.path = path;
     }
     
-    public <T extends Serializable> ArrayList<T> charger(String path) {
+    public <T extends Serializable> ArrayList<T> charger() {
         ArrayList<T> list = new ArrayList<>();
         try {
             File file = new File(path);
@@ -41,8 +43,38 @@ public class FileHelper<T> {
         return list;
     }
     
-    public <T extends Serializable> void sauvegarder(String path, Collection<T> object) {
+    public <T extends Serializable> T importer() {
+        T object = null;
+        
         try {
+            // TODO: Afficher boîte de choix pour décider de l'emplacement
+            File file = new File(path);
+            
+            try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
+                object = (T) ois.readObject();
+            }
+                
+        } catch(IOException | ClassNotFoundException e) {
+             // TODO: Afficher erreur de chargement avec petite boîte cute
+        }
+        
+        return object;
+    }
+    
+    public <T extends Serializable> void sauvegarder(Collection<T> object) {
+        try {
+            try (FileOutputStream fos = new FileOutputStream(path); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                oos.writeObject(object);
+            }
+        } catch(IOException ioe) {
+            // TODO: Afficher erreur de sauvegarde avec petite boîte cute
+        }
+    }
+    
+    public <T extends Serializable> void exporter(T object) {
+        try {
+            // TODO: Afficher boîte de choix pour décider de l'emplacement
+            
             try (FileOutputStream fos = new FileOutputStream(path); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 oos.writeObject(object);
             }

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package ca.ulaval.glo2004.domaine;
-
 import java.awt.Polygon;
 import java.util.ArrayList;
 
@@ -32,6 +31,26 @@ public class Pays {
             region.contaminer(tauxInfAjuste);
             region.guerirPop(tauxGuerison);
             region.eliminerPopulation(tauxMortalite);
+        }
+        contaminerInterPays();
+    }
+    
+    private void contaminerInterPays() //En fonction de la pop infectee du pays, va infecter le pays lié par sa voie de liaison
+    { // à un taux de 0.01 (à determiner)
+        double voyageursInfectees;
+        Pays paysAInfecter;
+        for (VoieLiaison voie : frontieres)
+        {
+            if (getPopInfecteePays() > 0)
+            {
+                voyageursInfectees = (0.01 * getPopInfecteePays()); //Déterminer quel sera le 0.01
+                paysAInfecter = voie.getPaysDestination();
+                for (Region region : paysAInfecter.listeRegions )
+                {
+                    region.setPopInfectee(getPopInfecteePays() + (int)(voyageursInfectees / paysAInfecter.listeRegions.size()));
+                }
+                
+            }
         }
     }
     
@@ -70,6 +89,15 @@ public class Pays {
     }
         
     public String getNom(){ return nom; }
+    
+    public int getPopInfecteePays()
+    {
+        int sum = 0;
+        for (Region r : listeRegions) {
+            sum += r.getPopInfectee();
+        }
+        return sum;
+    }
     
     public int getPopTotale() {
         int sum = 0;

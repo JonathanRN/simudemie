@@ -20,7 +20,7 @@ public class Pays {
         this.polygone = polygone;
     }
     
-    private void avancerJournee(float tauxInf, float tauxMortalite, float tauxGuerison)
+    public void avancerJournee(float tauxInf, float tauxMortalite, float tauxGuerison)
     {
         float tauxInfAjuste = tauxInf;
         for (Region region : listeRegions)

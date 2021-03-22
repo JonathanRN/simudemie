@@ -8,6 +8,8 @@ package ca.ulaval.glo2004.afficheur.panels;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetMaladie;
 import ca.ulaval.glo2004.afficheur.onglets.OngletMaladie;
+import ca.ulaval.glo2004.domaine.Maladie;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireCreation;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
@@ -51,28 +53,16 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
     }
     
     private void sauvegarderMaladie() {
+        Maladie maladie = GestionnaireCreation.getInstance().creerMaladie(MaladieInput.getText(), InfectionInput.getText(), DeadInput.getText(), CuredInput.getText());
+        
         ObjetMaladie objetMaladie = (ObjetMaladie)onglet.getCourant();
-        float infectionRate = 0;
-        float curedRate = 0;
-        float deadRate = 0;
         
-        try {
-            infectionRate = Float.parseFloat(InfectionInput.getText());
-            curedRate = Float.parseFloat(CuredInput.getText());
-            deadRate = Float.parseFloat(DeadInput.getText());
-        } catch(NumberFormatException nfe) {
-            // TODO: Afficher erreur conversion
-        }
-        
-        objetMaladie.setNom(MaladieInput.getText());
-        objetMaladie.setInfectedProgressBar(Math.round(infectionRate));
-        objetMaladie.setCuredProgressBar(Math.round(curedRate));
-        objetMaladie.setDeadProgressBar(Math.round(deadRate));
-        
-        // TODO: Caller contrôleur pour création maladie
-        onglet.gestionnaireCreation.creerMaladie(MaladieInput.getText(), infectionRate, curedRate, deadRate);
+        objetMaladie.setNom(maladie.getNom());
+        objetMaladie.setInfectedProgressBar(Math.round(maladie.getTauxInfection()));
+        objetMaladie.setCuredProgressBar(Math.round(maladie.getTauxGuerison()));
+        objetMaladie.setDeadProgressBar(Math.round(maladie.getTauxMortalite()));
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

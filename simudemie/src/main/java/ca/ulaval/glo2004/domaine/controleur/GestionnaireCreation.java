@@ -5,21 +5,12 @@
  */
 package ca.ulaval.glo2004.domaine.controleur;
 
+import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
 import ca.ulaval.glo2004.afficheur.onglets.OngletMaladie;
+import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.helper.FileHelper;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  *
@@ -28,40 +19,53 @@ import java.util.List;
 public class GestionnaireCreation {
     // TODO: Mettre constantes dans un fichier de param .ini peut-être ?
     private final String MALADIE_PATH = "C:\\test\\maladies.ser";
+    private final String CARTE_PATH = "C:\\test\\cartes.ser";
             
-    private FileHelper<Maladie> fileHelper;
+    private FileHelper<Maladie> fileHelperMaladie;
+    private FileHelper<Carte> fileHelperCarte;
     private Collection<Maladie> maladies;
     
-    public GestionnaireCreation()
+    
+    private static GestionnaireCreation instance;
+    
+    public static GestionnaireCreation getInstance() {
+        if (instance == null) {
+            instance = new GestionnaireCreation();
+        }
+        return instance;
+    }
+    
+    private GestionnaireCreation()
     {
-        fileHelper = new FileHelper(MALADIE_PATH);
+        fileHelperMaladie = new FileHelper(MALADIE_PATH);
+        fileHelperCarte = new FileHelper(CARTE_PATH);
         chargerMaladies();
     }
+    /* ONGLET MALADIE */
     
-    public void creerCarte(String nom)
+    public Maladie creerMaladie(String nom, String tauxInf, String tauxMort, String tauxGuerison)
     {
-        //TODO Appel au constructeur de carte
-    }
-    
-    public void creerPays(String nom)
-    {
-        //TODO Appel au constructeur 
-    }
-    
-    public void creerRegion(String nom, int popSaine)
-    {
-        //TODO Appel au constructeur 
-    }
-            
-    public void creerMaladie(String nom, float tauxInf, float tauxMort, float tauxGuerison)
-    {
-        Maladie maladie = new Maladie(nom, tauxInf, tauxMort, tauxGuerison);
+        float infectionRate = 0;
+        float curedRate = 0;
+        float deadRate = 0;
+        
+        try {
+            infectionRate = Float.parseFloat(tauxInf);
+            deadRate = Float.parseFloat(tauxMort);
+            curedRate = Float.parseFloat(tauxGuerison);
+        } catch(NumberFormatException nfe) {
+            // TODO: Afficher erreur conversion
+        }
+        
+        Maladie maladie = new Maladie(nom, infectionRate, deadRate, curedRate);
         maladies.add(maladie);
         sauvegarderMaladies();
+        
+        return maladie;
     }
     
     public void chargerMaladies() {
-        maladies = fileHelper.charger();
+        maladies = fileHelperMaladie.charger();
     }
     
     public void supprimerMaladie(String nom) {
@@ -70,11 +74,11 @@ public class GestionnaireCreation {
     }
     
     private void sauvegarderMaladies() {
-        fileHelper.sauvegarder(maladies);
+        fileHelperMaladie.sauvegarder(maladies);
     }
     
     public void importerMaladie() {
-        Maladie maladie = fileHelper.importer();
+        Maladie maladie = fileHelperMaladie.importer();
         maladies.add(maladie);
         sauvegarderMaladies();
     }
@@ -82,24 +86,14 @@ public class GestionnaireCreation {
     public void exporterMaladie(String nom) {
         for(Maladie maladie : maladies) {
             if(maladie.getNom().equals(nom)) {
-                fileHelper.exporter(maladie);
+                fileHelperMaladie.exporter(maladie);
             }
         }
     }
     
-    /*  Liaison avec la vue   */
+    public Collection<Maladie> getMaladies() {
+        return maladies;
+    }
     
-    
-    /*
-    
-    Il va falloir faire des méthodes d'ajout de 
-    
-    Pays -> Carte
-    VoieLiaison -> Pays
-    Region -> Pays
-    Region -> listeDeVoisins
-    
-    Et la même chose pour les retraits
-    
-    */
+    /* ONGLET CARTE */
 }

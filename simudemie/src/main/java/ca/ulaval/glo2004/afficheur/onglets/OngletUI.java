@@ -6,7 +6,6 @@
 package ca.ulaval.glo2004.afficheur.onglets;
 
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireCreation;
 import java.util.ArrayList;
 
 /**
@@ -17,11 +16,9 @@ public abstract class OngletUI extends javax.swing.JPanel {
 
     protected ArrayList<ObjetUI> objets = new ArrayList<>();
     protected ObjetUI courant;
-    public GestionnaireCreation gestionnaireCreation; // TODO: Refactor pour utiliser un observer maybe ou un genre d'event listener avec les actions
     
     public OngletUI() {
         initComponents();
-        gestionnaireCreation = new GestionnaireCreation();
     }
     
     public int getIndexCourant() {

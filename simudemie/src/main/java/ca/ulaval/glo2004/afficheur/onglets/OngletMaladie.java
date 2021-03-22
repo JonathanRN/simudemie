@@ -9,6 +9,8 @@ import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetMaladie;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
+import ca.ulaval.glo2004.domaine.Maladie;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireCreation;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -40,28 +42,47 @@ public class OngletMaladie extends OngletUI {
     
     public void init() {
         statsMaladiePanel1.setOnglet(this);
+        
+        for(Maladie maladie : GestionnaireCreation.getInstance().getMaladies()) {
+            System.out.println(maladie.getNom());
+            ajouterCard(maladie);
+        }
     }
     
     @Override
     public void ajouterObjetUI() {
-        super.ajouterObjetUI();
-        ObjetMaladie card = new ObjetMaladie(this);
-        card.setNom("Maladie: " + objets.size());
-        objets.add(card);
-        onClickObjetUI(card);
-        MaladiesContainer.add(card);
+        if(!cardLocked) {
+            super.ajouterObjetUI();
+            ObjetMaladie card = new ObjetMaladie(this);
+            card.setNom("Maladie: " + objets.size());
+            objets.add(card);
+            onClickObjetUI(card);
+            MaladiesContainer.add(card);
 
-        // On débloque les champs pour modification de la nouvelle maladie
-        statsMaladiePanel1.setModifying(true);
-        
-        updateUI();
+            // On débloque les champs pour modification de la nouvelle maladie
+            statsMaladiePanel1.setModifying(true);
 
+            updateUI();
+        }
     }
 
+    private void ajouterCard(Maladie maladie) {
+        ObjetMaladie card = new ObjetMaladie(this);
+        card.setNom(maladie.getNom());
+        card.setInfectedProgressBar(Math.round(maladie.getTauxInfection()));
+        card.setCuredProgressBar(Math.round(maladie.getTauxGuerison()));
+        card.setDeadProgressBar(Math.round(maladie.getTauxMortalite()));
+        objets.add(card);
+        MaladiesContainer.add(card);
+        
+        updateUI();
+    }
+    
     @Override
     public void retirerCourant() {
         MaladiesContainer.remove(courant);
         setCardLocked(false);
+        statsMaladiePanel1.setModifying(false);
         updateUI();
         
         super.retirerCourant();

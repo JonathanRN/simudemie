@@ -25,7 +25,8 @@ public class Carte {
     
     public void ajouterPays(Pays nouveauPays)
     {
-         listePays.add(nouveauPays);
+        nouveauPays.setNom("Pays " +  listePays.size());
+        listePays.add(nouveauPays);
     }
     
     public void retirerPays(Pays ancienPays)
@@ -43,6 +44,13 @@ public class Carte {
         for (Pays pays : listePays) {
             if (pays.getPolygone().equals(p)) {
                 return pays;
+            }
+            else {
+                for (Region r : pays.getRegions()) {
+                    if (r.getPolygone().equals(p)) {
+                        return pays;
+                    }
+                }
             }
         }
         return null;

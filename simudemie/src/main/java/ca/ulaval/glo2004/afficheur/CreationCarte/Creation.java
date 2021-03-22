@@ -85,7 +85,7 @@ public class Creation extends Mode {
     
     @Override
     public void onMouseDragged(MouseEvent evt) {
-        if (polygoneSousSouris != null) {
+        if (polygoneSousSouris != null && indexSousSouris != -1) {
             polygoneSousSouris.xpoints[indexSousSouris] = evt.getX();
             polygoneSousSouris.ypoints[indexSousSouris] = evt.getY();
             
@@ -100,6 +100,10 @@ public class Creation extends Mode {
         int offset = taillePoint/2 + 5;
         
         for (Polygon p : panel.getPolygones()) {
+            if (!p.equals(panel.getCourant()) && p.contains(x, y)) {
+                polygoneSousSouris = p;
+            }
+            
             for (int i = 0; i < p.npoints; i++) {
                 if (Math.abs(x - p.xpoints[i]) <= offset &&
                     Math.abs(y - p.ypoints[i]) <= offset) {

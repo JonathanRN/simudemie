@@ -6,7 +6,6 @@
 package ca.ulaval.glo2004.domaine;
 
 import java.awt.Polygon;
-import java.util.List;
 
 public class Region {
     
@@ -15,13 +14,11 @@ public class Region {
 //    private int populationImmune;
     private int populationInfectee;
     private int populationDecedee;
-    private List<Region> regionsVoisines;
     private Polygon polygone;
     
-    public Region(Polygon polygone) 
+    public Region(Polygon polygone)
     {
         this.polygone = polygone;
-        //TODO Constructeur
     }
     
 //    public void deplacementRegions()
@@ -50,19 +47,9 @@ public class Region {
         setPopSaine(populationSaine + gueris);
     }
     
-    public void ajouterVoisin(Region nouvelleRegion)
-    {
-        regionsVoisines.add(nouvelleRegion);
-    }
-    
-    public void retirerVoisin(Region ancienneRegion)
-    {
-        if (regionsVoisines.contains(ancienneRegion)){
-            regionsVoisines.remove(ancienneRegion);
-        }
-    }
-    
     public String getNom(){return nom;}
+    
+    public int getPopTotale() { return populationSaine + populationInfectee; }
     
     public int getPopSaine(){return populationSaine;}
     
@@ -72,12 +59,16 @@ public class Region {
     
     public int getPopDecedee(){return populationDecedee;}
     
-    private void setNom(String nom)
+    public Polygon getPolygone() {
+        return polygone;
+    }
+    
+    public void setNom(String nom)
     {
         this.nom = nom;
     }
     
-    private void setPopSaine(int populationSaine)
+    public void setPopSaine(int populationSaine)
     {
         this.populationSaine = populationSaine;
     }

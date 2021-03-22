@@ -29,6 +29,7 @@ public class CreerPolygoneAction extends ActionCarte {
     @Override
     public void Executer() {
         GestionnaireScenario.GetInstance().creerPays(index, pays);
+        pays.ajouterRegion(new ca.ulaval.glo2004.domaine.Region(pays.getPolygone()));
         polygons.add(new Polygon());
     }
 

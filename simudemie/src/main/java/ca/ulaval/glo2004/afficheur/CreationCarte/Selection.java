@@ -5,12 +5,14 @@
  */
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
+import ca.ulaval.glo2004.domaine.Pays;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+import java.text.ParseException;
 import javax.swing.JTextField;
 
 /**
@@ -55,14 +57,17 @@ public class Selection extends Mode {
         panel.getInformationsPaysPanel().setVisible(selectionne != null);
         
         if (selectionne != null) {
-            Point2D.Double centre = getCentrePolygone(selectionne);
+            Pays pays = panel.getPays(selectionne);
+            Point2D.Double centre = getCentrePolygone(pays.getPolygone());
+            ca.ulaval.glo2004.domaine.Region region = panel.getRegion(pays, selectionne);
             
-            JTextField field = panel.getNomField();
+            JTextField paysField = panel.getPaysNomField();
+            paysField.setText(pays.getNom());
             
-            field.setText(panel.getNomPays(selectionne));
-            panel.getPopField().setValue(panel.getPopTotale(selectionne));
+            panel.getRegionNomField().setText(region.getNom());
+            panel.getPopField().setValue(region.getPopTotale());
             
-            anciennePos = new Point((int)centre.x - field.getPreferredSize().width / 2, getHighestPointY(selectionne) - panel.getInformationsPaysPanel().getPreferredSize().height - 10);    
+            anciennePos = new Point((int)centre.x - paysField.getPreferredSize().width / 2, getHighestPointY(pays.getPolygone()) - panel.getInformationsPaysPanel().getPreferredSize().height - 10);    
         }
         
         super.onMouseReleased(evt);
@@ -70,7 +75,12 @@ public class Selection extends Mode {
     
     @Override
     public void paint(Graphics2D g) {
+        for (Polygon p : panel.getPolygones()) {
+            paintLignes(g, Color.black, p);
+        }
+        
         super.paint(g);
+        
         if (selectionne != null) {
             paintLignes(g, Color.green, selectionne);
         }
@@ -80,9 +90,17 @@ public class Selection extends Mode {
         }
     }
     
-    private void saveInfos(Polygon g) {
-        panel.setNomPays(panel.getNomField().getText(), g);
-        panel.setPopulationTotale((int)panel.getPopField().getValue(), g);
+    private void saveInfos(Polygon p) {
+        Pays pays = panel.getPays(p);
+        ca.ulaval.glo2004.domaine.Region region = panel.getRegion(pays, p);
+        
+        pays.setNom(panel.getPaysNomField().getText());
+        region.setNom(panel.getRegionNomField().getText());
+        try {
+            panel.getPopField().commitEdit();
+            region.setPopSaine((int)panel.getPopField().getValue());
+        } catch (ParseException e) {
+        }
     }
     
     private Point2D.Double getCentrePolygone(Polygon p) {

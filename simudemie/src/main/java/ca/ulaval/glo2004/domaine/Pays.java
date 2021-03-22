@@ -6,20 +6,17 @@
 package ca.ulaval.glo2004.domaine;
 
 import java.awt.Polygon;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Pays {
     
     private String nom;
-    private int populationTotale;
-    private List<VoieLiaison> frontieres;
-    private List<Region> listeRegions;
+    private ArrayList<VoieLiaison> frontieres = new ArrayList<>();
+    private ArrayList<Region> listeRegions = new ArrayList<>();
     private Polygon polygone;
-    public List<Mesure> mesures;
+    public ArrayList<Mesure> mesures =new ArrayList<>();
 
-    public Pays(String nom, int populationTotale, Polygon polygone) {
-        this.nom = nom;
-        this.populationTotale = populationTotale;
+    public Pays(Polygon polygone) {
         this.polygone = polygone;
     }
     
@@ -38,16 +35,26 @@ public class Pays {
         }
     }
     
-    private void ajouterRegion(Region nouvelleRegion)
-    {
+    public void ajouterRegion(Region nouvelleRegion) {
+        nouvelleRegion.setNom("Region " + listeRegions.size());
         listeRegions.add(nouvelleRegion);
     }
     
-    private void retirerRegion(Region ancienneRegion)
-    {
-        if (listeRegions.contains(ancienneRegion)){
+    public void retirerRegion(Region ancienneRegion) {
+        if (listeRegions.contains(ancienneRegion)) {
             listeRegions.remove(ancienneRegion);
         }
+    }
+    
+    public void retirerRegion(int index) {
+        try {
+            listeRegions.remove(index);
+        } catch (Exception e) {
+        }
+    }
+    
+    public ArrayList<Region> getRegions() {
+        return listeRegions;
     }
     
     public void ajouterVoie(VoieLiaison nouvelleVoie)
@@ -64,19 +71,17 @@ public class Pays {
         
     public String getNom(){ return nom; }
     
-    public int getPopTotale(){ return populationTotale; }
+    public int getPopTotale() {
+        int sum = 0;
+        for (Region r : listeRegions) {
+            sum += r.getPopTotale();
+        }
+        return sum;
+    }
     
     public Polygon getPolygone() { return polygone; };
     
-    public void setNom(String nom)
-    {
-        System.out.println("Pays: " + this.nom + " -> " + nom);
+    public void setNom(String nom) {
         this.nom = nom;
-    }
-     
-    public void setPopTotale(int populationTotale)
-    {
-        System.out.println("Pays: " + this.populationTotale + " -> " + populationTotale);
-        this.populationTotale = populationTotale;
     }
 }

@@ -31,11 +31,11 @@ public class Mode {
     }
     
     public void paint(Graphics2D g) {
-        paintLignes(g, Color.red, lignesInvalides);
-        
         if (highlight != null) {
             paintLignes(g, couleurLigne, highlight);
         }
+        
+        paintLignes(g, Color.red, lignesInvalides);
     }
     
     public void onActive() {
@@ -125,7 +125,7 @@ public class Mode {
         lignesInvalides = getLignesInvalides(g);
     }
     
-    private ArrayList<Line2D.Double> getPolygonLines(Polygon po) {
+    protected ArrayList<Line2D.Double> getPolygonLines(Polygon po) {
         ArrayList<double[]> areaPoints = new ArrayList<>();
         ArrayList<Line2D.Double> areaSegments = new ArrayList<>();
         double[] coords = new double[6];

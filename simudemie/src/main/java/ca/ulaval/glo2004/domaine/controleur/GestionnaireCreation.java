@@ -7,6 +7,7 @@ package ca.ulaval.glo2004.domaine.controleur;
 
 import ca.ulaval.glo2004.afficheur.onglets.OngletMaladie;
 import ca.ulaval.glo2004.domaine.Maladie;
+import ca.ulaval.glo2004.domaine.helper.FileHelper;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -26,13 +27,15 @@ import java.util.List;
  */
 public class GestionnaireCreation {
     // TODO: Mettre constantes dans un fichier de param .ini peut-être ?
-    private final String MALADIE_PATH = "C:\\test";
+    private final String MALADIE_PATH = "C:\\test\\maladies.ser";
             
+    private FileHelper<Maladie> fileHelper;
     private Collection<Maladie> maladies;
     
     public GestionnaireCreation()
     {
-        maladies = new ArrayList<>();
+        fileHelper = new FileHelper();
+        chargerMaladies();
     }
     
     public void creerCarte(String nom)
@@ -57,18 +60,8 @@ public class GestionnaireCreation {
         sauvegarderMaladies();
     }
     
-    public void chargerMaladies() throws ClassNotFoundException {
-        try {
-            Path path = Path.of(MALADIE_PATH, "maladies.ser");
-            File file = new File(path.toString());
-            
-            try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
-                maladies = (ArrayList<Maladie>) ois.readObject();
-            }
-                
-        } catch(IOException | ClassNotFoundException e) {
-             // TODO: Afficher erreur de chargement avec petite boîte cute
-        }
+    public void chargerMaladies() {
+        maladies = fileHelper.charger(MALADIE_PATH);
     }
     
     public void supprimerMaladie(String nom) {
@@ -77,15 +70,7 @@ public class GestionnaireCreation {
     }
     
     private void sauvegarderMaladies() {
-        try {
-            Path path = Path.of(MALADIE_PATH, "maladies.ser");
-            
-            try (FileOutputStream fos = new FileOutputStream(path.toString()); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-                oos.writeObject(maladies);
-            }
-        } catch(IOException ioe) {
-            // TODO: Afficher erreur de sauvegarde avec petite boîte cute
-        }
+        fileHelper.sauvegarder(MALADIE_PATH, maladies);
     }
     
     

@@ -112,6 +112,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
 
         MaladieInput.setBackground(new java.awt.Color(71, 76, 88));
         MaladieInput.setFont(new java.awt.Font("Dialog", 0, 21)); // NOI18N
+        MaladieInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         MaladieInput.setText("Nom de la maladie");
         MaladieInput.setToolTipText("");
         MaladieInput.setEnabled(false);

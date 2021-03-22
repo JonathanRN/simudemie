@@ -23,7 +23,7 @@ public class Pays {
         this.polygone = polygone;
     }
     
-    private void avancerJournee(float tauxInf, float tauxMortalite, float tauxGuerison)
+    public void avancerJournee(float tauxInf, float tauxMortalite, float tauxGuerison)
     {
         float tauxInfAjuste = tauxInf;
         for (Region region : listeRegions)
@@ -38,12 +38,12 @@ public class Pays {
         }
     }
     
-    private void ajouterRegion(Region nouvelleRegion)
+    public void ajouterRegion(Region nouvelleRegion)
     {
         listeRegions.add(nouvelleRegion);
     }
     
-    private void retirerRegion(Region ancienneRegion)
+    public void retirerRegion(Region ancienneRegion)
     {
         if (listeRegions.contains(ancienneRegion)){
             listeRegions.remove(ancienneRegion);

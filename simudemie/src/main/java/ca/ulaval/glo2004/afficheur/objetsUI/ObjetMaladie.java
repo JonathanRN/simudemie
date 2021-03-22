@@ -10,18 +10,18 @@ import ca.ulaval.glo2004.afficheur.onglets.OngletMaladie;
 
 
 public class ObjetMaladie extends ObjetUI {    
-    private float infectedRate;
-    private float curedRate;
-    private float deadRate;
+    private double infectedRate;
+    private double curedRate;
+    private double deadRate;
     
     public ObjetMaladie(OngletMaladie tab) {
         super(tab);
         initComponents();
         
         MaladieNom.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
-        setInfectedProgressBar(0);
-        setCuredProgressBar(0);
-        setDeadProgressBar(0);
+        setInfectedProgressBar(0.0d);
+        setCuredProgressBar(0.0d);
+        setDeadProgressBar(0.0d);
         
     }
     
@@ -33,30 +33,30 @@ public class ObjetMaladie extends ObjetUI {
         return MaladieNom.getText();
     }
     
-    public void setInfectedProgressBar(float value) {
+    public void setInfectedProgressBar(double value) {
         infectedRate = value;
-        InfectedProgressBar.setValue(Math.round(value));
+        InfectedProgressBar.setValue((int) Math.round(value));
     }
     
-    public void setCuredProgressBar(float value) {
+    public void setCuredProgressBar(double value) {
         curedRate = value;
-        CuredProgressBar.setValue(Math.round(value));
+        CuredProgressBar.setValue((int) Math.round(value));
     }
     
-    public void setDeadProgressBar(float value) {
+    public void setDeadProgressBar(double value) {
         deadRate = value;
-        DeadProgressBar.setValue(Math.round(value));
+        DeadProgressBar.setValue((int) Math.round(value));
     }
     
-    public float getInfectionRate() {
+    public double getInfectionRate() {
         return infectedRate;
     }
     
-    public float getCuredRate() {
+    public double getCuredRate() {
         return curedRate;
     }
     
-    public float getDeadRate() {
+    public double getDeadRate() {
         return deadRate;
     }
     

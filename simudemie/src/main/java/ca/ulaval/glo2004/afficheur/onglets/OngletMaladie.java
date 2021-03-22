@@ -75,12 +75,17 @@ public class OngletMaladie extends OngletUI {
         objets.add(card);
         MaladiesContainer.add(card);
         
+        if(objets.size() == 1) {
+            onClickObjetUI(card);
+        }
+        
         updateUI();
     }
     
     @Override
     public void retirerCourant() {
         MaladiesContainer.remove(courant);
+        objets.remove(courant);
         setCardLocked(false);
         statsMaladiePanel1.setModifying(false);
         updateUI();
@@ -94,9 +99,9 @@ public class OngletMaladie extends OngletUI {
             super.onClickObjetUI(objet);
             ObjetMaladie objetMaladie = (ObjetMaladie)courant;
             statsMaladiePanel1.setNomMaladie(objetMaladie.getNom());
-            statsMaladiePanel1.setInfectionInput(Float.toString(objetMaladie.getInfectionRate()));
-            statsMaladiePanel1.setCuredInput(Float.toString(objetMaladie.getCuredRate()));
-            statsMaladiePanel1.setDeadInput(Float.toString(objetMaladie.getDeadRate()));
+            statsMaladiePanel1.setInfectionInput(objetMaladie.getInfectionRate());
+            statsMaladiePanel1.setCuredInput(objetMaladie.getCuredRate());
+            statsMaladiePanel1.setDeadInput(objetMaladie.getDeadRate());
         }
     }
     

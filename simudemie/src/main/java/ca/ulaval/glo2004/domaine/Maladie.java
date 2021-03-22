@@ -12,11 +12,11 @@ import java.io.Serializable;
 public class Maladie implements Serializable {
 
     private String nom;
-    private float tauxInfection;
-    private float tauxMortalite;
-    private float tauxGuerison;
+    private double tauxInfection;
+    private double tauxMortalite;
+    private double tauxGuerison;
     
-    public Maladie(String nom, float tauxInfection, float tauxMortalite, float tauxGuerison)
+    public Maladie(String nom, double tauxInfection, double tauxMortalite, double tauxGuerison)
     {
         this.nom = nom;
         this.tauxInfection = tauxInfection;
@@ -26,28 +26,28 @@ public class Maladie implements Serializable {
     
     public String getNom(){return nom;}
     
-    public float getTauxInfection(){return tauxInfection;}
+    public double getTauxInfection(){return tauxInfection;}
     
-    public float getTauxMortalite(){return tauxMortalite;}
+    public double getTauxMortalite(){return tauxMortalite;}
     
-    public float getTauxGuerison(){return tauxGuerison;}
+    public double getTauxGuerison(){return tauxGuerison;}
     
     private void setNom(String nom)
     {
         this.nom = nom;
     }
     
-    private void setTauxInfection(float tauxInfection)
+    private void setTauxInfection(double tauxInfection)
     {
         this.tauxInfection = tauxInfection;
     }
         
-    private void setTauxMortalite(float tauxMortalite)
+    private void setTauxMortalite(double tauxMortalite)
     {
         this.tauxMortalite = tauxMortalite;
     }
     
-    private void setTauxGuerison(float tauxGuerison)
+    private void setTauxGuerison(double tauxGuerison)
     {
         this.tauxGuerison = tauxGuerison;
     }

@@ -43,21 +43,9 @@ public class GestionnaireCreation {
     }
     /* ONGLET MALADIE */
     
-    public Maladie creerMaladie(String nom, String tauxInf, String tauxMort, String tauxGuerison)
-    {
-        float infectionRate = 0;
-        float curedRate = 0;
-        float deadRate = 0;
-        
-        try {
-            infectionRate = Float.parseFloat(tauxInf);
-            deadRate = Float.parseFloat(tauxMort);
-            curedRate = Float.parseFloat(tauxGuerison);
-        } catch(NumberFormatException nfe) {
-            // TODO: Afficher erreur conversion
-        }
-        
-        Maladie maladie = new Maladie(nom, infectionRate, deadRate, curedRate);
+    public Maladie creerMaladie(String nom, double tauxInf, double tauxMort, double tauxGuerison)
+    {   
+        Maladie maladie = new Maladie(nom, tauxInf, tauxMort, tauxGuerison);
         maladies.add(maladie);
         sauvegarderMaladies();
         

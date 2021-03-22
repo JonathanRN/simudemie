@@ -12,6 +12,9 @@ import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCreation;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -19,33 +22,89 @@ import java.awt.event.KeyEvent;
  */
 public class StatsMaladiePanel extends javax.swing.JPanel {
     
+    private JLabel InfectionLabel;
+    private JSpinner InfectionInput;
+    private JLabel CuredLabel;
+    private JSpinner CuredInput;
+    private JLabel DeadLabel;
+    private JSpinner DeadInput;
+        
     private OngletMaladie onglet;
+    
     
     public StatsMaladiePanel() {
         initComponents();
         
         try {
             MaladieInput.setFont(FontRegister.RobotoThin.deriveFont(21f));
+            init();
             Main.setBackground(new Color(216, 222, 233, 38));
         }
         catch(Exception e) {
         }
     }
     
+    private void init() {
+        InfectionLabel = new javax.swing.JLabel();
+        InfectionLabel.setFont(FontRegister.RobotoLight.deriveFont(24f));
+        InfectionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        InfectionLabel.setText("Taux d'infection");
+        InfectionLabel.setToolTipText("");
+        Parent.add(InfectionLabel);
+        
+        InfectionInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 100, 0.01));
+        InfectionInput.setEnabled(false);
+        Parent.add(InfectionInput);
+
+        CuredLabel = new javax.swing.JLabel();
+        CuredLabel.setFont(FontRegister.RobotoLight.deriveFont(24f));
+        CuredLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CuredLabel.setText("Taux de guérison");
+        CuredLabel.setToolTipText("");
+        Parent.add(CuredLabel);
+
+        CuredInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 100, 0.01));
+        CuredInput.setEnabled(false);
+        Parent.add(CuredInput);
+
+        DeadLabel = new javax.swing.JLabel();
+        DeadLabel.setFont(FontRegister.RobotoLight.deriveFont(24f));
+        DeadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DeadLabel.setText("Taux de mortalité");
+        DeadLabel.setToolTipText("");
+        Parent.add(DeadLabel);
+
+        DeadInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 100, 0.01));
+        DeadInput.setEnabled(false);
+        Parent.add(DeadInput);
+    }
+    
     public void setNomMaladie(String nom) {
        MaladieInput.setText(nom);
     }
     
-    public void setInfectionInput(String value) {
-        InfectionInput.setText(value);
+    public void setInfectionInput(double value) {
+        InfectionInput.setValue(value);
     }
     
-    public void setCuredInput(String value) {
-        CuredInput.setText(value);
+    public void setCuredInput(double value) {
+        CuredInput.setValue(value);
     }
     
-    public void setDeadInput(String value) {
-        DeadInput.setText(value);
+    public void setDeadInput(double value) {
+        DeadInput.setValue(value);
+    }
+    
+    public double getInfectionInput() {
+        return (double) InfectionInput.getValue();
+    }
+    
+    public double getCuredInput() {
+        return (double) CuredInput.getValue();
+    }
+    
+    public double getDeadInput() {
+        return (double) DeadInput.getValue();
     }
     
     public void setOnglet(OngletMaladie onglet) {
@@ -53,7 +112,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
     }
     
     private void sauvegarderMaladie() {
-        Maladie maladie = GestionnaireCreation.getInstance().creerMaladie(MaladieInput.getText(), InfectionInput.getText(), DeadInput.getText(), CuredInput.getText());
+        Maladie maladie = GestionnaireCreation.getInstance().creerMaladie(MaladieInput.getText(), getInfectionInput(), getDeadInput(), getCuredInput());
         
         ObjetMaladie objetMaladie = (ObjetMaladie)onglet.getCourant();
         
@@ -76,12 +135,6 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         StatsHeader = new javax.swing.JPanel();
         MaladieInput = new javax.swing.JTextField();
         Parent = new javax.swing.JPanel();
-        InfectionLabel = new javax.swing.JLabel();
-        InfectionInput = new javax.swing.JTextField();
-        CuredLabel = new javax.swing.JLabel();
-        CuredInput = new javax.swing.JTextField();
-        DeadLabel = new javax.swing.JLabel();
-        DeadInput = new javax.swing.JTextField();
         Buttons = new javax.swing.JPanel();
         DeleteButton = new javax.swing.JButton();
         ModifyButton = new javax.swing.JButton();
@@ -123,44 +176,6 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
 
         Parent.setOpaque(false);
         Parent.setLayout(new java.awt.GridLayout(6, 0));
-
-        InfectionLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        InfectionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        InfectionLabel.setText("Taux d'infection");
-        InfectionLabel.setToolTipText("");
-        Parent.add(InfectionLabel);
-
-        InfectionInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        InfectionInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        InfectionInput.setText("0");
-        InfectionInput.setEnabled(false);
-        InfectionInput.setName(""); // NOI18N
-        Parent.add(InfectionInput);
-
-        CuredLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        CuredLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CuredLabel.setText("Taux de guérison");
-        CuredLabel.setToolTipText("");
-        Parent.add(CuredLabel);
-
-        CuredInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        CuredInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        CuredInput.setText("0");
-        CuredInput.setEnabled(false);
-        Parent.add(CuredInput);
-
-        DeadLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        DeadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DeadLabel.setText("Taux de mortalité");
-        DeadLabel.setToolTipText("");
-        Parent.add(DeadLabel);
-
-        DeadInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        DeadInput.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        DeadInput.setText("0");
-        DeadInput.setEnabled(false);
-        Parent.add(DeadInput);
-
         Main.add(Parent, java.awt.BorderLayout.CENTER);
 
         add(Main);
@@ -246,13 +261,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Buttons;
-    private javax.swing.JTextField CuredInput;
-    private javax.swing.JLabel CuredLabel;
-    private javax.swing.JTextField DeadInput;
-    private javax.swing.JLabel DeadLabel;
     private javax.swing.JButton DeleteButton;
-    private javax.swing.JTextField InfectionInput;
-    private javax.swing.JLabel InfectionLabel;
     private ca.ulaval.glo2004.afficheur.PanelArrondi Main;
     private javax.swing.JTextField MaladieInput;
     private javax.swing.JButton ModifyButton;

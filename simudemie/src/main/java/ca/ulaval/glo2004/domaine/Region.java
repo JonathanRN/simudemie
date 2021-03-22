@@ -29,21 +29,21 @@ public class Region {
 //        //TODO Déplacement des populations entre les régions
 //    }
     
-    public void contaminer(float taux)
+    public void contaminer(double taux)
     {
         int nouveauxInfectes  = (int)(populationSaine * taux);
         setPopSaine(populationSaine - nouveauxInfectes);
         setPopInfectee(populationInfectee + nouveauxInfectes);
     }
     
-    public void eliminerPopulation(float taux)
+    public void eliminerPopulation(double taux)
     {
         int deces  = (int)(populationInfectee * taux);
         setPopInfectee(populationInfectee - deces);
         setPopDecedee(populationDecedee + deces);
     }
     
-    public void guerirPop(float taux)
+    public void guerirPop(double taux)
     {
         int gueris = (int)(populationInfectee * taux);
         setPopInfectee(populationInfectee - gueris);

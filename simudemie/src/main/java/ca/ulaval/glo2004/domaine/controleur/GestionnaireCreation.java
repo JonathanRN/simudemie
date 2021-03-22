@@ -79,6 +79,7 @@ public class GestionnaireCreation {
     private void sauvegarderMaladies() {
         try {
             Path path = Path.of(MALADIE_PATH, "maladies.ser");
+            
             try (FileOutputStream fos = new FileOutputStream(path.toString()); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 oos.writeObject(maladies);
             }

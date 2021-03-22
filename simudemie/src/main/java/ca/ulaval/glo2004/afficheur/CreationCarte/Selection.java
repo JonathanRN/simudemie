@@ -19,7 +19,7 @@ import javax.swing.JTextField;
  */
 public class Selection extends Mode {
     
-    private Polygon selectionne, precedent;
+    private Polygon selectionne;
     private Point anciennePos;
     
     public Selection(CreationCartePanel panel) {
@@ -64,6 +64,8 @@ public class Selection extends Mode {
             
             anciennePos = new Point((int)centre.x - field.getPreferredSize().width / 2, getHighestPointY(selectionne) - panel.getInformationsPaysPanel().getPreferredSize().height - 10);    
         }
+        
+        super.onMouseReleased(evt);
     }
     
     @Override

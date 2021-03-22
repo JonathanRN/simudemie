@@ -27,21 +27,19 @@ public class OngletMaladie extends OngletUI {
         
         cardLocked = false;
         
-        try {
-            ajouterObjetUI();
-        
+        try {        
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
-
             MaladieLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             Mal_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             AddScenarioButton.setBackground(new Color(216, 222, 233, 38));
             ImportScenarioButton.setBackground(new Color(216, 222, 233, 38));
             BoutonExport.setBackground(new Color(216, 222, 233, 38));
-            
-            statsMaladiePanel1.setOnglet(this); // FIXME: this n'est pas encore compètement crée, sortir cette ligne
         } catch (Exception e) {
         }
-        
+    }
+    
+    public void init() {
+        statsMaladiePanel1.setOnglet(this);
     }
     
     @Override
@@ -54,7 +52,7 @@ public class OngletMaladie extends OngletUI {
         MaladiesContainer.add(card);
 
         // On débloque les champs pour modification de la nouvelle maladie
-        //statsMaladiePanel1.setModifying(true);
+        statsMaladiePanel1.setModifying(true);
         
         updateUI();
 
@@ -63,6 +61,7 @@ public class OngletMaladie extends OngletUI {
     @Override
     public void retirerCourant() {
         MaladiesContainer.remove(courant);
+        setCardLocked(false);
         updateUI();
         
         super.retirerCourant();

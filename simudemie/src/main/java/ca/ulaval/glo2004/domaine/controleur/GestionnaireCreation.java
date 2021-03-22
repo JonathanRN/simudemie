@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.domaine.controleur;
 
+import ca.ulaval.glo2004.afficheur.onglets.OngletMaladie;
 import ca.ulaval.glo2004.domaine.Maladie;
 import java.io.File;
 import java.io.FileFilter;
@@ -16,6 +17,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -26,7 +28,7 @@ public class GestionnaireCreation {
     // TODO: Mettre constantes dans un fichier de param .ini peut-être ?
     private final String MALADIE_PATH = "C:\\test";
             
-    private List<Maladie> maladies;
+    private Collection<Maladie> maladies;
     
     public GestionnaireCreation()
     {
@@ -52,20 +54,16 @@ public class GestionnaireCreation {
     {
         Maladie maladie = new Maladie(nom, tauxInf, tauxMort, tauxGuerison);
         maladies.add(maladie);
-        sauvegarderMaladie(maladie);
+        sauvegarderMaladies();
     }
     
     public void chargerMaladies() throws ClassNotFoundException {
-        Maladie maladie;
         try {
-            File folder = new File(MALADIE_PATH);
-            FilenameFilter filter = (File f, String name) -> name.endsWith("_mal.ser");
+            Path path = Path.of(MALADIE_PATH, "maladies.ser");
+            File file = new File(path.toString());
             
-            for(File file : folder.listFiles(filter)) {
-                try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
-                    maladie = (Maladie) ois.readObject();
-                    maladies.add(maladie);
-                }
+            try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
+                maladies = (ArrayList<Maladie>) ois.readObject();
             }
                 
         } catch(IOException | ClassNotFoundException e) {
@@ -73,17 +71,25 @@ public class GestionnaireCreation {
         }
     }
     
-    private void sauvegarderMaladie(Maladie maladie) {
+    public void supprimerMaladie(String nom) {
+        maladies.removeIf(m -> m.getNom().equals(nom));
+        sauvegarderMaladies();
+    }
+    
+    private void sauvegarderMaladies() {
         try {
-            Path path = Path.of(MALADIE_PATH, maladie.getNom() + "_mal.ser");
-            System.out.println(path.toString());
+            Path path = Path.of(MALADIE_PATH, "maladies.ser");
             try (FileOutputStream fos = new FileOutputStream(path.toString()); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-                oos.writeObject(maladie);
+                oos.writeObject(maladies);
             }
         } catch(IOException ioe) {
             // TODO: Afficher erreur de sauvegarde avec petite boîte cute
         }
     }
+    
+    
+    /*  Liaison avec la vue   */
+    
     
     /*
     

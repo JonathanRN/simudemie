@@ -81,12 +81,12 @@ public class Region {
 //        this.populationImmune = populationImmune;
 //    }
         
-    private void setPopInfectee(int populationInfectee)
+    public void setPopInfectee(int populationInfectee)
     {
         this.populationInfectee = populationInfectee;
     }
             
-    private void setPopDecedee(int populationDecedee)
+    public void setPopDecedee(int populationDecedee)
     {
         this.populationDecedee = populationDecedee;
     }

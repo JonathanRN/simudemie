@@ -41,6 +41,10 @@ public class Pays {
         Pays paysAInfecter;
         for (VoieLiaison voie : frontieres)
         {
+            if (!voie.getAccessible())
+            {
+                continue;
+            }
             if (getPopInfecteePays() > 0)
             {
                 voyageursInfectees = (0.01 * getPopInfecteePays()); //Déterminer quel sera le 0.01

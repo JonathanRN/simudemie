@@ -12,6 +12,7 @@ import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCreation;
 import java.awt.Color;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -20,6 +21,8 @@ import javax.swing.SwingUtilities;
  * @author Jonathan
  */
 public class OngletMaladie extends OngletUI {
+    
+    private final JFileChooser fileChooser = new JFileChooser();
     
     // Si à true, on ne peut pas sélectionner d'autre cartes maladie
     private boolean cardLocked;
@@ -192,6 +195,11 @@ public class OngletMaladie extends OngletUI {
         ImportScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
         ImportScenarioButton.setMinimumSize(new java.awt.Dimension(75, 30));
         ImportScenarioButton.setPreferredSize(new java.awt.Dimension(100, 36));
+        ImportScenarioButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ImportScenarioButtonMouseReleased(evt);
+            }
+        });
 
         BoutonExport.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         BoutonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
@@ -200,6 +208,11 @@ public class OngletMaladie extends OngletUI {
         BoutonExport.setMaximumSize(new java.awt.Dimension(75, 30));
         BoutonExport.setMinimumSize(new java.awt.Dimension(75, 30));
         BoutonExport.setPreferredSize(new java.awt.Dimension(100, 36));
+        BoutonExport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BoutonExportMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout MaladieTitleLayout = new javax.swing.GroupLayout(MaladieTitle);
         MaladieTitle.setLayout(MaladieTitleLayout);
@@ -268,6 +281,19 @@ public class OngletMaladie extends OngletUI {
     private void AddScenarioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseClicked
         this.ajouterObjetUI();
     }//GEN-LAST:event_AddScenarioButtonMouseClicked
+
+    private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
+        fileChooser.showOpenDialog(null);
+        System.out.println(fileChooser.getSelectedFile());
+        Maladie maladie = GestionnaireCreation.getInstance().importerMaladie(fileChooser.getSelectedFile().toString());
+        ajouterCard(maladie);
+    }//GEN-LAST:event_ImportScenarioButtonMouseReleased
+
+    private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
+        fileChooser.showOpenDialog(null);
+        ObjetMaladie objetMaladie = (ObjetMaladie) courant;
+        GestionnaireCreation.getInstance().exporterMaladie(objetMaladie.getNom(), fileChooser.getSelectedFile().toString());
+    }//GEN-LAST:event_BoutonExportMouseReleased
 
     public boolean getCardLocked() {
         return cardLocked;

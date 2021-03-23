@@ -43,7 +43,7 @@ public class FileHelper<T> {
         return list;
     }
     
-    public <T extends Serializable> T importer() {
+    public <T extends Serializable> T importer(String path) {
         T object = null;
         
         try {
@@ -71,7 +71,7 @@ public class FileHelper<T> {
         }
     }
     
-    public <T extends Serializable> void exporter(T object) {
+    public <T extends Serializable> void exporter(T object, String path) {
         try {
             // TODO: Afficher boîte de choix pour décider de l'emplacement
             

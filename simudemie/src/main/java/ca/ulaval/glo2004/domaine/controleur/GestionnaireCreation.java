@@ -65,16 +65,17 @@ public class GestionnaireCreation {
         fileHelperMaladie.sauvegarder(maladies);
     }
     
-    public void importerMaladie() {
-        Maladie maladie = fileHelperMaladie.importer();
+    public Maladie importerMaladie(String path) {
+        Maladie maladie = fileHelperMaladie.importer(path);
         maladies.add(maladie);
         sauvegarderMaladies();
+        return maladie;
     }
     
-    public void exporterMaladie(String nom) {
+    public void exporterMaladie(String nom, String path) {
         for(Maladie maladie : maladies) {
             if(maladie.getNom().equals(nom)) {
-                fileHelperMaladie.exporter(maladie);
+                fileHelperMaladie.exporter(maladie, path);
             }
         }
     }

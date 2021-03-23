@@ -147,6 +147,11 @@ public class CreationCartePanel extends ZoomablePanel {
                 formMouseMoved(evt);
             }
         });
+        addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                formMouseWheelMoved(evt);
+            }
+        });
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);
@@ -216,6 +221,11 @@ public class CreationCartePanel extends ZoomablePanel {
         }
         repaint();
     }//GEN-LAST:event_formMousePressed
+
+    private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
+        mouseWheelMoved(evt);
+        repaint();
+    }//GEN-LAST:event_formMouseWheelMoved
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

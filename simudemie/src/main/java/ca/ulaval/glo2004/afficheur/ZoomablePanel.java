@@ -12,6 +12,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import javax.swing.JPanel;
 
 /**
@@ -19,65 +20,65 @@ import javax.swing.JPanel;
  * @author Jonathan
  */
 public class ZoomablePanel extends JPanel {
+    
     private double zoomFactor = 1;
     private double prevZoomFactor = 1;
-    private boolean zoomer;
-    private boolean dragger;
-    private boolean released;
     private double xOffset = 0;
     private double yOffset = 0;
     private int xDiff = 0;
     private int yDiff = 0;
+    private double xRel = 0;
+    private double yRel = 0;
+    private double zoomDiv = 1;
     private Point startPoint;
+    
+    private Graphics2D g2;
     
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-//        if (zoomer) {
-//            AffineTransform at = new AffineTransform();
-//
-//            double xRel = MouseInfo.getPointerInfo().getLocation().getX() - getLocationOnScreen().getX();
-//            double yRel = MouseInfo.getPointerInfo().getLocation().getY() - getLocationOnScreen().getY();
-//
-//            double zoomDiv = zoomFactor / prevZoomFactor;
-//
-//            xOffset = (zoomDiv) * (xOffset) + (1 - zoomDiv) * xRel;
-//            yOffset = (zoomDiv) * (yOffset) + (1 - zoomDiv) * yRel;
-//
-//            at.translate(xOffset, yOffset);
-//            at.scale(zoomFactor, zoomFactor);
-//            prevZoomFactor = zoomFactor;
-//            g2.transform(at);
-//            zoomer = false;
-//        }
-
         AffineTransform at = new AffineTransform();
+        
         at.translate(xOffset + xDiff, yOffset + yDiff);
         at.scale(zoomFactor, zoomFactor);
-        ((Graphics2D) g).transform(at);
+        
+        g2 = (Graphics2D) g;
+        g2.transform(at);
     }
     
     public Point getOffset(Point point) {
-        return new Point(point.x - (int)xOffset, point.y - (int)yOffset);
+        try {
+            Point2D p = g2.getTransform().createInverse().transform(point, point);
+            return new Point((int)p.getX(), (int)p.getY());
+        } catch (java.awt.geom.NoninvertibleTransformException e) {
+            System.err.println(e);
+        }
+        return null;
     }
     
     public void mouseWheelMoved(MouseWheelEvent e) {
-        zoomer = true;
-
-        //Zoom in
         if (e.getWheelRotation() < 0) {
             zoomFactor *= 1.1;
         }
-        //Zoom out
         if (e.getWheelRotation() > 0) {
             zoomFactor /= 1.1;
         }
+        
+        xRel = MouseInfo.getPointerInfo().getLocation().getX() - getLocationOnScreen().getX();
+        yRel = MouseInfo.getPointerInfo().getLocation().getY() - getLocationOnScreen().getY();
+        
+        zoomDiv = zoomFactor / prevZoomFactor;
+        
+        xOffset = zoomDiv * xOffset + (1 - zoomDiv) * xRel;
+        yOffset = zoomDiv * yOffset + (1 - zoomDiv) * yRel;
+        
+        prevZoomFactor = zoomFactor;
     }
 
     public void mouseDragged(MouseEvent e) {
         Point curPoint = e.getPoint();
         xDiff = curPoint.x - startPoint.x;
-        yDiff = curPoint.y - startPoint.y;        
+        yDiff = curPoint.y - startPoint.y;
     }
 
     public void mousePressed(MouseEvent e) {

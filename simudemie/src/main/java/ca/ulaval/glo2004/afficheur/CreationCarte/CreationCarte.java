@@ -120,7 +120,17 @@ public class CreationCarte extends javax.swing.JPanel {
         setBackground(new java.awt.Color(46, 52, 64));
         setLayout(new java.awt.BorderLayout());
 
-        CreationCartePanel.setLayout(new java.awt.BorderLayout());
+        javax.swing.GroupLayout CreationCartePanelLayout = new javax.swing.GroupLayout(CreationCartePanel);
+        CreationCartePanel.setLayout(CreationCartePanelLayout);
+        CreationCartePanelLayout.setHorizontalGroup(
+            CreationCartePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 921, Short.MAX_VALUE)
+        );
+        CreationCartePanelLayout.setVerticalGroup(
+            CreationCartePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 749, Short.MAX_VALUE)
+        );
+
         add(CreationCartePanel, java.awt.BorderLayout.CENTER);
 
         InformationsPanel.setFocusable(false);

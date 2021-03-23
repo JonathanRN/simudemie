@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import org.apache.commons.math3.distribution.BinomialDistribution;
 import java.awt.Polygon;
+import java.io.Serializable;
 
-public class Region {
+public class Region implements Serializable {
     
     private String nom;
     private int populationSaine;

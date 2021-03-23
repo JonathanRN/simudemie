@@ -5,83 +5,55 @@
  */
 package ca.ulaval.glo2004.domaine.controleur;
 
-import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
-import ca.ulaval.glo2004.afficheur.onglets.OngletMaladie;
-import ca.ulaval.glo2004.domaine.Carte;
-import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.helper.FileHelper;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
  *
  * @author Mick
+ * 
  */
-public class GestionnaireCreation {
-    // TODO: Mettre constantes dans un fichier de param .ini peut-être ?
-    private final String MALADIE_PATH = "C:\\test\\maladies.ser";
-    private final String CARTE_PATH = "C:\\test\\cartes.ser";
-            
-    private FileHelper<Maladie> fileHelperMaladie;
-    private FileHelper<Carte> fileHelperCarte;
-    private Collection<Maladie> maladies;
+public abstract class GestionnaireCreation<T extends Serializable> {
+    protected FileHelper<T> fileHelper;
+    protected Collection<T> collection;
     
+    protected abstract T creer(Object ... parametre);
+    protected abstract T getElement(String nom);
     
-    private static GestionnaireCreation instance;
-    
-    public static GestionnaireCreation getInstance() {
-        if (instance == null) {
-            instance = new GestionnaireCreation();
-        }
-        return instance;
+    public void ajouter(T object) {
+        collection.add(object);
+        sauvegarder();
     }
     
-    private GestionnaireCreation()
-    {
-        fileHelperMaladie = new FileHelper(MALADIE_PATH);
-        fileHelperCarte = new FileHelper(CARTE_PATH);
-        chargerMaladies();
-    }
-    /* ONGLET MALADIE */
-    
-    public Maladie creerMaladie(String nom, double tauxInf, double tauxMort, double tauxGuerison)
-    {   
-        Maladie maladie = new Maladie(nom, tauxInf, tauxMort, tauxGuerison);
-        maladies.add(maladie);
-        sauvegarderMaladies();
-        
-        return maladie;
+    public void charger() {
+        collection = fileHelper.charger();
     }
     
-    public void chargerMaladies() {
-        maladies = fileHelperMaladie.charger();
+    public void supprimer(String nom) {
+        T element = getElement(nom);
+        collection.remove(element);
+        sauvegarder();
     }
     
-    public void supprimerMaladie(String nom) {
-        maladies.removeIf(m -> m.getNom().equals(nom));
-        sauvegarderMaladies();
+    private void sauvegarder() {
+        fileHelper.sauvegarder(collection);
     }
     
-    private void sauvegarderMaladies() {
-        fileHelperMaladie.sauvegarder(maladies);
+    public T importer(String path) {
+        T object = fileHelper.importer(path);
+        collection.add(object);
+        sauvegarder();
+        return object;
     }
     
-    public Maladie importerMaladie(String path) {
-        Maladie maladie = fileHelperMaladie.importer(path);
-        maladies.add(maladie);
-        sauvegarderMaladies();
-        return maladie;
+    public void exporter(String nom, String path) {
+        T element = getElement(nom);
+        fileHelper.exporter(element, path);
     }
     
-    public void exporterMaladie(String nom, String path) {
-        for(Maladie maladie : maladies) {
-            if(maladie.getNom().equals(nom)) {
-                fileHelperMaladie.exporter(maladie, path);
-            }
-        }
-    }
-    
-    public Collection<Maladie> getMaladies() {
-        return maladies;
+    public Collection<T> getCollection() {
+        return collection;
     }
     
     /* ONGLET CARTE */

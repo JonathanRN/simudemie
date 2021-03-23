@@ -5,9 +5,10 @@
  */
 package ca.ulaval.glo2004.domaine;
 import java.awt.Polygon;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Pays {
+public class Pays implements Serializable {
     
     private String nom;
     private ArrayList<VoieLiaison> frontieres = new ArrayList<>();

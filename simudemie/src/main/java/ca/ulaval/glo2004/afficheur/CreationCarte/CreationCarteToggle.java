@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004.afficheur.boutons;
+package ca.ulaval.glo2004.afficheur.CreationCarte;
 
-import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel;
 import ca.ulaval.glo2004.afficheur.CreationCarte.Mode;
 import ca.ulaval.glo2004.afficheur.PanelArrondi;
 import java.awt.Color;
@@ -18,7 +17,7 @@ import javax.swing.ImageIcon;
 public class CreationCarteToggle extends PanelArrondi {
 
     private Mode mode;
-    private CreationCartePanel creation;
+    private CreationCarte creation;
     private Color base, highlight;
     private boolean mouseOver;
     private boolean estToggle;
@@ -30,7 +29,7 @@ public class CreationCarteToggle extends PanelArrondi {
         setBackground(base);
     }
     
-    public void init(CreationCartePanel creation, Mode mode, String path) {
+    public void init(CreationCarte creation, Mode mode, String path) {
         this.creation = creation;
         this.mode = mode;
         

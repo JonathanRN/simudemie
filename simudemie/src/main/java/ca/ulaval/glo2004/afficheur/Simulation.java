@@ -175,7 +175,7 @@ public class Simulation extends javax.swing.JPanel {
             ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ButtonsLayout.createSequentialGroup()
                 .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 897, Short.MAX_VALUE))
+                .addGap(0, 1093, Short.MAX_VALUE))
         );
         ButtonsLayout.setVerticalGroup(
             ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

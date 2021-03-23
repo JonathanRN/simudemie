@@ -5,7 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.carteActions;
 
-import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel;
+import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Region;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
@@ -18,24 +18,24 @@ import java.util.ArrayList;
  */
 public class SplitPaysAction extends ActionCarte {
 
-    private final CreationCartePanel panel;
+    private final CreationCarte creationCarte;
     private final Polygon polygon, gauche, droit;
     private Pays pays;
     private ArrayList<Polygon> polygones;
     
     private Region regionGauche, regionDroite;
 
-    public SplitPaysAction(Polygon p, Polygon gauche, Polygon droit, CreationCartePanel panel) {
+    public SplitPaysAction(Polygon p, Polygon gauche, Polygon droit, CreationCarte panel) {
         this.polygon = p;
         this.gauche = gauche;
         this.droit = droit;
-        this.panel = panel;
+        this.creationCarte = panel;
     }
     
     @Override
     public void Executer() {
-        polygones = panel.getPolygones();
-        pays = GestionnaireScenario.GetInstance().getPays(panel.getIndexCarte(), polygon);
+        polygones = creationCarte.getPanel().getPolygones();
+        pays = GestionnaireScenario.GetInstance().getPays(creationCarte.getIndexCarte(), polygon);
         int index = polygones.indexOf(polygon);
         
         polygones.remove(index);

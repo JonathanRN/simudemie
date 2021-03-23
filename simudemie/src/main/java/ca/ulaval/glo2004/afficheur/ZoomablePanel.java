@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -29,7 +30,9 @@ public class ZoomablePanel extends JPanel {
     private int yDiff = 0;
     private Point startPoint;
     
-    public void paint(Graphics2D g2) {
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
 //        if (zoomer) {
 //            AffineTransform at = new AffineTransform();
 //
@@ -51,7 +54,7 @@ public class ZoomablePanel extends JPanel {
         AffineTransform at = new AffineTransform();
         at.translate(xOffset + xDiff, yOffset + yDiff);
         at.scale(zoomFactor, zoomFactor);
-        g2.transform(at);
+        ((Graphics2D) g).transform(at);
     }
     
     public Point getOffset(Point point) {

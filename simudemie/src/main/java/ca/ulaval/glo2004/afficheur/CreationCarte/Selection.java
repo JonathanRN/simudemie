@@ -10,7 +10,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
-import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.text.ParseException;
 import javax.swing.JTextField;
@@ -22,23 +21,23 @@ import javax.swing.JTextField;
 public class Selection extends Mode {
     
     private Polygon selectionne;
-    private Point anciennePos;
+    //private Point anciennePos;
     
-    public Selection(CreationCartePanel panel) {
+    public Selection(CreationCarte panel) {
         super(panel);
     }
 
     @Override
     public void onDesactive() {
         super.onDesactive();
-        panel.getInformationsPaysPanel().setVisible(false);
+        creationCarte.getInformationsPaysPanel().setVisible(false);
     }
     
     @Override
     public void onActive() {
         super.onActive();
         selectionne = null;
-        panel.getInformationsPaysPanel().setVisible(false);
+        creationCarte.getInformationsPaysPanel().setVisible(false);
     }
     
     @Override
@@ -48,27 +47,24 @@ public class Selection extends Mode {
         }
         
         selectionne = null;
-        for (Polygon p : panel.getPolygones()) {
+        for (Polygon p : creationCarte.getPanel().getPolygones()) {
             if (p.contains(point.x, point.y)) {
                 selectionne = p;
             }
         }
         
-        panel.getInformationsPaysPanel().setVisible(selectionne != null);
+        creationCarte.getInformationsPaysPanel().setVisible(selectionne != null);
         
         if (selectionne != null) {
-            Pays pays = panel.getPays(selectionne);
-            Point2D.Double centre = getCentrePolygone(pays.getPolygone());
-            ca.ulaval.glo2004.domaine.Region region = panel.getRegion(pays, selectionne);
+            Pays pays = creationCarte.getPanel().getPays(selectionne);
+            ca.ulaval.glo2004.domaine.Region region = creationCarte.getPanel().getRegion(pays, selectionne);
             
-            JTextField paysField = panel.getPaysNomField();
+            JTextField paysField = creationCarte.getPaysNomField();
             paysField.setText(pays.getNom());
             
-            panel.getRegionNomField().setText(region.getNom());
-            panel.getPopField().setValue(region.getPopTotale());
-            panel.setPopTotaleTexte(Integer.toString(pays.getPopTotale()));
-            
-            anciennePos = new Point((int)centre.x - paysField.getPreferredSize().width / 2, getHighestPointY(pays.getPolygone()) - panel.getInformationsPaysPanel().getPreferredSize().height - 10);    
+            creationCarte.getRegionNomField().setText(region.getNom());
+            creationCarte.getPopField().setValue(region.getPopTotale());
+            creationCarte.setPopTotaleTexte(Integer.toString(pays.getPopTotale()));
         }
         
         super.onMouseReleased(point);
@@ -76,7 +72,7 @@ public class Selection extends Mode {
     
     @Override
     public void paint(Graphics2D g) {
-        for (Polygon p : panel.getPolygones()) {
+        for (Polygon p : creationCarte.getPanel().getPolygones()) {
             paintLignes(g, Color.black, p);
         }
         
@@ -85,21 +81,17 @@ public class Selection extends Mode {
         if (selectionne != null) {
             paintLignes(g, Color.green, selectionne);
         }
-        
-        if (anciennePos != null) {
-            panel.getInformationsPaysPanel().setLocation(anciennePos);
-        }
     }
     
     private void saveInfos(Polygon p) {
-        Pays pays = panel.getPays(p);
-        ca.ulaval.glo2004.domaine.Region region = panel.getRegion(pays, p);
+        Pays pays = creationCarte.getPanel().getPays(p);
+        ca.ulaval.glo2004.domaine.Region region = creationCarte.getPanel().getRegion(pays, p);
         
-        pays.setNom(panel.getPaysNomField().getText());
-        region.setNom(panel.getRegionNomField().getText());
+        pays.setNom(creationCarte.getPaysNomField().getText());
+        region.setNom(creationCarte.getRegionNomField().getText());
         try {
-            panel.getPopField().commitEdit();
-            region.setPopSaine((int)panel.getPopField().getValue());
+            creationCarte.getPopField().commitEdit();
+            region.setPopSaine((int)creationCarte.getPopField().getValue());
         } catch (ParseException e) {
         }
     }

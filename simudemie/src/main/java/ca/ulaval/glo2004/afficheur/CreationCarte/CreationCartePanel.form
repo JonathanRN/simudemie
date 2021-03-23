@@ -28,7 +28,7 @@
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="InformationsParent">
+    <Container class="ca.ulaval.glo2004.afficheur.ZoomablePanel" name="ZoomablePanel">
       <Properties>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>

@@ -50,21 +50,21 @@ public class Region extends Mode {
     }
 
     @Override
-    public void onMouseDragged(MouseEvent evt) {
-        super.onMouseDragged(evt);
-        line = new Line2D.Double(initial.x, initial.y, evt.getX(), evt.getY());
+    public void onMouseDragged(Point point) {
+        super.onMouseDragged(point);
+        line = new Line2D.Double(initial.x, initial.y, point.x, point.y);
     }
 
     @Override
-    public void onMousePressed(MouseEvent evt) {
-        super.onMousePressed(evt);
-        initial = evt.getPoint();
+    public void onMousePressed(Point point) {
+        super.onMousePressed(point);
+        initial = point;
         line = null;
     }
 
     @Override
-    public void onMouseReleased(MouseEvent evt) {
-        super.onMouseReleased(evt);
+    public void onMouseReleased(Point point) {
+        super.onMouseReleased(point);
         
         polygoneSplit = null;
         

@@ -49,25 +49,25 @@ public class Creation extends Mode {
     }
 
     @Override
-    public void onMouseMoved(MouseEvent evt) {
-        super.onMouseMoved(evt);
-        getPolygoneSousSouris(evt.getX(), evt.getY());
+    public void onMouseMoved(Point point) {
+        super.onMouseMoved(point);
+        getPolygoneSousSouris(point.x, point.y);
     }
 
     @Override
-    public void onMousePressed(MouseEvent evt) {
-        pointDragInitial = evt.getPoint();
+    public void onMousePressed(Point point) {
+        pointDragInitial = point;
         
-        super.onMousePressed(evt);
+        super.onMousePressed(point);
     }
     
     @Override
-    public void onMouseReleased(MouseEvent evt) {
+    public void onMouseReleased(Point point) {
         if (polygoneSousSouris == null) {
-            panel.placerPoint(evt.getX(), evt.getY());
+            panel.placerPoint(point.x, point.y);
             
             // Dessine le nouveau point comme etant selectionne
-            getPolygoneSousSouris(evt.getX(), evt.getY());
+            getPolygoneSousSouris(point.x, point.y);
         }
         else {
             updateLignesInvalides(polygoneSousSouris);
@@ -80,18 +80,18 @@ public class Creation extends Mode {
             
             polygoneSousSouris.invalidate();
         }
-        super.onMouseReleased(evt);
+        super.onMouseReleased(point);
     }
     
     @Override
-    public void onMouseDragged(MouseEvent evt) {
+    public void onMouseDragged(Point point) {
         if (polygoneSousSouris != null && indexSousSouris != -1) {
-            polygoneSousSouris.xpoints[indexSousSouris] = evt.getX();
-            polygoneSousSouris.ypoints[indexSousSouris] = evt.getY();
+            polygoneSousSouris.xpoints[indexSousSouris] = point.x;
+            polygoneSousSouris.ypoints[indexSousSouris] = point.y;
             
             updateLignesInvalides(polygoneSousSouris);            
         }
-        super.onMouseDragged(evt);
+        super.onMouseDragged(point);
     }
     
     private void getPolygoneSousSouris(int x, int y) {

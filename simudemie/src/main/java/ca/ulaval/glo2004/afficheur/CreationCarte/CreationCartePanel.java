@@ -17,6 +17,7 @@ import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -24,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -157,10 +159,10 @@ public class CreationCartePanel extends javax.swing.JPanel {
     }
     
     @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        
+    public void paint(Graphics g) {
+        super.paint(g);
         Graphics2D graphics = (Graphics2D) g;
+        ZoomablePanel.paint(graphics);
 
         graphics.setColor(couleurFill);
         for (int i = 0; i < polygones.size() - 1; i++) {
@@ -174,7 +176,7 @@ public class CreationCartePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        InformationsParent = new javax.swing.JPanel();
+        ZoomablePanel = new ca.ulaval.glo2004.afficheur.ZoomablePanel();
         InformationsPaysPanel = new javax.swing.JPanel();
         PaysNomPanel = new javax.swing.JPanel();
         PaysNomLabel = new javax.swing.JLabel();
@@ -215,8 +217,8 @@ public class CreationCartePanel extends javax.swing.JPanel {
         });
         setLayout(new java.awt.BorderLayout());
 
-        InformationsParent.setOpaque(false);
-        InformationsParent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        ZoomablePanel.setOpaque(false);
+        ZoomablePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         InformationsPaysPanel.setOpaque(false);
         InformationsPaysPanel.setLayout(new java.awt.GridLayout(4, 1, 0, 2));
@@ -265,9 +267,9 @@ public class CreationCartePanel extends javax.swing.JPanel {
 
         InformationsPaysPanel.add(PopTotalePanel);
 
-        InformationsParent.add(InformationsPaysPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 270, -1, -1));
+        ZoomablePanel.add(InformationsPaysPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 270, -1, -1));
 
-        add(InformationsParent, java.awt.BorderLayout.CENTER);
+        add(ZoomablePanel, java.awt.BorderLayout.CENTER);
 
         ToolBar.setBackground(new java.awt.Color(67, 76, 94));
         ToolBar.setPreferredSize(new java.awt.Dimension(968, 50));
@@ -281,7 +283,13 @@ public class CreationCartePanel extends javax.swing.JPanel {
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         requestFocusInWindow();
-        mode.onMouseReleased(evt);
+        if (SwingUtilities.isLeftMouseButton(evt)) {
+            mode.onMouseReleased(ZoomablePanel.getOffset(evt.getPoint()));
+        }
+        
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            ZoomablePanel.mouseReleased(evt);
+        }
         repaint();
     }//GEN-LAST:event_formMouseReleased
     
@@ -291,17 +299,29 @@ public class CreationCartePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_formKeyReleased
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-        mode.onMouseDragged(evt);
+        if (SwingUtilities.isLeftMouseButton(evt)) {
+            mode.onMouseDragged(ZoomablePanel.getOffset(evt.getPoint()));
+        }
+        
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            ZoomablePanel.mouseDragged(evt);
+        }
         repaint();
     }//GEN-LAST:event_formMouseDragged
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
-        mode.onMouseMoved(evt);
+        mode.onMouseMoved(ZoomablePanel.getOffset(evt.getPoint()));
         repaint();
     }//GEN-LAST:event_formMouseMoved
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-        mode.onMousePressed(evt);
+        if (SwingUtilities.isLeftMouseButton(evt)) {
+            mode.onMousePressed(ZoomablePanel.getOffset(evt.getPoint()));        
+        }
+        
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            ZoomablePanel.mousePressed(evt);
+        }
         repaint();
     }//GEN-LAST:event_formMousePressed
 
@@ -325,7 +345,6 @@ public class CreationCartePanel extends javax.swing.JPanel {
     private ca.ulaval.glo2004.afficheur.boutons.CreationCarteToggle BoutonCrayon;
     private ca.ulaval.glo2004.afficheur.boutons.CreationCarteToggle BoutonRegion;
     private ca.ulaval.glo2004.afficheur.boutons.CreationCarteToggle BoutonSelection;
-    private javax.swing.JPanel InformationsParent;
     private javax.swing.JPanel InformationsPaysPanel;
     private javax.swing.JLabel PaysNomLabel;
     private javax.swing.JPanel PaysNomPanel;
@@ -338,5 +357,6 @@ public class CreationCartePanel extends javax.swing.JPanel {
     private javax.swing.JPanel RegionNomPanel;
     private javax.swing.JTextField RegionNomTextField;
     private javax.swing.JPanel ToolBar;
+    private ca.ulaval.glo2004.afficheur.ZoomablePanel ZoomablePanel;
     // End of variables declaration//GEN-END:variables
 }

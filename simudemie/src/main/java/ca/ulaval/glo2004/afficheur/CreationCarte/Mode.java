@@ -7,6 +7,7 @@ package ca.ulaval.glo2004.afficheur.CreationCarte;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -47,14 +48,14 @@ public class Mode {
         
     }
     
-    public void onMousePressed(MouseEvent evt) {
+    public void onMousePressed(Point point) {
         
     }
     
-    public void onMouseReleased(MouseEvent evt) {
+    public void onMouseReleased(Point point) {
     }
     
-    public void onMouseDragged(MouseEvent evt) {
+    public void onMouseDragged(Point point) {
     }
     
     public void onKeyReleased(KeyEvent evt) {
@@ -63,8 +64,8 @@ public class Mode {
         }
     }
     
-    public void onMouseMoved(MouseEvent evt) {
-        updateHighlight(evt);
+    public void onMouseMoved(Point point) {
+        updateHighlight(point);
     }
     
     public boolean estPolygoneValide(Polygon g) {
@@ -166,10 +167,10 @@ public class Mode {
         return areaSegments;
     }
 
-    private void updateHighlight(MouseEvent evt) {
+    private void updateHighlight(Point point) {
         highlight = null;
         for (Polygon p : panel.getPolygones()) {
-            if (p.contains(evt.getX(), evt.getY())) {
+            if (p.contains(point.x, point.y)) {
                 highlight = p;
                 return;
             }

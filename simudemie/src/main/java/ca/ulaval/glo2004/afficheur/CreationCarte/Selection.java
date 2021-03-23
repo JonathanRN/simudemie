@@ -42,14 +42,14 @@ public class Selection extends Mode {
     }
     
     @Override
-    public void onMouseReleased(MouseEvent evt) {
+    public void onMouseReleased(Point point) {
         if (selectionne != null) {
             saveInfos(selectionne);
         }
         
         selectionne = null;
         for (Polygon p : panel.getPolygones()) {
-            if (p.contains(evt.getX(), evt.getY())) {
+            if (p.contains(point.x, point.y)) {
                 selectionne = p;
             }
         }
@@ -71,7 +71,7 @@ public class Selection extends Mode {
             anciennePos = new Point((int)centre.x - paysField.getPreferredSize().width / 2, getHighestPointY(pays.getPolygone()) - panel.getInformationsPaysPanel().getPreferredSize().height - 10);    
         }
         
-        super.onMouseReleased(evt);
+        super.onMouseReleased(point);
     }
     
     @Override

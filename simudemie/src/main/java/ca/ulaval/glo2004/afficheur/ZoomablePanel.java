@@ -34,6 +34,9 @@ public class ZoomablePanel extends JPanel {
     
     private Graphics2D g2;
     
+    private final double zoomMax = 3;
+    private final double zoomMin = 0.2;
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -58,10 +61,14 @@ public class ZoomablePanel extends JPanel {
     
     public void mouseWheelMoved(MouseWheelEvent e) {
         if (e.getWheelRotation() < 0) {
-            zoomFactor *= 1.1;
+            if (zoomFactor * 1.1 < zoomMax) {
+                zoomFactor *= 1.1;
+            }
         }
         if (e.getWheelRotation() > 0) {
-            zoomFactor /= 1.1;
+            if (zoomFactor / 1.1 > zoomMin) {
+                zoomFactor /= 1.1;
+            }
         }
         
         xRel = MouseInfo.getPointerInfo().getLocation().getX() - getLocationOnScreen().getX();

@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
-import java.awt.event.MouseEvent;
 
 /**
  *
@@ -21,14 +20,14 @@ public class Creation extends Mode {
     private int indexSousSouris;
     private Point pointDragInitial;
 
-    public Creation(CreationCartePanel panel) {
+    public Creation(CreationCarte panel) {
         super(panel);
     }
     
     @Override
     public void paint(Graphics2D g) {
-        if (panel.getCourant().npoints >= 2) {
-            paintLignes(g, couleurLigne, panel.getCourant());
+        if (creationCarte.getPanel().getCourant().npoints >= 2) {
+            paintLignes(g, couleurLigne, creationCarte.getPanel().getCourant());
         }
         
         if (polygoneSousSouris != null) {
@@ -36,7 +35,7 @@ public class Creation extends Mode {
         }
         
         g.setColor(Color.white);
-        for (Polygon p : panel.getPolygones()) {
+        for (Polygon p : creationCarte.getPanel().getPolygones()) {
             paintPointPolygone(g, p);
         }
         
@@ -64,7 +63,7 @@ public class Creation extends Mode {
     @Override
     public void onMouseReleased(Point point) {
         if (polygoneSousSouris == null) {
-            panel.placerPoint(point.x, point.y);
+            creationCarte.getPanel().placerPoint(point.x, point.y);
             
             // Dessine le nouveau point comme etant selectionne
             getPolygoneSousSouris(point.x, point.y);
@@ -99,8 +98,8 @@ public class Creation extends Mode {
         indexSousSouris = -1;
         int offset = taillePoint/2 + 5;
         
-        for (Polygon p : panel.getPolygones()) {
-            if (!p.equals(panel.getCourant()) && p.contains(x, y)) {
+        for (Polygon p : creationCarte.getPanel().getPolygones()) {
+            if (!p.equals(creationCarte.getPanel().getCourant()) && p.contains(x, y)) {
                 polygoneSousSouris = p;
             }
             

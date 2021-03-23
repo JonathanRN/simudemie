@@ -10,7 +10,6 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
 import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
@@ -25,11 +24,11 @@ public class Mode {
     
     protected final int taillePoint = 20;
     protected final Color couleurLigne = new Color(136, 192, 208);
-    protected final CreationCartePanel panel;
+    protected final CreationCarte creationCarte;
     protected ArrayList<Line2D.Double> lignesInvalides = new ArrayList<>(); 
 
-    public Mode(CreationCartePanel panel) {
-        this.panel = panel;
+    public Mode(CreationCarte panel) {
+        this.creationCarte = panel;
     }
     
     public void paint(Graphics2D g) {
@@ -59,8 +58,8 @@ public class Mode {
     }
     
     public void onKeyReleased(KeyEvent evt) {
-        if (panel.getCourant().npoints >= 3 && evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            panel.creerPolygone();
+        if (creationCarte.getPanel().getCourant().npoints >= 3 && evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            creationCarte.getPanel().creerPolygone();
         }
     }
     
@@ -100,8 +99,8 @@ public class Mode {
         ArrayList<Line2D.Double> invalides = new ArrayList<>();
         
         for (Line2D.Double line : getPolygonLines(p)) {
-            for (int x = 0; x < panel.getPolygones().size(); x++) {
-                ArrayList<Line2D.Double> linesP2 = getPolygonLines(panel.getPolygones().get(x));
+            for (int x = 0; x < creationCarte.getPanel().getPolygones().size(); x++) {
+                ArrayList<Line2D.Double> linesP2 = getPolygonLines(creationCarte.getPanel().getPolygones().get(x));
                 for (Line2D.Double lineP2 : linesP2) {
                     if (line.intersectsLine(lineP2) &&
                         line.x1 != lineP2.x1 &&
@@ -169,7 +168,7 @@ public class Mode {
 
     private void updateHighlight(Point point) {
         highlight = null;
-        for (Polygon p : panel.getPolygones()) {
+        for (Polygon p : creationCarte.getPanel().getPolygones()) {
             if (p.contains(point.x, point.y)) {
                 highlight = p;
                 return;
@@ -177,7 +176,7 @@ public class Mode {
         }
     }
 
-    protected Point2D.Double getCentrePolygone(Polygon p) {
+    protected Point getCentrePolygone(Polygon p) {
         double x = 0.;
         double y = 0.;
         for (int i = 0; i < p.npoints; i++){
@@ -188,6 +187,6 @@ public class Mode {
         x = x / p.npoints;
         y = y / p.npoints;
 
-        return new Point2D.Double(x, y);
+        return creationCarte.getPanel().getOffset(new Point((int)x, (int)y));
     }
 }

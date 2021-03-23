@@ -25,13 +25,13 @@ public class Region extends Mode {
     private Line2D.Double line;
     private Polygon polygoneSplit;
     
-    public Region(CreationCartePanel panel) {
+    public Region(CreationCarte panel) {
         super(panel);
     }
 
     @Override
     public void paint(Graphics2D g) {
-        for (Polygon p : panel.getPolygones()) {
+        for (Polygon p : creationCarte.getPanel().getPolygones()) {
             paintLignes(g, Color.black, p);
         }
         
@@ -41,7 +41,7 @@ public class Region extends Mode {
             g.setColor(Color.yellow);
             g.drawLine((int)line.x1, (int)line.y1, (int)line.x2, (int)line.y2);
             
-            for (Polygon p : panel.getPolygones()) {
+            for (Polygon p : creationCarte.getPanel().getPolygones()) {
                 for (Point.Double point : getIntersections(p, line)) {
                     g.fillOval((int)point.x - 5, (int)point.y - 5, 10, 10);
                 }
@@ -72,7 +72,7 @@ public class Region extends Mode {
             return;
         }
         
-        for (Polygon p : panel.getPolygones()) {
+        for (Polygon p : creationCarte.getPanel().getPolygones()) {
             if (polygoneSplitLigne(p, line)) {
                 polygoneSplit = p;
             }
@@ -81,7 +81,7 @@ public class Region extends Mode {
         if (polygoneSplit != null) {
             PolygoneDivise divise = splitPolygone(polygoneSplit, line);
             if (divise != null) {
-                panel.splitPays(polygoneSplit, divise);
+                creationCarte.getPanel().splitPays(polygoneSplit, divise);
             }
         }
         

@@ -27,7 +27,7 @@ public class CreationCarte extends javax.swing.JPanel {
         
         BoutonSelection.init(this, new Selection(this), "icons8_cursor_25px");
         BoutonCrayon.init(this, new Creation(this), "icons8_pen_25px");
-        BoutonRegion.init(this, new ca.ulaval.glo2004.afficheur.CreationCarte.Region(this), "icons8_pen_25px");
+        BoutonRegion.init(this, new ca.ulaval.glo2004.afficheur.CreationCarte.Region(this), "icons8_scissors_25px");
         onToggleClick(BoutonSelection);
         
         PopulationTotale = new JSpinner(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 100));

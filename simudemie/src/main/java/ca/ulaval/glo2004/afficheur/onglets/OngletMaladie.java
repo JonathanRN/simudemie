@@ -44,7 +44,6 @@ public class OngletMaladie extends OngletUI {
         statsMaladiePanel1.setOnglet(this);
         
         for(Maladie maladie : GestionnaireCreation.getInstance().getMaladies()) {
-            System.out.println(maladie.getNom());
             ajouterCard(maladie);
         }
     }
@@ -69,9 +68,9 @@ public class OngletMaladie extends OngletUI {
     private void ajouterCard(Maladie maladie) {
         ObjetMaladie card = new ObjetMaladie(this);
         card.setNom(maladie.getNom());
-        card.setInfectedProgressBar(Math.round(maladie.getTauxInfection()));
-        card.setCuredProgressBar(Math.round(maladie.getTauxGuerison()));
-        card.setDeadProgressBar(Math.round(maladie.getTauxMortalite()));
+        card.setInfectedProgressBar(maladie.getTauxInfection());
+        card.setCuredProgressBar(maladie.getTauxGuerison());
+        card.setDeadProgressBar(maladie.getTauxMortalite());
         objets.add(card);
         MaladiesContainer.add(card);
         
@@ -84,13 +83,19 @@ public class OngletMaladie extends OngletUI {
     
     @Override
     public void retirerCourant() {
-        MaladiesContainer.remove(courant);
-        objets.remove(courant);
-        setCardLocked(false);
-        statsMaladiePanel1.setModifying(false);
-        updateUI();
-        
-        super.retirerCourant();
+        if(objets.size() > 0) {
+            ObjetMaladie objetMaladie = (ObjetMaladie) courant;
+            GestionnaireCreation.getInstance().supprimerMaladie(objetMaladie.getNom());
+            
+            MaladiesContainer.remove(courant);
+            objets.remove(courant);
+            setCardLocked(false);
+            statsMaladiePanel1.setModifying(false);
+            updateUI();
+
+
+            super.retirerCourant();
+        }
     }
 
     @Override

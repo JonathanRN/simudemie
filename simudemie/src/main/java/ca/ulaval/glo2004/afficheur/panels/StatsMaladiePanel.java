@@ -44,7 +44,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         }
     }
     
-    private void init() {
+    private void init() {        
         InfectionLabel = new javax.swing.JLabel();
         InfectionLabel.setFont(FontRegister.RobotoLight.deriveFont(24f));
         InfectionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -52,7 +52,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         InfectionLabel.setToolTipText("");
         Parent.add(InfectionLabel);
         
-        InfectionInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 100, 0.01));
+        InfectionInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 100, 0.10));
         InfectionInput.setEnabled(false);
         Parent.add(InfectionInput);
 
@@ -63,7 +63,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         CuredLabel.setToolTipText("");
         Parent.add(CuredLabel);
 
-        CuredInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 100, 0.01));
+        CuredInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 100, 0.10));
         CuredInput.setEnabled(false);
         Parent.add(CuredInput);
 
@@ -74,7 +74,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         DeadLabel.setToolTipText("");
         Parent.add(DeadLabel);
 
-        DeadInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 100, 0.01));
+        DeadInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 100, 0.10));
         DeadInput.setEnabled(false);
         Parent.add(DeadInput);
     }
@@ -117,9 +117,9 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         ObjetMaladie objetMaladie = (ObjetMaladie)onglet.getCourant();
         
         objetMaladie.setNom(maladie.getNom());
-        objetMaladie.setInfectedProgressBar(Math.round(maladie.getTauxInfection()));
-        objetMaladie.setCuredProgressBar(Math.round(maladie.getTauxGuerison()));
-        objetMaladie.setDeadProgressBar(Math.round(maladie.getTauxMortalite()));
+        objetMaladie.setInfectedProgressBar(maladie.getTauxInfection());
+        objetMaladie.setCuredProgressBar(maladie.getTauxGuerison());
+        objetMaladie.setDeadProgressBar(maladie.getTauxMortalite());
     }
     
     /**
@@ -215,7 +215,11 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_DeleteButtonMouseReleased
 
     private void ModifyButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifyButtonMouseReleased
-        setModifying(!onglet.getCardLocked());
+        boolean isModifying = !onglet.getCardLocked();
+        setModifying(isModifying);
+        if(!isModifying) {
+            sauvegarderMaladie();
+        }
     }//GEN-LAST:event_ModifyButtonMouseReleased
 
     public void setModifying(boolean isModifying) {
@@ -225,7 +229,6 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         } else {
             ModifyButton.setText("Modifier");
             ModifyButton.setToolTipText("Modifier les informations");
-            sauvegarderMaladie();
         }
         
         enableFields(isModifying);
@@ -243,8 +246,6 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             this.requestFocusInWindow();
             updateUI();
-
-            sauvegarderMaladie();
         }
     }//GEN-LAST:event_MaladieInputKeyReleased
 

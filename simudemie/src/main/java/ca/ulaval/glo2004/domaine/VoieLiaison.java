@@ -5,8 +5,10 @@
  */
 package ca.ulaval.glo2004.domaine;
 
+import java.io.Serializable;
 
-public class VoieLiaison {
+
+public class VoieLiaison implements Serializable {
     
     private Pays paysOrigine;
     private Pays paysDestination;

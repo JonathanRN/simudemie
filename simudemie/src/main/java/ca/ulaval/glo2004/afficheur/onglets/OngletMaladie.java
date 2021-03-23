@@ -10,7 +10,7 @@ import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetMaladie;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 import ca.ulaval.glo2004.domaine.Maladie;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireCreation;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireCreationMaladie;
 import java.awt.Color;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -46,7 +46,7 @@ public class OngletMaladie extends OngletUI {
     public void init() {
         statsMaladiePanel1.setOnglet(this);
         
-        for(Maladie maladie : GestionnaireCreation.getInstance().getMaladies()) {
+        for(Maladie maladie : GestionnaireCreationMaladie.getInstance().getCollection()) {
             ajouterCard(maladie);
         }
     }
@@ -88,7 +88,7 @@ public class OngletMaladie extends OngletUI {
     public void retirerCourant() {
         if(objets.size() > 0) {
             ObjetMaladie objetMaladie = (ObjetMaladie) courant;
-            GestionnaireCreation.getInstance().supprimerMaladie(objetMaladie.getNom());
+            GestionnaireCreationMaladie.getInstance().supprimer(objetMaladie.getNom());
             
             MaladiesContainer.remove(courant);
             objets.remove(courant);
@@ -285,14 +285,14 @@ public class OngletMaladie extends OngletUI {
     private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
         fileChooser.showOpenDialog(null);
         System.out.println(fileChooser.getSelectedFile());
-        Maladie maladie = GestionnaireCreation.getInstance().importerMaladie(fileChooser.getSelectedFile().toString());
+        Maladie maladie = GestionnaireCreationMaladie.getInstance().importer(fileChooser.getSelectedFile().toString());
         ajouterCard(maladie);
     }//GEN-LAST:event_ImportScenarioButtonMouseReleased
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
         fileChooser.showOpenDialog(null);
         ObjetMaladie objetMaladie = (ObjetMaladie) courant;
-        GestionnaireCreation.getInstance().exporterMaladie(objetMaladie.getNom(), fileChooser.getSelectedFile().toString());
+        GestionnaireCreationMaladie.getInstance().exporter(objetMaladie.getNom(), fileChooser.getSelectedFile().toString());
     }//GEN-LAST:event_BoutonExportMouseReleased
 
     public boolean getCardLocked() {

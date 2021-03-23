@@ -36,11 +36,13 @@ public class Creation extends Mode {
         
         g.setColor(Color.white);
         for (Polygon p : creationCarte.getPanel().getPolygones()) {
-            paintPointPolygone(g, p);
+            if (!creationCarte.getPanel().estRegionUnique(p)) {
+                paintPointPolygone(g, p);
+            }
         }
         
         g.setColor(Color.green);
-        if (polygoneSousSouris != null && indexSousSouris != -1) {
+        if (polygoneSousSouris != null && indexSousSouris != -1 && !creationCarte.getPanel().estRegionUnique(polygoneSousSouris)) {
             g.fillOval(polygoneSousSouris.xpoints[indexSousSouris] - taillePoint/2, polygoneSousSouris.ypoints[indexSousSouris] - taillePoint/2, taillePoint, taillePoint);
         }
         

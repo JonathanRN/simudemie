@@ -84,6 +84,11 @@ public class CreationCartePanel extends ZoomablePanel {
         return GestionnaireScenario.GetInstance().getPays(creationCarte.getIndexCarte(), p);
     }
     
+    public boolean estRegionUnique(Polygon p) {
+        Pays pays = getPays(p);
+        return pays != null && pays.getRegions().size() > 1;
+    }
+    
     public ca.ulaval.glo2004.domaine.Region getRegion(Pays pays, Polygon p) {
         for (Region r : pays.getRegions()) {
             if (r.getPolygone().equals(p)) {

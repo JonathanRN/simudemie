@@ -5,8 +5,6 @@
  */
 package ca.ulaval.glo2004.domaine;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Jonathan
@@ -16,7 +14,7 @@ public class Jour {
     public final Maladie maladie;
     
     
-    public Jour(Carte carte, Maladie maladie, ArrayList<Mesure> mesures) {
+    public Jour(Carte carte, Maladie maladie) {
         this.carte = carte;
         this.maladie = maladie;
         

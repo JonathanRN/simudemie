@@ -17,7 +17,6 @@ import javax.swing.Timer;
 
 
 public class GestionnaireScenario implements ActionListener {
-    private ArrayList<Carte> cartes = new ArrayList<>();
     private List<Jour> jours = new ArrayList<>();
     private Jour jourCourant;
     private Timer timer;

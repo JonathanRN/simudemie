@@ -10,7 +10,7 @@ import java.util.Random;
 import org.apache.commons.math3.distribution.BinomialDistribution;
 import java.awt.Polygon;
 import java.io.Serializable;
-import ca.ulaval.glo2004.domaine.Carte;
+
 
 public class Region implements Serializable {
     
@@ -33,23 +33,23 @@ public class Region implements Serializable {
     
     public void contaminer(double taux)
     {
-        int nouveauxInfectes  = (int)(populationSaine * taux);
-        setPopSaine(populationSaine - nouveauxInfectes);
-        setPopInfectee(populationInfectee + nouveauxInfectes);
+        int nouveauxInfectes  = contaminationBinomiale(taux);
+        setPopSaine(this.getPopSaine() - nouveauxInfectes);
+        setPopInfectee(this.getPopInfectee() + nouveauxInfectes);
     }
     
     public void eliminerPopulation(double taux)
     {
-        int deces  = (int)(populationInfectee * taux);
-        setPopInfectee(populationInfectee - deces);
-        setPopDecedee(populationDecedee + deces);
+        int deces  = (int)(this.getPopInfectee() * taux);
+        setPopInfectee(this.getPopInfectee() - deces);
+        setPopDecedee(this.getPopDecedee() + deces);
     }
     
     public void guerirPop(double taux)
     {
-        int gueris = (int)(populationInfectee * taux);
-        setPopInfectee(populationInfectee - gueris);
-        setPopSaine(populationSaine + gueris);
+        int gueris = (int)(this.getPopInfectee() * taux);
+        setPopInfectee(this.getPopInfectee() - gueris);
+        setPopSaine(this.getPopSaine() + gueris);
     }
     
     public String getNom(){return nom;}
@@ -93,58 +93,56 @@ public class Region implements Serializable {
         this.populationDecedee = populationDecedee;
     }
     
-    
-        /*
-    
-    Random rnd = new Random (System.currentTimeMillis());
-    double seuilTol = 0.0001;
-    
-    int nbInfectees = 50000;
-    double tauxPropag = 0.01;
+    private int contaminationBinomiale(double tauxPropag)
+    {
+        Random rnd = new Random (System.currentTimeMillis());
+        double seuilTol = 0.0001;
 
-    BinomialDistribution binomial = new BinomialDistribution(nbInfectees, tauxPropag);
+        int nbInfectees = this.getPopInfectee();
 
-    ArrayList<Double> probabilites = new ArrayList<>();
-    ArrayList<Integer> nombreSucces = new ArrayList<>();
+        BinomialDistribution binomial = new BinomialDistribution(nbInfectees, tauxPropag);
 
-    double x = nbInfectees * tauxPropag;
-    int cpt = 0;
-    double prob = binomial.probability((int)x);
-    
-    System.out.println(prob); 
-    
-    while(prob > seuilTol && x >= 0){
-        probabilites.add(prob);
-        nombreSucces.add(cpt);
-        cpt += 1;
-        x -= 1;
-        prob = binomial.probability((int)x);
-    }
+        ArrayList<Double> probabilites = new ArrayList<>();
+        ArrayList<Integer> nombreSucces = new ArrayList<>();
 
-    //System.out.println(probabilites);
-    //System.out.println(nombreSucces);
+        double x = nbInfectees * tauxPropag;
+        int cpt = 0;
+        double prob = binomial.probability((int)x);
 
-    double randomNumber = 0.0; 
-    double current = 0.0; //treshold
-    int success = 0;
+        System.out.println(prob); 
 
-    for (int k = 0; k < 10; k++){
-        randomNumber = rnd.nextDouble();
-        current = 0.0; //treshold
-        success = 0;
-        for(int i = 0; i < probabilites.size(); i++){
-            current += probabilites.get(0);
-            if(randomNumber < current){
-                success = nombreSucces.get(i);
-                break;
+        while(prob > seuilTol && x >= 0){
+            probabilites.add(prob);
+            nombreSucces.add(cpt);
+            cpt += 1;
+            x -= 1;
+            prob = binomial.probability((int)x);
+        }
+
+        //System.out.println(probabilites);
+        //System.out.println(nombreSucces);
+
+        double randomNumber = 0.0; 
+        double current = 0.0; //treshold
+        int success = 0;
+
+        for (int k = 0; k < 10; k++){
+            randomNumber = rnd.nextDouble();
+            current = 0.0; //treshold
+            success = 0;
+            for(int i = 0; i < probabilites.size(); i++){
+                current += probabilites.get(0);
+                if(randomNumber < current){
+                    success = nombreSucces.get(i);
+                    break;
+                }
             }
         }
+
+        return (int)(nbInfectees*tauxPropag + success);
+        //System.out.println(success); 
+        //System.out.println(randomNumber);
+        //System.out.println(resultatInfectees);
+        
     }
-    
-    int resultatInfectees = (int)(nbInfectees*tauxPropag + success);
-    //System.out.println(success); 
-    //System.out.println(randomNumber);
-    //System.out.println(resultatInfectees);
-    
-    */
 }

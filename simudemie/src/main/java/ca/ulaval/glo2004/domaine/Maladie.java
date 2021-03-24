@@ -32,22 +32,22 @@ public class Maladie implements Serializable {
     
     public double getTauxGuerison(){return tauxGuerison;}
     
-    private void setNom(String nom)
+    public void setNom(String nom)
     {
         this.nom = nom;
     }
     
-    private void setTauxInfection(double tauxInfection)
+    public void setTauxInfection(double tauxInfection)
     {
         this.tauxInfection = tauxInfection;
     }
         
-    private void setTauxMortalite(double tauxMortalite)
+    public void setTauxMortalite(double tauxMortalite)
     {
         this.tauxMortalite = tauxMortalite;
     }
     
-    private void setTauxGuerison(double tauxGuerison)
+    public void setTauxGuerison(double tauxGuerison)
     {
         this.tauxGuerison = tauxGuerison;
     }

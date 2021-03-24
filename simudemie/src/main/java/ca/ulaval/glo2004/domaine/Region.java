@@ -10,6 +10,7 @@ import java.util.Random;
 import org.apache.commons.math3.distribution.BinomialDistribution;
 import java.awt.Polygon;
 import java.io.Serializable;
+import ca.ulaval.glo2004.domaine.Carte;
 
 public class Region implements Serializable {
     
@@ -97,25 +98,33 @@ public class Region implements Serializable {
     
     Random rnd = new Random (System.currentTimeMillis());
     double seuilTol = 0.0001;
+    
+    int nbInfectees = 50000;
+    double tauxPropag = 0.01;
 
-    BinomialDistribution binomial = new BinomialDistribution(100, 0.05);
+    BinomialDistribution binomial = new BinomialDistribution(nbInfectees, tauxPropag);
 
     ArrayList<Double> probabilites = new ArrayList<>();
     ArrayList<Integer> nombreSucces = new ArrayList<>();
 
-    int x = 5;
-    double prob = binomial.probability(x);
+    double x = nbInfectees * tauxPropag;
+    int cpt = 0;
+    double prob = binomial.probability((int)x);
+    
+    System.out.println(prob); 
+    
     while(prob > seuilTol && x >= 0){
         probabilites.add(prob);
-        nombreSucces.add(x);
+        nombreSucces.add(cpt);
+        cpt += 1;
         x -= 1;
-        prob = binomial.probability(x);
+        prob = binomial.probability((int)x);
     }
 
-    System.out.println(probabilites);
-    System.out.println(nombreSucces);
+    //System.out.println(probabilites);
+    //System.out.println(nombreSucces);
 
-    double randomNumber = 0.0;
+    double randomNumber = 0.0; 
     double current = 0.0; //treshold
     int success = 0;
 
@@ -131,6 +140,11 @@ public class Region implements Serializable {
             }
         }
     }
+    
+    int resultatInfectees = (int)(nbInfectees*tauxPropag + success);
+    //System.out.println(success); 
+    //System.out.println(randomNumber);
+    //System.out.println(resultatInfectees);
     
     */
 }

@@ -14,20 +14,20 @@ import java.awt.Polygon;
  *
  * @author Mick
  */
-public class GestionnaireCreationCarte extends GestionnaireCreation<Carte> {
+public class GestionnaireCarte extends GestionnaireOnglet<Carte> {
     // TODO: Mettre constantes dans un fichier de param .ini peut-être ?
     protected final String PATH = "C:\\test\\cartes.ser";
     
-    private static GestionnaireCreationCarte instance;
+    private static GestionnaireCarte instance;
     
-    public static GestionnaireCreationCarte getInstance() {
+    public static GestionnaireCarte getInstance() {
         if(instance == null) {
-            instance = new GestionnaireCreationCarte();
+            instance = new GestionnaireCarte();
         }
         return instance;
     }
     
-    private GestionnaireCreationCarte() {
+    private GestionnaireCarte() {
         fileHelper = new FileHelper(PATH);
         charger();
     }

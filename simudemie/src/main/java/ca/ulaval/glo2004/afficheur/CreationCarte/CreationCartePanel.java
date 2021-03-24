@@ -13,7 +13,7 @@ import ca.ulaval.glo2004.afficheur.carteActions.CreerPolygoneAction;
 import ca.ulaval.glo2004.afficheur.carteActions.SplitPaysAction;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Region;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireCreationCarte;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -81,7 +81,7 @@ public class CreationCartePanel extends ZoomablePanel {
     }
     
     public Pays getPays(Polygon p) {
-        return GestionnaireCreationCarte.getInstance().getPays(creationCarte.getIndexCarte(), p);
+        return GestionnaireCarte.getInstance().getPays(creationCarte.getIndexCarte(), p);
     }
     
     public boolean estRegionUnique(Polygon p) {

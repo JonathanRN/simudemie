@@ -10,7 +10,7 @@ import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetMaladie;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 import ca.ulaval.glo2004.domaine.Maladie;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireCreationMaladie;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireMaladie;
 import java.awt.Color;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -23,7 +23,7 @@ import javax.swing.SwingUtilities;
 public class OngletMaladie extends OngletUI {
     
     private final JFileChooser fileChooser = new JFileChooser();
-    private GestionnaireCreationMaladie controller;
+    private GestionnaireMaladie controller;
     // Si à true, on ne peut pas sélectionner d'autre cartes maladie
     private boolean cardLocked;
     
@@ -31,7 +31,7 @@ public class OngletMaladie extends OngletUI {
         initComponents();
         
         cardLocked = false;
-        controller = new GestionnaireCreationMaladie();
+        controller = new GestionnaireMaladie();
         try {        
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             MaladieLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
@@ -300,7 +300,7 @@ public class OngletMaladie extends OngletUI {
         this.cardLocked = cardLocked;
     }
     
-    public GestionnaireCreationMaladie getController() {
+    public GestionnaireMaladie getController() {
         return controller;
     }
 

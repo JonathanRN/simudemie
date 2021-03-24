@@ -14,7 +14,7 @@ import java.util.List;
  * @author Mick
  * 
  */
-public abstract class GestionnaireCreation<T extends Serializable> {
+public abstract class GestionnaireOnglet<T extends Serializable> {
     protected FileHelper<T> fileHelper;
     protected List<T> list;
     

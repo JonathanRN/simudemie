@@ -10,8 +10,9 @@ import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetCarte;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 import ca.ulaval.glo2004.domaine.Carte;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireCreationCarte;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import java.awt.Color;
+import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
 
 /**
@@ -19,6 +20,8 @@ import javax.swing.SwingUtilities;
  * @author Jonathan
  */
 public class OngletCarte extends OngletUI {
+    
+    private final JFileChooser fileChooser = new JFileChooser();
     
     /**
      * Creates new form ScenarioTab
@@ -43,7 +46,7 @@ public class OngletCarte extends OngletUI {
     
     public void init() {
         mapStatsPanel1.setOnglet(this);
-        for(Carte carte : GestionnaireCreationCarte.getInstance().getList()) {
+        for(Carte carte : GestionnaireCarte.getInstance().getList()) {
             ajouterCard(carte);
         }
     }
@@ -56,7 +59,7 @@ public class OngletCarte extends OngletUI {
         // todo a changer
         card.setMapName("Carte: " + objets.size());
         
-        GestionnaireCreationCarte.getInstance().creer(card.getNomCarte());
+        GestionnaireCarte.getInstance().creer(card.getNomCarte());
         
         objets.add(card);
         onClickObjetUI(card);
@@ -80,7 +83,7 @@ public class OngletCarte extends OngletUI {
     
     @Override
     public void retirerCourant() {
-        GestionnaireCreationCarte.getInstance().supprimer(getIndexCourant());
+        GestionnaireCarte.getInstance().supprimer(getIndexCourant());
         objets.remove(courant);
         MapPanelContainer.remove(courant);
         updateUI();
@@ -161,6 +164,11 @@ public class OngletCarte extends OngletUI {
         ImportMapButton.setMaximumSize(new java.awt.Dimension(75, 30));
         ImportMapButton.setMinimumSize(new java.awt.Dimension(75, 30));
         ImportMapButton.setPreferredSize(new java.awt.Dimension(100, 36));
+        ImportMapButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ImportMapButtonMouseReleased(evt);
+            }
+        });
 
         BoutonExport.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         BoutonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
@@ -169,6 +177,11 @@ public class OngletCarte extends OngletUI {
         BoutonExport.setMaximumSize(new java.awt.Dimension(75, 30));
         BoutonExport.setMinimumSize(new java.awt.Dimension(75, 30));
         BoutonExport.setPreferredSize(new java.awt.Dimension(100, 36));
+        BoutonExport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BoutonExportMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout MapTitlePanelLayout = new javax.swing.GroupLayout(MapTitlePanel);
         MapTitlePanel.setLayout(MapTitlePanelLayout);
@@ -238,6 +251,17 @@ public class OngletCarte extends OngletUI {
     private void AddMapButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddMapButtonMouseClicked
         ajouterObjetUI();
     }//GEN-LAST:event_AddMapButtonMouseClicked
+
+    private void ImportMapButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportMapButtonMouseReleased
+        fileChooser.showOpenDialog(null);
+        Carte carte = GestionnaireCarte.getInstance().importer(fileChooser.getSelectedFile().toString());
+        ajouterCard(carte);
+    }//GEN-LAST:event_ImportMapButtonMouseReleased
+
+    private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
+        fileChooser.showOpenDialog(null);
+        GestionnaireCarte.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
+    }//GEN-LAST:event_BoutonExportMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddMapButton;

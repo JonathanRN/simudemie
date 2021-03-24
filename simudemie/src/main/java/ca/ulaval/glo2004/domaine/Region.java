@@ -58,6 +58,8 @@ public class Region implements Serializable {
     
     public int getPopSaine(){return populationSaine;}
     
+    public double getPourcentageInfection(){return (this.getPopSaine()/this.getPopInfectee()*100);}
+    
 //    public int getPopImmunisee(){return populationImmune;}
     
     public int getPopInfectee(){return populationInfectee;}

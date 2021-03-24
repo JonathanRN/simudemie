@@ -55,36 +55,7 @@ public class GestionnaireScenario implements ActionListener {
         jours.add(jourCourant);
         chargerJour(new Jour(jourCourant));
     }
-    
-    public void creerCarte(String nom) {
-        System.out.println("Creer carte: " + nom);
-        cartes.add(new Carte(nom));
-    }
-    
-    public void supprimeCarte(int index) {
-        if (cartes.contains(getCarte(index))) {
-            System.out.println("Supprime carte: " + getCarte(index).getNom());
-            cartes.remove(index);
-        }
-    }
-    
-    public Carte getCarte(int index) {
-        return cartes.get(index);
-    }
-    
-    public void creerPays(int index, Pays pays) {
-        getCarte(index).ajouterPays(pays);
-        System.out.println(String.format("%s -> %s", getCarte(index).getNom(), pays.getNom()));
-    }
-    
-    public Pays getPays(int indexCarte, int index) {
-        return cartes.get(indexCarte).getPays(index);
-    }
-    
-    public Pays getPays(int indexCarte, Polygon p) {
-        return cartes.get(indexCarte).getPays(p);
-    }
-        
+
     private void importer(String filePath)
     {
         // Importer selon le path et creer une nouvelle liste de journees...? (todo UI)

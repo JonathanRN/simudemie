@@ -5,14 +5,16 @@
  */
 package ca.ulaval.glo2004.domaine;
 
+import java.io.Serializable;
 
-public class Mesure {
+
+public class Mesure implements Serializable{
     
     private String nom;
     private float tauxAdhesion;
     private float tauxReductionProp;
     
-    Mesure(String nom, float tauxAdhesion, float tauxReductionProp)
+    public Mesure(String nom, float tauxAdhesion, float tauxReductionProp)
     {
         this.nom = nom; 
         this.tauxAdhesion = tauxAdhesion;

@@ -23,7 +23,7 @@ import javax.swing.SwingUtilities;
 public class OngletMaladie extends OngletUI {
     
     private final JFileChooser fileChooser = new JFileChooser();
-    
+    private GestionnaireCreationMaladie controller;
     // Si à true, on ne peut pas sélectionner d'autre cartes maladie
     private boolean cardLocked;
     
@@ -31,7 +31,7 @@ public class OngletMaladie extends OngletUI {
         initComponents();
         
         cardLocked = false;
-        
+        controller = new GestionnaireCreationMaladie();
         try {        
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             MaladieLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
@@ -46,7 +46,7 @@ public class OngletMaladie extends OngletUI {
     public void init() {
         statsMaladiePanel1.setOnglet(this);
         
-        for(Maladie maladie : GestionnaireCreationMaladie.getInstance().getCollection()) {
+        for(Maladie maladie : controller.getList()) {
             ajouterCard(maladie);
         }
     }
@@ -87,8 +87,7 @@ public class OngletMaladie extends OngletUI {
     @Override
     public void retirerCourant() {
         if(objets.size() > 0) {
-            ObjetMaladie objetMaladie = (ObjetMaladie) courant;
-            GestionnaireCreationMaladie.getInstance().supprimer(objetMaladie.getNom());
+            controller.supprimer(getIndexCourant());
             
             MaladiesContainer.remove(courant);
             objets.remove(courant);
@@ -284,15 +283,13 @@ public class OngletMaladie extends OngletUI {
 
     private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
         fileChooser.showOpenDialog(null);
-        System.out.println(fileChooser.getSelectedFile());
-        Maladie maladie = GestionnaireCreationMaladie.getInstance().importer(fileChooser.getSelectedFile().toString());
+        Maladie maladie = controller.importer(fileChooser.getSelectedFile().toString());
         ajouterCard(maladie);
     }//GEN-LAST:event_ImportScenarioButtonMouseReleased
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
         fileChooser.showOpenDialog(null);
-        ObjetMaladie objetMaladie = (ObjetMaladie) courant;
-        GestionnaireCreationMaladie.getInstance().exporter(objetMaladie.getNom(), fileChooser.getSelectedFile().toString());
+        controller.exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
     }//GEN-LAST:event_BoutonExportMouseReleased
 
     public boolean getCardLocked() {
@@ -301,6 +298,10 @@ public class OngletMaladie extends OngletUI {
     
     public void setCardLocked(boolean cardLocked) {
         this.cardLocked = cardLocked;
+    }
+    
+    public GestionnaireCreationMaladie getController() {
+        return controller;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -7,7 +7,7 @@ package ca.ulaval.glo2004.domaine.controleur;
 
 import ca.ulaval.glo2004.domaine.helper.FileHelper;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -16,45 +16,45 @@ import java.util.Collection;
  */
 public abstract class GestionnaireCreation<T extends Serializable> {
     protected FileHelper<T> fileHelper;
-    protected Collection<T> collection;
+    protected List<T> list;
     
-    protected abstract T creer(Object ... parametre);
-    protected abstract T getElement(String nom);
+    public abstract T creer(Object ... arguments);
     
-    public void ajouter(T object) {
-        collection.add(object);
+    protected void ajouter(T object) {
+        list.add(object);
         sauvegarder();
+    }
+
+    public void sauvegarder() {
+        fileHelper.sauvegarder(list);
     }
     
     public void charger() {
-        collection = fileHelper.charger();
+        list = fileHelper.charger();
     }
     
-    public void supprimer(String nom) {
-        T element = getElement(nom);
-        collection.remove(element);
+    public void supprimer(int index) {
+        list.remove(index);
         sauvegarder();
-    }
-    
-    private void sauvegarder() {
-        fileHelper.sauvegarder(collection);
     }
     
     public T importer(String path) {
         T object = fileHelper.importer(path);
-        collection.add(object);
+        list.add(object);
         sauvegarder();
         return object;
     }
     
-    public void exporter(String nom, String path) {
-        T element = getElement(nom);
+    public void exporter(int index, String path) {
+        T element = getElement(index);
         fileHelper.exporter(element, path);
     }
     
-    public Collection<T> getCollection() {
-        return collection;
+    public List<T> getList() {
+        return list;
     }
     
-    /* ONGLET CARTE */
+    public T getElement(int index) {
+        return list.get(index);
+    }
 }

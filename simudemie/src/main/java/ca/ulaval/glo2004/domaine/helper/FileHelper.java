@@ -13,7 +13,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -29,13 +29,12 @@ public class FileHelper<T> {
     
     public <T extends Serializable> ArrayList<T> charger() {
         ArrayList<T> list = new ArrayList<>();
+        
         try {
             File file = new File(path);
-            
             try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
                 list = (ArrayList<T>) ois.readObject();
             }
-                
         } catch(IOException | ClassNotFoundException e) {
              // TODO: Afficher erreur de chargement avec petite boîte cute
         }
@@ -47,13 +46,10 @@ public class FileHelper<T> {
         T object = null;
         
         try {
-            // TODO: Afficher boîte de choix pour décider de l'emplacement
             File file = new File(path);
-            
             try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
                 object = (T) ois.readObject();
             }
-                
         } catch(IOException | ClassNotFoundException e) {
              // TODO: Afficher erreur de chargement avec petite boîte cute
         }
@@ -61,7 +57,7 @@ public class FileHelper<T> {
         return object;
     }
     
-    public <T extends Serializable> void sauvegarder(Collection<T> object) {
+    public <T extends Serializable> void sauvegarder(List<T> object) {
         try {
             try (FileOutputStream fos = new FileOutputStream(path); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 oos.writeObject(object);
@@ -73,8 +69,6 @@ public class FileHelper<T> {
     
     public <T extends Serializable> void exporter(T object, String path) {
         try {
-            // TODO: Afficher boîte de choix pour décider de l'emplacement
-            
             try (FileOutputStream fos = new FileOutputStream(path); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 oos.writeObject(object);
             }

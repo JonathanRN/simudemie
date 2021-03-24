@@ -9,8 +9,6 @@ import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetMaladie;
 import ca.ulaval.glo2004.afficheur.onglets.OngletMaladie;
 import ca.ulaval.glo2004.domaine.Maladie;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireCreation;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireCreationMaladie;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
@@ -113,7 +111,8 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
     }
     
     private void sauvegarderMaladie() {
-        Maladie maladie = GestionnaireCreationMaladie.getInstance().creerMaladie(MaladieInput.getText(), getInfectionInput(), getDeadInput(), getCuredInput());
+        Object[] args = {MaladieInput.getText(), getInfectionInput(), getDeadInput(), getCuredInput()};
+        Maladie maladie = onglet.getController().creer(args);
         
         ObjetMaladie objetMaladie = (ObjetMaladie)onglet.getCourant();
         

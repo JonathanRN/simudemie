@@ -9,7 +9,8 @@ import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetCarte;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
+import ca.ulaval.glo2004.domaine.Carte;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireCreationCarte;
 import java.awt.Color;
 import javax.swing.SwingUtilities;
 
@@ -18,7 +19,7 @@ import javax.swing.SwingUtilities;
  * @author Jonathan
  */
 public class OngletCarte extends OngletUI {
-
+    
     /**
      * Creates new form ScenarioTab
      */
@@ -26,8 +27,6 @@ public class OngletCarte extends OngletUI {
         initComponents();
         
         try {
-            ajouterObjetUI();
-            mapStatsPanel1.setOnglet(this);
             
             MapsScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             MapsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
@@ -42,6 +41,13 @@ public class OngletCarte extends OngletUI {
         }
     }
     
+    public void init() {
+        mapStatsPanel1.setOnglet(this);
+        for(Carte carte : GestionnaireCreationCarte.getInstance().getList()) {
+            ajouterCard(carte);
+        }
+    }
+    
     @Override
     public void ajouterObjetUI() {
         super.ajouterObjetUI();
@@ -50,20 +56,32 @@ public class OngletCarte extends OngletUI {
         // todo a changer
         card.setMapName("Carte: " + objets.size());
         
-        GestionnaireScenario.GetInstance().creerCarte(card.getNomCarte());
+        GestionnaireCreationCarte.getInstance().creer(card.getNomCarte());
         
         objets.add(card);
-        if (objets.size() == 1) {
-            onClickObjetUI(card);
-        }
+        onClickObjetUI(card);
         
         MapPanelContainer.add(card);
         updateUI();
     }
 
+    private void ajouterCard(Carte carte) {
+        ObjetCarte card = new ObjetCarte(this);
+        card.setMapName(carte.getNom());
+        objets.add(card);
+        MapPanelContainer.add(card);
+        
+        if(objets.size() == 1) {
+            onClickObjetUI(card);
+        }
+        
+        updateUI();
+    }
+    
     @Override
     public void retirerCourant() {
-        GestionnaireScenario.GetInstance().supprimeCarte(getIndexCourant());
+        GestionnaireCreationCarte.getInstance().supprimer(getIndexCourant());
+        objets.remove(courant);
         MapPanelContainer.remove(courant);
         updateUI();
         
@@ -220,7 +238,6 @@ public class OngletCarte extends OngletUI {
     private void AddMapButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddMapButtonMouseClicked
         ajouterObjetUI();
     }//GEN-LAST:event_AddMapButtonMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddMapButton;

@@ -16,39 +16,19 @@ public class GestionnaireCreationMaladie extends GestionnaireCreation<Maladie> {
     // TODO: Mettre constantes dans un fichier de param .ini peut-être ?
     protected final String PATH = "C:\\test\\maladies.ser";
     
-    private static GestionnaireCreationMaladie instance;
-    
-    public static GestionnaireCreationMaladie getInstance() {
-        if (instance == null) {
-            instance = new GestionnaireCreationMaladie();
-        }
-        return instance;
-    }
-    
-    private GestionnaireCreationMaladie() {
+    public GestionnaireCreationMaladie() {
         fileHelper = new FileHelper(PATH);
         charger();
     }
     
     @Override
-    protected Maladie creer(Object... parametre) {
-        return null;
-    }
-    
-    public Maladie creerMaladie(String nom, double tauxInf, double tauxMort, double tauxGue) {
-        Maladie maladie = new Maladie(nom, tauxInf, tauxMort, tauxGue);
+    public Maladie creer(Object... arguments) {
+        String nom = (String) arguments[0];
+        double tauxInf = (double) arguments[1];
+        double tauxDead = (double) arguments[2];
+        double tauxGue = (double) arguments[3];
+        Maladie maladie = new Maladie(nom, tauxInf, tauxDead, tauxGue);
         ajouter(maladie);
         return maladie;
-    }
-
-    @Override
-    protected Maladie getElement(String nom) {
-        Maladie retMal = null;
-        for(Maladie maladie : getCollection()) {
-            if(maladie.getNom().equals(nom)) {
-                retMal = maladie;
-            }
-        }
-        return retMal;
     }
 }

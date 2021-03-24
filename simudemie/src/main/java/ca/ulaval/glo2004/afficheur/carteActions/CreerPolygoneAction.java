@@ -6,7 +6,7 @@
 package ca.ulaval.glo2004.afficheur.carteActions;
 
 import ca.ulaval.glo2004.domaine.Pays;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireCreationCarte;
 import java.awt.Polygon;
 import java.util.ArrayList;
 
@@ -28,7 +28,7 @@ public class CreerPolygoneAction extends ActionCarte {
     
     @Override
     public void Executer() {
-        GestionnaireScenario.GetInstance().creerPays(index, pays);
+        GestionnaireCreationCarte.getInstance().creerPays(index, pays);
         pays.ajouterRegion(new ca.ulaval.glo2004.domaine.Region(pays.getPolygone()));
         polygons.add(new Polygon());
     }

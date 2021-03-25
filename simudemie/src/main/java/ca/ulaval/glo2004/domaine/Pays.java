@@ -48,8 +48,14 @@ public class Pays implements Serializable {
             }
             if (getPopInfecteePays() > 0)
             {
-                voyageursInfectees = (0.01 * getPopInfecteePays()); //Déterminer quel sera le 0.01
-                paysAInfecter = voie.getPaysDestination();
+                voyageursInfectees = (0.001 * getPopInfecteePays()); //Déterminer quel sera le 0.001
+                if (this.getNom().equals(voie.getPaysOrigine().getNom()) )
+                {
+                    paysAInfecter = voie.getPaysDestination(); //validation (selon origine/destination)
+                }else
+                {
+                    paysAInfecter = voie.getPaysOrigine();
+                }
                 for (Region region : paysAInfecter.listeRegions )
                 {
                     region.setPopInfectee(getPopInfecteePays() + (int)(voyageursInfectees / paysAInfecter.listeRegions.size()));
@@ -117,4 +123,5 @@ public class Pays implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
+    
 }

@@ -35,17 +35,17 @@ public class ObjetMaladie extends ObjetUI {
     
     public void setInfectedProgressBar(double value) {
         infectedRate = value;
-        InfectedProgressBar.setValue((int) Math.round(value));
+        InfectedProgressBar.setValue(Math.round((float) value));
     }
     
     public void setCuredProgressBar(double value) {
         curedRate = value;
-        CuredProgressBar.setValue((int) Math.round(value));
+        CuredProgressBar.setValue(Math.round((float) value));
     }
     
     public void setDeadProgressBar(double value) {
         deadRate = value;
-        DeadProgressBar.setValue((int) Math.round(value));
+        DeadProgressBar.setValue(Math.round((float) value));
     }
     
     public double getInfectionRate() {

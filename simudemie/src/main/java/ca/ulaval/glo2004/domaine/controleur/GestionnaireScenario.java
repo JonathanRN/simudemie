@@ -6,7 +6,6 @@
 package ca.ulaval.glo2004.domaine.controleur;
 
 import ca.ulaval.glo2004.domaine.Carte;
-import ca.ulaval.glo2004.domaine.Jour;
 import ca.ulaval.glo2004.domaine.Pays;
 import java.awt.Polygon;
 import java.awt.event.ActionEvent;
@@ -17,9 +16,8 @@ import javax.swing.Timer;
 
 
 public class GestionnaireScenario implements ActionListener {
-    private ArrayList<Carte> cartes = new ArrayList<>();
-    private List<Jour> jours = new ArrayList<>();
-    private Jour jourCourant;
+    private List<Carte> cartes = new ArrayList<>();
+    private Carte carteJourCourant;
     private Timer timer;
     
     private static GestionnaireScenario instance;
@@ -43,19 +41,19 @@ public class GestionnaireScenario implements ActionListener {
         avancerJour();
     }
     
-    private void chargerJour(Jour jour)
+    private void chargerJour(Carte carte)
     {
         // Charger tous les elements selon la journee
-        jourCourant = jour;
+        carteJourCourant = carte;
     }
     
     private void avancerJour()
     {
-        jourCourant.carte.avancerJour();
-        jours.add(jourCourant);
-        chargerJour(new Jour(jourCourant));
+        carteJourCourant.avancerJour();
+        cartes.add(carteJourCourant);
+        chargerJour(new Carte(carteJourCourant));
     }
-
+    
     private void importer(String filePath)
     {
         // Importer selon le path et creer une nouvelle liste de journees...? (todo UI)
@@ -66,16 +64,10 @@ public class GestionnaireScenario implements ActionListener {
         // Exporter dans un fichier qui contient toutes les journees...
         // RetournerResultats
     }
-    
-    public void ajouterVoie(Pays origine, Pays destination)
-    {
-        // new Voie...
-        // jourCourant.carte.trouverPays(origine).AjouterVoie(nouvelleVoie);
-        // jourCourant.carte.trouverPays(destination).AjouterVoie(nouvelleVoie);
-    }
-    
+        
     private void creerMesure(String nom, float tauxAdhesion, float tauxReduction)
     {
+        
         //new Mesure()...
         //jourCourant.mesures.add(e);
     }
@@ -84,12 +76,7 @@ public class GestionnaireScenario implements ActionListener {
     {
         //jourCourant.mesures[]...
     }
-                    
-    private void editerMaladie(String nom, float tauxInfection, float tauxMortalite, float tauxGuerison)
-    {
-        //jourCourant.maladie
-    }
-                        
+    
     public void pause()
     {
         timer.stop();
@@ -100,7 +87,7 @@ public class GestionnaireScenario implements ActionListener {
         timer.restart();
     }
     
-    public List<Jour> retournerResultats()
+    public List<Carte> retournerResultats()
     {
         //TODO Retourner les résultats finaux
         return null;

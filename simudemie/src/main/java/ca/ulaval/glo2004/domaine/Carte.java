@@ -19,6 +19,10 @@ public class Carte implements Serializable {
     {
         this.nom = nom;
     }    
+
+    public Carte(Carte carteJourCourant) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public void avancerJour()
     {

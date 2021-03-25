@@ -123,4 +123,5 @@ public class Pays implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
+    
 }

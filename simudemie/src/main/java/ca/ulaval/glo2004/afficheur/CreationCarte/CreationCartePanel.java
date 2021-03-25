@@ -14,7 +14,6 @@ import ca.ulaval.glo2004.afficheur.carteActions.SplitPaysAction;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Region;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -31,9 +30,7 @@ public class CreationCartePanel extends ZoomablePanel {
     private final Stack<ActionCarte> actionsFaites = new Stack<>();
     private final Stack<ActionCarte> actionsUndo = new Stack<>();
     private final ArrayList<Polygon> polygones = new ArrayList<>();
-    
-    private final Color couleurFill = new Color(85, 91, 100, 100);
-    
+        
     private CreationCarte creationCarte;
     
     public CreationCartePanel() {
@@ -98,7 +95,7 @@ public class CreationCartePanel extends ZoomablePanel {
         return null;
     }
     
-    private void ajouterAction(ActionCarte action) {
+    public void ajouterAction(ActionCarte action) {
         actionsFaites.push(action);
         action.Executer();
         // On veut pas modifier le futur
@@ -128,11 +125,6 @@ public class CreationCartePanel extends ZoomablePanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics = (Graphics2D) g;
-
-        graphics.setColor(couleurFill);
-        for (int i = 0; i < polygones.size() - 1; i++) {
-            graphics.fillPolygon(polygones.get(i));
-        }
         
         if (creationCarte != null) {
             creationCarte.getMode().paint(graphics);

@@ -53,7 +53,7 @@ public class GestionnaireScenario implements ActionListener {
         cartes.add(carteJourCourant);
         chargerJour(new Carte(carteJourCourant));
     }
-
+    
     private void importer(String filePath)
     {
         // Importer selon le path et creer une nouvelle liste de journees...? (todo UI)
@@ -64,16 +64,10 @@ public class GestionnaireScenario implements ActionListener {
         // Exporter dans un fichier qui contient toutes les journees...
         // RetournerResultats
     }
-    
-    public void ajouterVoie(Pays origine, Pays destination)
-    {
-        // new Voie...
-        // jourCourant.carte.trouverPays(origine).AjouterVoie(nouvelleVoie);
-        // jourCourant.carte.trouverPays(destination).AjouterVoie(nouvelleVoie);
-    }
-    
+        
     private void creerMesure(String nom, float tauxAdhesion, float tauxReduction)
     {
+        
         //new Mesure()...
         //jourCourant.mesures.add(e);
     }
@@ -82,12 +76,7 @@ public class GestionnaireScenario implements ActionListener {
     {
         //jourCourant.mesures[]...
     }
-                    
-    private void editerMaladie(String nom, float tauxInfection, float tauxMortalite, float tauxGuerison)
-    {
-        //jourCourant.maladie
-    }
-                        
+    
     public void pause()
     {
         timer.stop();

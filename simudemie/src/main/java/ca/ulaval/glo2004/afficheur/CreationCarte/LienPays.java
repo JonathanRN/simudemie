@@ -197,7 +197,7 @@ public class LienPays extends Mode {
         // todo update pays
         creationCarte.getInformationsPanel().setVisible(false);
         
-        panel = new InformationsLienPanel(carte);
+        panel = new InformationsLienPanel(carte, this);
         creationCarte.getInformationsPanel().add(panel, BorderLayout.NORTH);
     }
 
@@ -206,6 +206,18 @@ public class LienPays extends Mode {
         pointSelectionne = null;
         creationCarte.getInformationsPanel().setVisible(false);
         creationCarte.getInformationsPanel().remove(panel);
+    }
+    
+    public void onLienSupprime(VoieLiaison lien) {
+        carte.retirerVoie(lien);
+        creationCarte.getInformationsPanel().setVisible(false);
+        
+        updateVoies();
+        updatePoints();
+        
+        pointSelectionne = null;
+        
+        creationCarte.repaint();
     }
     
     private void updateVoies() {

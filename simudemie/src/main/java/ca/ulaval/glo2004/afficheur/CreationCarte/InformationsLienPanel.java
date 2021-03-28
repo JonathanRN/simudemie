@@ -23,8 +23,11 @@ public class InformationsLienPanel extends javax.swing.JPanel implements ActionL
     private final Carte carte;
     private JButton terrestre, maritime, aerien;
     
-    public InformationsLienPanel(Carte carte) {
+    private final LienPays lienPays;
+    
+    public InformationsLienPanel(Carte carte, LienPays lienPays) {
         this.carte = carte;
+        this.lienPays = lienPays;
         initComponents();
         
         InformationsLienLabel.setFont(FontRegister.RobotoLight.deriveFont(17f));
@@ -142,8 +145,7 @@ public class InformationsLienPanel extends javax.swing.JPanel implements ActionL
     }// </editor-fold>//GEN-END:initComponents
 
     private void SupprimeBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupprimeBoutonMouseReleased
-        //lien.getPaysOrigine().retirerVoie(lien);
-        //lien.getPaysDestination().retirerVoie(lien);
+        lienPays.onLienSupprime(lien);
     }//GEN-LAST:event_SupprimeBoutonMouseReleased
 
 

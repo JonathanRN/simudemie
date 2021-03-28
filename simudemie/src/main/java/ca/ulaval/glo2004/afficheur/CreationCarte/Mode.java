@@ -6,7 +6,6 @@
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
 import ca.ulaval.glo2004.domaine.Carte;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -15,7 +14,6 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.Line2D;
 import java.awt.geom.PathIterator;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *

@@ -17,6 +17,7 @@ import java.awt.Polygon;
 import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -35,6 +36,7 @@ public class LienPays extends Mode {
     private Point pointSelectionne, pointHighlight;
     private Pays origine;
     private Path2D.Double path = new Path2D.Double();
+    private Polygon highlight;
     
     public LienPays(CreationCarte panel) {
         super(panel);
@@ -51,9 +53,14 @@ public class LienPays extends Mode {
             paintLignes(g, Color.black, p);
         }
         
+        if (highlight != null) {
+            g.setStroke(new BasicStroke(1));
+            paintLignes(g, couleurLigne, highlight);
+        }
+        
         if (path != null) {
             // todo couleur du type selectionne
-            g.setColor(Color.ORANGE);
+            g.setColor(couleurLigne);
             g.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
             g.draw(path);          
         }
@@ -87,7 +94,15 @@ public class LienPays extends Mode {
         for (Point p : points) {
             if (p.distance(point) <= taillePoint / 2) {
                 pointHighlight = p;
-                return;
+                break;
+            }
+        }
+        
+        highlight = null;
+        for (Polygon p : listePays.stream().map(x -> x.getPolygone()).collect(Collectors.toList())) {
+            if (p.contains(point)) {
+                highlight = p;
+                break;
             }
         }
     }

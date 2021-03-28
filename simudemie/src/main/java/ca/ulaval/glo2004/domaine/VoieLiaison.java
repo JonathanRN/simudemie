@@ -65,6 +65,10 @@ public class VoieLiaison implements Serializable {
         return centre;
     }
     
+    public void setCentre(Point centre) {
+        this.centre = centre;
+    }
+    
     public void setLigne(Path2D.Double ligne) {
         ligneCourbe.reset();
         ligneCourbe = ligne;

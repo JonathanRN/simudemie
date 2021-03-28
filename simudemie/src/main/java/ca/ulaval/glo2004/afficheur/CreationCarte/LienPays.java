@@ -137,6 +137,7 @@ public class LienPays extends Mode {
             ligne.curveTo(point.x, point.y, point.x, point.y, voie.getLigne().getCurrentPoint().getX(), voie.getLigne().getCurrentPoint().getY());
             
             voie.setLigne(ligne);
+            voie.setCentre(point);
             initialDrag.setLocation(point);
         }
     }
@@ -194,11 +195,22 @@ public class LienPays extends Mode {
         carte = GestionnaireCarte.getInstance().getElement(creationCarte.getIndexCarte());
         listePays = carte.getListePays();
         
-        // todo update pays
         creationCarte.getInformationsPanel().setVisible(false);
         
         panel = new InformationsLienPanel(carte, this);
         creationCarte.getInformationsPanel().add(panel, BorderLayout.NORTH);
+        
+        // Update toutes les voies dans le cas ou les points on bouges
+        for (VoieLiaison voie : carte.getVoies()) {
+            Path2D.Double ligne = new Path2D.Double();
+            Point centreOrigine = getCentrePolygone(voie.getPaysOrigine().getPolygone());
+            Point centreDestination = getCentrePolygone(voie.getPaysDestination().getPolygone());
+            
+            ligne.moveTo(centreOrigine.x, centreOrigine.y);
+            ligne.curveTo(voie.getCentre().x, voie.getCentre().y, voie.getCentre().x, voie.getCentre().y, centreDestination.x, centreDestination.y);
+
+            voie.setLigne(ligne);
+        }
     }
 
     @Override

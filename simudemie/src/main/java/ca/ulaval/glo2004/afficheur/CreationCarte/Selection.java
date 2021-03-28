@@ -105,6 +105,8 @@ public class Selection extends Mode {
         Pays pays = carte.getPays(selectionne);
         carte.retirerPays(pays);
         
+        creationCarte.getInformationsPanel().setVisible(false);
+        
         selectionne = null;
         creationCarte.repaint();
     }

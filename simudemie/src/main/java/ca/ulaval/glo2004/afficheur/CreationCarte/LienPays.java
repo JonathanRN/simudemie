@@ -222,6 +222,9 @@ public class LienPays extends Mode {
 
             voie.setLigne(ligne);
         }
+        
+        updateVoies();
+        updatePoints();
     }
 
     @Override

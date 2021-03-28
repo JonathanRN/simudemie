@@ -6,6 +6,7 @@
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
 import ca.ulaval.glo2004.domaine.Pays;
+import ca.ulaval.glo2004.domaine.VoieLiaison;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -103,6 +104,15 @@ public class Selection extends Mode {
     public void onPaysSupprime() {
         // todo: faire en carte action
         Pays pays = carte.getPays(selectionne);
+        
+        // supprime les liens également
+        for (VoieLiaison voie : carte.getVoies()
+                .stream()
+                .filter(x -> x.getPaysOrigine().equals(pays) || x.getPaysDestination().equals(pays))
+                .collect(Collectors.toList())) {
+            carte.retirerVoie(voie);
+        }
+        
         carte.retirerPays(pays);
         
         creationCarte.getInformationsPanel().setVisible(false);

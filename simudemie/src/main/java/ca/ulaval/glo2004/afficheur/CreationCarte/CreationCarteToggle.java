@@ -5,7 +5,6 @@
  */
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
-import ca.ulaval.glo2004.afficheur.CreationCarte.Mode;
 import ca.ulaval.glo2004.afficheur.PanelArrondi;
 import java.awt.Color;
 import javax.swing.ImageIcon;
@@ -18,7 +17,7 @@ public class CreationCarteToggle extends PanelArrondi {
 
     private Mode mode;
     private CreationCarte creation;
-    private Color base, highlight;
+    private final Color base, highlight;
     private boolean mouseOver;
     private boolean estToggle;
     

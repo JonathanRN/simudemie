@@ -83,6 +83,22 @@
         </Component>
         <Component class="ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle" name="BoutonLien">
         </Component>
+        <Container class="javax.swing.JPanel" name="BoutonQuitterParent">
+          <Properties>
+            <Property name="opaque" type="boolean" value="false"/>
+          </Properties>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+          <SubComponents>
+            <Component class="ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle" name="BoutonQuitter">
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="East"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>

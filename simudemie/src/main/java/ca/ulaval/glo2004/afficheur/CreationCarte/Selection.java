@@ -6,12 +6,12 @@
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
 import ca.ulaval.glo2004.domaine.Pays;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.text.ParseException;
-import javax.swing.JTextField;
 
 /**
  *
@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 public class Selection extends Mode {
     
     private Polygon selectionne;
+    private InformationsPaysPanel panel;
     
     public Selection(CreationCarte panel) {
         super(panel);
@@ -28,23 +29,28 @@ public class Selection extends Mode {
     @Override
     public void onDesactive() {
         super.onDesactive();
-        //creationCarte.getInformationsPaysPanel().setVisible(false);
+        
         creationCarte.getInformationsPanel().setVisible(false);
-
+        creationCarte.getInformationsPanel().remove(panel);
     }
     
     @Override
     public void onActive() {
         super.onActive();
         selectionne = null;
-        //creationCarte.getInformationsPaysPanel().setVisible(true);
+        
+        panel = new InformationsPaysPanel();
+        creationCarte.getInformationsPanel().add(panel, BorderLayout.NORTH);
         creationCarte.getInformationsPanel().setVisible(false);
     }
     
     @Override
     public void onMouseReleased(Point point) {
         if (selectionne != null) {
-            saveInfos(selectionne);
+            try {
+                saveInfos(selectionne);
+            } catch (ParseException ex) {
+            }
         }
         
         selectionne = null;
@@ -60,12 +66,10 @@ public class Selection extends Mode {
             Pays pays = creationCarte.getPanel().getPays(selectionne);
             ca.ulaval.glo2004.domaine.Region region = creationCarte.getPanel().getRegion(pays, selectionne);
             
-            //JTextField paysField = creationCarte.getPaysNomField();
-            //paysField.setText(pays.getNom());
-            
-            //creationCarte.getRegionNomField().setText(region.getNom());
-            //creationCarte.getPopField().setValue(region.getPopTotale());
-            //creationCarte.setPopTotaleTexte(Integer.toString(pays.getPopTotale()));
+            panel.setNomPays(pays.getNom());
+            panel.setNomRegion(region.getNom());
+            panel.setPopTotale(pays.getPopTotale());
+            panel.setPopRegion(region.getPopTotale());
         }
         
         super.onMouseReleased(point);
@@ -86,16 +90,11 @@ public class Selection extends Mode {
         }
     }
     
-    private void saveInfos(Polygon p) {
+    private void saveInfos(Polygon p) throws ParseException {
         Pays pays = creationCarte.getPanel().getPays(p);
         ca.ulaval.glo2004.domaine.Region region = creationCarte.getPanel().getRegion(pays, p);
-        
-//        pays.setNom(creationCarte.getPaysNomField().getText());
-//        region.setNom(creationCarte.getRegionNomField().getText());
-//        try {
-//            creationCarte.getPopField().commitEdit();
-//            region.setPopSaine((int)creationCarte.getPopField().getValue());
-//        } catch (ParseException e) {
-//        }
+        pays.setNom(panel.getNomPays());
+        region.setNom(panel.getNomRegion());
+        region.setPopSaine(panel.getPopRegion());
     }
 }

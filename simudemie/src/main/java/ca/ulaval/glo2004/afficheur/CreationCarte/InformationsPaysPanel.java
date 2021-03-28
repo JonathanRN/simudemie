@@ -6,6 +6,7 @@
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
+import java.text.ParseException;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
@@ -23,10 +24,43 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
         PopulationTotale = new JSpinner(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 100));
         PopPanel.add(PopulationTotale, java.awt.BorderLayout.SOUTH);
         
-        PaysNomLabel.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        InformationsPaysLabel.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        PaysNomLabel.setFont(FontRegister.RobotoLight.deriveFont(13f));
         RegionNomLabel.setFont(FontRegister.RobotoLight.deriveFont(13f));
         PopLabel.setFont(FontRegister.RobotoLight.deriveFont(13f));
         PopTotaleLabel.setFont(FontRegister.RobotoLight.deriveFont(13f));
+        
+        PaysNomTextField.setFont(FontRegister.RobotoLight.deriveFont(12f));
+        RegionNomTextField.setFont(FontRegister.RobotoLight.deriveFont(12f));
+    }
+    
+    public String getNomPays() {
+        return PaysNomTextField.getText();
+    }
+    
+    public String getNomRegion() {
+        return RegionNomTextField.getText();
+    }
+    
+    public void setNomPays(String nom) {
+        PaysNomTextField.setText(nom);
+    }
+    
+    public void setNomRegion(String region) {
+        RegionNomTextField.setText(region);
+    }
+    
+    public void setPopTotale(int pop) {
+        PopTotaleLabel.setText("Pop. Totale : " + Integer.toString(pop));
+    }
+    
+    public void setPopRegion(int pop) {
+        PopulationTotale.setValue(pop);
+    }
+    
+    public int getPopRegion() throws ParseException {
+        PopulationTotale.commitEdit();
+        return (int)PopulationTotale.getValue();
     }
 
     /**
@@ -38,6 +72,7 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        InformationsPaysLabel = new javax.swing.JLabel();
         PaysNomPanel = new javax.swing.JPanel();
         PaysNomLabel = new javax.swing.JLabel();
         PaysNomTextField = new javax.swing.JTextField();
@@ -50,7 +85,13 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
         PopLabel = new javax.swing.JLabel();
         SupprimeBouton = new javax.swing.JButton();
 
-        setLayout(new java.awt.GridLayout(5, 1, 0, 10));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
+        setOpaque(false);
+        setLayout(new java.awt.GridLayout(6, 1, 0, 10));
+
+        InformationsPaysLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        InformationsPaysLabel.setText("Informations Pays");
+        add(InformationsPaysLabel);
 
         PaysNomPanel.setOpaque(false);
         PaysNomPanel.setPreferredSize(new java.awt.Dimension(200, 30));
@@ -104,6 +145,7 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel InformationsPaysLabel;
     private javax.swing.JLabel PaysNomLabel;
     private javax.swing.JPanel PaysNomPanel;
     private javax.swing.JTextField PaysNomTextField;

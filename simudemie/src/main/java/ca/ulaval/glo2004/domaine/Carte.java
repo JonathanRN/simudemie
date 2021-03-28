@@ -8,11 +8,13 @@ package ca.ulaval.glo2004.domaine;
 import java.awt.Polygon;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Carte implements Serializable {
     
     private String nom;
-    private ArrayList<Pays> listePays = new ArrayList<>();
+    private final ArrayList<Pays> listePays = new ArrayList<>();
+    private final ArrayList<VoieLiaison> frontieres = new ArrayList<>();
     private Maladie maladie;
     
     public Carte(String nom)
@@ -31,6 +33,36 @@ public class Carte implements Serializable {
         }
     }
     
+    private void contaminerInterPays() {
+        //En fonction de la pop infectee du pays, va infecter le pays lié par sa voie de liaison
+        // à un taux de 0.01 (à determiner)
+//        double voyageursInfectees;
+//        Pays paysAInfecter;
+//        for (VoieLiaison voie : frontieres)
+//        {
+//            if (!voie.getAccessible())
+//            {
+//                continue;
+//            }
+//            if (getPopInfecteePays() > 0)
+//            {
+//                voyageursInfectees = (0.001 * getPopInfecteePays()); //Déterminer quel sera le 0.001
+//                if (this.getNom().equals(voie.getPaysOrigine().getNom()) )
+//                {
+//                    paysAInfecter = voie.getPaysDestination(); //validation (selon origine/destination)
+//                }else
+//                {
+//                    paysAInfecter = voie.getPaysOrigine();
+//                }
+//                for (Region region : paysAInfecter.listeRegions )
+//                {
+//                    region.setPopInfectee(getPopInfecteePays() + (int)(voyageursInfectees / paysAInfecter.listeRegions.size()));
+//                }
+//                
+//            }
+//        }
+    }
+    
     public void ajouterPays(Pays nouveauPays)
     {
         nouveauPays.setNom("Pays " +  listePays.size());
@@ -42,6 +74,60 @@ public class Carte implements Serializable {
         if (listePays.contains(ancienPays)){
             listePays.remove(ancienPays);
         }
+    }
+    
+    public void ajouterVoie(VoieLiaison nouvelleVoie) {
+        if (!frontieres.contains(nouvelleVoie)) {
+            frontieres.add(nouvelleVoie);
+        }
+    }
+    
+    public void retirerVoie(VoieLiaison ancienneVoie) {
+        if (frontieres.contains(ancienneVoie)){
+            frontieres.remove(ancienneVoie);
+        }
+    }
+    
+    public ArrayList<VoieLiaison> getVoies() {
+        return frontieres;
+    }
+    
+    public ArrayList<VoieLiaison.TypeVoie> getVoiesDisponibles(Pays origine, Pays destination) {
+        ArrayList<VoieLiaison.TypeVoie> voies = new ArrayList<>();
+        boolean terrestre = false, maritime = false, aerien = false;
+        
+        for (VoieLiaison voie : frontieres
+                .stream()
+                .filter(x -> (x.getPaysOrigine().equals(origine) && x.getPaysDestination().equals(destination)) ||
+                              x.getPaysOrigine().equals(destination) && x.getPaysDestination().equals(origine))
+                .collect(Collectors.toList())) {
+            
+            switch (voie.getType()) {
+                case Terrestre:
+                    terrestre = true;
+                    break;
+                case Maritime:
+                    maritime = true;
+                    break;
+                case Aerien:
+                    aerien = true;
+                    break;
+            }
+        }
+        
+        if (!terrestre) {
+            voies.add(VoieLiaison.TypeVoie.Terrestre);
+        }
+        
+        if (!maritime) {
+            voies.add(VoieLiaison.TypeVoie.Maritime);
+        }
+        
+        if (!aerien) {
+            voies.add(VoieLiaison.TypeVoie.Aerien);
+        }
+        
+        return voies;
     }
     
     public Pays getPays(int index) {

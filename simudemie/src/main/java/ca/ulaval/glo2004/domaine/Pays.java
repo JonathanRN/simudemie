@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class Pays implements Serializable {
     
     private String nom;
-    private ArrayList<VoieLiaison> frontieres = new ArrayList<>();
     private ArrayList<Region> listeRegions = new ArrayList<>();
     private Polygon polygone;
     public ArrayList<Mesure> mesures =new ArrayList<>();
@@ -33,36 +32,7 @@ public class Pays implements Serializable {
             region.guerirPop(tauxGuerison);
             region.eliminerPopulation(tauxMortalite);
         }
-        contaminerInterPays();
-    }
-    
-    private void contaminerInterPays() //En fonction de la pop infectee du pays, va infecter le pays lié par sa voie de liaison
-    { // à un taux de 0.01 (à determiner)
-        double voyageursInfectees;
-        Pays paysAInfecter;
-        for (VoieLiaison voie : frontieres)
-        {
-            if (!voie.getAccessible())
-            {
-                continue;
-            }
-            if (getPopInfecteePays() > 0)
-            {
-                voyageursInfectees = (0.001 * getPopInfecteePays()); //Déterminer quel sera le 0.001
-                if (this.getNom().equals(voie.getPaysOrigine().getNom()) )
-                {
-                    paysAInfecter = voie.getPaysDestination(); //validation (selon origine/destination)
-                }else
-                {
-                    paysAInfecter = voie.getPaysOrigine();
-                }
-                for (Region region : paysAInfecter.listeRegions )
-                {
-                    region.setPopInfectee(getPopInfecteePays() + (int)(voyageursInfectees / paysAInfecter.listeRegions.size()));
-                }
-                
-            }
-        }
+        //contaminerInterPays();
     }
     
     public void ajouterRegion(Region nouvelleRegion) {
@@ -85,18 +55,6 @@ public class Pays implements Serializable {
     
     public ArrayList<Region> getRegions() {
         return listeRegions;
-    }
-    
-    public void ajouterVoie(VoieLiaison nouvelleVoie)
-    {
-        frontieres.add(nouvelleVoie);
-    }
-    
-    public void retirerVoie(VoieLiaison ancienneVoie)
-    {
-        if (frontieres.contains(ancienneVoie)){
-            frontieres.remove(ancienneVoie);
-        }
     }
         
     public String getNom(){ return nom; }
@@ -123,5 +81,4 @@ public class Pays implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    
 }

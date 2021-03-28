@@ -12,7 +12,6 @@ import java.awt.Polygon;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Line2D;
 import java.awt.geom.PathIterator;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 /**
@@ -20,10 +19,11 @@ import java.util.ArrayList;
  * @author Jonathan
  */
 public class Mode {
-    private Polygon highlight;
+    protected Polygon highlight;
     
-    protected final int taillePoint = 20;
+    protected int taillePoint = 20;
     protected final Color couleurLigne = new Color(136, 192, 208);
+    protected final Color couleurFill = new Color(85, 91, 100, 100);
     protected final CreationCarte creationCarte;
     protected ArrayList<Line2D.Double> lignesInvalides = new ArrayList<>(); 
 
@@ -31,7 +31,7 @@ public class Mode {
         this.creationCarte = panel;
     }
     
-    public void paint(Graphics2D g) {
+    public void paint(Graphics2D g) {        
         if (highlight != null) {
             paintLignes(g, couleurLigne, highlight);
         }
@@ -78,6 +78,14 @@ public class Mode {
                 g.fillOval(p.xpoints[i] - taillePoint/2, p.ypoints[i] - taillePoint/2, taillePoint, taillePoint);
                 g.drawString(Integer.toString(i), p.xpoints[i] - taillePoint/2, p.ypoints[i] - taillePoint/2 - 10);
             }
+        }
+    }
+    
+    protected void paintPolygones(Graphics2D g) {
+        g.setColor(couleurFill);
+        ArrayList<Polygon> polygones = creationCarte.getPanel().getPolygones();
+        for (int i = 0; i < polygones.size() - 1; i++) {
+            g.fillPolygon(polygones.get(i));
         }
     }
     
@@ -174,19 +182,5 @@ public class Mode {
                 return;
             }
         }
-    }
-
-    protected Point getCentrePolygone(Polygon p) {
-        double x = 0.;
-        double y = 0.;
-        for (int i = 0; i < p.npoints; i++){
-            x += p.xpoints[i];
-            y += p.ypoints[i];
-        }
-
-        x = x / p.npoints;
-        y = y / p.npoints;
-
-        return creationCarte.getPanel().getOffset(new Point((int)x, (int)y));
     }
 }

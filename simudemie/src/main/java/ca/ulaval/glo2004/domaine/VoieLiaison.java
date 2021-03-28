@@ -5,6 +5,9 @@
  */
 package ca.ulaval.glo2004.domaine;
 
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.geom.Path2D;
 import java.io.Serializable;
 
 
@@ -12,24 +15,32 @@ public class VoieLiaison implements Serializable {
     
     private Pays paysOrigine;
     private Pays paysDestination;
-    private final String nom;
+    private TypeVoie type;
+    private Path2D.Double ligneCourbe;
+    private Point centre;
     private boolean accessible;
     
-    public VoieLiaison(String nom, Pays origine, Pays destination)
+    public VoieLiaison(TypeVoie type, Pays origine, Pays destination, Path2D.Double ligneCourbe, Point centre)
     {
-        this.nom = nom;
+        this.type = type;
         this.paysOrigine = origine;
         this.paysDestination = destination;
+        this.ligneCourbe = ligneCourbe;
+        this.centre = centre;
         accessible = true;
     }
         
-    public Pays getPaysOrigine(){return paysOrigine;}
+    public Pays getPaysOrigine(){ return paysOrigine; }
     
-    public Pays getPaysDestination(){return paysDestination;}
+    public Pays getPaysDestination() { return paysDestination; }
     
-    public String getNom() {return nom;}
+    public TypeVoie getType() { return type; }
     
-    public boolean getAccessible(){return accessible;}
+    public void setType(TypeVoie type) {
+        this.type = type;
+    }
+    
+    public boolean getAccessible() { return accessible; }
     
     public void setPaysOrigine(Pays paysOrigine)
     {
@@ -44,5 +55,37 @@ public class VoieLiaison implements Serializable {
     public void setAccessible(boolean accessible)
     {
         this.accessible = accessible;
+    }
+    
+    public Path2D.Double getLigne() {
+        return ligneCourbe;
+    }
+    
+    public Point getCentre() {
+        return centre;
+    }
+    
+    public void setLigne(Path2D.Double ligne) {
+        ligneCourbe.reset();
+        ligneCourbe = ligne;
+    }
+    
+    public Color getCouleur() {
+        switch (type) {
+            case Terrestre:
+                return Color.orange;
+            case Aerien:
+                return Color.white;
+            case Maritime:
+                return Color.cyan;
+            default:
+                return Color.red;
+        }
+    }
+    
+    public enum TypeVoie {
+        Terrestre,
+        Maritime,
+        Aerien
     }
 }

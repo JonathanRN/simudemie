@@ -30,6 +30,8 @@ public class Creation extends Mode {
             paintLignes(g, couleurLigne, creationCarte.getPanel().getCourant());
         }
         
+        paintPolygones(g);
+        
         if (polygoneSousSouris != null) {
             paintLignes(g, couleurLigne, polygoneSousSouris);
         }

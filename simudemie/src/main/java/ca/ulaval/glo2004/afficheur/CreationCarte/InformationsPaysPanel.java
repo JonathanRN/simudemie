@@ -17,8 +17,10 @@ import javax.swing.SpinnerNumberModel;
 public class InformationsPaysPanel extends javax.swing.JPanel {
     
     private final JSpinner PopulationTotale;
+    private final Selection selection;
     
-    public InformationsPaysPanel() {
+    public InformationsPaysPanel(Selection selection) {
+        this.selection = selection;
         initComponents();
         
         PopulationTotale = new JSpinner(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 100));
@@ -140,8 +142,17 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
         add(PopPanel);
 
         SupprimeBouton.setText("Retirer Pays");
+        SupprimeBouton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                SupprimeBoutonMouseReleased(evt);
+            }
+        });
         add(SupprimeBouton);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void SupprimeBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupprimeBoutonMouseReleased
+        selection.onPaysSupprime();
+    }//GEN-LAST:event_SupprimeBoutonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

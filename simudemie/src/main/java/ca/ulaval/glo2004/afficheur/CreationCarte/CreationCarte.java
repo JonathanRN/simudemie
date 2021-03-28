@@ -5,7 +5,14 @@
  */
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
+import ca.ulaval.glo2004.domaine.Carte;
+import ca.ulaval.glo2004.domaine.Pays;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import java.awt.Color;
+import java.awt.Polygon;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.JPanel;
 
 /**
@@ -15,7 +22,7 @@ import javax.swing.JPanel;
 public class CreationCarte extends javax.swing.JPanel {
     
     private Mode mode;
-    private int carteIndex;
+    private final int carteIndex;
     private CreationCarteToggle toggleCourant;
     
     public CreationCarte(int index) {
@@ -37,8 +44,20 @@ public class CreationCarte extends javax.swing.JPanel {
         return CreationCartePanel;
     }
     
-    public int getIndexCarte() {
-        return carteIndex;
+    public ArrayList<Polygon> getPolygones() {
+        ArrayList<Polygon> polygones = new ArrayList<>();
+        for (Pays pays : getCarte().getListePays()) {
+            polygones.addAll(pays.getRegions().stream().map(x -> x.getPolygone()).collect(Collectors.toList()));
+        }
+        return polygones;
+    }
+    
+    public Carte getCarte() {
+        return GestionnaireCarte.getInstance().getElement(carteIndex);
+    }
+    
+    public Pays getPays(Polygon p) {
+        return getCarte().getPays(p);
     }
     
     public Mode getMode() {
@@ -74,7 +93,6 @@ public class CreationCarte extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        LienButtonGroup = new javax.swing.ButtonGroup();
         CreationCartePanel = new ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel();
         InformationsPanel = new javax.swing.JPanel();
         ToolBar = new javax.swing.JPanel();
@@ -123,7 +141,6 @@ public class CreationCarte extends javax.swing.JPanel {
     private ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle BoutonSelection;
     private ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel CreationCartePanel;
     private javax.swing.JPanel InformationsPanel;
-    private javax.swing.ButtonGroup LienButtonGroup;
     private javax.swing.JPanel ToolBar;
     // End of variables declaration//GEN-END:variables
 }

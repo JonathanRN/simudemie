@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
+import java.util.ArrayList;
 
 /**
  *
@@ -37,11 +38,13 @@ public class Creation extends Mode {
         }
         
         g.setColor(Color.white);
-        for (Polygon p : creationCarte.getPanel().getPolygones()) {
+        for (Polygon p : creationCarte.getPolygones()) {
             if (!creationCarte.getPanel().estRegionUnique(p)) {
                 paintPointPolygone(g, p);
             }
         }
+        
+        paintPointPolygone(g, creationCarte.getPanel().getCourant());
         
         g.setColor(Color.green);
         if (polygoneSousSouris != null && indexSousSouris != -1 && !creationCarte.getPanel().estRegionUnique(polygoneSousSouris)) {
@@ -102,7 +105,10 @@ public class Creation extends Mode {
         indexSousSouris = -1;
         int offset = taillePoint/2 + 5;
         
-        for (Polygon p : creationCarte.getPanel().getPolygones()) {
+        ArrayList<Polygon> polygones = (ArrayList<Polygon>)creationCarte.getPolygones().clone();
+        polygones.add(creationCarte.getPanel().getCourant());
+        
+        for (Polygon p : polygones) {
             if (!p.equals(creationCarte.getPanel().getCourant()) && p.contains(x, y)) {
                 polygoneSousSouris = p;
             }

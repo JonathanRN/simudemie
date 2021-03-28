@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.text.ParseException;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -39,7 +40,7 @@ public class Selection extends Mode {
         super.onActive();
         selectionne = null;
         
-        panel = new InformationsPaysPanel();
+        panel = new InformationsPaysPanel(this);
         creationCarte.getInformationsPanel().add(panel, BorderLayout.NORTH);
         creationCarte.getInformationsPanel().setVisible(false);
     }
@@ -54,7 +55,7 @@ public class Selection extends Mode {
         }
         
         selectionne = null;
-        for (Polygon p : creationCarte.getPanel().getPolygones()) {
+        for (Polygon p : creationCarte.getPolygones()) {
             if (p.contains(point.x, point.y)) {
                 selectionne = p;
             }
@@ -63,7 +64,7 @@ public class Selection extends Mode {
         creationCarte.getInformationsPanel().setVisible(selectionne != null);
         
         if (selectionne != null) {
-            Pays pays = creationCarte.getPanel().getPays(selectionne);
+            Pays pays = creationCarte.getPays(selectionne);
             ca.ulaval.glo2004.domaine.Region region = creationCarte.getPanel().getRegion(pays, selectionne);
             
             panel.setNomPays(pays.getNom());
@@ -76,10 +77,11 @@ public class Selection extends Mode {
     }
     
     @Override
-    public void paint(Graphics2D g) {
-        paintPolygones(g);
-        
-        for (Polygon p : creationCarte.getPanel().getPolygones()) {
+    public void paint(Graphics2D g) {        
+        for (Polygon p : creationCarte.getPolygones()) {
+            g.setColor(couleurFill);
+            g.fillPolygon(p);
+            
             paintLignes(g, Color.black, p);
         }
         
@@ -91,10 +93,19 @@ public class Selection extends Mode {
     }
     
     private void saveInfos(Polygon p) throws ParseException {
-        Pays pays = creationCarte.getPanel().getPays(p);
+        Pays pays = creationCarte.getPays(p);
         ca.ulaval.glo2004.domaine.Region region = creationCarte.getPanel().getRegion(pays, p);
         pays.setNom(panel.getNomPays());
         region.setNom(panel.getNomRegion());
         region.setPopSaine(panel.getPopRegion());
+    }
+
+    public void onPaysSupprime() {
+        // todo: faire en carte action
+        Pays pays = carte.getPays(selectionne);
+        carte.retirerPays(pays);
+        
+        selectionne = null;
+        creationCarte.repaint();
     }
 }

@@ -39,10 +39,6 @@ public class GestionnaireCarte extends GestionnaireOnglet<Carte> {
         ajouter(carte);
         return carte;
     }
-   
-    public void creerPays(int index, Pays pays) {
-        getElement(index).ajouterPays(pays);
-    }
     
     public Pays getPays(int indexCarte, int indexPays) {
         return getElement(indexCarte).getPays(indexPays);

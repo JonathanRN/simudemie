@@ -30,7 +30,7 @@ public class Region extends Mode {
     public void paint(Graphics2D g) {
         paintPolygones(g);
         
-        for (Polygon p : creationCarte.getPanel().getPolygones()) {
+        for (Polygon p : creationCarte.getPolygones()) {
             paintLignes(g, Color.black, p);
         }
         
@@ -40,7 +40,7 @@ public class Region extends Mode {
             g.setColor(Color.yellow);
             g.drawLine((int)line.x1, (int)line.y1, (int)line.x2, (int)line.y2);
             
-            for (Polygon p : creationCarte.getPanel().getPolygones()) {
+            for (Polygon p : creationCarte.getPolygones()) {
                 for (Point.Double point : getIntersections(p, line)) {
                     g.fillOval((int)point.x - 5, (int)point.y - 5, 10, 10);
                 }
@@ -71,7 +71,7 @@ public class Region extends Mode {
             return;
         }
         
-        for (Polygon p : creationCarte.getPanel().getPolygones()) {
+        for (Polygon p : creationCarte.getPolygones()) {
             if (polygoneSplitLigne(p, line)) {
                 polygoneSplit = p;
             }

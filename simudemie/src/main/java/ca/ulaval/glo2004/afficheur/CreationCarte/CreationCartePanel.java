@@ -13,11 +13,9 @@ import ca.ulaval.glo2004.afficheur.carteActions.CreerPolygoneAction;
 import ca.ulaval.glo2004.afficheur.carteActions.SplitPaysAction;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Region;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
-import java.util.ArrayList;
 import java.util.Stack;
 import javax.swing.SwingUtilities;
 
@@ -29,26 +27,23 @@ public class CreationCartePanel extends ZoomablePanel {
     
     private final Stack<ActionCarte> actionsFaites = new Stack<>();
     private final Stack<ActionCarte> actionsUndo = new Stack<>();
-    private final ArrayList<Polygon> polygones = new ArrayList<>();
+    
+    private Polygon courant;
         
     private CreationCarte creationCarte;
     
     public CreationCartePanel() {
         initComponents();
         
-        polygones.add(new Polygon());
+        courant = new Polygon();
+    }
+    
+    public Polygon getCourant() {
+        return courant;
     }
     
     public void setCreationCarte(CreationCarte creationCarte) {
         this.creationCarte = creationCarte;
-    }
-    
-    public ArrayList<Polygon> getPolygones() {
-        return polygones;
-    }
-    
-    public Polygon getCourant() {
-        return polygones.get(polygones.size() - 1);
     }
     
     public void placerPoint(int x, int y) {
@@ -64,8 +59,10 @@ public class CreationCartePanel extends ZoomablePanel {
     public void creerPolygone() {
         // Dessine le polygone seulement s'il est valide
         if (creationCarte.getMode().estPolygoneValide(getCourant())) {
-            CreerPolygoneAction action = new CreerPolygoneAction(creationCarte.getIndexCarte(), new Pays(getCourant()), polygones);
+            CreerPolygoneAction action = new CreerPolygoneAction(creationCarte.getCarte(), new Pays(getCourant()));
             ajouterAction(action);
+            
+            courant = new Polygon();
         }
         else {
             repaint();
@@ -77,12 +74,8 @@ public class CreationCartePanel extends ZoomablePanel {
         ajouterAction(action);
     }
     
-    public Pays getPays(Polygon p) {
-        return GestionnaireCarte.getInstance().getPays(creationCarte.getIndexCarte(), p);
-    }
-    
     public boolean estRegionUnique(Polygon p) {
-        Pays pays = getPays(p);
+        Pays pays = creationCarte.getPays(p);
         return pays != null && pays.getRegions().size() > 1;
     }
     

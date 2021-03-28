@@ -5,8 +5,8 @@
  */
 package ca.ulaval.glo2004.afficheur.carteActions;
 
+import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 
 /**
  *
@@ -15,20 +15,20 @@ import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 public class AjouterLienAction extends ActionCarte {
 
     private final VoieLiaison voie;
-    private final int carteIndex;
+    private final Carte carte;
 
-    public AjouterLienAction(VoieLiaison voie, int carteIndex) {
+    public AjouterLienAction(VoieLiaison voie, Carte carte) {
         this.voie = voie;
-        this.carteIndex = carteIndex;
+        this.carte = carte;
     }
     
     @Override
     public void Executer() {
-        GestionnaireCarte.getInstance().getElement(carteIndex).ajouterVoie(voie);
+        carte.ajouterVoie(voie);
     }
 
     @Override
     public void Undo() {
-        GestionnaireCarte.getInstance().getElement(carteIndex).retirerVoie(voie);
+        carte.retirerVoie(voie);
     }
 }

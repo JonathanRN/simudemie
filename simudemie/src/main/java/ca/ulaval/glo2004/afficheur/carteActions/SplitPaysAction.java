@@ -8,9 +8,8 @@ package ca.ulaval.glo2004.afficheur.carteActions;
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Region;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import java.awt.Polygon;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -21,7 +20,7 @@ public class SplitPaysAction extends ActionCarte {
     private final CreationCarte creationCarte;
     private final Polygon polygon, gauche, droit;
     private Pays pays;
-    private ArrayList<Polygon> polygones;
+    private List<Polygon> polygones;
     
     private Region regionGauche, regionDroite;
 
@@ -34,8 +33,8 @@ public class SplitPaysAction extends ActionCarte {
     
     @Override
     public void Executer() {
-        polygones = creationCarte.getPanel().getPolygones();
-        pays = GestionnaireCarte.getInstance().getPays(creationCarte.getIndexCarte(), polygon);
+        polygones = creationCarte.getPolygones();
+        pays = creationCarte.getPays(polygon);
         int index = polygones.indexOf(polygon);
         
         polygones.remove(index);

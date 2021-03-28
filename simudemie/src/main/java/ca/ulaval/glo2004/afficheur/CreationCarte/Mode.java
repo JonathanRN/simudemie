@@ -5,6 +5,8 @@
  */
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
+import ca.ulaval.glo2004.domaine.Carte;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -13,6 +15,7 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.Line2D;
 import java.awt.geom.PathIterator;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -26,9 +29,11 @@ public class Mode {
     protected final Color couleurFill = new Color(85, 91, 100, 100);
     protected final CreationCarte creationCarte;
     protected ArrayList<Line2D.Double> lignesInvalides = new ArrayList<>(); 
+    protected final Carte carte;
 
     public Mode(CreationCarte panel) {
         this.creationCarte = panel;
+        this.carte = creationCarte.getCarte();
     }
     
     public void paint(Graphics2D g) {        
@@ -83,9 +88,8 @@ public class Mode {
     
     protected void paintPolygones(Graphics2D g) {
         g.setColor(couleurFill);
-        ArrayList<Polygon> polygones = creationCarte.getPanel().getPolygones();
-        for (int i = 0; i < polygones.size() - 1; i++) {
-            g.fillPolygon(polygones.get(i));
+        for (Polygon p : creationCarte.getPolygones()) {
+            g.fillPolygon(p);
         }
     }
     
@@ -106,9 +110,12 @@ public class Mode {
     private ArrayList<Line2D.Double> getLignesInvalides(Polygon p) {
         ArrayList<Line2D.Double> invalides = new ArrayList<>();
         
+        ArrayList<Polygon> polygones = (ArrayList<Polygon>)creationCarte.getPolygones().clone();
+        polygones.add(creationCarte.getPanel().getCourant());
+        
         for (Line2D.Double line : getPolygonLines(p)) {
-            for (int x = 0; x < creationCarte.getPanel().getPolygones().size(); x++) {
-                ArrayList<Line2D.Double> linesP2 = getPolygonLines(creationCarte.getPanel().getPolygones().get(x));
+            for (int x = 0; x < polygones.size(); x++) {
+                ArrayList<Line2D.Double> linesP2 = getPolygonLines(polygones.get(x));
                 for (Line2D.Double lineP2 : linesP2) {
                     if (line.intersectsLine(lineP2) &&
                         line.x1 != lineP2.x1 &&
@@ -176,7 +183,7 @@ public class Mode {
 
     private void updateHighlight(Point point) {
         highlight = null;
-        for (Polygon p : creationCarte.getPanel().getPolygones()) {
+        for (Polygon p : creationCarte.getPolygones()) {
             if (p.contains(point.x, point.y)) {
                 highlight = p;
                 return;

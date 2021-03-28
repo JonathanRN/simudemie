@@ -5,10 +5,8 @@
  */
 package ca.ulaval.glo2004.afficheur.carteActions;
 
+import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
-import java.awt.Polygon;
-import java.util.ArrayList;
 
 /**
  *
@@ -16,25 +14,22 @@ import java.util.ArrayList;
  */
 public class CreerPolygoneAction extends ActionCarte {
     
-    private ArrayList<Polygon> polygons;
-    private int index;
-    private Pays pays;
+    private final Carte carte;
+    private final Pays pays;
     
-    public CreerPolygoneAction(int index, Pays pays, ArrayList<Polygon> polygons) {
-        this.index = index;
+    public CreerPolygoneAction(Carte carte, Pays pays) {
+        this.carte = carte;
         this.pays = pays;
-        this.polygons = polygons;
     }
     
     @Override
     public void Executer() {
-        GestionnaireCarte.getInstance().creerPays(index, pays);
         pays.ajouterRegion(new ca.ulaval.glo2004.domaine.Region(pays.getPolygone()));
-        polygons.add(new Polygon());
+        carte.ajouterPays(pays);
     }
 
     @Override
     public void Undo() {
-        polygons.remove(polygons.get(polygons.size() - 1));
+        // TODO
     }
 }

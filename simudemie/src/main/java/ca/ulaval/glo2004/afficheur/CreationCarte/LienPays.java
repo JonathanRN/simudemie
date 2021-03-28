@@ -6,10 +6,8 @@
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
 import ca.ulaval.glo2004.afficheur.carteActions.AjouterLienAction;
-import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
-import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -28,7 +26,6 @@ public class LienPays extends Mode {
     
     private InformationsLienPanel panel;
     
-    private Carte carte;
     private ArrayList<Pays> listePays = new ArrayList<>();
     private Point initial, initialDrag;
     
@@ -178,7 +175,7 @@ public class LienPays extends Mode {
                 Point centreLigne = this.getCentreLigne(new Line2D.Double(initial.x, initial.y, centre.x, centre.y));
                 
                 VoieLiaison voie = new VoieLiaison(nonUtilisees.get(0), origine, destination, path, centreLigne);
-                AjouterLienAction action = new AjouterLienAction(voie, creationCarte.getIndexCarte());
+                AjouterLienAction action = new AjouterLienAction(voie, carte);
                 creationCarte.getPanel().ajouterAction(action);
                 
                 path = null;
@@ -192,7 +189,6 @@ public class LienPays extends Mode {
     
     @Override
     public void onActive() {
-        carte = GestionnaireCarte.getInstance().getElement(creationCarte.getIndexCarte());
         listePays = carte.getListePays();
         
         creationCarte.getInformationsPanel().setVisible(false);
@@ -221,6 +217,7 @@ public class LienPays extends Mode {
     }
     
     public void onLienSupprime(VoieLiaison lien) {
+        // todo: faire en carte action
         carte.retirerVoie(lien);
         creationCarte.getInformationsPanel().setVisible(false);
         
@@ -233,7 +230,7 @@ public class LienPays extends Mode {
     }
     
     private void updateVoies() {
-        voies = GestionnaireCarte.getInstance().getElement(creationCarte.getIndexCarte()).getVoies();
+        voies = carte.getVoies();
     }
     
     private void updatePoints() {

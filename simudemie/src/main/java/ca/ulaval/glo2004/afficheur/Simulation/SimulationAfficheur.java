@@ -67,7 +67,7 @@ public class SimulationAfficheur extends Mode {
             if (afficherInfosPays) {
                 int y = drawNom(pays.getNom() + "/" + simulation.getCarte().getNom(), g, zoomFactor);
                 y = drawPopulation(pays.getPopTotale(), g, zoomFactor, y);
-                y = drawStats(pays.getPopInfecteePays(), 0, 0, g, zoomFactor, y);
+                y = drawStats(pays.getPopInfectee(), pays.getPopSaine(), pays.getPopDecedee(), g, zoomFactor, y);
                 drawFooter("Appuyez sur Q pour voir les infos. sur la région", g, zoomFactor, y);
             }
             else {

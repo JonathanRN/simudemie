@@ -13,6 +13,7 @@ import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import java.awt.Color;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -53,19 +54,25 @@ public class OngletCarte extends OngletUI {
     
     @Override
     public void ajouterObjetUI() {
-        super.ajouterObjetUI();
-        ObjetCarte card = new ObjetCarte(this);
-        
-        // todo a changer
-        card.setMapName("Carte: " + objets.size());
-        
-        GestionnaireCarte.getInstance().creer(card.getNomCarte());
-        
-        objets.add(card);
-        onClickObjetUI(card);
-        
-        MapPanelContainer.add(card);
-        updateUI();
+        String nomCarte = JOptionPane.showInputDialog(this, "Entrez le nom de la nouvelle carte", "", JOptionPane.QUESTION_MESSAGE);
+
+        if(nomCarte != null && !nomCarte.isEmpty()) {
+            super.ajouterObjetUI();
+            ObjetCarte card = new ObjetCarte(this);
+
+            // todo a changer
+            card.setMapName(nomCarte);
+
+            GestionnaireCarte.getInstance().creer(card.getNomCarte());
+
+            objets.add(card);
+            onClickObjetUI(card);
+
+            MapPanelContainer.add(card);
+            updateUI();
+            
+            goToCreationCarte();
+        }
     }
 
     private void ajouterCard(Carte carte) {

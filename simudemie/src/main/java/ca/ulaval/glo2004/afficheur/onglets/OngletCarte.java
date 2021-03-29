@@ -31,7 +31,6 @@ public class OngletCarte extends OngletUI {
         initComponents();
         
         try {
-            
             MapsScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             MapsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             Map_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));

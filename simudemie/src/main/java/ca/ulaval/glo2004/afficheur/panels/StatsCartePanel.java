@@ -5,11 +5,9 @@
  */
 package ca.ulaval.glo2004.afficheur.panels;
 
-import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
 import java.awt.Color;
-import javax.swing.SwingUtilities;
 
 /**
  *

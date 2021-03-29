@@ -254,13 +254,19 @@ public class OngletCarte extends OngletUI {
 
     private void ImportMapButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportMapButtonMouseReleased
         fileChooser.showOpenDialog(null);
-        Carte carte = GestionnaireCarte.getInstance().importer(fileChooser.getSelectedFile().toString());
-        ajouterCard(carte);
+        if(fileChooser.getSelectedFile() != null) {
+            Carte carte = GestionnaireCarte.getInstance().importer(fileChooser.getSelectedFile().toString());
+            ajouterCard(carte);
+            fileChooser.setSelectedFile(null);
+        }
     }//GEN-LAST:event_ImportMapButtonMouseReleased
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
         fileChooser.showOpenDialog(null);
-        GestionnaireCarte.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
+        if(fileChooser.getSelectedFile() != null) {
+            GestionnaireCarte.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
+            fileChooser.setSelectedFile(null);
+        }
     }//GEN-LAST:event_BoutonExportMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

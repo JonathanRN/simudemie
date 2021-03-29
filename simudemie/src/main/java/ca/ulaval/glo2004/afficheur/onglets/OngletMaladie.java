@@ -283,13 +283,19 @@ public class OngletMaladie extends OngletUI {
 
     private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
         fileChooser.showOpenDialog(null);
-        Maladie maladie = controller.importer(fileChooser.getSelectedFile().toString());
-        ajouterCard(maladie);
+        if(fileChooser.getSelectedFile() != null) {
+            Maladie maladie = controller.importer(fileChooser.getSelectedFile().toString());
+            ajouterCard(maladie);
+            fileChooser.setSelectedFile(null);
+        }
     }//GEN-LAST:event_ImportScenarioButtonMouseReleased
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
         fileChooser.showOpenDialog(null);
-        controller.exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
+        if(fileChooser.getSelectedFile() != null) {
+            controller.exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
+            fileChooser.setSelectedFile(null);
+        }
     }//GEN-LAST:event_BoutonExportMouseReleased
 
     public boolean getCardLocked() {

@@ -8,7 +8,6 @@ package ca.ulaval.glo2004.domaine;
 import java.awt.Polygon;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Carte implements Serializable {
@@ -171,20 +170,11 @@ public class Carte implements Serializable {
     
     public Maladie getMaladie() {return maladie;}
     
-    public void setMaladie(Maladie maladie)
-    {
+    public void setMaladie(Maladie maladie) {
         this.maladie = maladie;
     }
     
-    public void setNom(String nom)
-    {
+    public void setNom(String nom) {
         this.nom = nom;
     }
-    
-    /*
-    public Pays trouverPays(Pays aTrouver)
-    {
-        return new Pays();
-    }
-    */
 }

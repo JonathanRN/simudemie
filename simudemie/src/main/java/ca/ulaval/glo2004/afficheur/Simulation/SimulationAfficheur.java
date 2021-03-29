@@ -7,6 +7,7 @@ package ca.ulaval.glo2004.afficheur.Simulation;
 
 import ca.ulaval.glo2004.afficheur.CreationCarte.Mode;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
+import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Region;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
@@ -17,6 +18,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -43,12 +45,13 @@ public class SimulationAfficheur extends Mode {
     }
     
     @Override
-    public void paint(Graphics2D g) {        
-        for (Polygon p : polygones) {
+    public void paint(Graphics2D g) {
+        for (Polygon p : afficherInfosPays ? simulation.getCarte().getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
             g.setColor(couleurFill);
             g.fillPolygon(p);
             this.paintLignes(g, Color.black, p);
         }
+        
         
         for (VoieLiaison voie : simulation.getCarte().getVoies()) {
             g.setColor(voie.getCouleur());
@@ -59,21 +62,38 @@ public class SimulationAfficheur extends Mode {
         g.setStroke(new BasicStroke(1));
         super.paint(g);
         
+        updateHighlight(souris);
+        
         if (highlight != null) {
             float zoomFactor = simulation.getPanel().getZoomFactor();
             Pays pays = simulation.getCarte().getPays(highlight);
-            Region region = pays.getRegion(highlight);
-            
             if (afficherInfosPays) {
-                int y = drawNom(pays.getNom() + "/" + simulation.getCarte().getNom(), g, zoomFactor);
+                int y = drawNom(pays.getNom(), g, zoomFactor);
                 y = drawPopulation(pays.getPopTotale(), g, zoomFactor, y);
-                y = drawStats(pays.getPopInfectee(), pays.getPopSaine(), pays.getPopDecedee(), g, zoomFactor, y);
+                y = drawStats(pays.getPopInfectee(),
+                        pays.getPopSaine(),
+                        pays.getPopDecedee(),
+                        pays.getPourcentageInfectee(),
+                        pays.getPourcentageSaine(),
+                        pays.getPourcentageDecedee(),
+                        g,
+                        zoomFactor,
+                        y);
                 drawFooter("Appuyez sur Q pour voir les infos. sur la région", g, zoomFactor, y);
             }
             else {
-                int y = drawNom(region.getNom() + "/" + pays.getNom(), g, zoomFactor);
+                Region region = pays.getRegion(highlight);
+                int y = drawNom(region.getNom(), g, zoomFactor);
                 y = drawPopulation(region.getPopTotale(), g, zoomFactor, y);
-                y = drawStats(region.getPopInfectee(), region.getPopSaine(), region.getPopDecedee(), g, zoomFactor, y);
+                y = drawStats(region.getPopInfectee(),
+                        region.getPopSaine(),
+                        region.getPopDecedee(),
+                        region.getPourcentageInfectee(),
+                        region.getPourcentageSaine(),
+                        region.getPourcentageDecedee(),
+                        g,
+                        zoomFactor,
+                        y);
                 drawFooter("Appuyez sur Q pour voir les infos. sur le pays", g, zoomFactor, y);
             }
         }
@@ -81,8 +101,6 @@ public class SimulationAfficheur extends Mode {
 
     @Override
     public void onMouseMoved(Point point) {
-        super.onMouseMoved(point);
-        
         souris = point;
     }
     
@@ -93,7 +111,7 @@ public class SimulationAfficheur extends Mode {
             return;
         }
         
-        for (Polygon p : polygones) {
+        for (Polygon p : afficherInfosPays ? simulation.getCarte().getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
             if (p.contains(point.x, point.y)) {
                 highlight = p;
                 break;
@@ -103,6 +121,8 @@ public class SimulationAfficheur extends Mode {
     
     public void onSwapInformations() {
         afficherInfosPays = !afficherInfosPays;
+        
+        updateHighlight(souris);
     }
     
     private int drawNom(String nom, Graphics2D g, float zoomFactor) {
@@ -129,13 +149,13 @@ public class SimulationAfficheur extends Mode {
         return (int)offsetY;
     }
     
-    private int drawStats(int infectes, int retablis, int morts, Graphics2D g, float zoomFactor, int offset) {
+    private int drawStats(int infectes, int retablis, int morts, float pourInf, float pourRet, float pourMorts, Graphics2D g, float zoomFactor, int offset) {
         float x = souris.x + sourisOffset.x / zoomFactor;
         int offsetY = (int)(offset + 20 / zoomFactor);
         
-        g.drawString(String.format("%s infectés (%s%%)", infectes, 0), x, offsetY);
-        g.drawString(String.format("%s sains (%s%%)", retablis, 0), x, offsetY + 20 / zoomFactor);
-        g.drawString(String.format("%s morts (%s%%)", morts, 0), x, offsetY + 40 / zoomFactor);
+        g.drawString(String.format("%s infectés (%.2f%%)", infectes, pourInf), x, offsetY);
+        g.drawString(String.format("%s sains (%.2f%%)", retablis, pourRet), x, offsetY + 20 / zoomFactor);
+        g.drawString(String.format("%s morts (%.2f%%)", morts, pourMorts), x, offsetY + 40 / zoomFactor);
         
         return (int)(offsetY + 40 / zoomFactor);
     }

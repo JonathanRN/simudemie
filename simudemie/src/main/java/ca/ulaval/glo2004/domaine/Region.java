@@ -58,13 +58,38 @@ public class Region implements Serializable {
     
     public int getPopSaine(){return populationSaine;}
     
-    public double getPourcentageInfection(){return (this.getPopSaine()/this.getPopInfectee()*100);}
-    
 //    public int getPopImmunisee(){return populationImmune;}
     
     public int getPopInfectee(){return populationInfectee;}
     
     public int getPopDecedee(){return populationDecedee;}
+    
+    public float getPourcentageInfectee() {
+        try {
+            return (getPopInfectee() / getPopTotale()) * 100;
+        }
+        catch (java.lang.ArithmeticException e) {
+            return 0;
+        }
+    }
+    
+    public float getPourcentageSaine() {
+        try {
+            return (getPopSaine() / getPopTotale()) * 100;
+        }
+        catch (java.lang.ArithmeticException e) {
+            return 0;
+        }
+    }
+    
+    public float getPourcentageDecedee() {
+        try {
+            return (getPopDecedee() / getPopTotale()) * 100;
+        }
+        catch (java.lang.ArithmeticException e) {
+            return 0;
+        }
+    }
     
     public Polygon getPolygone() {
         return polygone;
@@ -111,8 +136,6 @@ public class Region implements Serializable {
         int cpt = 0;
         double prob = binomial.probability((int)x);
 
-        System.out.println(prob); 
-
         while(prob > seuilTol && x >= 0){
             probabilites.add(prob);
             nombreSucces.add(cpt);
@@ -121,16 +144,13 @@ public class Region implements Serializable {
             prob = binomial.probability((int)x);
         }
 
-        //System.out.println(probabilites);
-        //System.out.println(nombreSucces);
-
         double randomNumber = 0.0; 
-        double current = 0.0; //treshold
+        double current = 0.0; //threshold
         int success = 0;
 
         for (int k = 0; k < 10; k++){
             randomNumber = rnd.nextDouble();
-            current = 0.0; //treshold
+            current = 0.0; //threshold
             success = 0;
             for(int i = 0; i < probabilites.size(); i++){
                 current += probabilites.get(0);
@@ -141,10 +161,6 @@ public class Region implements Serializable {
             }
         }
 
-        return (int)(nbInfectees*tauxPropag + success);
-        //System.out.println(success); 
-        //System.out.println(randomNumber);
-        //System.out.println(resultatInfectees);
-        
+        return (int)(nbInfectees*tauxPropag + success);        
     }
 }

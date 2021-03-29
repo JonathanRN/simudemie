@@ -67,14 +67,14 @@ public class CreationCarteToggle extends PanelArrondi {
         setMinimumSize(new java.awt.Dimension(50, 50));
         setPreferredSize(new java.awt.Dimension(50, 50));
         addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                formMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 formMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 formMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
             }
         });
         setLayout(new java.awt.BorderLayout());
@@ -98,12 +98,12 @@ public class CreationCarteToggle extends PanelArrondi {
         }
     }//GEN-LAST:event_formMouseExited
 
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         setToggle(true);
         if (creation != null) {
             creation.onToggleClick(this);
         }
-    }//GEN-LAST:event_formMouseClicked
+    }//GEN-LAST:event_formMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

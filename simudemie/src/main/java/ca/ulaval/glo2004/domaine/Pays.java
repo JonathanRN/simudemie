@@ -79,6 +79,33 @@ public class Pays implements Serializable {
         return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopTotale()));
     }
     
+    public float getPourcentageInfectee() {
+        try {
+            return (getPopInfectee() / getPopTotale()) * 100;
+        }
+        catch (java.lang.ArithmeticException e) {
+            return 0;
+        }
+    }
+    
+    public float getPourcentageSaine() {
+        try {
+            return (getPopSaine() / getPopTotale()) * 100;
+        }
+        catch (java.lang.ArithmeticException e) {
+            return 0;
+        }
+    }
+    
+    public float getPourcentageDecedee() {
+        try {
+            return (getPopDecedee() / getPopTotale()) * 100;
+        }
+        catch (java.lang.ArithmeticException e) {
+            return 0;
+        }
+    }
+    
     public Polygon getPolygone() { return polygone; };
     
     public void setNom(String nom) {

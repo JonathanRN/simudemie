@@ -56,11 +56,7 @@ public class CreationCarte extends javax.swing.JPanel {
     }
     
     public ArrayList<Polygon> getPolygones() {
-        ArrayList<Polygon> polygones = new ArrayList<>();
-        for (Pays pays : getCarte().getListePays()) {
-            polygones.addAll(pays.getRegions().stream().map(x -> x.getPolygone()).collect(Collectors.toList()));
-        }
-        return polygones;
+        return getCarte().getPolygonesRegions();
     }
     
     public Carte getCarte() {

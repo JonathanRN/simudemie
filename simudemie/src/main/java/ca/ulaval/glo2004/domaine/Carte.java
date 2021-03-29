@@ -150,6 +150,14 @@ public class Carte implements Serializable {
         return null;
     }
 
+    public ArrayList<Polygon> getPolygonesRegions() {
+        ArrayList<Polygon> polygones = new ArrayList<>();
+        for (Pays pays : getListePays()) {
+            polygones.addAll(pays.getRegions().stream().map(x -> x.getPolygone()).collect(Collectors.toList()));
+        }
+        return polygones;
+    }
+    
     public String getNom(){return nom;}
     
     public ArrayList<Pays> getListePays(){return listePays;}

@@ -21,7 +21,7 @@ import javax.swing.JPanel;
  */
 public class ZoomablePanel extends JPanel {
     
-    private double zoomFactor = 1;
+    protected double zoomFactor = 1;
     private double prevZoomFactor = 1;
     private double xOffset = 0;
     private double yOffset = 0;

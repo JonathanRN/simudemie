@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004.afficheur;
+package ca.ulaval.glo2004.afficheur.Simulation;
 
+import ca.ulaval.glo2004.afficheur.FramePrincipal;
+import ca.ulaval.glo2004.domaine.Carte;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -18,14 +20,12 @@ public class Simulation extends javax.swing.JPanel {
     
     private boolean estEnDirect;
     private boolean mouseOver;
+    private final Carte carte;
     
-    public Simulation() {
+    public Simulation(Carte carte) {
+        this.carte = carte;
         initComponents();
         
-        //SidePanel.setBackground(SidePanel.defaultColor);
-        LinkButton.setIcon("/icons/icons8_chain_25px.png");
-        StatsButton.setIcon("/icons/icons8_bar_chart_25px.png");
-        HelpButton.setIcon("/icons/icons8_help_25px.png");
         HomeButton.setIcon("/icons/icons8_home_25px_1.png");
         
         HomeButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -33,6 +33,16 @@ public class Simulation extends javax.swing.JPanel {
                 HomeButtonReleased(evt);
             }
         });
+        
+        SimulationPanel.setSimulation(this);
+    }
+    
+    public SimulationPanel getPanel() {
+        return SimulationPanel;
+    }
+    
+    public Carte getCarte() {
+        return carte;
     }
     
     public void setDirect(boolean direct) {
@@ -87,11 +97,9 @@ public class Simulation extends javax.swing.JPanel {
         Buttons = new javax.swing.JPanel();
         SidePanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         AddButton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
-        LinkButton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         Spacing = new javax.swing.JPanel();
-        StatsButton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
-        HelpButton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         HomeButton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
+        SimulationPanel = new ca.ulaval.glo2004.afficheur.Simulation.SimulationPanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
         setLayout(new javax.swing.OverlayLayout(this));
@@ -105,6 +113,7 @@ public class Simulation extends javax.swing.JPanel {
 
         SliderJour.setSnapToTicks(true);
         SliderJour.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 10));
+        SliderJour.setFocusable(false);
         SliderJour.setPreferredSize(new java.awt.Dimension(200, 70));
         SliderJour.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -147,7 +156,6 @@ public class Simulation extends javax.swing.JPanel {
         SidePanel.setPreferredSize(new java.awt.Dimension(50, 200));
         SidePanel.setLayout(new java.awt.GridLayout(6, 1, 0, 10));
         SidePanel.add(AddButton);
-        SidePanel.add(LinkButton);
 
         Spacing.setBackground(new java.awt.Color(90, 95, 104));
         Spacing.setOpaque(false);
@@ -165,8 +173,6 @@ public class Simulation extends javax.swing.JPanel {
         );
 
         SidePanel.add(Spacing);
-        SidePanel.add(StatsButton);
-        SidePanel.add(HelpButton);
         SidePanel.add(HomeButton);
 
         javax.swing.GroupLayout ButtonsLayout = new javax.swing.GroupLayout(Buttons);
@@ -175,17 +181,32 @@ public class Simulation extends javax.swing.JPanel {
             ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ButtonsLayout.createSequentialGroup()
                 .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1093, Short.MAX_VALUE))
+                .addGap(0, 1078, Short.MAX_VALUE))
         );
         ButtonsLayout.setVerticalGroup(
             ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ButtonsLayout.createSequentialGroup()
-                .addContainerGap(188, Short.MAX_VALUE)
+                .addContainerGap(240, Short.MAX_VALUE)
                 .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
 
         add(Buttons);
+
+        SimulationPanel.setOpaque(false);
+
+        javax.swing.GroupLayout SimulationPanelLayout = new javax.swing.GroupLayout(SimulationPanel);
+        SimulationPanel.setLayout(SimulationPanelLayout);
+        SimulationPanelLayout.setHorizontalGroup(
+            SimulationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, Short.MAX_VALUE, Short.MAX_VALUE)
+        );
+        SimulationPanelLayout.setVerticalGroup(
+            SimulationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 822, Short.MAX_VALUE)
+        );
+
+        add(SimulationPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BoutonDirectMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonDirectMouseEntered
@@ -220,14 +241,12 @@ public class Simulation extends javax.swing.JPanel {
     private javax.swing.JPanel BoutonDirect;
     private javax.swing.JPanel Buttons;
     private javax.swing.JLabel DirectIcon;
-    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HelpButton;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HomeButton;
-    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton LinkButton;
     private ca.ulaval.glo2004.afficheur.PanelArrondi SidePanel;
+    private ca.ulaval.glo2004.afficheur.Simulation.SimulationPanel SimulationPanel;
     private javax.swing.JPanel Slider;
     private javax.swing.JSlider SliderJour;
     private javax.swing.JPanel SliderParent;
     private javax.swing.JPanel Spacing;
-    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton StatsButton;
     // End of variables declaration//GEN-END:variables
 }

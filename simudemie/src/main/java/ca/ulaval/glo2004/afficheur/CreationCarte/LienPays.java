@@ -39,7 +39,7 @@ public class LienPays extends Mode {
     private Polygon highlight;
     
     public LienPays(CreationCarte panel) {
-        super(panel);
+        this.setCreationCarte(panel);
         taillePoint *= 1.5;
     }
 

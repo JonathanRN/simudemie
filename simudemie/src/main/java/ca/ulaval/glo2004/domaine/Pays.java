@@ -13,7 +13,7 @@ public class Pays implements Serializable {
     private String nom;
     private ArrayList<Region> listeRegions = new ArrayList<>();
     private Polygon polygone;
-    public ArrayList<Mesure> mesures =new ArrayList<>();
+    public ArrayList<Mesure> mesures = new ArrayList<>();
 
     public Pays(Polygon polygone) {
         this.polygone = polygone;
@@ -55,6 +55,10 @@ public class Pays implements Serializable {
     
     public ArrayList<Region> getRegions() {
         return listeRegions;
+    }
+    
+    public Region getRegion(Polygon p) {
+        return listeRegions.stream().filter(x -> x.getPolygone().equals(p)).findFirst().get();
     }
         
     public String getNom(){ return nom; }

@@ -25,7 +25,7 @@ public class Selection extends Mode {
     private InformationsPaysPanel panel;
     
     public Selection(CreationCarte panel) {
-        super(panel);
+        this.setCreationCarte(panel);
     }
 
     @Override

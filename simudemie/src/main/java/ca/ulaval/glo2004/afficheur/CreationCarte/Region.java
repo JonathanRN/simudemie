@@ -23,7 +23,7 @@ public class Region extends Mode {
     private Polygon polygoneSplit;
     
     public Region(CreationCarte panel) {
-        super(panel);
+        this.setCreationCarte(panel);
     }
 
     @Override

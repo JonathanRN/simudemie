@@ -22,7 +22,7 @@ public class Creation extends Mode {
     private Point pointDragInitial;
 
     public Creation(CreationCarte panel) {
-        super(panel);
+        this.setCreationCarte(panel);
     }
     
     @Override

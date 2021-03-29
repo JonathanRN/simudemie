@@ -1,7 +1,9 @@
 package ca.ulaval.glo2004.afficheur;
 
+import ca.ulaval.glo2004.afficheur.Simulation.Simulation;
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import com.formdev.flatlaf.IntelliJTheme;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
@@ -35,7 +37,8 @@ public class FramePrincipal extends javax.swing.JFrame {
     
     public void startSimulation() {
         remove(menu);
-        simulation = new Simulation();
+        // TODO A CHANGER
+        simulation = new Simulation(GestionnaireCarte.getInstance().getElement(0));
         add(simulation);
         revalidate();
         repaint();

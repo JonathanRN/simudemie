@@ -25,11 +25,11 @@ public class Mode {
     protected int taillePoint = 20;
     protected final Color couleurLigne = new Color(136, 192, 208);
     protected final Color couleurFill = new Color(85, 91, 100, 100);
-    protected final CreationCarte creationCarte;
+    protected CreationCarte creationCarte;
     protected ArrayList<Line2D.Double> lignesInvalides = new ArrayList<>(); 
-    protected final Carte carte;
-
-    public Mode(CreationCarte panel) {
+    protected Carte carte;
+    
+    public void setCreationCarte(CreationCarte panel) {
         this.creationCarte = panel;
         this.carte = creationCarte.getCarte();
     }
@@ -179,7 +179,7 @@ public class Mode {
         return areaSegments;
     }
 
-    private void updateHighlight(Point point) {
+    protected void updateHighlight(Point point) {
         highlight = null;
         for (Polygon p : creationCarte.getPolygones()) {
             if (p.contains(point.x, point.y)) {

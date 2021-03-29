@@ -115,11 +115,18 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         Maladie maladie = onglet.getController().creer(args);
         
         ObjetMaladie objetMaladie = (ObjetMaladie)onglet.getCourant();
-        
+        /*
         objetMaladie.setNom(maladie.getNom());
         objetMaladie.setInfectedProgressBar(maladie.getTauxInfection());
         objetMaladie.setCuredProgressBar(maladie.getTauxGuerison());
         objetMaladie.setDeadProgressBar(maladie.getTauxMortalite());
+        */
+        objetMaladie.setNom(MaladieInput.getText());
+        objetMaladie.setInfectedProgressBar(getInfectionInput());
+        objetMaladie.setCuredProgressBar(getCuredInput());
+        objetMaladie.setDeadProgressBar(getDeadInput());
+        
+        updateUI();
     }
     
     /**

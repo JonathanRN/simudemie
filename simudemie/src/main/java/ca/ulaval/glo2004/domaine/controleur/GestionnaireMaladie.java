@@ -7,6 +7,9 @@ package ca.ulaval.glo2004.domaine.controleur;
 
 import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.helper.FileHelper;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collector;
 
 /**
  *
@@ -26,8 +29,31 @@ public class GestionnaireMaladie extends GestionnaireOnglet<Maladie> {
         double tauxInf = (double) arguments[1];
         double tauxDead = (double) arguments[2];
         double tauxGue = (double) arguments[3];
-        Maladie maladie = new Maladie(nom, tauxInf, tauxDead, tauxGue);
-        ajouter(maladie);
+        
+        Maladie maladie = getElement(nom);
+        
+        if(maladie == null) {
+            maladie = new Maladie(nom, tauxInf, tauxDead, tauxGue);
+            ajouter(maladie);
+        } else {
+            maladie.setNom(nom);
+            maladie.setTauxInfection(tauxInf);
+            maladie.setTauxGuerison(tauxGue);
+            maladie.setTauxMortalite(tauxDead);
+            sauvegarder();
+        }
+        
+        return maladie;
+    }
+    
+    @Override
+    public Maladie getElement(String nom) {
+        Maladie maladie = null;
+        for(Maladie m : getList()) {
+            if(m.getNom().equals(nom)) {
+                maladie = m;
+            }
+        }
         return maladie;
     }
 }

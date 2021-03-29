@@ -87,7 +87,9 @@ public class OngletMaladie extends OngletUI {
     @Override
     public void retirerCourant() {
         if(objets.size() > 0) {
-            controller.supprimer(getIndexCourant());
+            if(!cardLocked) {
+                controller.supprimer(getIndexCourant());
+            }
             
             MaladiesContainer.remove(courant);
             objets.remove(courant);

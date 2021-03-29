@@ -11,9 +11,7 @@ import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import java.awt.Color;
 import java.awt.Polygon;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -29,6 +27,7 @@ public class CreationCarte extends javax.swing.JPanel {
     private CreationCarteToggle toggleCourant;
     
     public CreationCarte(int index) {
+        carteIndex = index;
         initComponents();
         
         InformationsPanel.setBackground(new Color(59, 66, 82));
@@ -47,7 +46,6 @@ public class CreationCarte extends javax.swing.JPanel {
         
         onToggleClick(BoutonSelection);
         
-        carteIndex = index;
         CreationCartePanel.setCreationCarte(this);
     }
     

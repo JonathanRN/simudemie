@@ -33,21 +33,21 @@ public class SimulationAfficheur extends Mode {
     
     public SimulationAfficheur(Simulation simulation) {
         this.simulation = simulation;
+        onActive();
     }
 
     @Override
     public void onActive() {
         super.onActive();
-        //simulation.getInformationsPays().setVisible(false);
-    }
-
-    @Override
-    public void paint(Graphics2D g) {
         polygones = simulation.getCarte().getPolygonesRegions();
-        
-        g.setColor(couleurFill);
+    }
+    
+    @Override
+    public void paint(Graphics2D g) {        
         for (Polygon p : polygones) {
+            g.setColor(couleurFill);
             g.fillPolygon(p);
+            this.paintLignes(g, Color.black, p);
         }
         
         for (VoieLiaison voie : simulation.getCarte().getVoies()) {
@@ -89,6 +89,10 @@ public class SimulationAfficheur extends Mode {
     @Override
     protected void updateHighlight(Point point) {
         highlight = null;
+        if (point == null) {
+            return;
+        }
+        
         for (Polygon p : polygones) {
             if (p.contains(point.x, point.y)) {
                 highlight = p;

@@ -47,9 +47,9 @@ public class Carte implements Serializable {
             }
             for ( Pays pays : listePays)
             {
-                if (pays.getPopInfecteePays() > 0)
+                if (pays.getPopInfectee() > 0)
                 {
-                    voyageursInfectees = (0.001 * pays.getPopInfecteePays()); //Déterminer quel sera le 0.001
+                    voyageursInfectees = (0.001 * pays.getPopInfectee()); //Déterminer quel sera le 0.001
                     if (this.getNom().equals(voie.getPaysOrigine().getNom()) )
                     {
                         paysAInfecter = voie.getPaysDestination(); //validation (selon origine/destination)
@@ -62,7 +62,7 @@ public class Carte implements Serializable {
                         double prob = Math.random();
                         if (prob > 0.5) //une chance sur deux
                         {//Arrondissement avec le int
-                            region.setPopInfectee(pays.getPopInfecteePays() + (int)(voyageursInfectees / paysAInfecter.listeRegions.size()));
+                            region.setPopInfectee(pays.getPopInfectee() + (int)(voyageursInfectees / paysAInfecter.listeRegions.size()));
                         }
                     }
                 }

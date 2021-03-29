@@ -109,9 +109,17 @@ public class CreationCarte extends javax.swing.JPanel {
             optionPane.getOptions(),
             optionPane.getInitialValue());
         
-        if (result == JOptionPane.YES_OPTION) {
-            FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
-            frame.returnToHome();
+        
+        switch(result) {
+            case JOptionPane.YES_OPTION:
+                GestionnaireCarte.getInstance().sauvegarder();
+            case JOptionPane.NO_OPTION:
+                // TODO: Undo actions ou export fichier temp avant modif et import après
+                // OU recharcher cartes.ser
+                
+                FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
+                frame.returnToHome();
+                break;
         }
     }
 

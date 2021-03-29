@@ -7,6 +7,7 @@ package ca.ulaval.glo2004.domaine;
 import java.awt.Polygon;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Pays implements Serializable {
     
@@ -62,21 +63,20 @@ public class Pays implements Serializable {
         
     public String getNom(){ return nom; }
     
-    public int getPopInfecteePays()
-    {
-        int sum = 0;
-        for (Region r : listeRegions) {
-            sum += r.getPopInfectee();
-        }
-        return sum;
+    public int getPopInfectee() {
+        return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopInfectee()));
+    }
+    
+    public int getPopSaine() {
+        return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopSaine()));
+    }
+    
+    public int getPopDecedee() {
+        return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopDecedee()));
     }
     
     public int getPopTotale() {
-        int sum = 0;
-        for (Region r : listeRegions) {
-            sum += r.getPopTotale();
-        }
-        return sum;
+        return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopTotale()));
     }
     
     public Polygon getPolygone() { return polygone; };

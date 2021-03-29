@@ -26,7 +26,7 @@ public class SimulationPanel extends ZoomablePanel {
     
     public void setSimulation(Simulation simulation) {
         this.simulation = simulation;
-        afficheur = new SimulationAfficheur(simulation);        
+        afficheur = new SimulationAfficheur(simulation);
     }
     
     public float getZoomFactor() {

@@ -51,9 +51,11 @@ public class ZoomablePanel extends JPanel {
     
     public Point getOffset(Point point) {
         try {
-            Point2D p = g2.getTransform().createInverse().transform(point, point);
-            return new Point((int)p.getX(), (int)p.getY());
-        } catch (java.awt.geom.NoninvertibleTransformException e) {
+            if (g2 != null) {
+                Point2D p = g2.getTransform().createInverse().transform(point, point);
+                return new Point((int)p.getX(), (int)p.getY());
+            }
+        } catch (Exception e) {
             System.err.println(e);
         }
         return null;

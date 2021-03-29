@@ -33,21 +33,21 @@ public class SimulationAfficheur extends Mode {
     
     public SimulationAfficheur(Simulation simulation) {
         this.simulation = simulation;
+        onActive();
     }
 
     @Override
     public void onActive() {
         super.onActive();
-        //simulation.getInformationsPays().setVisible(false);
-    }
-
-    @Override
-    public void paint(Graphics2D g) {
         polygones = simulation.getCarte().getPolygonesRegions();
-        
-        g.setColor(couleurFill);
+    }
+    
+    @Override
+    public void paint(Graphics2D g) {        
         for (Polygon p : polygones) {
+            g.setColor(couleurFill);
             g.fillPolygon(p);
+            this.paintLignes(g, Color.black, p);
         }
         
         for (VoieLiaison voie : simulation.getCarte().getVoies()) {
@@ -67,7 +67,7 @@ public class SimulationAfficheur extends Mode {
             if (afficherInfosPays) {
                 int y = drawNom(pays.getNom() + "/" + simulation.getCarte().getNom(), g, zoomFactor);
                 y = drawPopulation(pays.getPopTotale(), g, zoomFactor, y);
-                y = drawStats(pays.getPopInfecteePays(), 0, 0, g, zoomFactor, y);
+                y = drawStats(pays.getPopInfectee(), pays.getPopSaine(), pays.getPopDecedee(), g, zoomFactor, y);
                 drawFooter("Appuyez sur Q pour voir les infos. sur la région", g, zoomFactor, y);
             }
             else {
@@ -89,6 +89,10 @@ public class SimulationAfficheur extends Mode {
     @Override
     protected void updateHighlight(Point point) {
         highlight = null;
+        if (point == null) {
+            return;
+        }
+        
         for (Polygon p : polygones) {
             if (p.contains(point.x, point.y)) {
                 highlight = p;

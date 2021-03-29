@@ -19,7 +19,6 @@ public abstract class GestionnaireOnglet<T extends Serializable> {
     protected List<T> list;
     
     public abstract T creer(Object ... arguments);
-    protected abstract T getElement(String nom);
     
     protected void ajouter(T object) {
         list.add(object);

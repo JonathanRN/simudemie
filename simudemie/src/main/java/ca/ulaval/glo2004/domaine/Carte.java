@@ -13,17 +13,19 @@ import java.util.stream.Collectors;
 public class Carte implements Serializable {
     
     private String nom;
-    private final ArrayList<Pays> listePays = new ArrayList<>();
-    private final ArrayList<VoieLiaison> frontieres = new ArrayList<>();
+    private ArrayList<Pays> listePays = new ArrayList<>();
+    private ArrayList<VoieLiaison> frontieres = new ArrayList<>();
     private Maladie maladie;
     
-    public Carte(String nom)
-    {
+    public Carte(String nom) {
         this.nom = nom;
     }    
 
     public Carte(Carte carteJourCourant) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.nom = carteJourCourant.nom;
+        this.listePays = carteJourCourant.listePays;
+        this.frontieres = carteJourCourant.frontieres;
+        this.maladie = carteJourCourant.maladie;
     }
     
     public void avancerJour()
@@ -31,6 +33,7 @@ public class Carte implements Serializable {
         for (Pays pays : listePays){
             pays.avancerJournee(maladie.getTauxInfection(), maladie.getTauxMortalite(), maladie.getTauxGuerison());
         }
+        contaminerInterPays();
     }
     
     private void contaminerInterPays() {
@@ -168,7 +171,7 @@ public class Carte implements Serializable {
     
     public ArrayList<Pays> getListePays(){return listePays;}
     
-    public Maladie getMaladie() {return maladie;}
+    public Maladie getMaladie() { return maladie; }
     
     public void setMaladie(Maladie maladie) {
         this.maladie = maladie;

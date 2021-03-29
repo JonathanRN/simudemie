@@ -122,17 +122,19 @@ public class Region implements Serializable {
     
     private int contaminationBinomiale(double tauxPropag)
     {
+        double taux = tauxPropag / 100;
+        
         Random rnd = new Random (System.currentTimeMillis());
         double seuilTol = 0.0001;
 
         int nbInfectees = this.getPopInfectee();
 
-        BinomialDistribution binomial = new BinomialDistribution(nbInfectees, tauxPropag);
+        BinomialDistribution binomial = new BinomialDistribution(nbInfectees, taux);
 
         ArrayList<Double> probabilites = new ArrayList<>();
         ArrayList<Integer> nombreSucces = new ArrayList<>();
 
-        double x = nbInfectees * tauxPropag;
+        double x = nbInfectees * taux;
         int cpt = 0;
         double prob = binomial.probability((int)x);
 
@@ -161,6 +163,6 @@ public class Region implements Serializable {
             }
         }
 
-        return (int)(nbInfectees*tauxPropag + success);        
+        return (int)(nbInfectees*taux + success);        
     }
 }

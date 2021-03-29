@@ -30,9 +30,4 @@ public class GestionnaireMesure extends GestionnaireOnglet<Mesure> {
         ajouter(mesure);
         return mesure;
     }
-
-    @Override
-    protected Mesure getElement(String nom) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

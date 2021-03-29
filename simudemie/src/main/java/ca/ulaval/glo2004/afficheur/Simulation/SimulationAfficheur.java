@@ -7,7 +7,6 @@ package ca.ulaval.glo2004.afficheur.Simulation;
 
 import ca.ulaval.glo2004.afficheur.CreationCarte.Mode;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
-import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Region;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
@@ -102,6 +101,22 @@ public class SimulationAfficheur extends Mode {
     @Override
     public void onMouseMoved(Point point) {
         souris = point;
+    }
+
+    @Override
+    public void onMouseReleased(Point point) {
+        super.onMouseReleased(point);
+        
+        if (simulation.estCommence()) {
+            return;
+        }
+        
+        for (Polygon p : afficherInfosPays ? simulation.getCarte().getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
+            if (p.contains(point.x, point.y)) {
+                simulation.getCarte().getPays(p).getRegion(p).setPopInfectee(1);
+                break;
+            }
+        }
     }
     
     @Override

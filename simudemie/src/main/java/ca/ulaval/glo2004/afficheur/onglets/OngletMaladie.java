@@ -20,7 +20,6 @@ import javax.swing.JOptionPane;
  */
 public class OngletMaladie extends OngletUI {
     
-    private final JFileChooser fileChooser = new JFileChooser();
     private final GestionnaireMaladie controller;
     // Si à true, on ne peut pas sélectionner d'autre cartes maladie
     private boolean cardLocked;
@@ -265,8 +264,8 @@ public class OngletMaladie extends OngletUI {
     }//GEN-LAST:event_AddScenarioButtonMouseClicked
 
     private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
-        fileChooser.showOpenDialog(null);
-        if(fileChooser.getSelectedFile() != null) {
+        int result = fileChooser.showOpenDialog(null);
+        if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
             Maladie maladie = controller.importer(fileChooser.getSelectedFile().toString());
             ajouterCard(maladie);
             fileChooser.setSelectedFile(null);
@@ -274,8 +273,8 @@ public class OngletMaladie extends OngletUI {
     }//GEN-LAST:event_ImportScenarioButtonMouseReleased
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
-        fileChooser.showOpenDialog(null);
-        if(fileChooser.getSelectedFile() != null) {
+        int result = fileChooser.showOpenDialog(null);
+        if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
             controller.exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
             fileChooser.setSelectedFile(null);
         }

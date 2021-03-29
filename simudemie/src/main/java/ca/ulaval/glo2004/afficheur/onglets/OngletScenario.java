@@ -15,18 +15,17 @@ import java.awt.Color;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
  * @author Jonathan
  */
 public class OngletScenario extends OngletUI {
-    private JFileChooser fileChooser;
-    
+
     public OngletScenario() {
         initComponents();
         
-        fileChooser = new JFileChooser();
         try {
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             ScenariosLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
@@ -282,8 +281,8 @@ public class OngletScenario extends OngletUI {
     }//GEN-LAST:event_AddScenarioButtonMouseReleased
 
     private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
-        fileChooser.showOpenDialog(null);
-        if(fileChooser.getSelectedFile() != null) {
+        int result = fileChooser.showOpenDialog(null);
+        if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
             Scenario scenario = GestionnaireScenario.getInstance().importer(fileChooser.getSelectedFile().toString());
             ajouterCard(scenario);
             fileChooser.setSelectedFile(null);
@@ -291,8 +290,8 @@ public class OngletScenario extends OngletUI {
     }//GEN-LAST:event_ImportScenarioButtonMouseReleased
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
-        fileChooser.showOpenDialog(null);
-        if(fileChooser.getSelectedFile() != null) {
+        int result = fileChooser.showOpenDialog(null);
+        if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
             GestionnaireScenario.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
             fileChooser.setSelectedFile(null);
         }

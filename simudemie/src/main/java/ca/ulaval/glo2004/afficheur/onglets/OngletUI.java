@@ -6,7 +6,12 @@
 package ca.ulaval.glo2004.afficheur.onglets;
 
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
+import java.io.File;
+import java.io.FileFilter;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -16,9 +21,24 @@ public abstract class OngletUI extends javax.swing.JPanel {
 
     protected ArrayList<ObjetUI> objets = new ArrayList<>();
     protected ObjetUI courant;
+    protected JFileChooser fileChooser;
     
     public OngletUI() {
         initComponents();
+        
+        /*
+        FileFilter filter = new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                pathname.
+            }
+        };
+        */
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Serializable java file", "ser");
+        fileChooser = new JFileChooser();
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setFileFilter(filter);
     }
     
     public int getIndexCourant() {

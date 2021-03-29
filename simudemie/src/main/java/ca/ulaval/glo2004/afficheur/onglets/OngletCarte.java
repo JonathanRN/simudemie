@@ -12,6 +12,7 @@ import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import java.awt.Color;
+import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -21,8 +22,6 @@ import javax.swing.SwingUtilities;
  * @author Jonathan
  */
 public class OngletCarte extends OngletUI {
-    
-    private final JFileChooser fileChooser = new JFileChooser();
     
     /**
      * Creates new form ScenarioTab
@@ -257,8 +256,8 @@ public class OngletCarte extends OngletUI {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ImportMapButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportMapButtonMouseReleased
-        fileChooser.showOpenDialog(null);
-        if(fileChooser.getSelectedFile() != null) {
+        int result = fileChooser.showOpenDialog(null);
+        if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
             Carte carte = GestionnaireCarte.getInstance().importer(fileChooser.getSelectedFile().toString());
             ajouterCard(carte);
             fileChooser.setSelectedFile(null);
@@ -266,8 +265,8 @@ public class OngletCarte extends OngletUI {
     }//GEN-LAST:event_ImportMapButtonMouseReleased
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
-        fileChooser.showOpenDialog(null);
-        if(fileChooser.getSelectedFile() != null) {
+        int result = fileChooser.showOpenDialog(null);
+        if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
             GestionnaireCarte.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
             fileChooser.setSelectedFile(null);
         }

@@ -72,7 +72,8 @@ public class FileHelper<T> {
     
     public <T extends Serializable> void exporter(T object, String path) {
         try {
-            try (FileOutputStream fos = new FileOutputStream(path); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            String pathser = path.concat(".ser");
+            try (FileOutputStream fos = new FileOutputStream(pathser); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 oos.writeObject(object);
             }
         } catch(IOException ioe) {

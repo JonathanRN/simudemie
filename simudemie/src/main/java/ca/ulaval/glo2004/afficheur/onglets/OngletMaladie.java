@@ -6,7 +6,6 @@
 package ca.ulaval.glo2004.afficheur.onglets;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
-import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetMaladie;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 import ca.ulaval.glo2004.domaine.Maladie;
@@ -14,7 +13,6 @@ import ca.ulaval.glo2004.domaine.controleur.GestionnaireMaladie;
 import java.awt.Color;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -23,7 +21,7 @@ import javax.swing.SwingUtilities;
 public class OngletMaladie extends OngletUI {
     
     private final JFileChooser fileChooser = new JFileChooser();
-    private GestionnaireMaladie controller;
+    private final GestionnaireMaladie controller;
     // Si à true, on ne peut pas sélectionner d'autre cartes maladie
     private boolean cardLocked;
     
@@ -31,7 +29,7 @@ public class OngletMaladie extends OngletUI {
         initComponents();
         
         cardLocked = false;
-        controller = new GestionnaireMaladie();
+        controller = GestionnaireMaladie.getInstance();
         try {        
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             MaladieLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
@@ -113,28 +111,6 @@ public class OngletMaladie extends OngletUI {
             statsMaladiePanel1.setInfectionInput(objetMaladie.getInfectionRate());
             statsMaladiePanel1.setCuredInput(objetMaladie.getCuredRate());
             statsMaladiePanel1.setDeadInput(objetMaladie.getDeadRate());
-        }
-    }
-    
-    public void onStartSimulation() {
-        JOptionPane optionPane = new JOptionPane();
-        optionPane.setMessage("Voulez-vous commencer cette simulation?");
-        optionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
-        optionPane.setOptionType(JOptionPane.YES_NO_CANCEL_OPTION);
-        
-        int result = JOptionPane.showOptionDialog(
-            SwingUtilities.windowForComponent(this),
-            optionPane.getMessage(),
-            "Commencer la simulation?",
-            optionPane.getOptionType(),
-            optionPane.getMessageType(),
-            optionPane.getIcon(),
-            optionPane.getOptions(),
-            optionPane.getInitialValue());
-        
-        if (result == JOptionPane.YES_OPTION) {
-            FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
-            frame.startSimulation();
         }
     }
 

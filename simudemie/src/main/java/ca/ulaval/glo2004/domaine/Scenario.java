@@ -33,6 +33,10 @@ public class Scenario implements Serializable {
         carteJourCourant = carte;
     }
     
+    public int getIndexJourCourant() {
+        return cartes.indexOf(carteJourCourant);
+    }
+    
     public String getNom() {
         return nom;
     }

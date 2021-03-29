@@ -7,6 +7,8 @@ package ca.ulaval.glo2004.afficheur.Simulation;
 
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.domaine.Carte;
+import ca.ulaval.glo2004.domaine.Maladie;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -16,14 +18,20 @@ import javax.swing.SwingUtilities;
  *
  * @author Jonathan
  */
-public class Simulation extends javax.swing.JPanel {
+public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     
-    private boolean estEnDirect;
+    private boolean estEnDirect, estCommence;
     private boolean mouseOver;
     private final Carte carte;
+    private final GestionnaireScenario gestionnaire;
+    private final int index;
     
-    public Simulation(Carte carte) {
+    public Simulation(int index, Carte carte, Maladie maladie) {
+        this.index = index;
         this.carte = carte;
+        this.carte.setMaladie(maladie);
+        this.gestionnaire = GestionnaireScenario.getInstance();
+        
         initComponents();
         
         HomeButton.setIcon("/icons/icons8_home_25px_1.png");
@@ -45,8 +53,25 @@ public class Simulation extends javax.swing.JPanel {
         return carte;
     }
     
+    public boolean estCommence() {
+        return estCommence;
+    }
+    
     public void setDirect(boolean direct) {
         estEnDirect = direct;
+        
+        if (estCommence) {
+            if (direct) {
+                gestionnaire.resumer();
+            }
+            else {
+                gestionnaire.pause();
+            }
+        }
+        else {
+            // TODO A CHANGER
+            gestionnaire.demarrer(index, 2, this);
+        }
     }
     
     public boolean getDirect() { return estEnDirect; }
@@ -80,6 +105,13 @@ public class Simulation extends javax.swing.JPanel {
         DirectIcon.setIcon(new ImageIcon(getClass().getResource(path)));
     }
     
+    @Override
+    public void onAvancerJour() {
+        SliderJour.setMaximum(gestionnaire.getCourant().getIndexJourCourant());
+        
+        // todo pt des choses a faire ici
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -111,6 +143,8 @@ public class Simulation extends javax.swing.JPanel {
         Slider.setOpaque(false);
         Slider.setLayout(new java.awt.BorderLayout());
 
+        SliderJour.setMaximum(1);
+        SliderJour.setMinimum(1);
         SliderJour.setSnapToTicks(true);
         SliderJour.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 10));
         SliderJour.setFocusable(false);
@@ -229,6 +263,10 @@ public class Simulation extends javax.swing.JPanel {
     }//GEN-LAST:event_BoutonDirectMouseClicked
 
     private void SliderJourMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderJourMouseReleased
+        if (!estCommence) {
+            estCommence = true;
+        }
+        
         if (estEnDirect) {
             setDirect(false);
             updateDirectIcon();

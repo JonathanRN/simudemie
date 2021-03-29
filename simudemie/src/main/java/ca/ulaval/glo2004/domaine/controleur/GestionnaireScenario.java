@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.domaine.controleur;
 
+import ca.ulaval.glo2004.afficheur.Simulation.ScenarioCallback;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.helper.FileHelper;
@@ -16,7 +17,10 @@ import javax.swing.Timer;
 
 public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implements ActionListener {
     protected final String RELATIVE_PATH = "Scenarios\\scenarios.ser";
-    private final Timer timer;    
+    private Timer timer;    
+    private Scenario courant;
+    
+    private ScenarioCallback scenarioCallback;
     
     private static GestionnaireScenario instance;
     
@@ -31,14 +35,16 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     {
         fileHelper = new FileHelper(RELATIVE_PATH);
         charger();
-        // todo change timer
-        timer = new Timer(3 * 1000, this);
-        //demarrer();
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        //avancerJour();
+        courant.avancerJour();
+        scenarioCallback.onAvancerJour();
+    }
+    
+    public Scenario getCourant() {
+        return courant;
     }
     
     private void creerMesure(String nom, float tauxAdhesion, float tauxReduction)
@@ -53,14 +59,20 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         //jourCourant.mesures[]...
     }
     
-    public void pause()
-    {
+    public void pause() {
         timer.stop();
     }
     
-    public void demarrer()
-    {
+    public void resumer() {
         timer.restart();
+    }
+    
+    public void demarrer(int index, int secondes, ScenarioCallback scenarioCallback) {
+        timer = new Timer(secondes * 1000, this);
+        timer.start();
+        
+        this.scenarioCallback = scenarioCallback;
+        courant = getElement(index);
     }
     
     public List<Carte> retournerResultats()

@@ -27,8 +27,8 @@ public class ObjetScenario extends ObjetUI {
         SimulationName.setText(name);
     }
     
-    public void setDays(String days) {
-        Day.setText(days);
+    public void setDays(int jour) {
+        Day.setText("Jour " + jour);
     }
     
     public void setMapName(String name) {

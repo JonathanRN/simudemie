@@ -7,9 +7,6 @@ package ca.ulaval.glo2004.domaine.controleur;
 
 import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.helper.FileHelper;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collector;
 
 /**
  *
@@ -18,7 +15,16 @@ import java.util.stream.Collector;
 public class GestionnaireMaladie extends GestionnaireOnglet<Maladie> {
     protected final String RELATIVE_PATH = "Maladies\\maladies.ser";
     
-    public GestionnaireMaladie() {
+    private static GestionnaireMaladie instance;
+    
+    public static GestionnaireMaladie getInstance() {
+        if(instance == null) {
+            instance = new GestionnaireMaladie();
+        }
+        return instance;
+    }
+    
+    private GestionnaireMaladie() {
         fileHelper = new FileHelper(RELATIVE_PATH);
         charger();
     }

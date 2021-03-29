@@ -11,9 +11,9 @@ import java.util.ArrayList;
 public class Pays implements Serializable {
     
     private String nom;
-    private ArrayList<Region> listeRegions = new ArrayList<>();
     private Polygon polygone;
     public ArrayList<Mesure> mesures = new ArrayList<>();
+    public ArrayList<Region> listeRegions = new ArrayList<>();
 
     public Pays(Polygon polygone) {
         this.polygone = polygone;
@@ -32,7 +32,6 @@ public class Pays implements Serializable {
             region.guerirPop(tauxGuerison);
             region.eliminerPopulation(tauxMortalite);
         }
-        //contaminerInterPays();
     }
     
     public void ajouterRegion(Region nouvelleRegion) {

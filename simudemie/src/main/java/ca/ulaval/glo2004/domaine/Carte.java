@@ -8,6 +8,7 @@ package ca.ulaval.glo2004.domaine;
 import java.awt.Polygon;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Carte implements Serializable {
@@ -35,32 +36,38 @@ public class Carte implements Serializable {
     
     private void contaminerInterPays() {
         //En fonction de la pop infectee du pays, va infecter le pays lié par sa voie de liaison
-        // à un taux de 0.01 (à determiner)
-//        double voyageursInfectees;
-//        Pays paysAInfecter;
-//        for (VoieLiaison voie : frontieres)
-//        {
-//            if (!voie.getAccessible())
-//            {
-//                continue;
-//            }
-//            if (getPopInfecteePays() > 0)
-//            {
-//                voyageursInfectees = (0.001 * getPopInfecteePays()); //Déterminer quel sera le 0.001
-//                if (this.getNom().equals(voie.getPaysOrigine().getNom()) )
-//                {
-//                    paysAInfecter = voie.getPaysDestination(); //validation (selon origine/destination)
-//                }else
-//                {
-//                    paysAInfecter = voie.getPaysOrigine();
-//                }
-//                for (Region region : paysAInfecter.listeRegions )
-//                {
-//                    region.setPopInfectee(getPopInfecteePays() + (int)(voyageursInfectees / paysAInfecter.listeRegions.size()));
-//                }
-//                
-//            }
-//        }
+        // à un taux de 0.001 (à determiner)
+        double voyageursInfectees;
+        Pays paysAInfecter;
+        for (VoieLiaison voie : frontieres)
+        {
+            if (!voie.getAccessible())
+            {
+                continue;
+            }
+            for ( Pays pays : listePays)
+            {
+                if (pays.getPopInfecteePays() > 0)
+                {
+                    voyageursInfectees = (0.001 * pays.getPopInfecteePays()); //Déterminer quel sera le 0.001
+                    if (this.getNom().equals(voie.getPaysOrigine().getNom()) )
+                    {
+                        paysAInfecter = voie.getPaysDestination(); //validation (selon origine/destination)
+                    }else
+                    {
+                        paysAInfecter = voie.getPaysOrigine();
+                    }
+                    for (Region region : paysAInfecter.listeRegions )
+                    {
+                        double prob = Math.random();
+                        if (prob > 0.5) //une chance sur deux
+                        {//Arrondissement avec le int
+                            region.setPopInfectee(pays.getPopInfecteePays() + (int)(voyageursInfectees / paysAInfecter.listeRegions.size()));
+                        }
+                    }
+                }
+            }
+        }
     }
     
     public void ajouterPays(Pays nouveauPays)

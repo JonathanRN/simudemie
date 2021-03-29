@@ -37,6 +37,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         try {
             MaladieInput.setFont(FontRegister.RobotoThin.deriveFont(21f));
             init();
+            showFields(false);
             Main.setBackground(new Color(216, 222, 233, 38));
         }
         catch(Exception e) {
@@ -247,6 +248,17 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
         InfectionInput.setEnabled(enabled);
         CuredInput.setEnabled(enabled);
         DeadInput.setEnabled(enabled);
+    }
+    
+    public void showFields(boolean enabled) {
+        InfectionLabel.setVisible(enabled);
+        CuredLabel.setVisible(enabled);
+        DeadLabel.setVisible(enabled);
+        
+        MaladieInput.setVisible(enabled);
+        InfectionInput.setVisible(enabled);
+        CuredInput.setVisible(enabled);
+        DeadInput.setVisible(enabled);
     }
     
     private void MaladieInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaladieInputKeyReleased

@@ -86,15 +86,17 @@ public class OngletCarte extends OngletUI {
     
     @Override
     public void retirerCourant() {
-        int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer cette carte?", "", JOptionPane.WARNING_MESSAGE);
+        if(objets.size() > 0) {
+            int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer cette carte?", "", JOptionPane.WARNING_MESSAGE);
 
-        if(result == JOptionPane.YES_OPTION) {
-            GestionnaireCarte.getInstance().supprimer(getIndexCourant());
-            objets.remove(courant);
-            MapPanelContainer.remove(courant);
-            updateUI();
+            if(result == JOptionPane.YES_OPTION) {
+                GestionnaireCarte.getInstance().supprimer(getIndexCourant());
+                objets.remove(courant);
+                MapPanelContainer.remove(courant);
+                updateUI();
 
-            super.retirerCourant();
+                super.retirerCourant();
+            }
         }
     }
 

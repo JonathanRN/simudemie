@@ -60,7 +60,6 @@ public class OngletMaladie extends OngletUI {
 
             // On débloque les champs pour modification de la nouvelle maladie
             statsMaladiePanel1.setModifying(true);
-
             updateUI();
         }
     }
@@ -74,30 +73,32 @@ public class OngletMaladie extends OngletUI {
         objets.add(card);
         MaladiesContainer.add(card);
         
-        if(objets.size() == 1) {
-            onClickObjetUI(card);
-        }
-        
         updateUI();
     }
     
     @Override
     public void retirerCourant() {
-        int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer cette maladie?", "", JOptionPane.WARNING_MESSAGE);
-
-        if(result == JOptionPane.YES_OPTION && objets.size() > 0) {
-            if(!cardLocked) {
-                controller.supprimer(getIndexCourant());
-            }
+        if(objets.size() > 0) {
+            int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer cette maladie?", "", JOptionPane.WARNING_MESSAGE);
             
-            MaladiesContainer.remove(courant);
-            objets.remove(courant);
-            setCardLocked(false);
-            statsMaladiePanel1.setModifying(false);
-            updateUI();
+            if(result == JOptionPane.YES_OPTION) {
+                if(!cardLocked) {
+                    controller.supprimer(getIndexCourant());
+                }
+
+                MaladiesContainer.remove(courant);
+                objets.remove(courant);
+                setCardLocked(false);
+                statsMaladiePanel1.setModifying(false);
+                updateUI();
 
 
-            super.retirerCourant();
+                super.retirerCourant();
+            }
+        }
+        
+        if(objets.isEmpty()){
+            statsMaladiePanel1.showFields(false);
         }
     }
 
@@ -110,6 +111,7 @@ public class OngletMaladie extends OngletUI {
             statsMaladiePanel1.setInfectionInput(objetMaladie.getInfectionRate());
             statsMaladiePanel1.setCuredInput(objetMaladie.getCuredRate());
             statsMaladiePanel1.setDeadInput(objetMaladie.getDeadRate());
+            statsMaladiePanel1.showFields(true);
         }
     }
 

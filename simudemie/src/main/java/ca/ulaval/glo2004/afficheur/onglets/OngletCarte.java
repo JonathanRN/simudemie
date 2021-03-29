@@ -59,8 +59,6 @@ public class OngletCarte extends OngletUI {
         if(nomCarte != null && !nomCarte.isEmpty()) {
             super.ajouterObjetUI();
             ObjetCarte card = new ObjetCarte(this);
-
-            // todo a changer
             card.setMapName(nomCarte);
 
             GestionnaireCarte.getInstance().creer(card.getNomCarte());
@@ -90,12 +88,16 @@ public class OngletCarte extends OngletUI {
     
     @Override
     public void retirerCourant() {
-        GestionnaireCarte.getInstance().supprimer(getIndexCourant());
-        objets.remove(courant);
-        MapPanelContainer.remove(courant);
-        updateUI();
-        
-        super.retirerCourant();
+        int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer cette carte?", "", JOptionPane.WARNING_MESSAGE);
+
+        if(result == JOptionPane.YES_OPTION) {
+            GestionnaireCarte.getInstance().supprimer(getIndexCourant());
+            objets.remove(courant);
+            MapPanelContainer.remove(courant);
+            updateUI();
+
+            super.retirerCourant();
+        }
     }
 
     @Override

@@ -86,7 +86,9 @@ public class OngletMaladie extends OngletUI {
     
     @Override
     public void retirerCourant() {
-        if(objets.size() > 0) {
+        int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer cette maladie?", "", JOptionPane.WARNING_MESSAGE);
+
+        if(result == JOptionPane.YES_OPTION && objets.size() > 0) {
             if(!cardLocked) {
                 controller.supprimer(getIndexCourant());
             }

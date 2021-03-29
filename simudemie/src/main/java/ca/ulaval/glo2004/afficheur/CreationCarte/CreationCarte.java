@@ -38,7 +38,7 @@ public class CreationCarte extends javax.swing.JPanel {
         BoutonRegion.init(this, new ca.ulaval.glo2004.afficheur.CreationCarte.Region(this), "icons8_scissors_25px");
         BoutonLien.init(this, new LienPays(this), "icons8_chain_25px");
         
-        BoutonQuitter.init(this, null, "icons8_exit_25px");
+        BoutonQuitter.init(this, null, "icons8_home_25px_1");
         BoutonQuitter.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 quitter();
@@ -114,9 +114,7 @@ public class CreationCarte extends javax.swing.JPanel {
             case JOptionPane.YES_OPTION:
                 GestionnaireCarte.getInstance().sauvegarder();
             case JOptionPane.NO_OPTION:
-                // TODO: Undo actions ou export fichier temp avant modif et import après
-                // OU recharcher cartes.ser
-                
+                GestionnaireCarte.getInstance().charger();
                 FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
                 frame.returnToHome();
                 break;

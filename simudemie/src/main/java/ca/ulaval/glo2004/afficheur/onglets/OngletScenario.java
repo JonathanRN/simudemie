@@ -55,10 +55,14 @@ public class OngletScenario extends OngletUI {
 
     @Override
     public void retirerCourant() {
-        ProjectPanelContainer.remove(courant);
-        updateUI();
+        int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer ce scénario?", "", JOptionPane.WARNING_MESSAGE);
         
-        super.retirerCourant();
+        if(result == JOptionPane.YES_OPTION) {
+            ProjectPanelContainer.remove(courant);
+            updateUI();
+
+            super.retirerCourant();
+        }
     }
 
     @Override

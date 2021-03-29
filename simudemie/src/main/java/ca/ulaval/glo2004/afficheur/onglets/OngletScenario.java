@@ -9,7 +9,10 @@ import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetScenario;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
+import ca.ulaval.glo2004.domaine.Scenario;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.Color;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -18,15 +21,14 @@ import javax.swing.SwingUtilities;
  * @author Jonathan
  */
 public class OngletScenario extends OngletUI {
+    private JFileChooser fileChooser;
     
     public OngletScenario() {
         initComponents();
         
+        fileChooser = new JFileChooser();
         try {
-            ajouterObjetUI();
-        
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
-
             ScenariosLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             Sce_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             AddScenarioButton.setBackground(new Color(216, 222, 233, 38));
@@ -40,6 +42,15 @@ public class OngletScenario extends OngletUI {
         
     }
     
+    
+    public void init() {
+        scenarioStatsPanel1.setOnglet(this);
+        
+        for(Scenario scenario : GestionnaireScenario.getInstance().getList()) {
+            ajouterCard(scenario);
+        }
+    }
+    
     @Override
     public void ajouterObjetUI() {
         super.ajouterObjetUI();
@@ -51,13 +62,38 @@ public class OngletScenario extends OngletUI {
         }
         ProjectPanelContainer.add(card);
         updateUI();
+        
+        // TODO: Afficher panneau information pour créer scénario
+        Object[] args = {"Simulation: " + objets.size()};
+        GestionnaireScenario.getInstance().creer(args);
     }
 
+    private void ajouterCard(Scenario scenario) {
+        ObjetScenario card = new ObjetScenario(this);
+        card.setSimulationName(scenario.getNom());
+        card.setDays("NaN"); // TODO: Changer pour afficher le vrai jour de la simulation
+        //card.setMapName(scenario.getCarteJourCourant().getNom());
+        //card.setVirusName(scenario.getCarteJourCourant().getMaladie().getNom());
+        card.setInfectedPercent(0);
+        card.setCuredPercent(0);
+        card.setImmunedPercent(0);
+        card.setDeadPercent(0);
+        
+        objets.add(card);
+        ProjectPanelContainer.add(card);
+        
+        if(objets.size() == 1) {
+            onClickObjetUI(card);
+        }
+        
+        updateUI();
+    }
+    
     @Override
     public void retirerCourant() {
         int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer ce scénario?", "", JOptionPane.WARNING_MESSAGE);
         
-        if(result == JOptionPane.YES_OPTION) {
+        if(result == JOptionPane.YES_OPTION && objets.size() > 0) {
             ProjectPanelContainer.remove(courant);
             updateUI();
 
@@ -157,6 +193,11 @@ public class OngletScenario extends OngletUI {
         ImportScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
         ImportScenarioButton.setMinimumSize(new java.awt.Dimension(75, 30));
         ImportScenarioButton.setPreferredSize(new java.awt.Dimension(100, 36));
+        ImportScenarioButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ImportScenarioButtonMouseReleased(evt);
+            }
+        });
 
         BoutonExport.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         BoutonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
@@ -165,6 +206,11 @@ public class OngletScenario extends OngletUI {
         BoutonExport.setMaximumSize(new java.awt.Dimension(75, 30));
         BoutonExport.setMinimumSize(new java.awt.Dimension(75, 30));
         BoutonExport.setPreferredSize(new java.awt.Dimension(100, 36));
+        BoutonExport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BoutonExportMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout ScenariosTitleLayout = new javax.swing.GroupLayout(ScenariosTitle);
         ScenariosTitle.setLayout(ScenariosTitleLayout);
@@ -234,6 +280,23 @@ public class OngletScenario extends OngletUI {
     private void AddScenarioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseClicked
         this.ajouterObjetUI();
     }//GEN-LAST:event_AddScenarioButtonMouseClicked
+
+    private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
+        fileChooser.showOpenDialog(null);
+        if(fileChooser.getSelectedFile() != null) {
+            Scenario scenario = GestionnaireScenario.getInstance().importer(fileChooser.getSelectedFile().toString());
+            ajouterCard(scenario);
+            fileChooser.setSelectedFile(null);
+        }
+    }//GEN-LAST:event_ImportScenarioButtonMouseReleased
+
+    private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
+        fileChooser.showOpenDialog(null);
+        if(fileChooser.getSelectedFile() != null) {
+            GestionnaireScenario.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
+            fileChooser.setSelectedFile(null);
+        }
+    }//GEN-LAST:event_BoutonExportMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

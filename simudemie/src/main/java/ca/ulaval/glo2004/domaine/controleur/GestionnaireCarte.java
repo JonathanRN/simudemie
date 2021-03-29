@@ -46,9 +46,4 @@ public class GestionnaireCarte extends GestionnaireOnglet<Carte> {
     public Pays getPays(int indexCarte, Polygon polygon) {
         return getElement(indexCarte).getPays(polygon);
     }
-
-    @Override
-    protected Carte getElement(String nom) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

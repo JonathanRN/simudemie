@@ -6,21 +6,21 @@
 package ca.ulaval.glo2004.domaine.controleur;
 
 import ca.ulaval.glo2004.domaine.Carte;
+import ca.ulaval.glo2004.domaine.Scenario;
+import ca.ulaval.glo2004.domaine.helper.FileHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.Timer;
 
 
-public class GestionnaireScenario implements ActionListener {
-    private List<Carte> cartes = new ArrayList<>();
-    private Carte carteJourCourant;
-    private Timer timer;
+public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implements ActionListener {
+    protected final String RELATIVE_PATH = "Scenarios\\scenarios.ser";
+    private final Timer timer;    
     
     private static GestionnaireScenario instance;
     
-    public static GestionnaireScenario GetInstance() {
+    public static GestionnaireScenario getInstance() {
         if (instance == null) {
             instance = new GestionnaireScenario();
         }
@@ -29,40 +29,18 @@ public class GestionnaireScenario implements ActionListener {
     
     private GestionnaireScenario()
     {
+        fileHelper = new FileHelper(RELATIVE_PATH);
+        charger();
         // todo change timer
-        //timer = new Timer(3 * 1000, this);
+        timer = new Timer(3 * 1000, this);
         //demarrer();
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        avancerJour();
+        //avancerJour();
     }
     
-    private void chargerJour(Carte carte)
-    {
-        // Charger tous les elements selon la journee
-        carteJourCourant = carte;
-    }
-    
-    private void avancerJour()
-    {
-        carteJourCourant.avancerJour();
-        cartes.add(carteJourCourant);
-        chargerJour(new Carte(carteJourCourant));
-    }
-    
-    private void importer(String filePath)
-    {
-        // Importer selon le path et creer une nouvelle liste de journees...? (todo UI)
-    }
-            
-    private void exporter(String nomCarte, String filePath)
-    {
-        // Exporter dans un fichier qui contient toutes les journees...
-        // RetournerResultats
-    }
-        
     private void creerMesure(String nom, float tauxAdhesion, float tauxReduction)
     {
         
@@ -89,5 +67,13 @@ public class GestionnaireScenario implements ActionListener {
     {
         //TODO Retourner les résultats finaux
         return null;
+    }
+
+    @Override
+    public Scenario creer(Object... arguments) {
+        String nom = (String) arguments[0];
+        Scenario scenario = new Scenario(nom, GestionnaireCarte.getInstance().getElement(0));
+        ajouter(scenario);
+        return scenario;
     }
 }

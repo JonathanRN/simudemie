@@ -46,7 +46,6 @@ public class GestionnaireMaladie extends GestionnaireOnglet<Maladie> {
         return maladie;
     }
     
-    @Override
     public Maladie getElement(String nom) {
         Maladie maladie = null;
         for(Maladie m : getList()) {

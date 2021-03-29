@@ -189,6 +189,9 @@ public class OngletMaladie extends OngletUI {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AddScenarioButtonMouseClicked(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                AddScenarioButtonMouseReleased(evt);
+            }
         });
 
         ImportScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -282,7 +285,7 @@ public class OngletMaladie extends OngletUI {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddScenarioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseClicked
-        this.ajouterObjetUI();
+  
     }//GEN-LAST:event_AddScenarioButtonMouseClicked
 
     private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
@@ -301,6 +304,10 @@ public class OngletMaladie extends OngletUI {
             fileChooser.setSelectedFile(null);
         }
     }//GEN-LAST:event_BoutonExportMouseReleased
+
+    private void AddScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseReleased
+             this.ajouterObjetUI();
+    }//GEN-LAST:event_AddScenarioButtonMouseReleased
 
     public boolean getCardLocked() {
         return cardLocked;

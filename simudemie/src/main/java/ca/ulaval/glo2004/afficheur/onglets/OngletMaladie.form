@@ -132,6 +132,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AddScenarioButtonMouseClicked"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AddScenarioButtonMouseReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="ImportScenarioButton">

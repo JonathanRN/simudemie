@@ -78,8 +78,8 @@ public class StatsCartePanel extends javax.swing.JPanel {
         DeleteButton.setText("Supprimer");
         DeleteButton.setFocusable(false);
         DeleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DeleteButtonMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                DeleteButtonMouseReleased(evt);
             }
         });
         Buttons.add(DeleteButton);
@@ -96,13 +96,13 @@ public class StatsCartePanel extends javax.swing.JPanel {
         add(Buttons, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DeleteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseClicked
-        onglet.retirerCourant();
-    }//GEN-LAST:event_DeleteButtonMouseClicked
-
     private void ModifyButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifyButtonMouseReleased
         onglet.goToCreationCarte();
     }//GEN-LAST:event_ModifyButtonMouseReleased
+
+    private void DeleteButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseReleased
+        onglet.retirerCourant();
+    }//GEN-LAST:event_DeleteButtonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

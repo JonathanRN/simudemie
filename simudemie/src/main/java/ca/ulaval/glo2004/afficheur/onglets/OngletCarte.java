@@ -161,8 +161,8 @@ public class OngletCarte extends OngletUI {
         AddMapButton.setMinimumSize(new java.awt.Dimension(75, 30));
         AddMapButton.setPreferredSize(new java.awt.Dimension(100, 36));
         AddMapButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AddMapButtonMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                AddMapButtonMouseReleased(evt);
             }
         });
 
@@ -257,10 +257,6 @@ public class OngletCarte extends OngletUI {
         add(Map_Informations, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AddMapButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddMapButtonMouseClicked
-        ajouterObjetUI();
-    }//GEN-LAST:event_AddMapButtonMouseClicked
-
     private void ImportMapButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportMapButtonMouseReleased
         fileChooser.showOpenDialog(null);
         if(fileChooser.getSelectedFile() != null) {
@@ -277,6 +273,10 @@ public class OngletCarte extends OngletUI {
             fileChooser.setSelectedFile(null);
         }
     }//GEN-LAST:event_BoutonExportMouseReleased
+
+    private void AddMapButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddMapButtonMouseReleased
+        ajouterObjetUI();
+    }//GEN-LAST:event_AddMapButtonMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddMapButton;

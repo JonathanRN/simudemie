@@ -131,7 +131,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AddMapButtonMouseClicked"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AddMapButtonMouseReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="ImportMapButton">

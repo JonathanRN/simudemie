@@ -144,8 +144,8 @@ public class OngletScenario extends OngletUI {
         AddScenarioButton.setMinimumSize(new java.awt.Dimension(75, 30));
         AddScenarioButton.setPreferredSize(new java.awt.Dimension(100, 36));
         AddScenarioButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AddScenarioButtonMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                AddScenarioButtonMouseReleased(evt);
             }
         });
 
@@ -231,9 +231,9 @@ public class OngletScenario extends OngletUI {
         add(Sce_Informations, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AddScenarioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseClicked
+    private void AddScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseReleased
         this.ajouterObjetUI();
-    }//GEN-LAST:event_AddScenarioButtonMouseClicked
+    }//GEN-LAST:event_AddScenarioButtonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

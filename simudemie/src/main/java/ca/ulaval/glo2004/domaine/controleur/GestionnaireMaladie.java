@@ -13,11 +13,10 @@ import ca.ulaval.glo2004.domaine.helper.FileHelper;
  * @author Mick
  */
 public class GestionnaireMaladie extends GestionnaireOnglet<Maladie> {
-    // TODO: Mettre constantes dans un fichier de param .ini peut-être ?
-    protected final String PATH = "C:\\test\\maladies.ser";
+    protected final String RELATIVE_PATH = "Maladies\\maladies.ser";
     
     public GestionnaireMaladie() {
-        fileHelper = new FileHelper(PATH);
+        fileHelper = new FileHelper(RELATIVE_PATH);
         charger();
     }
     

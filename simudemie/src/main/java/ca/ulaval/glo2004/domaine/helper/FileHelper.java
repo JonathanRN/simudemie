@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,17 +23,18 @@ import java.util.List;
  */
 public class FileHelper<T> {
     
-    private String path;
+    private final File file;
     
-    public FileHelper(String path) {
-        this.path = path;
+    public FileHelper(String filename) {
+        Path path = Paths.get(getCurrentPath(), "SIMUDEMIE-DATA", filename);
+        file = new File(path.toString());
+        createDirs();
     }
     
     public <T extends Serializable> ArrayList<T> charger() {
         ArrayList<T> list = new ArrayList<>();
         
         try {
-            File file = new File(path);
             try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
                 list = (ArrayList<T>) ois.readObject();
             }
@@ -59,7 +62,7 @@ public class FileHelper<T> {
     
     public <T extends Serializable> void sauvegarder(List<T> object) {
         try {
-            try (FileOutputStream fos = new FileOutputStream(path); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            try (FileOutputStream fos = new FileOutputStream(file); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 oos.writeObject(object);
             }
         } catch(IOException ioe) {
@@ -77,4 +80,12 @@ public class FileHelper<T> {
         }
     }
     
+    private String getCurrentPath() {
+        return System.getProperty("user.dir");
+    }
+    
+    private void createDirs() {
+        File parentDirectory = new File(file.getParent());
+        parentDirectory.mkdirs();
+    }
 }

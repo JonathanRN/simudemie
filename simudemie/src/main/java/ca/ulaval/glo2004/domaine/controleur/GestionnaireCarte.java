@@ -15,8 +15,7 @@ import java.awt.Polygon;
  * @author Mick
  */
 public class GestionnaireCarte extends GestionnaireOnglet<Carte> {
-    // TODO: Mettre constantes dans un fichier de param .ini peut-être ?
-    protected final String PATH = "C:\\test\\cartes.ser";
+    protected final String RELATIVE_PATH = "Cartes\\cartes.ser";
     
     private static GestionnaireCarte instance;
     
@@ -28,7 +27,7 @@ public class GestionnaireCarte extends GestionnaireOnglet<Carte> {
     }
     
     private GestionnaireCarte() {
-        fileHelper = new FileHelper(PATH);
+        fileHelper = new FileHelper(RELATIVE_PATH);
         charger();
     }
     

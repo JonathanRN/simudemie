@@ -13,11 +13,10 @@ import ca.ulaval.glo2004.domaine.helper.FileHelper;
  * @author Mick
  */
 public class GestionnaireMesure extends GestionnaireOnglet<Mesure> {
-    // TODO: Mettre constantes dans un fichier de param .ini peut-être ?
-    protected final String PATH = "C:\\test\\mesures.ser";
+    protected final String RELATIVE_PATH = "Mesures\\mesures.ser";
     
     public GestionnaireMesure() {
-        fileHelper = new FileHelper(PATH);
+        fileHelper = new FileHelper(RELATIVE_PATH);
         charger();
     }
     

@@ -96,6 +96,8 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
             optionPane.getInitialValue());
         
         if (result == JOptionPane.YES_OPTION) {
+            setDirect(false);
+            
             FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
             frame.returnToHome();
         }

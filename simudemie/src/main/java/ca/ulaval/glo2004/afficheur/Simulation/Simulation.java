@@ -20,10 +20,11 @@ import javax.swing.SwingUtilities;
  */
 public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     
-    private boolean estEnDirect, estCommence;
+    private boolean estEnDirect;
     private boolean mouseOver;
     private final GestionnaireScenario gestionnaire;
     private final int index;
+    private boolean estCommence;
     
     public Simulation(int index) {
         this.index = index;
@@ -45,6 +46,14 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         });
         
         SimulationPanel.setSimulation(this);
+        
+        boolean commence = getScenario().estCommence();
+        SliderJour.setVisible(commence);
+        StartPanel.setVisible(!commence);
+        
+        if (commence) {
+            onAvancerJour(getScenario().getIndexJourCourant());
+        }
     }
     
     public SimulationPanel getPanel() {
@@ -52,27 +61,19 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     }
     
     public Scenario getScenario() {
-        return GestionnaireScenario.getInstance().getElement(index);
-    }
-    
-    public boolean estCommence() {
-        return estCommence;
+        return gestionnaire.getElement(index);
     }
     
     public void setDirect(boolean direct) {
         estEnDirect = direct;
         
-        if (estCommence) {
+        if (getScenario().estCommence()) {
             if (direct) {
                 gestionnaire.resumer();
             }
             else {
                 gestionnaire.pause();
             }
-        }
-        else {
-            // TODO A CHANGER
-            gestionnaire.demarrer(index, 2, this);
         }
     }
     
@@ -309,13 +310,18 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         setDirect(!estEnDirect);
         updateDirectIcon();
         
-        if (!estCommence) {
-            estCommence = true;
-            
+        if (!getScenario().estCommence()) {
             SliderJour.setVisible(true);
             StartPanel.setVisible(false);
             
             getPanel().getAfficheur().onSimulationDemaree();
+        }
+        
+        if (!estCommence) {
+            estCommence = true;
+            
+            // TODO A CHANGER
+            gestionnaire.demarrer(index, 1, this);
         }
         
         if (estEnDirect) {
@@ -329,7 +335,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
             updateDirectIcon();
         }
         
-        gestionnaire.getCourant().chargerJour(SliderJour.getValue());
+        getScenario().chargerJour(SliderJour.getValue());
         getPanel().repaint();
     }//GEN-LAST:event_SliderJourMouseReleased
 

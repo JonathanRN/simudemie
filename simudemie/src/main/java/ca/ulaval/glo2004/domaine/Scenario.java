@@ -17,6 +17,7 @@ public class Scenario implements Serializable {
     private String nom;
     private final List<Carte> cartes = new ArrayList<>();;
     private int indexCourant;
+    private boolean estCommence;
     
     public Scenario(String nom, Carte carte, Maladie maladie) {
         this.nom = nom;
@@ -24,11 +25,18 @@ public class Scenario implements Serializable {
         // Ajoute la carte en parametre comme jour 0
         carte.setMaladie(maladie);
         cartes.add(new Carte(carte));
-        indexCourant = 0;
+    }
+    
+    public boolean estCommence() {
+        return estCommence;
     }
     
     public Carte getCarteJourCourant() {
         return cartes.get(indexCourant);
+    }
+    
+    public int getIndexJourCourant() {
+        return indexCourant;
     }
     
     public void chargerJour(int index) {
@@ -43,12 +51,22 @@ public class Scenario implements Serializable {
         this.nom = nom;
     }
     
+    public void demarrer() {
+        estCommence = true;
+        retourEnDirect();
+    }
+    
+    public void retourEnDirect() {
+        indexCourant = cartes.size() - 1;
+    }
+    
     public int avancerJour() {
-        getCarteJourCourant().avancerJour();
-        
         // Ajoute une nouvelle journee selon les nouvelles donnees modifies de la carte courante
         cartes.add(new Carte(getCarteJourCourant()));
         
-        return ++indexCourant;
+        indexCourant++;
+        getCarteJourCourant().avancerJour();
+        
+        return indexCourant;
     }
 }

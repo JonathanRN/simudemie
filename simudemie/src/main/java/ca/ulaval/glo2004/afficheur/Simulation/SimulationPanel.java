@@ -30,6 +30,10 @@ public class SimulationPanel extends ZoomablePanel {
     public float getZoomFactor() {
         return (float)zoomFactor;
     }
+    
+    public SimulationAfficheur getAfficheur() {
+        return afficheur;
+    }
 
     @Override
     public void paintComponent(Graphics g) {

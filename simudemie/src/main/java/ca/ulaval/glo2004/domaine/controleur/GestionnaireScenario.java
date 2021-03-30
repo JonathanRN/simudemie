@@ -39,8 +39,8 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        scenarioCallback.onAvancerJour();
-        getCourant().avancerJour();
+        int jour = getCourant().avancerJour();
+        scenarioCallback.onAvancerJour(jour);
     }
     
     public Scenario getCourant() {
@@ -73,10 +73,6 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         timer.start();
         
         this.scenarioCallback = scenarioCallback;
-        
-        // On commence immediatement
-        scenarioCallback.onAvancerJour();
-        getCourant().avancerJour();
     }
     
     public List<Carte> retournerResultats()

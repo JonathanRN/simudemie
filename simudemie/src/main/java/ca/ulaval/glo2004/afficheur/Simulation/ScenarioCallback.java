@@ -10,5 +10,5 @@ package ca.ulaval.glo2004.afficheur.Simulation;
  * @author Jonathan
  */
 public interface ScenarioCallback {
-    void onAvancerJour();
+    void onAvancerJour(int jour);
 }

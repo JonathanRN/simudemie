@@ -6,7 +6,7 @@
 package ca.ulaval.glo2004.afficheur.Simulation;
 
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
-import ca.ulaval.glo2004.domaine.Carte;
+import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.event.MouseEvent;
@@ -31,8 +31,13 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         
         initComponents();
         
-        HomeButton.setIcon("/icons/icons8_home_25px_1.png");
+        // Cacher par default, tant que la simulation n'est pas commencee
+        SliderJour.setVisible(false);
         
+        StartLabel1.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        StartLabel2.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        
+        HomeButton.setIcon("/icons/icons8_home_25px_1.png");
         HomeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 HomeButtonReleased(evt);
@@ -103,10 +108,8 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     }
     
     @Override
-    public void onAvancerJour() {
-        System.out.println(gestionnaire.getCourant().getIndexJourCourant());
-        
-        SliderJour.setMaximum(gestionnaire.getCourant().getIndexJourCourant());
+    public void onAvancerJour(int jour) {        
+        SliderJour.setMaximum(jour);
         SliderJour.setValue(SliderJour.getMaximum());
         
         getPanel().repaint();
@@ -121,6 +124,11 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        StartParent = new javax.swing.JPanel();
+        StartPanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        StartLabel1 = new javax.swing.JLabel();
+        icon = new javax.swing.JLabel();
+        StartLabel2 = new javax.swing.JLabel();
         SliderParent = new javax.swing.JPanel();
         Slider = new javax.swing.JPanel();
         SliderJour = new javax.swing.JSlider();
@@ -136,6 +144,49 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         setBackground(new java.awt.Color(46, 52, 64));
         setLayout(new javax.swing.OverlayLayout(this));
 
+        StartParent.setOpaque(false);
+
+        StartPanel.setMaximumSize(new java.awt.Dimension(715, 50));
+        StartPanel.setMinimumSize(new java.awt.Dimension(715, 50));
+        StartPanel.setPreferredSize(new java.awt.Dimension(715, 50));
+        StartPanel.setLayout(new javax.swing.BoxLayout(StartPanel, javax.swing.BoxLayout.X_AXIS));
+
+        StartLabel1.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        StartLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        StartLabel1.setText("Appuyez sur une région pour choisir la région initialement infectée, puis appuyez sur");
+        StartLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        StartPanel.add(StartLabel1);
+
+        icon.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/direct_button_35px.png"))); // NOI18N
+        StartPanel.add(icon);
+
+        StartLabel2.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        StartLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        StartLabel2.setText("pour démarrer la simulation.");
+        StartLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
+        StartPanel.add(StartLabel2);
+        StartLabel2.getAccessibleContext().setAccessibleName("");
+
+        javax.swing.GroupLayout StartParentLayout = new javax.swing.GroupLayout(StartParent);
+        StartParent.setLayout(StartParentLayout);
+        StartParentLayout.setHorizontalGroup(
+            StartParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StartParentLayout.createSequentialGroup()
+                .addContainerGap(222, Short.MAX_VALUE)
+                .addComponent(StartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(135, Short.MAX_VALUE))
+        );
+        StartParentLayout.setVerticalGroup(
+            StartParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(StartParentLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(StartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(742, Short.MAX_VALUE))
+        );
+
+        add(StartParent);
+
         SliderParent.setOpaque(false);
         SliderParent.setLayout(new java.awt.BorderLayout());
 
@@ -143,8 +194,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         Slider.setOpaque(false);
         Slider.setLayout(new java.awt.BorderLayout());
 
-        SliderJour.setMaximum(1);
-        SliderJour.setMinimum(1);
+        SliderJour.setMaximum(0);
         SliderJour.setSnapToTicks(true);
         SliderJour.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 10));
         SliderJour.setFocusable(false);
@@ -157,7 +207,9 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         Slider.add(SliderJour, java.awt.BorderLayout.CENTER);
 
         BoutonDirect.setToolTipText("Retour en direct");
+        BoutonDirect.setMinimumSize(new java.awt.Dimension(35, 70));
         BoutonDirect.setOpaque(false);
+        BoutonDirect.setPreferredSize(new java.awt.Dimension(35, 70));
         BoutonDirect.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BoutonDirectMouseClicked(evt);
@@ -215,7 +267,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
             ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ButtonsLayout.createSequentialGroup()
                 .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1078, Short.MAX_VALUE))
+                .addGap(0, 1090, Short.MAX_VALUE))
         );
         ButtonsLayout.setVerticalGroup(
             ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,6 +311,11 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         
         if (!estCommence) {
             estCommence = true;
+            
+            SliderJour.setVisible(true);
+            StartPanel.setVisible(false);
+            
+            getPanel().getAfficheur().onSimulationDemaree();
         }
         
         if (estEnDirect) {
@@ -289,5 +346,10 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private javax.swing.JSlider SliderJour;
     private javax.swing.JPanel SliderParent;
     private javax.swing.JPanel Spacing;
+    private javax.swing.JLabel StartLabel1;
+    private javax.swing.JLabel StartLabel2;
+    private ca.ulaval.glo2004.afficheur.PanelArrondi StartPanel;
+    private javax.swing.JPanel StartParent;
+    private javax.swing.JLabel icon;
     // End of variables declaration//GEN-END:variables
 }

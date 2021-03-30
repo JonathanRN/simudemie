@@ -29,11 +29,15 @@ public class SimulationAfficheur extends Mode {
     private ArrayList<Polygon> polygones;
     private Point souris;
     private boolean afficherInfosPays = false;
+    private Region regionInfectee;
     
     private final Point sourisOffset = new Point(20, 5);
     
     public SimulationAfficheur(Simulation simulation) {
         this.simulation = simulation;
+        
+        // Il faut toujours avoir une region de selectionne
+        regionInfectee = simulation.getScenario().getCarteJourCourant().getPays(0).getRegions().get(0);
     }
     
     @Override
@@ -60,6 +64,11 @@ public class SimulationAfficheur extends Mode {
         super.paint(g);
         
         updateHighlight(souris);
+        
+        if (regionInfectee != null) {
+            g.setColor(Color.red);
+            this.paintLignes(g, Color.red, regionInfectee.getPolygone());
+        }
         
         if (highlight != null) {
             float zoomFactor = simulation.getPanel().getZoomFactor();
@@ -109,7 +118,12 @@ public class SimulationAfficheur extends Mode {
             return;
         }
         
-        simulation.getScenario().getCarteJourCourant().getPays(0).getRegions().get(0).setPopInfectee(1000);
+        for (Polygon p : polygones) {
+            if (p.contains(point.x, point.y)) {
+                regionInfectee = carte.getPays(p).getRegion(p);
+                break;
+            }
+        }
     }
     
     @Override
@@ -131,6 +145,11 @@ public class SimulationAfficheur extends Mode {
         afficherInfosPays = !afficherInfosPays;
         
         updateHighlight(souris);
+    }
+    
+    public void onSimulationDemaree() {
+        regionInfectee.setPopInfectee(1000);
+        regionInfectee = null;
     }
     
     private int drawNom(String nom, Graphics2D g, float zoomFactor) {

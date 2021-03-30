@@ -10,6 +10,8 @@ import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetScenario;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 import ca.ulaval.glo2004.domaine.Scenario;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireMaladie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.Color;
 import javax.swing.JFileChooser;
@@ -34,13 +36,10 @@ public class OngletScenario extends OngletUI {
             ImportScenarioButton.setBackground(new Color(216, 222, 233, 38));
             BoutonExport.setBackground(new Color(216, 222, 233, 38));
             
-            // TODO
             scenarioStatsPanel1.setOnglet(this);
         } catch (Exception e) {
         }
-        
     }
-    
     
     public void init() {
         scenarioStatsPanel1.setOnglet(this);
@@ -70,9 +69,9 @@ public class OngletScenario extends OngletUI {
     private void ajouterCard(Scenario scenario) {
         ObjetScenario card = new ObjetScenario(this);
         card.setSimulationName(scenario.getNom());
-        card.setDays(1); // TODO: Changer pour afficher le vrai jour de la simulation
-        //card.setMapName(scenario.getCarteJourCourant().getNom());
-        //card.setVirusName(scenario.getCarteJourCourant().getMaladie().getNom());
+        card.setDays(1);
+        card.setMapName(scenario.getCarteJourCourant().getNom());
+        card.setVirusName(scenario.getCarteJourCourant().getMaladie().getNom());
         card.setInfectedPercent(0);
         card.setCuredPercent(0);
         card.setImmunedPercent(0);
@@ -127,7 +126,7 @@ public class OngletScenario extends OngletUI {
         
         if (result == JOptionPane.YES_OPTION) {
             FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
-            frame.startSimulation(getIndexCourant());
+            frame.startSimulation(getIndexCourant(), GestionnaireCarte.getInstance().getElement(0), GestionnaireMaladie.getInstance().getElement(0));
         }
     }
 

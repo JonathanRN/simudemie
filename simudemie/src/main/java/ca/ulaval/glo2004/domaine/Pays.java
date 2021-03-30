@@ -22,6 +22,10 @@ public class Pays implements Serializable {
     
     public void avancerJournee(double tauxInf, double tauxMortalite, double tauxGuerison)
     {
+        tauxInf /= 100d;
+        tauxMortalite /= 100d;
+        tauxGuerison /= 100d;
+        
         double tauxInfAjuste = tauxInf;
         for (Region region : listeRegions)
         {
@@ -81,7 +85,7 @@ public class Pays implements Serializable {
     
     public float getPourcentageInfectee() {
         try {
-            return (getPopInfectee() / getPopTotale()) * 100;
+            return (getPopInfectee() / getPopTotale()) * 100f;
         }
         catch (java.lang.ArithmeticException e) {
             return 0;
@@ -90,7 +94,7 @@ public class Pays implements Serializable {
     
     public float getPourcentageSaine() {
         try {
-            return (getPopSaine() / getPopTotale()) * 100;
+            return (getPopSaine() / getPopTotale()) * 100f;
         }
         catch (java.lang.ArithmeticException e) {
             return 0;
@@ -99,7 +103,7 @@ public class Pays implements Serializable {
     
     public float getPourcentageDecedee() {
         try {
-            return (getPopDecedee() / getPopTotale()) * 100;
+            return (getPopDecedee() / getPopTotale()) * 100f;
         }
         catch (java.lang.ArithmeticException e) {
             return 0;

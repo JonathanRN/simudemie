@@ -8,6 +8,7 @@ package ca.ulaval.glo2004.afficheur.Simulation;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Maladie;
+import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
@@ -49,8 +50,8 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         return SimulationPanel;
     }
     
-    public Carte getCarte() {
-        return carte;
+    public Scenario getScenario() {
+        return GestionnaireScenario.getInstance().getElement(index);
     }
     
     public boolean estCommence() {
@@ -107,9 +108,12 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     
     @Override
     public void onAvancerJour() {
-        SliderJour.setMaximum(gestionnaire.getCourant().getIndexJourCourant());
+        System.out.println(gestionnaire.getCourant().getIndexJourCourant());
         
-        // todo pt des choses a faire ici
+        SliderJour.setMaximum(gestionnaire.getCourant().getIndexJourCourant());
+        SliderJour.setValue(SliderJour.getMaximum());
+        
+        getPanel().repaint();
     }
     
     /**
@@ -257,16 +261,16 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         setDirect(!estEnDirect);
         updateDirectIcon();
         
+        if (!estCommence) {
+            estCommence = true;
+        }
+        
         if (estEnDirect) {
             SliderJour.setValue(SliderJour.getMaximum());
         }
     }//GEN-LAST:event_BoutonDirectMouseClicked
 
     private void SliderJourMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderJourMouseReleased
-        if (!estCommence) {
-            estCommence = true;
-        }
-        
         if (estEnDirect) {
             setDirect(false);
             updateDirectIcon();

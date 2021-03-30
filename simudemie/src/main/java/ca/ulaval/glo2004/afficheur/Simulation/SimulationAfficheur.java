@@ -34,25 +34,26 @@ public class SimulationAfficheur extends Mode {
     
     public SimulationAfficheur(Simulation simulation) {
         this.simulation = simulation;
+        carte = simulation.getScenario().getCarteJourCourant();
         onActive();
     }
 
     @Override
     public void onActive() {
         super.onActive();
-        polygones = simulation.getCarte().getPolygonesRegions();
+        polygones = carte.getPolygonesRegions();
     }
     
     @Override
     public void paint(Graphics2D g) {
-        for (Polygon p : afficherInfosPays ? simulation.getCarte().getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
+        for (Polygon p : afficherInfosPays ? carte.getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
             g.setColor(couleurFill);
             g.fillPolygon(p);
             this.paintLignes(g, Color.black, p);
         }
         
         
-        for (VoieLiaison voie : simulation.getCarte().getVoies()) {
+        for (VoieLiaison voie : carte.getVoies()) {
             g.setColor(voie.getCouleur());
             g.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
             g.draw(voie.getLigne());
@@ -65,7 +66,7 @@ public class SimulationAfficheur extends Mode {
         
         if (highlight != null) {
             float zoomFactor = simulation.getPanel().getZoomFactor();
-            Pays pays = simulation.getCarte().getPays(highlight);
+            Pays pays = carte.getPays(highlight);
             if (afficherInfosPays) {
                 int y = drawNom(pays.getNom(), g, zoomFactor);
                 y = drawPopulation(pays.getPopTotale(), g, zoomFactor, y);
@@ -111,12 +112,7 @@ public class SimulationAfficheur extends Mode {
             return;
         }
         
-        for (Polygon p : afficherInfosPays ? simulation.getCarte().getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
-            if (p.contains(point.x, point.y)) {
-                simulation.getCarte().getPays(p).getRegion(p).setPopInfectee(1);
-                break;
-            }
-        }
+        simulation.getScenario().getCarteJourCourant().getPays(0).getRegions().get(0).setPopInfectee(1000);
     }
     
     @Override
@@ -126,7 +122,7 @@ public class SimulationAfficheur extends Mode {
             return;
         }
         
-        for (Polygon p : afficherInfosPays ? simulation.getCarte().getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
+        for (Polygon p : afficherInfosPays ? carte.getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
             if (p.contains(point.x, point.y)) {
                 highlight = p;
                 break;

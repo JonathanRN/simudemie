@@ -33,7 +33,7 @@ public class Carte implements Serializable {
         for (Pays pays : listePays){
             pays.avancerJournee(maladie.getTauxInfection(), maladie.getTauxMortalite(), maladie.getTauxGuerison());
         }
-        contaminerInterPays();
+        //contaminerInterPays();
     }
     
     private void contaminerInterPays() {

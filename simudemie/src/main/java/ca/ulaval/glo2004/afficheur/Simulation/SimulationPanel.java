@@ -17,7 +17,6 @@ import javax.swing.SwingUtilities;
  */
 public class SimulationPanel extends ZoomablePanel {
     
-    private Simulation simulation;
     private SimulationAfficheur afficheur;
     
     public SimulationPanel() {
@@ -25,7 +24,6 @@ public class SimulationPanel extends ZoomablePanel {
     }
     
     public void setSimulation(Simulation simulation) {
-        this.simulation = simulation;
         afficheur = new SimulationAfficheur(simulation);
     }
     

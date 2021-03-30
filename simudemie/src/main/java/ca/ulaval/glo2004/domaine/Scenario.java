@@ -18,23 +18,19 @@ public class Scenario implements Serializable {
     private List<Carte> cartes;
     private Carte carteJourCourant;
     
-    public Scenario(String nom, Carte carte) {
+    public Scenario(String nom, Carte carte, Maladie maladie) {
         this.nom = nom;
         cartes = new ArrayList<>();
         carteJourCourant = new Carte(carte);
+        carteJourCourant.setMaladie(maladie);
     }
     
     public Carte getCarteJourCourant() {
         return carteJourCourant;
     }
     
-    // ChargerJour
-    public void setCarteJourCourant(Carte carte) {
-        carteJourCourant = carte;
-    }
-    
     public int getIndexJourCourant() {
-        return cartes.indexOf(carteJourCourant);
+        return cartes.size() + 1;
     }
     
     public String getNom() {
@@ -48,6 +44,6 @@ public class Scenario implements Serializable {
     public void avancerJour() {
         carteJourCourant.avancerJour();
         cartes.add(carteJourCourant);
-        setCarteJourCourant(new Carte(carteJourCourant));
+        carteJourCourant = new Carte(carteJourCourant);
     }
 }

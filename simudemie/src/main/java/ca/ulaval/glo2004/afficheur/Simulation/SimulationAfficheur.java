@@ -150,7 +150,10 @@ public class SimulationAfficheur extends Mode {
     }
     
     public void onSimulationDemaree() {
-        regionInfectee.setPopInfectee(1000);
+        int infections = 1;
+        
+        regionInfectee.setPopSaine(regionInfectee.getPopSaine() - infections);
+        regionInfectee.setPopInfectee(infections);
         regionInfectee = null;
     }
     

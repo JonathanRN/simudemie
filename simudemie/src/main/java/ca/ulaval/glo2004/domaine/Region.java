@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class Region implements Serializable {
     
     private String nom;
-    private int populationSaine, populationSaineInitiale;
+    private int populationSaine;
 //    private int populationImmune;
     private int populationInfectee;
     private int populationDecedee;
@@ -29,7 +29,6 @@ public class Region implements Serializable {
     public Region(Region region) {
         this.nom = region.nom;
         this.populationSaine = region.populationSaine;
-        this.populationSaineInitiale = region.populationSaineInitiale;
         this.populationInfectee = region.populationInfectee;
         this.populationDecedee = region.populationDecedee;
         
@@ -45,25 +44,23 @@ public class Region implements Serializable {
     public void contaminer(double taux)
     {
         int nouveauxInfectes = contaminationBinomiale(taux);
-        setPopSaine(this.getPopSaine() - nouveauxInfectes);
         setPopInfectee(this.getPopInfectee() + nouveauxInfectes);
-        
-        //System.out.println(nouveauxInfectes);
+        setPopSaine(this.getPopSaine() - nouveauxInfectes);
     }
     
     public void eliminerPopulation(double taux)
     {
-        int deces  = (int)(this.getPopInfectee() * taux);
-        setPopInfectee(this.getPopInfectee() - deces);
+        int deces = (int)(this.getPopInfectee() * taux);
         setPopDecedee(this.getPopDecedee() + deces);
+        setPopInfectee(this.getPopInfectee() - deces);
         
     }
     
     public void guerirPop(double taux)
     {
         int gueris = (int)(this.getPopInfectee() * taux);
-        setPopInfectee(this.getPopInfectee() - gueris);
         setPopSaine(this.getPopSaine() + gueris);
+        setPopInfectee(this.getPopInfectee() - gueris);
     }
     
     public String getNom(){return nom;}
@@ -116,13 +113,7 @@ public class Region implements Serializable {
     
     public void setPopSaine(int populationSaine)
     {
-        if (populationSaineInitiale == 0) {
-            populationSaineInitiale = populationSaine;
-        }
-        
-        if (populationSaine >= 0) {
-            this.populationSaine = populationSaine >= populationSaineInitiale ? populationSaineInitiale : populationSaine;
-        }
+        this.populationSaine = clamp(populationSaine, 0, this.getPopTotale());
     }
     
 //    private void setPopImmune(int populationImmune)
@@ -132,34 +123,29 @@ public class Region implements Serializable {
         
     public void setPopInfectee(int populationInfectee)
     {
-        if (populationInfectee >= 0) {
-            this.populationInfectee = populationInfectee >= populationSaineInitiale ? populationSaineInitiale : populationInfectee;
-        }
-    }
-            
-    public void setPopDecedee(int populationDecedee)
-    {
-        if (populationDecedee >= 0) {
-            this.populationDecedee = populationDecedee >= populationSaineInitiale ? populationSaineInitiale : populationDecedee;
-        }
+        this.populationInfectee = clamp(populationInfectee, 0, this.getPopTotale());
     }
     
-    private int contaminationBinomiale(double tauxPropag)
+    public void setPopDecedee(int populationDecedee)
     {
-        int nbInfectees = this.getPopInfectee();
-        if (nbInfectees <= 0) {
+        this.populationDecedee = clamp(populationDecedee, 0, this.getPopTotale());
+    }
+    
+    private int contaminationBinomiale(double tauxPropag) {
+        int nbInfectes = this.getPopInfectee();
+        if (nbInfectes <= 0) {
             return 0;
         }
         
         Random rnd = new Random (System.currentTimeMillis());
         double seuilTol = 0.0001;
 
-        BinomialDistribution binomial = new BinomialDistribution(nbInfectees, tauxPropag);
+        BinomialDistribution binomial = new BinomialDistribution(nbInfectes, tauxPropag);
 
         ArrayList<Double> probabilites = new ArrayList<>();
         ArrayList<Integer> nombreSucces = new ArrayList<>();
 
-        double x = nbInfectees * tauxPropag;
+        double x = nbInfectes * tauxPropag;
         int cpt = 0;
         double prob = binomial.probability((int)x);
 
@@ -189,6 +175,11 @@ public class Region implements Serializable {
         }
 
         
-        return (int)Math.ceil(nbInfectees * tauxPropag + success);        
+        return (int)Math.ceil(nbInfectes * tauxPropag + success);
+    }
+
+    // https://stackoverflow.com/questions/16656651/does-java-have-a-clamp-function
+    private int clamp(int value, int min, int max) {
+        return value > max ? max : value < min ? min : value;
     }
 }

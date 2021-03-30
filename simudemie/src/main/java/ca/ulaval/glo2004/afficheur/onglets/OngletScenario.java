@@ -126,7 +126,7 @@ public class OngletScenario extends OngletUI {
         
         if (result == JOptionPane.YES_OPTION) {
             FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
-            frame.startSimulation(getIndexCourant(), GestionnaireCarte.getInstance().getElement(0), GestionnaireMaladie.getInstance().getElement(0));
+            frame.startSimulation(getIndexCourant());
         }
     }
 

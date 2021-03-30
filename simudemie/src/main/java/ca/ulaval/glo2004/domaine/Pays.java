@@ -19,6 +19,21 @@ public class Pays implements Serializable {
     public Pays(Polygon polygone) {
         this.polygone = polygone;
     }
+
+    public Pays(Pays pays) {
+        this.nom = pays.nom;
+        this.polygone = pays.polygone;
+        
+        this.mesures.clear();
+        for (Mesure mesure : pays.mesures) {
+            this.mesures.add(new Mesure(mesure));
+        }
+        
+        this.listeRegions.clear();
+        for (Region region : pays.listeRegions) {
+            this.listeRegions.add(new Region(region));
+        }
+    }
     
     public void avancerJournee(double tauxInf, double tauxMortalite, double tauxGuerison)
     {

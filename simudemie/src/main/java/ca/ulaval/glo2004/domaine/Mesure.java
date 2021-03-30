@@ -21,6 +21,13 @@ public class Mesure implements Serializable{
         this.tauxReductionProp = tauxReductionProp;
     }
     
+    public Mesure(Mesure mesure)
+    {
+        this.nom = mesure.nom; 
+        this.tauxAdhesion = mesure.tauxAdhesion;
+        this.tauxReductionProp = mesure.tauxReductionProp;
+    }
+    
     public String getNom(){return nom;}
     
     public float getTauxAdhesion(){return tauxAdhesion;}

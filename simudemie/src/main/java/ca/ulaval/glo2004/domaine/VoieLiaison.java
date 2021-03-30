@@ -29,6 +29,18 @@ public class VoieLiaison implements Serializable {
         this.centre = centre;
         accessible = true;
     }
+    
+    public VoieLiaison(VoieLiaison voie)
+    {
+        this.type = voie.type;
+        this.paysOrigine = new Pays(voie.paysOrigine);
+        this.paysDestination = new Pays(voie.paysDestination);
+        
+        // todo voir si modifications dans carte change ici
+        this.ligneCourbe = voie.ligneCourbe;
+        this.centre = voie.centre;
+        this.accessible = voie.accessible;
+    }
         
     public Pays getPaysOrigine(){ return paysOrigine; }
     

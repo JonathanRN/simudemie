@@ -34,18 +34,15 @@ public class SimulationAfficheur extends Mode {
     
     public SimulationAfficheur(Simulation simulation) {
         this.simulation = simulation;
-        carte = simulation.getScenario().getCarteJourCourant();
-        onActive();
-    }
-
-    @Override
-    public void onActive() {
-        super.onActive();
-        polygones = carte.getPolygonesRegions();
     }
     
     @Override
     public void paint(Graphics2D g) {
+        // Rafraichit toujours la carte courante
+        // dans les cas ou l'on charge une ancienne carte
+        carte = simulation.getScenario().getCarteJourCourant();
+        polygones = carte.getPolygonesRegions();
+        
         for (Polygon p : afficherInfosPays ? carte.getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
             g.setColor(couleurFill);
             g.fillPolygon(p);

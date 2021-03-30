@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class Region implements Serializable {
     
     private String nom;
-    private int populationSaine;
+    private int populationSaine, populationSaineInitiale;
 //    private int populationImmune;
     private int populationInfectee;
     private int populationDecedee;
@@ -24,7 +24,17 @@ public class Region implements Serializable {
     public Region(Polygon polygone)
     {
         this.polygone = polygone;
-        this.setPopInfectee(1000);
+    }
+
+    public Region(Region region) {
+        this.nom = region.nom;
+        this.populationSaine = region.populationSaine;
+        this.populationSaineInitiale = region.populationSaineInitiale;
+        this.populationInfectee = region.populationInfectee;
+        this.populationDecedee = region.populationDecedee;
+        
+        // Voir si modifier une carte modifie le polygone ici
+        this.polygone = region.polygone;
     }
     
 //    public void deplacementRegions()
@@ -38,7 +48,7 @@ public class Region implements Serializable {
         setPopSaine(this.getPopSaine() - nouveauxInfectes);
         setPopInfectee(this.getPopInfectee() + nouveauxInfectes);
         
-        System.out.println(nouveauxInfectes);
+        //System.out.println(nouveauxInfectes);
     }
     
     public void eliminerPopulation(double taux)
@@ -106,7 +116,13 @@ public class Region implements Serializable {
     
     public void setPopSaine(int populationSaine)
     {
-        this.populationSaine = populationSaine;
+        if (populationSaineInitiale == 0) {
+            populationSaineInitiale = populationSaine;
+        }
+        
+        if (populationSaine >= 0) {
+            this.populationSaine = populationSaine >= populationSaineInitiale ? populationSaineInitiale : populationSaine;
+        }
     }
     
 //    private void setPopImmune(int populationImmune)
@@ -116,12 +132,16 @@ public class Region implements Serializable {
         
     public void setPopInfectee(int populationInfectee)
     {
-        this.populationInfectee = populationInfectee >= getPopTotale() ? getPopTotale() : populationInfectee;
+        if (populationInfectee >= 0) {
+            this.populationInfectee = populationInfectee >= populationSaineInitiale ? populationSaineInitiale : populationInfectee;
+        }
     }
             
     public void setPopDecedee(int populationDecedee)
     {
-        this.populationDecedee = populationDecedee >= getPopTotale() ? getPopTotale() : populationDecedee;
+        if (populationDecedee >= 0) {
+            this.populationDecedee = populationDecedee >= populationSaineInitiale ? populationSaineInitiale : populationDecedee;
+        }
     }
     
     private int contaminationBinomiale(double tauxPropag)

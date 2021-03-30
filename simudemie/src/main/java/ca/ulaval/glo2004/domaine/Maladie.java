@@ -24,6 +24,13 @@ public class Maladie implements Serializable {
         this.tauxGuerison = tauxGuerison;
     }
     
+    public Maladie(Maladie maladie) {
+        this.nom = maladie.nom;
+        this.tauxInfection = maladie.tauxInfection;
+        this.tauxGuerison = maladie.tauxGuerison;
+        this.tauxMortalite = maladie.tauxMortalite;
+    }
+    
     public String getNom(){return nom;}
     
     public double getTauxInfection(){return tauxInfection;}

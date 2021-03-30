@@ -38,10 +38,10 @@ public class FramePrincipal extends javax.swing.JFrame {
         UIManager.put("TabbedPane.minimumTabWidth", 130);
     }
     
-    public void startSimulation(int index, Carte carte, Maladie maladie) {
+    public void startSimulation(int index) {
         remove(menu);
         // TODO A CHANGER
-        simulation = new Simulation(index, carte, maladie);
+        simulation = new Simulation(index);
         add(simulation);
         revalidate();
         repaint();

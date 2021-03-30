@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 public class Carte implements Serializable {
     
     private String nom;
-    private ArrayList<Pays> listePays = new ArrayList<>();
-    private ArrayList<VoieLiaison> frontieres = new ArrayList<>();
+    private final ArrayList<Pays> listePays = new ArrayList<>();
+    private final ArrayList<VoieLiaison> frontieres = new ArrayList<>();
     private Maladie maladie;
     
     public Carte(String nom) {
@@ -23,17 +23,24 @@ public class Carte implements Serializable {
 
     public Carte(Carte carteJourCourant) {
         this.nom = carteJourCourant.nom;
-        this.listePays = carteJourCourant.listePays;
-        this.frontieres = carteJourCourant.frontieres;
-        this.maladie = carteJourCourant.maladie;
+        this.maladie = new Maladie(carteJourCourant.getMaladie());
+        
+        this.listePays.clear();
+        for (Pays pays : carteJourCourant.listePays) {
+            this.listePays.add(new Pays(pays));
+        }
+        
+        this.frontieres.clear();
+        for (VoieLiaison voie : carteJourCourant.frontieres) {
+            this.frontieres.add(new VoieLiaison(voie));
+        }
     }
     
-    public void avancerJour()
-    {
+    public void avancerJour() {
         for (Pays pays : listePays){
             pays.avancerJournee(maladie.getTauxInfection(), maladie.getTauxMortalite(), maladie.getTauxGuerison());
         }
-        //contaminerInterPays();
+        contaminerInterPays();
     }
     
     private void contaminerInterPays() {
@@ -174,7 +181,8 @@ public class Carte implements Serializable {
     public Maladie getMaladie() { return maladie; }
     
     public void setMaladie(Maladie maladie) {
-        this.maladie = maladie;
+        // Cree une copie pour garder la maladie en memoire
+        this.maladie = new Maladie(maladie);
     }
     
     public void setNom(String nom) {

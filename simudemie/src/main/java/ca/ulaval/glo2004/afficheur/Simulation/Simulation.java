@@ -7,7 +7,6 @@ package ca.ulaval.glo2004.afficheur.Simulation;
 
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.domaine.Carte;
-import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.event.MouseEvent;
@@ -23,14 +22,11 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     
     private boolean estEnDirect, estCommence;
     private boolean mouseOver;
-    private final Carte carte;
     private final GestionnaireScenario gestionnaire;
     private final int index;
     
-    public Simulation(int index, Carte carte, Maladie maladie) {
+    public Simulation(int index) {
         this.index = index;
-        this.carte = carte;
-        this.carte.setMaladie(maladie);
         this.gestionnaire = GestionnaireScenario.getInstance();
         
         initComponents();
@@ -275,6 +271,9 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
             setDirect(false);
             updateDirectIcon();
         }
+        
+        gestionnaire.getCourant().chargerJour(SliderJour.getValue());
+        getPanel().repaint();
     }//GEN-LAST:event_SliderJourMouseReleased
 
 

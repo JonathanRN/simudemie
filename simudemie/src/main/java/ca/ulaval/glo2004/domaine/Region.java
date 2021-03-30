@@ -15,15 +15,26 @@ import java.io.Serializable;
 public class Region implements Serializable {
     
     private String nom;
-    private int populationSaine;
+    private int populationSaine, populationSaineInitiale;
 //    private int populationImmune;
     private int populationInfectee;
     private int populationDecedee;
-    private Polygon polygone;
+    private final Polygon polygone;
     
     public Region(Polygon polygone)
     {
         this.polygone = polygone;
+    }
+
+    public Region(Region region) {
+        this.nom = region.nom;
+        this.populationSaine = region.populationSaine;
+        this.populationSaineInitiale = region.populationSaineInitiale;
+        this.populationInfectee = region.populationInfectee;
+        this.populationDecedee = region.populationDecedee;
+        
+        // Voir si modifier une carte modifie le polygone ici
+        this.polygone = region.polygone;
     }
     
 //    public void deplacementRegions()
@@ -33,9 +44,11 @@ public class Region implements Serializable {
     
     public void contaminer(double taux)
     {
-        int nouveauxInfectes  = contaminationBinomiale(taux);
+        int nouveauxInfectes = contaminationBinomiale(taux);
         setPopSaine(this.getPopSaine() - nouveauxInfectes);
         setPopInfectee(this.getPopInfectee() + nouveauxInfectes);
+        
+        //System.out.println(nouveauxInfectes);
     }
     
     public void eliminerPopulation(double taux)
@@ -43,6 +56,7 @@ public class Region implements Serializable {
         int deces  = (int)(this.getPopInfectee() * taux);
         setPopInfectee(this.getPopInfectee() - deces);
         setPopDecedee(this.getPopDecedee() + deces);
+        
     }
     
     public void guerirPop(double taux)
@@ -56,17 +70,17 @@ public class Region implements Serializable {
     
     public int getPopTotale() { return populationSaine + populationInfectee; }
     
-    public int getPopSaine(){return populationSaine;}
+    public int getPopSaine(){ return populationSaine; }
     
 //    public int getPopImmunisee(){return populationImmune;}
     
-    public int getPopInfectee(){return populationInfectee;}
+    public int getPopInfectee(){ return populationInfectee; }
     
-    public int getPopDecedee(){return populationDecedee;}
+    public int getPopDecedee(){ return populationDecedee; }
     
     public float getPourcentageInfectee() {
         try {
-            return (getPopInfectee() / getPopTotale()) * 100;
+            return (getPopInfectee() / getPopTotale()) * 100f;
         }
         catch (java.lang.ArithmeticException e) {
             return 0;
@@ -75,7 +89,7 @@ public class Region implements Serializable {
     
     public float getPourcentageSaine() {
         try {
-            return (getPopSaine() / getPopTotale()) * 100;
+            return (getPopSaine() / getPopTotale()) * 100f;
         }
         catch (java.lang.ArithmeticException e) {
             return 0;
@@ -84,7 +98,7 @@ public class Region implements Serializable {
     
     public float getPourcentageDecedee() {
         try {
-            return (getPopDecedee() / getPopTotale()) * 100;
+            return (getPopDecedee() / getPopTotale()) * 100f;
         }
         catch (java.lang.ArithmeticException e) {
             return 0;
@@ -102,7 +116,13 @@ public class Region implements Serializable {
     
     public void setPopSaine(int populationSaine)
     {
-        this.populationSaine = populationSaine;
+        if (populationSaineInitiale == 0) {
+            populationSaineInitiale = populationSaine;
+        }
+        
+        if (populationSaine >= 0) {
+            this.populationSaine = populationSaine >= populationSaineInitiale ? populationSaineInitiale : populationSaine;
+        }
     }
     
 //    private void setPopImmune(int populationImmune)
@@ -112,29 +132,34 @@ public class Region implements Serializable {
         
     public void setPopInfectee(int populationInfectee)
     {
-        this.populationInfectee = populationInfectee;
+        if (populationInfectee >= 0) {
+            this.populationInfectee = populationInfectee >= populationSaineInitiale ? populationSaineInitiale : populationInfectee;
+        }
     }
             
     public void setPopDecedee(int populationDecedee)
     {
-        this.populationDecedee = populationDecedee;
+        if (populationDecedee >= 0) {
+            this.populationDecedee = populationDecedee >= populationSaineInitiale ? populationSaineInitiale : populationDecedee;
+        }
     }
     
     private int contaminationBinomiale(double tauxPropag)
     {
-        double taux = tauxPropag / 100;
+        int nbInfectees = this.getPopInfectee();
+        if (nbInfectees <= 0) {
+            return 0;
+        }
         
         Random rnd = new Random (System.currentTimeMillis());
         double seuilTol = 0.0001;
 
-        int nbInfectees = this.getPopInfectee();
-
-        BinomialDistribution binomial = new BinomialDistribution(nbInfectees, taux);
+        BinomialDistribution binomial = new BinomialDistribution(nbInfectees, tauxPropag);
 
         ArrayList<Double> probabilites = new ArrayList<>();
         ArrayList<Integer> nombreSucces = new ArrayList<>();
 
-        double x = nbInfectees * taux;
+        double x = nbInfectees * tauxPropag;
         int cpt = 0;
         double prob = binomial.probability((int)x);
 
@@ -163,6 +188,7 @@ public class Region implements Serializable {
             }
         }
 
-        return (int)(nbInfectees*taux + success);        
+        
+        return (int)Math.ceil(nbInfectees * tauxPropag + success);        
     }
 }

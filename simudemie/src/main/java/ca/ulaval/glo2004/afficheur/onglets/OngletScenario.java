@@ -40,14 +40,11 @@ public class OngletScenario extends OngletUI {
             ImportScenarioButton.setBackground(new Color(216, 222, 233, 38));
             BoutonExport.setBackground(new Color(216, 222, 233, 38));
             
-            // TODO
             scenarioStatsPanel1.setOnglet(this);
             creationScenarioPanel1.setVisible(false);
         } catch (Exception e) {
         }
-        
     }
-    
     
     public void init() {
         scenarioStatsPanel1.setOnglet(this);
@@ -78,9 +75,9 @@ public class OngletScenario extends OngletUI {
     private void ajouterCard(Scenario scenario) {
         ObjetScenario card = new ObjetScenario(this);
         card.setSimulationName(scenario.getNom());
-        card.setDays(1); // TODO: Changer pour afficher le vrai jour de la simulation
-        //card.setMapName(scenario.getCarteJourCourant().getNom());
-        //card.setVirusName(scenario.getCarteJourCourant().getMaladie().getNom());
+        card.setDays(1);
+        card.setMapName(scenario.getCarteJourCourant().getNom());
+        card.setVirusName(scenario.getCarteJourCourant().getMaladie().getNom());
         card.setInfectedPercent(0);
         card.setCuredPercent(0);
         card.setImmunedPercent(0);

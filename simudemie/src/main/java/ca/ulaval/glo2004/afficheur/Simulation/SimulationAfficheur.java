@@ -29,30 +29,32 @@ public class SimulationAfficheur extends Mode {
     private ArrayList<Polygon> polygones;
     private Point souris;
     private boolean afficherInfosPays = false;
+    private Region regionInfectee;
     
     private final Point sourisOffset = new Point(20, 5);
     
     public SimulationAfficheur(Simulation simulation) {
         this.simulation = simulation;
-        onActive();
-    }
-
-    @Override
-    public void onActive() {
-        super.onActive();
-        polygones = simulation.getCarte().getPolygonesRegions();
+        
+        // Il faut toujours avoir une region de selectionne
+        regionInfectee = simulation.getScenario().getCarteJourCourant().getPays(0).getRegions().get(0);
     }
     
     @Override
     public void paint(Graphics2D g) {
-        for (Polygon p : afficherInfosPays ? simulation.getCarte().getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
+        // Rafraichit toujours la carte courante
+        // dans les cas ou l'on charge une ancienne carte
+        carte = simulation.getScenario().getCarteJourCourant();
+        polygones = carte.getPolygonesRegions();
+        
+        for (Polygon p : afficherInfosPays ? carte.getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
             g.setColor(couleurFill);
             g.fillPolygon(p);
             this.paintLignes(g, Color.black, p);
         }
         
         
-        for (VoieLiaison voie : simulation.getCarte().getVoies()) {
+        for (VoieLiaison voie : carte.getVoies()) {
             g.setColor(voie.getCouleur());
             g.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
             g.draw(voie.getLigne());
@@ -63,9 +65,14 @@ public class SimulationAfficheur extends Mode {
         
         updateHighlight(souris);
         
+        if (regionInfectee != null) {
+            g.setColor(Color.red);
+            this.paintLignes(g, Color.red, regionInfectee.getPolygone());
+        }
+        
         if (highlight != null) {
             float zoomFactor = simulation.getPanel().getZoomFactor();
-            Pays pays = simulation.getCarte().getPays(highlight);
+            Pays pays = carte.getPays(highlight);
             if (afficherInfosPays) {
                 int y = drawNom(pays.getNom(), g, zoomFactor);
                 y = drawPopulation(pays.getPopTotale(), g, zoomFactor, y);
@@ -111,9 +118,9 @@ public class SimulationAfficheur extends Mode {
             return;
         }
         
-        for (Polygon p : afficherInfosPays ? simulation.getCarte().getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
+        for (Polygon p : polygones) {
             if (p.contains(point.x, point.y)) {
-                simulation.getCarte().getPays(p).getRegion(p).setPopInfectee(1);
+                regionInfectee = carte.getPays(p).getRegion(p);
                 break;
             }
         }
@@ -126,7 +133,7 @@ public class SimulationAfficheur extends Mode {
             return;
         }
         
-        for (Polygon p : afficherInfosPays ? simulation.getCarte().getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
+        for (Polygon p : afficherInfosPays ? carte.getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
             if (p.contains(point.x, point.y)) {
                 highlight = p;
                 break;
@@ -138,6 +145,11 @@ public class SimulationAfficheur extends Mode {
         afficherInfosPays = !afficherInfosPays;
         
         updateHighlight(souris);
+    }
+    
+    public void onSimulationDemaree() {
+        regionInfectee.setPopInfectee(1000);
+        regionInfectee = null;
     }
     
     private int drawNom(String nom, Graphics2D g, float zoomFactor) {

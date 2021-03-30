@@ -18,7 +18,7 @@ import javax.swing.Timer;
 public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implements ActionListener {
     protected final String RELATIVE_PATH = "Scenarios\\scenarios.ser";
     private Timer timer;    
-    private Scenario courant;
+    private int scenarioCourant;
     
     private ScenarioCallback scenarioCallback;
     
@@ -39,12 +39,12 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        courant.avancerJour();
-        scenarioCallback.onAvancerJour();
+        int jour = getCourant().avancerJour();
+        scenarioCallback.onAvancerJour(jour);
     }
     
     public Scenario getCourant() {
-        return courant;
+        return getElement(scenarioCourant);
     }
     
     private void creerMesure(String nom, float tauxAdhesion, float tauxReduction)
@@ -68,11 +68,11 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     }
     
     public void demarrer(int index, int secondes, ScenarioCallback scenarioCallback) {
+        scenarioCourant = index;
         timer = new Timer(secondes * 1000, this);
         timer.start();
         
         this.scenarioCallback = scenarioCallback;
-        courant = getElement(index);
     }
     
     public List<Carte> retournerResultats()
@@ -84,7 +84,9 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     @Override
     public Scenario creer(Object... arguments) {
         String nom = (String) arguments[0];
-        Scenario scenario = new Scenario(nom, GestionnaireCarte.getInstance().getElement(0));
+        
+        // TODO
+        Scenario scenario = new Scenario(nom, GestionnaireCarte.getInstance().getElement(0), GestionnaireMaladie.getInstance().getElement(0));
         ajouter(scenario);
         return scenario;
     }

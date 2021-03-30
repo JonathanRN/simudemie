@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 public class Carte implements Serializable {
     
     private String nom;
-    private ArrayList<Pays> listePays = new ArrayList<>();
-    private ArrayList<VoieLiaison> frontieres = new ArrayList<>();
+    private final ArrayList<Pays> listePays = new ArrayList<>();
+    private final ArrayList<VoieLiaison> frontieres = new ArrayList<>();
     private Maladie maladie;
     
     public Carte(String nom) {
@@ -23,13 +23,20 @@ public class Carte implements Serializable {
 
     public Carte(Carte carteJourCourant) {
         this.nom = carteJourCourant.nom;
-        this.listePays = carteJourCourant.listePays;
-        this.frontieres = carteJourCourant.frontieres;
-        this.maladie = carteJourCourant.maladie;
+        this.maladie = new Maladie(carteJourCourant.getMaladie());
+        
+        this.listePays.clear();
+        for (Pays pays : carteJourCourant.listePays) {
+            this.listePays.add(new Pays(pays));
+        }
+        
+        this.frontieres.clear();
+        for (VoieLiaison voie : carteJourCourant.frontieres) {
+            this.frontieres.add(new VoieLiaison(voie));
+        }
     }
     
-    public void avancerJour()
-    {
+    public void avancerJour() {
         for (Pays pays : listePays){
             pays.avancerJournee(maladie.getTauxInfection(), maladie.getTauxMortalite(), maladie.getTauxGuerison());
         }
@@ -51,7 +58,7 @@ public class Carte implements Serializable {
             {
                 if (pays.getPopInfectee() > 0)
                 {
-                    voyageursInfectees = (0.001 * pays.getPopInfectee()); //Déterminer quel sera le 0.001
+                    voyageursInfectees = (0.01 * pays.getPopInfectee()); //Déterminer quel sera le 0.001
                     if (this.getNom().equals(voie.getPaysOrigine().getNom()) )
                     {
                         paysAInfecter = voie.getPaysDestination(); //validation (selon origine/destination)
@@ -64,7 +71,8 @@ public class Carte implements Serializable {
                         double prob = Math.random();
                         if (prob > 0.5) //une chance sur deux
                         {//Arrondissement avec le int
-                            region.setPopInfectee(pays.getPopInfectee() + (int)(voyageursInfectees / paysAInfecter.listeRegions.size()));
+                            region.setPopInfectee(region.getPopInfectee() + (int)(voyageursInfectees / paysAInfecter.listeRegions.size()));
+                            region.setPopSaine(region.getPopSaine() - (int)(voyageursInfectees / paysAInfecter.listeRegions.size()));
                         }
                     }
                 }
@@ -174,7 +182,8 @@ public class Carte implements Serializable {
     public Maladie getMaladie() { return maladie; }
     
     public void setMaladie(Maladie maladie) {
-        this.maladie = maladie;
+        // Cree une copie pour garder la maladie en memoire
+        this.maladie = new Maladie(maladie);
     }
     
     public void setNom(String nom) {

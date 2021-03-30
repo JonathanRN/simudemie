@@ -12,7 +12,8 @@ import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
  * Adapte depuis https://stackoverflow.com/questions/15025092/border-with-rounded-corners-transparency
  * @author Jonathan
  */
-public class ObjetScenario extends ObjetUI {    
+public class ObjetScenario extends ObjetUI {
+        
     public ObjetScenario(OngletScenario tab) {
         super(tab);
         initComponents();

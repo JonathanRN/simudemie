@@ -3,6 +3,8 @@ package ca.ulaval.glo2004.afficheur;
 import ca.ulaval.glo2004.afficheur.Simulation.Simulation;
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
+import ca.ulaval.glo2004.domaine.Carte;
+import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireMaladie;
 import com.formdev.flatlaf.IntelliJTheme;
@@ -39,7 +41,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     public void startSimulation(int index) {
         remove(menu);
         // TODO A CHANGER
-        simulation = new Simulation(index, GestionnaireCarte.getInstance().getElement(0), GestionnaireMaladie.getInstance().getElement(0));
+        simulation = new Simulation(index);
         add(simulation);
         revalidate();
         repaint();

@@ -11,6 +11,7 @@ import ca.ulaval.glo2004.afficheur.onglets.OngletMaladie;
 import ca.ulaval.glo2004.domaine.Maladie;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -85,14 +86,29 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
     
     public void setInfectionInput(double value) {
         InfectionInput.setValue(value);
+        try {
+            InfectionInput.commitEdit();
+        } catch(ParseException pe) {
+            
+        }
     }
     
     public void setCuredInput(double value) {
         CuredInput.setValue(value);
+        try {
+            CuredInput.commitEdit();
+        } catch(ParseException pe) {
+            
+        }
     }
     
     public void setDeadInput(double value) {
         DeadInput.setValue(value);
+        try {
+            DeadInput.commitEdit();
+        } catch(ParseException pe) {
+            
+        }
     }
     
     public double getInfectionInput() {
@@ -113,19 +129,18 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
     
     private void sauvegarderMaladie() {
         Object[] args = {MaladieInput.getText(), getInfectionInput(), getDeadInput(), getCuredInput()};
-        Maladie maladie = onglet.getController().creer(args);
+        onglet.getController().creer(args);
+        
+        setInfectionInput(getInfectionInput());
+        setCuredInput(getCuredInput());
+        setDeadInput(getDeadInput());
         
         ObjetMaladie objetMaladie = (ObjetMaladie)onglet.getCourant();
-        /*
-        objetMaladie.setNom(maladie.getNom());
-        objetMaladie.setInfectedProgressBar(maladie.getTauxInfection());
-        objetMaladie.setCuredProgressBar(maladie.getTauxGuerison());
-        objetMaladie.setDeadProgressBar(maladie.getTauxMortalite());
-        */
         objetMaladie.setNom(MaladieInput.getText());
         objetMaladie.setInfectedProgressBar(getInfectionInput());
         objetMaladie.setCuredProgressBar(getCuredInput());
         objetMaladie.setDeadProgressBar(getDeadInput());
+        
         
         updateUI();
     }
@@ -223,10 +238,12 @@ public class StatsMaladiePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_DeleteButtonMouseReleased
 
     private void ModifyButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifyButtonMouseReleased
-        boolean isModifying = !onglet.getCardLocked();
-        setModifying(isModifying);
-        if(!isModifying) {
-            sauvegarderMaladie();
+        if(onglet.getCourant() != null) {
+            boolean isModifying = !onglet.getCardLocked();
+            setModifying(isModifying);
+            if(!isModifying) {
+                sauvegarderMaladie();
+            }
         }
     }//GEN-LAST:event_ModifyButtonMouseReleased
 

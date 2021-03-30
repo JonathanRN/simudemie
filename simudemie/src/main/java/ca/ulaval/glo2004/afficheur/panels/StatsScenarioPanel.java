@@ -8,6 +8,7 @@ package ca.ulaval.glo2004.afficheur.panels;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
 import java.awt.Color;
+import javax.swing.JButton;
 
 /**
  *
@@ -30,6 +31,10 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         }
         catch(Exception e) {
         }
+    }
+    
+    public JButton getResumeButton() {
+        return ResumeButton;
     }
     
     public void setOnglet(OngletScenario onglet) {
@@ -106,7 +111,9 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_DeleteButtonMouseReleased
 
     private void ResumeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResumeButtonMouseReleased
-        onglet.onStartSimulation();
+        if(onglet.getCourant() != null) {
+            onglet.onStartSimulation();
+        }
     }//GEN-LAST:event_ResumeButtonMouseReleased
 
 

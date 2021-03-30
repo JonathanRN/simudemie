@@ -78,7 +78,7 @@ public class OngletMaladie extends OngletUI {
     
     @Override
     public void retirerCourant() {
-        if(objets.size() > 0) {
+        if(objets.size() > 0 && courant != null) {
             int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer cette maladie?", "", JOptionPane.WARNING_MESSAGE);
             
             if(result == JOptionPane.YES_OPTION) {
@@ -275,10 +275,12 @@ public class OngletMaladie extends OngletUI {
     }//GEN-LAST:event_ImportScenarioButtonMouseReleased
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
-        int result = fileChooser.showOpenDialog(null);
-        if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
-            controller.exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
-            fileChooser.setSelectedFile(null);
+        if(getCourant() != null) {
+            int result = fileChooser.showOpenDialog(null);
+            if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
+                controller.exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
+                fileChooser.setSelectedFile(null);
+            }
         }
     }//GEN-LAST:event_BoutonExportMouseReleased
 

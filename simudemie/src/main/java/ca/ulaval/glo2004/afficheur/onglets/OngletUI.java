@@ -26,14 +26,6 @@ public abstract class OngletUI extends javax.swing.JPanel {
     public OngletUI() {
         initComponents();
         
-        /*
-        FileFilter filter = new FileFilter() {
-            @Override
-            public boolean accept(File pathname) {
-                pathname.
-            }
-        };
-        */
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Serializable java file", "ser");
         fileChooser = new JFileChooser();
         fileChooser.setAcceptAllFileFilterUsed(false);
@@ -51,6 +43,10 @@ public abstract class OngletUI extends javax.swing.JPanel {
     public ObjetUI getCourant() {
         return courant;
     }
+    
+    public void setCourant(ObjetUI courant) {
+        this.courant = courant;
+    }
 
     public void ajouterObjetUI() {
     }
@@ -59,6 +55,8 @@ public abstract class OngletUI extends javax.swing.JPanel {
         objets.remove(courant);
         if (!objets.isEmpty()) {
             onClickObjetUI(objets.get(0));
+        } else {
+            setCourant(null);
         }
     }
     

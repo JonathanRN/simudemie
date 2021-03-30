@@ -95,7 +95,9 @@ public class StatsCartePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ModifyButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifyButtonMouseReleased
-        onglet.goToCreationCarte();
+        if(onglet.getCourant() != null) {
+            onglet.goToCreationCarte();
+        }
     }//GEN-LAST:event_ModifyButtonMouseReleased
 
     private void DeleteButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseReleased

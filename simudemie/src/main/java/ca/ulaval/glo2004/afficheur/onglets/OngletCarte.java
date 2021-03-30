@@ -97,6 +97,7 @@ public class OngletCarte extends OngletUI {
 
                 super.retirerCourant();
             }
+            
         }
     }
 
@@ -267,10 +268,12 @@ public class OngletCarte extends OngletUI {
     }//GEN-LAST:event_ImportMapButtonMouseReleased
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
-        int result = fileChooser.showOpenDialog(null);
-        if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
-            GestionnaireCarte.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
-            fileChooser.setSelectedFile(null);
+        if(getCourant() != null) {
+            int result = fileChooser.showOpenDialog(null);
+            if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
+                GestionnaireCarte.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
+                fileChooser.setSelectedFile(null);
+            }
         }
     }//GEN-LAST:event_BoutonExportMouseReleased
 

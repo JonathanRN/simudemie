@@ -7,15 +7,18 @@ package ca.ulaval.glo2004.afficheur.onglets;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
+import ca.ulaval.glo2004.afficheur.objetsUI.ObjetCarte;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetScenario;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 import ca.ulaval.glo2004.domaine.Scenario;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireMaladie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.Color;
+import java.awt.Dimension;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -23,9 +26,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class OngletScenario extends OngletUI {
 
+    private boolean cardLocked;
+    
     public OngletScenario() {
         initComponents();
         
+        cardLocked = false;
         try {
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             ScenariosLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
@@ -36,6 +42,7 @@ public class OngletScenario extends OngletUI {
             
             // TODO
             scenarioStatsPanel1.setOnglet(this);
+            creationScenarioPanel1.setVisible(false);
         } catch (Exception e) {
         }
         
@@ -52,19 +59,20 @@ public class OngletScenario extends OngletUI {
     
     @Override
     public void ajouterObjetUI() {
-        super.ajouterObjetUI();
-        ObjetScenario card = new ObjetScenario(this);
-        card.setSimulationName("Simulation: " + objets.size());
-        objets.add(card);
-        if (objets.size() == 1) {
+        if(!cardLocked) {
+            super.ajouterObjetUI();
+            cardLocked = true;
+            ObjetScenario card = new ObjetScenario(this);
+            card.setSimulationName("Simulation: " + objets.size());
+            objets.add(card);
             onClickObjetUI(card);
+            ProjectPanelContainer.add(card);
+            updateUI();
+
+            // TODO: Afficher panneau information pour créer scénario
+            Object[] args = {"Simulation: " + objets.size()};
+            GestionnaireScenario.getInstance().creer(args);
         }
-        ProjectPanelContainer.add(card);
-        updateUI();
-        
-        // TODO: Afficher panneau information pour créer scénario
-        Object[] args = {"Simulation: " + objets.size()};
-        GestionnaireScenario.getInstance().creer(args);
     }
 
     private void ajouterCard(Scenario scenario) {
@@ -96,9 +104,12 @@ public class OngletScenario extends OngletUI {
             if(result == JOptionPane.YES_OPTION && objets.size() > 0) {
                 ProjectPanelContainer.remove(courant);
                 updateUI();
-
+                setCreating(false);
+                
                 super.retirerCourant();
             }
+            
+            cardLocked = false;
         }
     }
 
@@ -126,11 +137,23 @@ public class OngletScenario extends OngletUI {
             optionPane.getInitialValue());
         
         if (result == JOptionPane.YES_OPTION) {
+            setCreating(false);
+            //GestionnaireScenario.getInstance().creer();
+            
             FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
             frame.startSimulation(getIndexCourant());
         }
     }
 
+    private boolean contientMaladieEtCarte() {
+        return GestionnaireMaladie.getInstance().getList().size() > 0 &&
+                GestionnaireCarte.getInstance().getList().size() > 0;
+    }
+    
+    private void loadCartes() {
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -151,7 +174,9 @@ public class OngletScenario extends OngletUI {
         Sce_Informations = new javax.swing.JPanel();
         Sce_InformationsLabel = new javax.swing.JLabel();
         Layout = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        jPanel1 = new javax.swing.JPanel();
         scenarioMapPanel2 = new ca.ulaval.glo2004.afficheur.panels.CarteScenarioPanel();
+        creationScenarioPanel1 = new ca.ulaval.glo2004.afficheur.panels.CreationScenarioPanel();
         scenarioStatsPanel1 = new ca.ulaval.glo2004.afficheur.panels.StatsScenarioPanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
@@ -223,7 +248,7 @@ public class OngletScenario extends OngletUI {
                 .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 539, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 996, Short.MAX_VALUE)
                 .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         ScenariosTitleLayout.setVerticalGroup(
@@ -270,7 +295,29 @@ public class OngletScenario extends OngletUI {
         Layout.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
         Layout.setOpaque(false);
         Layout.setLayout(new java.awt.GridLayout(1, 2, 25, 0));
-        Layout.add(scenarioMapPanel2);
+
+        jPanel1.setOpaque(false);
+        jPanel1.setPreferredSize(new java.awt.Dimension(207, 58));
+
+        creationScenarioPanel1.setMinimumSize(new java.awt.Dimension(207, 58));
+        creationScenarioPanel1.setPreferredSize(new java.awt.Dimension(207, 58));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(creationScenarioPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(scenarioMapPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(creationScenarioPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(scenarioMapPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
+        );
+
+        Layout.add(jPanel1);
         Layout.add(scenarioStatsPanel1);
 
         Sce_Informations.add(Layout, java.awt.BorderLayout.CENTER);
@@ -279,7 +326,14 @@ public class OngletScenario extends OngletUI {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseReleased
-        this.ajouterObjetUI();
+        if(contientMaladieEtCarte()) {
+            setCreating(true);
+            loadCartes();
+            this.ajouterObjetUI();
+        } else {
+            JOptionPane.showMessageDialog(this, "Vous devez avoir au moins une maladie et une carte dans votre répertoire.",
+                    "", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_AddScenarioButtonMouseReleased
 
     private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
@@ -292,13 +346,29 @@ public class OngletScenario extends OngletUI {
     }//GEN-LAST:event_ImportScenarioButtonMouseReleased
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
-        int result = fileChooser.showOpenDialog(null);
-        if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
-            GestionnaireScenario.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
-            fileChooser.setSelectedFile(null);
+        if(getCourant() != null) {
+            int result = fileChooser.showOpenDialog(null);
+            if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
+                GestionnaireScenario.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
+                fileChooser.setSelectedFile(null);
+            }
         }
     }//GEN-LAST:event_BoutonExportMouseReleased
 
+    private void setCreating(boolean creating) {
+        if(creating) {
+            Sce_InformationsLabel.setText("Choisir une carte et une maladie");
+            scenarioStatsPanel1.getResumeButton().setText("Commencer");
+            creationScenarioPanel1.setVisible(true);
+            scenarioMapPanel2.setVisible(false);
+        } else {
+            cardLocked = false;
+            Sce_InformationsLabel.setText("Informations");
+            scenarioStatsPanel1.getResumeButton().setText("Résumer");
+            creationScenarioPanel1.setVisible(false);
+            scenarioMapPanel2.setVisible(true);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddScenarioButton;
@@ -312,6 +382,8 @@ public class OngletScenario extends OngletUI {
     private javax.swing.JLabel ScenariosLabel;
     private javax.swing.JScrollPane ScenariosScrollPane;
     private javax.swing.JPanel ScenariosTitle;
+    private ca.ulaval.glo2004.afficheur.panels.CreationScenarioPanel creationScenarioPanel1;
+    private javax.swing.JPanel jPanel1;
     private ca.ulaval.glo2004.afficheur.panels.CarteScenarioPanel scenarioMapPanel2;
     private ca.ulaval.glo2004.afficheur.panels.StatsScenarioPanel scenarioStatsPanel1;
     // End of variables declaration//GEN-END:variables

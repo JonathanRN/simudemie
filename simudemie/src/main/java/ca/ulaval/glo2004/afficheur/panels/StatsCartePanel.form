@@ -91,6 +91,7 @@
               <Image iconType="3" name="/icons/icons8_pencil_20px.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Modifier"/>
+            <Property name="toolTipText" type="java.lang.String" value="Modifier la carte courante"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>

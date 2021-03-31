@@ -58,7 +58,7 @@ public class CarteScenarioPanel extends PanelArrondi {
         MapPanelHeader.add(MapNameLabel, java.awt.BorderLayout.CENTER);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
-        jLabel2.setToolTipText("Exporter la carte du scénario");
+        jLabel2.setToolTipText("Exporter la carte en format JPEG");
         MapPanelHeader.add(jLabel2, java.awt.BorderLayout.EAST);
 
         add(MapPanelHeader, java.awt.BorderLayout.NORTH);

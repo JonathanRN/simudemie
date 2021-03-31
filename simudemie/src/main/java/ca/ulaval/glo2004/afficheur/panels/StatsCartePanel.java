@@ -72,6 +72,7 @@ public class StatsCartePanel extends javax.swing.JPanel {
 
         ModifyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_pencil_20px.png"))); // NOI18N
         ModifyButton.setText("Modifier");
+        ModifyButton.setToolTipText("Modifier la carte courante");
         ModifyButton.setFocusable(false);
         ModifyButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {

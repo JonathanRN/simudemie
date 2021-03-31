@@ -157,6 +157,7 @@ public class OngletCarte extends OngletUI {
 
         AddMapButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddMapButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_plus_math_20px.png"))); // NOI18N
+        AddMapButton.setToolTipText("Créer une nouvelle carte");
         AddMapButton.setFocusable(false);
         AddMapButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         AddMapButton.setMaximumSize(new java.awt.Dimension(75, 30));
@@ -170,6 +171,7 @@ public class OngletCarte extends OngletUI {
 
         DeleteMapButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         DeleteMapButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_trash_can_20px.png"))); // NOI18N
+        DeleteMapButton.setToolTipText("Supprimer la carte courante");
         DeleteMapButton.setFocusable(false);
         DeleteMapButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         DeleteMapButton.setMaximumSize(new java.awt.Dimension(75, 30));
@@ -183,6 +185,7 @@ public class OngletCarte extends OngletUI {
 
         ImportMapButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         ImportMapButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_installing_updates_20px.png"))); // NOI18N
+        ImportMapButton.setToolTipText("Importer une carte existante");
         ImportMapButton.setFocusable(false);
         ImportMapButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ImportMapButton.setMaximumSize(new java.awt.Dimension(75, 30));
@@ -196,6 +199,7 @@ public class OngletCarte extends OngletUI {
 
         BoutonExport.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         BoutonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
+        BoutonExport.setToolTipText("Exporter la carte courante");
         BoutonExport.setFocusable(false);
         BoutonExport.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         BoutonExport.setMaximumSize(new java.awt.Dimension(75, 30));
@@ -277,7 +281,7 @@ public class OngletCarte extends OngletUI {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ImportMapButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportMapButtonMouseReleased
-        int result = fileChooser.showOpenDialog(null);
+        int result = fileChooser.showDialog(null, "Importer");
         if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
             try {
                 Carte carte = GestionnaireCarte.getInstance().importer(fileChooser.getSelectedFile().toString());
@@ -291,7 +295,7 @@ public class OngletCarte extends OngletUI {
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
         if(getCourant() != null) {
-            int result = fileChooser.showOpenDialog(null);
+            int result = fileChooser.showDialog(null, "Exporter");
             if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
                 try {
                     GestionnaireCarte.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());

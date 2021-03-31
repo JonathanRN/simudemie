@@ -115,7 +115,7 @@
         <Component class="javax.swing.JButton" name="DeleteButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Supprimer"/>
-            <Property name="toolTipText" type="java.lang.String" value="Supprimer la maladie"/>
+            <Property name="toolTipText" type="java.lang.String" value="Supprimer la maladie "/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[75, 22]"/>

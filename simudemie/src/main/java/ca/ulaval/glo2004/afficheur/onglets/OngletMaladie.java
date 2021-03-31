@@ -160,6 +160,7 @@ public class OngletMaladie extends OngletUI {
 
         AddScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         AddScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_plus_math_20px.png"))); // NOI18N
+        AddScenarioButton.setToolTipText("Créer une nouvelle maladie");
         AddScenarioButton.setFocusable(false);
         AddScenarioButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         AddScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
@@ -176,6 +177,7 @@ public class OngletMaladie extends OngletUI {
 
         ImportScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         ImportScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_installing_updates_20px.png"))); // NOI18N
+        ImportScenarioButton.setToolTipText("Importer une maladie existante");
         ImportScenarioButton.setFocusable(false);
         ImportScenarioButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ImportScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
@@ -189,6 +191,7 @@ public class OngletMaladie extends OngletUI {
 
         BoutonExport.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         BoutonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
+        BoutonExport.setToolTipText("Exporter la maladie courante");
         BoutonExport.setFocusable(false);
         BoutonExport.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         BoutonExport.setMaximumSize(new java.awt.Dimension(75, 30));
@@ -269,7 +272,7 @@ public class OngletMaladie extends OngletUI {
     }//GEN-LAST:event_AddScenarioButtonMouseClicked
 
     private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
-        int result = fileChooser.showOpenDialog(null);
+        int result = fileChooser.showDialog(null, "Importer");
         if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
             try {
                 Maladie maladie = controller.importer(fileChooser.getSelectedFile().toString());
@@ -283,7 +286,7 @@ public class OngletMaladie extends OngletUI {
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
         if(getCourant() != null) {
-            int result = fileChooser.showOpenDialog(null);
+            int result = fileChooser.showDialog(null, "Exporter");
             if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
                 try {
                 controller.exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());

@@ -210,7 +210,7 @@ public class OngletScenario extends OngletUI {
 
         ImportScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         ImportScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_installing_updates_20px.png"))); // NOI18N
-        ImportScenarioButton.setToolTipText("Importer un scénario");
+        ImportScenarioButton.setToolTipText("Importer un scénario existant");
         ImportScenarioButton.setFocusable(false);
         ImportScenarioButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ImportScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
@@ -224,6 +224,7 @@ public class OngletScenario extends OngletUI {
 
         BoutonExport.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         BoutonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
+        BoutonExport.setToolTipText("Exporter le scénario courant");
         BoutonExport.setFocusable(false);
         BoutonExport.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         BoutonExport.setMaximumSize(new java.awt.Dimension(75, 30));
@@ -237,6 +238,7 @@ public class OngletScenario extends OngletUI {
 
         BoutonDelete.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         BoutonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_trash_can_20px.png"))); // NOI18N
+        BoutonDelete.setToolTipText("Supprimer le scénario courant");
         BoutonDelete.setFocusable(false);
         BoutonDelete.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         BoutonDelete.setMaximumSize(new java.awt.Dimension(75, 30));
@@ -351,7 +353,7 @@ public class OngletScenario extends OngletUI {
     }//GEN-LAST:event_AddScenarioButtonMouseReleased
 
     private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
-        int result = fileChooser.showOpenDialog(null);
+        int result = fileChooser.showDialog(null, "Importer");
         if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
             try {
                 Scenario scenario = GestionnaireScenario.getInstance().importer(fileChooser.getSelectedFile().toString());
@@ -369,7 +371,7 @@ public class OngletScenario extends OngletUI {
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
         if(getCourant() != null) {
-            int result = fileChooser.showOpenDialog(null);
+            int result = fileChooser.showDialog(null, "Exporter");
             if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
                 try {
                     GestionnaireScenario.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
@@ -385,12 +387,14 @@ public class OngletScenario extends OngletUI {
         if(creating) {
             Sce_InformationsLabel.setText("Choisir une carte et une maladie");
             scenarioStatsPanel1.getResumeButton().setText("Commencer");
+            scenarioStatsPanel1.getResumeButton().setToolTipText("Commencer le scénario");
             creationScenarioPanel1.setVisible(true);
             scenarioMapPanel2.setVisible(false);
         } else {
             cardLocked = false;
             Sce_InformationsLabel.setText("Informations");
             scenarioStatsPanel1.getResumeButton().setText("Résumer");
+            scenarioStatsPanel1.getResumeButton().setToolTipText("Résumer le scénario");
             creationScenarioPanel1.setVisible(false);
             scenarioMapPanel2.setVisible(true);
         }

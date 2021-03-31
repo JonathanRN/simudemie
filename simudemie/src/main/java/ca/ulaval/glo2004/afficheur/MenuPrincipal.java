@@ -48,7 +48,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         });
 
         OngletTitre.setFocusable(false);
-        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_home_40px_1.png")), OngletTitre); // NOI18N
+        TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_home_40px_1.png")), OngletTitre, "Accueil"); // NOI18N
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_play_40px.png")), OngletScenario, "Scénarios"); // NOI18N
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_country_40px.png")), OngletCarte, "Cartes Mondiales"); // NOI18N
         TabMenu.addTab("", new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_microorganisms_40px.png")), OngletMaladie, "Maladies"); // NOI18N

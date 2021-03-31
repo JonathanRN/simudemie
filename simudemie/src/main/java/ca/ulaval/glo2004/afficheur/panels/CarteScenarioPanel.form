@@ -53,7 +53,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icons/icons8_upload_20px.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Exporter la carte du sc&#xe9;nario"/>
+            <Property name="toolTipText" type="java.lang.String" value="Exporter la carte en format JPEG"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

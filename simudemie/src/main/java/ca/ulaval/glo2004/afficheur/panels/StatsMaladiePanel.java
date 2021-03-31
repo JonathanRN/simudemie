@@ -220,7 +220,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         Buttons.setLayout(new java.awt.GridLayout(2, 1, 0, 25));
 
         DeleteButton.setText("Supprimer");
-        DeleteButton.setToolTipText("Supprimer la maladie");
+        DeleteButton.setToolTipText("Supprimer la maladie ");
         DeleteButton.setFocusable(false);
         DeleteButton.setMaximumSize(new java.awt.Dimension(75, 22));
         DeleteButton.setMinimumSize(new java.awt.Dimension(75, 22));

@@ -6,9 +6,6 @@
 package ca.ulaval.glo2004.afficheur.onglets;
 
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
-import java.io.File;
-import java.io.FileFilter;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;

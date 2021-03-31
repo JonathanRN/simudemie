@@ -9,10 +9,7 @@ import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.onglets.OngletMaladie;
 
 
-public class ObjetMaladie extends ObjetUI {    
-    private double infectedRate;
-    private double curedRate;
-    private double deadRate;
+public class ObjetMaladie extends ObjetUI {
     
     public ObjetMaladie(OngletMaladie tab) {
         super(tab);
@@ -22,7 +19,6 @@ public class ObjetMaladie extends ObjetUI {
         setInfectedProgressBar(0.0d);
         setCuredProgressBar(0.0d);
         setDeadProgressBar(0.0d);
-        
     }
     
     public void setNom(String nom) {
@@ -34,30 +30,27 @@ public class ObjetMaladie extends ObjetUI {
     }
     
     public void setInfectedProgressBar(double value) {
-        infectedRate = value;
         InfectedProgressBar.setValue(Math.round((float) value));
     }
     
     public void setCuredProgressBar(double value) {
-        curedRate = value;
         CuredProgressBar.setValue(Math.round((float) value));
     }
     
     public void setDeadProgressBar(double value) {
-        deadRate = value;
         DeadProgressBar.setValue(Math.round((float) value));
     }
     
     public double getInfectionRate() {
-        return infectedRate;
+        return InfectedProgressBar.getValue();
     }
     
     public double getCuredRate() {
-        return curedRate;
+        return CuredProgressBar.getValue();
     }
     
     public double getDeadRate() {
-        return deadRate;
+        return DeadProgressBar.getValue();
     }
     
     /**

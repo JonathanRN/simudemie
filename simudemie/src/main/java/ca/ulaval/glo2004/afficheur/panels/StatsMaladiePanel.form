@@ -59,7 +59,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nom de la maladie"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AccessibilityProperties>
                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
@@ -96,51 +95,6 @@
             <Property name="verticalGap" type="int" value="5"/>
           </Layout>
         </Container>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JPanel" name="Buttons">
-      <Properties>
-        <Property name="opaque" type="boolean" value="false"/>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[691, 431]"/>
-        </Property>
-      </Properties>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-        <Property name="columns" type="int" value="1"/>
-        <Property name="rows" type="int" value="2"/>
-        <Property name="verticalGap" type="int" value="25"/>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JButton" name="DeleteButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Supprimer"/>
-            <Property name="toolTipText" type="java.lang.String" value="Supprimer la maladie "/>
-            <Property name="focusable" type="boolean" value="false"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[75, 22]"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[75, 22]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[75, 22]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DeleteButtonMouseReleased"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="ModifyButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Modifier"/>
-            <Property name="toolTipText" type="java.lang.String" value="Modifier la maladie"/>
-            <Property name="focusable" type="boolean" value="false"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ModifyButtonMouseReleased"/>
-          </Events>
-        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

@@ -21,20 +21,18 @@ import javax.swing.JOptionPane;
 public class OngletMaladie extends OngletUI {
     
     private final GestionnaireMaladie controller;
-    // Si à true, on ne peut pas sélectionner d'autre cartes maladie
-    private boolean cardLocked;
     
     public OngletMaladie() {
         initComponents();
         
-        cardLocked = false;
         controller = GestionnaireMaladie.getInstance();
         try {        
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             MaladieLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             Mal_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
-            AddScenarioButton.setBackground(new Color(216, 222, 233, 38));
-            ImportScenarioButton.setBackground(new Color(216, 222, 233, 38));
+            AddMaladieButton.setBackground(new Color(163,190,140));
+            DeleteMaladieButton.setBackground(new Color(191, 97, 106));
+            ImportMaladieButton.setBackground(new Color(216, 222, 233, 38));
             BoutonExport.setBackground(new Color(216, 222, 233, 38));
         } catch (Exception e) {
         }
@@ -50,21 +48,20 @@ public class OngletMaladie extends OngletUI {
     
     @Override
     public void ajouterObjetUI() {
-        if (!cardLocked) {
-            super.ajouterObjetUI();
-            ObjetMaladie card = new ObjetMaladie(this);
-            card.setNom("Maladie: " + objets.size());
-            objets.add(card);
-            onClickObjetUI(card);
-            MaladiesContainer.add(card);
+        super.ajouterObjetUI();        
+        ObjetMaladie card = new ObjetMaladie(this);
+        
+        // todo: faire un popup qui demande d'entrer un nom
+        card.setNom("Maladie: " + objets.size());
+        objets.add(card);
+        
+        Object[] args = { objets.size() - 1, card.getNom(), 0.0, 0.0, 0.0 };
+        controller.creer(args);
+        
+        onClickObjetUI(card);
+        MaladiesContainer.add(card);
 
-            Object[] args = { getIndexCourant(), card.getNom(), 0.0, 0.0, 0.0 };
-            controller.creer(args);
-            
-            // On débloque les champs pour modification de la nouvelle maladie
-            statsMaladiePanel1.setModifying(true);
-            updateUI();
-        }
+        updateUI();
     }
 
     private void ajouterCard(Maladie maladie) {
@@ -75,6 +72,7 @@ public class OngletMaladie extends OngletUI {
         card.setDeadProgressBar(maladie.getTauxMortalite());
         objets.add(card);
         MaladiesContainer.add(card);
+        onClickObjetUI(card);
         
         updateUI();
     }
@@ -85,16 +83,11 @@ public class OngletMaladie extends OngletUI {
             int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer cette maladie?", "", JOptionPane.WARNING_MESSAGE);
             
             if(result == JOptionPane.YES_OPTION) {
-                if(!cardLocked) {
-                    controller.supprimer(getIndexCourant());
-                }
+                controller.supprimer(getIndexCourant());
 
                 MaladiesContainer.remove(courant);
                 objets.remove(courant);
-                setCardLocked(false);
-                statsMaladiePanel1.setModifying(false);
                 updateUI();
-
 
                 super.retirerCourant();
             }
@@ -107,15 +100,13 @@ public class OngletMaladie extends OngletUI {
 
     @Override
     public void onClickObjetUI(ObjetUI objet) {
-        if(!cardLocked) {
-            super.onClickObjetUI(objet);
-            ObjetMaladie objetMaladie = (ObjetMaladie)courant;
-            statsMaladiePanel1.setNomMaladie(objetMaladie.getNom());
-            statsMaladiePanel1.setInfectionInput(objetMaladie.getInfectionRate());
-            statsMaladiePanel1.setCuredInput(objetMaladie.getCuredRate());
-            statsMaladiePanel1.setDeadInput(objetMaladie.getDeadRate());
-            statsMaladiePanel1.showFields(true);
-        }
+        super.onClickObjetUI(objet);
+        Maladie maladie = new Maladie(controller.getElement(getIndexCourant()));
+        statsMaladiePanel1.setDeadInput(maladie.getTauxMortalite());
+        statsMaladiePanel1.setNomMaladie(maladie.getNom());
+        statsMaladiePanel1.setInfectionInput(maladie.getTauxInfection());
+        statsMaladiePanel1.setCuredInput(maladie.getTauxGuerison());
+        statsMaladiePanel1.showFields(true);
     }
 
     /**
@@ -130,8 +121,9 @@ public class OngletMaladie extends OngletUI {
         Maladies = new javax.swing.JPanel();
         MaladieTitle = new javax.swing.JPanel();
         MaladieLabel = new javax.swing.JLabel();
-        AddScenarioButton = new javax.swing.JButton();
-        ImportScenarioButton = new javax.swing.JButton();
+        AddMaladieButton = new javax.swing.JButton();
+        DeleteMaladieButton = new javax.swing.JButton();
+        ImportMaladieButton = new javax.swing.JButton();
         BoutonExport = new javax.swing.JButton();
         ScenariosScrollPane = new javax.swing.JScrollPane();
         MaladiesContainer = new javax.swing.JPanel();
@@ -158,34 +150,42 @@ public class OngletMaladie extends OngletUI {
         MaladieLabel.setText("Maladies");
         MaladieLabel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        AddScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        AddScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_plus_math_20px.png"))); // NOI18N
-        AddScenarioButton.setToolTipText("Créer une nouvelle maladie");
-        AddScenarioButton.setFocusable(false);
-        AddScenarioButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        AddScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
-        AddScenarioButton.setMinimumSize(new java.awt.Dimension(75, 30));
-        AddScenarioButton.setPreferredSize(new java.awt.Dimension(100, 36));
-        AddScenarioButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AddScenarioButtonMouseClicked(evt);
-            }
+        AddMaladieButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        AddMaladieButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_plus_math_20px.png"))); // NOI18N
+        AddMaladieButton.setFocusable(false);
+        AddMaladieButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AddMaladieButton.setMaximumSize(new java.awt.Dimension(75, 30));
+        AddMaladieButton.setMinimumSize(new java.awt.Dimension(75, 30));
+        AddMaladieButton.setPreferredSize(new java.awt.Dimension(100, 36));
+        AddMaladieButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                AddScenarioButtonMouseReleased(evt);
+                AddMaladieButtonMouseReleased(evt);
             }
         });
 
-        ImportScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        ImportScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_installing_updates_20px.png"))); // NOI18N
-        ImportScenarioButton.setToolTipText("Importer une maladie existante");
-        ImportScenarioButton.setFocusable(false);
-        ImportScenarioButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        ImportScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
-        ImportScenarioButton.setMinimumSize(new java.awt.Dimension(75, 30));
-        ImportScenarioButton.setPreferredSize(new java.awt.Dimension(100, 36));
-        ImportScenarioButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        DeleteMaladieButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        DeleteMaladieButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_trash_can_20px.png"))); // NOI18N
+        DeleteMaladieButton.setFocusable(false);
+        DeleteMaladieButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        DeleteMaladieButton.setMaximumSize(new java.awt.Dimension(75, 30));
+        DeleteMaladieButton.setMinimumSize(new java.awt.Dimension(75, 30));
+        DeleteMaladieButton.setPreferredSize(new java.awt.Dimension(100, 36));
+        DeleteMaladieButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                ImportScenarioButtonMouseReleased(evt);
+                DeleteMaladieButtonMouseReleased(evt);
+            }
+        });
+
+        ImportMaladieButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        ImportMaladieButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_installing_updates_20px.png"))); // NOI18N
+        ImportMaladieButton.setFocusable(false);
+        ImportMaladieButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ImportMaladieButton.setMaximumSize(new java.awt.Dimension(75, 30));
+        ImportMaladieButton.setMinimumSize(new java.awt.Dimension(75, 30));
+        ImportMaladieButton.setPreferredSize(new java.awt.Dimension(100, 36));
+        ImportMaladieButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ImportMaladieButtonMouseReleased(evt);
             }
         });
 
@@ -210,10 +210,12 @@ public class OngletMaladie extends OngletUI {
             .addGroup(MaladieTitleLayout.createSequentialGroup()
                 .addComponent(MaladieLabel)
                 .addGap(101, 101, 101)
-                .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AddMaladieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 973, Short.MAX_VALUE)
+                .addComponent(DeleteMaladieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 892, Short.MAX_VALUE)
+                .addComponent(ImportMaladieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         MaladieTitleLayout.setVerticalGroup(
@@ -224,8 +226,9 @@ public class OngletMaladie extends OngletUI {
                         .addGap(1, 1, 1)
                         .addComponent(MaladieLabel))
                     .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ImportMaladieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddMaladieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DeleteMaladieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
 
@@ -271,7 +274,7 @@ public class OngletMaladie extends OngletUI {
   
     }//GEN-LAST:event_AddScenarioButtonMouseClicked
 
-    private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
+    private void ImportMaladieButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
         int result = fileChooser.showDialog(null, "Importer");
         if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
             try {
@@ -282,10 +285,10 @@ public class OngletMaladie extends OngletUI {
             }
             fileChooser.setSelectedFile(null);
         }
-    }//GEN-LAST:event_ImportScenarioButtonMouseReleased
+    }//GEN-LAST:event_ImportMaladieButtonMouseReleased
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
-        if(getCourant() != null) {
+        if (getCourant() != null) {
             int result = fileChooser.showDialog(null, "Exporter");
             if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
                 try {
@@ -298,26 +301,23 @@ public class OngletMaladie extends OngletUI {
         }
     }//GEN-LAST:event_BoutonExportMouseReleased
 
-    private void AddScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseReleased
-             this.ajouterObjetUI();
-    }//GEN-LAST:event_AddScenarioButtonMouseReleased
+    private void AddMaladieButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddMaladieButtonMouseReleased
+        this.ajouterObjetUI();
+    }//GEN-LAST:event_AddMaladieButtonMouseReleased
 
-    public boolean getCardLocked() {
-        return cardLocked;
-    }
-    
-    public void setCardLocked(boolean cardLocked) {
-        this.cardLocked = cardLocked;
-    }
+    private void DeleteMaladieButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteMaladieButtonMouseReleased
+        retirerCourant();
+    }//GEN-LAST:event_DeleteMaladieButtonMouseReleased
     
     public GestionnaireMaladie getController() {
         return controller;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddScenarioButton;
+    private javax.swing.JButton AddMaladieButton;
     private javax.swing.JButton BoutonExport;
-    private javax.swing.JButton ImportScenarioButton;
+    private javax.swing.JButton DeleteMaladieButton;
+    private javax.swing.JButton ImportMaladieButton;
     private ca.ulaval.glo2004.afficheur.PanelArrondi Layout;
     private javax.swing.JPanel Mal_Informations;
     private javax.swing.JLabel Mal_InformationsLabel;

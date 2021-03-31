@@ -35,7 +35,7 @@ public class Pays implements Serializable {
         }
     }
     
-    public void avancerJournee(double tauxInf, double tauxMortalite, double tauxGuerison)
+    public void avancerJournee(double tauxInf, double tauxMortalite, double tauxGuerison, int cptJours)
     {
         tauxInf /= 100d;
         tauxMortalite /= 100d;
@@ -48,9 +48,9 @@ public class Pays implements Serializable {
             {
                 tauxInfAjuste = tauxInfAjuste * (m.getTauxAdhesion() * m.getTauxReductionProp());
             }
-            region.contaminer(tauxInfAjuste);
-            region.guerirPop(tauxGuerison);
-            region.eliminerPopulation(tauxMortalite);
+            region.contaminer(tauxInfAjuste, cptJours);
+            region.guerirPop(tauxGuerison, cptJours);
+            region.eliminerPopulation(tauxMortalite, cptJours);
         }
     }
     

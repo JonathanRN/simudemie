@@ -65,7 +65,7 @@ public class Scenario implements Serializable {
         cartes.add(new Carte(getCarteJourCourant()));
         
         indexCourant++;
-        getCarteJourCourant().avancerJour();
+        getCarteJourCourant().avancerJour(indexCourant);
         
         return indexCourant;
     }

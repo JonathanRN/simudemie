@@ -16,6 +16,7 @@ public class Carte implements Serializable {
     private final ArrayList<Pays> listePays = new ArrayList<>();
     private final ArrayList<VoieLiaison> frontieres = new ArrayList<>();
     private Maladie maladie;
+
     
     public Carte(String nom) {
         this.nom = nom;
@@ -33,12 +34,15 @@ public class Carte implements Serializable {
         this.frontieres.clear();
         for (VoieLiaison voie : carteJourCourant.frontieres) {
             this.frontieres.add(new VoieLiaison(voie));
+            
+
         }
     }
     
-    public void avancerJour() {
+    public void avancerJour(int cptJours) {
+
         for (Pays pays : listePays){
-            pays.avancerJournee(maladie.getTauxInfection(), maladie.getTauxMortalite(), maladie.getTauxGuerison());
+            pays.avancerJournee(maladie.getTauxInfection(), maladie.getTauxMortalite(), maladie.getTauxGuerison(), cptJours);
         }
         contaminerInterPays();
     }
@@ -176,6 +180,7 @@ public class Carte implements Serializable {
     }
     
     public String getNom(){return nom;}
+
     
     public ArrayList<Pays> getListePays(){return listePays;}
     

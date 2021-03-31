@@ -42,25 +42,29 @@ public class Region implements Serializable {
 //        //TODO Déplacement des populations entre les régions
 //    }
     
-    public void contaminer(double taux)
+    public void contaminer(double taux, int cptJours)
     {
         int nouveauxInfectes = contaminationBinomiale(taux);
         setPopInfectee(this.getPopInfectee() + nouveauxInfectes);
         setPopSaine(this.getPopSaine() - nouveauxInfectes);
     }
     
-    public void eliminerPopulation(double taux)
+    public void eliminerPopulation(double taux, int cptJours)
     {
-//        int deces = (int)(this.getPopInfectee() * taux);
-//        setPopDecedee(this.getPopDecedee() + deces);
-//        setPopInfectee(this.getPopInfectee() - deces);
+        if (cptJours > 14){
+            int deces = (int)(this.getPopInfectee()/cptJours * taux);
+            setPopDecedee(this.getPopDecedee() + deces);
+            setPopInfectee(this.getPopInfectee() - deces);
+        }
     }
     
-    public void guerirPop(double taux)
+    public void guerirPop(double taux, int cptJours)
     {
-//            int gueris = (int)(this.getPopInfectee() * taux);
-//            setPopSaine(this.getPopSaine() + gueris);
-//            setPopInfectee(this.getPopInfectee() - gueris);   
+        if (cptJours > 14){
+            int gueris = (int)(this.getPopInfectee()/cptJours * taux);
+            setPopSaine(this.getPopSaine() + gueris);
+            setPopInfectee(this.getPopInfectee() - gueris);   
+        }
     }
     
     public String getNom(){return nom;}

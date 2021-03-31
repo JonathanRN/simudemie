@@ -31,7 +31,7 @@ public class PanelArrondi extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         if (this.isOpaque()) {
-            Dimension arcs = new Dimension(15,15); //Border corners arcs {width,height}, change this to whatever you want
+            Dimension arcs = new Dimension(20,20); //Border corners arcs {width,height}, change this to whatever you want
             int width = getWidth();
             int height = getHeight();
             Graphics2D graphics = (Graphics2D) g;

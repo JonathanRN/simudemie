@@ -8,7 +8,6 @@ package ca.ulaval.glo2004.afficheur.panels;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
 import java.awt.Color;
-import java.awt.Graphics;
 import javax.swing.JButton;
 
 /**

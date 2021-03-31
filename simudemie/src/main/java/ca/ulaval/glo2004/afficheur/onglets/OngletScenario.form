@@ -75,11 +75,11 @@
                       <Component id="AddScenarioButton" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="BoutonDelete" min="-2" pref="75" max="-2" attributes="0"/>
-                      <EmptySpace pref="452" max="32767" attributes="0"/>
+                      <EmptySpace pref="729" max="32767" attributes="0"/>
                       <Component id="ImportScenarioButton" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="BoutonExport" min="-2" pref="75" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

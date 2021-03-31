@@ -35,8 +35,8 @@ public class OngletScenario extends OngletUI {
             ScenariosLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             Sce_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             AddScenarioButton.setBackground(new Color(163,190,140));
-            ImportScenarioButton.setBackground(new Color(216, 222, 233, 38));
             BoutonDelete.setBackground(new Color(191, 97, 106));
+            ImportScenarioButton.setBackground(new Color(216, 222, 233, 38));
             BoutonExport.setBackground(new Color(216, 222, 233, 38));
             
             scenarioStatsPanel1.setOnglet(this);
@@ -258,11 +258,11 @@ public class OngletScenario extends OngletUI {
                 .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BoutonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 452, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 729, Short.MAX_VALUE)
                 .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
         ScenariosTitleLayout.setVerticalGroup(
             ScenariosTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -52,11 +52,10 @@ public class SimulationAfficheur extends Mode {
         polygones = carte.getPolygonesRegions();
         
         for (Polygon p : afficherInfosPays ? carte.getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
-            g.setColor(couleurFill);
+            g.setColor(this.getCouleurPolygone(p, new Color(191, 97, 106)));
             g.fillPolygon(p);
             this.paintLignes(g, Color.black, p);
         }
-
 
         super.paint(g);
         updateHighlight(souris);
@@ -211,5 +210,31 @@ public class SimulationAfficheur extends Mode {
         
         g.drawString(texte, x, offsetY);
         g.drawLine((int)x, (int)(offsetY + 5 / zoomFactor), width + (int)x, (int)(offsetY + 5 / zoomFactor));
+    }
+    
+    private Color getCouleurPolygone(Polygon p, Color color) {
+        Pays pays = carte.getPays(p);
+        float pourcent = 1;
+        
+        if (afficherInfosPays) {
+            pourcent = pays.getPourcentageInfectee() / 100f;
+        }
+        else {
+            Region region = pays.getRegion(p);
+            pourcent = region.getPourcentageInfectee() / 100f;
+        }
+        
+        Color c1 = couleurFill;
+        Color c2 = color;
+        return new Color(
+            interpoler(c1.getRed(), c2.getRed(), pourcent) / 255,
+            interpoler(c1.getGreen(), c2.getGreen(), pourcent) / 255,
+            interpoler(c1.getBlue(), c2.getBlue(), pourcent) / 255
+        );
+    }
+    
+    private float interpoler(float v1, float v2, float p)
+    {
+        return (v2 - v1) * p + v1;
     }
 }

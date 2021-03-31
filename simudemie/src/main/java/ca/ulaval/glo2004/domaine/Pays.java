@@ -46,7 +46,7 @@ public class Pays implements Serializable {
         {
             for (Mesure m : mesures)
             {
-                tauxInfAjuste = tauxInfAjuste * (m.getTauxAdhesion() + m.getTauxReductionProp());
+                tauxInfAjuste = tauxInfAjuste * (m.getTauxAdhesion() * m.getTauxReductionProp());
             }
             region.contaminer(tauxInfAjuste);
             region.guerirPop(tauxGuerison);

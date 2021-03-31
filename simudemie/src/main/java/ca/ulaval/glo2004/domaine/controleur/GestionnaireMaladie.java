@@ -31,12 +31,13 @@ public class GestionnaireMaladie extends GestionnaireOnglet<Maladie> {
     
     @Override
     public Maladie creer(Object... arguments) {
-        String nom = (String) arguments[0];
-        double tauxInf = (double) arguments[1];
-        double tauxDead = (double) arguments[2];
-        double tauxGue = (double) arguments[3];
+        int index = (int) arguments[0];
+        String nom = (String) arguments[1];
+        double tauxInf = (double) arguments[2];
+        double tauxDead = (double) arguments[3];
+        double tauxGue = (double) arguments[4];
         
-        Maladie maladie = getElement(nom);
+        Maladie maladie = getElement(index);
         
         if(maladie == null) {
             maladie = new Maladie(nom, tauxInf, tauxDead, tauxGue);
@@ -49,16 +50,6 @@ public class GestionnaireMaladie extends GestionnaireOnglet<Maladie> {
             sauvegarder();
         }
         
-        return maladie;
-    }
-    
-    public Maladie getElement(String nom) {
-        Maladie maladie = null;
-        for(Maladie m : getList()) {
-            if(m.getNom().equals(nom)) {
-                maladie = m;
-            }
-        }
         return maladie;
     }
 }

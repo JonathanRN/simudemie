@@ -24,10 +24,9 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         try {
             StatsLabel.setFont(FontRegister.RobotoThin.deriveFont(21f));
             Main.setBackground(new Color(216, 222, 233, 38));
-            DeleteButton.setBackground(new Color(216, 222, 233, 38));
-            DeleteButton.setFont(FontRegister.RobotoLight.deriveFont(15f));
+            
             ResumeButton.setBackground(new Color(216, 222, 233, 38));
-            ResumeButton.setFont(FontRegister.RobotoLight.deriveFont(15f));
+            ResumeButton.setFont(FontRegister.RobotoRegular.deriveFont(15f));
         }
         catch(Exception e) {
         }
@@ -55,7 +54,6 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         StatsLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         Buttons = new javax.swing.JPanel();
-        DeleteButton = new javax.swing.JButton();
         ResumeButton = new javax.swing.JButton();
 
         setOpaque(false);
@@ -83,16 +81,7 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         Buttons.setPreferredSize(new java.awt.Dimension(100, 50));
         Buttons.setLayout(new java.awt.GridLayout(1, 0, 25, 0));
 
-        DeleteButton.setText("Supprimer");
-        DeleteButton.setToolTipText("Supprimer le scénario ");
-        DeleteButton.setFocusable(false);
-        DeleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                DeleteButtonMouseReleased(evt);
-            }
-        });
-        Buttons.add(DeleteButton);
-
+        ResumeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_play_20px.png"))); // NOI18N
         ResumeButton.setText("Résumer");
         ResumeButton.setToolTipText("Résumer le scénario");
         ResumeButton.setFocusable(false);
@@ -106,10 +95,6 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         add(Buttons, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DeleteButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseReleased
-        onglet.retirerCourant();
-    }//GEN-LAST:event_DeleteButtonMouseReleased
-
     private void ResumeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResumeButtonMouseReleased
         if(onglet.getCourant() != null) {
             onglet.onStartSimulation();
@@ -119,7 +104,6 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Buttons;
-    private javax.swing.JButton DeleteButton;
     private ca.ulaval.glo2004.afficheur.PanelArrondi Main;
     private javax.swing.JButton ResumeButton;
     private javax.swing.JPanel StatsHeader;

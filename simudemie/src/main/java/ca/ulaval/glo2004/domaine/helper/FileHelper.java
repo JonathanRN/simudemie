@@ -26,7 +26,7 @@ public class FileHelper<T> {
     private final File file;
     
     public FileHelper(String filename) {
-        Path path = Paths.get(getCurrentPath(), "SIMUDEMIE-DATA", filename);
+        Path path = Paths.get(getCurrentPath(), "data", filename);
         file = new File(path.toString());
         createDirs();
     }

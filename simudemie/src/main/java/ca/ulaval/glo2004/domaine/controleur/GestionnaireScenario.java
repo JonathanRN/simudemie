@@ -64,14 +64,22 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     }
     
     public void resumer() {
+        getCourant().retourEnDirect();
         timer.restart();
     }
     
     public void demarrer(int index, int secondes, ScenarioCallback scenarioCallback) {
         scenarioCourant = index;
+        
+        if (timer != null && timer.isRunning()) {
+            timer.stop();
+        }
+        
         timer = new Timer(secondes * 1000, this);
+        timer.setInitialDelay(0);
         timer.start();
         
+        getCourant().demarrer();
         this.scenarioCallback = scenarioCallback;
     }
     

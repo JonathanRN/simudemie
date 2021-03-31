@@ -50,7 +50,7 @@ public class OngletMaladie extends OngletUI {
     
     @Override
     public void ajouterObjetUI() {
-        if(!cardLocked) {
+        if (!cardLocked) {
             super.ajouterObjetUI();
             ObjetMaladie card = new ObjetMaladie(this);
             card.setNom("Maladie: " + objets.size());
@@ -58,6 +58,9 @@ public class OngletMaladie extends OngletUI {
             onClickObjetUI(card);
             MaladiesContainer.add(card);
 
+            Object[] args = { getIndexCourant(), card.getNom(), 0.0, 0.0, 0.0 };
+            controller.creer(args);
+            
             // On débloque les champs pour modification de la nouvelle maladie
             statsMaladiePanel1.setModifying(true);
             updateUI();

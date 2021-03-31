@@ -7,7 +7,6 @@ package ca.ulaval.glo2004.afficheur.onglets;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
-import ca.ulaval.glo2004.afficheur.objetsUI.ObjetCarte;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetScenario;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 import ca.ulaval.glo2004.domaine.Scenario;
@@ -15,7 +14,6 @@ import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireMaladie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.Color;
-import java.awt.Dimension;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -36,7 +34,8 @@ public class OngletScenario extends OngletUI {
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             ScenariosLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             Sce_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
-            AddScenarioButton.setBackground(new Color(216, 222, 233, 38));
+            AddScenarioButton.setBackground(new Color(163,190,140));
+            BoutonDelete.setBackground(new Color(191, 97, 106));
             ImportScenarioButton.setBackground(new Color(216, 222, 233, 38));
             BoutonExport.setBackground(new Color(216, 222, 233, 38));
             
@@ -166,6 +165,7 @@ public class OngletScenario extends OngletUI {
         AddScenarioButton = new javax.swing.JButton();
         ImportScenarioButton = new javax.swing.JButton();
         BoutonExport = new javax.swing.JButton();
+        BoutonDelete = new javax.swing.JButton();
         ScenariosScrollPane = new javax.swing.JScrollPane();
         ProjectPanelContainer = new javax.swing.JPanel();
         Sce_Informations = new javax.swing.JPanel();
@@ -235,6 +235,19 @@ public class OngletScenario extends OngletUI {
             }
         });
 
+        BoutonDelete.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        BoutonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_trash_can_20px.png"))); // NOI18N
+        BoutonDelete.setFocusable(false);
+        BoutonDelete.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        BoutonDelete.setMaximumSize(new java.awt.Dimension(75, 30));
+        BoutonDelete.setMinimumSize(new java.awt.Dimension(75, 30));
+        BoutonDelete.setPreferredSize(new java.awt.Dimension(100, 36));
+        BoutonDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BoutonDeleteMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout ScenariosTitleLayout = new javax.swing.GroupLayout(ScenariosTitle);
         ScenariosTitle.setLayout(ScenariosTitleLayout);
         ScenariosTitleLayout.setHorizontalGroup(
@@ -244,9 +257,12 @@ public class OngletScenario extends OngletUI {
                 .addGap(90, 90, 90)
                 .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BoutonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 729, Short.MAX_VALUE)
                 .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 996, Short.MAX_VALUE)
-                .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         ScenariosTitleLayout.setVerticalGroup(
             ScenariosTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,9 +271,10 @@ public class OngletScenario extends OngletUI {
                     .addGroup(ScenariosTitleLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(ScenariosLabel))
-                    .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BoutonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
 
@@ -346,6 +363,10 @@ public class OngletScenario extends OngletUI {
         }
     }//GEN-LAST:event_ImportScenarioButtonMouseReleased
 
+    private void BoutonDeleteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonDeleteMouseReleased
+        retirerCourant();
+    }//GEN-LAST:event_BoutonDeleteMouseReleased
+
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
         if(getCourant() != null) {
             int result = fileChooser.showOpenDialog(null);
@@ -377,6 +398,7 @@ public class OngletScenario extends OngletUI {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddScenarioButton;
+    private javax.swing.JButton BoutonDelete;
     private javax.swing.JButton BoutonExport;
     private javax.swing.JButton ImportScenarioButton;
     private ca.ulaval.glo2004.afficheur.PanelArrondi Layout;

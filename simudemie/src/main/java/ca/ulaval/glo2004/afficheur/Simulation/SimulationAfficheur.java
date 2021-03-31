@@ -36,8 +36,10 @@ public class SimulationAfficheur extends Mode {
     public SimulationAfficheur(Simulation simulation) {
         this.simulation = simulation;
         
-        // Il faut toujours avoir une region de selectionne
-        regionInfectee = simulation.getScenario().getCarteJourCourant().getPays(0).getRegions().get(0);
+        if (!simulation.getScenario().estCommence()) {
+            // Il faut toujours avoir une region de selectionne
+            regionInfectee = simulation.getScenario().getCarteJourCourant().getPays(0).getRegions().get(0);            
+        }
     }
     
     @Override
@@ -114,7 +116,7 @@ public class SimulationAfficheur extends Mode {
     public void onMouseReleased(Point point) {
         super.onMouseReleased(point);
         
-        if (simulation.estCommence()) {
+        if (simulation.getScenario().estCommence()) {
             return;
         }
         
@@ -148,7 +150,10 @@ public class SimulationAfficheur extends Mode {
     }
     
     public void onSimulationDemaree() {
-        regionInfectee.setPopInfectee(1000);
+        int infections = 1;
+        
+        regionInfectee.setPopSaine(regionInfectee.getPopSaine() - infections);
+        regionInfectee.setPopInfectee(infections);
         regionInfectee = null;
     }
     

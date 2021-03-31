@@ -162,13 +162,23 @@ public class CreationCarte extends javax.swing.JPanel {
         ToolBar.setBackground(new java.awt.Color(67, 76, 94));
         ToolBar.setPreferredSize(new java.awt.Dimension(968, 50));
         ToolBar.setLayout(new javax.swing.BoxLayout(ToolBar, javax.swing.BoxLayout.X_AXIS));
+
+        BoutonSelection.setToolTipText("Outil de sélection/édition");
         ToolBar.add(BoutonSelection);
+
+        BoutonCrayon.setToolTipText("Outil de création pays");
         ToolBar.add(BoutonCrayon);
+
+        BoutonRegion.setToolTipText("Outil découpage de région");
         ToolBar.add(BoutonRegion);
+
+        BoutonLien.setToolTipText("Outils création liens ");
         ToolBar.add(BoutonLien);
 
         BoutonQuitterParent.setOpaque(false);
         BoutonQuitterParent.setLayout(new java.awt.BorderLayout());
+
+        BoutonQuitter.setToolTipText("Retour à l'accueil");
         BoutonQuitterParent.add(BoutonQuitter, java.awt.BorderLayout.EAST);
 
         ToolBar.add(BoutonQuitterParent);

@@ -15,6 +15,7 @@ public class Pays implements Serializable {
     private Polygon polygone;
     public ArrayList<Mesure> mesures = new ArrayList<>();
     public ArrayList<Region> listeRegions = new ArrayList<>();
+    public int popInitiale;
 
     public Pays(Polygon polygone) {
         this.polygone = polygone;
@@ -41,6 +42,10 @@ public class Pays implements Serializable {
         tauxMortalite /= 100d;
         tauxGuerison /= 100d;
         
+        if (cptJours == 1)
+        {
+            this.setPopInitiale(this.getPopInfectee() + this.getPopSaine());
+        }
         double tauxInfAjuste = tauxInf;
         for (Region region : listeRegions)
         {
@@ -100,6 +105,10 @@ public class Pays implements Serializable {
         return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopTotale()));
     }
     
+    public int getPopInitiale() {
+        return popInitiale;
+    }
+    
     public float getPourcentageInfectee() {
         if (this.getPopTotale() <= 0) {
             return 0;
@@ -118,12 +127,16 @@ public class Pays implements Serializable {
         if (this.getPopTotale() <= 0) {
             return 0;
         }
-        return ((float)this.getPopDecedee() / (float)this.getPopTotale()) * 100f;
+        return ((float)this.getPopDecedee() / (float)this.getPopInitiale()) * 100f;
     }
     
     public Polygon getPolygone() { return polygone; };
     
     public void setNom(String nom) {
         this.nom = nom;
+    }
+    
+    public void setPopInitiale(int popInitiale) {
+        this.popInitiale = popInitiale;
     }
 }

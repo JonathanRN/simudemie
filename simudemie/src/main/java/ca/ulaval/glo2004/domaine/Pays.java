@@ -59,6 +59,27 @@ public class Pays implements Serializable {
             region.guerirPop(tauxGuerison, cptJours);
             region.eliminerPopulation(tauxMortalite, cptJours);
         }
+        
+        contaminerInterRegions();
+    }
+    
+    public void contaminerInterRegions()
+    {
+        for (Region r : listeRegions)
+        {
+            if (r.getPopInfectee() > 100)
+            {
+                double prob = Math.random();
+                for( Region f : listeRegions)
+                {
+                    if(!r.equals(f) && prob > 0.5){
+                        int voyageursInfectes = (int)((float)r.getPopInfectee() * 0.01);
+                        f.setPopInfectee(f.getPopInfectee()+ voyageursInfectes);
+                        f.setPopSaine(f.getPopSaine() - voyageursInfectes);
+                    }
+                }
+            }
+        }
     }
     
     public void ajouterRegion(Region nouvelleRegion) {

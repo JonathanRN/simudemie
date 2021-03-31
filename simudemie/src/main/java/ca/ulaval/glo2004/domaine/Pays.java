@@ -101,30 +101,24 @@ public class Pays implements Serializable {
     }
     
     public float getPourcentageInfectee() {
-        try {
-            return (getPopInfectee() / getPopTotale()) * 100f;
-        }
-        catch (java.lang.ArithmeticException e) {
+        if (this.getPopTotale() <= 0) {
             return 0;
         }
+        return ((float)this.getPopInfectee() / (float)this.getPopTotale()) * 100f;
     }
     
     public float getPourcentageSaine() {
-        try {
-            return (getPopSaine() / getPopTotale()) * 100f;
-        }
-        catch (java.lang.ArithmeticException e) {
+        if (this.getPopTotale() <= 0) {
             return 0;
         }
+        return ((float)this.getPopSaine() / (float)this.getPopTotale()) * 100f;
     }
     
     public float getPourcentageDecedee() {
-        try {
-            return (getPopDecedee() / getPopTotale()) * 100f;
-        }
-        catch (java.lang.ArithmeticException e) {
+        if (this.getPopTotale() <= 0) {
             return 0;
         }
+        return ((float)this.getPopDecedee() / (float)this.getPopTotale()) * 100f;
     }
     
     public Polygon getPolygone() { return polygone; };

@@ -82,33 +82,26 @@ public class Region implements Serializable {
     public int getPopInfectee(){ return populationInfectee; }
     
     public int getPopDecedee(){ return populationDecedee; }
-
     
     public float getPourcentageInfectee() {
-        try {
-            return (float)(this.getPopInfectee() / this.getPopTotale()) * 100;
-        }
-        catch (java.lang.ArithmeticException e) {
+        if (this.getPopTotale() <= 0) {
             return 0;
         }
+        return ((float)this.getPopInfectee() / (float)this.getPopTotale()) * 100f;
     }
     
     public float getPourcentageSaine() {
-        try {
-            return (float)(this.getPopSaine() / this.getPopTotale()) * 100;
-        }
-        catch (java.lang.ArithmeticException e) {
+        if (this.getPopTotale() <= 0) {
             return 0;
         }
+        return ((float)this.getPopSaine() / (float)this.getPopTotale()) * 100f;
     }
     
     public float getPourcentageDecedee() {
-        try {
-            return (float)(this.getPopDecedee() / this.getPopTotale()) * 100;
-        }
-        catch (java.lang.ArithmeticException e) {
+        if (this.getPopTotale() <= 0) {
             return 0;
         }
+        return ((float)this.getPopDecedee() / (float)this.getPopTotale()) * 100f;
     }
     
     public Polygon getPolygone() {

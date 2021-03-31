@@ -19,6 +19,11 @@ public class VoieLiaison implements Serializable {
     private Path2D.Double ligneCourbe;
     private Point centre;
     private boolean accessible;
+    protected final Color Ter = new Color(208, 135, 112);
+    protected final Color Mar = new Color(94, 129, 172);
+    protected final Color Aer = new Color(143, 188, 187);
+
+   
     
     public VoieLiaison(TypeVoie type, Pays origine, Pays destination, Path2D.Double ligneCourbe, Point centre)
     {
@@ -85,15 +90,15 @@ public class VoieLiaison implements Serializable {
         ligneCourbe.reset();
         ligneCourbe = ligne;
     }
-    
+
     public Color getCouleur() {
         switch (type) {
             case Terrestre:
-                return Color.orange;
+                return Ter;
             case Aerien:
-                return Color.white;
+                return Aer;
             case Maritime:
-                return Color.cyan;
+                return Mar;
             default:
                 return Color.red;
         }

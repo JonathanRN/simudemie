@@ -145,6 +145,9 @@ public class SimulationPanel extends ZoomablePanel {
         if (evt.getKeyCode() == KeyEvent.VK_Q) {
             afficheur.onSwapInformations();
             repaint();
+        } else if(evt.getKeyCode() == KeyEvent.VK_W) {
+            afficheur.onSwapLinks();
+            repaint();
         }
     }//GEN-LAST:event_formKeyReleased
 

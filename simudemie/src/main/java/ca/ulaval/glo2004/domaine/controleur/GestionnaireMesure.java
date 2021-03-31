@@ -22,12 +22,24 @@ public class GestionnaireMesure extends GestionnaireOnglet<Mesure> {
     
     @Override
     public Mesure creer(Object... arguments) {
-        String nom = (String) arguments[0];
-        float tauxAdhesion = (float) arguments[1];
-        float tauxReductionProp = (float) arguments[2];
+        int index = (int) arguments[0];
+        String nom = (String) arguments[1];
+        float tauxAdhesion = (float) arguments[2];
+        float tauxReduction = (float) arguments[3];
         
-        Mesure mesure = new Mesure(nom, tauxAdhesion, tauxReductionProp);
-        ajouter(mesure);
+        Mesure mesure = getElement(index);
+        
+        if(mesure == null) {
+            mesure = new Mesure(nom, tauxAdhesion, tauxReduction);
+            ajouter(mesure);
+        } else {
+            mesure.setNom(nom);
+            mesure.setTauxAdhesion(tauxAdhesion);
+            mesure.setTauxReductionProp(tauxReduction);
+            sauvegarder();
+        }
+        
+        
         return mesure;
     }
 }

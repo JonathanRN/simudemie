@@ -11,14 +11,16 @@ import java.io.Serializable;
 public class Mesure implements Serializable{
     
     private String nom;
-    private float tauxAdhesion;
-    private float tauxReductionProp;
+    private double tauxAdhesion;
+    private double tauxReductionProp;
+    private boolean active;
     
-    public Mesure(String nom, float tauxAdhesion, float tauxReductionProp)
+    public Mesure(String nom, double tauxAdhesion, double tauxReductionProp)
     {
         this.nom = nom; 
         this.tauxAdhesion = tauxAdhesion;
         this.tauxReductionProp = tauxReductionProp;
+        active = false;
     }
     
     public Mesure(Mesure mesure)
@@ -26,26 +28,35 @@ public class Mesure implements Serializable{
         this.nom = mesure.nom; 
         this.tauxAdhesion = mesure.tauxAdhesion;
         this.tauxReductionProp = mesure.tauxReductionProp;
+        active = false;
     }
     
     public String getNom(){return nom;}
     
-    public float getTauxAdhesion(){return tauxAdhesion;}
+    public double getTauxAdhesion(){return tauxAdhesion;}
     
-    public float getTauxReductionProp(){return tauxReductionProp;}
+    public double getTauxReductionProp(){return tauxReductionProp;}
     
-    private void setNom(String nom)
+    public boolean getActive() {
+        return active;
+    }
+    
+    public void setNom(String nom)
     {
         this.nom = nom;
     }
     
-    private void setTauxAdhesion(float tauxAdhesion)
+    public void setTauxAdhesion(double tauxAdhesion)
     {
         this.tauxAdhesion = tauxAdhesion;
     }
         
-    private void setTauxReductionProp(float tauxReductionProp)
+    public void setTauxReductionProp(double tauxReductionProp)
     {
         this.tauxReductionProp = tauxReductionProp;
+    }
+    
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

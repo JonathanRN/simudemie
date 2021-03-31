@@ -7,6 +7,7 @@ package ca.ulaval.glo2004.domaine.controleur;
 
 import ca.ulaval.glo2004.afficheur.Simulation.ScenarioCallback;
 import ca.ulaval.glo2004.domaine.Carte;
+import ca.ulaval.glo2004.domaine.Mesure;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.helper.FileHelper;
 import java.awt.event.ActionEvent;
@@ -47,14 +48,14 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         return getElement(scenarioCourant);
     }
     
-    private void creerMesure(String nom, float tauxAdhesion, float tauxReduction)
+    public void creerMesure(String nom, double tauxAdhesion, double tauxReduction)
     {
-        
-        //new Mesure()...
-        //jourCourant.mesures.add(e);
+        Mesure mesure = new Mesure(nom, tauxAdhesion, tauxReduction);
+        // TODO: Quel pays ?!?
+        //getCourant().getCarteJourCourant().
     }
                 
-    private void editerMesure(String nom, float tauxAdhesion, float tauxReduction)
+    private void editerMesure(String nom, double tauxAdhesion, double tauxReduction)
     {
         //jourCourant.mesures[]...
     }

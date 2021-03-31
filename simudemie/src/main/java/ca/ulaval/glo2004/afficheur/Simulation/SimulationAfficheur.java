@@ -29,6 +29,8 @@ public class SimulationAfficheur extends Mode {
     private ArrayList<Polygon> polygones;
     private Point souris;
     private boolean afficherInfosPays = false;
+    private boolean afficherLiens = false;
+    
     private Region regionInfectee;
     
     private final Point sourisOffset = new Point(20, 5);
@@ -54,23 +56,26 @@ public class SimulationAfficheur extends Mode {
             g.fillPolygon(p);
             this.paintLignes(g, Color.black, p);
         }
-        
-        
-        for (VoieLiaison voie : carte.getVoies()) {
-            g.setColor(voie.getCouleur());
-            g.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
-            g.draw(voie.getLigne());
-        }
-        
-        g.setStroke(new BasicStroke(1));
+
+
         super.paint(g);
-        
         updateHighlight(souris);
         
         if (regionInfectee != null) {
             g.setColor(Color.red);
             this.paintLignes(g, Color.red, regionInfectee.getPolygone());
         }
+        
+        if(afficherLiens) {
+            for (VoieLiaison voie : carte.getVoies()) {
+                g.setColor(voie.getCouleur());
+                g.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
+                g.draw(voie.getLigne());
+            }
+        }
+        
+        g.setStroke(new BasicStroke(1));
+
         
         if (highlight != null) {
             float zoomFactor = simulation.getPanel().getZoomFactor();
@@ -147,6 +152,10 @@ public class SimulationAfficheur extends Mode {
         afficherInfosPays = !afficherInfosPays;
         
         updateHighlight(souris);
+    }
+    
+    public void onSwapLinks() {
+        afficherLiens = !afficherLiens;
     }
     
     public void onSimulationDemaree() {

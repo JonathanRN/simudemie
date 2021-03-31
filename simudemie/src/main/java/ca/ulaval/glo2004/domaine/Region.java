@@ -65,6 +65,10 @@ public class Region implements Serializable {
     
     public String getNom(){return nom;}
     
+    public void setPopTotale(int pop) {
+        this.populationSaine = pop;
+    }
+    
     public int getPopTotale() { return populationSaine + populationInfectee; }
     
     public int getPopSaine(){ return populationSaine; }
@@ -77,7 +81,7 @@ public class Region implements Serializable {
     
     public float getPourcentageInfectee() {
         try {
-            return (getPopInfectee() / getPopTotale()) * 100f;
+            return (float)(getPopInfectee() / getPopTotale()) * 100;
         }
         catch (java.lang.ArithmeticException e) {
             return 0;
@@ -86,7 +90,7 @@ public class Region implements Serializable {
     
     public float getPourcentageSaine() {
         try {
-            return (getPopSaine() / getPopTotale()) * 100f;
+            return (float)(getPopSaine() / getPopTotale()) * 100;
         }
         catch (java.lang.ArithmeticException e) {
             return 0;
@@ -95,7 +99,7 @@ public class Region implements Serializable {
     
     public float getPourcentageDecedee() {
         try {
-            return (getPopDecedee() / getPopTotale()) * 100f;
+            return (float)(getPopDecedee() / getPopTotale()) * 100;
         }
         catch (java.lang.ArithmeticException e) {
             return 0;
@@ -112,7 +116,7 @@ public class Region implements Serializable {
     }
     
     public void setPopSaine(int populationSaine)
-    {
+    {        
         this.populationSaine = clamp(populationSaine, 0, this.getPopTotale());
     }
     

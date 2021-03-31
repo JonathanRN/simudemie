@@ -98,7 +98,7 @@ public class Selection extends Mode {
         ca.ulaval.glo2004.domaine.Region region = creationCarte.getPanel().getRegion(pays, p);
         pays.setNom(panel.getNomPays());
         region.setNom(panel.getNomRegion());
-        region.setPopSaine(panel.getPopRegion());
+        region.setPopTotale(panel.getPopRegion());
     }
 
     public void onPaysSupprime() {

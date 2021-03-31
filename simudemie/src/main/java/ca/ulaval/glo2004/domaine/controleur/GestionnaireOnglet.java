@@ -55,6 +55,9 @@ public abstract class GestionnaireOnglet<T extends Serializable> {
     }
     
     public T getElement(int index) {
+        if (list.isEmpty() || index >= list.size()) {
+            return null;
+        }
         return list.get(index);
     }
 }

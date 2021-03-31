@@ -106,15 +106,15 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         add(Buttons, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DeleteButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseReleased
-        onglet.retirerCourant();
-    }//GEN-LAST:event_DeleteButtonMouseReleased
-
     private void ResumeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResumeButtonMouseReleased
         if(onglet.getCourant() != null) {
             onglet.onStartSimulation();
         }
     }//GEN-LAST:event_ResumeButtonMouseReleased
+
+    private void DeleteButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseReleased
+        onglet.retirerCourant();
+    }//GEN-LAST:event_DeleteButtonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

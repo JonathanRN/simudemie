@@ -20,6 +20,7 @@ public class Region implements Serializable {
     private int populationInfectee;
     private int populationDecedee;
     private final Polygon polygone;
+
     
     public Region(Polygon polygone)
     {
@@ -50,17 +51,16 @@ public class Region implements Serializable {
     
     public void eliminerPopulation(double taux)
     {
-        int deces = (int)(this.getPopInfectee() * taux);
-        setPopDecedee(this.getPopDecedee() + deces);
-        setPopInfectee(this.getPopInfectee() - deces);
-        
+//        int deces = (int)(this.getPopInfectee() * taux);
+//        setPopDecedee(this.getPopDecedee() + deces);
+//        setPopInfectee(this.getPopInfectee() - deces);
     }
     
     public void guerirPop(double taux)
     {
-        int gueris = (int)(this.getPopInfectee() * taux);
-        setPopSaine(this.getPopSaine() + gueris);
-        setPopInfectee(this.getPopInfectee() - gueris);
+//            int gueris = (int)(this.getPopInfectee() * taux);
+//            setPopSaine(this.getPopSaine() + gueris);
+//            setPopInfectee(this.getPopInfectee() - gueris);   
     }
     
     public String getNom(){return nom;}
@@ -78,10 +78,11 @@ public class Region implements Serializable {
     public int getPopInfectee(){ return populationInfectee; }
     
     public int getPopDecedee(){ return populationDecedee; }
+
     
     public float getPourcentageInfectee() {
         try {
-            return (float)(getPopInfectee() / getPopTotale()) * 100;
+            return (float)(this.getPopInfectee() / this.getPopTotale()) * 100;
         }
         catch (java.lang.ArithmeticException e) {
             return 0;
@@ -90,7 +91,7 @@ public class Region implements Serializable {
     
     public float getPourcentageSaine() {
         try {
-            return (float)(getPopSaine() / getPopTotale()) * 100;
+            return (float)(this.getPopSaine() / this.getPopTotale()) * 100;
         }
         catch (java.lang.ArithmeticException e) {
             return 0;
@@ -99,7 +100,7 @@ public class Region implements Serializable {
     
     public float getPourcentageDecedee() {
         try {
-            return (float)(getPopDecedee() / getPopTotale()) * 100;
+            return (float)(this.getPopDecedee() / this.getPopTotale()) * 100;
         }
         catch (java.lang.ArithmeticException e) {
             return 0;
@@ -137,6 +138,7 @@ public class Region implements Serializable {
     
     private int contaminationBinomiale(double tauxPropag) {
         int nbInfectes = this.getPopInfectee();
+
         if (nbInfectes <= 0) {
             return 0;
         }
@@ -178,7 +180,9 @@ public class Region implements Serializable {
             }
         }
 
-        
+
+        nbInfectes = (int)(this.getPopInfectee()/(cpt*0.3));
+
         return (int)Math.ceil(nbInfectes * tauxPropag + success);
     }
 

@@ -38,14 +38,14 @@ public class FileHelper<T> {
             try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
                 list = (ArrayList<T>) ois.readObject();
             }
-        } catch(IOException | ClassNotFoundException e) {
-             // TODO: Afficher erreur de chargement avec petite boîte cute
+        } catch(IOException | ClassNotFoundException | ClassCastException e) {
+             // TODO: Gérer cette exception
         }
         
         return list;
     }
     
-    public <T extends Serializable> T importer(String path) {
+    public <T extends Serializable> T importer(String path) throws Exception {
         T object = null;
         
         try {
@@ -53,8 +53,8 @@ public class FileHelper<T> {
             try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
                 object = (T) ois.readObject();
             }
-        } catch(IOException | ClassNotFoundException e) {
-             // TODO: Afficher erreur de chargement avec petite boîte cute
+        } catch(IOException | ClassNotFoundException | ClassCastException e) {
+             throw e;
         }
         
         return object;
@@ -70,14 +70,14 @@ public class FileHelper<T> {
         }
     }
     
-    public <T extends Serializable> void exporter(T object, String path) {
+    public <T extends Serializable> void exporter(T object, String path) throws Exception {
         try {
             String pathser = path.concat(".ser");
             try (FileOutputStream fos = new FileOutputStream(pathser); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                 oos.writeObject(object);
             }
-        } catch(IOException ioe) {
-            // TODO: Afficher erreur de sauvegarde avec petite boîte cute
+        } catch(IOException | ClassCastException e) {
+             throw e;
         }
     }
     

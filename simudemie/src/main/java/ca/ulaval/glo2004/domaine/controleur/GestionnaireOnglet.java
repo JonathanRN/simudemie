@@ -38,14 +38,14 @@ public abstract class GestionnaireOnglet<T extends Serializable> {
         sauvegarder();
     }
     
-    public T importer(String path) {
+    public T importer(String path) throws Exception {
         T object = fileHelper.importer(path);
         list.add(object);
         sauvegarder();
         return object;
     }
     
-    public void exporter(int index, String path) {
+    public void exporter(int index, String path) throws Exception {
         T element = getElement(index);
         fileHelper.exporter(element, path);
     }

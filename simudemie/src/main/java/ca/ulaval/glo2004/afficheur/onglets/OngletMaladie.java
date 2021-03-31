@@ -268,8 +268,12 @@ public class OngletMaladie extends OngletUI {
     private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
         int result = fileChooser.showOpenDialog(null);
         if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
-            Maladie maladie = controller.importer(fileChooser.getSelectedFile().toString());
-            ajouterCard(maladie);
+            try {
+                Maladie maladie = controller.importer(fileChooser.getSelectedFile().toString());
+                ajouterCard(maladie);
+            } catch(Exception e) {
+                JOptionPane.showMessageDialog(this, "Une erreur est survenue lors de l'importation d'une maladie.", "", JOptionPane.ERROR_MESSAGE);
+            }
             fileChooser.setSelectedFile(null);
         }
     }//GEN-LAST:event_ImportScenarioButtonMouseReleased
@@ -278,7 +282,11 @@ public class OngletMaladie extends OngletUI {
         if(getCourant() != null) {
             int result = fileChooser.showOpenDialog(null);
             if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
+                try {
                 controller.exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
+                } catch(Exception e) {
+                    JOptionPane.showMessageDialog(this, "Une erreur est survenue lors de l'exportation d'une maladie.", "", JOptionPane.ERROR_MESSAGE);
+                }
                 fileChooser.setSelectedFile(null);
             }
         }

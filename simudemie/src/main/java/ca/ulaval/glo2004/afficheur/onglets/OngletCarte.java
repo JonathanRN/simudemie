@@ -261,8 +261,12 @@ public class OngletCarte extends OngletUI {
     private void ImportMapButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportMapButtonMouseReleased
         int result = fileChooser.showOpenDialog(null);
         if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
-            Carte carte = GestionnaireCarte.getInstance().importer(fileChooser.getSelectedFile().toString());
-            ajouterCard(carte);
+            try {
+                Carte carte = GestionnaireCarte.getInstance().importer(fileChooser.getSelectedFile().toString());
+                ajouterCard(carte);
+            } catch(Exception e) {
+                JOptionPane.showMessageDialog(this, "Une erreur est survenue lors de l'exportation d'une carte.", "", JOptionPane.ERROR_MESSAGE);
+            }
             fileChooser.setSelectedFile(null);
         }
     }//GEN-LAST:event_ImportMapButtonMouseReleased
@@ -271,7 +275,11 @@ public class OngletCarte extends OngletUI {
         if(getCourant() != null) {
             int result = fileChooser.showOpenDialog(null);
             if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
-                GestionnaireCarte.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
+                try {
+                    GestionnaireCarte.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
+                } catch(Exception e) {
+                    JOptionPane.showMessageDialog(this, "Une erreur est survenue lors de l'exportation d'une carte.", "", JOptionPane.ERROR_MESSAGE);
+                }
                 fileChooser.setSelectedFile(null);
             }
         }

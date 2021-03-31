@@ -336,8 +336,12 @@ public class OngletScenario extends OngletUI {
     private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
         int result = fileChooser.showOpenDialog(null);
         if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
-            Scenario scenario = GestionnaireScenario.getInstance().importer(fileChooser.getSelectedFile().toString());
-            ajouterCard(scenario);
+            try {
+                Scenario scenario = GestionnaireScenario.getInstance().importer(fileChooser.getSelectedFile().toString());
+                ajouterCard(scenario);
+            } catch(Exception e) {
+                JOptionPane.showMessageDialog(this, "Une erreur est survenue lors de l'importation d'un scénario.", "", JOptionPane.ERROR_MESSAGE);
+            }
             fileChooser.setSelectedFile(null);
         }
     }//GEN-LAST:event_ImportScenarioButtonMouseReleased
@@ -346,12 +350,16 @@ public class OngletScenario extends OngletUI {
         if(getCourant() != null) {
             int result = fileChooser.showOpenDialog(null);
             if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
-                GestionnaireScenario.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
+                try {
+                    GestionnaireScenario.getInstance().exporter(getIndexCourant(), fileChooser.getSelectedFile().toString());
+                } catch(Exception e) {
+                    JOptionPane.showMessageDialog(this, "Une erreur est survenue lors de l'exportation d'un scénario.", "", JOptionPane.ERROR_MESSAGE);
+                }
                 fileChooser.setSelectedFile(null);
             }
         }
     }//GEN-LAST:event_BoutonExportMouseReleased
-
+    
     private void setCreating(boolean creating) {
         if(creating) {
             Sce_InformationsLabel.setText("Choisir une carte et une maladie");

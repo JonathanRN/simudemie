@@ -48,20 +48,23 @@ public class OngletMaladie extends OngletUI {
     
     @Override
     public void ajouterObjetUI() {
-        super.ajouterObjetUI();        
-        ObjetMaladie card = new ObjetMaladie(this);
+        String nomMaladie = JOptionPane.showInputDialog(this, "Entrez le nom de la nouvelle maladie", "", JOptionPane.QUESTION_MESSAGE);
         
-        // todo: faire un popup qui demande d'entrer un nom
-        card.setNom("Maladie: " + objets.size());
-        objets.add(card);
-        
-        Object[] args = { objets.size() - 1, card.getNom(), 0.0, 0.0, 0.0 };
-        controller.creer(args);
-        
-        onClickObjetUI(card);
-        MaladiesContainer.add(card);
+        if (nomMaladie != null && !nomMaladie.isEmpty()) {
+            super.ajouterObjetUI();        
+            ObjetMaladie card = new ObjetMaladie(this);
 
-        updateUI();
+            card.setNom(nomMaladie);
+            objets.add(card);
+
+            Object[] args = { objets.size() - 1, card.getNom(), 0.0, 0.0, 0.0 };
+            controller.creer(args);
+
+            onClickObjetUI(card);
+            MaladiesContainer.add(card);
+
+            updateUI();
+        }
     }
 
     private void ajouterCard(Maladie maladie) {
@@ -274,7 +277,7 @@ public class OngletMaladie extends OngletUI {
   
     }//GEN-LAST:event_AddScenarioButtonMouseClicked
 
-    private void ImportMaladieButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
+    private void ImportMaladieButtonMouseReleased(java.awt.event.MouseEvent evt) {                                                   
         int result = fileChooser.showDialog(null, "Importer");
         if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
             try {
@@ -285,7 +288,7 @@ public class OngletMaladie extends OngletUI {
             }
             fileChooser.setSelectedFile(null);
         }
-    }//GEN-LAST:event_ImportMaladieButtonMouseReleased
+    }                                                 
 
     private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
         if (getCourant() != null) {

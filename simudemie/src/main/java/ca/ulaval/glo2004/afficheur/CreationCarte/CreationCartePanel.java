@@ -63,9 +63,11 @@ public class CreationCartePanel extends ZoomablePanel {
             ajouterAction(action);
             
             courant = new Polygon();
+            
+            creationCarte.getPopup().setVisible(false);
         }
         else {
-            repaint();
+            creationCarte.repaint();
         }
     }
     
@@ -93,7 +95,7 @@ public class CreationCartePanel extends ZoomablePanel {
         action.Executer();
         // On veut pas modifier le futur
         actionsUndo.clear();
-        repaint();
+        creationCarte.repaint();
     }
     
     private void undoAction() {
@@ -101,7 +103,7 @@ public class CreationCartePanel extends ZoomablePanel {
             ActionCarte action = actionsFaites.pop();
             action.Undo();
             actionsUndo.push(action);
-            repaint();
+            creationCarte.repaint();
         }
     }
     
@@ -110,7 +112,7 @@ public class CreationCartePanel extends ZoomablePanel {
             ActionCarte action = actionsUndo.pop();
             action.Executer();
             actionsFaites.push(action);
-            repaint();
+            creationCarte.repaint();
         }
     }
     
@@ -177,12 +179,12 @@ public class CreationCartePanel extends ZoomablePanel {
         if (SwingUtilities.isRightMouseButton(evt)) {
             mouseReleased(evt);
         }
-        repaint();
+        creationCarte.repaint();
     }//GEN-LAST:event_formMouseReleased
     
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         creationCarte.getMode().onKeyReleased(evt);
-        repaint();
+        creationCarte.repaint();
     }//GEN-LAST:event_formKeyReleased
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
@@ -193,12 +195,12 @@ public class CreationCartePanel extends ZoomablePanel {
         if (SwingUtilities.isRightMouseButton(evt)) {
             mouseDragged(evt);
         }
-        repaint();
+        creationCarte.repaint();
     }//GEN-LAST:event_formMouseDragged
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         creationCarte.getMode().onMouseMoved(getOffset(evt.getPoint()));
-        repaint();
+        creationCarte.repaint();
     }//GEN-LAST:event_formMouseMoved
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
@@ -209,12 +211,12 @@ public class CreationCartePanel extends ZoomablePanel {
         if (SwingUtilities.isRightMouseButton(evt)) {
             mousePressed(evt);
         }
-        repaint();
+        creationCarte.repaint();
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
         mouseWheelMoved(evt);
-        repaint();
+        creationCarte.repaint();
     }//GEN-LAST:event_formMouseWheelMoved
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

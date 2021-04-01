@@ -100,7 +100,7 @@ public class CreationCarte extends javax.swing.JPanel {
     
     private void quitter() {
         JOptionPane optionPane = new JOptionPane();
-        optionPane.setMessage("Retourner au menu principal?\nVos modifications sont sauvegardées.");
+        optionPane.setMessage("Retourner au menu principal.\nVoulez-vous sauvegarder vos modifications?");
         optionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
         optionPane.setOptionType(JOptionPane.YES_NO_CANCEL_OPTION);
         
@@ -122,6 +122,10 @@ public class CreationCarte extends javax.swing.JPanel {
                 GestionnaireCarte.getInstance().charger();
                 FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
                 frame.returnToHome();
+                break;
+            default:
+                onToggleClick(toggleCourant);
+                BoutonQuitter.setToggle(false);
                 break;
         }
     }

@@ -6,6 +6,7 @@
 package ca.ulaval.glo2004.afficheur.Simulation;
 
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
+import ca.ulaval.glo2004.afficheur.ZoomInfoPanel;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
@@ -54,6 +55,10 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         if (commence) {
             onAvancerJour(getScenario().getIndexJourCourant());
         }
+    }
+    
+    public ZoomInfoPanel getZoomPopup() {
+        return ZoomInfo;
     }
     
     public SimulationPanel getPanel() {
@@ -127,6 +132,8 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        ZoomInfo = new ca.ulaval.glo2004.afficheur.ZoomInfoPanel();
         StartParent = new javax.swing.JPanel();
         StartPanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         StartLabel1 = new javax.swing.JLabel();
@@ -146,6 +153,27 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
 
         setBackground(new java.awt.Color(46, 52, 64));
         setLayout(new javax.swing.OverlayLayout(this));
+
+        jPanel1.setOpaque(false);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(998, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(695, Short.MAX_VALUE))
+        );
+
+        add(jPanel1);
 
         StartParent.setOpaque(false);
 
@@ -176,16 +204,16 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         StartParentLayout.setHorizontalGroup(
             StartParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StartParentLayout.createSequentialGroup()
-                .addContainerGap(125, Short.MAX_VALUE)
+                .addContainerGap(137, Short.MAX_VALUE)
                 .addComponent(StartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         StartParentLayout.setVerticalGroup(
             StartParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(StartParentLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(StartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(742, Short.MAX_VALUE))
+                .addContainerGap(659, Short.MAX_VALUE))
         );
 
         add(StartParent);
@@ -214,14 +242,14 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         BoutonDirect.setOpaque(false);
         BoutonDirect.setPreferredSize(new java.awt.Dimension(35, 70));
         BoutonDirect.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BoutonDirectMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BoutonDirectMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BoutonDirectMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BoutonDirectMouseReleased(evt);
             }
         });
         BoutonDirect.setLayout(new java.awt.BorderLayout());
@@ -270,14 +298,14 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
             ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ButtonsLayout.createSequentialGroup()
                 .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 984, Short.MAX_VALUE))
+                .addGap(0, 1007, Short.MAX_VALUE))
         );
         ButtonsLayout.setVerticalGroup(
             ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ButtonsLayout.createSequentialGroup()
-                .addContainerGap(240, Short.MAX_VALUE)
+                .addContainerGap(198, Short.MAX_VALUE)
                 .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         add(Buttons);
@@ -292,7 +320,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         );
         SimulationPanelLayout.setVerticalGroup(
             SimulationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 822, Short.MAX_VALUE)
+            .addGap(0, 739, Short.MAX_VALUE)
         );
 
         add(SimulationPanel);
@@ -308,7 +336,17 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         updateDirectIcon();
     }//GEN-LAST:event_BoutonDirectMouseExited
 
-    private void BoutonDirectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonDirectMouseClicked
+    private void SliderJourMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderJourMouseReleased
+        if (estEnDirect) {
+            setDirect(false);
+            updateDirectIcon();
+        }
+        
+        getScenario().chargerJour(SliderJour.getValue());
+        getPanel().repaint();
+    }//GEN-LAST:event_SliderJourMouseReleased
+
+    private void BoutonDirectMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonDirectMouseReleased
         setDirect(!estEnDirect);
         updateDirectIcon();
         
@@ -329,17 +367,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         if (estEnDirect) {
             SliderJour.setValue(SliderJour.getMaximum());
         }
-    }//GEN-LAST:event_BoutonDirectMouseClicked
-
-    private void SliderJourMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderJourMouseReleased
-        if (estEnDirect) {
-            setDirect(false);
-            updateDirectIcon();
-        }
-        
-        getScenario().chargerJour(SliderJour.getValue());
-        getPanel().repaint();
-    }//GEN-LAST:event_SliderJourMouseReleased
+    }//GEN-LAST:event_BoutonDirectMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -358,6 +386,8 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private javax.swing.JLabel StartLabel2;
     private ca.ulaval.glo2004.afficheur.PanelArrondi StartPanel;
     private javax.swing.JPanel StartParent;
+    private ca.ulaval.glo2004.afficheur.ZoomInfoPanel ZoomInfo;
     private javax.swing.JLabel icon;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

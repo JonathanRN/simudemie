@@ -24,6 +24,7 @@ public class Pays implements Serializable {
     public Pays(Pays pays) {
         this.nom = pays.nom;
         this.polygone = pays.polygone;
+        this.popInitiale = pays.popInitiale;
         
         this.mesures.clear();
         for (Mesure mesure : pays.mesures) {
@@ -36,6 +37,14 @@ public class Pays implements Serializable {
         }
     }
     
+    public void initiliserPopInit()
+    {
+        this.setPopInitiale(this.getPopInfectee() + this.getPopSaine());
+        for (Region r : listeRegions){
+            r.setPopInitiale(r.getPopInfectee() + r.getPopSaine());
+        }
+    }
+    
     public void avancerJournee(double tauxInf, double tauxMortalite, double tauxGuerison, int cptJours)
     {
         tauxInf /= 100d;
@@ -44,7 +53,7 @@ public class Pays implements Serializable {
         
         if (cptJours == 1)
         {
-            this.setPopInitiale(this.getPopInfectee() + this.getPopSaine());
+            initiliserPopInit();
         }
         double tauxInfAjuste = tauxInf;
         for (Region region : listeRegions)

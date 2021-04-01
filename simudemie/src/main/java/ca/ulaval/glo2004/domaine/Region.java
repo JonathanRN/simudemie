@@ -20,6 +20,7 @@ public class Region implements Serializable {
     private int populationInfectee;
     private int populationDecedee;
     private final Polygon polygone;
+    public int popInitiale;
 
     
     public Region(Polygon polygone)
@@ -32,6 +33,7 @@ public class Region implements Serializable {
         this.populationSaine = region.populationSaine;
         this.populationInfectee = region.populationInfectee;
         this.populationDecedee = region.populationDecedee;
+        this.popInitiale = region.popInitiale;
         
         // Voir si modifier une carte modifie le polygone ici
         this.polygone = region.polygone;
@@ -101,7 +103,7 @@ public class Region implements Serializable {
         if (this.getPopTotale() <= 0) {
             return 0;
         }
-        return ((float)this.getPopDecedee() / (float)this.getPopTotale()) * 100f;
+        return ((float)this.getPopDecedee() / (float)this.getPopInitiale()) * 100f;
     }
     
     public Polygon getPolygone() {
@@ -187,4 +189,12 @@ public class Region implements Serializable {
     private int clamp(int value, int min, int max) {
         return value > max ? max : value < min ? min : value;
     }
+    
+    public void setPopInitiale(int popInitiale) {
+        this.popInitiale = popInitiale;
+    }
+
+    public int getPopInitiale() {
+        return popInitiale;
+    }    
 }

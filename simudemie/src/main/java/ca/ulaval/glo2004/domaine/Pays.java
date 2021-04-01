@@ -76,12 +76,12 @@ public class Pays implements Serializable {
     {
         for (Region r : listeRegions)
         {
-            if (r.getPopInfectee() > 100)
+            if (r.getPopInfectee() > 25)
             {
-                double prob = Math.random();
                 for( Region f : listeRegions)
                 {
-                    if(!r.equals(f) && prob > 0.5){
+                    double prob = Math.random();
+                    if(!r.equals(f) && prob > 0.3){
                         int voyageursInfectes = (int)((float)r.getPopInfectee() * 0.01);
                         f.setPopInfectee(f.getPopInfectee()+ voyageursInfectes);
                         f.setPopSaine(f.getPopSaine() - voyageursInfectes);

@@ -6,6 +6,7 @@
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
+import ca.ulaval.glo2004.afficheur.ZoomInfoPanel;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
@@ -54,6 +55,10 @@ public class CreationCarte extends javax.swing.JPanel {
     
     public JPanel getPopup() {
         return StartParent;
+    }
+    
+    public ZoomInfoPanel getZoomPopup() {
+        return ZoomInfo;
     }
     
     public CreationCartePanel getPanel() {
@@ -151,6 +156,8 @@ public class CreationCarte extends javax.swing.JPanel {
         BoutonLien = new ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle();
         BoutonQuitterParent = new javax.swing.JPanel();
         BoutonQuitter = new ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle();
+        ZoomPanelParent = new javax.swing.JPanel();
+        ZoomInfo = new ca.ulaval.glo2004.afficheur.ZoomInfoPanel();
         InformationsPanelParent = new javax.swing.JPanel();
         InformationsPanel = new javax.swing.JPanel();
         CreationCartePanel = new ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel();
@@ -225,6 +232,27 @@ public class CreationCarte extends javax.swing.JPanel {
 
         ToolBarParent.add(ToolBar, java.awt.BorderLayout.SOUTH);
 
+        ZoomPanelParent.setOpaque(false);
+
+        javax.swing.GroupLayout ZoomPanelParentLayout = new javax.swing.GroupLayout(ZoomPanelParent);
+        ZoomPanelParent.setLayout(ZoomPanelParentLayout);
+        ZoomPanelParentLayout.setHorizontalGroup(
+            ZoomPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ZoomPanelParentLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1072, Short.MAX_VALUE))
+        );
+        ZoomPanelParentLayout.setVerticalGroup(
+            ZoomPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ZoomPanelParentLayout.createSequentialGroup()
+                .addContainerGap(641, Short.MAX_VALUE)
+                .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+
+        ToolBarParent.add(ZoomPanelParent, java.awt.BorderLayout.CENTER);
+
         add(ToolBarParent);
 
         InformationsPanelParent.setOpaque(false);
@@ -268,5 +296,7 @@ public class CreationCarte extends javax.swing.JPanel {
     private javax.swing.JPanel StartParent;
     private javax.swing.JPanel ToolBar;
     private javax.swing.JPanel ToolBarParent;
+    private ca.ulaval.glo2004.afficheur.ZoomInfoPanel ZoomInfo;
+    private javax.swing.JPanel ZoomPanelParent;
     // End of variables declaration//GEN-END:variables
 }

@@ -216,6 +216,9 @@ public class CreationCartePanel extends ZoomablePanel {
 
     private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
         mouseWheelMoved(evt);
+        
+        creationCarte.getZoomPopup().onMouseWheel(zoomFactor);
+        
         creationCarte.repaint();
     }//GEN-LAST:event_formMouseWheelMoved
     

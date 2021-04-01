@@ -13,9 +13,9 @@ public class Pays implements Serializable {
     
     private String nom;
     private Polygon polygone;
+    public int popInitiale; 
     public ArrayList<Mesure> mesures = new ArrayList<>();
     public ArrayList<Region> listeRegions = new ArrayList<>();
-    public int popInitiale;
 
     public Pays(Polygon polygone) {
         this.polygone = polygone;
@@ -81,7 +81,7 @@ public class Pays implements Serializable {
                 for( Region f : listeRegions)
                 {
                     double prob = Math.random();
-                    if(!r.equals(f) && prob > 0.3){
+                    if(!r.equals(f) && prob > 0.5){
                         int voyageursInfectes = (int)((float)r.getPopInfectee() * 0.01);
                         f.setPopInfectee(f.getPopInfectee()+ voyageursInfectes);
                         f.setPopSaine(f.getPopSaine() - voyageursInfectes);

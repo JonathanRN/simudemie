@@ -10,17 +10,19 @@ import java.util.Random;
 import org.apache.commons.math3.distribution.BinomialDistribution;
 import java.awt.Polygon;
 import java.io.Serializable;
+import java.util.Vector;
 
 
 public class Region implements Serializable {
     
     private String nom;
     private int populationSaine;
-//    private int populationImmune;
     private int populationInfectee;
     private int populationDecedee;
-    private final Polygon polygone;
     public int popInitiale;
+    private final Polygon polygone;
+    private Vector<Integer> listeInfections = new Vector<>();
+//    private int populationImmune;
 
     
     public Region(Polygon polygone)
@@ -34,7 +36,11 @@ public class Region implements Serializable {
         this.populationInfectee = region.populationInfectee;
         this.populationDecedee = region.populationDecedee;
         this.popInitiale = region.popInitiale;
-        
+        this.listeInfections.clear();
+        for (int infections : region.listeInfections) {
+            this.listeInfections.add(infections);
+        }
+
         // Voir si modifier une carte modifie le polygone ici
         this.polygone = region.polygone;
     }
@@ -47,6 +53,7 @@ public class Region implements Serializable {
     public void contaminer(double taux, int cptJours)
     {
         int nouveauxInfectes = contaminationBinomiale(taux);
+        this.listeInfections.add(nouveauxInfectes);
         setPopInfectee(this.getPopInfectee() + nouveauxInfectes);
         setPopSaine(this.getPopSaine() - nouveauxInfectes);
     }
@@ -54,7 +61,7 @@ public class Region implements Serializable {
     public void eliminerPopulation(double taux, int cptJours)
     {
         if (cptJours > 14){
-            int deces = (int)(this.getPopInfectee()/cptJours * taux);
+            int deces = (int)(this.listeInfections.get(cptJours - 14) * taux);
             setPopDecedee(this.getPopDecedee() + deces);
             setPopInfectee(this.getPopInfectee() - deces);
         }
@@ -63,7 +70,7 @@ public class Region implements Serializable {
     public void guerirPop(double taux, int cptJours)
     {
         if (cptJours > 14){
-            int gueris = (int)(this.getPopInfectee()/cptJours * taux);
+            int gueris = (int)(this.listeInfections.get(cptJours - 14) * taux);
             setPopSaine(this.getPopSaine() + gueris);
             setPopInfectee(this.getPopInfectee() - gueris);   
         }
@@ -163,12 +170,12 @@ public class Region implements Serializable {
         }
 
         double randomNumber = 0.0; 
-        double current = 0.0; //threshold
+        double current = 0.0; 
         int success = 0;
 
         for (int k = 0; k < 10; k++){
             randomNumber = rnd.nextDouble();
-            current = 0.0; //threshold
+            current = 0.0;
             success = 0;
             for(int i = 0; i < probabilites.size(); i++){
                 current += probabilites.get(0);

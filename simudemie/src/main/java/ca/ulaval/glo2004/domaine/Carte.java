@@ -50,35 +50,36 @@ public class Carte implements Serializable {
     private void contaminerInterPays() {
         //En fonction de la pop infectee du pays, va infecter le pays lié par sa voie de liaison
         // à un taux de 0.001 (à determiner)
-        double voyageursInfectees;
-        Pays paysAInfecter;
+        
         for (VoieLiaison voie : frontieres)
         {
             if (!voie.getAccessible())
             {
                 continue;
             }
-            for ( Pays pays : listePays)
+            
+            Pays paysOrigine = voie.getPaysOrigine();
+            Pays paysDestination = voie.getPaysDestination();
+            
+            if (paysOrigine.getPourcentageInfectee() > 0)
             {
-                if (pays.getPopInfectee() > 0)
-                {
-                    voyageursInfectees = (0.01 * pays.getPopInfectee()); //Déterminer quel sera le 0.001
-                    if (this.getNom().equals(voie.getPaysOrigine().getNom()) )
-                    {
-                        paysAInfecter = voie.getPaysDestination(); //validation (selon origine/destination)
-                    }else
-                    {
-                        paysAInfecter = voie.getPaysOrigine();
-                    }
-                    for (Region region : paysAInfecter.listeRegions )
-                    {
-                        double prob = Math.random();
-                        if (prob > 0.5) //une chance sur deux
-                        {//Arrondissement avec le int
-                            region.setPopInfectee(region.getPopInfectee() + (int)(voyageursInfectees / paysAInfecter.listeRegions.size()));
-                            region.setPopSaine(region.getPopSaine() - (int)(voyageursInfectees / paysAInfecter.listeRegions.size()));
-                        }
-                    }
+                double prob = Math.random();
+                if (prob * 10 < paysOrigine.getPourcentageInfectee()/10){
+                    //Selection de la region 0 (la region ou se situe la voie - "theoriquement")
+                    int infectees = voie.getPaysDestination().listeRegions.get(0).getPopInfectee();
+                    voie.getPaysDestination().listeRegions.get(0).setPopInfectee(infectees + 1);
+                    voie.getPaysDestination().listeRegions.get(0).setPopSaine(infectees + 1);
+                }
+            }
+            
+            if (paysDestination.getPourcentageInfectee() > 0)
+            {
+                double prob = Math.random();
+                if (prob * 10 < paysDestination.getPourcentageInfectee()/10){
+                    //Selection de la region 0 (la region ou se situe la voie - "theoriquement")
+                    int infectees = voie.getPaysOrigine().listeRegions.get(0).getPopInfectee();
+                    voie.getPaysOrigine().listeRegions.get(0).setPopInfectee(infectees + 1);
+                    voie.getPaysOrigine().listeRegions.get(0).setPopSaine(infectees + 1);
                 }
             }
         }

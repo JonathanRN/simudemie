@@ -37,13 +37,6 @@ public class Pays implements Serializable {
         }
     }
     
-    public void initiliserPopInit()
-    {
-        this.setPopInitiale(this.getPopInfectee() + this.getPopSaine());
-        for (Region r : listeRegions){
-            r.setPopInitiale(r.getPopInfectee() + r.getPopSaine());
-        }
-    }
     
     public void avancerJournee(double tauxInf, double tauxMortalite, double tauxGuerison, int cptJours)
     {
@@ -51,10 +44,6 @@ public class Pays implements Serializable {
         tauxMortalite /= 100d;
         tauxGuerison /= 100d;
         
-        if (cptJours == 1)
-        {
-            initiliserPopInit();
-        }
         double tauxInfAjuste = tauxInf;
         for (Region region : listeRegions)
         {

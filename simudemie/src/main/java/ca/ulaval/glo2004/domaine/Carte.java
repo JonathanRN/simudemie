@@ -39,6 +39,18 @@ public class Carte implements Serializable {
         }
     }
     
+    public void initiliserPopInit()
+    {
+        for(Pays pays : listePays)
+        {
+            pays.setPopInitiale(pays.getPopInfectee() + pays.getPopSaine());
+            
+            for (Region r : pays.listeRegions){
+                r.setPopInitiale(r.getPopInfectee() + r.getPopSaine());
+            }
+        }
+    }
+    
     public void avancerJour(int cptJours) {
 
         for (Pays pays : listePays){

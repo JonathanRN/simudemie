@@ -27,6 +27,11 @@ public class Scenario implements Serializable {
         cartes.add(new Carte(carte));
     }
     
+    public void initialisePopInit()
+    {
+        cartes.get(0).initiliserPopInit();
+    }
+    
     public boolean estCommence() {
         return estCommence;
     }

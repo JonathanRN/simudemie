@@ -96,6 +96,7 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         
         // TODO
         Scenario scenario = new Scenario(nom, GestionnaireCarte.getInstance().getElement(0), GestionnaireMaladie.getInstance().getElement(0));
+        scenario.initialisePopInit();
         ajouter(scenario);
         return scenario;
     }

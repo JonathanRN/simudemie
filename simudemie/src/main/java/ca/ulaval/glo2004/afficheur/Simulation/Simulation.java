@@ -242,14 +242,14 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         BoutonDirect.setOpaque(false);
         BoutonDirect.setPreferredSize(new java.awt.Dimension(35, 70));
         BoutonDirect.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BoutonDirectMouseClicked(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BoutonDirectMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 BoutonDirectMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BoutonDirectMouseReleased(evt);
             }
         });
         BoutonDirect.setLayout(new java.awt.BorderLayout());
@@ -336,7 +336,17 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         updateDirectIcon();
     }//GEN-LAST:event_BoutonDirectMouseExited
 
-    private void BoutonDirectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonDirectMouseClicked
+    private void SliderJourMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderJourMouseReleased
+        if (estEnDirect) {
+            setDirect(false);
+            updateDirectIcon();
+        }
+        
+        getScenario().chargerJour(SliderJour.getValue());
+        getPanel().repaint();
+    }//GEN-LAST:event_SliderJourMouseReleased
+
+    private void BoutonDirectMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonDirectMouseReleased
         setDirect(!estEnDirect);
         updateDirectIcon();
         
@@ -357,17 +367,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         if (estEnDirect) {
             SliderJour.setValue(SliderJour.getMaximum());
         }
-    }//GEN-LAST:event_BoutonDirectMouseClicked
-
-    private void SliderJourMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderJourMouseReleased
-        if (estEnDirect) {
-            setDirect(false);
-            updateDirectIcon();
-        }
-        
-        getScenario().chargerJour(SliderJour.getValue());
-        getPanel().repaint();
-    }//GEN-LAST:event_SliderJourMouseReleased
+    }//GEN-LAST:event_BoutonDirectMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

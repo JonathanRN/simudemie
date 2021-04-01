@@ -239,16 +239,16 @@ public class CreationCarte extends javax.swing.JPanel {
         ZoomPanelParentLayout.setHorizontalGroup(
             ZoomPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ZoomPanelParentLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1072, Short.MAX_VALUE))
+                .addContainerGap(1086, Short.MAX_VALUE))
         );
         ZoomPanelParentLayout.setVerticalGroup(
             ZoomPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ZoomPanelParentLayout.createSequentialGroup()
-                .addContainerGap(641, Short.MAX_VALUE)
+            .addGroup(ZoomPanelParentLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap(655, Short.MAX_VALUE))
         );
 
         ToolBarParent.add(ZoomPanelParent, java.awt.BorderLayout.CENTER);

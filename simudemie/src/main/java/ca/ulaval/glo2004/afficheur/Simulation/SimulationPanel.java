@@ -18,12 +18,14 @@ import javax.swing.SwingUtilities;
 public class SimulationPanel extends ZoomablePanel {
     
     private SimulationAfficheur afficheur;
+    private Simulation simulation;
     
     public SimulationPanel() {
         initComponents();
     }
     
     public void setSimulation(Simulation simulation) {
+        this.simulation = simulation;
         afficheur = new SimulationAfficheur(simulation);
     }
     
@@ -104,6 +106,9 @@ public class SimulationPanel extends ZoomablePanel {
 
     private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
         mouseWheelMoved(evt);
+        
+        simulation.getZoomPopup().onMouseWheel(zoomFactor);
+        
         repaint();
     }//GEN-LAST:event_formMouseWheelMoved
 

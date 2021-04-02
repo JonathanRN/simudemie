@@ -28,9 +28,13 @@ public class CarteScenarioPanel extends PanelArrondi {
         setBackground(new Color(216, 222, 233, 38));
         try {
             MapNameLabel.setFont(FontRegister.RobotoThin.deriveFont(21f));
+            AideLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         }
         catch(Exception e) {
         }
+        
+        // Pas besoin en mode creation carte
+        BoutonExport.setVisible(false);
     }
     
     public void setCarte(Carte carte) {
@@ -60,7 +64,11 @@ public class CarteScenarioPanel extends PanelArrondi {
 
         MapPanelHeader = new javax.swing.JPanel();
         MapNameLabel = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        BoutonExport = new javax.swing.JLabel();
+        ContentParent = new javax.swing.JPanel();
+        AideParent = new javax.swing.JPanel();
+        AidePanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        AideLabel = new javax.swing.JLabel();
         cartePreview = new ca.ulaval.glo2004.afficheur.CreationCarte.CartePreview();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
@@ -74,31 +82,78 @@ public class CarteScenarioPanel extends PanelArrondi {
         MapNameLabel.setText("Aperçu");
         MapPanelHeader.add(MapNameLabel, java.awt.BorderLayout.CENTER);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
-        jLabel2.setToolTipText("Exporter la carte en format JPEG");
-        MapPanelHeader.add(jLabel2, java.awt.BorderLayout.EAST);
+        BoutonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_unsplash_20px.png"))); // NOI18N
+        BoutonExport.setToolTipText("Exporter la carte en format PNG");
+        BoutonExport.setMaximumSize(new java.awt.Dimension(25, 25));
+        BoutonExport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BoutonExportMouseReleased(evt);
+            }
+        });
+        MapPanelHeader.add(BoutonExport, java.awt.BorderLayout.EAST);
 
         add(MapPanelHeader, java.awt.BorderLayout.NORTH);
+
+        ContentParent.setOpaque(false);
+        ContentParent.setLayout(new javax.swing.OverlayLayout(ContentParent));
+
+        AideParent.setOpaque(false);
+
+        AidePanel.setLayout(new java.awt.BorderLayout());
+
+        AideLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        AideLabel.setText("Indice: utilisez la souris pour zoomer et déplacer, comme en mode création.");
+        AideLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 15, 2, 15));
+        AidePanel.add(AideLabel, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout AideParentLayout = new javax.swing.GroupLayout(AideParent);
+        AideParent.setLayout(AideParentLayout);
+        AideParentLayout.setHorizontalGroup(
+            AideParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AideParentLayout.createSequentialGroup()
+                .addContainerGap(212, Short.MAX_VALUE)
+                .addComponent(AidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(211, Short.MAX_VALUE))
+        );
+        AideParentLayout.setVerticalGroup(
+            AideParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AideParentLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(AidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(431, Short.MAX_VALUE))
+        );
+
+        ContentParent.add(AideParent);
 
         javax.swing.GroupLayout cartePreviewLayout = new javax.swing.GroupLayout(cartePreview);
         cartePreview.setLayout(cartePreviewLayout);
         cartePreviewLayout.setHorizontalGroup(
             cartePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 627, Short.MAX_VALUE)
+            .addGap(0, 878, Short.MAX_VALUE)
         );
         cartePreviewLayout.setVerticalGroup(
             cartePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 426, Short.MAX_VALUE)
+            .addGap(0, 472, Short.MAX_VALUE)
         );
 
-        add(cartePreview, java.awt.BorderLayout.CENTER);
+        ContentParent.add(cartePreview);
+
+        add(ContentParent, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
+        prendrePhoto();
+    }//GEN-LAST:event_BoutonExportMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AideLabel;
+    private ca.ulaval.glo2004.afficheur.PanelArrondi AidePanel;
+    private javax.swing.JPanel AideParent;
+    private javax.swing.JLabel BoutonExport;
+    private javax.swing.JPanel ContentParent;
     private javax.swing.JLabel MapNameLabel;
     private javax.swing.JPanel MapPanelHeader;
     private ca.ulaval.glo2004.afficheur.CreationCarte.CartePreview cartePreview;
-    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

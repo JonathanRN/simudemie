@@ -6,25 +6,12 @@
 package ca.ulaval.glo2004.afficheur.onglets;
 
 import ca.ulaval.glo2004.afficheur.objetsScenario.ObjetScenarioCarte;
-import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 
 /**
  *
  * @author Jonathan
  */
 public class OngletScenarioCarte extends OngletUI {
-    
-    /**
-     * Creates new form ScenarioTab
-     */
-    public OngletScenarioCarte() {
-        //initComponents();
-    }
-
-    @Override
-    public void onClickObjetUI(ObjetUI objet) {
-        super.onClickObjetUI(objet);
-    }
 
     public int getIndexCourant() {
         int index = -1;
@@ -33,6 +20,18 @@ public class OngletScenarioCarte extends OngletUI {
             index = osc.getIndex();
         }
         return index;
+    }
+
+    public void ajouterObjetUI(ObjetScenarioCarte osc) {
+        objets.add(osc);
+        
+        if (objets.size() == 1) {
+            this.onClickObjetUI(osc);
+        }
+    }
+    
+    public void clear() {
+        objets.clear();
     }
     
     /**

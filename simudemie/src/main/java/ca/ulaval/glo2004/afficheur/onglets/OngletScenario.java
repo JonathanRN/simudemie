@@ -75,6 +75,7 @@ public class OngletScenario extends OngletUI {
                 ProjectPanelContainer.add(card);
                 onClickObjetUI(card);
                 setCreating(true);
+                
                 creationScenarioPanel1.clear();
                 loadCartes();
                 loadMaladies();
@@ -169,22 +170,28 @@ public class OngletScenario extends OngletUI {
     }
     
     private void loadCartes() {
+        ongletScenarioCarte.clear();
+        
         List<Carte> cartes = GestionnaireCarte.getInstance().getList();
         for(int index = 0; index < cartes.size(); index++) {
             Carte carte = cartes.get(index);
             ObjetScenarioCarte osc = new ObjetScenarioCarte(ongletScenarioCarte, index,
                                             carte.getNom(), carte.getListePays().size(), carte.getPopulationTotal());
             creationScenarioPanel1.addCarte(osc);
+            ongletScenarioCarte.ajouterObjetUI(osc);
         }
     }
     
     private void loadMaladies() {
+        ongletScenarioMaladie.clear();
+        
         List<Maladie> maladies = GestionnaireMaladie.getInstance().getList();
         for(int index = 0; index < maladies.size(); index++) {
             Maladie maladie = maladies.get(index);
             ObjetScenarioMaladie osm = new ObjetScenarioMaladie(ongletScenarioMaladie, index, maladie.getNom(),
                                             maladie.getTauxInfection(), maladie.getTauxGuerison(), maladie.getTauxMortalite());
             creationScenarioPanel1.addMaladie(osm);
+            ongletScenarioMaladie.ajouterObjetUI(osm);
         }
     }
     
@@ -352,24 +359,12 @@ public class OngletScenario extends OngletUI {
 
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(207, 58));
+        jPanel1.setLayout(new javax.swing.OverlayLayout(jPanel1));
+        jPanel1.add(scenarioMapPanel2);
 
         creationScenarioPanel1.setMinimumSize(new java.awt.Dimension(207, 58));
         creationScenarioPanel1.setPreferredSize(new java.awt.Dimension(207, 58));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(creationScenarioPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(scenarioMapPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(creationScenarioPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(scenarioMapPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
-        );
+        jPanel1.add(creationScenarioPanel1);
 
         Layout.add(jPanel1);
         Layout.add(scenarioStatsPanel1);

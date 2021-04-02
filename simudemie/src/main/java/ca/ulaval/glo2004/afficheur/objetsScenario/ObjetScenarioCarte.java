@@ -8,7 +8,6 @@ package ca.ulaval.glo2004.afficheur.objetsScenario;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 import ca.ulaval.glo2004.afficheur.onglets.OngletScenarioCarte;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
-import java.awt.Component;
 
 public class ObjetScenarioCarte extends ObjetUI {    
     private int index;

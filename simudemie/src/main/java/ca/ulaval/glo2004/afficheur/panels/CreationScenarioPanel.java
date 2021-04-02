@@ -7,7 +7,6 @@ package ca.ulaval.glo2004.afficheur.panels;
 
 import ca.ulaval.glo2004.afficheur.objetsScenario.ObjetScenarioCarte;
 import ca.ulaval.glo2004.afficheur.objetsScenario.ObjetScenarioMaladie;
-import ca.ulaval.glo2004.afficheur.objetsUI.ObjetCarte;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.AdjustmentEvent;

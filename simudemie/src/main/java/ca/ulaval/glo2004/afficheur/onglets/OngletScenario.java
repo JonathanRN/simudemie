@@ -65,7 +65,7 @@ public class OngletScenario extends OngletUI {
     @Override
     public void ajouterObjetUI() {
         if(!cardLocked) {
-            String nomScenario = JOptionPane.showInputDialog(this, "Entrez le nom de la nouvelle maladie", "", JOptionPane.QUESTION_MESSAGE);
+            String nomScenario = JOptionPane.showInputDialog(this, "Entrez le nom du nouveau scénario", "", JOptionPane.QUESTION_MESSAGE);
         
             if (nomScenario != null && !nomScenario.isEmpty()) {
                 super.ajouterObjetUI();
@@ -143,25 +143,37 @@ public class OngletScenario extends OngletUI {
     }
     
     public void onStartSimulation() {
-        int indexCarte = ongletScenarioCarte.getIndexCourant();
-        int indexMaladie = ongletScenarioMaladie.getIndexCourant();
-        int result = JOptionPane.NO_OPTION;
-        
-        if(indexCarte != -1 && indexMaladie != -1) {
-            result = JOptionPane.showConfirmDialog(this, "Voulez-vous commencer cette simulation?", "Commencer la simulation?", JOptionPane.YES_NO_CANCEL_OPTION);
+        if(cardLocked) { // Si on est en train de créer le scénario
+            int indexCarte = ongletScenarioCarte.getIndexCourant();
+            int indexMaladie = ongletScenarioMaladie.getIndexCourant();
+            int result = JOptionPane.NO_OPTION;
+
+            if(indexCarte != -1 && indexMaladie != -1) {
+                result = JOptionPane.showConfirmDialog(this, "Voulez-vous commencer cette simulation?", "Commencer la simulation?", JOptionPane.YES_NO_OPTION);
+            } else {
+                JOptionPane.showMessageDialog(this, "Vous devez choisir une carte et une maladie.", "", JOptionPane.WARNING_MESSAGE);
+            }
+
+            if (result == JOptionPane.YES_OPTION) {
+                setCreating(false);
+                ObjetScenario objetScenario = (ObjetScenario) getCourant();
+                Object[] args = {objetScenario.getSimulationName(), indexCarte, indexMaladie};
+                GestionnaireScenario.getInstance().creer(args);
+
+                startSimulation();
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Vous devez choisir une carte et une maladie.", "", JOptionPane.WARNING_MESSAGE);
+            int result = JOptionPane.showConfirmDialog(this, "Voulez-vous résumer cette simulation?", "Résumer la simulation?", JOptionPane.YES_NO_OPTION);
+            
+            if (result == JOptionPane.YES_OPTION) {
+                startSimulation();
+            }
         }
-
-        if (result == JOptionPane.YES_OPTION) {
-            setCreating(false);
-            ObjetScenario objetScenario = (ObjetScenario) getCourant();
-            Object[] args = {objetScenario.getSimulationName(), indexCarte, indexMaladie};
-            GestionnaireScenario.getInstance().creer(args);
-
-            FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
-            frame.startSimulation(getIndexCourant(), this);
-        }
+    }
+    
+    private void startSimulation() {
+        FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
+        frame.startSimulation(getIndexCourant(), this);
     }
     
     private boolean contientMaladieEtCarte() {

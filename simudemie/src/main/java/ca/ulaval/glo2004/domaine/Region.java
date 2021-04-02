@@ -22,7 +22,7 @@ public class Region implements Serializable {
     public int popInitiale;
     private final Polygon polygone;
     private Vector<Integer> listeInfections = new Vector<>();
-//    private int populationImmune;
+    private int populationImmune;
 
     
     public Region(Polygon polygone)
@@ -35,6 +35,7 @@ public class Region implements Serializable {
         this.populationSaine = region.populationSaine;
         this.populationInfectee = region.populationInfectee;
         this.populationDecedee = region.populationDecedee;
+        this.populationImmune = region.populationImmune;
         this.popInitiale = region.popInitiale;
         this.listeInfections.clear();
         for (int infections : region.listeInfections) {
@@ -45,10 +46,6 @@ public class Region implements Serializable {
         this.polygone = region.polygone;
     }
     
-//    public void deplacementRegions()
-//    {
-//        //TODO Déplacement des populations entre les régions
-//    }
     
     public void contaminer(double taux, int cptJours)
     {
@@ -76,17 +73,23 @@ public class Region implements Serializable {
         }
     }
     
+    public void vaccinationPop(double taux, int vaccinationParJour)
+    {
+        int nouveauxImmune = (int)((float)vaccinationParJour * taux);
+        
+    }
+    
     public String getNom(){return nom;}
     
     public void setPopTotale(int pop) {
         this.populationSaine = pop;
     }
     
-    public int getPopTotale() { return populationSaine + populationInfectee; }
+    public int getPopTotale() { return populationSaine + populationInfectee + populationImmune; }
     
     public int getPopSaine(){ return populationSaine; }
     
-//    public int getPopImmunisee(){return populationImmune;}
+    public int getPopImmunisee(){return populationImmune;}
     
     public int getPopInfectee(){ return populationInfectee; }
     
@@ -127,10 +130,10 @@ public class Region implements Serializable {
         this.populationSaine = clamp(populationSaine, 0, this.getPopTotale());
     }
     
-//    private void setPopImmune(int populationImmune)
-//    {
-//        this.populationImmune = populationImmune;
-//    }
+    private void setPopImmune(int populationImmune)
+    {
+        this.populationImmune = populationImmune;
+    }
         
     public void setPopInfectee(int populationInfectee)
     {
@@ -187,7 +190,7 @@ public class Region implements Serializable {
         }
 
 
-        nbInfectes = (int)(this.getPopInfectee()/(cpt*0.3));
+        nbInfectes = (int)(this.getPopInfectee()/(cpt*0.2));
 
         return (int)Math.ceil(nbInfectes * tauxPropag + success);
     }

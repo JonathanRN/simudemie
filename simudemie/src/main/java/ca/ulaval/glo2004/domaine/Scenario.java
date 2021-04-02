@@ -23,7 +23,7 @@ public class Scenario implements Serializable {
         this.nom = nom;
         
         // Ajoute la carte en parametre comme jour 0
-        carte.setMaladie(maladie);
+        carte.setMaladie(new Maladie(maladie));
         cartes.add(new Carte(carte));
     }
     

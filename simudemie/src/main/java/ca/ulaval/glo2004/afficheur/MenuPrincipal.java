@@ -18,6 +18,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         initComponents();
         OngletMaladie.init();
         OngletCarte.init();
+        OngletScenario.init();
     }
 
     /**

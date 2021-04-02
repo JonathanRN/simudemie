@@ -7,13 +7,19 @@ package ca.ulaval.glo2004.afficheur.onglets;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
+import ca.ulaval.glo2004.afficheur.objetsScenario.ObjetScenarioCarte;
+import ca.ulaval.glo2004.afficheur.objetsScenario.ObjetScenarioMaladie;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetScenario;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
+import ca.ulaval.glo2004.domaine.Carte;
+import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireMaladie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -25,11 +31,15 @@ import javax.swing.SwingUtilities;
 public class OngletScenario extends OngletUI {
 
     private boolean cardLocked;
+    private OngletScenarioCarte ongletScenarioCarte;
+    private OngletScenarioMaladie ongletScenarioMaladie;
     
     public OngletScenario() {
         initComponents();
         
         cardLocked = false;
+        ongletScenarioCarte = new OngletScenarioCarte();
+        ongletScenarioMaladie = new OngletScenarioMaladie();
         try {
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             ScenariosLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
@@ -64,10 +74,6 @@ public class OngletScenario extends OngletUI {
             onClickObjetUI(card);
             ProjectPanelContainer.add(card);
             updateUI();
-
-            // TODO: Afficher panneau information pour créer scénario
-            Object[] args = {"Simulation: " + objets.size()};
-            GestionnaireScenario.getInstance().creer(args);
         }
     }
 
@@ -117,37 +123,50 @@ public class OngletScenario extends OngletUI {
     }
     
     public void onStartSimulation() {
-        JOptionPane optionPane = new JOptionPane();
-        optionPane.setMessage("Voulez-vous commencer cette simulation?");
-        optionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
-        optionPane.setOptionType(JOptionPane.YES_NO_CANCEL_OPTION);
+        int indexCarte = ongletScenarioCarte.getIndexCourant();
+        int indexMaladie = ongletScenarioMaladie.getIndexCourant();
+        int result = JOptionPane.NO_OPTION;
         
-        int result = JOptionPane.showOptionDialog(
-            SwingUtilities.windowForComponent(this),
-            optionPane.getMessage(),
-            "Commencer la simulation?",
-            optionPane.getOptionType(),
-            optionPane.getMessageType(),
-            optionPane.getIcon(),
-            optionPane.getOptions(),
-            optionPane.getInitialValue());
-        
+        if(indexCarte != -1 && indexMaladie != -1) {
+            result = JOptionPane.showConfirmDialog(this, "Voulez-vous commencer cette simulation?", "Commencer la simulation?", JOptionPane.YES_NO_CANCEL_OPTION);
+        } else {
+            JOptionPane.showMessageDialog(this, "Vous devez choisir une carte et une maladie.", "", JOptionPane.WARNING_MESSAGE);
+        }
+
         if (result == JOptionPane.YES_OPTION) {
             setCreating(false);
-            //GestionnaireScenario.getInstance().creer();
-            
+            // TODO: Changer le nom de la simulation
+            Object[] args = {"Simulation: " + objets.size(), indexCarte, indexMaladie};
+            GestionnaireScenario.getInstance().creer(args);
+
             FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
             frame.startSimulation(getIndexCourant());
         }
     }
-
+    
     private boolean contientMaladieEtCarte() {
         return GestionnaireMaladie.getInstance().getList().size() > 0 &&
                 GestionnaireCarte.getInstance().getList().size() > 0;
     }
     
     private void loadCartes() {
-        
+        List<Carte> cartes = GestionnaireCarte.getInstance().getList();
+        for(int index = 0; index < cartes.size(); index++) {
+            Carte carte = cartes.get(index);
+            ObjetScenarioCarte osc = new ObjetScenarioCarte(ongletScenarioCarte, index,
+                                            carte.getNom(), carte.getListePays().size(), carte.getPopulationTotal());
+            creationScenarioPanel1.addCarte(osc);
+        }
+    }
+    
+    private void loadMaladies() {
+        List<Maladie> maladies = GestionnaireMaladie.getInstance().getList();
+        for(int index = 0; index < maladies.size(); index++) {
+            Maladie maladie = maladies.get(index);
+            ObjetScenarioMaladie osm = new ObjetScenarioMaladie(ongletScenarioMaladie, index, maladie.getNom(),
+                                            maladie.getTauxInfection(), maladie.getTauxGuerison(), maladie.getTauxMortalite());
+            creationScenarioPanel1.addMaladie(osm);
+        }
     }
     
     /**
@@ -344,7 +363,9 @@ public class OngletScenario extends OngletUI {
     private void AddScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseReleased
         if(contientMaladieEtCarte()) {
             setCreating(true);
+            creationScenarioPanel1.clear();
             loadCartes();
+            loadMaladies();
             this.ajouterObjetUI();
         } else {
             JOptionPane.showMessageDialog(this, "Vous devez avoir au moins une maladie et une carte dans votre répertoire.",

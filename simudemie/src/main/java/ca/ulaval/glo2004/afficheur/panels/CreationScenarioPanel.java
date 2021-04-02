@@ -5,9 +5,13 @@
  */
 package ca.ulaval.glo2004.afficheur.panels;
 
+import ca.ulaval.glo2004.afficheur.objetsScenario.ObjetScenarioCarte;
+import ca.ulaval.glo2004.afficheur.objetsScenario.ObjetScenarioMaladie;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetCarte;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import javax.swing.Box;
 import javax.swing.JPanel;
 
@@ -24,22 +28,48 @@ public class CreationScenarioPanel extends javax.swing.JPanel {
         initComponents();
         CartesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
         MaladiesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
+        
+        // Gestion pour le bogue de refresh sur le scroll
+        AdjustmentListener adjustementListener = new AdjustmentListener(){
+            @Override
+            public void adjustmentValueChanged(AdjustmentEvent e) {
+                repaint();
+            };
+        };
+        
+        CartesScrollPane.getVerticalScrollBar().addAdjustmentListener(adjustementListener);
+        MaladiesScrollPane.getVerticalScrollBar().addAdjustmentListener(adjustementListener);
     }
 
     public JPanel getCartesContainer() {
         return CartesContainer;
     }
     
-    public void addCarte(ObjetCarte objetCarte) {
+    public void addCarte(ObjetScenarioCarte objetScenarioCarte) {
         if(CartesContainer.getComponentCount() != 0) {
-            CartesContainer.add(getFiller());
+            CartesContainer.add(getFiller(25));
         }
-        objetCarte.setMaximumSize(new Dimension(200, 75));
-        CartesContainer.add(objetCarte);
+        CartesContainer.add(objetScenarioCarte);
+        CartesScrollPane.revalidate();
+        CartesScrollPane.repaint();
     }
     
-    private Component getFiller() {
-        return Box.createRigidArea(new Dimension(0, 25));
+    public void addMaladie(ObjetScenarioMaladie objetScenarioMaladie) {
+        if(MaladiesContainer.getComponentCount() != 0) {
+            MaladiesContainer.add(getFiller(25));
+        }
+        MaladiesContainer.add(objetScenarioMaladie);
+        MaladiesScrollPane.revalidate();
+        MaladiesScrollPane.repaint();
+    }
+    
+    private Component getFiller(int y) {
+        return Box.createRigidArea(new Dimension(0, y));
+    }
+    
+    public void clear() {
+        CartesContainer.removeAll();
+        MaladiesContainer.removeAll();
     }
     
     /**
@@ -56,33 +86,36 @@ public class CreationScenarioPanel extends javax.swing.JPanel {
         MaladiesScrollPane = new javax.swing.JScrollPane();
         MaladiesContainer = new javax.swing.JPanel();
 
+        setOpaque(false);
         setLayout(new java.awt.GridLayout(1, 2, 25, 0));
 
         CartesScrollPane.setBackground(new java.awt.Color(46, 52, 64));
-        CartesScrollPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        CartesScrollPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         CartesScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         CartesScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         CartesScrollPane.setMaximumSize(new java.awt.Dimension(75, 250));
         CartesScrollPane.setMinimumSize(new java.awt.Dimension(75, 250));
+        CartesScrollPane.setOpaque(false);
         CartesScrollPane.setPreferredSize(new java.awt.Dimension(75, 250));
 
         CartesContainer.setBackground(new java.awt.Color(46, 52, 64));
-        CartesContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -25, 0, 0));
+        CartesContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         CartesContainer.setLayout(new javax.swing.BoxLayout(CartesContainer, javax.swing.BoxLayout.Y_AXIS));
         CartesScrollPane.setViewportView(CartesContainer);
 
         add(CartesScrollPane);
 
         MaladiesScrollPane.setBackground(new java.awt.Color(46, 52, 64));
-        MaladiesScrollPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        MaladiesScrollPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         MaladiesScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         MaladiesScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         MaladiesScrollPane.setMaximumSize(new java.awt.Dimension(75, 250));
         MaladiesScrollPane.setMinimumSize(new java.awt.Dimension(75, 250));
+        MaladiesScrollPane.setOpaque(false);
         MaladiesScrollPane.setPreferredSize(new java.awt.Dimension(75, 250));
 
         MaladiesContainer.setBackground(new java.awt.Color(46, 52, 64));
-        MaladiesContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -25, 0, 0));
+        MaladiesContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         MaladiesContainer.setLayout(new javax.swing.BoxLayout(MaladiesContainer, javax.swing.BoxLayout.Y_AXIS));
         MaladiesScrollPane.setViewportView(MaladiesContainer);
 

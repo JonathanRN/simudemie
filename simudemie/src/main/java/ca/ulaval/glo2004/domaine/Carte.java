@@ -213,4 +213,12 @@ public class Carte implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
+    
+    public int getPopulationTotal() {
+        int total = 0;
+        for(Pays pays : getListePays()) {
+            total += pays.getPopTotale();
+        }
+        return total;
+    }
 }

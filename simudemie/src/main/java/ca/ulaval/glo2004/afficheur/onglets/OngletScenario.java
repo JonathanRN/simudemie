@@ -65,14 +65,23 @@ public class OngletScenario extends OngletUI {
     @Override
     public void ajouterObjetUI() {
         if(!cardLocked) {
-            super.ajouterObjetUI();
-            cardLocked = true;
-            ObjetScenario card = new ObjetScenario(this);
-            card.setSimulationName("Simulation: " + objets.size());
-            objets.add(card);
-            onClickObjetUI(card);
-            ProjectPanelContainer.add(card);
-            updateUI();
+            String nomScenario = JOptionPane.showInputDialog(this, "Entrez le nom de la nouvelle maladie", "", JOptionPane.QUESTION_MESSAGE);
+        
+            if (nomScenario != null && !nomScenario.isEmpty()) {
+                super.ajouterObjetUI();
+                ObjetScenario card = new ObjetScenario(this);
+                card.setSimulationName(nomScenario);
+                objets.add(card);
+                ProjectPanelContainer.add(card);
+                onClickObjetUI(card);
+                setCreating(true);
+                creationScenarioPanel1.clear();
+                loadCartes();
+                loadMaladies();
+                
+                cardLocked = true;
+                updateUI();
+            }
         }
     }
 
@@ -103,6 +112,9 @@ public class OngletScenario extends OngletUI {
             int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer ce scénario?", "", JOptionPane.WARNING_MESSAGE);
 
             if(result == JOptionPane.YES_OPTION && objets.size() > 0) {
+                if(!cardLocked) { // Si le scénario est barré, il n'est pas encore dans le controller, donc ne pas faire ligne suivante
+                    GestionnaireScenario.getInstance().supprimer(getIndexCourant());
+                }
                 ProjectPanelContainer.remove(courant);
                 updateUI();
                 setCreating(false);
@@ -120,8 +132,10 @@ public class OngletScenario extends OngletUI {
 
     @Override
     public void onClickObjetUI(ObjetUI objet) {
-        super.onClickObjetUI(objet);
-        scenarioMapPanel2.setCarte(GestionnaireScenario.getInstance().getElement(this.getIndexCourant()).getCarteJourCourant());
+        if (!cardLocked) {
+            super.onClickObjetUI(objet);
+            scenarioMapPanel2.setCarte(GestionnaireScenario.getInstance().getElement(this.getIndexCourant()).getCarteJourCourant());
+        }
     }
     
     public void onStartSimulation() {
@@ -137,8 +151,8 @@ public class OngletScenario extends OngletUI {
 
         if (result == JOptionPane.YES_OPTION) {
             setCreating(false);
-            // TODO: Changer le nom de la simulation
-            Object[] args = {"Simulation: " + objets.size(), indexCarte, indexMaladie};
+            ObjetScenario objetScenario = (ObjetScenario) getCourant();
+            Object[] args = {objetScenario.getSimulationName(), indexCarte, indexMaladie};
             GestionnaireScenario.getInstance().creer(args);
 
             FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
@@ -364,10 +378,6 @@ public class OngletScenario extends OngletUI {
 
     private void AddScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseReleased
         if(contientMaladieEtCarte()) {
-            setCreating(true);
-            creationScenarioPanel1.clear();
-            loadCartes();
-            loadMaladies();
             this.ajouterObjetUI();
         } else {
             JOptionPane.showMessageDialog(this, "Vous devez avoir au moins une maladie et une carte dans votre répertoire.",

@@ -24,6 +24,10 @@ public class ObjetScenario extends ObjetUI {
         VirusName.setFont(FontRegister.RobotoLight.deriveFont(12f));
     }
     
+    public String getSimulationName() {
+        return SimulationName.getText();
+    }
+    
     public void setSimulationName(String name) {
         SimulationName.setText(name);
     }
@@ -88,7 +92,7 @@ public class ObjetScenario extends ObjetUI {
         SimulationName.setText("Nom de la simulation");
 
         Day.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        Day.setText("Jour 238");
+        Day.setText("Jour 0");
         Day.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         Day.setBorder(javax.swing.BorderFactory.createEmptyBorder(-1, -1, -1, -1));
         Day.setIconTextGap(0);
@@ -104,28 +108,24 @@ public class ObjetScenario extends ObjetUI {
         Bars.setLayout(new java.awt.GridLayout(4, 0));
 
         InfectedProgressBar.setForeground(new java.awt.Color(191, 97, 106));
-        InfectedProgressBar.setValue(25);
         InfectedProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
         InfectedProgressBar.setBorderPainted(false);
         InfectedProgressBar.setString("Infectés");
         Bars.add(InfectedProgressBar);
 
         CuredProgressBar.setForeground(new java.awt.Color(163, 190, 140));
-        CuredProgressBar.setValue(100);
         CuredProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
         CuredProgressBar.setBorderPainted(false);
         CuredProgressBar.setString("Guéris");
         Bars.add(CuredProgressBar);
 
         ImmunedProgressBar.setForeground(new java.awt.Color(136, 192, 208));
-        ImmunedProgressBar.setValue(75);
         ImmunedProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
         ImmunedProgressBar.setBorderPainted(false);
         ImmunedProgressBar.setString("Immunisés");
         Bars.add(ImmunedProgressBar);
 
         DeadProgressBar.setForeground(new java.awt.Color(180, 142, 173));
-        DeadProgressBar.setValue(50);
         DeadProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
         DeadProgressBar.setBorderPainted(false);
         DeadProgressBar.setString("Morts");

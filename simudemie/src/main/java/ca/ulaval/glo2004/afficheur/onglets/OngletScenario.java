@@ -7,18 +7,13 @@ package ca.ulaval.glo2004.afficheur.onglets;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
-import ca.ulaval.glo2004.afficheur.objetsScenario.ObjetScenarioCarte;
-import ca.ulaval.glo2004.afficheur.objetsScenario.ObjetScenarioMaladie;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetScenario;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
-import ca.ulaval.glo2004.domaine.Carte;
-import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireMaladie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.Color;
-import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -28,18 +23,14 @@ import javax.swing.SwingUtilities;
  * @author Jonathan
  */
 public class OngletScenario extends OngletUI {
-
-    private boolean cardLocked;
-    private OngletScenarioCarte ongletScenarioCarte;
-    private OngletScenarioMaladie ongletScenarioMaladie;
-    
+        
     public OngletScenario() {
         initComponents();
         
-        cardLocked = false;
-        ongletScenarioCarte = new OngletScenarioCarte();
-        ongletScenarioMaladie = new OngletScenarioMaladie();
         try {
+            CreationScenarioPanel.setVisible(false);
+            CreationScenarioPanel.setOngletScenario(this);
+            
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             ScenariosLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             Sce_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
@@ -49,7 +40,6 @@ public class OngletScenario extends OngletUI {
             BoutonExport.setBackground(new Color(216, 222, 233, 38));
             
             scenarioStatsPanel1.setOnglet(this);
-            creationScenarioPanel1.setVisible(false);
         } catch (Exception e) {
         }
     }
@@ -62,31 +52,24 @@ public class OngletScenario extends OngletUI {
         }
     }
     
-    @Override
-    public void ajouterObjetUI() {
-        if(!cardLocked) {
-            String nomScenario = JOptionPane.showInputDialog(this, "Entrez le nom du nouveau scénario", "", JOptionPane.QUESTION_MESSAGE);
-        
-            if (nomScenario != null && !nomScenario.isEmpty()) {
-                super.ajouterObjetUI();
-                ObjetScenario card = new ObjetScenario(this);
-                card.setSimulationName(nomScenario);
-                objets.add(card);
-                ProjectPanelContainer.add(card);
-                onClickObjetUI(card);
-                setCreating(true);
-                
-                creationScenarioPanel1.clear();
-                loadCartes();
-                loadMaladies();
-                
-                cardLocked = true;
-                updateUI();
-            }
-        }
+    private Scenario getScenarioCourant() {
+        return GestionnaireScenario.getInstance().getElement(this.getIndexCourant());
     }
 
-    private void ajouterCard(Scenario scenario) {
+    @Override
+    public void onClickObjetUI(ObjetUI objet) {
+        super.onClickObjetUI(objet);
+        
+        scenarioStatsPanel1.getResumeButton().setText(getScenarioCourant().estCommence() ? "Résumer" : "Commencer");
+    }
+    
+    @Override
+    public void ajouterObjetUI() {
+        CreationScenarioPanel.setVisible(true);
+        CreationScenarioPanel.loadElements();
+    }
+
+    public void ajouterCard(Scenario scenario) {
         ObjetScenario card = new ObjetScenario(this);
         card.setSimulationName(scenario.getNom());
         card.setDays(1);
@@ -113,12 +96,9 @@ public class OngletScenario extends OngletUI {
             int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer ce scénario?", "", JOptionPane.WARNING_MESSAGE);
 
             if(result == JOptionPane.YES_OPTION && objets.size() > 0) {
-                if(!cardLocked) { // Si le scénario est barré, il n'est pas encore dans le controller, donc ne pas faire ligne suivante
-                    GestionnaireScenario.getInstance().supprimer(getIndexCourant());
-                }
+                GestionnaireScenario.getInstance().supprimer(getIndexCourant());
                 ProjectPanelContainer.remove(courant);
                 updateUI();
-                setCreating(false);
                 
                 super.retirerCourant();
             }
@@ -126,48 +106,17 @@ public class OngletScenario extends OngletUI {
             if (objets.isEmpty()) {
                 scenarioMapPanel2.setCarte(null);
             }
-            
-            cardLocked = false;
-        }
-    }
-
-    @Override
-    public void onClickObjetUI(ObjetUI objet) {
-        if (!cardLocked) {
-            super.onClickObjetUI(objet);
-            Scenario scenario = GestionnaireScenario.getInstance().getElement(this.getIndexCourant());
-            if (scenario != null) {
-                scenarioMapPanel2.setCarte(scenario.getCarteJourCourant());
-            }
         }
     }
     
     public void onStartSimulation() {
-        if(cardLocked) { // Si on est en train de créer le scénario
-            int indexCarte = ongletScenarioCarte.getIndexCourant();
-            int indexMaladie = ongletScenarioMaladie.getIndexCourant();
-            int result = JOptionPane.NO_OPTION;
-
-            if(indexCarte != -1 && indexMaladie != -1) {
-                result = JOptionPane.showConfirmDialog(this, "Voulez-vous commencer cette simulation?", "Commencer la simulation?", JOptionPane.YES_NO_OPTION);
-            } else {
-                JOptionPane.showMessageDialog(this, "Vous devez choisir une carte et une maladie.", "", JOptionPane.WARNING_MESSAGE);
-            }
-
-            if (result == JOptionPane.YES_OPTION) {
-                setCreating(false);
-                ObjetScenario objetScenario = (ObjetScenario) getCourant();
-                Object[] args = {objetScenario.getSimulationName(), indexCarte, indexMaladie};
-                GestionnaireScenario.getInstance().creer(args);
-
-                startSimulation();
-            }
-        } else {
-            int result = JOptionPane.showConfirmDialog(this, "Voulez-vous résumer cette simulation?", "Résumer la simulation?", JOptionPane.YES_NO_OPTION);
-            
-            if (result == JOptionPane.YES_OPTION) {
-                startSimulation();
-            }
+        Scenario scenario = getScenarioCourant();
+        String texte = scenario.estCommence() ? "Voulez-vous résumer cette simulation?" : "Voulez-vous commencer cette simulation?";
+        String titre = scenario.estCommence() ? "Résumer la simulation?" : "Commencer la simulation?";
+        
+        int result = JOptionPane.showConfirmDialog(this, texte, titre, JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION) {
+            startSimulation();
         }
     }
     
@@ -181,32 +130,6 @@ public class OngletScenario extends OngletUI {
                 GestionnaireCarte.getInstance().getList().size() > 0;
     }
     
-    private void loadCartes() {
-        ongletScenarioCarte.clear();
-        
-        List<Carte> cartes = GestionnaireCarte.getInstance().getList();
-        for(int index = 0; index < cartes.size(); index++) {
-            Carte carte = cartes.get(index);
-            ObjetScenarioCarte osc = new ObjetScenarioCarte(ongletScenarioCarte, index,
-                                            carte.getNom(), carte.getListePays().size(), carte.getPopulationTotal());
-            creationScenarioPanel1.addCarte(osc);
-            ongletScenarioCarte.ajouterObjetUI(osc);
-        }
-    }
-    
-    private void loadMaladies() {
-        ongletScenarioMaladie.clear();
-        
-        List<Maladie> maladies = GestionnaireMaladie.getInstance().getList();
-        for(int index = 0; index < maladies.size(); index++) {
-            Maladie maladie = maladies.get(index);
-            ObjetScenarioMaladie osm = new ObjetScenarioMaladie(ongletScenarioMaladie, index, maladie.getNom(),
-                                            maladie.getTauxInfection(), maladie.getTauxGuerison(), maladie.getTauxMortalite());
-            creationScenarioPanel1.addMaladie(osm);
-            ongletScenarioMaladie.ajouterObjetUI(osm);
-        }
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -216,6 +139,8 @@ public class OngletScenario extends OngletUI {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        CreationScenarioPanel = new ca.ulaval.glo2004.afficheur.panels.CreationScenarioPanel();
+        Main = new javax.swing.JPanel();
         Scenarios = new javax.swing.JPanel();
         ScenariosTitle = new javax.swing.JPanel();
         ScenariosLabel = new javax.swing.JLabel();
@@ -230,12 +155,16 @@ public class OngletScenario extends OngletUI {
         Layout = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         jPanel1 = new javax.swing.JPanel();
         scenarioMapPanel2 = new ca.ulaval.glo2004.afficheur.panels.CarteScenarioPanel();
-        creationScenarioPanel1 = new ca.ulaval.glo2004.afficheur.panels.CreationScenarioPanel();
         scenarioStatsPanel1 = new ca.ulaval.glo2004.afficheur.panels.StatsScenarioPanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
-        setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 35, 35));
-        setLayout(new java.awt.BorderLayout());
+        setOpaque(false);
+        setLayout(new javax.swing.OverlayLayout(this));
+        add(CreationScenarioPanel);
+
+        Main.setBackground(new java.awt.Color(46, 52, 64));
+        Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 35, 35));
+        Main.setLayout(new java.awt.BorderLayout());
 
         Scenarios.setBackground(new java.awt.Color(46, 52, 64));
         Scenarios.setBorder(javax.swing.BorderFactory.createEmptyBorder(35, 0, 0, 0));
@@ -317,7 +246,7 @@ public class OngletScenario extends OngletUI {
                 .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BoutonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 729, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 915, Short.MAX_VALUE)
                 .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -352,7 +281,7 @@ public class OngletScenario extends OngletUI {
 
         Scenarios.add(ScenariosScrollPane, java.awt.BorderLayout.CENTER);
 
-        add(Scenarios, java.awt.BorderLayout.NORTH);
+        Main.add(Scenarios, java.awt.BorderLayout.NORTH);
 
         Sce_Informations.setBorder(javax.swing.BorderFactory.createEmptyBorder(35, 0, 0, 0));
         Sce_Informations.setOpaque(false);
@@ -374,20 +303,18 @@ public class OngletScenario extends OngletUI {
         jPanel1.setLayout(new javax.swing.OverlayLayout(jPanel1));
         jPanel1.add(scenarioMapPanel2);
 
-        creationScenarioPanel1.setMinimumSize(new java.awt.Dimension(207, 58));
-        creationScenarioPanel1.setPreferredSize(new java.awt.Dimension(207, 58));
-        jPanel1.add(creationScenarioPanel1);
-
         Layout.add(jPanel1);
         Layout.add(scenarioStatsPanel1);
 
         Sce_Informations.add(Layout, java.awt.BorderLayout.CENTER);
 
-        add(Sce_Informations, java.awt.BorderLayout.CENTER);
+        Main.add(Sce_Informations, java.awt.BorderLayout.CENTER);
+
+        add(Main);
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseReleased
-        if(contientMaladieEtCarte()) {
+        if (contientMaladieEtCarte()) {
             this.ajouterObjetUI();
         } else {
             JOptionPane.showMessageDialog(this, "Vous devez avoir au moins une maladie et une carte dans votre répertoire.",
@@ -425,30 +352,15 @@ public class OngletScenario extends OngletUI {
             }
         }
     }//GEN-LAST:event_BoutonExportMouseReleased
-    
-    private void setCreating(boolean creating) {
-        if(creating) {
-            Sce_InformationsLabel.setText("Choisir une carte et une maladie");
-            scenarioStatsPanel1.getResumeButton().setText("Commencer");
-            scenarioStatsPanel1.getResumeButton().setToolTipText("Commencer le scénario");
-            creationScenarioPanel1.setVisible(true);
-            scenarioMapPanel2.setVisible(false);
-        } else {
-            cardLocked = false;
-            Sce_InformationsLabel.setText("Informations");
-            scenarioStatsPanel1.getResumeButton().setText("Résumer");
-            scenarioStatsPanel1.getResumeButton().setToolTipText("Résumer le scénario");
-            creationScenarioPanel1.setVisible(false);
-            scenarioMapPanel2.setVisible(true);
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddScenarioButton;
     private javax.swing.JButton BoutonDelete;
     private javax.swing.JButton BoutonExport;
+    private ca.ulaval.glo2004.afficheur.panels.CreationScenarioPanel CreationScenarioPanel;
     private javax.swing.JButton ImportScenarioButton;
     private ca.ulaval.glo2004.afficheur.PanelArrondi Layout;
+    private javax.swing.JPanel Main;
     private javax.swing.JPanel ProjectPanelContainer;
     private javax.swing.JPanel Sce_Informations;
     private javax.swing.JLabel Sce_InformationsLabel;
@@ -456,7 +368,6 @@ public class OngletScenario extends OngletUI {
     private javax.swing.JLabel ScenariosLabel;
     private javax.swing.JScrollPane ScenariosScrollPane;
     private javax.swing.JPanel ScenariosTitle;
-    private ca.ulaval.glo2004.afficheur.panels.CreationScenarioPanel creationScenarioPanel1;
     private javax.swing.JPanel jPanel1;
     private ca.ulaval.glo2004.afficheur.panels.CarteScenarioPanel scenarioMapPanel2;
     private ca.ulaval.glo2004.afficheur.panels.StatsScenarioPanel scenarioStatsPanel1;

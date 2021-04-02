@@ -6,12 +6,16 @@
 package ca.ulaval.glo2004.afficheur.onglets;
 
 import ca.ulaval.glo2004.afficheur.objetsScenario.ObjetScenarioMaladie;
+import ca.ulaval.glo2004.afficheur.objetsUI.ObjetScenario;
+import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
 
 /**
  *
  * @author Jonathan
  */
 public class OngletScenarioMaladie extends OngletUI {
+    
+    private ObjetScenario objet;
     
     public int getIndexCourant() {
         int index = -1;
@@ -20,6 +24,13 @@ public class OngletScenarioMaladie extends OngletUI {
             index = osm.getIndex();
         }
         return index;
+    }
+    
+    public void setIndexCourant(ObjetScenario objet) {
+        this.objet = objet;
+        if (!objets.isEmpty()) {
+            this.onClickObjetUI(objets.get(objet.getMaladieSelectionne()));
+        }
     }
     
     public void ajouterObjetUI(ObjetScenarioMaladie osm) {
@@ -32,6 +43,15 @@ public class OngletScenarioMaladie extends OngletUI {
     
     public void clear() {
         objets.clear();
+    }
+
+    @Override
+    public void onClickObjetUI(ObjetUI objet) {
+        super.onClickObjetUI(objet);
+        
+        if (this.objet != null) {
+            this.objet.setMaladieSelectionne(getIndexCourant());
+        }
     }
     
     /**

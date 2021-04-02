@@ -13,7 +13,6 @@ import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
  * @author Jonathan
  */
 public class ObjetScenario extends ObjetUI {
-        
     public ObjetScenario(OngletScenario tab) {
         super(tab);
         initComponents();
@@ -92,7 +91,7 @@ public class ObjetScenario extends ObjetUI {
         SimulationName.setText("Nom de la simulation");
 
         Day.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        Day.setText("Jour 0");
+        Day.setText("Non commencée");
         Day.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         Day.setBorder(javax.swing.BorderFactory.createEmptyBorder(-1, -1, -1, -1));
         Day.setIconTextGap(0);
@@ -148,7 +147,7 @@ public class ObjetScenario extends ObjetUI {
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SimulationName, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Day, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Day, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)

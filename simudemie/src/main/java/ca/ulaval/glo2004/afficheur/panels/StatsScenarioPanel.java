@@ -82,8 +82,8 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         Buttons.setLayout(new java.awt.GridLayout(1, 0, 25, 0));
 
         ResumeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_play_20px.png"))); // NOI18N
-        ResumeButton.setText("Résumer");
-        ResumeButton.setToolTipText("Résumer le scénario");
+        ResumeButton.setText("Commencer");
+        ResumeButton.setToolTipText("Commencer le scénario");
         ResumeButton.setFocusable(false);
         ResumeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {

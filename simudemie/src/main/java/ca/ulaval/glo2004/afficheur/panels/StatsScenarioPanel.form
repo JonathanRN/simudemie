@@ -103,8 +103,8 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icons/icons8_play_20px.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="R&#xe9;sumer"/>
-            <Property name="toolTipText" type="java.lang.String" value="R&#xe9;sumer le sc&#xe9;nario"/>
+            <Property name="text" type="java.lang.String" value="Commencer"/>
+            <Property name="toolTipText" type="java.lang.String" value="Commencer le sc&#xe9;nario"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>

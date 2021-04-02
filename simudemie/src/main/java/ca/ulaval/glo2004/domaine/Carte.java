@@ -71,7 +71,6 @@ public class Carte implements Serializable {
             }
             
 
-            
             for (Pays p : listePays)
             {
                 if (p.getPolygone().equals(voie.getPaysOrigine().getPolygone())){
@@ -82,25 +81,23 @@ public class Carte implements Serializable {
                 }
             }
             
-            if (paysOrigine.getPourcentageInfectee() > 0)
+            if (paysOrigine.getPourcentageInfectee() > 0 && paysDestination.getPopDecedee() == 0)
             {
                 double prob = Math.random();
                 if (prob * 10 < paysOrigine.getPourcentageInfectee()/10){
                     //Selection de la region 0 (la region ou se situe la voie - "theoriquement")
-                    int infectees = paysDestination.listeRegions.get(0).getPopInfectee(); 
-                    paysDestination.listeRegions.get(0).setPopInfectee(infectees + 1); 
-                    paysDestination.listeRegions.get(0).setPopSaine(infectees + 1); 
+                    paysDestination.listeRegions.get(0).setPopInfectee(1); 
+                    paysDestination.listeRegions.get(0).setPopSaine(paysDestination.listeRegions.get(0).getPopSaine() - 1); 
                 }
             }
             
-            if (paysDestination.getPourcentageInfectee() > 0)
+            if (paysDestination.getPourcentageInfectee() > 0 && paysOrigine.getPopDecedee() == 0)
             {
                 double prob = Math.random();
                 if (prob * 10 < paysDestination.getPourcentageInfectee()/10){
                     //Selection de la region 0 (la region ou se situe la voie - "theoriquement")
-                    int infectees = paysOrigine.listeRegions.get(0).getPopInfectee();
-                    paysOrigine.listeRegions.get(0).setPopInfectee(infectees + 1);
-                    paysOrigine.listeRegions.get(0).setPopSaine(infectees + 1);
+                    paysOrigine.listeRegions.get(0).setPopInfectee(1);
+                    paysOrigine.listeRegions.get(0).setPopSaine(paysOrigine.listeRegions.get(0).getPopSaine() - 1);
                 }
             }
         }

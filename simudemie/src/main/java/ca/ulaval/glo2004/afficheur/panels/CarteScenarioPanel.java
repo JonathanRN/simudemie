@@ -35,6 +35,12 @@ public class CarteScenarioPanel extends PanelArrondi {
         
         // Pas besoin en mode creation carte
         BoutonExport.setVisible(false);
+        
+        setPreviewVisibility(false);
+    }
+    
+    public void setPreviewVisibility(boolean toggle) {
+        ContentParent.setVisible(toggle);
     }
     
     public void setCarte(Carte carte) {

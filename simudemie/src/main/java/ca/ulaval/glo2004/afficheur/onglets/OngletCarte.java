@@ -99,7 +99,7 @@ public class OngletCarte extends OngletUI {
             }
             
             if (objets.isEmpty()) {
-                scenarioMapPanel1.setCarte(null);
+                scenarioMapPanel1.setPreviewVisibility(false);
             }
         }
     }
@@ -107,6 +107,8 @@ public class OngletCarte extends OngletUI {
     @Override
     public void onClickObjetUI(ObjetUI objet) {
         super.onClickObjetUI(objet);
+        
+        scenarioMapPanel1.setPreviewVisibility(true);
         scenarioMapPanel1.setCarte(GestionnaireCarte.getInstance().getElement(this.getIndexCourant()));
     }
     

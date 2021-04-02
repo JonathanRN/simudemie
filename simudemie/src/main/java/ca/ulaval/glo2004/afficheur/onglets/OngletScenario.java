@@ -64,6 +64,7 @@ public class OngletScenario extends OngletUI {
         
         Scenario scenario = GestionnaireScenario.getInstance().getElement(this.getIndexCourant());
         if (scenario != null) {
+            scenarioMapPanel2.setPreviewVisibility(true);
             scenarioMapPanel2.setCarte(scenario.getCarteJourCourant());
         }
     }
@@ -109,7 +110,7 @@ public class OngletScenario extends OngletUI {
             }
             
             if (objets.isEmpty()) {
-                scenarioMapPanel2.setCarte(null);
+                scenarioMapPanel2.setPreviewVisibility(false);
             }
         }
     }

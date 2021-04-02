@@ -2,6 +2,8 @@ package ca.ulaval.glo2004.afficheur;
 
 import ca.ulaval.glo2004.afficheur.Simulation.Simulation;
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
+import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
+import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import com.formdev.flatlaf.IntelliJTheme;
 import javax.swing.JFrame;
@@ -34,17 +36,17 @@ public class FramePrincipal extends javax.swing.JFrame {
         UIManager.put("TabbedPane.minimumTabWidth", 130);
     }
     
-    public void startSimulation(int index) {
+    public void startSimulation(int index, OngletScenario onglet) {
         remove(menu);
-        simulation = new Simulation(index);
+        simulation = new Simulation(index, onglet);
         add(simulation);
         revalidate();
         repaint();
     }
     
-    public void startCreationCarte(int index) {
+    public void startCreationCarte(int index, OngletCarte onglet) {
         remove(menu);
-        creationCarte = new CreationCarte(index);
+        creationCarte = new CreationCarte(index, onglet);
         add(creationCarte);
         revalidate();
         repaint();

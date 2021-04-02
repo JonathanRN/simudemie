@@ -18,7 +18,6 @@ import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireMaladie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -111,6 +110,10 @@ public class OngletScenario extends OngletUI {
                 super.retirerCourant();
             }
             
+            if (objets.isEmpty()) {
+                scenarioMapPanel2.setCarte(null);
+            }
+            
             cardLocked = false;
         }
     }
@@ -118,7 +121,7 @@ public class OngletScenario extends OngletUI {
     @Override
     public void onClickObjetUI(ObjetUI objet) {
         super.onClickObjetUI(objet);
-        scenarioMapPanel2.setCarte(GestionnaireCarte.getInstance().getElement(this.getIndexCourant()));
+        scenarioMapPanel2.setCarte(GestionnaireScenario.getInstance().getElement(this.getIndexCourant()).getCarteJourCourant());
     }
     
     public void onStartSimulation() {
@@ -139,7 +142,7 @@ public class OngletScenario extends OngletUI {
             GestionnaireScenario.getInstance().creer(args);
 
             FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
-            frame.startSimulation(getIndexCourant());
+            frame.startSimulation(getIndexCourant(), this);
         }
     }
     

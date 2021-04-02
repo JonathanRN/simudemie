@@ -17,14 +17,17 @@ import javax.swing.SwingUtilities;
  */
 public class CartePreview extends ZoomablePanel {
     
-    private PrisePhoto prisePhotoMode;
+    private PreviewCarte prisePhotoMode;
     
     public CartePreview() {
         initComponents();        
     }
     
     public void setCarte(Carte carte) {
-        prisePhotoMode = new PrisePhoto(carte);
+        prisePhotoMode = null;
+        if (carte != null) {
+            prisePhotoMode = new PreviewCarte(carte);
+        }
     }
 
     @Override

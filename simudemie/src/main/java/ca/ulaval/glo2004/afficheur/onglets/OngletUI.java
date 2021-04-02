@@ -69,6 +69,10 @@ public abstract class OngletUI extends javax.swing.JPanel {
         courant.setToggled(true);
     }
     
+    public void onRevenirSurOnglet() {
+        onClickObjetUI(courant);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

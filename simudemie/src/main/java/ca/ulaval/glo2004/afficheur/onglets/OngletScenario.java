@@ -118,8 +118,7 @@ public class OngletScenario extends OngletUI {
     @Override
     public void onClickObjetUI(ObjetUI objet) {
         super.onClickObjetUI(objet);
-        ObjetScenario objetSimulation = (ObjetScenario)courant;
-        scenarioMapPanel2.setMapName(objetSimulation.getMapName());
+        scenarioMapPanel2.setCarte(GestionnaireCarte.getInstance().getElement(this.getIndexCourant()));
     }
     
     public void onStartSimulation() {

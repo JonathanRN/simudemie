@@ -7,7 +7,11 @@ package ca.ulaval.glo2004.afficheur.panels;
 
 import ca.ulaval.glo2004.afficheur.PanelArrondi;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
+import ca.ulaval.glo2004.domaine.Carte;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -29,8 +33,20 @@ public class CarteScenarioPanel extends PanelArrondi {
         }
     }
     
-    public void setMapName(String text) {
-        MapNameLabel.setText(text);
+    public void setCarte(Carte carte) {
+        cartePreview.setCarte(carte);
+    }
+    
+    private void prendrePhoto() {
+        BufferedImage img = new BufferedImage(cartePreview.getWidth(), cartePreview.getHeight(), BufferedImage.TYPE_INT_RGB);
+        
+        cartePreview.paint(img.getGraphics());
+        
+        try {
+            ImageIO.write(img, "png", new File("saved.png"));
+        }
+        catch (Exception e) {
+        }
     }
 
     /**
@@ -45,16 +61,17 @@ public class CarteScenarioPanel extends PanelArrondi {
         MapPanelHeader = new javax.swing.JPanel();
         MapNameLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        cartePreview = new ca.ulaval.glo2004.afficheur.CreationCarte.CartePreview();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
         setLayout(new java.awt.BorderLayout());
 
+        MapPanelHeader.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
         MapPanelHeader.setOpaque(false);
         MapPanelHeader.setLayout(new java.awt.BorderLayout());
 
         MapNameLabel.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
-        MapNameLabel.setText("Nom de la carte");
+        MapNameLabel.setText("Aperçu");
         MapPanelHeader.add(MapNameLabel, java.awt.BorderLayout.CENTER);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
@@ -63,15 +80,25 @@ public class CarteScenarioPanel extends PanelArrondi {
 
         add(MapPanelHeader, java.awt.BorderLayout.NORTH);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        add(jLabel1, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout cartePreviewLayout = new javax.swing.GroupLayout(cartePreview);
+        cartePreview.setLayout(cartePreviewLayout);
+        cartePreviewLayout.setHorizontalGroup(
+            cartePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 627, Short.MAX_VALUE)
+        );
+        cartePreviewLayout.setVerticalGroup(
+            cartePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 426, Short.MAX_VALUE)
+        );
+
+        add(cartePreview, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel MapNameLabel;
     private javax.swing.JPanel MapPanelHeader;
-    private javax.swing.JLabel jLabel1;
+    private ca.ulaval.glo2004.afficheur.CreationCarte.CartePreview cartePreview;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

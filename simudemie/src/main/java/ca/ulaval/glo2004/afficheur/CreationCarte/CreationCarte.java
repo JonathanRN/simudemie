@@ -122,7 +122,7 @@ public class CreationCarte extends javax.swing.JPanel {
         
         switch(result) {
             case JOptionPane.YES_OPTION:
-                GestionnaireCarte.getInstance().sauvegarder();
+                GestionnaireCarte.getInstance().sauvegarder();                
             case JOptionPane.NO_OPTION:
                 GestionnaireCarte.getInstance().charger();
                 FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
@@ -132,9 +132,9 @@ public class CreationCarte extends javax.swing.JPanel {
                 onToggleClick(toggleCourant);
                 BoutonQuitter.setToggle(false);
                 break;
-        }
+        }        
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

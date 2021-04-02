@@ -104,8 +104,7 @@ public class OngletCarte extends OngletUI {
     @Override
     public void onClickObjetUI(ObjetUI objet) {
         super.onClickObjetUI(objet);
-        ObjetCarte objetCarte = (ObjetCarte)objet;
-        scenarioMapPanel1.setMapName(objetCarte.getNomCarte());
+        scenarioMapPanel1.setCarte(GestionnaireCarte.getInstance().getElement(this.getIndexCourant()));
     }
     
     public void goToCreationCarte() {

@@ -19,7 +19,7 @@ import javax.swing.JPanel;
  *
  * @author Jonathan
  */
-public class ZoomablePanel extends JPanel {
+public class ZoomablePanel extends PanelArrondi {
     
     protected double zoomFactor = 1;
     private double prevZoomFactor = 1;

@@ -86,7 +86,7 @@ public class Mode {
     
     protected void paintPolygones(Graphics2D g) {
         g.setColor(couleurFill);
-        for (Polygon p : creationCarte.getPolygones()) {
+        for (Polygon p : carte.getPolygonesRegions()) {
             g.fillPolygon(p);
         }
     }

@@ -98,6 +98,9 @@ public class OngletCarte extends OngletUI {
                 super.retirerCourant();
             }
             
+            if (objets.isEmpty()) {
+                scenarioMapPanel1.setCarte(null);
+            }
         }
     }
 
@@ -109,7 +112,7 @@ public class OngletCarte extends OngletUI {
     
     public void goToCreationCarte() {
         FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
-        frame.startCreationCarte(getIndexCourant());
+        frame.startCreationCarte(getIndexCourant(), this);
     }
 
     /**

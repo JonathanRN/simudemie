@@ -16,9 +16,9 @@ import java.awt.Polygon;
  *
  * @author Jonathan
  */
-public class PrisePhoto extends Mode {
+public class PreviewCarte extends Mode {
     
-    public PrisePhoto(Carte carte) {
+    public PreviewCarte(Carte carte) {
         this.carte = carte;
     }
 

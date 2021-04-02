@@ -7,6 +7,7 @@ package ca.ulaval.glo2004.afficheur.Simulation;
 
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.ZoomInfoPanel;
+import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
@@ -26,8 +27,10 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private final GestionnaireScenario gestionnaire;
     private final int index;
     private boolean estCommence;
+    private OngletScenario onglet;
     
-    public Simulation(int index) {
+    public Simulation(int index, OngletScenario onglet) {
+        this.onglet = onglet;
         this.index = index;
         this.gestionnaire = GestionnaireScenario.getInstance();
         
@@ -105,6 +108,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
             
             FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
             frame.returnToHome();
+            onglet.onRevenirSurOnglet();
         }
     }
     

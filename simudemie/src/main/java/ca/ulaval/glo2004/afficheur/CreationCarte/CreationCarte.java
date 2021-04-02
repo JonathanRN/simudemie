@@ -7,6 +7,7 @@ package ca.ulaval.glo2004.afficheur.CreationCarte;
 
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.ZoomInfoPanel;
+import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
@@ -26,9 +27,11 @@ public class CreationCarte extends javax.swing.JPanel {
     private Mode mode;
     private final int carteIndex;
     private CreationCarteToggle toggleCourant;
+    private OngletCarte onglet;
     
-    public CreationCarte(int index) {
+    public CreationCarte(int index, OngletCarte onglet) {
         carteIndex = index;
+        this.onglet = onglet;
         initComponents();
         
         InformationsPanel.setBackground(new Color(59, 66, 82));
@@ -122,11 +125,13 @@ public class CreationCarte extends javax.swing.JPanel {
         
         switch(result) {
             case JOptionPane.YES_OPTION:
-                GestionnaireCarte.getInstance().sauvegarder();                
+                GestionnaireCarte.getInstance().sauvegarder();
+                onglet.onRevenirSurOnglet();
             case JOptionPane.NO_OPTION:
                 GestionnaireCarte.getInstance().charger();
                 FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
                 frame.returnToHome();
+                onglet.onRevenirSurOnglet();
                 break;
             default:
                 onToggleClick(toggleCourant);

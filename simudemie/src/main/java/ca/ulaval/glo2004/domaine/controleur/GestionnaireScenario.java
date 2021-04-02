@@ -7,6 +7,7 @@ package ca.ulaval.glo2004.domaine.controleur;
 
 import ca.ulaval.glo2004.afficheur.Simulation.ScenarioCallback;
 import ca.ulaval.glo2004.domaine.Carte;
+import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.Mesure;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.helper.FileHelper;
@@ -93,9 +94,13 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     @Override
     public Scenario creer(Object... arguments) {
         String nom = (String) arguments[0];
+        int indexCarte = (int) arguments[1];
+        int indexMaladie = (int) arguments[2];
         
-        // TODO
-        Scenario scenario = new Scenario(nom, GestionnaireCarte.getInstance().getElement(0), GestionnaireMaladie.getInstance().getElement(0));
+        Carte carte = GestionnaireCarte.getInstance().getElement(indexCarte);
+        Maladie maladie = GestionnaireMaladie.getInstance().getElement(indexMaladie);
+        
+        Scenario scenario = new Scenario(nom, carte, maladie);
         ajouter(scenario);
         return scenario;
     }

@@ -134,7 +134,10 @@ public class OngletScenario extends OngletUI {
     public void onClickObjetUI(ObjetUI objet) {
         if (!cardLocked) {
             super.onClickObjetUI(objet);
-            scenarioMapPanel2.setCarte(GestionnaireScenario.getInstance().getElement(this.getIndexCourant()).getCarteJourCourant());
+            Scenario scenario = GestionnaireScenario.getInstance().getElement(this.getIndexCourant());
+            if (scenario != null) {
+                scenarioMapPanel2.setCarte(scenario.getCarteJourCourant());
+            }
         }
     }
     

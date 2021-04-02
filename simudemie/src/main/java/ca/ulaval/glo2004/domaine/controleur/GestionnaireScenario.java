@@ -101,6 +101,7 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         Maladie maladie = GestionnaireMaladie.getInstance().getElement(indexMaladie);
         
         Scenario scenario = new Scenario(nom, carte, maladie);
+        scenario.initialisePopInit();
         ajouter(scenario);
         return scenario;
     }

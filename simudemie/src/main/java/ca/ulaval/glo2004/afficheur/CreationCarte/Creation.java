@@ -24,6 +24,18 @@ public class Creation extends Mode {
     public Creation(CreationCarte panel) {
         this.setCreationCarte(panel);
     }
+
+    @Override
+    public void onDesactive() {
+        super.onDesactive();
+        creationCarte.getPopup().setVisible(false);
+    }
+
+    @Override
+    public void onActive() {
+        super.onActive();
+        creationCarte.getPopup().setVisible(creationCarte.getCarte().getListePays().isEmpty());
+    }
     
     @Override
     public void paint(Graphics2D g) {
@@ -57,7 +69,9 @@ public class Creation extends Mode {
     @Override
     public void onMouseMoved(Point point) {
         super.onMouseMoved(point);
-        getPolygoneSousSouris(point.x, point.y);
+        if (point != null) {
+            getPolygoneSousSouris(point.x, point.y);
+        }
     }
 
     @Override

@@ -81,22 +81,22 @@ public class Carte implements Serializable {
                 }
             }
             
-            if (paysOrigine.getPourcentageInfectee() > 0 && paysDestination.getPopDecedee() == 0)
+            if (paysOrigine.listeRegions.get(0).getPopInfectee() > 0 || paysDestination.listeRegions.get(0).getPopInfectee() > 0 )
             {
                 double prob = Math.random();
-                if (prob * 10 < paysOrigine.getPourcentageInfectee()/10){
+                if (prob < 0.01 || prob < 0.1 && paysDestination.getPopInfectee() > 5000 || prob < 0.3 && paysDestination.getPopInfectee() > 1000){
                     //Selection de la region 0 (la region ou se situe la voie - "theoriquement")
                     paysDestination.listeRegions.get(0).setPopInfectee(1); 
                     paysDestination.listeRegions.get(0).setPopSaine(paysDestination.listeRegions.get(0).getPopSaine() - 1); 
                 }
             }
             
-            if (paysDestination.getPourcentageInfectee() > 0 && paysOrigine.getPopDecedee() == 0)
+            if (paysDestination.listeRegions.get(0).getPopInfectee() > 0 || paysOrigine.listeRegions.get(0).getPopInfectee() > 0)
             {
                 double prob = Math.random();
-                if (prob * 10 < paysDestination.getPourcentageInfectee()/10){
+                if (prob < 0.01 || prob < 0.1 && paysDestination.getPopInfectee() > 5000 || prob < 0.3 && paysDestination.getPopInfectee() > 1000){
                     //Selection de la region 0 (la region ou se situe la voie - "theoriquement")
-                    paysOrigine.listeRegions.get(0).setPopInfectee(1);
+                    paysOrigine.listeRegions.get(0).setPopInfectee(paysOrigine.listeRegions.get(0).getPopInfectee()+1);
                     paysOrigine.listeRegions.get(0).setPopSaine(paysOrigine.listeRegions.get(0).getPopSaine() - 1);
                 }
             }

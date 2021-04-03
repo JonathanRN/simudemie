@@ -385,6 +385,21 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BoutonDirectMouseReleased(null);
         }
+        
+        if (evt.getKeyCode() == KeyEvent.VK_RIGHT && !estEnDirect) {
+            getScenario().stepJour(1);
+            SliderJour.setValue(getScenario().getIndexJourCourant());
+            getPanel().repaint();
+        }
+        
+        if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
+            if (estEnDirect) {
+                setDirect(false);
+            }
+            getScenario().stepJour(-1);
+            SliderJour.setValue(getScenario().getIndexJourCourant());
+            getPanel().repaint();
+        }
     }//GEN-LAST:event_SimulationPanelKeyReleased
 
 

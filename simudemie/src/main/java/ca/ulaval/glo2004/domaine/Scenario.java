@@ -51,6 +51,15 @@ public class Scenario implements Serializable {
         indexCourant = index;
     }
     
+    public void stepJour(int step) {
+        if (step == -1 && indexCourant > 0) {
+            chargerJour(indexCourant - 1);
+        }
+        else if (step == 1 && indexCourant < cartes.size() - 1) {
+            chargerJour(indexCourant + 1);
+        }
+    }
+    
     public String getNom() {
         return nom;
     }

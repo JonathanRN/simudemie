@@ -213,7 +213,7 @@ public class Carte implements Serializable {
         this.nom = nom;
     }
     
-    public int getPopulationTotal() {
+    public int getPopulationTotale() {
         int total = 0;
         for(Pays pays : getListePays()) {
             total += pays.getPopTotale();
@@ -221,15 +221,19 @@ public class Carte implements Serializable {
         return total;
     }
     
+    public int getPopulationInitiale() {
+        return listePays.stream().collect(Collectors.summingInt(x -> x.getPopInitiale()));
+    }
+    
     public float getPourcentageInfectee() {
-        return (float)listePays.stream().collect(Collectors.summingInt(x -> x.getPopInfectee())) / (float)getPopulationTotal();
+        return (float)listePays.stream().collect(Collectors.summingInt(x -> x.getPopInfectee())) / (float)getPopulationTotale();
     }
     
     public float getPourcentageSaine() {
-        return (float)listePays.stream().collect(Collectors.summingInt(x -> x.getPopSaine())) / (float)getPopulationTotal();
+        return (float)listePays.stream().collect(Collectors.summingInt(x -> x.getPopSaine())) / (float)getPopulationTotale();
     }
     
     public float getPourcentageDecedee() {
-        return (float)listePays.stream().collect(Collectors.summingInt(x -> x.getPopDecedee())) / (float)getPopulationTotal();
+        return (float)listePays.stream().collect(Collectors.summingInt(x -> x.getPopDecedee())) / (float)getPopulationInitiale();
     }
 }

@@ -13,7 +13,7 @@ public class Pays implements Serializable {
     
     private String nom;
     private Polygon polygone;
-    public int popInitiale; 
+    private int popInitiale; 
     public ArrayList<Mesure> mesures = new ArrayList<>();
     public ArrayList<Region> listeRegions = new ArrayList<>();
 

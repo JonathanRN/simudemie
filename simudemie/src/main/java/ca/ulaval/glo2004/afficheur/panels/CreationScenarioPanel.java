@@ -111,7 +111,7 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
         for(int index = 0; index < cartes.size(); index++) {
             Carte carte = cartes.get(index);
             ObjetScenarioCarte osc = new ObjetScenarioCarte(ongletScenarioCarte, index,
-                                            carte.getNom(), carte.getListePays().size(), carte.getPopulationTotal());
+                                            carte.getNom(), carte.getListePays().size(), carte.getPopulationTotale());
             addCarte(osc);
             ongletScenarioCarte.ajouterObjetUI(osc);
         }

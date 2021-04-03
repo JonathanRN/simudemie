@@ -13,14 +13,10 @@ import ca.ulaval.glo2004.afficheur.carteActions.CreerPolygoneAction;
 import ca.ulaval.glo2004.afficheur.carteActions.SplitPaysAction;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Region;
-import com.sun.glass.events.KeyEvent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.MouseInfo;
-import java.awt.Point;
 import java.awt.Polygon;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
+import java.awt.event.KeyEvent;
 import java.util.Stack;
 import javax.swing.SwingUtilities;
 

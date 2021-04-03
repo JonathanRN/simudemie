@@ -29,7 +29,7 @@ public class SimulationAfficheur extends Mode {
     private ArrayList<Polygon> polygones;
     private Point souris;
     private boolean afficherInfosPays = false;
-    private boolean afficherLiens = false;
+    private boolean afficherLiens = true;
     
     private Region regionInfectee;
     

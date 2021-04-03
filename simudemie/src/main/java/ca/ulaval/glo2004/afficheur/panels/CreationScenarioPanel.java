@@ -7,7 +7,6 @@ package ca.ulaval.glo2004.afficheur.panels;
 
 import ca.ulaval.glo2004.afficheur.objetsScenario.ObjetScenarioCarte;
 import ca.ulaval.glo2004.afficheur.objetsScenario.ObjetScenarioMaladie;
-import ca.ulaval.glo2004.afficheur.objetsUI.ObjetScenario;
 import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
 import ca.ulaval.glo2004.afficheur.onglets.OngletScenarioCarte;
 import ca.ulaval.glo2004.afficheur.onglets.OngletScenarioMaladie;
@@ -42,26 +41,31 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
     public CreationScenarioPanel() {
         initComponents();
         
-        ongletScenarioCarte = new OngletScenarioCarte();
-        ongletScenarioMaladie = new OngletScenarioMaladie();
+        try {
+            ongletScenarioCarte = new OngletScenarioCarte();
+            ongletScenarioMaladie = new OngletScenarioMaladie();
+
+            setBackground(new Color(0, 0, 0, 150));
+            Color bg = new Color(71, 76, 88);
+            BackgroundArrondi.setBackground(bg);
+            CartesContainer.setBackground(bg);
+            MaladiesContainer.setBackground(bg);
+
+            Annuler.setFont(FontRegister.RobotoRegular.deriveFont(15f));
+            Annuler.setBackground(bg);
+            Creer.setFont(FontRegister.RobotoRegular.deriveFont(15f));
+            Creer.setBackground(bg);
+
+            CartesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
+            MaladiesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
+
+            // Gestion pour le bogue de refresh sur le scroll
+            CartesScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
+            MaladiesScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
+        }
+        catch (Exception e) {
+        }
         
-        setBackground(new Color(0, 0, 0, 150));
-        Color bg = new Color(71, 76, 88);
-        BackgroundArrondi.setBackground(bg);
-        CartesContainer.setBackground(bg);
-        MaladiesContainer.setBackground(bg);
-        
-        Annuler.setFont(FontRegister.RobotoRegular.deriveFont(15f));
-        Annuler.setBackground(bg);
-        Creer.setFont(FontRegister.RobotoRegular.deriveFont(15f));
-        Creer.setBackground(bg);
-        
-        CartesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
-        MaladiesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
-        
-        // Gestion pour le bogue de refresh sur le scroll
-        CartesScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
-        MaladiesScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
     }
     
     public void loadElements() {

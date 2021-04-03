@@ -57,7 +57,7 @@ public class Region implements Serializable {
     
     public void eliminerPopulation(double taux, int cptJours)
     {
-        if (cptJours > 14){
+        if (cptJours > 14 && getPopInfectee() > 0f){
             int deces = (int)(this.listeInfections.get(cptJours - 14) * taux);
             setPopDecedee(this.getPopDecedee() + deces);
             setPopInfectee(this.getPopInfectee() - deces);

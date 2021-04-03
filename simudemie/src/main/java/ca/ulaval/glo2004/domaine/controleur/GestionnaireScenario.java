@@ -35,7 +35,7 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     
     private GestionnaireScenario()
     {
-        timer = new Timer(1 * 1000, this);
+        timer = new Timer(1 * 250, this);
         timer.setInitialDelay(0);
         
         fileHelper = new FileHelper(RELATIVE_PATH);

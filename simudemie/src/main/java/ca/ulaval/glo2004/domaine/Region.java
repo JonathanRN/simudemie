@@ -191,7 +191,9 @@ public class Region implements Serializable {
 
 
         nbInfectes = (int)(this.getPopInfectee()/(cpt*0.2));
-
+        if (nbInfectes > this.getPopSaine()){
+            nbInfectes = this.getPopSaine();
+        }
         return (int)Math.ceil(nbInfectes * tauxPropag + success);
     }
 

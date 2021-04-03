@@ -69,7 +69,6 @@ public class Carte implements Serializable {
             {
                 continue;
             }
-            
 
             for (Pays p : listePays)
             {

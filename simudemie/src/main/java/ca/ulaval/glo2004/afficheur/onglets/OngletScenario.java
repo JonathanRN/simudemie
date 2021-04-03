@@ -89,9 +89,7 @@ public class OngletScenario extends OngletUI {
         objets.add(card);
         ProjectPanelContainer.add(card);
         
-        if(objets.size() == 1) {
-            onClickObjetUI(card);
-        }
+        onClickObjetUI(card);
         
         updateUI();
     }

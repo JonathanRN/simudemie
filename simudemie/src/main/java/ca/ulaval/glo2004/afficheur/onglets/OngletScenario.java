@@ -83,7 +83,7 @@ public class OngletScenario extends OngletUI {
         card.setVirusName(scenario.getCarteJourCourant().getMaladie().getNom());
         card.setInfectedPercent(0);
         card.setCuredPercent(0);
-        card.setImmunedPercent(0);
+        //card.setImmunedPercent(0);
         card.setDeadPercent(0);
         
         objets.add(card);

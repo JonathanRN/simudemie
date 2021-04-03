@@ -55,9 +55,9 @@ public class ObjetScenario extends ObjetUI {
         CuredProgressBar.setValue(percent);
     }
     
-    public void setImmunedPercent(int percent) {
-        ImmunedProgressBar.setValue(percent);
-    }
+//    public void setImmunedPercent(int percent) {
+//        ImmunedProgressBar.setValue(percent);
+//    }
     
     public void setDeadPercent(int percent) {
         DeadProgressBar.setValue(percent);
@@ -78,7 +78,6 @@ public class ObjetScenario extends ObjetUI {
         Bars = new javax.swing.JPanel();
         InfectedProgressBar = new javax.swing.JProgressBar();
         CuredProgressBar = new javax.swing.JProgressBar();
-        ImmunedProgressBar = new javax.swing.JProgressBar();
         DeadProgressBar = new javax.swing.JProgressBar();
         MapName = new javax.swing.JLabel();
         VirusName = new javax.swing.JLabel();
@@ -104,7 +103,7 @@ public class ObjetScenario extends ObjetUI {
 
         Bars.setBackground(new java.awt.Color(59, 66, 82));
         Bars.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 42, 4, 42));
-        Bars.setLayout(new java.awt.GridLayout(4, 0));
+        Bars.setLayout(new java.awt.GridLayout(3, 1));
 
         InfectedProgressBar.setForeground(new java.awt.Color(191, 97, 106));
         InfectedProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
@@ -117,12 +116,6 @@ public class ObjetScenario extends ObjetUI {
         CuredProgressBar.setBorderPainted(false);
         CuredProgressBar.setString("Guéris");
         Bars.add(CuredProgressBar);
-
-        ImmunedProgressBar.setForeground(new java.awt.Color(136, 192, 208));
-        ImmunedProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
-        ImmunedProgressBar.setBorderPainted(false);
-        ImmunedProgressBar.setString("Immunisés");
-        Bars.add(ImmunedProgressBar);
 
         DeadProgressBar.setForeground(new java.awt.Color(180, 142, 173));
         DeadProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
@@ -181,7 +174,6 @@ public class ObjetScenario extends ObjetUI {
     private javax.swing.JLabel Day;
     private javax.swing.JProgressBar DeadProgressBar;
     private javax.swing.JPanel DiagramPanel;
-    private javax.swing.JProgressBar ImmunedProgressBar;
     private javax.swing.JProgressBar InfectedProgressBar;
     private javax.swing.JLabel MapName;
     private javax.swing.JLabel SimulationName;

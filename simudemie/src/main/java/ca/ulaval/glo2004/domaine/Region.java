@@ -25,9 +25,9 @@ public class Region implements Serializable {
     private int populationImmune;
 
     
-    public Region(Polygon polygone)
-    {
+    public Region(Polygon polygone) {
         this.polygone = polygone;
+        setPopTotale(100000);
     }
 
     public Region(Region region) {

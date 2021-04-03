@@ -26,7 +26,6 @@ public class Scenario implements Serializable {
         carte.setMaladie(new Maladie(maladie));
         cartes.add(new Carte(carte));
     }
-    
     public void initialisePopInit()
     {
         cartes.get(0).initiliserPopInit();
@@ -42,6 +41,10 @@ public class Scenario implements Serializable {
     
     public int getIndexJourCourant() {
         return indexCourant;
+    }
+    
+    public int getTotalJours() {
+        return cartes.size() - 1;
     }
     
     public void chargerJour(int index) {
@@ -62,7 +65,7 @@ public class Scenario implements Serializable {
     }
     
     public void retourEnDirect() {
-        indexCourant = cartes.size() - 1;
+        indexCourant = getTotalJours();
     }
     
     public int avancerJour() {

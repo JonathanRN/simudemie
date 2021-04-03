@@ -56,7 +56,8 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         StartPanel.setVisible(!commence);
         
         if (commence) {
-            onAvancerJour(getScenario().getIndexJourCourant());
+            SliderJour.setMaximum(getScenario().getTotalJours());
+            SliderJour.setValue(getScenario().getIndexJourCourant());
         }
     }
     

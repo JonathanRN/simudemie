@@ -13,6 +13,7 @@ import ca.ulaval.glo2004.afficheur.carteActions.CreerPolygoneAction;
 import ca.ulaval.glo2004.afficheur.carteActions.SplitPaysAction;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Region;
+import com.sun.glass.events.KeyEvent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -183,6 +184,22 @@ public class CreationCartePanel extends ZoomablePanel {
     }//GEN-LAST:event_formMouseReleased
     
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_1) {
+            creationCarte.onToggleClick(1);
+        }
+        
+        if (evt.getKeyCode() == KeyEvent.VK_2) {
+            creationCarte.onToggleClick(2);
+        }
+        
+        if (evt.getKeyCode() == KeyEvent.VK_3) {
+            creationCarte.onToggleClick(3);
+        }
+        
+        if (evt.getKeyCode() == KeyEvent.VK_4) {
+            creationCarte.onToggleClick(4);
+        }
+        
         creationCarte.getMode().onKeyReleased(evt);
         creationCarte.repaint();
     }//GEN-LAST:event_formKeyReleased

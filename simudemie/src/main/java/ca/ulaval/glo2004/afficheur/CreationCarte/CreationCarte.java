@@ -106,6 +106,23 @@ public class CreationCarte extends javax.swing.JPanel {
         }
     }
     
+    public void onToggleClick(int index) {
+        switch (index) {
+            case 1:
+                onToggleClick(BoutonSelection);
+                break;
+            case 2:
+                onToggleClick(BoutonCrayon);
+                break;
+            case 3:
+                onToggleClick(BoutonRegion);
+                break;
+            case 4:
+                onToggleClick(BoutonLien);
+                break;
+        }
+    }
+    
     private void quitter() {
         JOptionPane optionPane = new JOptionPane();
         optionPane.setMessage("Retourner au menu principal.\nVoulez-vous sauvegarder vos modifications?");

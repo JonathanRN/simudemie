@@ -24,7 +24,8 @@ import javax.swing.SwingUtilities;
 public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     
     private boolean estEnDirect;
-    private boolean mouseOver;
+    private boolean mouseOverDirect, mouseOverFF;
+    private int vitesse = 1;
     private final GestionnaireScenario gestionnaire;
     private final int index;
     private boolean estCommence;
@@ -40,6 +41,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         // Cacher par default, tant que la simulation n'est pas commencee
         SliderJour.setVisible(false);
         
+        FFLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         StartLabel1.setFont(FontRegister.RobotoLight.deriveFont(15f));
         StartLabel2.setFont(FontRegister.RobotoLight.deriveFont(15f));
         
@@ -121,8 +123,26 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private void updateDirectIcon() {
         String path = "/icons/";
         path += estEnDirect ? "pause_button_35px" : "direct_button_35px" ;
-        path += mouseOver ? "_highlight.png" : ".png";
+        path += mouseOverDirect ? "_highlight.png" : ".png";
         DirectIcon.setIcon(new ImageIcon(getClass().getResource(path)));
+    }
+    
+    private void updateFastForwardIcon() {
+        String path = "/icons/FastForward/";
+        path += "speed_" + vitesse;
+        path += mouseOverFF ? "_highlight.png" : ".png";
+        
+        FastForward.setIcon(new ImageIcon(getClass().getResource(path)));
+    }
+    
+    private void setVitesse(int vit) {
+        vitesse = vit > 4 ? 1 : vit;
+        
+        FFLabel.setText("x" + vitesse);
+        
+        updateFastForwardIcon();
+        
+        GestionnaireScenario.getInstance().setVitesse(vitesse);
     }
     
     @Override
@@ -152,8 +172,11 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         SliderParent = new javax.swing.JPanel();
         Slider = new javax.swing.JPanel();
         SliderJour = new javax.swing.JSlider();
-        BoutonDirect = new javax.swing.JPanel();
+        Boutons = new javax.swing.JPanel();
         DirectIcon = new javax.swing.JLabel();
+        FF = new javax.swing.JPanel();
+        FastForward = new javax.swing.JLabel();
+        FFLabel = new javax.swing.JLabel();
         Buttons = new javax.swing.JPanel();
         SidePanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         AddButton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
@@ -247,28 +270,58 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         });
         Slider.add(SliderJour, java.awt.BorderLayout.CENTER);
 
-        BoutonDirect.setToolTipText("Retour en direct");
-        BoutonDirect.setMinimumSize(new java.awt.Dimension(35, 70));
-        BoutonDirect.setOpaque(false);
-        BoutonDirect.setPreferredSize(new java.awt.Dimension(35, 70));
-        BoutonDirect.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BoutonDirectMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BoutonDirectMouseExited(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                BoutonDirectMouseReleased(evt);
-            }
-        });
-        BoutonDirect.setLayout(new java.awt.BorderLayout());
+        Boutons.setToolTipText("");
+        Boutons.setMinimumSize(new java.awt.Dimension(35, 70));
+        Boutons.setOpaque(false);
+        Boutons.setPreferredSize(new java.awt.Dimension(80, 70));
+        Boutons.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
         DirectIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         DirectIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/direct_button_35px.png"))); // NOI18N
-        BoutonDirect.add(DirectIcon, java.awt.BorderLayout.EAST);
+        DirectIcon.setToolTipText("Retour en direct");
+        DirectIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                DirectIconMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                DirectIconMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                DirectIconMouseReleased(evt);
+            }
+        });
+        Boutons.add(DirectIcon);
 
-        Slider.add(BoutonDirect, java.awt.BorderLayout.EAST);
+        FF.setOpaque(false);
+        FF.setPreferredSize(new java.awt.Dimension(50, 70));
+        FF.setLayout(new java.awt.BorderLayout());
+
+        FastForward.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        FastForward.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/FastForward/speed_1.png"))); // NOI18N
+        FastForward.setToolTipText("Changer la vitesse");
+        FastForward.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        FastForward.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                FastForwardMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                FastForwardMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                FastForwardMouseReleased(evt);
+            }
+        });
+        FF.add(FastForward, java.awt.BorderLayout.CENTER);
+
+        FFLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        FFLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        FFLabel.setText("x1");
+        FFLabel.setPreferredSize(new java.awt.Dimension(14, 20));
+        FF.add(FFLabel, java.awt.BorderLayout.PAGE_START);
+
+        Boutons.add(FF);
+
+        Slider.add(Boutons, java.awt.BorderLayout.EAST);
 
         SliderParent.add(Slider, java.awt.BorderLayout.SOUTH);
 
@@ -341,16 +394,6 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         add(SimulationPanel);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BoutonDirectMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonDirectMouseEntered
-        mouseOver = true;
-        updateDirectIcon();
-    }//GEN-LAST:event_BoutonDirectMouseEntered
-
-    private void BoutonDirectMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonDirectMouseExited
-        mouseOver = false;
-        updateDirectIcon();
-    }//GEN-LAST:event_BoutonDirectMouseExited
-
     private void SliderJourMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderJourMouseReleased
         if (estEnDirect) {
             setDirect(false);
@@ -360,30 +403,9 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         getPanel().repaint();
     }//GEN-LAST:event_SliderJourMouseReleased
 
-    private void BoutonDirectMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonDirectMouseReleased
-        setDirect(!estEnDirect);
-        
-        if (!getScenario().estCommence()) {
-            SliderJour.setVisible(true);
-            StartPanel.setVisible(false);
-            
-            getPanel().getAfficheur().onSimulationDemaree();
-        }
-        
-        if (!estCommence) {
-            estCommence = true;
-            
-            gestionnaire.demarrer(index, this);
-        }
-        
-        if (estEnDirect) {
-            SliderJour.setValue(SliderJour.getMaximum());
-        }
-    }//GEN-LAST:event_BoutonDirectMouseReleased
-
     private void SimulationPanelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SimulationPanelKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            BoutonDirectMouseReleased(null);
+            DirectIconMouseReleased(null);
         }
         
         if (evt.getKeyCode() == KeyEvent.VK_RIGHT && !estEnDirect) {
@@ -402,12 +424,60 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         }
     }//GEN-LAST:event_SimulationPanelKeyReleased
 
+    private void DirectIconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DirectIconMouseEntered
+        mouseOverDirect = true;
+        updateDirectIcon();
+    }//GEN-LAST:event_DirectIconMouseEntered
+
+    private void DirectIconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DirectIconMouseExited
+        mouseOverDirect = false;
+        updateDirectIcon();
+    }//GEN-LAST:event_DirectIconMouseExited
+
+    private void DirectIconMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DirectIconMouseReleased
+        setDirect(!estEnDirect);
+        
+        if (!getScenario().estCommence()) {
+            SliderJour.setVisible(true);
+            StartPanel.setVisible(false);
+            
+            getPanel().getAfficheur().onSimulationDemaree();
+        }
+        
+        if (!estCommence) {
+            estCommence = true;
+            
+            gestionnaire.demarrer(index, this);
+        }
+        
+        if (estEnDirect) {
+            SliderJour.setValue(SliderJour.getMaximum());
+        }
+    }//GEN-LAST:event_DirectIconMouseReleased
+
+    private void FastForwardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FastForwardMouseEntered
+        mouseOverFF = true;
+        updateFastForwardIcon();
+    }//GEN-LAST:event_FastForwardMouseEntered
+
+    private void FastForwardMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FastForwardMouseExited
+        mouseOverFF = false;
+        updateFastForwardIcon();
+    }//GEN-LAST:event_FastForwardMouseExited
+
+    private void FastForwardMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FastForwardMouseReleased
+        setVitesse(vitesse + 1);
+    }//GEN-LAST:event_FastForwardMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton AddButton;
-    private javax.swing.JPanel BoutonDirect;
+    private javax.swing.JPanel Boutons;
     private javax.swing.JPanel Buttons;
     private javax.swing.JLabel DirectIcon;
+    private javax.swing.JPanel FF;
+    private javax.swing.JLabel FFLabel;
+    private javax.swing.JLabel FastForward;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HomeButton;
     private ca.ulaval.glo2004.afficheur.PanelArrondi SidePanel;
     private ca.ulaval.glo2004.afficheur.Simulation.SimulationPanel SimulationPanel;

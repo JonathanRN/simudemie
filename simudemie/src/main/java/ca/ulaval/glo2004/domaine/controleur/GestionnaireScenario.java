@@ -35,7 +35,7 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     
     private GestionnaireScenario()
     {
-        timer = new Timer(1 * 250, this);
+        timer = new Timer(2000, this);
         timer.setInitialDelay(0);
         
         fileHelper = new FileHelper(RELATIVE_PATH);
@@ -84,6 +84,12 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         
         getCourant().demarrer();
         this.scenarioCallback = scenarioCallback;
+    }
+    
+    public void setVitesse(int vitesse) {
+        if (timer != null) {
+            timer.setDelay((int)(1f / (float)vitesse * 1000));
+        }
     }
     
     public List<Carte> retournerResultats()

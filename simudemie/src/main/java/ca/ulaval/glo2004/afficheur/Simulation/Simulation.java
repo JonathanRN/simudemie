@@ -11,6 +11,7 @@ import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -84,6 +85,8 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
                 gestionnaire.pause();
             }
         }
+        
+        updateDirectIcon();
     }
     
     public boolean getDirect() { return estEnDirect; }
@@ -139,7 +142,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        ZoomInfoParent = new javax.swing.JPanel();
         ZoomInfo = new ca.ulaval.glo2004.afficheur.ZoomInfoPanel();
         StartParent = new javax.swing.JPanel();
         StartPanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
@@ -161,26 +164,26 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         setBackground(new java.awt.Color(46, 52, 64));
         setLayout(new javax.swing.OverlayLayout(this));
 
-        jPanel1.setOpaque(false);
+        ZoomInfoParent.setOpaque(false);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout ZoomInfoParentLayout = new javax.swing.GroupLayout(ZoomInfoParent);
+        ZoomInfoParent.setLayout(ZoomInfoParentLayout);
+        ZoomInfoParentLayout.setHorizontalGroup(
+            ZoomInfoParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ZoomInfoParentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(998, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        ZoomInfoParentLayout.setVerticalGroup(
+            ZoomInfoParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ZoomInfoParentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(695, Short.MAX_VALUE))
         );
 
-        add(jPanel1);
+        add(ZoomInfoParent);
 
         StartParent.setOpaque(false);
 
@@ -318,6 +321,11 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         add(Buttons);
 
         SimulationPanel.setOpaque(false);
+        SimulationPanel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SimulationPanelKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout SimulationPanelLayout = new javax.swing.GroupLayout(SimulationPanel);
         SimulationPanel.setLayout(SimulationPanelLayout);
@@ -346,7 +354,6 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private void SliderJourMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SliderJourMouseReleased
         if (estEnDirect) {
             setDirect(false);
-            updateDirectIcon();
         }
         
         getScenario().chargerJour(SliderJour.getValue());
@@ -355,7 +362,6 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
 
     private void BoutonDirectMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonDirectMouseReleased
         setDirect(!estEnDirect);
-        updateDirectIcon();
         
         if (!getScenario().estCommence()) {
             SliderJour.setVisible(true);
@@ -375,6 +381,12 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         }
     }//GEN-LAST:event_BoutonDirectMouseReleased
 
+    private void SimulationPanelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SimulationPanelKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BoutonDirectMouseReleased(null);
+        }
+    }//GEN-LAST:event_SimulationPanelKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton AddButton;
@@ -393,7 +405,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private ca.ulaval.glo2004.afficheur.PanelArrondi StartPanel;
     private javax.swing.JPanel StartParent;
     private ca.ulaval.glo2004.afficheur.ZoomInfoPanel ZoomInfo;
+    private javax.swing.JPanel ZoomInfoParent;
     private javax.swing.JLabel icon;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

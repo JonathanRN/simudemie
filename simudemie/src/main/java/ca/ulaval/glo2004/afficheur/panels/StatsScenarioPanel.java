@@ -137,7 +137,7 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         setOpaque(false);
         setLayout(new java.awt.BorderLayout(0, 25));
 
-        Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 25, 15));
+        Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
         Main.setLayout(new java.awt.BorderLayout(0, 10));
 
         StatsHeader.setOpaque(false);

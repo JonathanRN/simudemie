@@ -7,7 +7,24 @@ package ca.ulaval.glo2004.afficheur.panels;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
+import ca.ulaval.glo2004.domaine.Carte;
+import ca.ulaval.glo2004.domaine.Pays;
+import ca.ulaval.glo2004.domaine.Region;
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.block.BlockBorder;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.StandardBarPainter;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -16,6 +33,7 @@ import java.awt.Color;
 public class StatsCartePanel extends javax.swing.JPanel {
     
     private OngletCarte onglet;
+    private Color bgColor = new Color(71, 76, 88);
     
     public StatsCartePanel() {
         initComponents();
@@ -33,6 +51,43 @@ public class StatsCartePanel extends javax.swing.JPanel {
     public void setOnglet(OngletCarte onglet) {
         this.onglet = onglet;
     }
+    
+    public void setDataset(Carte carte) {
+        StatsPanel.removeAll();
+        
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (Pays pays : carte.getListePays()) {
+            dataset.setValue(pays.getPopTotale(), "", pays.getNom());
+        }
+        
+        JFreeChart stats = ChartFactory.createStackedBarChart(null, "", "Population", dataset, PlotOrientation.VERTICAL, false, true, false);
+        stats.setBackgroundPaint(bgColor);
+
+        CategoryPlot plot = stats.getCategoryPlot();
+        plot.setBackgroundPaint(bgColor);
+        plot.getDomainAxis().setLabelFont(FontRegister.RobotoRegular.deriveFont(14f));
+        plot.getDomainAxis().setTickLabelPaint(Color.white);
+        plot.getDomainAxis().setLabelPaint(Color.white);
+        plot.getRangeAxis().setLabelFont(FontRegister.RobotoRegular.deriveFont(14f));
+        plot.getRangeAxis().setTickLabelPaint(Color.white);
+        plot.getRangeAxis().setLabelPaint(Color.white);
+        
+        BarRenderer br = (BarRenderer) plot.getRenderer();
+        br.setMaximumBarWidth(0.2);
+        br.setItemMargin(-1);
+        br.setBarPainter(new StandardBarPainter());
+        br.setSeriesPaint(0, new Color(163,190,140));
+
+        ChartPanel chartPanel = new ChartPanel(stats);
+        chartPanel.setPopupMenu(null);
+        chartPanel.setDomainZoomable(false);
+        chartPanel.setRangeZoomable(false);
+        
+        StatsPanel.add(chartPanel, BorderLayout.CENTER);
+        StatsPanel.validate();
+        
+        repaint();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,14 +101,15 @@ public class StatsCartePanel extends javax.swing.JPanel {
         Main = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         StatsHeader = new javax.swing.JPanel();
         StatsLabel = new javax.swing.JLabel();
+        StatsPanel = new javax.swing.JPanel();
         Buttons = new javax.swing.JPanel();
         ModifyButton = new javax.swing.JButton();
 
         setOpaque(false);
         setLayout(new java.awt.BorderLayout(0, 25));
 
-        Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 25, 15));
-        Main.setLayout(new java.awt.BorderLayout());
+        Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        Main.setLayout(new java.awt.BorderLayout(0, 10));
 
         StatsHeader.setOpaque(false);
         StatsHeader.setLayout(new java.awt.BorderLayout());
@@ -63,6 +119,10 @@ public class StatsCartePanel extends javax.swing.JPanel {
         StatsHeader.add(StatsLabel, java.awt.BorderLayout.CENTER);
 
         Main.add(StatsHeader, java.awt.BorderLayout.NORTH);
+
+        StatsPanel.setOpaque(false);
+        StatsPanel.setLayout(new java.awt.BorderLayout());
+        Main.add(StatsPanel, java.awt.BorderLayout.CENTER);
 
         add(Main, java.awt.BorderLayout.CENTER);
 
@@ -97,5 +157,6 @@ public class StatsCartePanel extends javax.swing.JPanel {
     private javax.swing.JButton ModifyButton;
     private javax.swing.JPanel StatsHeader;
     private javax.swing.JLabel StatsLabel;
+    private javax.swing.JPanel StatsPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -109,7 +109,9 @@ public class OngletCarte extends OngletUI {
         super.onClickObjetUI(objet);
         
         scenarioMapPanel1.setPreviewVisibility(true);
-        scenarioMapPanel1.setCarte(GestionnaireCarte.getInstance().getElement(this.getIndexCourant()));
+        Carte carte = GestionnaireCarte.getInstance().getElement(this.getIndexCourant());
+        scenarioMapPanel1.setCarte(carte);
+        mapStatsPanel1.setDataset(carte);
     }
     
     public void goToCreationCarte() {

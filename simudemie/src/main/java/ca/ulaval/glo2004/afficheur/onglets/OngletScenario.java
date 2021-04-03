@@ -66,6 +66,11 @@ public class OngletScenario extends OngletUI {
         if (scenario != null) {
             scenarioMapPanel2.setPreviewVisibility(true);
             scenarioMapPanel2.setCarte(scenario.getCarteJourCourant());
+            
+            ObjetScenario obj = (ObjetScenario) objet;
+            obj.setInfectedPercent((float)scenario.getCarteDernierJour().getPourcentageInfectee() * 100f);
+            obj.setCuredPercent((float)scenario.getCarteDernierJour().getPourcentageSaine() * 100f);
+            obj.setDeadPercent((float)scenario.getCarteDernierJour().getPourcentageDecedee() * 100f);
         }
     }
     

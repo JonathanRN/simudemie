@@ -47,6 +47,10 @@ public class Scenario implements Serializable {
         return cartes.size() - 1;
     }
     
+    public Carte getCarteDernierJour() {
+        return cartes.get(getTotalJours());
+    }
+    
     public void chargerJour(int index) {
         indexCourant = index;
     }

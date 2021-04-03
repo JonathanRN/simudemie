@@ -47,20 +47,20 @@ public class ObjetScenario extends ObjetUI {
         VirusName.setText(name);
     }
     
-    public void setInfectedPercent(int percent) {
-        InfectedProgressBar.setValue(percent);
+    public void setInfectedPercent(float percent) {
+        InfectedProgressBar.setValue((int)percent);
     }
     
-    public void setCuredPercent(int percent) {
-        CuredProgressBar.setValue(percent);
+    public void setCuredPercent(float percent) {
+        CuredProgressBar.setValue((int)percent);
     }
     
 //    public void setImmunedPercent(int percent) {
 //        ImmunedProgressBar.setValue(percent);
 //    }
     
-    public void setDeadPercent(int percent) {
-        DeadProgressBar.setValue(percent);
+    public void setDeadPercent(float percent) {
+        DeadProgressBar.setValue((int)percent);
     }
 
     /**

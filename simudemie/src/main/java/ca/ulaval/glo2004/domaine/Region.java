@@ -142,7 +142,7 @@ public class Region implements Serializable {
     
     public void setPopDecedee(int populationDecedee)
     {
-        this.populationDecedee = clamp(populationDecedee, 0, this.getPopTotale());
+        this.populationDecedee = clamp(populationDecedee, 0, this.getPopInitiale());
     }
     
     private int contaminationBinomiale(double tauxPropag) {

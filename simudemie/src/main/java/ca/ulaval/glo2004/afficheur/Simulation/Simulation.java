@@ -106,6 +106,8 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         if (result == JOptionPane.YES_OPTION) {
             setDirect(false);
             
+            GestionnaireScenario.getInstance().sauvegarder();
+            
             FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
             frame.returnToHome();
             onglet.onRevenirSurOnglet();
@@ -364,8 +366,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         if (!estCommence) {
             estCommence = true;
             
-            // TODO A CHANGER
-            gestionnaire.demarrer(index, 1, this);
+            gestionnaire.demarrer(index, this);
         }
         
         if (estEnDirect) {

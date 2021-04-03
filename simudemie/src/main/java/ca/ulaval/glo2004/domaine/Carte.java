@@ -225,8 +225,12 @@ public class Carte implements Serializable {
         return listePays.stream().collect(Collectors.summingInt(x -> x.getPopInitiale()));
     }
     
+    public int getPopulationInfectee() {
+        return listePays.stream().collect(Collectors.summingInt(x -> x.getPopInfectee()));
+    }
+    
     public float getPourcentageInfectee() {
-        return (float)listePays.stream().collect(Collectors.summingInt(x -> x.getPopInfectee())) / (float)getPopulationTotale();
+         return (float)getPopulationInfectee() / (float)getPopulationTotale();
     }
     
     public float getPourcentageSaine() {

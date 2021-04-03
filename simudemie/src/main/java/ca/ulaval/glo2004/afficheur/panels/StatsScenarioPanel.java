@@ -7,8 +7,20 @@ package ca.ulaval.glo2004.afficheur.panels;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
+import ca.ulaval.glo2004.domaine.Scenario;
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JButton;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.block.BlockBorder;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -16,7 +28,8 @@ import javax.swing.JButton;
  */
 public class StatsScenarioPanel extends javax.swing.JPanel {
 
-    private OngletScenario onglet; 
+    private OngletScenario onglet;
+    private Color bgColor = new Color(71, 76, 88);
     
     public StatsScenarioPanel() {
         initComponents();
@@ -30,6 +43,54 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         }
         catch(Exception e) {
         }
+    }
+    
+    public void setDataset(Scenario scenario) {
+        StatsPanel.removeAll();
+        
+        XYSeries infectes = new XYSeries("Infectés");
+        for (int i = 0; i < scenario.getTotalJours(); i++) {
+            infectes.add(i, scenario.getListeCartes().get(i).getPopulationInfectee());
+        }
+        
+        XYSeriesCollection collection = new XYSeriesCollection();
+        collection.addSeries(infectes);
+                
+        JFreeChart stats = ChartFactory.createXYLineChart(null, "Jours", "Population", collection, PlotOrientation.VERTICAL, true, true, false);
+        stats.setBackgroundPaint(bgColor);
+
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        renderer.setSeriesPaint(0, new Color(191,97,106));
+        renderer.setSeriesStroke(0, new BasicStroke(2.0f));
+
+        XYPlot plot = stats.getXYPlot();
+        plot.setRenderer(renderer);
+        plot.setBackgroundPaint(bgColor);
+        plot.setRangeGridlinesVisible(true);
+        plot.setRangeGridlinePaint(Color.white);
+        plot.setDomainGridlinesVisible(true);
+        plot.setDomainGridlinePaint(Color.white);
+        plot.getDomainAxis().setLabelFont(FontRegister.RobotoRegular.deriveFont(14f));
+        plot.getDomainAxis().setTickLabelPaint(Color.white);
+        plot.getDomainAxis().setLabelPaint(Color.white);
+        plot.getRangeAxis().setLabelFont(FontRegister.RobotoRegular.deriveFont(14f));
+        plot.getRangeAxis().setTickLabelPaint(Color.white);
+        plot.getRangeAxis().setLabelPaint(Color.white);
+
+        stats.getLegend().setFrame(BlockBorder.NONE);
+        stats.getLegend().setItemPaint(Color.white);
+        stats.getLegend().setBackgroundPaint(bgColor);
+
+        ChartPanel chartPanel = new ChartPanel(stats);
+        chartPanel.setPopupMenu(null);
+        chartPanel.setDomainZoomable(false);
+        chartPanel.setRangeZoomable(false);
+        chartPanel.setDisplayToolTips(false);
+        
+        StatsPanel.add(chartPanel, BorderLayout.CENTER);
+        StatsPanel.validate();
+        
+        repaint();
     }
     
     public JButton getResumeButton() {
@@ -53,6 +114,7 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         StatsHeader = new javax.swing.JPanel();
         StatsLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        StatsPanel = new javax.swing.JPanel();
         Buttons = new javax.swing.JPanel();
         ResumeButton = new javax.swing.JButton();
 
@@ -60,7 +122,7 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout(0, 25));
 
         Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 25, 15));
-        Main.setLayout(new java.awt.BorderLayout());
+        Main.setLayout(new java.awt.BorderLayout(0, 10));
 
         StatsHeader.setOpaque(false);
         StatsHeader.setLayout(new java.awt.BorderLayout());
@@ -74,6 +136,10 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         StatsHeader.add(jLabel1, java.awt.BorderLayout.EAST);
 
         Main.add(StatsHeader, java.awt.BorderLayout.NORTH);
+
+        StatsPanel.setOpaque(false);
+        StatsPanel.setLayout(new java.awt.BorderLayout());
+        Main.add(StatsPanel, java.awt.BorderLayout.CENTER);
 
         add(Main, java.awt.BorderLayout.CENTER);
 
@@ -108,6 +174,7 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
     private javax.swing.JButton ResumeButton;
     private javax.swing.JPanel StatsHeader;
     private javax.swing.JLabel StatsLabel;
+    private javax.swing.JPanel StatsPanel;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

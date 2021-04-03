@@ -64,6 +64,10 @@ public class Scenario implements Serializable {
         }
     }
     
+    public List<Carte> getListeCartes() {
+        return cartes;
+    }
+    
     public String getNom() {
         return nom;
     }

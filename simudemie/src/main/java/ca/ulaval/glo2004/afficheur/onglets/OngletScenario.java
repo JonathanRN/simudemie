@@ -59,10 +59,11 @@ public class OngletScenario extends OngletUI {
     @Override
     public void onClickObjetUI(ObjetUI objet) {
         super.onClickObjetUI(objet);
+        Scenario scenario = GestionnaireScenario.getInstance().getElement(this.getIndexCourant());
         
         scenarioStatsPanel1.getResumeButton().setText(getScenarioCourant().estCommence() ? "Résumer" : "Commencer");
+        scenarioStatsPanel1.setDataset(scenario);
         
-        Scenario scenario = GestionnaireScenario.getInstance().getElement(this.getIndexCourant());
         if (scenario != null) {
             scenarioMapPanel2.setPreviewVisibility(true);
             scenarioMapPanel2.setCarte(scenario.getCarteJourCourant());

@@ -108,7 +108,7 @@ public class CarteScenarioPanel extends PanelArrondi {
         AidePanel.setLayout(new java.awt.BorderLayout());
 
         AideLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        AideLabel.setText("Indice: utilisez la souris pour zoomer et déplacer, comme en mode création.");
+        AideLabel.setText("Indice: utilisez la souris pour zoomer et se déplacer.");
         AideLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 15, 2, 15));
         AidePanel.add(AideLabel, java.awt.BorderLayout.CENTER);
 
@@ -117,9 +117,9 @@ public class CarteScenarioPanel extends PanelArrondi {
         AideParentLayout.setHorizontalGroup(
             AideParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AideParentLayout.createSequentialGroup()
-                .addContainerGap(212, Short.MAX_VALUE)
+                .addContainerGap(262, Short.MAX_VALUE)
                 .addComponent(AidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         AideParentLayout.setVerticalGroup(
             AideParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

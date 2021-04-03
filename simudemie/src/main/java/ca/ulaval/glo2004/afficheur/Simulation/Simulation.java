@@ -126,7 +126,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         SliderJour.setMaximum(jour);
         SliderJour.setValue(SliderJour.getMaximum());
         
-        getPanel().repaint();
+        repaint();
     }
     
     /**

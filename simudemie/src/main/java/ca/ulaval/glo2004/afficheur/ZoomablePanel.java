@@ -13,11 +13,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
-import javax.swing.JPanel;
 
 /**
- *
- * @author Jonathan
+ * Basé depuis https://github.com/Thanasis1101/Zoomable-Java-Panel
  */
 public class ZoomablePanel extends PanelArrondi {
     
@@ -35,7 +33,7 @@ public class ZoomablePanel extends PanelArrondi {
     private Graphics2D g2;
     
     private final double zoomMax = 3;
-    private final double zoomMin = 0.2;
+    protected final double zoomMin = 0.2;
     
     @Override
     public void paintComponent(Graphics g) {
@@ -64,17 +62,23 @@ public class ZoomablePanel extends PanelArrondi {
     public void mouseWheelMoved(MouseWheelEvent e) {
         if (e.getWheelRotation() < 0) {
             if (zoomFactor * 1.1 < zoomMax) {
-                zoomFactor *= 1.1;
+                setZoom(zoomFactor * 1.1, new Point2D.Double(MouseInfo.getPointerInfo().getLocation().getX() - getLocationOnScreen().getX(),
+                MouseInfo.getPointerInfo().getLocation().getY() - getLocationOnScreen().getY()));
             }
         }
-        if (e.getWheelRotation() > 0) {
+        else if (e.getWheelRotation() > 0) {
             if (zoomFactor / 1.1 > zoomMin) {
-                zoomFactor /= 1.1;
+                setZoom(zoomFactor / 1.1, new Point2D.Double(MouseInfo.getPointerInfo().getLocation().getX() - getLocationOnScreen().getX(),
+                MouseInfo.getPointerInfo().getLocation().getY() - getLocationOnScreen().getY()));
             }
         }
+    }
+    
+    protected void setZoom(double zoom, Point2D.Double centre) {
+        zoomFactor = zoom;
         
-        xRel = MouseInfo.getPointerInfo().getLocation().getX() - getLocationOnScreen().getX();
-        yRel = MouseInfo.getPointerInfo().getLocation().getY() - getLocationOnScreen().getY();
+        xRel = centre.x;
+        yRel = centre.y;
         
         zoomDiv = zoomFactor / prevZoomFactor;
         
@@ -100,5 +104,10 @@ public class ZoomablePanel extends PanelArrondi {
         
         xDiff = 0;
         yDiff = 0;
+    }
+    
+    public void setPos(Point point) {
+        xOffset = point.x;
+        yOffset = point.y;
     }
 }

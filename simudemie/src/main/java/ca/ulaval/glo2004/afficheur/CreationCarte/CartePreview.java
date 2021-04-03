@@ -9,6 +9,9 @@ import ca.ulaval.glo2004.afficheur.ZoomablePanel;
 import ca.ulaval.glo2004.domaine.Carte;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import javax.swing.SwingUtilities;
 
 /**
@@ -27,7 +30,26 @@ public class CartePreview extends ZoomablePanel {
         prisePhotoMode = null;
         if (carte != null) {
             prisePhotoMode = new PreviewCarte(carte);
+            
+            centrerVueSurPolygones(carte);
         }
+    }
+    
+    private void centrerVueSurPolygones(Carte carte) {
+        this.getParent().setVisible(!carte.getListePays().isEmpty());
+        
+        if (!carte.getListePays().isEmpty()) {
+            // Get les bounds du premier pays sur la carte
+            Rectangle2D rect = carte.getListePays().get(0).getPolygone().getBounds2D();
+
+            int x = (getWidth()/2) - (int)rect.getCenterX();
+            int y = (getHeight()/2) - (int)rect.getCenterY();
+
+            setZoom(1, new Point2D.Double(getWidth()/2, getHeight()/2));
+            setPos(new Point(x, y));
+        }
+        
+        repaint();
     }
 
     @Override

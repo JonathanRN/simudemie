@@ -16,7 +16,11 @@ import ca.ulaval.glo2004.domaine.Region;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.util.Stack;
 import javax.swing.SwingUtilities;
 

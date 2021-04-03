@@ -62,6 +62,8 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
             SliderJour.setMaximum(getScenario().getTotalJours());
             SliderJour.setValue(getScenario().getIndexJourCourant());
         }
+        
+        setVitesse(1);
     }
     
     public ZoomInfoPanel getZoomPopup() {

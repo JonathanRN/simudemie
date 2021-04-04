@@ -23,8 +23,6 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     private Timer timer;    
     private int scenarioCourant;
     
-    private ScenarioCallback scenarioCallback;
-    
     private static GestionnaireScenario instance;
     
     public static GestionnaireScenario getInstance() {
@@ -45,8 +43,7 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        int jour = getCourant().avancerJour();
-        scenarioCallback.onAvancerJour(jour);
+        getCourant().avancerJour();
         sauvegarder();
     }
     
@@ -54,23 +51,24 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         return getElement(scenarioCourant);
     }
     
-    public void creerMesure(int indexMesure, Pays pays, String nom, double tauxAdhesion, double tauxReduction, boolean active)
+    public void creerMesure(int indexMesure, int indexPays, String nom, double tauxAdhesion, double tauxReduction, boolean active)
     {
+        Pays pays = getCourant().getCarteJourCourant().getPays(indexPays);
         Mesure mesure = pays.getMesure(indexMesure);
-        if(mesure == null) {
-            mesure = new Mesure(nom, tauxAdhesion, tauxReduction, active);
-            pays.ajouterMesure(mesure);
+        if (mesure == null) {
+            pays.ajouterMesure(new Mesure(nom, tauxAdhesion, tauxReduction, active));
         } else {
             mesure.setNom(nom);
             mesure.setTauxAdhesion(tauxAdhesion);
             mesure.setTauxReductionProp(tauxReduction);
             mesure.setActive(active);
-            pays.setMesure(indexMesure, new Mesure(mesure));
+            //pays.setMesure(indexMesure, mesure);
         }
         sauvegarder();
     }       
     
-    public void supprimerMesure(int indexMesure, Pays pays) {
+    public void supprimerMesure(int indexMesure, int indexPays) {
+        Pays pays = getCourant().getCarteJourCourant().getPays(indexPays);
         pays.supprimerMesure(indexMesure);
         sauvegarder();
     }
@@ -84,7 +82,7 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         timer.restart();
     }
     
-    public void demarrer(int index, ScenarioCallback scenarioCallback) {
+    public void demarrer(int index) {
         scenarioCourant = index;
         
         if (timer != null && timer.isRunning()) {
@@ -94,7 +92,10 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         timer.start();
         
         getCourant().demarrer();
-        this.scenarioCallback = scenarioCallback;
+    }
+    
+    public void setCallback(ScenarioCallback scenarioCallback) {
+        getCourant().setCallback(scenarioCallback);
     }
     
     public void setVitesse(int vitesse) {

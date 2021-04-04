@@ -35,6 +35,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         this.onglet = onglet;
         this.index = index;
         this.gestionnaire = GestionnaireScenario.getInstance();
+        gestionnaire.setCallback(this);
         
         initComponents();
         SimulationTabs.setSimulation(this);
@@ -168,11 +169,19 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     }
     
     @Override
-    public void onAvancerJour(int jour) {        
+    public void onAvancerJour(int jour) {
         SliderJour.setMaximum(jour);
         SliderJour.setValue(SliderJour.getMaximum());
         
         repaint();
+    }
+    
+    @Override
+    public void onChargerJour(int jour) {
+        // On recharge le UI dans le cas que ca change
+        if (SimulationTabs.isVisible()) {
+            SimulationTabs.loadMesures();
+        }
     }
     
     /**
@@ -499,7 +508,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         if (!estCommence) {
             estCommence = true;
             
-            gestionnaire.demarrer(index, this);
+            gestionnaire.demarrer(index);
         }
         
         if (estEnDirect) {

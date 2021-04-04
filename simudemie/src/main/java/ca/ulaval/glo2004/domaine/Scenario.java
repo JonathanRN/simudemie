@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.domaine;
 
+import ca.ulaval.glo2004.afficheur.Simulation.ScenarioCallback;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ public class Scenario implements Serializable {
     private int indexCourant;
     private boolean estCommence;
     
+    transient private ScenarioCallback scenarioCallback;
+    
     public Scenario(String nom, Carte carte, Maladie maladie) {
         this.nom = nom;
         
@@ -26,9 +29,14 @@ public class Scenario implements Serializable {
         carte.setMaladie(new Maladie(maladie));
         cartes.add(new Carte(carte));
     }
+    
     public void initialisePopInit()
     {
         cartes.get(0).initiliserPopInit();
+    }
+    
+    public void setCallback(ScenarioCallback cb) {
+        this.scenarioCallback = cb;
     }
     
     public boolean estCommence() {
@@ -53,6 +61,7 @@ public class Scenario implements Serializable {
     
     public void chargerJour(int index) {
         indexCourant = index;
+        scenarioCallback.onChargerJour(index);
     }
     
     public void stepJour(int step) {
@@ -91,6 +100,8 @@ public class Scenario implements Serializable {
         
         indexCourant++;
         getCarteJourCourant().avancerJour(indexCourant);
+        
+        scenarioCallback.onAvancerJour(indexCourant);
         
         return indexCourant;
     }

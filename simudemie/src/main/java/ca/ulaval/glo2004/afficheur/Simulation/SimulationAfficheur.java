@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
  */
 public class SimulationAfficheur extends Mode {
     
+    private int indexSelectionne;
     private Pays selectionne;
     private final Simulation simulation;
     private ArrayList<Polygon> polygones;
@@ -126,11 +127,13 @@ public class SimulationAfficheur extends Mode {
     public void onMouseReleased(Point point) {
         super.onMouseReleased(point);
         
+        indexSelectionne = -1;
         selectionne = null;
         for (Polygon p : polygones) {
             if (p.contains(point.x, point.y)) {
                 if (simulation.getScenario().estCommence()) {
                     selectionne = carte.getPays(p);
+                    indexSelectionne = carte.getListePays().indexOf(selectionne);
                 }
                 else {
                     regionInfectee = carte.getPays(p).getRegion(p);
@@ -164,8 +167,8 @@ public class SimulationAfficheur extends Mode {
         afficherLiens = !afficherLiens;
     }
     
-    public Pays getPaysSelectionne() {
-        return selectionne;
+    public int getPaysSelectionne() {
+        return indexSelectionne;
     }
     
     public void onSimulationDemaree() {

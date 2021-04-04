@@ -49,8 +49,8 @@ public class Pays implements Serializable {
         {
             for (Mesure m : mesures)
             {
-                if(m.getActive()) {
-                    tauxInfAjuste = tauxInfAjuste * (m.getTauxAdhesion() * m.getTauxReductionProp());
+                if (m.getActive()) {
+                    tauxInfAjuste = tauxInfAjuste * (m.getTauxAdhesion() / 100.0 * m.getTauxReductionProp() / 100.0);
                 }
             }
             region.contaminer(tauxInfAjuste, cptJours);

@@ -129,11 +129,11 @@ public class SimulationPanel extends ZoomablePanel {
         if (SwingUtilities.isLeftMouseButton(evt)) {
             afficheur.onMouseReleased(getOffset(evt.getPoint()));
             
-            Pays selectionne = afficheur.getPaysSelectionne();
-            simulation.toggleSimulationTabs(selectionne != null);
-            if (selectionne != null) {
-                simulation.getSimulationTabs().setPays(selectionne);
-                simulation.setNomPays(selectionne.getNom());
+            int selectionne = afficheur.getPaysSelectionne();
+            simulation.toggleSimulationTabs(selectionne != -1);
+            if (selectionne != -1) {
+                simulation.getSimulationTabs().setIndexPays(selectionne);
+                //simulation.setNomPays(selectionne.getNom());
             }
         }
         

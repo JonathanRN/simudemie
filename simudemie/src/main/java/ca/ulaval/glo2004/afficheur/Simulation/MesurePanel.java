@@ -45,7 +45,6 @@ public class MesurePanel extends javax.swing.JPanel {
         // Met tout de suite en mode edition lors de la creation
         setEdition(true, false);
         setActif(true, false);
-        sauvegarderMesure();
     }
     
     private void setActif(boolean actif, boolean mouseOver) {
@@ -72,15 +71,15 @@ public class MesurePanel extends javax.swing.JPanel {
         setEdition(false, false);
     }
     
-    private void sauvegarderMesure() {
+    public void sauvegarderMesure() {
         try {
             Adhesion.commitEdit();
             Reduction.commitEdit();
         } catch(ParseException pe) {
-
         }
-        System.out.println(estActif);
-        GestionnaireScenario.getInstance().creerMesure(index, simulationTabs.getPays(), NomMesureTextField.getText(), (double) Adhesion.getValue(), (double) Reduction.getValue(), estActif);
+        
+        System.out.println(index);
+        GestionnaireScenario.getInstance().creerMesure(index, simulationTabs.getIndexPays(), NomMesureTextField.getText(), (double) Adhesion.getValue(), (double) Reduction.getValue(), estActif);
     }
     
     private void updateEditerIcon(boolean actif) {
@@ -258,11 +257,13 @@ public class MesurePanel extends javax.swing.JPanel {
         int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer " + "\"" + NomMesureTextField.getText() + "\"?", "", JOptionPane.WARNING_MESSAGE);
 
         if(result == JOptionPane.YES_OPTION) {
-            GestionnaireScenario.getInstance().supprimerMesure(index, simulationTabs.getPays());
+            GestionnaireScenario.getInstance().supprimerMesure(index, simulationTabs.getIndexPays());
             conteneur.remove(this);
+            
+            simulationTabs.loadMesures();
+            
             conteneur.getParent().validate();
             conteneur.getRootPane().repaint();
-            simulationTabs.loadMesures();
         }
     }//GEN-LAST:event_SupprimerMouseReleased
 

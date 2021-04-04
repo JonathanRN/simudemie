@@ -23,7 +23,7 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
     
     private BoutonToggle toggleCourant;
     private Simulation simulation;
-    private Pays pays;
+    private int indexPays;
     
     public SimulationTabs() {
         initComponents();
@@ -48,12 +48,12 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
         this.simulation = simulation;
     }
     
-    public Pays getPays() {
-        return pays;
+    public int getIndexPays() {
+        return indexPays;
     }
     
-    public void setPays(Pays pays) {
-        this.pays = pays;
+    public void setIndexPays(int indexPays) {
+        this.indexPays = indexPays;
         
         loadMesures();
     }
@@ -62,9 +62,9 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
         ContenuMesures.removeAll();
         ContenuMesures.getParent().validate();
         ContenuMesures.getRootPane().repaint();
-        int size = pays.getMesures().size();
-        for(int index = 0; index < size; index++) {
-            addMesure(pays.getMesure(index));
+
+        for (Mesure m : simulation.getScenario().getCarteJourCourant().getPays(indexPays).getMesures()) {
+            addMesure(m);
         }
     }
     
@@ -89,14 +89,15 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
         }
     }
 
-    private void addMesure(Mesure mesure) {
+    private MesurePanel addMesure(Mesure mesure) {
         MesurePanel panel = new MesurePanel(ContenuMesures, this, ContenuMesures.getComponentCount());
         if(mesure != null) {
-            panel.chargerMesure(mesure);
+            panel.chargerMesure(new Mesure(mesure));
         }
         ContenuMesures.add(panel);
         ContenuMesures.getParent().validate();
         ContenuMesures.getRootPane().repaint();
+        return panel;
     }
     
     /**
@@ -190,7 +191,10 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
     }//GEN-LAST:event_AjouterMesureMouseExited
 
     private void AjouterMesureMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterMesureMouseReleased
-        addMesure(null);
+        MesurePanel panel = addMesure(null);
+        
+        // On veut créer la mesure immédiatement, mais seulement quand on appuie +
+        panel.sauvegarderMesure();
     }//GEN-LAST:event_AjouterMesureMouseReleased
 
 

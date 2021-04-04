@@ -35,11 +35,13 @@ public class FileHelper<T> {
         ArrayList<T> list = new ArrayList<>();
         
         try {
-            try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
-                list = (ArrayList<T>) ois.readObject();
+            if (file.exists()) {
+                try (FileInputStream fis = new FileInputStream(file); ObjectInputStream ois = new ObjectInputStream(fis)) {
+                    list = (ArrayList<T>) ois.readObject();
+                }
             }
         } catch(IOException | ClassNotFoundException | ClassCastException e) {
-             // TODO: Gérer cette exception
+             e.printStackTrace();
         }
         
         return list;

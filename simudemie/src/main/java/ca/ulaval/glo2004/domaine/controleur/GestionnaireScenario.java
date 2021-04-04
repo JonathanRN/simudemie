@@ -9,6 +9,7 @@ import ca.ulaval.glo2004.afficheur.Simulation.ScenarioCallback;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.Mesure;
+import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.helper.FileHelper;
 import java.awt.event.ActionEvent;
@@ -46,22 +47,32 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     public void actionPerformed(ActionEvent e) {
         int jour = getCourant().avancerJour();
         scenarioCallback.onAvancerJour(jour);
+        sauvegarder();
     }
     
     public Scenario getCourant() {
         return getElement(scenarioCourant);
     }
     
-    public void creerMesure(String nom, double tauxAdhesion, double tauxReduction)
+    public void creerMesure(int indexMesure, Pays pays, String nom, double tauxAdhesion, double tauxReduction, boolean active)
     {
-        Mesure mesure = new Mesure(nom, tauxAdhesion, tauxReduction);
-        // TODO: Quel pays ?!?
-        //getCourant().getCarteJourCourant().
-    }
-                
-    private void editerMesure(String nom, double tauxAdhesion, double tauxReduction)
-    {
-        //jourCourant.mesures[]...
+        Mesure mesure = pays.getMesure(indexMesure);
+        if(mesure == null) {
+            mesure = new Mesure(nom, tauxAdhesion, tauxReduction, active);
+            pays.ajouterMesure(mesure);
+        } else {
+            mesure.setNom(nom);
+            mesure.setTauxAdhesion(tauxAdhesion);
+            mesure.setTauxReductionProp(tauxReduction);
+            mesure.setActive(active);
+            pays.setMesure(indexMesure, new Mesure(mesure));
+        }
+        sauvegarder();
+    }       
+    
+    public void supprimerMesure(int indexMesure, Pays pays) {
+        pays.supprimerMesure(indexMesure);
+        sauvegarder();
     }
     
     public void pause() {

@@ -14,7 +14,7 @@ public class Pays implements Serializable {
     private String nom;
     private Polygon polygone;
     private int popInitiale; 
-    public ArrayList<Mesure> mesures = new ArrayList<>();
+    private ArrayList<Mesure> mesures = new ArrayList<>();
     public ArrayList<Region> listeRegions = new ArrayList<>();
 
     public Pays(Polygon polygone) {
@@ -157,5 +157,28 @@ public class Pays implements Serializable {
     
     public void setPopInitiale(int popInitiale) {
         this.popInitiale = popInitiale;
+    }
+    
+    public ArrayList<Mesure> getMesures() {
+        return mesures;
+    }
+    
+    public Mesure getMesure(int index) {
+        if(index >= mesures.size()) {
+            return null;
+        }
+        return mesures.get(index);
+    }
+    
+    public void setMesure(int index, Mesure mesure) {
+        mesures.set(index, mesure);
+    }
+    
+    public void ajouterMesure(Mesure mesure) {
+        mesures.add(mesure);
+    }
+    
+    public void supprimerMesure(int index) {
+        mesures.remove(index);
     }
 }

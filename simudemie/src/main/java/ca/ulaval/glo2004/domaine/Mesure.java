@@ -15,12 +15,12 @@ public class Mesure implements Serializable{
     private double tauxReductionProp;
     private boolean active;
     
-    public Mesure(String nom, double tauxAdhesion, double tauxReductionProp)
+    public Mesure(String nom, double tauxAdhesion, double tauxReductionProp, boolean active)
     {
         this.nom = nom; 
         this.tauxAdhesion = tauxAdhesion;
         this.tauxReductionProp = tauxReductionProp;
-        active = false;
+        this.active = active;
     }
     
     public Mesure(Mesure mesure)
@@ -28,7 +28,7 @@ public class Mesure implements Serializable{
         this.nom = mesure.nom; 
         this.tauxAdhesion = mesure.tauxAdhesion;
         this.tauxReductionProp = mesure.tauxReductionProp;
-        active = false;
+        this.active = mesure.active;
     }
     
     public String getNom(){return nom;}

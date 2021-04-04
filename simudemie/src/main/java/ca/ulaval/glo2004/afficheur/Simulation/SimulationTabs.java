@@ -8,6 +8,7 @@ package ca.ulaval.glo2004.afficheur.Simulation;
 import ca.ulaval.glo2004.afficheur.BoutonToggle;
 import ca.ulaval.glo2004.afficheur.PanelArrondi;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
+import ca.ulaval.glo2004.domaine.Mesure;
 import ca.ulaval.glo2004.domaine.Pays;
 import java.awt.Color;
 import java.awt.event.AdjustmentEvent;
@@ -22,6 +23,7 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
     
     private BoutonToggle toggleCourant;
     private Simulation simulation;
+    private Pays pays;
     
     public SimulationTabs() {
         initComponents();
@@ -46,8 +48,24 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
         this.simulation = simulation;
     }
     
+    public Pays getPays() {
+        return pays;
+    }
+    
     public void setPays(Pays pays) {
+        this.pays = pays;
         
+        loadMesures();
+    }
+    
+    public void loadMesures() {
+        ContenuMesures.removeAll();
+        ContenuMesures.getParent().validate();
+        ContenuMesures.getRootPane().repaint();
+        int size = pays.getMesures().size();
+        for(int index = 0; index < size; index++) {
+            addMesure(pays.getMesure(index));
+        }
     }
     
     public void onToggleClick(BoutonToggle toggle) {        
@@ -71,6 +89,16 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
         }
     }
 
+    private void addMesure(Mesure mesure) {
+        MesurePanel panel = new MesurePanel(ContenuMesures, this, ContenuMesures.getComponentCount());
+        if(mesure != null) {
+            panel.chargerMesure(mesure);
+        }
+        ContenuMesures.add(panel);
+        ContenuMesures.getParent().validate();
+        ContenuMesures.getRootPane().repaint();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -162,10 +190,7 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
     }//GEN-LAST:event_AjouterMesureMouseExited
 
     private void AjouterMesureMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterMesureMouseReleased
-        MesurePanel panel = new MesurePanel(ContenuMesures);
-        ContenuMesures.add(panel);
-        ContenuMesures.getParent().validate();
-        ContenuMesures.getRootPane().repaint();
+        addMesure(null);
     }//GEN-LAST:event_AjouterMesureMouseReleased
 
 

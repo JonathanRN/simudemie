@@ -6,6 +6,9 @@
 package ca.ulaval.glo2004.afficheur.Simulation;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
+import ca.ulaval.glo2004.domaine.Mesure;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
+import java.text.ParseException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,14 +20,18 @@ import javax.swing.JPanel;
 public class MesurePanel extends javax.swing.JPanel {
     
     private JPanel conteneur;
+    private SimulationTabs simulationTabs;
     private boolean edition, mouseOverEdition, mouseOverActif, estActif;
+    private int index;
     
     public MesurePanel() {
         initComponents();
     }
     
-    public MesurePanel(JPanel conteneur) {
+    public MesurePanel(JPanel conteneur, SimulationTabs simulationTabs, int index) {
         this.conteneur = conteneur;
+        this.simulationTabs = simulationTabs;
+        this.index = index;
         initComponents();
         
         try {
@@ -38,6 +45,7 @@ public class MesurePanel extends javax.swing.JPanel {
         // Met tout de suite en mode edition lors de la creation
         setEdition(true, false);
         setActif(true, false);
+        sauvegarderMesure();
     }
     
     private void setActif(boolean actif, boolean mouseOver) {
@@ -54,10 +62,25 @@ public class MesurePanel extends javax.swing.JPanel {
         Adhesion.setEnabled(edition);
         
         updateEditerIcon(mouseOver);
-        
-        if (!edition) {
-            // Save
+    }
+    
+    public void chargerMesure(Mesure mesure) {
+        NomMesureTextField.setText(mesure.getNom());
+        Adhesion.setValue(mesure.getTauxAdhesion());
+        Reduction.setValue(mesure.getTauxReductionProp());
+        setActif(mesure.getActive(), false);
+        setEdition(false, false);
+    }
+    
+    private void sauvegarderMesure() {
+        try {
+            Adhesion.commitEdit();
+            Reduction.commitEdit();
+        } catch(ParseException pe) {
+
         }
+        System.out.println(estActif);
+        GestionnaireScenario.getInstance().creerMesure(index, simulationTabs.getPays(), NomMesureTextField.getText(), (double) Adhesion.getValue(), (double) Reduction.getValue(), estActif);
     }
     
     private void updateEditerIcon(boolean actif) {
@@ -188,7 +211,7 @@ public class MesurePanel extends javax.swing.JPanel {
         ReductionLabel.setText("Taux réduction inf. : ");
         ReductionPanel.add(ReductionLabel, java.awt.BorderLayout.WEST);
 
-        Reduction.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(100.0f), Float.valueOf(0.5f)));
+        Reduction.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 0.5d));
         ReductionPanel.add(Reduction, java.awt.BorderLayout.CENTER);
 
         add(ReductionPanel);
@@ -201,7 +224,7 @@ public class MesurePanel extends javax.swing.JPanel {
         AdhesionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
         TauxAdhesion.add(AdhesionLabel, java.awt.BorderLayout.WEST);
 
-        Adhesion.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(100.0f), Float.valueOf(0.5f)));
+        Adhesion.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 0.5d));
         TauxAdhesion.add(Adhesion, java.awt.BorderLayout.CENTER);
 
         add(TauxAdhesion);
@@ -235,18 +258,24 @@ public class MesurePanel extends javax.swing.JPanel {
         int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer " + "\"" + NomMesureTextField.getText() + "\"?", "", JOptionPane.WARNING_MESSAGE);
 
         if(result == JOptionPane.YES_OPTION) {
+            GestionnaireScenario.getInstance().supprimerMesure(index, simulationTabs.getPays());
             conteneur.remove(this);
             conteneur.getParent().validate();
             conteneur.getRootPane().repaint();
+            simulationTabs.loadMesures();
         }
     }//GEN-LAST:event_SupprimerMouseReleased
 
     private void EditerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditerMouseReleased
         setEdition(!edition, mouseOverEdition);
+        if(!edition) {
+            sauvegarderMesure();
+        }
     }//GEN-LAST:event_EditerMouseReleased
 
     private void ActiverMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActiverMouseReleased
         setActif(!estActif, mouseOverActif);
+        sauvegarderMesure();
     }//GEN-LAST:event_ActiverMouseReleased
 
 

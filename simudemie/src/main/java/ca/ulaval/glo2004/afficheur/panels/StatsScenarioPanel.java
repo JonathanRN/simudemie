@@ -48,6 +48,10 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
     public void setDataset(Scenario scenario) {
         StatsPanel.removeAll();
         
+        if (scenario == null) {
+            return;
+        }
+        
         XYSeries infectes = new XYSeries("Infectés");
         for (int i = 0; i < scenario.getTotalJours(); i++) {
             infectes.add(i, scenario.getListeCartes().get(i).getPopulationInfectee());

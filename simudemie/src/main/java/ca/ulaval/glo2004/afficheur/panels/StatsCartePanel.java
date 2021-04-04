@@ -9,22 +9,16 @@ import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;
-import ca.ulaval.glo2004.domaine.Region;
-import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.StandardBarPainter;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -54,6 +48,10 @@ public class StatsCartePanel extends javax.swing.JPanel {
     
     public void setDataset(Carte carte) {
         StatsPanel.removeAll();
+        
+        if (carte == null) {
+            return;
+        }
         
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (Pays pays : carte.getListePays()) {

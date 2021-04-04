@@ -100,6 +100,7 @@ public class OngletCarte extends OngletUI {
             
             if (objets.isEmpty()) {
                 scenarioMapPanel1.setPreviewVisibility(false);
+                mapStatsPanel1.setDataset(null);
             }
         }
     }

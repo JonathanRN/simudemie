@@ -115,6 +115,7 @@ public class OngletScenario extends OngletUI {
             
             if (objets.isEmpty()) {
                 scenarioMapPanel2.setPreviewVisibility(false);
+                scenarioStatsPanel1.setDataset(null);
             }
         }
     }

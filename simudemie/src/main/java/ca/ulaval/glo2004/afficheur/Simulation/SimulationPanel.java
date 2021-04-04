@@ -6,7 +6,6 @@
 package ca.ulaval.glo2004.afficheur.Simulation;
 
 import ca.ulaval.glo2004.afficheur.ZoomablePanel;
-import ca.ulaval.glo2004.domaine.Pays;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;

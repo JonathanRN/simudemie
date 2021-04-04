@@ -78,7 +78,6 @@ public class MesurePanel extends javax.swing.JPanel {
         } catch(ParseException pe) {
         }
         
-        System.out.println(index);
         GestionnaireScenario.getInstance().creerMesure(index, simulationTabs.getIndexPays(), NomMesureTextField.getText(), (double) Adhesion.getValue(), (double) Reduction.getValue(), estActif);
     }
     
@@ -210,7 +209,7 @@ public class MesurePanel extends javax.swing.JPanel {
         ReductionLabel.setText("Taux réduction inf. : ");
         ReductionPanel.add(ReductionLabel, java.awt.BorderLayout.WEST);
 
-        Reduction.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 0.5d));
+        Reduction.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
         ReductionPanel.add(Reduction, java.awt.BorderLayout.CENTER);
 
         add(ReductionPanel);
@@ -223,7 +222,7 @@ public class MesurePanel extends javax.swing.JPanel {
         AdhesionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
         TauxAdhesion.add(AdhesionLabel, java.awt.BorderLayout.WEST);
 
-        Adhesion.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 0.5d));
+        Adhesion.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
         TauxAdhesion.add(Adhesion, java.awt.BorderLayout.CENTER);
 
         add(TauxAdhesion);

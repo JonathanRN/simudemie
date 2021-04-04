@@ -531,8 +531,6 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     }//GEN-LAST:event_FastForwardMouseReleased
 
     private void HomeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeButtonMouseReleased
-        System.out.println(HomeButton.getWidth());
-        System.out.println(HomeButton.getHeight());
         this.HomeButtonReleased(evt);
     }//GEN-LAST:event_HomeButtonMouseReleased
 

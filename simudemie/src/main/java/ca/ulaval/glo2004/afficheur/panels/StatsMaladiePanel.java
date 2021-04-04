@@ -54,7 +54,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         InfectionLabel.setToolTipText("");
         Parent.add(InfectionLabel);
         
-        InfectionInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 100, 0.5));
+        InfectionInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 99.9, 0.5));
         Parent.add(InfectionInput);
 
         CuredLabel = new javax.swing.JLabel();

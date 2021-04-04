@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
  */
 public class SimulationAfficheur extends Mode {
     
+    private Pays selectionne;
     private final Simulation simulation;
     private ArrayList<Polygon> polygones;
     private Point souris;
@@ -63,6 +64,11 @@ public class SimulationAfficheur extends Mode {
         if (regionInfectee != null) {
             g.setColor(Color.red);
             this.paintLignes(g, Color.red, regionInfectee.getPolygone());
+        }
+        
+        if (selectionne != null) {
+            g.setStroke(new BasicStroke(2));
+            this.paintLignes(g, Color.green, selectionne.getPolygone());
         }
         
         if(afficherLiens) {
@@ -120,14 +126,15 @@ public class SimulationAfficheur extends Mode {
     public void onMouseReleased(Point point) {
         super.onMouseReleased(point);
         
-        if (simulation.getScenario().estCommence()) {
-            return;
-        }
-        
+        selectionne = null;
         for (Polygon p : polygones) {
             if (p.contains(point.x, point.y)) {
-                regionInfectee = carte.getPays(p).getRegion(p);
-                break;
+                if (simulation.getScenario().estCommence()) {
+                    selectionne = carte.getPays(p);
+                }
+                else {
+                    regionInfectee = carte.getPays(p).getRegion(p);
+                }
             }
         }
     }
@@ -155,6 +162,10 @@ public class SimulationAfficheur extends Mode {
     
     public void onSwapLinks() {
         afficherLiens = !afficherLiens;
+    }
+    
+    public Pays getPaysSelectionne() {
+        return selectionne;
     }
     
     public void onSimulationDemaree() {

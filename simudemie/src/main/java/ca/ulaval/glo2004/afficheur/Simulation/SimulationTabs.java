@@ -7,13 +7,18 @@ package ca.ulaval.glo2004.afficheur.Simulation;
 
 import ca.ulaval.glo2004.afficheur.BoutonToggle;
 import ca.ulaval.glo2004.afficheur.PanelArrondi;
+import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
+import ca.ulaval.glo2004.domaine.Pays;
 import java.awt.Color;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
+import javax.swing.JLabel;
 
 /**
  *
  * @author Jonathan
  */
-public class SimulationTabs extends PanelArrondi {
+public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
     
     private BoutonToggle toggleCourant;
     private Simulation simulation;
@@ -22,8 +27,13 @@ public class SimulationTabs extends PanelArrondi {
         initComponents();
         
         try {
-            Contenu.setBackground(new Color(76, 86, 106, 100));
+            updateBoutonAjouter(false, AjouterMesure);
+            setBackground(new Color(76, 86, 106, 100));
+            MesuresActives.getViewport().setOpaque(false);
             BoutonMesures.init(this, "icons8_wash_your_hands_30px");
+            MesuresActives.getVerticalScrollBar().addAdjustmentListener(this);
+            
+            onToggleClick(BoutonMesures);
         }
         catch(Exception e) {
         }
@@ -33,9 +43,11 @@ public class SimulationTabs extends PanelArrondi {
         this.simulation = simulation;
     }
     
-    public void onToggleClick(BoutonToggle toggle) {
-        Contenu.setVisible(toggle != null);
+    public void setPays(Pays pays) {
         
+    }
+    
+    public void onToggleClick(BoutonToggle toggle) {        
         if (toggleCourant != null) {
             toggleCourant.setToggle(false);
         }
@@ -44,6 +56,15 @@ public class SimulationTabs extends PanelArrondi {
         
         if (toggleCourant != null) {
             toggleCourant.setToggle(true);
+        }
+    }
+    
+    private void updateBoutonAjouter(boolean actif, JLabel bouton) {
+        if (actif) {
+            bouton.setFont(FontRegister.RobotoRegular.deriveFont(25f));
+        }
+        else {
+            bouton.setFont(FontRegister.RobotoLight.deriveFont(25f));
         }
     }
 
@@ -59,9 +80,13 @@ public class SimulationTabs extends PanelArrondi {
         SidePanelParent = new javax.swing.JPanel();
         SidePanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         BoutonMesures = new ca.ulaval.glo2004.afficheur.BoutonToggle();
-        Contenu = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        MesuresPanel = new javax.swing.JPanel();
+        Titre = new javax.swing.JPanel();
+        MesuresTitre = new javax.swing.JLabel();
+        AjouterMesure = new javax.swing.JLabel();
+        MesuresActives = new javax.swing.JScrollPane();
+        ContenuMesures = new javax.swing.JPanel();
 
-        setOpaque(false);
         setLayout(new javax.swing.OverlayLayout(this));
 
         SidePanelParent.setOpaque(false);
@@ -77,25 +102,83 @@ public class SimulationTabs extends PanelArrondi {
 
         add(SidePanelParent);
 
-        javax.swing.GroupLayout ContenuLayout = new javax.swing.GroupLayout(Contenu);
-        Contenu.setLayout(ContenuLayout);
-        ContenuLayout.setHorizontalGroup(
-            ContenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 352, Short.MAX_VALUE)
-        );
-        ContenuLayout.setVerticalGroup(
-            ContenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 343, Short.MAX_VALUE)
-        );
+        MesuresPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 0, 0));
+        MesuresPanel.setOpaque(false);
+        MesuresPanel.setLayout(new java.awt.BorderLayout());
 
-        add(Contenu);
+        Titre.setOpaque(false);
+        Titre.setLayout(new java.awt.BorderLayout());
+
+        MesuresTitre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        MesuresTitre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        MesuresTitre.setText("Mesures");
+        MesuresTitre.setPreferredSize(new java.awt.Dimension(62, 30));
+        Titre.add(MesuresTitre, java.awt.BorderLayout.CENTER);
+
+        AjouterMesure.setFont(new java.awt.Font("Dialog", 0, 25)); // NOI18N
+        AjouterMesure.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AjouterMesure.setText("+");
+        AjouterMesure.setPreferredSize(new java.awt.Dimension(41, 30));
+        AjouterMesure.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AjouterMesureMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AjouterMesureMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                AjouterMesureMouseReleased(evt);
+            }
+        });
+        Titre.add(AjouterMesure, java.awt.BorderLayout.EAST);
+
+        MesuresPanel.add(Titre, java.awt.BorderLayout.PAGE_START);
+
+        MesuresActives.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        MesuresActives.setOpaque(false);
+
+        ContenuMesures.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        ContenuMesures.setOpaque(false);
+        ContenuMesures.setLayout(new javax.swing.BoxLayout(ContenuMesures, javax.swing.BoxLayout.Y_AXIS));
+        MesuresActives.setViewportView(ContenuMesures);
+
+        MesuresPanel.add(MesuresActives, java.awt.BorderLayout.CENTER);
+
+        add(MesuresPanel);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void AjouterMesureMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterMesureMouseEntered
+        updateBoutonAjouter(true, (JLabel)evt.getSource());
+        this.getRootPane().repaint();
+    }//GEN-LAST:event_AjouterMesureMouseEntered
+
+    private void AjouterMesureMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterMesureMouseExited
+        updateBoutonAjouter(false, (JLabel)evt.getSource());
+        this.getRootPane().repaint();
+    }//GEN-LAST:event_AjouterMesureMouseExited
+
+    private void AjouterMesureMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterMesureMouseReleased
+        MesurePanel panel = new MesurePanel(ContenuMesures);
+        ContenuMesures.add(panel);
+        ContenuMesures.getParent().validate();
+        this.getRootPane().repaint();
+    }//GEN-LAST:event_AjouterMesureMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AjouterMesure;
     private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonMesures;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi Contenu;
+    private javax.swing.JPanel ContenuMesures;
+    private javax.swing.JScrollPane MesuresActives;
+    private javax.swing.JPanel MesuresPanel;
+    private javax.swing.JLabel MesuresTitre;
     private ca.ulaval.glo2004.afficheur.PanelArrondi SidePanel;
     private javax.swing.JPanel SidePanelParent;
+    private javax.swing.JPanel Titre;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void adjustmentValueChanged(AdjustmentEvent e) {
+        this.getRootPane().repaint();
+    }
 }

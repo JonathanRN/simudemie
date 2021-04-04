@@ -6,6 +6,7 @@
 package ca.ulaval.glo2004.afficheur.Simulation;
 
 import ca.ulaval.glo2004.afficheur.ZoomablePanel;
+import ca.ulaval.glo2004.domaine.Pays;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -127,6 +128,13 @@ public class SimulationPanel extends ZoomablePanel {
         requestFocusInWindow();
         if (SwingUtilities.isLeftMouseButton(evt)) {
             afficheur.onMouseReleased(getOffset(evt.getPoint()));
+            
+            Pays selectionne = afficheur.getPaysSelectionne();
+            simulation.toggleSimulationTabs(selectionne != null);
+            if (selectionne != null) {
+                simulation.getSimulationTabs().setPays(selectionne);
+                simulation.setNomPays(selectionne.getNom());
+            }
         }
         
         if (SwingUtilities.isRightMouseButton(evt)) {

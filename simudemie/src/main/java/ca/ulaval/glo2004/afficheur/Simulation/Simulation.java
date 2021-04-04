@@ -35,13 +35,17 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         this.onglet = onglet;
         this.index = index;
         this.gestionnaire = GestionnaireScenario.getInstance();
+        
         initComponents();
         SimulationTabs.setSimulation(this);
+        toggleSimulationTabs(false);
+        
         initBoutonsGeneraux();
         
         // Cacher par default, tant que la simulation n'est pas commencee
         SliderJour.setVisible(false);
         
+        //NomPays.setFont(FontRegister.RobotoLight.deriveFont(18f));
         FFLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         StartLabel1.setFont(FontRegister.RobotoLight.deriveFont(15f));
         StartLabel2.setFont(FontRegister.RobotoLight.deriveFont(15f));
@@ -67,6 +71,19 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         BoutonPhoto.setIcon("/icons/simulation/icons8_unsplash_25px.png");
         Help.setIcon("/icons/simulation/icons8_help_25px.png");
         HomeButton.setIcon("/icons/icons8_home_25px_1.png");
+    }
+    
+    public void toggleSimulationTabs(boolean actif) {
+        SimulationTabs.setVisible(actif);
+        //NomPays.setVisible(actif);
+    }
+    
+    public void setNomPays(String nom) {
+        //NomPays.setText("Pays : " + nom);
+    }
+    
+    public SimulationTabs getSimulationTabs() {
+        return SimulationTabs;
     }
     
     public ZoomInfoPanel getZoomPopup() {
@@ -182,8 +199,9 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         FF = new javax.swing.JPanel();
         FastForward = new javax.swing.JLabel();
         FFLabel = new javax.swing.JLabel();
-        Buttons = new javax.swing.JPanel();
+        TabsParent = new javax.swing.JPanel();
         SimulationTabs = new ca.ulaval.glo2004.afficheur.Simulation.SimulationTabs();
+        MenuDroitParent = new javax.swing.JPanel();
         SidePanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         TogglePaysRegion = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         ToggleLiens = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
@@ -205,14 +223,14 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
             .addGroup(ZoomInfoParentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1077, Short.MAX_VALUE))
+                .addContainerGap(1080, Short.MAX_VALUE))
         );
         ZoomInfoParentLayout.setVerticalGroup(
             ZoomInfoParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ZoomInfoParentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(739, Short.MAX_VALUE))
+                .addContainerGap(744, Short.MAX_VALUE))
         );
 
         add(ZoomInfoParent);
@@ -246,16 +264,16 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         StartParentLayout.setHorizontalGroup(
             StartParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StartParentLayout.createSequentialGroup()
-                .addContainerGap(137, Short.MAX_VALUE)
+                .addContainerGap(138, Short.MAX_VALUE)
                 .addComponent(StartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         StartParentLayout.setVerticalGroup(
             StartParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(StartParentLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(StartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(659, Short.MAX_VALUE))
+                .addContainerGap(664, Short.MAX_VALUE))
         );
 
         add(StartParent);
@@ -336,8 +354,29 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
 
         add(SliderParent);
 
-        Buttons.setBackground(new java.awt.Color(46, 52, 64));
-        Buttons.setOpaque(false);
+        TabsParent.setBackground(new java.awt.Color(46, 52, 64));
+        TabsParent.setOpaque(false);
+
+        javax.swing.GroupLayout TabsParentLayout = new javax.swing.GroupLayout(TabsParent);
+        TabsParent.setLayout(TabsParentLayout);
+        TabsParentLayout.setHorizontalGroup(
+            TabsParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TabsParentLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(SimulationTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(730, Short.MAX_VALUE))
+        );
+        TabsParentLayout.setVerticalGroup(
+            TabsParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TabsParentLayout.createSequentialGroup()
+                .addContainerGap(196, Short.MAX_VALUE)
+                .addComponent(SimulationTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(196, Short.MAX_VALUE))
+        );
+
+        add(TabsParent);
+
+        MenuDroitParent.setOpaque(false);
 
         SidePanel.setMaximumSize(new java.awt.Dimension(100, 200));
         SidePanel.setMinimumSize(new java.awt.Dimension(100, 200));
@@ -367,28 +406,24 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         });
         SidePanel.add(HomeButton);
 
-        javax.swing.GroupLayout ButtonsLayout = new javax.swing.GroupLayout(Buttons);
-        Buttons.setLayout(ButtonsLayout);
-        ButtonsLayout.setHorizontalGroup(
-            ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ButtonsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(SimulationTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 711, Short.MAX_VALUE)
+        javax.swing.GroupLayout MenuDroitParentLayout = new javax.swing.GroupLayout(MenuDroitParent);
+        MenuDroitParent.setLayout(MenuDroitParentLayout);
+        MenuDroitParentLayout.setHorizontalGroup(
+            MenuDroitParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuDroitParentLayout.createSequentialGroup()
+                .addContainerGap(1024, Short.MAX_VALUE)
                 .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        ButtonsLayout.setVerticalGroup(
-            ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ButtonsLayout.createSequentialGroup()
-                .addContainerGap(215, Short.MAX_VALUE)
-                .addGroup(ButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(SidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-                    .addComponent(SimulationTabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(215, Short.MAX_VALUE))
+        MenuDroitParentLayout.setVerticalGroup(
+            MenuDroitParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MenuDroitParentLayout.createSequentialGroup()
+                .addContainerGap(196, Short.MAX_VALUE)
+                .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(196, Short.MAX_VALUE))
         );
 
-        add(Buttons);
+        add(MenuDroitParent);
 
         SimulationPanel.setOpaque(false);
         SimulationPanel.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -405,7 +440,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         );
         SimulationPanelLayout.setVerticalGroup(
             SimulationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 739, Short.MAX_VALUE)
+            .addGap(0, 744, Short.MAX_VALUE)
         );
 
         add(SimulationPanel);
@@ -496,13 +531,13 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton BoutonPhoto;
     private javax.swing.JPanel Boutons;
-    private javax.swing.JPanel Buttons;
     private javax.swing.JLabel DirectIcon;
     private javax.swing.JPanel FF;
     private javax.swing.JLabel FFLabel;
     private javax.swing.JLabel FastForward;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton Help;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HomeButton;
+    private javax.swing.JPanel MenuDroitParent;
     private ca.ulaval.glo2004.afficheur.PanelArrondi SidePanel;
     private ca.ulaval.glo2004.afficheur.Simulation.SimulationPanel SimulationPanel;
     private ca.ulaval.glo2004.afficheur.Simulation.SimulationTabs SimulationTabs;
@@ -513,6 +548,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private javax.swing.JLabel StartLabel2;
     private ca.ulaval.glo2004.afficheur.PanelArrondi StartPanel;
     private javax.swing.JPanel StartParent;
+    private javax.swing.JPanel TabsParent;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton ToggleCouleurs;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton ToggleLiens;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton TogglePaysRegion;

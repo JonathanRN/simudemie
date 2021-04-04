@@ -7,6 +7,7 @@ package ca.ulaval.glo2004.afficheur.Simulation;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
 public class MesurePanel extends javax.swing.JPanel {
     
     private JPanel conteneur;
+    private boolean edition, mouseOverEdition, mouseOverActif, estActif;
     
     public MesurePanel() {
         initComponents();
@@ -32,14 +34,39 @@ public class MesurePanel extends javax.swing.JPanel {
         }
         catch (Exception e) {
         }
+        
+        // Met tout de suite en mode edition lors de la creation
+        setEdition(true, false);
+        setActif(true, false);
+    }
+    
+    private void setActif(boolean actif, boolean mouseOver) {
+        estActif = actif;
+        
+        updateActifIcon(mouseOver);
+    }
+    
+    private void setEdition(boolean edition, boolean mouseOver) {
+        this.edition = edition;
+        
+        NomMesureTextField.setEnabled(edition);
+        Reduction.setEnabled(edition);
+        Adhesion.setEnabled(edition);
+        
+        updateEditerIcon(mouseOver);
+        
+        if (!edition) {
+            // Save
+        }
     }
     
     private void updateEditerIcon(boolean actif) {
+        mouseOverEdition = actif;
         String path = "/icons/simulation/mesure/";
-        path += "editer";
+        path += edition ? "save" : "editer";
         path += actif ? "_highlight.png" : ".png";
         Editer.setIcon(new ImageIcon(getClass().getResource(path)));
-        this.getRootPane().repaint();
+        conteneur.getRootPane().repaint();
     }
     
     private void updateSupprimerIcon(boolean actif) {
@@ -47,15 +74,16 @@ public class MesurePanel extends javax.swing.JPanel {
         path += "supprimer";
         path += actif ? "_highlight.png" : ".png";
         Supprimer.setIcon(new ImageIcon(getClass().getResource(path)));
-        this.getRootPane().repaint();
+        conteneur.getRootPane().repaint();
     }
     
     private void updateActifIcon(boolean actif) {
+        mouseOverActif = actif;
         String path = "/icons/simulation/mesure/";
-        path += "unchecked";
+        path += estActif ? "checked" : "unchecked";
         path += actif ? "_highlight.png" : ".png";
         Activer.setIcon(new ImageIcon(getClass().getResource(path)));
-        this.getRootPane().repaint();
+        conteneur.getRootPane().repaint();
     }
 
     /**
@@ -75,10 +103,10 @@ public class MesurePanel extends javax.swing.JPanel {
         Activer = new javax.swing.JLabel();
         ReductionPanel = new javax.swing.JPanel();
         ReductionLabel = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        Reduction = new javax.swing.JSpinner();
         TauxAdhesion = new javax.swing.JPanel();
         AdhesionLabel = new javax.swing.JLabel();
-        jSpinner2 = new javax.swing.JSpinner();
+        Adhesion = new javax.swing.JSpinner();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
         setMaximumSize(new java.awt.Dimension(32767, 100));
@@ -89,6 +117,7 @@ public class MesurePanel extends javax.swing.JPanel {
         Header.setLayout(new java.awt.BorderLayout());
 
         NomMesureTextField.setText("Nom de la mesure");
+        NomMesureTextField.setSelectionColor(new java.awt.Color(136, 192, 208));
         Header.add(NomMesureTextField, java.awt.BorderLayout.CENTER);
 
         Boutons.setOpaque(false);
@@ -105,6 +134,9 @@ public class MesurePanel extends javax.swing.JPanel {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 EditerMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                EditerMouseReleased(evt);
             }
         });
         Boutons.add(Editer);
@@ -139,6 +171,9 @@ public class MesurePanel extends javax.swing.JPanel {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 ActiverMouseExited(evt);
             }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ActiverMouseReleased(evt);
+            }
         });
         Boutons.add(Activer);
 
@@ -152,7 +187,9 @@ public class MesurePanel extends javax.swing.JPanel {
         ReductionLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         ReductionLabel.setText("Taux réduction inf. : ");
         ReductionPanel.add(ReductionLabel, java.awt.BorderLayout.WEST);
-        ReductionPanel.add(jSpinner1, java.awt.BorderLayout.CENTER);
+
+        Reduction.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(100.0f), Float.valueOf(0.5f)));
+        ReductionPanel.add(Reduction, java.awt.BorderLayout.CENTER);
 
         add(ReductionPanel);
 
@@ -163,7 +200,9 @@ public class MesurePanel extends javax.swing.JPanel {
         AdhesionLabel.setText("Taux d'adhésion :");
         AdhesionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
         TauxAdhesion.add(AdhesionLabel, java.awt.BorderLayout.WEST);
-        TauxAdhesion.add(jSpinner2, java.awt.BorderLayout.CENTER);
+
+        Adhesion.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(100.0f), Float.valueOf(0.5f)));
+        TauxAdhesion.add(Adhesion, java.awt.BorderLayout.CENTER);
 
         add(TauxAdhesion);
     }// </editor-fold>//GEN-END:initComponents
@@ -193,24 +232,36 @@ public class MesurePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_SupprimerMouseExited
 
     private void SupprimerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupprimerMouseReleased
-        conteneur.remove(this);
-        conteneur.getParent().validate();
-        conteneur.getRootPane().repaint();
+        int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer " + "\"" + NomMesureTextField.getText() + "\"?", "", JOptionPane.WARNING_MESSAGE);
+
+        if(result == JOptionPane.YES_OPTION) {
+            conteneur.remove(this);
+            conteneur.getParent().validate();
+            conteneur.getRootPane().repaint();
+        }
     }//GEN-LAST:event_SupprimerMouseReleased
+
+    private void EditerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditerMouseReleased
+        setEdition(!edition, mouseOverEdition);
+    }//GEN-LAST:event_EditerMouseReleased
+
+    private void ActiverMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActiverMouseReleased
+        setActif(!estActif, mouseOverActif);
+    }//GEN-LAST:event_ActiverMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Activer;
+    private javax.swing.JSpinner Adhesion;
     private javax.swing.JLabel AdhesionLabel;
     private javax.swing.JPanel Boutons;
     private javax.swing.JLabel Editer;
     private javax.swing.JPanel Header;
     private javax.swing.JTextField NomMesureTextField;
+    private javax.swing.JSpinner Reduction;
     private javax.swing.JLabel ReductionLabel;
     private javax.swing.JPanel ReductionPanel;
     private javax.swing.JLabel Supprimer;
     private javax.swing.JPanel TauxAdhesion;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
     // End of variables declaration//GEN-END:variables
 }

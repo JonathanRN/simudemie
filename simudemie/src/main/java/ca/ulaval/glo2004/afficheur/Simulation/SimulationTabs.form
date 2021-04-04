@@ -119,6 +119,7 @@
         <Container class="javax.swing.JScrollPane" name="MesuresActives">
           <Properties>
             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+            <Property name="verticalScrollBarPolicy" type="int" value="22"/>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
           <Constraints>

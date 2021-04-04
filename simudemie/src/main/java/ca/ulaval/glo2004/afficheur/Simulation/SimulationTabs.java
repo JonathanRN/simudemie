@@ -29,9 +29,12 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
         try {
             updateBoutonAjouter(false, AjouterMesure);
             setBackground(new Color(76, 86, 106, 100));
+            
             MesuresActives.getViewport().setOpaque(false);
-            BoutonMesures.init(this, "icons8_wash_your_hands_30px");
+            MesuresActives.getVerticalScrollBar().setUnitIncrement(15);
             MesuresActives.getVerticalScrollBar().addAdjustmentListener(this);
+            
+            BoutonMesures.init(this, "icons8_wash_your_hands_30px");
             
             onToggleClick(BoutonMesures);
         }
@@ -135,6 +138,7 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
         MesuresPanel.add(Titre, java.awt.BorderLayout.PAGE_START);
 
         MesuresActives.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        MesuresActives.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         MesuresActives.setOpaque(false);
 
         ContenuMesures.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -161,7 +165,7 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
         MesurePanel panel = new MesurePanel(ContenuMesures);
         ContenuMesures.add(panel);
         ContenuMesures.getParent().validate();
-        this.getRootPane().repaint();
+        ContenuMesures.getRootPane().repaint();
     }//GEN-LAST:event_AjouterMesureMouseReleased
 
 

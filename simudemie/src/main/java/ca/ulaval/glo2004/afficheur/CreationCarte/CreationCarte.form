@@ -121,22 +121,22 @@
             <Property name="axis" type="int" value="0"/>
           </Layout>
           <SubComponents>
-            <Component class="ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle" name="BoutonSelection">
+            <Component class="ca.ulaval.glo2004.afficheur.BoutonToggle" name="BoutonSelection">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Outil de s&#xe9;lection/&#xe9;dition"/>
               </Properties>
             </Component>
-            <Component class="ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle" name="BoutonCrayon">
+            <Component class="ca.ulaval.glo2004.afficheur.BoutonToggle" name="BoutonCrayon">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Outil de cr&#xe9;ation pays"/>
               </Properties>
             </Component>
-            <Component class="ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle" name="BoutonRegion">
+            <Component class="ca.ulaval.glo2004.afficheur.BoutonToggle" name="BoutonRegion">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Outil d&#xe9;coupage de r&#xe9;gion"/>
               </Properties>
             </Component>
-            <Component class="ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle" name="BoutonLien">
+            <Component class="ca.ulaval.glo2004.afficheur.BoutonToggle" name="BoutonLien">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Outils cr&#xe9;ation liens "/>
               </Properties>
@@ -148,7 +148,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
               <SubComponents>
-                <Component class="ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle" name="BoutonQuitter">
+                <Component class="ca.ulaval.glo2004.afficheur.BoutonToggle" name="BoutonQuitter">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="Retour &#xe0; l&apos;accueil"/>
                   </Properties>

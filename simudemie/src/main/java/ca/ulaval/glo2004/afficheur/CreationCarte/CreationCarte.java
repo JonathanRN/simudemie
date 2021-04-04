@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
+import ca.ulaval.glo2004.afficheur.BoutonToggle;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.ZoomInfoPanel;
 import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
@@ -26,7 +27,7 @@ public class CreationCarte extends javax.swing.JPanel {
     
     private Mode mode;
     private final int carteIndex;
-    private CreationCarteToggle toggleCourant;
+    private BoutonToggle toggleCourant;
     private OngletCarte onglet;
     
     public CreationCarte(int index, OngletCarte onglet) {
@@ -88,7 +89,7 @@ public class CreationCarte extends javax.swing.JPanel {
         return InformationsPanel;
     }
     
-    public void onToggleClick(CreationCarteToggle bouton) {
+    public void onToggleClick(BoutonToggle bouton) {
         if (toggleCourant != null) {
             toggleCourant.setToggle(false);
         }
@@ -172,12 +173,12 @@ public class CreationCarte extends javax.swing.JPanel {
         StartLabel2 = new javax.swing.JLabel();
         ToolBarParent = new javax.swing.JPanel();
         ToolBar = new javax.swing.JPanel();
-        BoutonSelection = new ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle();
-        BoutonCrayon = new ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle();
-        BoutonRegion = new ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle();
-        BoutonLien = new ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle();
+        BoutonSelection = new ca.ulaval.glo2004.afficheur.BoutonToggle();
+        BoutonCrayon = new ca.ulaval.glo2004.afficheur.BoutonToggle();
+        BoutonRegion = new ca.ulaval.glo2004.afficheur.BoutonToggle();
+        BoutonLien = new ca.ulaval.glo2004.afficheur.BoutonToggle();
         BoutonQuitterParent = new javax.swing.JPanel();
-        BoutonQuitter = new ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle();
+        BoutonQuitter = new ca.ulaval.glo2004.afficheur.BoutonToggle();
         ZoomPanelParent = new javax.swing.JPanel();
         ZoomInfo = new ca.ulaval.glo2004.afficheur.ZoomInfoPanel();
         InformationsPanelParent = new javax.swing.JPanel();
@@ -303,12 +304,12 @@ public class CreationCarte extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle BoutonCrayon;
-    private ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle BoutonLien;
-    private ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle BoutonQuitter;
+    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonCrayon;
+    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonLien;
+    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonQuitter;
     private javax.swing.JPanel BoutonQuitterParent;
-    private ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle BoutonRegion;
-    private ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarteToggle BoutonSelection;
+    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonRegion;
+    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonSelection;
     private ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel CreationCartePanel;
     private javax.swing.JPanel InformationsPanel;
     private javax.swing.JPanel InformationsPanelParent;

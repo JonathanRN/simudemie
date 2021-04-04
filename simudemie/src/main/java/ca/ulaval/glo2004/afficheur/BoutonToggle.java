@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004.afficheur.CreationCarte;
+package ca.ulaval.glo2004.afficheur;
 
-import ca.ulaval.glo2004.afficheur.PanelArrondi;
+import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
+import ca.ulaval.glo2004.afficheur.CreationCarte.Mode;
+import ca.ulaval.glo2004.afficheur.Simulation.SimulationTabs;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
@@ -13,15 +15,16 @@ import javax.swing.ImageIcon;
  *
  * @author Jonathan
  */
-public class CreationCarteToggle extends PanelArrondi {
+public class BoutonToggle extends PanelArrondi {
 
     private Mode mode;
     private CreationCarte creation;
+    private SimulationTabs simulationTabs;
     private final Color base, highlight;
     private boolean mouseOver;
     private boolean estToggle;
     
-    public CreationCarteToggle() {
+    public BoutonToggle() {
         initComponents();
         base = new Color(0, 0, 0, 0);
         highlight = new Color(128, 134, 143);
@@ -33,6 +36,11 @@ public class CreationCarteToggle extends PanelArrondi {
         this.mode = mode;
         
         setIcon("/icons/" + path + ".png");
+    }
+    
+    public void init(SimulationTabs tabs, String path) {
+        this.simulationTabs = tabs;
+        setIcon("/icons/simulation/" + path + ".png");
     }
     
     public void setIcon(String path) {
@@ -102,6 +110,10 @@ public class CreationCarteToggle extends PanelArrondi {
         setToggle(true);
         if (creation != null) {
             creation.onToggleClick(this);
+        }
+        
+        if (simulationTabs != null) {
+            simulationTabs.onToggleClick(this);
         }
     }//GEN-LAST:event_formMouseReleased
 

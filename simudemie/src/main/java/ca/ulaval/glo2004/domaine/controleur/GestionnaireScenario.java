@@ -50,8 +50,7 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         return getElement(scenarioCourant);
     }
     
-    public void creerMesure(int indexMesure, int indexPays, String nom, double tauxAdhesion, double tauxReduction, boolean active)
-    {
+    public void creerMesure(int indexMesure, int indexPays, String nom, double tauxAdhesion, double tauxReduction, boolean active) {
         Pays pays = getCourant().getCarteJourCourant().getPays(indexPays);
         Mesure mesure = pays.getMesure(indexMesure);
         if (mesure == null) {
@@ -62,13 +61,11 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
             mesure.setTauxReductionProp(tauxReduction);
             mesure.setActive(active);
         }
-        sauvegarder();
     }       
     
     public void supprimerMesure(int indexMesure, int indexPays) {
         Pays pays = getCourant().getCarteJourCourant().getPays(indexPays);
         pays.supprimerMesure(indexMesure);
-        sauvegarder();
     }
     
     public void pause() {

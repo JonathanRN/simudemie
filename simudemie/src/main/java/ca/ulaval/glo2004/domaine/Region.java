@@ -53,6 +53,9 @@ public class Region implements Externalizable {
     
     public void contaminer(double taux, int cptJours)
     {
+        //Nous ajoutons les nouveaux infectés dans un vecteur pour ajouter une dose de réalisme.
+        //Lorsque l'élimination et guérison de la pop ont lieu, ces méthodes s'appliquent sur la 
+        //pop infectée d'il y a 2 semaines (inspiré du Covid - période d'incubation d'environ 2 semaines)
         int nouveauxInfectes = contaminationBinomiale(taux);
         this.listeInfections.add(nouveauxInfectes);
         setPopInfectee(this.getPopInfectee() + nouveauxInfectes);
@@ -61,6 +64,7 @@ public class Region implements Externalizable {
     
     public void eliminerPopulation(double taux, int cptJours)
     {
+        //Les premières infections ont lieu 2 semaines après la 1ere infection
         if (cptJours > 14 && getPopInfectee() > 0f){
             int deces = (int)(this.listeInfections.get(cptJours - 14) * taux);
             setPopDecedee(this.getPopDecedee() + deces);
@@ -70,6 +74,7 @@ public class Region implements Externalizable {
     
     public void guerirPop(double taux, int cptJours)
     {
+        //Les premières guerisons ont lieu 2 semaines après la 1ere infection
         if (cptJours > 14){
             int gueris = (int)(this.listeInfections.get(cptJours - 14) * taux);
             setPopSaine(this.getPopSaine() + gueris);
@@ -150,6 +155,13 @@ public class Region implements Externalizable {
     }
     
     private int contaminationBinomiale(double tauxPropag) {
+        
+        /*
+        Contanimation suivant une distribution binomiale inspiré du labo présenté par Anthony.
+        Nous prenons le nombre d'infectés et, suivant les probabilités, ajoutons un nombre réalistes
+        de personnes infectées.
+        */
+        
         int nbInfectes = this.getPopInfectee();
 
         if (nbInfectes <= 0) {
@@ -193,7 +205,6 @@ public class Region implements Externalizable {
             }
         }
 
-
         nbInfectes = (int)(this.getPopInfectee()/(cpt*0.2));
         if (nbInfectes > this.getPopSaine()){
             nbInfectes = this.getPopSaine();
@@ -205,11 +216,11 @@ public class Region implements Externalizable {
     private int clamp(int value, int min, int max) {
         return value > max ? max : value < min ? min : value;
     }
-    
+       
     public void setPopInitiale(int popInitiale) {
         this.popInitiale = popInitiale;
     }
-
+    
     public int getPopInitiale() {
         return popInitiale;
     }    

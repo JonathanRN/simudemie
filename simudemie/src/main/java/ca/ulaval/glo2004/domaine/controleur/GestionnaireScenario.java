@@ -46,6 +46,10 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         getCourant().avancerJour();
     }
     
+    public void setIndexCourant(int index) {
+        scenarioCourant = index;
+    }
+    
     public Scenario getCourant() {
         return getElement(scenarioCourant);
     }
@@ -77,9 +81,7 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         timer.restart();
     }
     
-    public void demarrer(int index) {
-        scenarioCourant = index;
-        
+    public void demarrer() {
         if (timer != null && timer.isRunning()) {
             timer.stop();
         }

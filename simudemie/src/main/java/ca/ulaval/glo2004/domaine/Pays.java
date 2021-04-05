@@ -52,6 +52,7 @@ public class Pays implements Externalizable {
         double tauxInfAjuste = tauxInf;
         for (Region region : listeRegions)
         {
+            //Chaque mesure vient appliquer une réduction sur le taux de propagation
             for (Mesure m : mesures)
             {
                 if (m.getActive()) {
@@ -67,6 +68,8 @@ public class Pays implements Externalizable {
     }
     
     public void contaminerInterRegions()
+    //Pour chaque région infectée, si le nombre d'infection est superieure à 25, il y a une chance sur deux de contaminer 
+    //une autre région du pays. 
     {
         for (Region r : listeRegions)
         {

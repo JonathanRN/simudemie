@@ -35,6 +35,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         this.onglet = onglet;
         this.index = index;
         this.gestionnaire = GestionnaireScenario.getInstance();
+        gestionnaire.setIndexCourant(index);
         gestionnaire.setCallback(this);
         
         initComponents();
@@ -508,7 +509,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         if (!estCommence) {
             estCommence = true;
             
-            gestionnaire.demarrer(index);
+            gestionnaire.demarrer();
         }
         
         if (estEnDirect) {

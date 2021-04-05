@@ -82,7 +82,9 @@ public class StatsCartePanel extends javax.swing.JPanel {
         chartPanel.setRangeZoomable(false);
         
         StatsPanel.add(chartPanel, BorderLayout.CENTER);
-        StatsPanel.validate();        
+        StatsPanel.validate();
+        
+        repaint();
     }
 
     /**

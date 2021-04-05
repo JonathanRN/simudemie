@@ -22,13 +22,11 @@ public class ZoomInfoPanel extends PanelArrondi implements ActionListener {
         initComponents();
         timer = new Timer(3000, this);
         
-        try {
-
+        if (FontRegister.RobotoLight != null) {
             ZoomLabel.setFont(FontRegister.RobotoLight.deriveFont(24f));
-
-            this.setVisible(false);
         }
-        catch (Exception e) {}
+        
+        this.setVisible(false);
     }
     
     public void onMouseWheel(double zoomFactor) {
@@ -37,7 +35,6 @@ public class ZoomInfoPanel extends PanelArrondi implements ActionListener {
         }
         
         ZoomLabel.setText(String.format("%.2fx", zoomFactor));
-        revalidate();
         
         timer.restart();
     }

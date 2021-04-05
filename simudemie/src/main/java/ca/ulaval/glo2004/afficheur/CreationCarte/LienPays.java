@@ -243,6 +243,8 @@ public class LienPays extends Mode {
         updatePoints();
         
         pointSelectionne = null;
+        
+        creationCarte.repaint();
     }
     
     private void updateVoies() {

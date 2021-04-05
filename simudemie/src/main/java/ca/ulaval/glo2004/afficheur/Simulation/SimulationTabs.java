@@ -9,14 +9,17 @@ import ca.ulaval.glo2004.afficheur.BoutonToggle;
 import ca.ulaval.glo2004.afficheur.PanelArrondi;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Mesure;
+import ca.ulaval.glo2004.domaine.Pays;
 import java.awt.Color;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import javax.swing.JLabel;
 
 /**
  *
  * @author Jonathan
  */
-public class SimulationTabs extends PanelArrondi {
+public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
     
     private BoutonToggle toggleCourant;
     private Simulation simulation;
@@ -32,6 +35,7 @@ public class SimulationTabs extends PanelArrondi {
             BoutonMesures.init(this, "icons8_wash_your_hands_30px");
             MesuresActives.getViewport().setOpaque(false);
             MesuresActives.getVerticalScrollBar().setUnitIncrement(15);
+            MesuresActives.getVerticalScrollBar().addAdjustmentListener(this);
             MesuresTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
             BoutonLiens.init(this, "icons8_chain_25px");
@@ -60,6 +64,7 @@ public class SimulationTabs extends PanelArrondi {
     public void loadMesures() {
         ContenuMesures.removeAll();
         ContenuMesures.getParent().validate();
+        ContenuMesures.getRootPane().repaint();
 
         for (Mesure m : simulation.getScenario().getCarteJourCourant().getPays(indexPays).getMesures()) {
             addMesure(m);
@@ -100,6 +105,7 @@ public class SimulationTabs extends PanelArrondi {
         }
         ContenuMesures.add(panel);
         ContenuMesures.getParent().validate();
+        ContenuMesures.getRootPane().repaint();
         return panel;
     }
     
@@ -219,10 +225,12 @@ public class SimulationTabs extends PanelArrondi {
 
     private void AjouterMesureMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterMesureMouseEntered
         updateBoutonAjouter(true, (JLabel)evt.getSource());
+        this.getRootPane().repaint();
     }//GEN-LAST:event_AjouterMesureMouseEntered
 
     private void AjouterMesureMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterMesureMouseExited
         updateBoutonAjouter(false, (JLabel)evt.getSource());
+        this.getRootPane().repaint();
     }//GEN-LAST:event_AjouterMesureMouseExited
 
     private void AjouterMesureMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterMesureMouseReleased
@@ -250,4 +258,9 @@ public class SimulationTabs extends PanelArrondi {
     private javax.swing.JPanel Titre;
     private javax.swing.JPanel Titre1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void adjustmentValueChanged(AdjustmentEvent e) {
+        this.getRootPane().repaint();
+    }
 }

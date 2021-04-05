@@ -6,14 +6,11 @@ import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
 import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import com.formdev.flatlaf.IntelliJTheme;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
-import javax.swing.Timer;
 import javax.swing.UIManager;
 
-public class FramePrincipal extends javax.swing.JFrame implements Runnable {  
+public class FramePrincipal extends javax.swing.JFrame {  
     private MenuPrincipal menu;
     private Simulation simulation;
     private CreationCarte creationCarte;
@@ -25,7 +22,6 @@ public class FramePrincipal extends javax.swing.JFrame implements Runnable {
         initComponents();
         
         menu = MenuPrincipal;
-        new Thread(this).start();
     }
     
     /*
@@ -45,6 +41,7 @@ public class FramePrincipal extends javax.swing.JFrame implements Runnable {
         simulation = new Simulation(index, onglet);
         add(simulation);
         revalidate();
+        repaint();
     }
     
     public void startCreationCarte(int index, OngletCarte onglet) {
@@ -52,6 +49,7 @@ public class FramePrincipal extends javax.swing.JFrame implements Runnable {
         creationCarte = new CreationCarte(index, onglet);
         add(creationCarte);
         revalidate();
+        repaint();
     }
     
     public void returnToHome() {
@@ -66,6 +64,7 @@ public class FramePrincipal extends javax.swing.JFrame implements Runnable {
             add(menu);
         }
         revalidate();
+        repaint();
     }
 
     /**
@@ -122,19 +121,4 @@ public class FramePrincipal extends javax.swing.JFrame implements Runnable {
     private javax.swing.JMenuBar TitleMenuBar;
     // End of variables declaration//GEN-END:variables
 
-
-    @Override
-    public void run() {
-        Timer repaintTimer = new Timer(8, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                repaint();
-                try {
-                  Thread.sleep(8);
-               }
-               catch (InterruptedException ex) {}
-            }
-        });
-        repaintTimer.start();
-    }
 }

@@ -20,6 +20,7 @@ import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -30,7 +31,7 @@ import javax.swing.JPanel;
  *
  * @author Mick
  */
-public class CreationScenarioPanel extends javax.swing.JPanel {
+public class CreationScenarioPanel extends javax.swing.JPanel implements AdjustmentListener {
     
     private OngletScenarioCarte ongletScenarioCarte;
     private OngletScenarioMaladie ongletScenarioMaladie;
@@ -57,6 +58,10 @@ public class CreationScenarioPanel extends javax.swing.JPanel {
 
             CartesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
             MaladiesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
+
+            // Gestion pour le bogue de refresh sur le scroll
+            CartesScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
+            MaladiesScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
         }
         catch (Exception e) {
         }
@@ -82,6 +87,7 @@ public class CreationScenarioPanel extends javax.swing.JPanel {
         }
         CartesContainer.add(objetScenarioCarte);
         CartesScrollPane.revalidate();
+        CartesScrollPane.repaint();
     }
     
     public void addMaladie(ObjetScenarioMaladie objetScenarioMaladie) {
@@ -90,6 +96,7 @@ public class CreationScenarioPanel extends javax.swing.JPanel {
         }
         MaladiesContainer.add(objetScenarioMaladie);
         MaladiesScrollPane.revalidate();
+        MaladiesScrollPane.repaint();
     }
     
     private Component getFiller(int y) {
@@ -258,6 +265,7 @@ public class CreationScenarioPanel extends javax.swing.JPanel {
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         // Ne pas retirer l'event pour bloquer les inputs dans les autres panels
+        this.getRootPane().repaint();
     }//GEN-LAST:event_formMouseMoved
 
     private void AnnulerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnnulerMouseReleased
@@ -288,4 +296,9 @@ public class CreationScenarioPanel extends javax.swing.JPanel {
     private javax.swing.JPanel ScrollPanes;
     private javax.swing.JTextField SimulationInput;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void adjustmentValueChanged(AdjustmentEvent e) {
+        this.getRootPane().repaint();
+    }
 }

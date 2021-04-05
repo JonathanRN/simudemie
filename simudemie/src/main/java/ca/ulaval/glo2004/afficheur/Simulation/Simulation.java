@@ -172,6 +172,8 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     public void onAvancerJour(int jour) {
         SliderJour.setMaximum(jour);
         SliderJour.setValue(SliderJour.getMaximum());
+        
+        repaint();
     }
     
     @Override
@@ -459,6 +461,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         }
         
         getScenario().chargerJour(SliderJour.getValue());
+        getPanel().repaint();
     }//GEN-LAST:event_SliderJourMouseReleased
 
     private void SimulationPanelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SimulationPanelKeyReleased
@@ -469,6 +472,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         if (evt.getKeyCode() == KeyEvent.VK_RIGHT && !estEnDirect) {
             getScenario().stepJour(1);
             SliderJour.setValue(getScenario().getIndexJourCourant());
+            getPanel().repaint();
         }
         
         if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -477,6 +481,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
             }
             getScenario().stepJour(-1);
             SliderJour.setValue(getScenario().getIndexJourCourant());
+            getPanel().repaint();
         }
     }//GEN-LAST:event_SimulationPanelKeyReleased
 

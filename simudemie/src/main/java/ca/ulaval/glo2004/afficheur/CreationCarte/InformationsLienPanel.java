@@ -87,6 +87,7 @@ public class InformationsLienPanel extends javax.swing.JPanel implements ActionL
     public void actionPerformed(ActionEvent e) {
         setVoie(VoieLiaison.TypeVoie.valueOf(e.getActionCommand()));
         setLien(lien);
+        this.getRootPane().repaint();
     }
     
     private void setVoie(VoieLiaison.TypeVoie voie) {

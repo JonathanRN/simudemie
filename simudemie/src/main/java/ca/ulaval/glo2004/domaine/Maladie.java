@@ -5,16 +5,20 @@
  */
 package ca.ulaval.glo2004.domaine;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 
-
-public class Maladie implements Serializable {
+public class Maladie implements Externalizable {
 
     private String nom;
     private double tauxInfection;
     private double tauxMortalite;
     private double tauxGuerison;
+    
+    public Maladie() {}
     
     public Maladie(String nom, double tauxInfection, double tauxMortalite, double tauxGuerison)
     {
@@ -57,6 +61,22 @@ public class Maladie implements Serializable {
     public void setTauxGuerison(double tauxGuerison)
     {
         this.tauxGuerison = tauxGuerison;
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeUTF(nom);
+        out.writeDouble(tauxInfection);
+        out.writeDouble(tauxMortalite);
+        out.writeDouble(tauxGuerison);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        nom = in.readUTF();
+        tauxInfection = in.readDouble();
+        tauxMortalite = in.readDouble();
+        tauxGuerison = in.readDouble();
     }
     
      

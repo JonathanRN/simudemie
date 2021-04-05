@@ -5,11 +5,14 @@
  */
 package ca.ulaval.glo2004.domaine;
 import java.awt.Polygon;
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class Pays implements Serializable {
+public class Pays implements Externalizable {
     
     private String nom;
     private Polygon polygone;
@@ -17,6 +20,8 @@ public class Pays implements Serializable {
     private ArrayList<Mesure> mesures = new ArrayList<>();
     public ArrayList<Region> listeRegions = new ArrayList<>();
 
+    public Pays() {}
+    
     public Pays(Polygon polygone) {
         this.polygone = polygone;
     }
@@ -180,5 +185,23 @@ public class Pays implements Serializable {
     
     public void supprimerMesure(int index) {
         mesures.remove(index);
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeUTF(nom);
+        out.writeObject(polygone);
+        out.writeInt(popInitiale);
+        out.writeObject(mesures);
+        out.writeObject(listeRegions);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        nom = in.readUTF();
+        polygone = (Polygon) in.readObject();
+        popInitiale = in.readInt();
+        mesures = (ArrayList<Mesure>) in.readObject();
+        listeRegions = (ArrayList<Region>) in.readObject();
     }
 }

@@ -6,7 +6,10 @@
 package ca.ulaval.glo2004.domaine;
 
 import ca.ulaval.glo2004.afficheur.Simulation.ScenarioCallback;
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +17,15 @@ import java.util.List;
  *
  * @author Mick
  */
-public class Scenario implements Serializable {
+public class Scenario implements Externalizable {
     private String nom;
-    private final List<Carte> cartes = new ArrayList<>();;
+    private final List<Carte> cartes = new ArrayList<>();
     private int indexCourant;
     private boolean estCommence;
     
     transient private ScenarioCallback scenarioCallback;
+    
+    public Scenario() {}
     
     public Scenario(String nom, Carte carte, Maladie maladie) {
         this.nom = nom;
@@ -104,5 +109,28 @@ public class Scenario implements Serializable {
         scenarioCallback.onAvancerJour(indexCourant);
         
         return indexCourant;
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeUTF(nom);
+        out.writeInt(cartes.size());
+        for(Carte carte : cartes) {
+            out.writeObject(carte);
+        }
+        out.writeInt(indexCourant);
+        out.writeBoolean(estCommence);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        cartes.clear();
+        nom = in.readUTF();
+        int cartesSize = in.readInt();
+        for(int index = 0; index < cartesSize; index++) {
+            cartes.add((Carte) in.readObject());
+        }
+        indexCourant = in.readInt();
+        estCommence = in.readBoolean();
     }
 }

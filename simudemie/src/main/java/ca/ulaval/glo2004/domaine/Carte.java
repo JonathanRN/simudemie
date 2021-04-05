@@ -6,17 +6,21 @@
 package ca.ulaval.glo2004.domaine;
 
 import java.awt.Polygon;
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class Carte implements Serializable {
+public class Carte implements Externalizable {
     
     private String nom;
     private final ArrayList<Pays> listePays = new ArrayList<>();
     private final ArrayList<VoieLiaison> frontieres = new ArrayList<>();
     private Maladie maladie;
 
+    public Carte() {}
     
     public Carte(String nom) {
         this.nom = nom;
@@ -247,5 +251,35 @@ public class Carte implements Serializable {
     
     public float getPourcentageDecedee() {
         return (float)getPopulationDecedee() / (float)getPopulationInitiale();
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeUTF(nom);
+        out.writeInt(listePays.size());
+        for(int index = 0; index < listePays.size(); index++) {
+            out.writeObject(listePays.get(index));
+        }
+        out.writeInt(frontieres.size());
+        for(int index = 0; index < frontieres.size(); index++) {
+            out.writeObject(frontieres.get(index));
+        }
+        out.writeObject(maladie);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        listePays.clear();
+        frontieres.clear();
+        nom = in.readUTF();
+        int listePaysSize = in.readInt();
+        for(int index = 0; index < listePaysSize; index++) {
+            listePays.add((Pays) in.readObject());
+        }
+        int frontieresSize = in.readInt();
+        for(int index = 0; index < frontieresSize; index++) {
+            frontieres.add((VoieLiaison) in.readObject());
+        }
+        maladie = (Maladie) in.readObject();
     }
 }

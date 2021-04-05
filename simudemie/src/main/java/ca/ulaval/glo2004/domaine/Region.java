@@ -9,21 +9,25 @@ import java.util.ArrayList;
 import java.util.Random;
 import org.apache.commons.math3.distribution.BinomialDistribution;
 import java.awt.Polygon;
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Vector;
 
 
-public class Region implements Serializable {
+public class Region implements Externalizable {
     
     private String nom;
     private int populationSaine;
     private int populationInfectee;
     private int populationDecedee;
     public int popInitiale;
-    private final Polygon polygone;
+    private Polygon polygone;
     private Vector<Integer> listeInfections = new Vector<>();
     private int populationImmune;
 
+    public Region() {}
     
     public Region(Polygon polygone) {
         this.polygone = polygone;
@@ -209,4 +213,35 @@ public class Region implements Serializable {
     public int getPopInitiale() {
         return popInitiale;
     }    
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeUTF(nom);
+        out.writeInt(populationSaine);
+        out.writeInt(populationInfectee);
+        out.writeInt(populationDecedee);
+        out.writeInt(popInitiale);
+        out.writeObject(polygone);
+        out.writeInt(listeInfections.size());
+        for(Integer i : listeInfections) {
+            out.writeInt(i);
+        }
+        out.writeInt(popInitiale);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        listeInfections.clear();
+        nom = in.readUTF();
+        populationSaine = in.readInt();
+        populationInfectee = in.readInt();
+        populationDecedee = in.readInt();
+        popInitiale = in.readInt();
+        polygone = (Polygon) in.readObject();
+        int listeInfectionsSize = in.readInt();
+        for(int index = 0; index < listeInfectionsSize; index++) {
+            listeInfections.add(in.readInt());
+        }
+        popInitiale = in.readInt();
+    }
 }

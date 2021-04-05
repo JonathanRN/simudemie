@@ -8,10 +8,12 @@ package ca.ulaval.glo2004.domaine;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.geom.Path2D;
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
-
-public class VoieLiaison implements Serializable {
+public class VoieLiaison implements Externalizable {
     
     private Pays paysOrigine;
     private Pays paysDestination;
@@ -19,11 +21,11 @@ public class VoieLiaison implements Serializable {
     private Path2D.Double ligneCourbe;
     private Point centre;
     private boolean accessible;
-    protected final Color Ter = new Color(208, 135, 112);
-    protected final Color Mar = new Color(94, 129, 172);
-    protected final Color Aer = new Color(143, 188, 187);
+    protected transient final Color Ter = new Color(208, 135, 112);
+    protected transient final Color Mar = new Color(94, 129, 172);
+    protected transient final Color Aer = new Color(143, 188, 187);
 
-   
+    public VoieLiaison() {}
     
     public VoieLiaison(TypeVoie type, Pays origine, Pays destination, Path2D.Double ligneCourbe, Point centre)
     {
@@ -102,6 +104,26 @@ public class VoieLiaison implements Serializable {
             default:
                 return Color.red;
         }
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeObject(paysOrigine);
+        out.writeObject(paysDestination);
+        out.writeObject(type);
+        out.writeObject(ligneCourbe);
+        out.writeObject(centre);
+        out.writeBoolean(accessible);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        paysOrigine = (Pays) in.readObject();
+        paysDestination = (Pays) in.readObject();
+        type = (TypeVoie) in.readObject();
+        ligneCourbe = (Path2D.Double) in.readObject();
+        centre = (Point) in.readObject();
+        accessible = in.readBoolean();
     }
     
     public enum TypeVoie {

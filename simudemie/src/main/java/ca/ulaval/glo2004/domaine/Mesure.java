@@ -5,15 +5,20 @@
  */
 package ca.ulaval.glo2004.domaine;
 
-import java.io.Serializable;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 
 
-public class Mesure implements Serializable{
+public class Mesure implements Externalizable{
     
     private String nom;
     private double tauxAdhesion;
     private double tauxReductionProp;
     private boolean active;
+    
+    public Mesure() {}
     
     public Mesure(String nom, double tauxAdhesion, double tauxReductionProp, boolean active)
     {
@@ -58,5 +63,21 @@ public class Mesure implements Serializable{
     
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeUTF(nom);
+        out.writeDouble(tauxAdhesion);
+        out.writeDouble(tauxReductionProp);
+        out.writeBoolean(active);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        nom = in.readUTF();
+        tauxAdhesion = in.readDouble();
+        tauxReductionProp = in.readDouble();
+        active = in.readBoolean();
     }
 }

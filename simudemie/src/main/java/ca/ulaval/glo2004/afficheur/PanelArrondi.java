@@ -50,24 +50,10 @@ public class PanelArrondi extends javax.swing.JPanel {
     @Override
     public void setBackground(Color color) {
         bgColor = color;
-        
-        // Force un repaint sur le JFrame pour redessiner
-        try {
-            JFrame topFrame = (JFrame)SwingUtilities.getWindowAncestor(this);
-            topFrame.repaint();
-        } catch (Exception e) {   
-        }
     }
     
     protected void setBorderColor(Color color) {
         borderColor = color;
-        
-        // Force un repaint sur le JFrame pour redessiner
-        try {
-            JFrame topFrame = (JFrame)SwingUtilities.getWindowAncestor(this);
-            topFrame.repaint();
-        } catch (Exception e) {   
-        }
     }
  
     /**

@@ -48,8 +48,6 @@ public class CartePreview extends ZoomablePanel {
             setZoom(1, new Point2D.Double(getWidth()/2, getHeight()/2));
             setPos(new Point(x, y));
         }
-        
-        repaint();
     }
 
     @Override
@@ -112,19 +110,16 @@ public class CartePreview extends ZoomablePanel {
         if (SwingUtilities.isRightMouseButton(evt)) {
             mouseReleased(evt);
         }
-        this.getRootPane().repaint();
     }//GEN-LAST:event_formMouseReleased
 
     private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
         mouseWheelMoved(evt);
-        this.getRootPane().repaint();
     }//GEN-LAST:event_formMouseWheelMoved
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         if (SwingUtilities.isRightMouseButton(evt)) {
             mouseDragged(evt);
         }
-        this.getRootPane().repaint();
     }//GEN-LAST:event_formMouseDragged
 
 

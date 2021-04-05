@@ -18,7 +18,7 @@ import javax.swing.Timer;
  *
  * @author Jonathan
  */
-public class OngletTitre extends javax.swing.JPanel implements ActionListener {
+public class OngletTitre extends javax.swing.JPanel {
     
     private Timer logoTimer, translateTimer, textTimer;
     
@@ -45,16 +45,10 @@ public class OngletTitre extends javax.swing.JPanel implements ActionListener {
         updateAlphaLogo();
     }
     
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        repaint();
-    }
-    
     private void translateLogo() {
         translateTimer = new Timer(DELAY, listener -> {
             if (logoOffsetY < finalLogoOffsetY) {
                 logoOffsetY += 2;
-                repaint();
             }
             else {
                 updateAlphaText();
@@ -68,7 +62,6 @@ public class OngletTitre extends javax.swing.JPanel implements ActionListener {
         logoTimer = new Timer(DELAY, listener -> {
             if (alphaImage < 0.99f) {
                 alphaImage += 0.02f;
-                repaint();
             }
             else {
                 alphaImageDone = true;
@@ -83,7 +76,6 @@ public class OngletTitre extends javax.swing.JPanel implements ActionListener {
         textTimer = new Timer(DELAY, listener -> {
             if (alphaText < 0.99f) {
                 alphaText += 0.02f;
-                repaint();
             }
             else {
                 textTimer.stop();

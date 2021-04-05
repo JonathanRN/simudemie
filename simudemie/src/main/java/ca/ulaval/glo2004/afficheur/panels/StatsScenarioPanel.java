@@ -109,8 +109,6 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         
         StatsPanel.add(chartPanel, BorderLayout.CENTER);
         StatsPanel.validate();
-        
-        repaint();
     }
     
     public JButton getResumeButton() {

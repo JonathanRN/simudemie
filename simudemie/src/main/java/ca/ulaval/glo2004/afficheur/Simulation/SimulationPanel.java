@@ -101,15 +101,12 @@ public class SimulationPanel extends ZoomablePanel {
         }
         
         afficheur.onMouseMoved(getOffset(evt.getPoint()));
-        repaint();
     }//GEN-LAST:event_formMouseMoved
 
     private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
         mouseWheelMoved(evt);
         
         simulation.getZoomPopup().onMouseWheel(zoomFactor);
-        
-        repaint();
     }//GEN-LAST:event_formMouseWheelMoved
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
@@ -120,7 +117,6 @@ public class SimulationPanel extends ZoomablePanel {
         if (SwingUtilities.isRightMouseButton(evt)) {
             mousePressed(evt);
         }
-        repaint();
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
@@ -139,7 +135,6 @@ public class SimulationPanel extends ZoomablePanel {
         if (SwingUtilities.isRightMouseButton(evt)) {
             mouseReleased(evt);
         }
-        repaint();
     }//GEN-LAST:event_formMouseReleased
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
@@ -150,16 +145,13 @@ public class SimulationPanel extends ZoomablePanel {
         if (SwingUtilities.isRightMouseButton(evt)) {
             mouseDragged(evt);
         }
-        repaint();
     }//GEN-LAST:event_formMouseDragged
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_Q) {
             afficheur.onSwapInformations();
-            repaint();
         } else if(evt.getKeyCode() == KeyEvent.VK_W) {
             afficheur.onSwapLinks();
-            repaint();
         }
     }//GEN-LAST:event_formKeyReleased
 

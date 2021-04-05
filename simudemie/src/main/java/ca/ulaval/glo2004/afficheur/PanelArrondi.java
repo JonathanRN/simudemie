@@ -10,8 +10,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import java.awt.image.BufferedImage;
+import java.awt.image.ConvolveOp;
+import java.awt.image.Kernel;
 
 /**
  *
@@ -20,10 +21,10 @@ import javax.swing.SwingUtilities;
 public class PanelArrondi extends javax.swing.JPanel {
     
     private Color bgColor, borderColor;
-    protected final Color defaultColor = new Color(216, 222, 233, 38);
-    /**
-     * Creates new form RoundedPanel
-     */
+    private final Dimension arcs = new Dimension(20,20);
+    
+    protected final Color defaultColor = new Color(71, 76, 88);
+    
     public PanelArrondi() {
         initComponents();
     }
@@ -31,43 +32,29 @@ public class PanelArrondi extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         if (this.isOpaque()) {
-            Dimension arcs = new Dimension(20,20); //Border corners arcs {width,height}, change this to whatever you want
             int width = getWidth();
             int height = getHeight();
-            Graphics2D graphics = (Graphics2D) g;
+            
+            Graphics2D graphics = (Graphics2D) g.create();
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-            // Draw background
+            
             graphics.setColor(bgColor);
             graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height);
 
-            // Draw border
             graphics.setColor(borderColor);
-            graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height);//paint border 
+            graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height);
+            
+            graphics.dispose();
         }
     }
     
     @Override
     public void setBackground(Color color) {
         bgColor = color;
-        
-        // Force un repaint sur le JFrame pour redessiner
-        try {
-            JFrame topFrame = (JFrame)SwingUtilities.getWindowAncestor(this);
-            topFrame.repaint();
-        } catch (Exception e) {   
-        }
     }
     
     protected void setBorderColor(Color color) {
         borderColor = color;
-        
-        // Force un repaint sur le JFrame pour redessiner
-        try {
-            JFrame topFrame = (JFrame)SwingUtilities.getWindowAncestor(this);
-            topFrame.repaint();
-        } catch (Exception e) {   
-        }
     }
  
     /**

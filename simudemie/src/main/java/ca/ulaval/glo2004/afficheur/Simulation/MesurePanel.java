@@ -87,7 +87,6 @@ public class MesurePanel extends javax.swing.JPanel {
         path += edition ? "save" : "editer";
         path += actif ? "_highlight.png" : ".png";
         Editer.setIcon(new ImageIcon(getClass().getResource(path)));
-        conteneur.getRootPane().repaint();
     }
     
     private void updateSupprimerIcon(boolean actif) {
@@ -95,7 +94,6 @@ public class MesurePanel extends javax.swing.JPanel {
         path += "supprimer";
         path += actif ? "_highlight.png" : ".png";
         Supprimer.setIcon(new ImageIcon(getClass().getResource(path)));
-        conteneur.getRootPane().repaint();
     }
     
     private void updateActifIcon(boolean actif) {
@@ -104,7 +102,6 @@ public class MesurePanel extends javax.swing.JPanel {
         path += estActif ? "checked" : "unchecked";
         path += actif ? "_highlight.png" : ".png";
         Activer.setIcon(new ImageIcon(getClass().getResource(path)));
-        conteneur.getRootPane().repaint();
     }
 
     /**
@@ -262,7 +259,6 @@ public class MesurePanel extends javax.swing.JPanel {
             simulationTabs.loadMesures();
             
             conteneur.getParent().validate();
-            conteneur.getRootPane().repaint();
         }
     }//GEN-LAST:event_SupprimerMouseReleased
 

@@ -44,7 +44,6 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     @Override
     public void actionPerformed(ActionEvent e) {
         getCourant().avancerJour();
-        sauvegarder();
     }
     
     public Scenario getCourant() {
@@ -62,7 +61,6 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
             mesure.setTauxAdhesion(tauxAdhesion);
             mesure.setTauxReductionProp(tauxReduction);
             mesure.setActive(active);
-            //pays.setMesure(indexMesure, mesure);
         }
         sauvegarder();
     }       

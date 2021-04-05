@@ -118,6 +118,5 @@ public class Selection extends Mode {
         creationCarte.getInformationsPanel().setVisible(false);
         
         selectionne = null;
-        creationCarte.repaint();
     }
 }

@@ -141,7 +141,6 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         }
         
         updateUI();
-        repaint();
     }
     
     /**

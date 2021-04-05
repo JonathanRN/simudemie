@@ -54,7 +54,7 @@ public class Carte implements Externalizable {
     }
     
     public void avancerJour(int cptJours) {
-
+        //Pour chaque pays, nous effectuons la méthode avancerJour qui contamine/guéri/éliminer la population
         for (Pays pays : listePays){
             pays.avancerJournee(maladie.getTauxInfection(), maladie.getTauxMortalite(), maladie.getTauxGuerison(), cptJours);
         }
@@ -69,7 +69,7 @@ public class Carte implements Externalizable {
         
         for (VoieLiaison voie : frontieres)
         {
-            if (!voie.getAccessible())
+            if (!voie.getAccessible()) //frontière fermée
             {
                 continue;
             }
@@ -84,6 +84,8 @@ public class Carte implements Externalizable {
                 }
             }
             
+            //Pour les pays d'origine et destination, si la population d'une région 0 est supérieur à 0,
+            //on 'tente' d'infecter le pays de destination (on le set à 1).
             if (paysOrigine.listeRegions.get(0).getPopInfectee() > 0 && paysDestination.listeRegions.get(0).getPopInfectee() == 0 )
             {
                 double prob = Math.random();

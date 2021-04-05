@@ -10,7 +10,6 @@ import ca.ulaval.glo2004.afficheur.PanelArrondi;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Mesure;
 import java.awt.Color;
-import java.awt.event.AdjustmentEvent;
 import javax.swing.JLabel;
 
 /**
@@ -30,10 +29,13 @@ public class SimulationTabs extends PanelArrondi {
             updateBoutonAjouter(false, AjouterMesure);
             setBackground(new Color(76, 86, 106, 100));
             
+            BoutonMesures.init(this, "icons8_wash_your_hands_30px");
             MesuresActives.getViewport().setOpaque(false);
             MesuresActives.getVerticalScrollBar().setUnitIncrement(15);
+            MesuresTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
-            BoutonMesures.init(this, "icons8_wash_your_hands_30px");
+            BoutonLiens.init(this, "icons8_chain_25px");
+            LiensTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
             onToggleClick(BoutonMesures);
         }
@@ -74,6 +76,12 @@ public class SimulationTabs extends PanelArrondi {
         if (toggleCourant != null) {
             toggleCourant.setToggle(true);
         }
+        
+        MesuresPanel.setVisible(toggle.equals(BoutonMesures));
+        LiensPanel.setVisible(toggle.equals(BoutonLiens));
+        
+        repaint();
+        updateUI();
     }
     
     private void updateBoutonAjouter(boolean actif, JLabel bouton) {
@@ -107,6 +115,12 @@ public class SimulationTabs extends PanelArrondi {
         SidePanelParent = new javax.swing.JPanel();
         SidePanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         BoutonMesures = new ca.ulaval.glo2004.afficheur.BoutonToggle();
+        BoutonLiens = new ca.ulaval.glo2004.afficheur.BoutonToggle();
+        LiensPanel = new javax.swing.JPanel();
+        Titre1 = new javax.swing.JPanel();
+        LiensTitre = new javax.swing.JLabel();
+        ScrollPane = new javax.swing.JScrollPane();
+        ContenuLiens = new javax.swing.JPanel();
         MesuresPanel = new javax.swing.JPanel();
         Titre = new javax.swing.JPanel();
         MesuresTitre = new javax.swing.JLabel();
@@ -124,10 +138,38 @@ public class SimulationTabs extends PanelArrondi {
         SidePanel.setPreferredSize(new java.awt.Dimension(50, 200));
         SidePanel.setLayout(new java.awt.GridLayout(6, 1, 0, 10));
         SidePanel.add(BoutonMesures);
+        SidePanel.add(BoutonLiens);
 
         SidePanelParent.add(SidePanel, java.awt.BorderLayout.WEST);
 
         add(SidePanelParent);
+
+        LiensPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 0, 0));
+        LiensPanel.setOpaque(false);
+        LiensPanel.setLayout(new java.awt.BorderLayout());
+
+        Titre1.setOpaque(false);
+        Titre1.setLayout(new java.awt.BorderLayout());
+
+        LiensTitre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        LiensTitre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LiensTitre.setText("Liens");
+        LiensTitre.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 40));
+        LiensTitre.setPreferredSize(new java.awt.Dimension(62, 30));
+        Titre1.add(LiensTitre, java.awt.BorderLayout.CENTER);
+
+        LiensPanel.add(Titre1, java.awt.BorderLayout.PAGE_START);
+
+        ScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        ScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        ScrollPane.setOpaque(false);
+
+        ContenuLiens.setLayout(new java.awt.GridLayout(3, 0));
+        ScrollPane.setViewportView(ContenuLiens);
+
+        LiensPanel.add(ScrollPane, java.awt.BorderLayout.CENTER);
+
+        add(LiensPanel);
 
         MesuresPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 0, 0));
         MesuresPanel.setOpaque(false);
@@ -145,7 +187,7 @@ public class SimulationTabs extends PanelArrondi {
         AjouterMesure.setFont(new java.awt.Font("Dialog", 0, 25)); // NOI18N
         AjouterMesure.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AjouterMesure.setText("+");
-        AjouterMesure.setPreferredSize(new java.awt.Dimension(41, 30));
+        AjouterMesure.setPreferredSize(new java.awt.Dimension(40, 30));
         AjouterMesure.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 AjouterMesureMouseEntered(evt);
@@ -193,13 +235,19 @@ public class SimulationTabs extends PanelArrondi {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AjouterMesure;
+    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonLiens;
     private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonMesures;
+    private javax.swing.JPanel ContenuLiens;
     private javax.swing.JPanel ContenuMesures;
+    private javax.swing.JPanel LiensPanel;
+    private javax.swing.JLabel LiensTitre;
     private javax.swing.JScrollPane MesuresActives;
     private javax.swing.JPanel MesuresPanel;
     private javax.swing.JLabel MesuresTitre;
+    private javax.swing.JScrollPane ScrollPane;
     private ca.ulaval.glo2004.afficheur.PanelArrondi SidePanel;
     private javax.swing.JPanel SidePanelParent;
     private javax.swing.JPanel Titre;
+    private javax.swing.JPanel Titre1;
     // End of variables declaration//GEN-END:variables
 }

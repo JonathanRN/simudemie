@@ -44,7 +44,6 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     @Override
     public void actionPerformed(ActionEvent e) {
         getCourant().avancerJour();
-        //sauvegarder();
     }
     
     public Scenario getCourant() {

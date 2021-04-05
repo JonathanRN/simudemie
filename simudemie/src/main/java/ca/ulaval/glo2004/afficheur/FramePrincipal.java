@@ -130,7 +130,7 @@ public class FramePrincipal extends javax.swing.JFrame implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 repaint();
                 try {
-                  Thread.sleep(4);
+                  Thread.sleep(8);
                }
                catch (InterruptedException ex) {}
             }

@@ -8,10 +8,12 @@ package ca.ulaval.glo2004.afficheur.Simulation;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Mesure;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
+import java.awt.Color;
 import java.text.ParseException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 
 /**
  *

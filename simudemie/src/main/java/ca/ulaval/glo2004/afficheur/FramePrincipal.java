@@ -6,6 +6,8 @@ import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
 import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import com.formdev.flatlaf.IntelliJTheme;
+import java.awt.Color;
+import java.awt.Insets;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.UIManager;
@@ -101,6 +103,9 @@ public class FramePrincipal extends javax.swing.JFrame {
 
                 UIManager.put("Button.arc", 15);
                 UIManager.put("ProgressBar.arc", 999);
+                UIManager.put( "Component.arrowType", "chevron" );
+                UIManager.put("Spinner.disabledForeground", Color.white);
+                UIManager.put("Spinner.padding", new Insets(0, 0, 0, 0));
                 
                 JFrame frame = new FramePrincipal();
 		frame.dispose();

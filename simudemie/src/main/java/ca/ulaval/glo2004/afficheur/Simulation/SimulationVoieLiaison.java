@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.Simulation;
 
+import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
 import javax.swing.ImageIcon;
 
@@ -14,15 +15,24 @@ import javax.swing.ImageIcon;
  */
 public class SimulationVoieLiaison extends javax.swing.JPanel {
     
-    private boolean mouseOver, checked;
-    
+    private boolean mouseOver, checked = true;
+        
     public SimulationVoieLiaison() {
         initComponents();
+        
+        Label.setFont(FontRegister.RobotoLight.deriveFont(14f));
+        
+        updateIcon();
     }
     
     public void setTypeVoie(VoieLiaison.TypeVoie type) {
-        Label.setText("Voie " + type);
-        Icon.setIcon(new ImageIcon(getClass().getResource("/icons/simulation/lien/" + type)));
+        String texte = "Voie " + type;        
+        if (type == VoieLiaison.TypeVoie.Aerien) {
+            texte = "Voie Aérienne";
+        }
+        
+        Label.setText(texte);
+        Icon.setIcon(new ImageIcon(getClass().getResource("/icons/simulation/lien/" + type + ".png")));        
     }
     
     private void updateIcon() {
@@ -45,6 +55,7 @@ public class SimulationVoieLiaison extends javax.swing.JPanel {
         Label = new javax.swing.JLabel();
         Icon = new javax.swing.JLabel();
 
+        setOpaque(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 formMouseEntered(evt);
@@ -66,27 +77,29 @@ public class SimulationVoieLiaison extends javax.swing.JPanel {
         add(Checkbox);
 
         Label.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        Label.setText("Voie Terrestre       ");
+        Label.setText("Voie Terrestre");
+        Label.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 20));
         Label.setPreferredSize(new java.awt.Dimension(50, 16));
         add(Label);
-
-        Icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simulation/lien/terrestre.png"))); // NOI18N
         add(Icon);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
         mouseOver = true;
         updateIcon();
+        this.getRootPane().repaint();
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
-        mouseOver = true;
+        mouseOver = false;
         updateIcon();
+        this.getRootPane().repaint();
     }//GEN-LAST:event_formMouseExited
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         checked = !checked;
         updateIcon();
+        this.getRootPane().repaint();
     }//GEN-LAST:event_formMouseReleased
 
 

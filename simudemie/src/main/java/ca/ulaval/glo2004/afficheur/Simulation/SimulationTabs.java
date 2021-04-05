@@ -8,11 +8,13 @@ package ca.ulaval.glo2004.afficheur.Simulation;
 import ca.ulaval.glo2004.afficheur.BoutonToggle;
 import ca.ulaval.glo2004.afficheur.PanelArrondi;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
+import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Mesure;
-import ca.ulaval.glo2004.domaine.Pays;
+import ca.ulaval.glo2004.domaine.VoieLiaison;
 import java.awt.Color;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 
 /**
@@ -24,6 +26,7 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
     private BoutonToggle toggleCourant;
     private Simulation simulation;
     private int indexPays;
+    private ArrayList<VoieLiaison.TypeVoie> voies = new ArrayList<>();
     
     public SimulationTabs() {
         initComponents();
@@ -40,6 +43,7 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
             
             BoutonLiens.init(this, "icons8_chain_25px");
             LiensTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            SPLiens.getViewport().setOpaque(false);
             
             onToggleClick(BoutonMesures);
         }
@@ -58,7 +62,16 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
     public void setIndexPays(int indexPays) {
         this.indexPays = indexPays;
         
-        loadMesures();
+        loadElements();
+    }
+    
+    public void loadElements() {
+        if (toggleCourant.equals(BoutonMesures)) {
+            loadMesures();
+        }
+        else if (toggleCourant.equals(BoutonLiens)) {
+            loadLiens();
+        }
     }
     
     public void loadMesures() {
@@ -69,6 +82,30 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
         for (Mesure m : simulation.getScenario().getCarteJourCourant().getPays(indexPays).getMesures()) {
             addMesure(m);
         }
+    }
+    
+    public void loadLiens() {
+        voies.clear();
+        ContenuLiens.removeAll();
+        ContenuLiens.getParent().validate();
+        ContenuLiens.getRootPane().repaint();
+        
+        Carte carte = simulation.getScenario().getCarteJourCourant();
+        for (VoieLiaison voie : carte.getVoies()) {
+            if (voie.getPaysOrigine().getPolygone().equals(carte.getPays(indexPays).getPolygone()) ||
+                voie.getPaysDestination().getPolygone().equals(carte.getPays(indexPays).getPolygone())) {
+                
+                if (!voies.contains(voie.getType())) {
+                    SimulationVoieLiaison sml = new SimulationVoieLiaison();
+                    sml.setTypeVoie(voie.getType());
+                    ContenuLiens.add(sml);
+                    voies.add(voie.getType());
+                }
+            }
+        }
+        
+        ContenuLiens.getParent().validate();
+        ContenuLiens.getRootPane().repaint();
     }
     
     public void onToggleClick(BoutonToggle toggle) {        
@@ -85,8 +122,9 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
         MesuresPanel.setVisible(toggle.equals(BoutonMesures));
         LiensPanel.setVisible(toggle.equals(BoutonLiens));
         
+        loadElements();
+        
         repaint();
-        updateUI();
     }
     
     private void updateBoutonAjouter(boolean actif, JLabel bouton) {
@@ -122,17 +160,17 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
         SidePanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
         BoutonMesures = new ca.ulaval.glo2004.afficheur.BoutonToggle();
         BoutonLiens = new ca.ulaval.glo2004.afficheur.BoutonToggle();
-        LiensPanel = new javax.swing.JPanel();
-        Titre1 = new javax.swing.JPanel();
-        LiensTitre = new javax.swing.JLabel();
-        ScrollPane = new javax.swing.JScrollPane();
-        ContenuLiens = new javax.swing.JPanel();
         MesuresPanel = new javax.swing.JPanel();
         Titre = new javax.swing.JPanel();
         MesuresTitre = new javax.swing.JLabel();
         AjouterMesure = new javax.swing.JLabel();
         MesuresActives = new javax.swing.JScrollPane();
         ContenuMesures = new javax.swing.JPanel();
+        LiensPanel = new javax.swing.JPanel();
+        Titre1 = new javax.swing.JPanel();
+        LiensTitre = new javax.swing.JLabel();
+        SPLiens = new javax.swing.JScrollPane();
+        ContenuLiens = new javax.swing.JPanel();
 
         setLayout(new javax.swing.OverlayLayout(this));
 
@@ -149,33 +187,6 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
         SidePanelParent.add(SidePanel, java.awt.BorderLayout.WEST);
 
         add(SidePanelParent);
-
-        LiensPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 0, 0));
-        LiensPanel.setOpaque(false);
-        LiensPanel.setLayout(new java.awt.BorderLayout());
-
-        Titre1.setOpaque(false);
-        Titre1.setLayout(new java.awt.BorderLayout());
-
-        LiensTitre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        LiensTitre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LiensTitre.setText("Liens");
-        LiensTitre.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 40));
-        LiensTitre.setPreferredSize(new java.awt.Dimension(62, 30));
-        Titre1.add(LiensTitre, java.awt.BorderLayout.CENTER);
-
-        LiensPanel.add(Titre1, java.awt.BorderLayout.PAGE_START);
-
-        ScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        ScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        ScrollPane.setOpaque(false);
-
-        ContenuLiens.setLayout(new java.awt.GridLayout(3, 0));
-        ScrollPane.setViewportView(ContenuLiens);
-
-        LiensPanel.add(ScrollPane, java.awt.BorderLayout.CENTER);
-
-        add(LiensPanel);
 
         MesuresPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 0, 0));
         MesuresPanel.setOpaque(false);
@@ -221,6 +232,33 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
         MesuresPanel.add(MesuresActives, java.awt.BorderLayout.CENTER);
 
         add(MesuresPanel);
+
+        LiensPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 0, 0));
+        LiensPanel.setOpaque(false);
+        LiensPanel.setLayout(new java.awt.BorderLayout());
+
+        Titre1.setOpaque(false);
+        Titre1.setLayout(new java.awt.BorderLayout());
+
+        LiensTitre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        LiensTitre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LiensTitre.setText("Fermeture des voies");
+        LiensTitre.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 40));
+        LiensTitre.setPreferredSize(new java.awt.Dimension(62, 30));
+        Titre1.add(LiensTitre, java.awt.BorderLayout.CENTER);
+
+        LiensPanel.add(Titre1, java.awt.BorderLayout.PAGE_START);
+
+        SPLiens.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        SPLiens.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        ContenuLiens.setOpaque(false);
+        ContenuLiens.setLayout(new java.awt.GridLayout(3, 0));
+        SPLiens.setViewportView(ContenuLiens);
+
+        LiensPanel.add(SPLiens, java.awt.BorderLayout.CENTER);
+
+        add(LiensPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void AjouterMesureMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterMesureMouseEntered
@@ -252,7 +290,7 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
     private javax.swing.JScrollPane MesuresActives;
     private javax.swing.JPanel MesuresPanel;
     private javax.swing.JLabel MesuresTitre;
-    private javax.swing.JScrollPane ScrollPane;
+    private javax.swing.JScrollPane SPLiens;
     private ca.ulaval.glo2004.afficheur.PanelArrondi SidePanel;
     private javax.swing.JPanel SidePanelParent;
     private javax.swing.JPanel Titre;

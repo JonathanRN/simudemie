@@ -132,6 +132,10 @@ public class Pays implements Externalizable {
         return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopTotale()));
     }
     
+    public int getPopImmune() {
+        return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopImmunisee()));
+    }
+    
     public int getPopInitiale() {
         return popInitiale;
     }

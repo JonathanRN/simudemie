@@ -19,6 +19,7 @@ public class Carte implements Externalizable {
     private final ArrayList<Pays> listePays = new ArrayList<>();
     private final ArrayList<VoieLiaison> frontieres = new ArrayList<>();
     private Maladie maladie;
+    private boolean immunite = false;
 
     public Carte() {}
     

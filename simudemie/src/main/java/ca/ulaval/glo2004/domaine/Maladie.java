@@ -17,6 +17,9 @@ public class Maladie implements Externalizable {
     private double tauxInfection;
     private double tauxMortalite;
     private double tauxGuerison;
+    private boolean immunitePossible = false;
+    private int incubation = 14;
+    
     
     public Maladie() {}
     
@@ -43,6 +46,11 @@ public class Maladie implements Externalizable {
     
     public double getTauxGuerison(){return tauxGuerison;}
     
+    public boolean getImmunitePossible(){return immunitePossible;}
+
+    public int getIncubation(){return incubation;}
+
+    
     public void setNom(String nom)
     {
         this.nom = nom;
@@ -61,6 +69,16 @@ public class Maladie implements Externalizable {
     public void setTauxGuerison(double tauxGuerison)
     {
         this.tauxGuerison = tauxGuerison;
+    }
+    
+    public void setImmunitePossible(boolean immunitePossible)
+    {
+        this.immunitePossible = immunitePossible;
+    }
+    
+    public void setIncubation(int incubation)
+    {
+        this.incubation = incubation;
     }
 
     @Override

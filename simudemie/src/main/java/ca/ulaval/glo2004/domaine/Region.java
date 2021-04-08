@@ -62,21 +62,21 @@ public class Region implements Externalizable {
         setPopSaine(this.getPopSaine() - nouveauxInfectes);
     }
     
-    public void eliminerPopulation(double taux, int cptJours)
+    public void eliminerPopulation(double taux, int cptJours, int incubation)
     {
         //Les premières infections ont lieu 2 semaines après la 1ere infection
         if (cptJours > 14 && getPopInfectee() > 0f){
-            int deces = (int)(this.listeInfections.get(cptJours - 14) * taux);
+            int deces = (int)(this.listeInfections.get(cptJours - incubation) * taux);
             setPopDecedee(this.getPopDecedee() + deces);
             setPopInfectee(this.getPopInfectee() - deces);
         }
     }
     
-    public void guerirPop(double taux, int cptJours)
+    public void guerirPop(double taux, int cptJours, int incubation)
     {
         //Les premières guerisons ont lieu 2 semaines après la 1ere infection
         if (cptJours > 14){
-            int gueris = (int)(this.listeInfections.get(cptJours - 14) * taux);
+            int gueris = (int)(this.listeInfections.get(cptJours - incubation) * taux);
             setPopSaine(this.getPopSaine() + gueris);
             setPopInfectee(this.getPopInfectee() - gueris);   
         }

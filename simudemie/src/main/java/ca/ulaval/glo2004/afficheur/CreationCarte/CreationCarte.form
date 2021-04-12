@@ -161,7 +161,10 @@
                 <Component class="ca.ulaval.glo2004.afficheur.BoutonToggle" name="BoutonUndo">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="Undo (CTRL-Z)"/>
+                    <Property name="actif" type="boolean" value="true"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="toggle" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BoutonUndoMouseReleased"/>
@@ -184,6 +187,7 @@
                 <Component class="ca.ulaval.glo2004.afficheur.BoutonToggle" name="BoutonRedo">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="Redo (CTRL-Y)"/>
+                    <Property name="actif" type="boolean" value="true"/>
                     <Property name="focusable" type="boolean" value="false"/>
                   </Properties>
                   <Events>

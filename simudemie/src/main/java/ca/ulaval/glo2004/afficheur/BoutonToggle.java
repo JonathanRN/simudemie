@@ -23,12 +23,14 @@ public class BoutonToggle extends PanelArrondi {
     private final Color base, highlight;
     private boolean mouseOver;
     private boolean estToggle;
+    private boolean actif;
     
     public BoutonToggle() {
         initComponents();
         base = new Color(0, 0, 0, 0);
         highlight = new Color(128, 134, 143);
         setBackground(base);
+        setActif(true);
     }
     
     public void init(CreationCarte creation, Mode mode, String path) {
@@ -41,6 +43,11 @@ public class BoutonToggle extends PanelArrondi {
     public void init(SimulationTabs tabs, String path) {
         this.simulationTabs = tabs;
         setIcon("/icons/simulation/" + path + ".png");
+    }
+    
+    public void setActif(boolean actif) {
+        this.actif = actif;
+        this.setVisible(actif);
     }
     
     public void setIcon(String path) {
@@ -94,19 +101,23 @@ public class BoutonToggle extends PanelArrondi {
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
         mouseOver = true;
-        if (!estToggle) {
+        if (!estToggle && actif) {
             setBackground(highlight);
         }
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
         mouseOver = false;
-        if (!estToggle) {
+        if (!estToggle && actif) {
             setBackground(base);
         }
     }//GEN-LAST:event_formMouseExited
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        if (!actif) {
+            return;
+        }
+        
         if (creation != null) {
             creation.onToggleClick(this);
         }

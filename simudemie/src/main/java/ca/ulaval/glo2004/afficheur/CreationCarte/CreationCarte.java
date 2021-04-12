@@ -46,6 +46,8 @@ public class CreationCarte extends javax.swing.JPanel {
         
         BoutonUndo.init(this, null, "icons8_undo_25px");
         BoutonRedo.init(this, null, "icons8_redo_25px");
+        setUndoActif(false);
+        setRedoActif(false);
         
         BoutonQuitter.init(this, null, "icons8_home_25px_1");
         BoutonQuitter.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -58,6 +60,14 @@ public class CreationCarte extends javax.swing.JPanel {
         onToggleClick(estNouvelleCarte ? BoutonCrayon : BoutonSelection);
         
         CreationCartePanel.setCreationCarte(this);
+    }
+    
+    public void setUndoActif(boolean actif) {
+        BoutonUndo.setActif(actif);
+    }
+    
+    public void setRedoActif(boolean actif) {
+        BoutonRedo.setActif(actif);
     }
     
     public JPanel getPopup() {
@@ -239,7 +249,7 @@ public class CreationCarte extends javax.swing.JPanel {
 
         ToolBar.setBackground(new java.awt.Color(67, 76, 94));
         ToolBar.setPreferredSize(new java.awt.Dimension(968, 50));
-        ToolBar.setLayout(new java.awt.GridLayout());
+        ToolBar.setLayout(new java.awt.GridLayout(1, 0));
 
         BoutonsPrincipauxParent.setOpaque(false);
         BoutonsPrincipauxParent.setLayout(new javax.swing.BoxLayout(BoutonsPrincipauxParent, javax.swing.BoxLayout.LINE_AXIS));
@@ -262,7 +272,10 @@ public class CreationCarte extends javax.swing.JPanel {
         BoutonUndoParent.setLayout(new java.awt.BorderLayout());
 
         BoutonUndo.setToolTipText("Undo (CTRL-Z)");
+        BoutonUndo.setActif(true);
+        BoutonUndo.setEnabled(false);
         BoutonUndo.setFocusable(false);
+        BoutonUndo.setToggle(false);
         BoutonUndo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 BoutonUndoMouseReleased(evt);
@@ -276,6 +289,7 @@ public class CreationCarte extends javax.swing.JPanel {
         BoutonRedoParent.setLayout(new java.awt.BorderLayout());
 
         BoutonRedo.setToolTipText("Redo (CTRL-Y)");
+        BoutonRedo.setActif(true);
         BoutonRedo.setFocusable(false);
         BoutonRedo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {

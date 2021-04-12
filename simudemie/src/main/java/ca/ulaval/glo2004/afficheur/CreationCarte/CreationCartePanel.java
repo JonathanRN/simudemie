@@ -93,6 +93,7 @@ public class CreationCartePanel extends ZoomablePanel {
     
     public void ajouterAction(ActionCarte action) {
         actionsFaites.push(action);
+        creationCarte.setUndoActif(true);
         action.Executer();
         
         // On veut pas modifier le futur
@@ -109,6 +110,11 @@ public class CreationCartePanel extends ZoomablePanel {
             action.Undo();
             actionsUndo.push(action);
             
+            creationCarte.setRedoActif(true);
+            if (actionsFaites.empty()) {
+                creationCarte.setUndoActif(false);
+            }
+            
             creationCarte.repaint();
         }
     }
@@ -118,6 +124,10 @@ public class CreationCartePanel extends ZoomablePanel {
             ActionCarte action = actionsUndo.pop();
             action.Executer();
             actionsFaites.push(action);
+            
+            if (actionsUndo.empty()) {
+                creationCarte.setRedoActif(false);
+            }
             
             creationCarte.repaint();
         }

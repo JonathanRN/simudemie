@@ -263,6 +263,11 @@ public class CreationCarte extends javax.swing.JPanel {
 
         BoutonUndo.setToolTipText("Undo (CTRL-Z)");
         BoutonUndo.setFocusable(false);
+        BoutonUndo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BoutonUndoMouseReleased(evt);
+            }
+        });
         BoutonUndoParent.add(BoutonUndo, java.awt.BorderLayout.EAST);
 
         ToolBar.add(BoutonUndoParent);
@@ -272,6 +277,11 @@ public class CreationCarte extends javax.swing.JPanel {
 
         BoutonRedo.setToolTipText("Redo (CTRL-Y)");
         BoutonRedo.setFocusable(false);
+        BoutonRedo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                BoutonRedoMouseReleased(evt);
+            }
+        });
         BoutonRedoParent.add(BoutonRedo, java.awt.BorderLayout.WEST);
 
         ToolBar.add(BoutonRedoParent);
@@ -332,6 +342,14 @@ public class CreationCarte extends javax.swing.JPanel {
 
         add(CreationCartePanel);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BoutonUndoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonUndoMouseReleased
+        getPanel().undoAction();
+    }//GEN-LAST:event_BoutonUndoMouseReleased
+
+    private void BoutonRedoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonRedoMouseReleased
+        getPanel().redoAction();
+    }//GEN-LAST:event_BoutonRedoMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

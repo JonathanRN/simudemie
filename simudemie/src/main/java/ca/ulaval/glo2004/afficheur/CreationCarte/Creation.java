@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
+import ca.ulaval.glo2004.afficheur.carteActions.DragPointAction;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -19,7 +20,7 @@ public class Creation extends Mode {
     
     private Polygon polygoneSousSouris;
     private int indexSousSouris;
-    private Point pointDragInitial;
+    private Point pointDragInitial, dernierDrag;
 
     public Creation(CreationCarte panel) {
         this.setCreationCarte(panel);
@@ -95,7 +96,12 @@ public class Creation extends Mode {
             if (!lignesInvalides.isEmpty()) {
                 polygoneSousSouris.ypoints[indexSousSouris] = pointDragInitial.y;
                 polygoneSousSouris.xpoints[indexSousSouris] = pointDragInitial.x;
+                
                 lignesInvalides.clear();
+            }
+            else {
+                DragPointAction action = new DragPointAction(polygoneSousSouris, indexSousSouris, pointDragInitial, dernierDrag);
+                creationCarte.getPanel().ajouterAction(action);
             }
             
             polygoneSousSouris.invalidate();
@@ -108,6 +114,8 @@ public class Creation extends Mode {
         if (polygoneSousSouris != null && indexSousSouris != -1) {
             polygoneSousSouris.xpoints[indexSousSouris] = point.x;
             polygoneSousSouris.ypoints[indexSousSouris] = point.y;
+            
+            dernierDrag = point;
             
             updateLignesInvalides(polygoneSousSouris);            
         }

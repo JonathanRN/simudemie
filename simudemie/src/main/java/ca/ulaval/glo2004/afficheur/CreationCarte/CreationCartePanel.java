@@ -60,7 +60,7 @@ public class CreationCartePanel extends ZoomablePanel {
     public void creerPolygone() {
         // Dessine le polygone seulement s'il est valide
         if (creationCarte.getMode().estPolygoneValide(getCourant())) {
-            CreerPolygoneAction action = new CreerPolygoneAction(creationCarte.getCarte(), new Pays(getCourant()));
+            CreerPolygoneAction action = new CreerPolygoneAction(creationCarte.getCarte(), new Pays(getCourant()), courant);
             ajouterAction(action);
             
             courant = new Polygon();
@@ -94,25 +94,31 @@ public class CreationCartePanel extends ZoomablePanel {
     public void ajouterAction(ActionCarte action) {
         actionsFaites.push(action);
         action.Executer();
+        
         // On veut pas modifier le futur
         actionsUndo.clear();
+        
         creationCarte.repaint();
+        
+        System.out.println(action.getClass().getName());
     }
     
-    private void undoAction() {
+    public void undoAction() {
         if (!actionsFaites.isEmpty()) {
             ActionCarte action = actionsFaites.pop();
             action.Undo();
             actionsUndo.push(action);
+            
             creationCarte.repaint();
         }
     }
     
-    private void redoAction() {
+    public void redoAction() {
         if (!actionsUndo.isEmpty()) {
             ActionCarte action = actionsUndo.pop();
             action.Executer();
             actionsFaites.push(action);
+            
             creationCarte.repaint();
         }
     }

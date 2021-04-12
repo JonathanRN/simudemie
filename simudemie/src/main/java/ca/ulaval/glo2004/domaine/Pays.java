@@ -65,6 +65,17 @@ public class Pays implements Externalizable {
         }
         
         contaminerInterRegions();
+        seuilAtteint();
+    }
+    
+    public void seuilAtteint(){
+        for (Mesure m : mesures){
+            if (this.getPourcentageInfectee() >= m.getSeuilActivation()){
+                m.setActive(true);
+            }else{
+                m.setActive(false);
+            }
+        }
     }
     
     public void contaminerInterRegions()

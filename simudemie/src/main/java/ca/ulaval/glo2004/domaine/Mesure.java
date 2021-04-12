@@ -14,6 +14,7 @@ import java.io.ObjectOutput;
 public class Mesure implements Externalizable{
     
     private String nom;
+    private int seuilActivation;
     private double tauxAdhesion;
     private double tauxReductionProp;
     private boolean active;
@@ -46,6 +47,10 @@ public class Mesure implements Externalizable{
         return active;
     }
     
+    public int getSeuilActivation(){
+        return seuilActivation;
+    }
+    
     public void setNom(String nom)
     {
         this.nom = nom;
@@ -63,6 +68,10 @@ public class Mesure implements Externalizable{
     
     public void setActive(boolean active) {
         this.active = active;
+    }
+    
+    public void setSeuilActivation(int seuil){
+        this.seuilActivation = seuil;
     }
 
     @Override

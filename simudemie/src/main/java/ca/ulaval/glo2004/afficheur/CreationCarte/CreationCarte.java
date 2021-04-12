@@ -44,6 +44,9 @@ public class CreationCarte extends javax.swing.JPanel {
         BoutonRegion.init(this, new ca.ulaval.glo2004.afficheur.CreationCarte.Region(this), "icons8_scissors_25px");
         BoutonLien.init(this, new LienPays(this), "icons8_chain_25px");
         
+        BoutonUndo.init(this, null, "icons8_undo_25px");
+        BoutonRedo.init(this, null, "icons8_redo_25px");
+        
         BoutonQuitter.init(this, null, "icons8_home_25px_1");
         BoutonQuitter.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -90,15 +93,15 @@ public class CreationCarte extends javax.swing.JPanel {
     }
     
     public void onToggleClick(BoutonToggle bouton) {
-        if (toggleCourant != null) {
-            toggleCourant.setToggle(false);
-        }
-        
-        if (mode != null) {
-            mode.onDesactive();
-        }
-        
         if (bouton.getMode() != null) {
+            if (toggleCourant != null) {
+                toggleCourant.setToggle(false);
+            }
+
+            if (mode != null) {
+                mode.onDesactive();
+            }
+            
             mode = bouton.getMode();
             mode.onActive();
 
@@ -173,10 +176,15 @@ public class CreationCarte extends javax.swing.JPanel {
         StartLabel2 = new javax.swing.JLabel();
         ToolBarParent = new javax.swing.JPanel();
         ToolBar = new javax.swing.JPanel();
+        BoutonsPrincipauxParent = new javax.swing.JPanel();
         BoutonSelection = new ca.ulaval.glo2004.afficheur.BoutonToggle();
         BoutonCrayon = new ca.ulaval.glo2004.afficheur.BoutonToggle();
         BoutonRegion = new ca.ulaval.glo2004.afficheur.BoutonToggle();
         BoutonLien = new ca.ulaval.glo2004.afficheur.BoutonToggle();
+        BoutonUndoParent = new javax.swing.JPanel();
+        BoutonUndo = new ca.ulaval.glo2004.afficheur.BoutonToggle();
+        BoutonRedoParent = new javax.swing.JPanel();
+        BoutonRedo = new ca.ulaval.glo2004.afficheur.BoutonToggle();
         BoutonQuitterParent = new javax.swing.JPanel();
         BoutonQuitter = new ca.ulaval.glo2004.afficheur.BoutonToggle();
         ZoomPanelParent = new javax.swing.JPanel();
@@ -212,9 +220,9 @@ public class CreationCarte extends javax.swing.JPanel {
         StartParentLayout.setHorizontalGroup(
             StartParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StartParentLayout.createSequentialGroup()
-                .addContainerGap(397, Short.MAX_VALUE)
+                .addContainerGap(292, Short.MAX_VALUE)
                 .addComponent(StartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addContainerGap(293, Short.MAX_VALUE))
         );
         StartParentLayout.setVerticalGroup(
             StartParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,19 +239,42 @@ public class CreationCarte extends javax.swing.JPanel {
 
         ToolBar.setBackground(new java.awt.Color(67, 76, 94));
         ToolBar.setPreferredSize(new java.awt.Dimension(968, 50));
-        ToolBar.setLayout(new javax.swing.BoxLayout(ToolBar, javax.swing.BoxLayout.X_AXIS));
+        ToolBar.setLayout(new java.awt.GridLayout());
 
-        BoutonSelection.setToolTipText("Outil de sélection/édition");
-        ToolBar.add(BoutonSelection);
+        BoutonsPrincipauxParent.setOpaque(false);
+        BoutonsPrincipauxParent.setLayout(new javax.swing.BoxLayout(BoutonsPrincipauxParent, javax.swing.BoxLayout.LINE_AXIS));
 
-        BoutonCrayon.setToolTipText("Outil de création pays");
-        ToolBar.add(BoutonCrayon);
+        BoutonSelection.setToolTipText("Outil de sélection/édition (1)");
+        BoutonsPrincipauxParent.add(BoutonSelection);
 
-        BoutonRegion.setToolTipText("Outil découpage de région");
-        ToolBar.add(BoutonRegion);
+        BoutonCrayon.setToolTipText("Outil de création pays (2)");
+        BoutonsPrincipauxParent.add(BoutonCrayon);
 
-        BoutonLien.setToolTipText("Outils création liens ");
-        ToolBar.add(BoutonLien);
+        BoutonRegion.setToolTipText("Outil découpage de région (3)");
+        BoutonsPrincipauxParent.add(BoutonRegion);
+
+        BoutonLien.setToolTipText("Outils création liens (4)");
+        BoutonsPrincipauxParent.add(BoutonLien);
+
+        ToolBar.add(BoutonsPrincipauxParent);
+
+        BoutonUndoParent.setOpaque(false);
+        BoutonUndoParent.setLayout(new java.awt.BorderLayout());
+
+        BoutonUndo.setToolTipText("Undo (CTRL-Z)");
+        BoutonUndo.setFocusable(false);
+        BoutonUndoParent.add(BoutonUndo, java.awt.BorderLayout.EAST);
+
+        ToolBar.add(BoutonUndoParent);
+
+        BoutonRedoParent.setOpaque(false);
+        BoutonRedoParent.setLayout(new java.awt.BorderLayout());
+
+        BoutonRedo.setToolTipText("Redo (CTRL-Y)");
+        BoutonRedo.setFocusable(false);
+        BoutonRedoParent.add(BoutonRedo, java.awt.BorderLayout.WEST);
+
+        ToolBar.add(BoutonRedoParent);
 
         BoutonQuitterParent.setOpaque(false);
         BoutonQuitterParent.setLayout(new java.awt.BorderLayout());
@@ -264,7 +295,7 @@ public class CreationCarte extends javax.swing.JPanel {
             .addGroup(ZoomPanelParentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1086, Short.MAX_VALUE))
+                .addContainerGap(956, Short.MAX_VALUE))
         );
         ZoomPanelParentLayout.setVerticalGroup(
             ZoomPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,7 +323,7 @@ public class CreationCarte extends javax.swing.JPanel {
         CreationCartePanel.setLayout(CreationCartePanelLayout);
         CreationCartePanelLayout.setHorizontalGroup(
             CreationCartePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1165, Short.MAX_VALUE)
+            .addGap(0, 956, Short.MAX_VALUE)
         );
         CreationCartePanelLayout.setVerticalGroup(
             CreationCartePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,8 +339,13 @@ public class CreationCarte extends javax.swing.JPanel {
     private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonLien;
     private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonQuitter;
     private javax.swing.JPanel BoutonQuitterParent;
+    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonRedo;
+    private javax.swing.JPanel BoutonRedoParent;
     private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonRegion;
     private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonSelection;
+    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonUndo;
+    private javax.swing.JPanel BoutonUndoParent;
+    private javax.swing.JPanel BoutonsPrincipauxParent;
     private ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel CreationCartePanel;
     private javax.swing.JPanel InformationsPanel;
     private javax.swing.JPanel InformationsPanelParent;

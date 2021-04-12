@@ -107,7 +107,6 @@ public class BoutonToggle extends PanelArrondi {
     }//GEN-LAST:event_formMouseExited
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
-        setToggle(true);
         if (creation != null) {
             creation.onToggleClick(this);
         }

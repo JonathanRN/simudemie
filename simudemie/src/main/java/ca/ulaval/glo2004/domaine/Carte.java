@@ -86,25 +86,25 @@ public class Carte implements Externalizable {
             
             //Pour les pays d'origine et destination, si la population d'une région 0 est supérieur à 0,
             //on 'tente' d'infecter le pays de destination (on le set à 1).
-            if (paysOrigine.listeRegions.get(1).getPopInfectee() > 0 && paysDestination.listeRegions.get(1).getPopInfectee() == 0 )
-            {
-                double prob = Math.random();
-                if (prob < 0.1 || (prob < 0.3 && paysDestination.getPopInfectee() > 1000)){
-                    //Selection de la region 0 (la region ou se situe la voie - "theoriquement")
-                    paysDestination.listeRegions.get(0).setPopInfectee(1); 
-                    paysDestination.listeRegions.get(0).setPopSaine(paysDestination.listeRegions.get(0).getPopSaine() - 1); 
-                }
-            }
-            
-            if (paysDestination.listeRegions.get(0).getPopInfectee() > 0 && paysOrigine.listeRegions.get(0).getPopInfectee() == 0)
-            {
-                double prob = Math.random();
-                if (prob < 0.1 || (prob < 0.3 && paysDestination.getPopInfectee() > 1000)){
-                    //Selection de la region 0 (la region ou se situe la voie - "theoriquement")
-                    paysOrigine.listeRegions.get(0).setPopInfectee(paysOrigine.listeRegions.get(0).getPopInfectee()+1);
-                    paysOrigine.listeRegions.get(0).setPopSaine(paysOrigine.listeRegions.get(0).getPopSaine() - 1);
-                }
-            }
+//            if (paysOrigine.listeRegions.get(0).getPopInfectee() > 0 && paysDestination.listeRegions.get(0).getPopInfectee() == 0 )
+//            {
+//                double prob = Math.random();
+//                if (prob < 0.1 || (prob < 0.3 && paysDestination.getPopInfectee() > 1000)){
+//                    //Selection de la region 0 (la region ou se situe la voie - "theoriquement")
+//                    paysDestination.listeRegions.get(0).setPopInfectee(1); 
+//                    paysDestination.listeRegions.get(0).setPopSaine(paysDestination.listeRegions.get(0).getPopSaine() - 1); 
+//                }
+//            }
+//            
+//            if (paysDestination.listeRegions.get(0).getPopInfectee() > 0 && paysOrigine.listeRegions.get(0).getPopInfectee() == 0)
+//            {
+//                double prob = Math.random();
+//                if (prob < 0.1 || (prob < 0.3 && paysDestination.getPopInfectee() > 1000)){
+//                    //Selection de la region 0 (la region ou se situe la voie - "theoriquement")
+//                    paysOrigine.listeRegions.get(0).setPopInfectee(paysOrigine.listeRegions.get(0).getPopInfectee()+1);
+//                    paysOrigine.listeRegions.get(0).setPopSaine(paysOrigine.listeRegions.get(0).getPopSaine() - 1);
+//                }
+//            }
         }
     }
     

@@ -23,12 +23,12 @@ public class Pays implements Externalizable {
     public Pays() {}
     
     public Pays(Polygon polygone) {
-        this.polygone = polygone;
+        this.polygone = new Polygon(polygone.xpoints, polygone.ypoints, polygone.npoints);
     }
 
     public Pays(Pays pays) {
         this.nom = pays.nom;
-        this.polygone = pays.polygone;
+        this.polygone = new Polygon(pays.polygone.xpoints, pays.polygone.ypoints, pays.polygone.npoints);
         this.popInitiale = pays.popInitiale;
         
         this.mesures.clear();

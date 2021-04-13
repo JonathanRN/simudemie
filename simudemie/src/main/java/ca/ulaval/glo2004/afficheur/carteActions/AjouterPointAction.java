@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.carteActions;
 
+import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel;
 import java.awt.Polygon;
 
 /**
@@ -13,31 +14,27 @@ import java.awt.Polygon;
  */
 public class AjouterPointAction extends ActionCarte {
 
-    private Polygon polygon;
     private int x, y;
+    private CreationCartePanel cc;
     
-    public AjouterPointAction(Polygon polygon, int x, int y) {
-        this.polygon = polygon;
+    public AjouterPointAction(int x, int y, CreationCartePanel cc) {
         this.x = x;
         this.y = y;
+        this.cc = cc;
     }
     
     @Override
     public void Executer() {
-        polygon.addPoint(x, y);
+        cc.getCourant().addPoint(x, y);
     }
 
     @Override
-    public void Undo() {        
-        Polygon nouveau = new Polygon();
+    public void Undo() {
         // Ajoute tous les points, sauf le precedent
-        for (int i = 0; i < polygon.npoints - 1; i++) {
-            nouveau.addPoint(polygon.xpoints[i], polygon.ypoints[i]);
+        Polygon courantSaufPrecedent = new Polygon();
+        for (int i = 0; i < cc.getCourant().npoints - 1; i++) {
+            courantSaufPrecedent.addPoint(cc.getCourant().xpoints[i], cc.getCourant().ypoints[i]);
         }
-        
-        polygon.reset();
-        for (int i = 0; i < nouveau.npoints; i++) {
-            polygon.addPoint(nouveau.xpoints[i], nouveau.ypoints[i]);
-        }
+        cc.setCourant(courantSaufPrecedent);
     }
 }

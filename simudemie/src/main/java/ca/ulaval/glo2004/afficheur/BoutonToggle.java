@@ -48,6 +48,7 @@ public class BoutonToggle extends PanelArrondi {
     public void setActif(boolean actif) {
         this.actif = actif;
         this.setVisible(actif);
+        setToggle(false);
     }
     
     public void setIcon(String path) {

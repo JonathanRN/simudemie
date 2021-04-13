@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.carteActions;
 
+import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;
 import java.awt.Polygon;
@@ -16,19 +17,22 @@ import java.awt.Polygon;
 public class CreerPolygoneAction extends ActionCarte {
     
     private final Carte carte;
-    private final Pays pays;
-    private final Polygon courant;
+    private final CreationCartePanel cc;
+    private Pays pays;
     
-    public CreerPolygoneAction(Carte carte, Pays pays, Polygon courant) {
+    public CreerPolygoneAction(Carte carte, CreationCartePanel cc) {
         this.carte = carte;
-        this.pays = pays;
-        this.courant = courant;
+        this.cc = cc;
     }
     
     @Override
     public void Executer() {
+        pays = new Pays(cc.getCourant());
         pays.ajouterRegion(new ca.ulaval.glo2004.domaine.Region(pays.getPolygone()));
         carte.ajouterPays(pays);
+        
+        // On cree un nouveau tout de suite pour y ajouter des points eventuellement
+        cc.setCourant(new Polygon());
     }
 
     @Override
@@ -36,11 +40,6 @@ public class CreerPolygoneAction extends ActionCarte {
         pays.retirerRegion(pays.getRegion(pays.getPolygone()));
         carte.retirerPays(pays);
         
-        // Rajout des points dans le polygone
-        Polygon p = pays.getPolygone();
-        courant.reset();
-        for (int i = 0; i < p.npoints; i++) {
-            courant.addPoint(p.xpoints[i], p.ypoints[i]);
-        }
+        cc.setCourant(pays.getPolygone());
     }
 }

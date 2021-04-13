@@ -29,18 +29,21 @@ public class CreationCartePanel extends ZoomablePanel {
     private final Stack<ActionCarte> actionsFaites = new Stack<>();
     private final Stack<ActionCarte> actionsUndo = new Stack<>();
     
-    private Polygon courant;
+    private Polygon courant = new Polygon();
         
     private CreationCarte creationCarte;
     
     public CreationCartePanel() {
-        initComponents();
-        
-        courant = new Polygon();
+        initComponents();        
     }
     
     public Polygon getCourant() {
         return courant;
+    }
+    
+    public void setCourant(Polygon courant) {
+        // Copie pour ne pas garder de reference
+        this.courant = new Polygon(courant.xpoints, courant.ypoints, courant.npoints);
     }
     
     public void setCreationCarte(CreationCarte creationCarte) {
@@ -48,7 +51,7 @@ public class CreationCartePanel extends ZoomablePanel {
     }
     
     public void placerPoint(int x, int y) {
-        AjouterPointAction action = new AjouterPointAction(getCourant(), x, y);
+        AjouterPointAction action = new AjouterPointAction(x, y, this);
         ajouterAction(action);
         
         // Place le point seulement s'il est valide
@@ -60,14 +63,13 @@ public class CreationCartePanel extends ZoomablePanel {
     public void creerPolygone() {
         // Dessine le polygone seulement s'il est valide
         if (creationCarte.getMode().estPolygoneValide(getCourant())) {
-            CreerPolygoneAction action = new CreerPolygoneAction(creationCarte.getCarte(), new Pays(getCourant()), courant);
+            CreerPolygoneAction action = new CreerPolygoneAction(creationCarte.getCarte(), this);
             ajouterAction(action);
-            
-            courant = new Polygon();
-            
+                        
             creationCarte.getPopup().setVisible(false);
         }
         else {
+            // Pour ne pas call repaint() deux fois, si l'action est ajoutee
             creationCarte.repaint();
         }
     }
@@ -101,13 +103,14 @@ public class CreationCartePanel extends ZoomablePanel {
         
         creationCarte.repaint();
         
-        System.out.println(action.getClass().getName());
+        System.out.println("AJOUT: " + action.getClass().getSimpleName());
     }
     
     public void undoAction() {
         if (!actionsFaites.isEmpty()) {
             ActionCarte action = actionsFaites.pop();
             action.Undo();
+            System.out.println("UNDO: " + action.getClass().getSimpleName());
             actionsUndo.push(action);
             
             creationCarte.setRedoActif(true);
@@ -123,6 +126,7 @@ public class CreationCartePanel extends ZoomablePanel {
         if (!actionsUndo.isEmpty()) {
             ActionCarte action = actionsUndo.pop();
             action.Executer();
+            System.out.println("REDO: " + action.getClass().getSimpleName());
             actionsFaites.push(action);
             
             if (actionsUndo.empty()) {

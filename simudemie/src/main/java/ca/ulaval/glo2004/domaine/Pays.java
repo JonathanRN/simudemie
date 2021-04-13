@@ -60,7 +60,7 @@ public class Pays implements Externalizable {
                     tauxInfAjuste = tauxInfAjuste * (m.getTauxAdhesion() / 100.0 * m.getTauxReductionProp() / 100.0);
                 }
             }
-            region.contaminer(tauxInfAjuste, cptJours);
+            region.contaminer(tauxInfAjuste, cptJours, incubation);
             region.guerirPop(tauxGuerison, cptJours, incubation);
             region.eliminerPopulation(tauxMortalite, cptJours, incubation);
         }
@@ -101,7 +101,7 @@ public class Pays implements Externalizable {
                 for( Region f : listeRegions)
                 {
                     double prob = Math.random();
-                    if(!r.equals(f) && prob > 0.5){
+                    if(!r.equals(f) && prob > r.getTauxContaInterRegion()){
                         int voyageursInfectes = (int)((float)r.getPopInfectee() * 0.01);
                         f.setPopInfectee(f.getPopInfectee()+ voyageursInfectes);
                         f.setPopSaine(f.getPopSaine() - voyageursInfectes);

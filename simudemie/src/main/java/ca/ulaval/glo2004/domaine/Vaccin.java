@@ -5,10 +5,7 @@
  */
 package ca.ulaval.glo2004.domaine;
 
-/**
- *
- * @author Fred
- */
+
 public class Vaccin {
     private String nom;
     private double tauxImmunisation;

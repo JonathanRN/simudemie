@@ -249,6 +249,11 @@ public class CreationCarte extends javax.swing.JPanel {
 
         ToolBar.setBackground(new java.awt.Color(67, 76, 94));
         ToolBar.setPreferredSize(new java.awt.Dimension(968, 50));
+        ToolBar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ToolBarMousePressed(evt);
+            }
+        });
         ToolBar.setLayout(new java.awt.GridLayout(1, 0));
 
         BoutonsPrincipauxParent.setOpaque(false);
@@ -364,6 +369,10 @@ public class CreationCarte extends javax.swing.JPanel {
     private void BoutonRedoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonRedoMouseReleased
         getPanel().redoAction();
     }//GEN-LAST:event_BoutonRedoMouseReleased
+
+    private void ToolBarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ToolBarMousePressed
+        // Garder l'event ici pour empecher de click au travers du UI
+    }//GEN-LAST:event_ToolBarMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

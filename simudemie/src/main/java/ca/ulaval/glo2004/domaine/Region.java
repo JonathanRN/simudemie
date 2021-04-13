@@ -23,9 +23,11 @@ public class Region implements Externalizable {
     private int populationInfectee;
     private int populationDecedee;
     public int popInitiale;
+    private int populationImmune;
     private Polygon polygone;
     private Vector<Integer> listeInfections = new Vector<>();
-    private int populationImmune;
+    private double tauxContaInterRegion;
+    private double tauxContaIntraRegion;
 
     public Region() {}
     
@@ -85,6 +87,7 @@ public class Region implements Externalizable {
     public void vaccinationPop(double taux, int vaccinationParJour)
     {
         int nouveauxImmune = (int)((float)vaccinationParJour * taux);
+        setPopImmune(this.getPopImmunisee() + nouveauxImmune);
         
     }
     
@@ -123,6 +126,13 @@ public class Region implements Externalizable {
             return 0;
         }
         return ((float)this.getPopDecedee() / (float)this.getPopInitiale()) * 100f;
+    }
+    
+    public float getPourcentageImmune() {
+        if (this.getPopTotale() <= 0) {
+            return 0;
+        }
+        return ((float)this.getPopImmunisee() / (float)this.getPopTotale()) * 100f;
     }
     
     public Polygon getPolygone() {

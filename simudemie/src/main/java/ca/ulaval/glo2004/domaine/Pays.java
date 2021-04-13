@@ -17,6 +17,7 @@ public class Pays implements Externalizable {
     private String nom;
     private Polygon polygone;
     private int popInitiale; 
+    private ArrayList<Vaccin> vaccins = new ArrayList<>(); //Au cas ou il y aurait plusieurs vaccins - a voir
     private ArrayList<Mesure> mesures = new ArrayList<>();
     public ArrayList<Region> listeRegions = new ArrayList<>();
 
@@ -74,6 +75,16 @@ public class Pays implements Externalizable {
                 m.setActive(true);
             }else{
                 m.setActive(false);
+            }
+        }
+    }
+    
+    public void vaccination(){
+        if(!this.vaccins.isEmpty()){
+            for (Region r : listeRegions){
+                for (Vaccin v : vaccins){
+                    r.vaccinationPop(v.getTauxImmunisation(), v.getVaccinationQuotidienne());
+                }
             }
         }
     }

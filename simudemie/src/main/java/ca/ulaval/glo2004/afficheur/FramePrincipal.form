@@ -38,7 +38,7 @@
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
-    <Component class="ca.ulaval.glo2004.afficheur.MenuPrincipal" name="MenuPrincipal">
+    <Component class="ca.ulaval.glo2004.afficheur.MenuPrincipal.MenuPrincipal" name="MenuPrincipal">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
           <BorderConstraints direction="Center"/>

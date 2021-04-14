@@ -5,9 +5,11 @@
  */
 package ca.ulaval.glo2004.afficheur.Simulation;
 
+import ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche;
+import ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanel;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
-import ca.ulaval.glo2004.afficheur.ZoomInfoPanel;
-import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
+import ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel;
+import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletScenario;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
@@ -84,7 +86,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         //NomPays.setText("Pays : " + nom);
     }
     
-    public SimulationTabs getSimulationTabs() {
+    public SimulationPanelGauche getSimulationTabs() {
         return SimulationTabs;
     }
     
@@ -195,7 +197,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private void initComponents() {
 
         ZoomInfoParent = new javax.swing.JPanel();
-        ZoomInfo = new ca.ulaval.glo2004.afficheur.ZoomInfoPanel();
+        ZoomInfo = new ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel();
         StartParent = new javax.swing.JPanel();
         StartPanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         StartLabel1 = new javax.swing.JLabel();
@@ -210,7 +212,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         FastForward = new javax.swing.JLabel();
         FFLabel = new javax.swing.JLabel();
         TabsParent = new javax.swing.JPanel();
-        SimulationTabs = new ca.ulaval.glo2004.afficheur.Simulation.SimulationTabs();
+        SimulationTabs = new ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche();
         MenuDroitParent = new javax.swing.JPanel();
         SidePanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         TogglePaysRegion = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
@@ -219,7 +221,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         BoutonPhoto = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         Help = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         HomeButton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
-        SimulationPanel = new ca.ulaval.glo2004.afficheur.Simulation.SimulationPanel();
+        SimulationPanel = new ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
         setLayout(new javax.swing.OverlayLayout(this));
@@ -547,8 +549,8 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HomeButton;
     private javax.swing.JPanel MenuDroitParent;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi SidePanel;
-    private ca.ulaval.glo2004.afficheur.Simulation.SimulationPanel SimulationPanel;
-    private ca.ulaval.glo2004.afficheur.Simulation.SimulationTabs SimulationTabs;
+    private ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanel SimulationPanel;
+    private ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche SimulationTabs;
     private javax.swing.JPanel Slider;
     private javax.swing.JSlider SliderJour;
     private javax.swing.JPanel SliderParent;
@@ -560,7 +562,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton ToggleCouleurs;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton ToggleLiens;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton TogglePaysRegion;
-    private ca.ulaval.glo2004.afficheur.ZoomInfoPanel ZoomInfo;
+    private ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel ZoomInfo;
     private javax.swing.JPanel ZoomInfoParent;
     private javax.swing.JLabel icon;
     // End of variables declaration//GEN-END:variables

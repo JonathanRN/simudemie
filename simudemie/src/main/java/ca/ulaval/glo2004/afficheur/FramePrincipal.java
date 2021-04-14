@@ -1,9 +1,10 @@
 package ca.ulaval.glo2004.afficheur;
 
+import ca.ulaval.glo2004.afficheur.MenuPrincipal.MenuPrincipal;
 import ca.ulaval.glo2004.afficheur.Simulation.Simulation;
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
-import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
-import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
+import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletCarte;
+import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletScenario;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import com.formdev.flatlaf.IntelliJTheme;
@@ -79,7 +80,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MenuPrincipal = new ca.ulaval.glo2004.afficheur.MenuPrincipal();
+        MenuPrincipal = new ca.ulaval.glo2004.afficheur.MenuPrincipal.MenuPrincipal();
         TitleMenuBar = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -123,7 +124,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private ca.ulaval.glo2004.afficheur.MenuPrincipal MenuPrincipal;
+    private ca.ulaval.glo2004.afficheur.MenuPrincipal.MenuPrincipal MenuPrincipal;
     private javax.swing.JMenuBar TitleMenuBar;
     // End of variables declaration//GEN-END:variables
 

@@ -132,22 +132,22 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
               <SubComponents>
-                <Component class="ca.ulaval.glo2004.afficheur.BoutonToggle" name="BoutonSelection">
+                <Component class="ca.ulaval.glo2004.afficheur.boutons.ToggleBouton" name="BoutonSelection">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="Outil de s&#xe9;lection/&#xe9;dition (1)"/>
                   </Properties>
                 </Component>
-                <Component class="ca.ulaval.glo2004.afficheur.BoutonToggle" name="BoutonCrayon">
+                <Component class="ca.ulaval.glo2004.afficheur.boutons.ToggleBouton" name="BoutonCrayon">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="Outil de cr&#xe9;ation pays (2)"/>
                   </Properties>
                 </Component>
-                <Component class="ca.ulaval.glo2004.afficheur.BoutonToggle" name="BoutonRegion">
+                <Component class="ca.ulaval.glo2004.afficheur.boutons.ToggleBouton" name="BoutonRegion">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="Outil d&#xe9;coupage de r&#xe9;gion (3)"/>
                   </Properties>
                 </Component>
-                <Component class="ca.ulaval.glo2004.afficheur.BoutonToggle" name="BoutonLien">
+                <Component class="ca.ulaval.glo2004.afficheur.boutons.ToggleBouton" name="BoutonLien">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="Outils cr&#xe9;ation liens (4)"/>
                   </Properties>
@@ -161,7 +161,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
               <SubComponents>
-                <Component class="ca.ulaval.glo2004.afficheur.BoutonToggle" name="BoutonUndo">
+                <Component class="ca.ulaval.glo2004.afficheur.boutons.ToggleBouton" name="BoutonUndo">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="Undo (CTRL-Z)"/>
                     <Property name="actif" type="boolean" value="true"/>
@@ -187,7 +187,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
               <SubComponents>
-                <Component class="ca.ulaval.glo2004.afficheur.BoutonToggle" name="BoutonRedo">
+                <Component class="ca.ulaval.glo2004.afficheur.boutons.ToggleBouton" name="BoutonRedo">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="Redo (CTRL-Y)"/>
                     <Property name="actif" type="boolean" value="true"/>
@@ -211,7 +211,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
               <SubComponents>
-                <Component class="ca.ulaval.glo2004.afficheur.BoutonToggle" name="BoutonQuitter">
+                <Component class="ca.ulaval.glo2004.afficheur.boutons.ToggleBouton" name="BoutonQuitter">
                   <Properties>
                     <Property name="toolTipText" type="java.lang.String" value="Retour &#xe0; l&apos;accueil"/>
                   </Properties>
@@ -256,7 +256,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="ca.ulaval.glo2004.afficheur.ZoomInfoPanel" name="ZoomInfo">
+            <Component class="ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel" name="ZoomInfo">
             </Component>
           </SubComponents>
         </Container>
@@ -286,7 +286,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel" name="CreationCartePanel">
+    <Container class="ca.ulaval.glo2004.afficheur.CreationCarte.panels.CreationCartePanel" name="CreationCartePanel">
 
       <Layout>
         <DimensionLayout dim="0">

@@ -5,7 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.carteActions;
 
-import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel;
+import ca.ulaval.glo2004.afficheur.CreationCarte.panels.CreationCartePanel;
 import java.awt.Polygon;
 
 /**

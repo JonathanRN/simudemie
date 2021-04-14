@@ -45,7 +45,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="ca.ulaval.glo2004.afficheur.ZoomInfoPanel" name="ZoomInfo">
+        <Component class="ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel" name="ZoomInfo">
         </Component>
       </SubComponents>
     </Container>
@@ -305,7 +305,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="ca.ulaval.glo2004.afficheur.Simulation.SimulationTabs" name="SimulationTabs">
+        <Component class="ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche" name="SimulationTabs">
         </Component>
       </SubComponents>
     </Container>
@@ -391,7 +391,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="ca.ulaval.glo2004.afficheur.Simulation.SimulationPanel" name="SimulationPanel">
+    <Container class="ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanel" name="SimulationPanel">
       <Properties>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>

@@ -5,10 +5,15 @@
  */
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
-import ca.ulaval.glo2004.afficheur.BoutonToggle;
+import ca.ulaval.glo2004.afficheur.CreationCarte.panels.CreationCartePanel;
+import ca.ulaval.glo2004.afficheur.CreationCarte.mode.Creation;
+import ca.ulaval.glo2004.afficheur.CreationCarte.mode.LienPays;
+import ca.ulaval.glo2004.afficheur.CreationCarte.mode.Mode;
+import ca.ulaval.glo2004.afficheur.CreationCarte.mode.Selection;
+import ca.ulaval.glo2004.afficheur.boutons.ToggleBouton;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
-import ca.ulaval.glo2004.afficheur.ZoomInfoPanel;
-import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
+import ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel;
+import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletCarte;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;
@@ -28,7 +33,7 @@ public class CreationCarte extends javax.swing.JPanel {
     
     private Mode mode;
     private final int carteIndex;
-    private BoutonToggle toggleCourant;
+    private ToggleBouton toggleCourant;
     private OngletCarte onglet;
     
     public CreationCarte(int index, OngletCarte onglet) {
@@ -42,7 +47,7 @@ public class CreationCarte extends javax.swing.JPanel {
         
         BoutonSelection.init(this, new Selection(this), "icons8_cursor_25px");
         BoutonCrayon.init(this, new Creation(this), "icons8_pen_25px");
-        BoutonRegion.init(this, new ca.ulaval.glo2004.afficheur.CreationCarte.Region(this), "icons8_scissors_25px");
+        BoutonRegion.init(this, new ca.ulaval.glo2004.afficheur.CreationCarte.mode.Region(this), "icons8_scissors_25px");
         BoutonLien.init(this, new LienPays(this), "icons8_chain_25px");
         
         BoutonUndo.init(this, null, "icons8_undo_25px");
@@ -103,7 +108,7 @@ public class CreationCarte extends javax.swing.JPanel {
         return InformationsPanel;
     }
     
-    public void onToggleClick(BoutonToggle bouton) {
+    public void onToggleClick(ToggleBouton bouton) {
         if (bouton.getMode() != null) {
             if (toggleCourant != null) {
                 toggleCourant.setToggle(false);
@@ -188,21 +193,21 @@ public class CreationCarte extends javax.swing.JPanel {
         ToolBarParent = new javax.swing.JPanel();
         ToolBar = new javax.swing.JPanel();
         BoutonsPrincipauxParent = new javax.swing.JPanel();
-        BoutonSelection = new ca.ulaval.glo2004.afficheur.BoutonToggle();
-        BoutonCrayon = new ca.ulaval.glo2004.afficheur.BoutonToggle();
-        BoutonRegion = new ca.ulaval.glo2004.afficheur.BoutonToggle();
-        BoutonLien = new ca.ulaval.glo2004.afficheur.BoutonToggle();
+        BoutonSelection = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
+        BoutonCrayon = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
+        BoutonRegion = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
+        BoutonLien = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
         BoutonUndoParent = new javax.swing.JPanel();
-        BoutonUndo = new ca.ulaval.glo2004.afficheur.BoutonToggle();
+        BoutonUndo = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
         BoutonRedoParent = new javax.swing.JPanel();
-        BoutonRedo = new ca.ulaval.glo2004.afficheur.BoutonToggle();
+        BoutonRedo = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
         BoutonQuitterParent = new javax.swing.JPanel();
-        BoutonQuitter = new ca.ulaval.glo2004.afficheur.BoutonToggle();
+        BoutonQuitter = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
         ZoomPanelParent = new javax.swing.JPanel();
-        ZoomInfo = new ca.ulaval.glo2004.afficheur.ZoomInfoPanel();
+        ZoomInfo = new ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel();
         InformationsPanelParent = new javax.swing.JPanel();
         InformationsPanel = new javax.swing.JPanel();
-        CreationCartePanel = new ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel();
+        CreationCartePanel = new ca.ulaval.glo2004.afficheur.CreationCarte.panels.CreationCartePanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
         setLayout(new javax.swing.OverlayLayout(this));
@@ -377,18 +382,18 @@ public class CreationCarte extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonCrayon;
-    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonLien;
-    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonQuitter;
+    private ca.ulaval.glo2004.afficheur.boutons.ToggleBouton BoutonCrayon;
+    private ca.ulaval.glo2004.afficheur.boutons.ToggleBouton BoutonLien;
+    private ca.ulaval.glo2004.afficheur.boutons.ToggleBouton BoutonQuitter;
     private javax.swing.JPanel BoutonQuitterParent;
-    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonRedo;
+    private ca.ulaval.glo2004.afficheur.boutons.ToggleBouton BoutonRedo;
     private javax.swing.JPanel BoutonRedoParent;
-    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonRegion;
-    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonSelection;
-    private ca.ulaval.glo2004.afficheur.BoutonToggle BoutonUndo;
+    private ca.ulaval.glo2004.afficheur.boutons.ToggleBouton BoutonRegion;
+    private ca.ulaval.glo2004.afficheur.boutons.ToggleBouton BoutonSelection;
+    private ca.ulaval.glo2004.afficheur.boutons.ToggleBouton BoutonUndo;
     private javax.swing.JPanel BoutonUndoParent;
     private javax.swing.JPanel BoutonsPrincipauxParent;
-    private ca.ulaval.glo2004.afficheur.CreationCarte.CreationCartePanel CreationCartePanel;
+    private ca.ulaval.glo2004.afficheur.CreationCarte.panels.CreationCartePanel CreationCartePanel;
     private javax.swing.JPanel InformationsPanel;
     private javax.swing.JPanel InformationsPanelParent;
     private javax.swing.JLabel StartLabel1;
@@ -397,7 +402,7 @@ public class CreationCarte extends javax.swing.JPanel {
     private javax.swing.JPanel StartParent;
     private javax.swing.JPanel ToolBar;
     private javax.swing.JPanel ToolBarParent;
-    private ca.ulaval.glo2004.afficheur.ZoomInfoPanel ZoomInfo;
+    private ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel ZoomInfo;
     private javax.swing.JPanel ZoomPanelParent;
     // End of variables declaration//GEN-END:variables
 }

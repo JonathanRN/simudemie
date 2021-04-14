@@ -1,0 +1,248 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ca.ulaval.glo2004.afficheur.MenuPrincipal.panels;
+
+import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
+import ca.ulaval.glo2004.afficheur.MenuPrincipal.objetsUI.ObjetMaladie;
+import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletMaladie;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.text.ParseException;
+import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+/**
+ *
+ * @author Jonathan
+ */
+public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListener, KeyListener {
+    
+    private JLabel InfectionLabel;
+    private JSpinner InfectionInput;
+    private JLabel CuredLabel;
+    private JSpinner CuredInput;
+    private JLabel DeadLabel;
+    private JSpinner DeadInput;
+        
+    private OngletMaladie onglet;
+    
+    public StatsMaladiePanel() {
+        initComponents();
+        
+        try {
+            MaladieInput.setFont(FontRegister.RobotoThin.deriveFont(21f));
+            init();
+            showFields(false);
+            Main.setBackground(Couleurs.pannelArrondi);
+        }
+        catch(Exception e) {
+        }
+    }
+    
+    private void init() {        
+        InfectionLabel = new javax.swing.JLabel();
+        InfectionLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        InfectionLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        InfectionLabel.setText("Taux d'infection");
+        InfectionLabel.setToolTipText("");
+        Parent.add(InfectionLabel);
+        
+        InfectionInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 99.9, 0.5));
+        Parent.add(InfectionInput);
+
+        CuredLabel = new javax.swing.JLabel();
+        CuredLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        CuredLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        CuredLabel.setText("Taux de guérison");
+        CuredLabel.setToolTipText("");
+        Parent.add(CuredLabel);
+
+        CuredInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 100, 0.5));
+        Parent.add(CuredInput);
+
+        DeadLabel = new javax.swing.JLabel();
+        DeadLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        DeadLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        DeadLabel.setText("Taux de mortalité");
+        DeadLabel.setToolTipText("");
+        Parent.add(DeadLabel);
+
+        DeadInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 100, 0.5));
+        Parent.add(DeadInput);
+        
+        InfectionInput.addChangeListener(this);
+        CuredInput.addChangeListener(this);
+        DeadInput.addChangeListener(this);
+        MaladieInput.addKeyListener(this);
+        
+    }
+    
+    public void setNomMaladie(String nom) {
+       MaladieInput.setText(nom);
+    }
+    
+    public void setInfectionInput(double value) {
+        InfectionInput.setValue(value);
+    }
+    
+    public void setCuredInput(double value) {
+        CuredInput.setValue(value);
+    }
+    
+    public void setDeadInput(double value) {
+        DeadInput.setValue(value);
+    }
+    
+    public double getInfectionInput() {
+        commitEdit();
+        return (double) InfectionInput.getValue();
+    }
+    
+    public double getCuredInput() {
+        commitEdit();
+        return (double) CuredInput.getValue();
+    }
+    
+    public double getDeadInput() {
+        commitEdit();
+        return (double) DeadInput.getValue();
+    }
+    
+    private void commitEdit() {
+        try {
+            InfectionInput.commitEdit();
+            CuredInput.commitEdit();
+            DeadInput.commitEdit();
+        } catch(ParseException pe) {
+        }
+    }
+    
+    public void setOnglet(OngletMaladie onglet) {
+        this.onglet = onglet;
+    }
+    
+    private void sauvegarderMaladie() {
+        Object[] args = { onglet.getIndexCourant(), MaladieInput.getText(), getInfectionInput(), getDeadInput(), getCuredInput() };
+        onglet.getController().creer(args);
+        
+        ObjetMaladie objetMaladie = (ObjetMaladie)onglet.getCourant();
+        if (objetMaladie != null) {
+            objetMaladie.setDeadProgressBar(getDeadInput());
+            objetMaladie.setInfectedProgressBar(getInfectionInput());
+            objetMaladie.setCuredProgressBar(getCuredInput());
+            objetMaladie.setNom(MaladieInput.getText());
+        }
+        
+        updateUI();
+        repaint();
+    }
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        Main = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
+        StatsHeader = new javax.swing.JPanel();
+        MaladieInput = new javax.swing.JTextField();
+        Parent = new javax.swing.JPanel();
+
+        setOpaque(false);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                formMouseReleased(evt);
+            }
+        });
+        setLayout(new java.awt.GridLayout(1, 2, 20, 0));
+
+        Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 25, 15));
+        Main.setLayout(new java.awt.BorderLayout());
+
+        StatsHeader.setOpaque(false);
+        StatsHeader.setLayout(new java.awt.BorderLayout());
+
+        MaladieInput.setBackground(new java.awt.Color(71, 76, 88));
+        MaladieInput.setFont(new java.awt.Font("Dialog", 0, 21)); // NOI18N
+        MaladieInput.setText("Nom de la maladie");
+        MaladieInput.setToolTipText("");
+        MaladieInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                MaladieInputKeyReleased(evt);
+            }
+        });
+        StatsHeader.add(MaladieInput, java.awt.BorderLayout.CENTER);
+        MaladieInput.getAccessibleContext().setAccessibleName("");
+
+        Main.add(StatsHeader, java.awt.BorderLayout.NORTH);
+
+        Parent.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 0, 0));
+        Parent.setOpaque(false);
+        Parent.setLayout(new java.awt.GridLayout(6, 0, 0, 5));
+        Main.add(Parent, java.awt.BorderLayout.CENTER);
+
+        add(Main);
+    }// </editor-fold>//GEN-END:initComponents
+    
+    public void showFields(boolean enabled) {
+        InfectionLabel.setVisible(enabled);
+        CuredLabel.setVisible(enabled);
+        DeadLabel.setVisible(enabled);
+        
+        MaladieInput.setVisible(enabled);
+        InfectionInput.setVisible(enabled);
+        CuredInput.setVisible(enabled);
+        DeadInput.setVisible(enabled);
+        
+        updateUI();
+    }
+    
+    private void MaladieInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaladieInputKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.requestFocusInWindow();
+            updateUI();
+        }
+    }//GEN-LAST:event_MaladieInputKeyReleased
+
+    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+        this.requestFocusInWindow();
+        updateUI();
+    }//GEN-LAST:event_formMouseReleased
+    
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi Main;
+    private javax.swing.JTextField MaladieInput;
+    private javax.swing.JPanel Parent;
+    private javax.swing.JPanel StatsHeader;
+    // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        sauvegarderMaladie();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        sauvegarderMaladie();
+    }
+}

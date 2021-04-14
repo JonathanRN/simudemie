@@ -8,12 +8,10 @@ package ca.ulaval.glo2004.afficheur.CreationCarte.panels;
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
 import ca.ulaval.glo2004.afficheur.CreationCarte.mode.Region.PolygoneDivise;
 import ca.ulaval.glo2004.afficheur.utilsUI.ZoomablePanel;
-import ca.ulaval.glo2004.afficheur.carteActions.ActionCarte;
-import ca.ulaval.glo2004.afficheur.carteActions.AjouterPointAction;
-import ca.ulaval.glo2004.afficheur.carteActions.CreerPolygoneAction;
-import ca.ulaval.glo2004.afficheur.carteActions.SplitPaysAction;
+import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Region;
+import ca.ulaval.glo2004.domaine.VoieLiaison;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -27,45 +25,81 @@ import javax.swing.SwingUtilities;
  */
 public class CreationCartePanel extends ZoomablePanel {
     
-    private final Stack<ActionCarte> actionsFaites = new Stack<>();
-    private final Stack<ActionCarte> actionsUndo = new Stack<>();
+    private class Etat {
+        private final Polygon courant;
+        private final Carte carte;
+
+        public Etat(Polygon courant, Carte carte) {
+            this.courant = new Polygon(courant.xpoints, courant.ypoints, courant.npoints);
+            this.carte = new Carte(carte);
+        }
+        
+        public Polygon getCourant() {
+            return courant;
+        }
+        
+        public Carte getCarte() {
+            return carte;
+        }
+    }
+    
+    private final Stack<Etat> etats = new Stack<>();
+    private int pointeur = -1;
     
     private Polygon courant = new Polygon();
         
     private CreationCarte creationCarte;
     
     public CreationCartePanel() {
-        initComponents();        
+        initComponents();
     }
     
     public Polygon getCourant() {
         return courant;
     }
     
-    public void setCourant(Polygon courant) {
-        // Copie pour ne pas garder de reference
-        this.courant = new Polygon(courant.xpoints, courant.ypoints, courant.npoints);
-    }
-    
     public void setCreationCarte(CreationCarte creationCarte) {
         this.creationCarte = creationCarte;
+        
+        // Il faut avoir l'etat initial
+        sauvegarderEtat();
+    }
+    
+    public void sauvegarderEtat() {
+        // On supprime tout ce qui etait apres cet etat
+        for (int i = etats.size() - 1; i > pointeur; i--) {
+            etats.remove(i);
+        }
+        
+        etats.push(new Etat(courant, creationCarte.getCarte()));
+        pointeur++;
+        
+        creationCarte.setUndoActif(true);
+        creationCarte.repaint();
+        
+        System.out.println("Sauvegarde " + pointeur);
     }
     
     public void placerPoint(int x, int y) {
-        AjouterPointAction action = new AjouterPointAction(x, y, this);
-        ajouterAction(action);
+        Polygon testeur = new Polygon(courant.xpoints, courant.ypoints, courant.npoints);
+        testeur.addPoint(x, y);
         
         // Place le point seulement s'il est valide
-        if (!creationCarte.getMode().estPolygoneValide(getCourant())) {
-            undoAction();
+        if (creationCarte.getMode().estPolygoneValide(testeur)) {
+            courant.addPoint(x, y);
+            sauvegarderEtat();
         }
     }
     
     public void creerPolygone() {
         // Dessine le polygone seulement s'il est valide
         if (creationCarte.getMode().estPolygoneValide(getCourant())) {
-            CreerPolygoneAction action = new CreerPolygoneAction(creationCarte.getCarte(), this);
-            ajouterAction(action);
+            Pays pays = new Pays(getCourant());
+            pays.ajouterRegion(new ca.ulaval.glo2004.domaine.Region(pays.getPolygone()));
+            creationCarte.getCarte().ajouterPays(pays);
+            
+            courant.reset();
+            sauvegarderEtat();
                         
             creationCarte.getPopup().setVisible(false);
         }
@@ -75,9 +109,14 @@ public class CreationCartePanel extends ZoomablePanel {
         }
     }
     
+    public void ajouterLien(VoieLiaison voie) {
+        creationCarte.getCarte().ajouterVoie(voie);
+        
+        sauvegarderEtat();
+    }
+    
     public void splitPays(Polygon p, PolygoneDivise divise) {
-        SplitPaysAction action = new SplitPaysAction(p, divise.getGauche(), divise.getDroit(), creationCarte);
-        ajouterAction(action);
+        sauvegarderEtat();
     }
     
     public boolean estRegionUnique(Polygon p) {
@@ -94,48 +133,23 @@ public class CreationCartePanel extends ZoomablePanel {
         return null;
     }
     
-    public void ajouterAction(ActionCarte action) {
-        actionsFaites.push(action);
-        creationCarte.setUndoActif(true);
-        action.Executer();
-        
-        // On veut pas modifier le futur
-        actionsUndo.clear();
-        
-        creationCarte.repaint();
-        
-        System.out.println("AJOUT: " + action.getClass().getSimpleName());
-    }
-    
-    public void undoAction() {
-        if (!actionsFaites.isEmpty()) {
-            ActionCarte action = actionsFaites.pop();
-            action.Undo();
-            System.out.println("UNDO: " + action.getClass().getSimpleName());
-            actionsUndo.push(action);
-            
-            creationCarte.setRedoActif(true);
-            if (actionsFaites.empty()) {
+    public void undo() {
+        if (pointeur > 0) {
+            Etat undo = etats.get(--pointeur);
+            creationCarte.chargerCarte(undo.getCarte());
+            courant = new Polygon(undo.getCourant().xpoints, undo.getCourant().ypoints, undo.getCourant().npoints);
+
+            if (pointeur <= 0) {
                 creationCarte.setUndoActif(false);
             }
             
             creationCarte.repaint();
+            System.out.println("Undo " + pointeur);
         }
     }
     
-    public void redoAction() {
-        if (!actionsUndo.isEmpty()) {
-            ActionCarte action = actionsUndo.pop();
-            action.Executer();
-            System.out.println("REDO: " + action.getClass().getSimpleName());
-            actionsFaites.push(action);
-            
-            if (actionsUndo.empty()) {
-                creationCarte.setRedoActif(false);
-            }
-            
-            creationCarte.repaint();
-        }
+    public void redo() {
+        
     }
     
     @Override
@@ -145,7 +159,7 @@ public class CreationCartePanel extends ZoomablePanel {
         
         if (creationCarte != null) {
             creationCarte.getMode().paint(graphics);
-        }
+        }        
     }
 
     @SuppressWarnings("unchecked")

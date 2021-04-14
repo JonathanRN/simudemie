@@ -32,7 +32,7 @@ public class Region implements Externalizable {
     public Region() {}
     
     public Region(Polygon polygone) {
-        this.polygone = polygone;
+        this.polygone = new Polygon(polygone.xpoints, polygone.ypoints, polygone.npoints);
         setPopTotale(100000);
     }
 
@@ -48,8 +48,7 @@ public class Region implements Externalizable {
             this.listeInfections.add(infections);
         }
 
-        // Voir si modifier une carte modifie le polygone ici
-        this.polygone = region.polygone;
+        this.polygone = new Polygon(region.polygone.xpoints, region.polygone.ypoints, region.polygone.npoints);
     }
     
     

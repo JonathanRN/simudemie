@@ -99,13 +99,19 @@ public class Selection extends Mode {
     private void saveInfos(Polygon p) throws ParseException {
         Pays pays = creationCarte.getPays(p);
         ca.ulaval.glo2004.domaine.Region region = creationCarte.getPanel().getRegion(pays, p);
-        pays.setNom(panel.getNomPays());
-        region.setNom(panel.getNomRegion());
-        region.setPopTotale(panel.getPopRegion());
+        
+        if (!(pays.getNom().equals(panel.getNomPays())) ||
+            !(region.getNom().equals(panel.getNomRegion()) ||
+            region.getPopTotale() != panel.getPopRegion())) {
+            pays.setNom(panel.getNomPays());
+            region.setNom(panel.getNomRegion());
+            region.setPopTotale(panel.getPopRegion());
+
+            creationCarte.getPanel().sauvegarderEtat();
+        }
     }
 
     public void onPaysSupprime() {
-        // todo: faire en carte action
         Pays pays = carte.getPays(selectionne);
         
         // supprime les liens également
@@ -117,6 +123,8 @@ public class Selection extends Mode {
         }
         
         carte.retirerPays(pays);
+        
+        creationCarte.getPanel().sauvegarderEtat();
         
         creationCarte.getInformationsPanel().setVisible(false);
         

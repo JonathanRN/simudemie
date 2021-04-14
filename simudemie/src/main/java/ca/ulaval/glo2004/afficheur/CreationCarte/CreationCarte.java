@@ -41,7 +41,7 @@ public class CreationCarte extends javax.swing.JPanel {
         this.onglet = onglet;
         initComponents();
         
-        nomCarte.setText("Carte :   " + getCarte().getNom());
+        nomCarte.setText("Carte : " + getCarte().getNom());
         nomCarte.setFont(FontRegister.RobotoLight.deriveFont(17f));
         
         InformationsPanel.setBackground(Couleurs.titleBar);
@@ -93,6 +93,10 @@ public class CreationCarte extends javax.swing.JPanel {
     
     public ArrayList<Polygon> getPolygones() {
         return getCarte().getPolygonesRegions();
+    }
+    
+    public void chargerCarte(Carte carte) {
+        getCarte().charger(carte);
     }
     
     public Carte getCarte() {
@@ -240,16 +244,16 @@ public class CreationCarte extends javax.swing.JPanel {
         IndiceCommenceParentLayout.setHorizontalGroup(
             IndiceCommenceParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IndiceCommenceParentLayout.createSequentialGroup()
-                .addContainerGap(292, Short.MAX_VALUE)
+                .addContainerGap(339, Short.MAX_VALUE)
                 .addComponent(IndiceCommencePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addContainerGap(338, Short.MAX_VALUE))
         );
         IndiceCommenceParentLayout.setVerticalGroup(
             IndiceCommenceParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(IndiceCommenceParentLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(IndiceCommencePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(661, Short.MAX_VALUE))
+                .addContainerGap(591, Short.MAX_VALUE))
         );
 
         add(IndiceCommenceParent);
@@ -316,7 +320,7 @@ public class CreationCarte extends javax.swing.JPanel {
         ToolBar.add(BoutonRedoParent);
 
         BoutonQuitterParent.setOpaque(false);
-        BoutonQuitterParent.setLayout(new java.awt.BorderLayout());
+        BoutonQuitterParent.setLayout(new java.awt.BorderLayout(5, 0));
 
         BoutonQuitter.setToolTipText("Retour à l'accueil");
         BoutonQuitterParent.add(BoutonQuitter, java.awt.BorderLayout.EAST);
@@ -335,14 +339,14 @@ public class CreationCarte extends javax.swing.JPanel {
             .addGroup(ZoomPanelParentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(956, Short.MAX_VALUE))
+                .addContainerGap(1048, Short.MAX_VALUE))
         );
         ZoomPanelParentLayout.setVerticalGroup(
             ZoomPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ZoomPanelParentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(655, Short.MAX_VALUE))
+                .addContainerGap(629, Short.MAX_VALUE))
         );
 
         ToolBarParent.add(ZoomPanelParent, java.awt.BorderLayout.CENTER);
@@ -363,22 +367,22 @@ public class CreationCarte extends javax.swing.JPanel {
         CreationCartePanel.setLayout(CreationCartePanelLayout);
         CreationCartePanelLayout.setHorizontalGroup(
             CreationCartePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 956, Short.MAX_VALUE)
+            .addGap(0, 1048, Short.MAX_VALUE)
         );
         CreationCartePanelLayout.setVerticalGroup(
             CreationCartePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
 
         add(CreationCartePanel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BoutonUndoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonUndoMouseReleased
-        getPanel().undoAction();
+        getPanel().undo();
     }//GEN-LAST:event_BoutonUndoMouseReleased
 
     private void BoutonRedoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonRedoMouseReleased
-        getPanel().redoAction();
+        getPanel().redo();
     }//GEN-LAST:event_BoutonRedoMouseReleased
 
     private void ToolBarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ToolBarMousePressed

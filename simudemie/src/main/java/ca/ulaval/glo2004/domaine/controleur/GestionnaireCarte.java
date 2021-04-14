@@ -37,7 +37,13 @@ public class GestionnaireCarte extends GestionnaireOnglet<Carte> {
         return carte;
     }
     
-    public Pays getPays(int indexCarte, int indexPays) {return getElement(indexCarte).getPays(indexPays);}
+    public void creerCopie(Carte carte) {
+        ajouter(new Carte(carte));
+    }
+    
+    public Pays getPays(int indexCarte, int indexPays) {
+        return getElement(indexCarte).getPays(indexPays);
+    }
     
     public Pays getPays(int indexCarte, Polygon polygon) {return getElement(indexCarte).getPays(polygon);}
 }

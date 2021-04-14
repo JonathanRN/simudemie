@@ -7,7 +7,6 @@ package ca.ulaval.glo2004.afficheur.CreationCarte.mode;
 
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
 import ca.ulaval.glo2004.afficheur.CreationCarte.panels.InformationsLienPanel;
-import ca.ulaval.glo2004.afficheur.carteActions.AjouterLienAction;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
@@ -193,8 +192,7 @@ public class LienPays extends Mode {
                 Point centreLigne = this.getCentreLigne(new Line2D.Double(initial.x, initial.y, centre.x, centre.y));
                 
                 VoieLiaison voie = new VoieLiaison(nonUtilisees.get(0), origine, destination, path, centreLigne);
-                AjouterLienAction action = new AjouterLienAction(voie, carte);
-                creationCarte.getPanel().ajouterAction(action);
+                creationCarte.getPanel().ajouterLien(voie);
                 
                 path = null;
                 

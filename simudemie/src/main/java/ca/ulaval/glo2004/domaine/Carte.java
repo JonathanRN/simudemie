@@ -24,19 +24,25 @@ public class Carte implements Externalizable {
     
     public Carte(String nom) {this.nom = nom;}    
 
-    public Carte(Carte carteJourCourant) {
-        this.nom = carteJourCourant.nom;
-        this.maladie = new Maladie(carteJourCourant.getMaladie());
+    public void charger(Carte carte) {
+        this.nom = carte.nom;
+        if (carte.getMaladie() != null) {
+            this.maladie = new Maladie(carte.getMaladie());
+        }
         
         this.listePays.clear();
-        for (Pays pays : carteJourCourant.listePays) {
+        for (Pays pays : carte.listePays) {
             this.listePays.add(new Pays(pays));
         }
         
         this.frontieres.clear();
-        for (VoieLiaison voie : carteJourCourant.frontieres) {
+        for (VoieLiaison voie : carte.frontieres) {
             this.frontieres.add(new VoieLiaison(voie));
         }
+    }
+    
+    public Carte(Carte carteJourCourant) {
+        charger(carteJourCourant);
     }
     
     public void initiliserPopInit()

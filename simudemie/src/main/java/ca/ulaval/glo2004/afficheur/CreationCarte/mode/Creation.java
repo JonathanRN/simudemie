@@ -6,7 +6,6 @@
 package ca.ulaval.glo2004.afficheur.CreationCarte.mode;
 
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
-import ca.ulaval.glo2004.afficheur.carteActions.DragPointAction;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -22,7 +21,7 @@ public class Creation extends Mode {
     
     private Polygon polygoneSousSouris;
     private int indexSousSouris;
-    private Point pointDragInitial, dernierDrag;
+    private Point pointDragInitial;
 
     public Creation(CreationCarte panel) {
         this.setCreationCarte(panel);
@@ -102,8 +101,7 @@ public class Creation extends Mode {
                 lignesInvalides.clear();
             }
             else {
-                DragPointAction action = new DragPointAction(polygoneSousSouris, indexSousSouris, pointDragInitial, dernierDrag);
-                creationCarte.getPanel().ajouterAction(action);
+                creationCarte.getPanel().sauvegarderEtat();
             }
             
             polygoneSousSouris.invalidate();
@@ -116,10 +114,8 @@ public class Creation extends Mode {
         if (polygoneSousSouris != null && indexSousSouris != -1) {
             polygoneSousSouris.xpoints[indexSousSouris] = point.x;
             polygoneSousSouris.ypoints[indexSousSouris] = point.y;
-            
-            dernierDrag = point;
-            
-            updateLignesInvalides(polygoneSousSouris);            
+                        
+            updateLignesInvalides(polygoneSousSouris);
         }
         super.onMouseDragged(point);
     }
@@ -129,7 +125,7 @@ public class Creation extends Mode {
         indexSousSouris = -1;
         int offset = taillePoint/2 + 5;
         
-        ArrayList<Polygon> polygones = (ArrayList<Polygon>)creationCarte.getPolygones().clone();
+        ArrayList<Polygon> polygones = creationCarte.getPolygones();
         polygones.add(creationCarte.getPanel().getCourant());
         
         for (Polygon p : polygones) {

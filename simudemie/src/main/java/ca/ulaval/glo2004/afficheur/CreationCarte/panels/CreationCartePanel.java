@@ -16,6 +16,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Stack;
 import javax.swing.SwingUtilities;
 
@@ -117,6 +118,23 @@ public class CreationCartePanel extends ZoomablePanel {
     }
     
     public void splitPays(Polygon p, PolygoneDivise divise) {
+        ArrayList<Polygon> polygones = creationCarte.getPolygones();
+        Pays pays = creationCarte.getPays(p);
+        int index = polygones.indexOf(p);
+        
+        polygones.remove(index);
+
+        polygones.add(index, divise.getGauche());
+        polygones.add(index + 1, divise.getDroit());
+
+        Region regionGauche = new Region(divise.getGauche());
+        Region regionDroite = new Region(divise.getDroit());
+        
+        pays.ajouterRegion(regionGauche);
+        pays.ajouterRegion(regionDroite);
+        
+        pays.retirerRegion(pays.getRegions().stream().filter(x -> x.getPolygone().equals(p)).findFirst().get());
+        
         sauvegarderEtat();
     }
     

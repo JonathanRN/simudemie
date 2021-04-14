@@ -100,7 +100,7 @@ public class Creation extends Mode {
                 
                 lignesInvalides.clear();
             }
-            else {
+            else if (indexSousSouris != -1) {
                 creationCarte.getPanel().sauvegarderEtat();
             }
             

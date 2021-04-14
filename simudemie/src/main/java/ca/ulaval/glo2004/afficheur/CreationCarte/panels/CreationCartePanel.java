@@ -74,6 +74,7 @@ public class CreationCartePanel extends ZoomablePanel {
         etats.push(new Etat(courant, creationCarte.getCarte()));
         pointeur++;
         
+        creationCarte.setRedoActif(false);
         creationCarte.setUndoActif(true);
         creationCarte.repaint();
         
@@ -143,13 +144,28 @@ public class CreationCartePanel extends ZoomablePanel {
                 creationCarte.setUndoActif(false);
             }
             
+            creationCarte.setRedoActif(true);
+            
             creationCarte.repaint();
             System.out.println("Undo " + pointeur);
         }
     }
     
     public void redo() {
-        
+        if (pointeur < etats.size()) {
+            Etat redo = etats.get(++pointeur);
+            creationCarte.chargerCarte(redo.getCarte());
+            courant = new Polygon(redo.getCourant().xpoints, redo.getCourant().ypoints, redo.getCourant().npoints);
+            
+            if (pointeur >= etats.size() - 1) {
+                creationCarte.setRedoActif(false);
+            }
+            
+            creationCarte.setUndoActif(true);
+            
+            creationCarte.repaint();
+            System.out.println("Redo " + pointeur);
+        }
     }
     
     @Override
@@ -198,7 +214,7 @@ public class CreationCartePanel extends ZoomablePanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1118, Short.MAX_VALUE)
+            .addGap(0, 834, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

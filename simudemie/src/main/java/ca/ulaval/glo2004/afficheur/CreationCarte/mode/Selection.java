@@ -92,7 +92,7 @@ public class Selection extends Mode {
         super.paint(g);
         
         if (selectionne != null) {
-            paintLignes(g, Couleurs.selectionneBorder, selectionne);
+            paintLignes(g, Color.green, selectionne);
         }
     }
     

@@ -8,6 +8,7 @@ package ca.ulaval.glo2004.afficheur.CreationCarte.mode;
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Carte;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -95,6 +96,7 @@ public class Mode {
     
     protected void paintLignes(Graphics2D g, Color c, ArrayList<Line2D.Double> lignes) {
         g.setColor(c);
+        g.setStroke(new BasicStroke(2));
         for(Line2D.Double line : lignes) {
             g.drawLine((int)line.x1, (int)line.y1, (int)line.x2, (int)line.y2);
         }
@@ -102,6 +104,7 @@ public class Mode {
     
     protected void paintLignes(Graphics2D g, Color c, Polygon p) {
         g.setColor(c);
+        g.setStroke(new BasicStroke(2));
         for(Line2D.Double line : getPolygonLines(p)) {
             g.drawLine((int)line.x1, (int)line.y1, (int)line.x2, (int)line.y2);
         }

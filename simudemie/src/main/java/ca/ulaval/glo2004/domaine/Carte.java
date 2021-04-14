@@ -255,6 +255,14 @@ public class Carte implements Externalizable {
         return (float)getPopulationDecedee() / (float)getPopulationInitiale();
     }
 
+    public float getPopulationImmune() {
+        return listePays.stream().collect(Collectors.summingInt(x -> x.getPopImmune()));
+    }
+    
+    public float getPourcentageImmune() {
+        return (float)getPopulationImmune() / (float)getPopulationTotale();
+    }
+    
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeUTF(nom);

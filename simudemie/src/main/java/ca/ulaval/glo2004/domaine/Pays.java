@@ -41,6 +41,11 @@ public class Pays implements Externalizable {
         for (Region region : pays.listeRegions) {
             this.listeRegions.add(new Region(region));
         }
+        
+//        this.vaccins.clear();
+//        for (Vaccin vaccin : pays.vaccins) {
+//            this.vaccins.add(new Vaccin(vaccin));
+//        }
     }
     
     

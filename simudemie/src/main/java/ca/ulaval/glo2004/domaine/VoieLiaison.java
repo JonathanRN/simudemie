@@ -17,6 +17,7 @@ public class VoieLiaison implements Externalizable {
     
     private Pays paysOrigine;
     private Pays paysDestination;
+    private double tauxPropag = 0.1;
     private TypeVoie type;
     private Path2D.Double ligneCourbe;
     private Point centre;
@@ -37,11 +38,23 @@ public class VoieLiaison implements Externalizable {
         accessible = true;
     }
     
+    public VoieLiaison(TypeVoie type, Pays origine, Pays destination, Path2D.Double ligneCourbe, Point centre, double tauxPropag)
+    {
+        this.type = type;
+        this.paysOrigine = origine;
+        this.paysDestination = destination;
+        this.ligneCourbe = ligneCourbe;
+        this.centre = centre;
+        this.tauxPropag = tauxPropag;
+        accessible = true;
+    }
+    
     public VoieLiaison(VoieLiaison voie)
     {
         this.type = voie.type;
         this.paysOrigine = new Pays(voie.paysOrigine);
         this.paysDestination = new Pays(voie.paysDestination);
+        this.tauxPropag = voie.tauxPropag;
         
         // todo voir si modifications dans carte change ici
         this.ligneCourbe = voie.ligneCourbe;
@@ -54,6 +67,8 @@ public class VoieLiaison implements Externalizable {
     public Pays getPaysDestination() { return paysDestination; }
     
     public TypeVoie getType() { return type; }
+    
+    public TypeVoie getTauxPropag() { return type; }
     
     public void setType(TypeVoie type) {
         this.type = type;
@@ -74,6 +89,11 @@ public class VoieLiaison implements Externalizable {
     public void setAccessible(boolean accessible)
     {
         this.accessible = accessible;
+    }
+    
+    public void setTauxPropag(double tauxPropag)
+    {
+        this.tauxPropag = tauxPropag;
     }
     
     public Path2D.Double getLigne() {

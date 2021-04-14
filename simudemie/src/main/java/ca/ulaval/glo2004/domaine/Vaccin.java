@@ -26,6 +26,13 @@ public class Vaccin {
         this.vaccinationQuotidienne = vaccinationQuotidienne;
         this.tauxAdhesion = tauxAdhesion;
     }
+    
+    public Vaccin(Vaccin vaccin){
+        this.nom = vaccin.nom;
+        this.tauxImmunisation = vaccin.tauxImmunisation;
+        this.vaccinationQuotidienne = vaccin.vaccinationQuotidienne;
+        this.tauxAdhesion = vaccin.tauxAdhesion;
+    }
 
     public String getNom() {
         return nom;

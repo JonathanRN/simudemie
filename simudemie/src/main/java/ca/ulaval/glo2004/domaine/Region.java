@@ -26,8 +26,8 @@ public class Region implements Externalizable {
     private int populationImmune;
     private Polygon polygone;
     private Vector<Integer> listeInfections = new Vector<>();
-    private double tauxContaInterRegion;
-    private double tauxContaIntraRegion;
+    private double tauxContaInterRegion = 0.1;
+    private double tauxContaIntraRegion = 0.1;
 
     public Region() {}
     
@@ -53,12 +53,12 @@ public class Region implements Externalizable {
     }
     
     
-    public void contaminer(double taux, int cptJours)
+    public void contaminer(double taux, int cptJours, int incubation)
     {
         //Nous ajoutons les nouveaux infectés dans un vecteur pour ajouter une dose de réalisme.
         //Lorsque l'élimination et guérison de la pop ont lieu, ces méthodes s'appliquent sur la 
         //pop infectée d'il y a 2 semaines (inspiré du Covid - période d'incubation d'environ 2 semaines)
-        int nouveauxInfectes = contaminationBinomiale(taux);
+        int nouveauxInfectes = (int)(contaminationBinomiale(taux, incubation)/2);
         this.listeInfections.add(nouveauxInfectes);
         setPopInfectee(this.getPopInfectee() + nouveauxInfectes);
         setPopSaine(this.getPopSaine() - nouveauxInfectes);
@@ -88,7 +88,6 @@ public class Region implements Externalizable {
     {
         int nouveauxImmune = (int)((float)vaccinationParJour * taux);
         setPopImmune(this.getPopImmunisee() + nouveauxImmune);
-        
     }
     
     public String getNom(){return nom;}
@@ -106,6 +105,11 @@ public class Region implements Externalizable {
     public int getPopInfectee(){ return populationInfectee; }
     
     public int getPopDecedee(){ return populationDecedee; }
+
+    public double getTauxContaInterRegion() {return tauxContaInterRegion;}
+
+    public double getTauxContaIntraRegion() {return tauxContaIntraRegion;}
+    
     
     public float getPourcentageInfectee() {
         if (this.getPopTotale() <= 0) {
@@ -163,8 +167,17 @@ public class Region implements Externalizable {
     {
         this.populationDecedee = clamp(populationDecedee, 0, this.getPopInitiale());
     }
+
+    public void setTauxContaInterRegion(double tauxContaInterRegion) {
+        this.tauxContaInterRegion = tauxContaInterRegion;
+    }
+
+    public void setTauxContaIntraRegion(double tauxContaIntraRegion) {
+        this.tauxContaIntraRegion = tauxContaIntraRegion;
+    }
     
-    private int contaminationBinomiale(double tauxPropag) {
+    
+    private int contaminationBinomiale(double tauxPropag, int incubation) {
         
         /*
         Contanimation suivant une distribution binomiale inspiré du labo présenté par Anthony.
@@ -215,10 +228,19 @@ public class Region implements Externalizable {
             }
         }
 
-        nbInfectes = (int)(this.getPopInfectee()/(cpt*0.2));
+        if (cpt < incubation){
+            nbInfectes = (int)(this.getPopInfectee()/(cpt*0.2));
+            
+        }else{
+            nbInfectes = (int)(this.getPopInfectee()/(incubation*0.5));
+            
+        }
+        
         if (nbInfectes > this.getPopSaine()){
             nbInfectes = this.getPopSaine();
         }
+        
+        success = (int)(success * (1.0 + this.getTauxContaIntraRegion()));
         return (int)Math.ceil(nbInfectes * tauxPropag + success);
     }
 

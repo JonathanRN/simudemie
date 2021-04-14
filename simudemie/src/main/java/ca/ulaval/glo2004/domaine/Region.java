@@ -58,7 +58,7 @@ public class Region implements Externalizable {
         //Nous ajoutons les nouveaux infectés dans un vecteur pour ajouter une dose de réalisme.
         //Lorsque l'élimination et guérison de la pop ont lieu, ces méthodes s'appliquent sur la 
         //pop infectée d'il y a 2 semaines (inspiré du Covid - période d'incubation d'environ 2 semaines)
-        int nouveauxInfectes = contaminationBinomiale(taux, incubation);
+        int nouveauxInfectes = (int)(contaminationBinomiale(taux, incubation)/2);
         this.listeInfections.add(nouveauxInfectes);
         setPopInfectee(this.getPopInfectee() + nouveauxInfectes);
         setPopSaine(this.getPopSaine() - nouveauxInfectes);

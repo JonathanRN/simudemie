@@ -18,6 +18,7 @@ import java.util.List;
  * @author Mick
  */
 public class Scenario implements Externalizable {
+    
     private String nom;
     private final List<Carte> cartes = new ArrayList<>();
     private int indexCourant;
@@ -35,34 +36,25 @@ public class Scenario implements Externalizable {
         cartes.add(new Carte(carte));
     }
     
-    public void initialisePopInit()
-    {
-        cartes.get(0).initiliserPopInit();
-    }
+    public void initialisePopInit() {cartes.get(0).initiliserPopInit();}
     
-    public void setCallback(ScenarioCallback cb) {
-        this.scenarioCallback = cb;
-    }
+    public void setCallback(ScenarioCallback cb) {this.scenarioCallback = cb;}
     
-    public boolean estCommence() {
-        return estCommence;
-    }
+    public boolean estCommence() {return estCommence;}
     
-    public Carte getCarteJourCourant() {
-        return cartes.get(indexCourant);
-    }
+    public Carte getCarteJourCourant() {return cartes.get(indexCourant);}
     
-    public int getIndexJourCourant() {
-        return indexCourant;
-    }
+    public int getIndexJourCourant() {return indexCourant;}
     
-    public int getTotalJours() {
-        return cartes.size() - 1;
-    }
+    public int getTotalJours() {return cartes.size() - 1;}
     
-    public Carte getCarteDernierJour() {
-        return cartes.get(getTotalJours());
-    }
+    public Carte getCarteDernierJour() {return cartes.get(getTotalJours());}
+    
+    public List<Carte> getListeCartes() {return cartes;}
+    
+    public String getNom() {return nom;}
+    
+    public void setNom(String nom) {this.nom = nom;}
     
     public void chargerJour(int index) {
         indexCourant = index;
@@ -78,26 +70,9 @@ public class Scenario implements Externalizable {
         }
     }
     
-    public List<Carte> getListeCartes() {
-        return cartes;
-    }
+    public void demarrer() {estCommence = true; retourEnDirect();}
     
-    public String getNom() {
-        return nom;
-    }
-    
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-    
-    public void demarrer() {
-        estCommence = true;
-        retourEnDirect();
-    }
-    
-    public void retourEnDirect() {
-        indexCourant = getTotalJours();
-    }
+    public void retourEnDirect() {indexCourant = getTotalJours();}
     
     public int avancerJour() {
         // Ajoute une nouvelle journee selon les nouvelles donnees modifies de la carte courante

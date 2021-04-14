@@ -6,13 +6,13 @@
 package ca.ulaval.glo2004.afficheur.MenuPrincipal.objetsUI;
 
 import ca.ulaval.glo2004.afficheur.MenuPrincipal.objetsUI.ObjetUI;
-import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletScenarioCarte;
+import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletCreationScenarioCarte;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 
 public class ObjetScenarioCarte extends ObjetUI {    
     private int index;
     
-    public ObjetScenarioCarte(OngletScenarioCarte tab, int index, String nom, int valeurPays, int valeurPopulation) {
+    public ObjetScenarioCarte(OngletCreationScenarioCarte tab, int index, String nom, int valeurPays, int valeurPopulation) {
         super(tab);
         initComponents();
         
@@ -21,7 +21,7 @@ public class ObjetScenarioCarte extends ObjetUI {
         setPaysValue(valeurPays);
         setPopulationValue(valeurPopulation);
         
-        MapName.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
+        NomCarte.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
         PaysTotalLabel1.setFont(FontRegister.RobotoLight.deriveFont(12f));
         PaysTotalValue1.setFont(FontRegister.RobotoLight.deriveFont(12f));
         PopulationTotalLabel.setFont(FontRegister.RobotoLight.deriveFont(12f));
@@ -37,7 +37,7 @@ public class ObjetScenarioCarte extends ObjetUI {
     }
     
     public void setNom(String text) {
-        MapName.setText(text);
+        NomCarte.setText(text);
     }
     
     public void setPaysValue(int value) {
@@ -57,12 +57,12 @@ public class ObjetScenarioCarte extends ObjetUI {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MapName = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        NomCarte = new javax.swing.JLabel();
+        InfoObjetPanel = new javax.swing.JPanel();
+        NombrePaysPanel = new javax.swing.JPanel();
         PaysTotalLabel1 = new javax.swing.JLabel();
         PaysTotalValue1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        PopPanel = new javax.swing.JPanel();
         PopulationTotalLabel = new javax.swing.JLabel();
         PopulationTotalValue = new javax.swing.JLabel();
 
@@ -72,17 +72,17 @@ public class ObjetScenarioCarte extends ObjetUI {
         setPreferredSize(new java.awt.Dimension(224, 150));
         setLayout(new java.awt.BorderLayout(0, 25));
 
-        MapName.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
-        MapName.setText("Nom de la carte");
-        MapName.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 25, 0, 0));
-        MapName.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        add(MapName, java.awt.BorderLayout.PAGE_START);
+        NomCarte.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
+        NomCarte.setText("Nom de la carte");
+        NomCarte.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 25, 0, 0));
+        NomCarte.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        add(NomCarte, java.awt.BorderLayout.PAGE_START);
 
-        jPanel1.setEnabled(false);
-        jPanel1.setFocusable(false);
-        jPanel1.setLayout(new java.awt.GridLayout(2, 0));
+        InfoObjetPanel.setEnabled(false);
+        InfoObjetPanel.setFocusable(false);
+        InfoObjetPanel.setLayout(new java.awt.GridLayout(2, 0));
 
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+        NombrePaysPanel.setLayout(new javax.swing.BoxLayout(NombrePaysPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         PaysTotalLabel1.setText("Nombre de pays");
         PaysTotalLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 25, 0, 0));
@@ -90,7 +90,7 @@ public class ObjetScenarioCarte extends ObjetUI {
         PaysTotalLabel1.setMaximumSize(new java.awt.Dimension(150, 20));
         PaysTotalLabel1.setMinimumSize(new java.awt.Dimension(150, 20));
         PaysTotalLabel1.setPreferredSize(new java.awt.Dimension(150, 20));
-        jPanel2.add(PaysTotalLabel1);
+        NombrePaysPanel.add(PaysTotalLabel1);
 
         PaysTotalValue1.setText("0");
         PaysTotalValue1.setToolTipText("");
@@ -99,11 +99,11 @@ public class ObjetScenarioCarte extends ObjetUI {
         PaysTotalValue1.setMaximumSize(new java.awt.Dimension(200, 20));
         PaysTotalValue1.setMinimumSize(new java.awt.Dimension(200, 20));
         PaysTotalValue1.setPreferredSize(new java.awt.Dimension(200, 20));
-        jPanel2.add(PaysTotalValue1);
+        NombrePaysPanel.add(PaysTotalValue1);
 
-        jPanel1.add(jPanel2);
+        InfoObjetPanel.add(NombrePaysPanel);
 
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+        PopPanel.setLayout(new javax.swing.BoxLayout(PopPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         PopulationTotalLabel.setText("Population totale");
         PopulationTotalLabel.setToolTipText("");
@@ -113,7 +113,7 @@ public class ObjetScenarioCarte extends ObjetUI {
         PopulationTotalLabel.setMaximumSize(new java.awt.Dimension(150, 20));
         PopulationTotalLabel.setMinimumSize(new java.awt.Dimension(150, 20));
         PopulationTotalLabel.setPreferredSize(new java.awt.Dimension(150, 20));
-        jPanel3.add(PopulationTotalLabel);
+        PopPanel.add(PopulationTotalLabel);
 
         PopulationTotalValue.setText("0");
         PopulationTotalValue.setToolTipText("");
@@ -122,22 +122,22 @@ public class ObjetScenarioCarte extends ObjetUI {
         PopulationTotalValue.setMaximumSize(new java.awt.Dimension(200, 20));
         PopulationTotalValue.setMinimumSize(new java.awt.Dimension(200, 20));
         PopulationTotalValue.setPreferredSize(new java.awt.Dimension(200, 20));
-        jPanel3.add(PopulationTotalValue);
+        PopPanel.add(PopulationTotalValue);
 
-        jPanel1.add(jPanel3);
+        InfoObjetPanel.add(PopPanel);
 
-        add(jPanel1, java.awt.BorderLayout.CENTER);
+        add(InfoObjetPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel MapName;
+    private javax.swing.JPanel InfoObjetPanel;
+    private javax.swing.JLabel NomCarte;
+    private javax.swing.JPanel NombrePaysPanel;
     private javax.swing.JLabel PaysTotalLabel1;
     private javax.swing.JLabel PaysTotalValue1;
+    private javax.swing.JPanel PopPanel;
     private javax.swing.JLabel PopulationTotalLabel;
     private javax.swing.JLabel PopulationTotalValue;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

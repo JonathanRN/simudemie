@@ -17,42 +17,42 @@ public class ObjetScenario extends ObjetUI {
         super(tab);
         initComponents();
         
-        SimulationName.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
-        Day.setFont(FontRegister.RobotoLight.deriveFont(15.98f));
-        MapName.setFont(FontRegister.RobotoLight.deriveFont(12f));
-        VirusName.setFont(FontRegister.RobotoLight.deriveFont(12f));
+        NomSimulation.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
+        Jour.setFont(FontRegister.RobotoLight.deriveFont(15.98f));
+        NomCarte.setFont(FontRegister.RobotoLight.deriveFont(12f));
+        NomVirus.setFont(FontRegister.RobotoLight.deriveFont(12f));
     }
     
     public String getSimulationName() {
-        return SimulationName.getText();
+        return NomSimulation.getText();
     }
     
     public void setSimulationName(String name) {
-        SimulationName.setText(name);
+        NomSimulation.setText(name);
     }
     
     public void setDays(int jour) {
-        Day.setText("Jour " + jour);
+        Jour.setText("Jour " + jour);
     }
     
     public void setMapName(String name) {
-        MapName.setText(name);
+        NomCarte.setText(name);
     }
     
     public String getMapName() {
-        return MapName.getText();
+        return NomCarte.getText();
     }
     
     public void setVirusName(String name) {
-        VirusName.setText(name);
+        NomVirus.setText(name);
     }
     
     public void setInfectedPercent(float percent) {
-        InfectedProgressBar.setValue((int)percent);
+        InfectionsBar.setValue((int)percent);
     }
     
     public void setCuredPercent(float percent) {
-        CuredProgressBar.setValue((int)percent);
+        SainsBar.setValue((int)percent);
     }
     
 //    public void setImmunedPercent(int percent) {
@@ -60,7 +60,7 @@ public class ObjetScenario extends ObjetUI {
 //    }
     
     public void setDeadPercent(float percent) {
-        DeadProgressBar.setValue((int)percent);
+        MortsBar.setValue((int)percent);
     }
 
     /**
@@ -72,28 +72,28 @@ public class ObjetScenario extends ObjetUI {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SimulationName = new javax.swing.JLabel();
-        Day = new javax.swing.JLabel();
+        NomSimulation = new javax.swing.JLabel();
+        Jour = new javax.swing.JLabel();
         DiagramPanel = new javax.swing.JPanel();
         Bars = new javax.swing.JPanel();
-        InfectedProgressBar = new javax.swing.JProgressBar();
-        CuredProgressBar = new javax.swing.JProgressBar();
-        DeadProgressBar = new javax.swing.JProgressBar();
-        MapName = new javax.swing.JLabel();
-        VirusName = new javax.swing.JLabel();
+        InfectionsBar = new javax.swing.JProgressBar();
+        SainsBar = new javax.swing.JProgressBar();
+        MortsBar = new javax.swing.JProgressBar();
+        NomCarte = new javax.swing.JLabel();
+        NomVirus = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(351, 215));
         setMinimumSize(new java.awt.Dimension(351, 215));
         setPreferredSize(new java.awt.Dimension(351, 215));
 
-        SimulationName.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
-        SimulationName.setText("Nom de la simulation");
+        NomSimulation.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
+        NomSimulation.setText("Nom de la simulation");
 
-        Day.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        Day.setText("Non commencée");
-        Day.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        Day.setBorder(javax.swing.BorderFactory.createEmptyBorder(-1, -1, -1, -1));
-        Day.setIconTextGap(0);
+        Jour.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        Jour.setText("Non commencée");
+        Jour.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        Jour.setBorder(javax.swing.BorderFactory.createEmptyBorder(-1, -1, -1, -1));
+        Jour.setIconTextGap(0);
 
         DiagramPanel.setBackground(new java.awt.Color(59, 66, 82));
         DiagramPanel.setMaximumSize(new java.awt.Dimension(349, 85));
@@ -105,32 +105,32 @@ public class ObjetScenario extends ObjetUI {
         Bars.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 42, 4, 42));
         Bars.setLayout(new java.awt.GridLayout(3, 1));
 
-        InfectedProgressBar.setForeground(new java.awt.Color(191, 97, 106));
-        InfectedProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
-        InfectedProgressBar.setBorderPainted(false);
-        InfectedProgressBar.setString("Infectés");
-        Bars.add(InfectedProgressBar);
+        InfectionsBar.setForeground(new java.awt.Color(191, 97, 106));
+        InfectionsBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
+        InfectionsBar.setBorderPainted(false);
+        InfectionsBar.setString("Infectés");
+        Bars.add(InfectionsBar);
 
-        CuredProgressBar.setForeground(new java.awt.Color(163, 190, 140));
-        CuredProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
-        CuredProgressBar.setBorderPainted(false);
-        CuredProgressBar.setString("Guéris");
-        Bars.add(CuredProgressBar);
+        SainsBar.setForeground(new java.awt.Color(163, 190, 140));
+        SainsBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
+        SainsBar.setBorderPainted(false);
+        SainsBar.setString("Guéris");
+        Bars.add(SainsBar);
 
-        DeadProgressBar.setForeground(new java.awt.Color(180, 142, 173));
-        DeadProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
-        DeadProgressBar.setBorderPainted(false);
-        DeadProgressBar.setString("Morts");
-        Bars.add(DeadProgressBar);
+        MortsBar.setForeground(new java.awt.Color(180, 142, 173));
+        MortsBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
+        MortsBar.setBorderPainted(false);
+        MortsBar.setString("Morts");
+        Bars.add(MortsBar);
 
         DiagramPanel.add(Bars, java.awt.BorderLayout.CENTER);
 
-        MapName.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        MapName.setText("Nom de la carte");
+        NomCarte.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        NomCarte.setText("Nom de la carte");
 
-        VirusName.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
-        VirusName.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        VirusName.setText("Nom du virus");
+        NomVirus.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
+        NomVirus.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        NomVirus.setText("Nom du virus");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -139,14 +139,14 @@ public class ObjetScenario extends ObjetUI {
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(SimulationName, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Day, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NomSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jour, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addComponent(MapName)
+                .addComponent(NomCarte)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(VirusName)
+                .addComponent(NomVirus)
                 .addGap(41, 41, 41))
             .addComponent(DiagramPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -154,15 +154,15 @@ public class ObjetScenario extends ObjetUI {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(SimulationName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(NomSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
-                .addComponent(Day)
+                .addComponent(Jour)
                 .addGap(14, 14, 14)
                 .addComponent(DiagramPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MapName)
-                    .addComponent(VirusName))
+                    .addComponent(NomCarte)
+                    .addComponent(NomVirus))
                 .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -170,14 +170,14 @@ public class ObjetScenario extends ObjetUI {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Bars;
-    private javax.swing.JProgressBar CuredProgressBar;
-    private javax.swing.JLabel Day;
-    private javax.swing.JProgressBar DeadProgressBar;
     private javax.swing.JPanel DiagramPanel;
-    private javax.swing.JProgressBar InfectedProgressBar;
-    private javax.swing.JLabel MapName;
-    private javax.swing.JLabel SimulationName;
-    private javax.swing.JLabel VirusName;
+    private javax.swing.JProgressBar InfectionsBar;
+    private javax.swing.JLabel Jour;
+    private javax.swing.JProgressBar MortsBar;
+    private javax.swing.JLabel NomCarte;
+    private javax.swing.JLabel NomSimulation;
+    private javax.swing.JLabel NomVirus;
+    private javax.swing.JProgressBar SainsBar;
     // End of variables declaration//GEN-END:variables
   
 }

@@ -41,7 +41,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         gestionnaire.setCallback(this);
         
         initComponents();
-        SimulationTabs.setSimulation(this);
+        SimulationMenuGauche.setSimulation(this);
         toggleSimulationTabs(false);
         
         initBoutonsGeneraux();
@@ -51,14 +51,14 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         
         //NomPays.setFont(FontRegister.RobotoLight.deriveFont(18f));
         FFLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
-        StartLabel1.setFont(FontRegister.RobotoLight.deriveFont(15f));
-        StartLabel2.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        CommenceLabel.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        CommenceLabel2.setFont(FontRegister.RobotoLight.deriveFont(15f));
         
         SimulationPanel.setSimulation(this);
         
         boolean commence = getScenario().estCommence();
         SliderJour.setVisible(commence);
-        StartPanel.setVisible(!commence);
+        CommencePanel.setVisible(!commence);
         
         if (commence) {
             SliderJour.setMaximum(getScenario().getTotalJours());
@@ -73,12 +73,12 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         ToggleLiens.setIcon("/icons/icons8_chain_25px.png");
         ToggleCouleurs.setIcon("/icons/simulation/icons8_radar_plot_25px_inf.png");
         BoutonPhoto.setIcon("/icons/simulation/icons8_unsplash_25px.png");
-        Help.setIcon("/icons/simulation/icons8_help_25px.png");
-        HomeButton.setIcon("/icons/icons8_home_25px_1.png");
+        AideBouton.setIcon("/icons/simulation/icons8_help_25px.png");
+        HomeBouton.setIcon("/icons/icons8_home_25px_1.png");
     }
     
     public void toggleSimulationTabs(boolean actif) {
-        SimulationTabs.setVisible(actif);
+        SimulationMenuGauche.setVisible(actif);
         //NomPays.setVisible(actif);
     }
     
@@ -87,7 +87,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     }
     
     public SimulationPanelGauche getSimulationTabs() {
-        return SimulationTabs;
+        return SimulationMenuGauche;
     }
     
     public ZoomInfoPanel getZoomPopup() {
@@ -150,7 +150,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         String path = "/icons/";
         path += estEnDirect ? "pause_button_35px" : "direct_button_35px" ;
         path += mouseOverDirect ? "_highlight.png" : ".png";
-        DirectIcon.setIcon(new ImageIcon(getClass().getResource(path)));
+        PlayPauseIcon.setIcon(new ImageIcon(getClass().getResource(path)));
     }
     
     private void updateFastForwardIcon() {
@@ -182,8 +182,8 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     @Override
     public void onChargerJour(int jour) {
         // On recharge le UI dans le cas que ca change
-        if (SimulationTabs.isVisible()) {
-            SimulationTabs.loadMesures();
+        if (SimulationMenuGauche.isVisible()) {
+            SimulationMenuGauche.loadMesures();
         }
     }
     
@@ -198,29 +198,29 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
 
         ZoomInfoParent = new javax.swing.JPanel();
         ZoomInfo = new ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel();
-        StartParent = new javax.swing.JPanel();
-        StartPanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
-        StartLabel1 = new javax.swing.JLabel();
-        icon = new javax.swing.JLabel();
-        StartLabel2 = new javax.swing.JLabel();
+        CommenceParent = new javax.swing.JPanel();
+        CommencePanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
+        CommenceLabel = new javax.swing.JLabel();
+        CommenceIcon = new javax.swing.JLabel();
+        CommenceLabel2 = new javax.swing.JLabel();
         SliderParent = new javax.swing.JPanel();
         Slider = new javax.swing.JPanel();
         SliderJour = new javax.swing.JSlider();
-        Boutons = new javax.swing.JPanel();
-        DirectIcon = new javax.swing.JLabel();
+        BoutonsPanel = new javax.swing.JPanel();
+        PlayPauseIcon = new javax.swing.JLabel();
         FF = new javax.swing.JPanel();
         FastForward = new javax.swing.JLabel();
         FFLabel = new javax.swing.JLabel();
-        TabsParent = new javax.swing.JPanel();
-        SimulationTabs = new ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche();
+        MenuGaucheParent = new javax.swing.JPanel();
+        SimulationMenuGauche = new ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche();
         MenuDroitParent = new javax.swing.JPanel();
-        SidePanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
+        SimulationMenuDroit = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         TogglePaysRegion = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         ToggleLiens = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         ToggleCouleurs = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         BoutonPhoto = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
-        Help = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
-        HomeButton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
+        AideBouton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
+        HomeBouton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         SimulationPanel = new ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
@@ -247,48 +247,48 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
 
         add(ZoomInfoParent);
 
-        StartParent.setOpaque(false);
+        CommenceParent.setOpaque(false);
 
-        StartPanel.setMaximumSize(new java.awt.Dimension(715, 50));
-        StartPanel.setMinimumSize(new java.awt.Dimension(715, 50));
-        StartPanel.setPreferredSize(new java.awt.Dimension(715, 50));
-        StartPanel.setLayout(new javax.swing.BoxLayout(StartPanel, javax.swing.BoxLayout.X_AXIS));
+        CommencePanel.setMaximumSize(new java.awt.Dimension(715, 50));
+        CommencePanel.setMinimumSize(new java.awt.Dimension(715, 50));
+        CommencePanel.setPreferredSize(new java.awt.Dimension(715, 50));
+        CommencePanel.setLayout(new javax.swing.BoxLayout(CommencePanel, javax.swing.BoxLayout.X_AXIS));
 
-        StartLabel1.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        StartLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        StartLabel1.setText("Appuyez sur une région pour choisir la région initialement infectée, puis appuyez sur");
-        StartLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 10));
-        StartPanel.add(StartLabel1);
+        CommenceLabel.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        CommenceLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CommenceLabel.setText("Appuyez sur une région pour choisir la région initialement infectée, puis appuyez sur");
+        CommenceLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        CommencePanel.add(CommenceLabel);
 
-        icon.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/direct_button_35px.png"))); // NOI18N
-        StartPanel.add(icon);
+        CommenceIcon.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        CommenceIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/direct_button_35px.png"))); // NOI18N
+        CommencePanel.add(CommenceIcon);
 
-        StartLabel2.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
-        StartLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        StartLabel2.setText("pour démarrer la simulation.");
-        StartLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
-        StartPanel.add(StartLabel2);
-        StartLabel2.getAccessibleContext().setAccessibleName("");
+        CommenceLabel2.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        CommenceLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        CommenceLabel2.setText("pour démarrer la simulation.");
+        CommenceLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 0));
+        CommencePanel.add(CommenceLabel2);
+        CommenceLabel2.getAccessibleContext().setAccessibleName("");
 
-        javax.swing.GroupLayout StartParentLayout = new javax.swing.GroupLayout(StartParent);
-        StartParent.setLayout(StartParentLayout);
-        StartParentLayout.setHorizontalGroup(
-            StartParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StartParentLayout.createSequentialGroup()
+        javax.swing.GroupLayout CommenceParentLayout = new javax.swing.GroupLayout(CommenceParent);
+        CommenceParent.setLayout(CommenceParentLayout);
+        CommenceParentLayout.setHorizontalGroup(
+            CommenceParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CommenceParentLayout.createSequentialGroup()
                 .addContainerGap(138, Short.MAX_VALUE)
-                .addComponent(StartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CommencePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(139, Short.MAX_VALUE))
         );
-        StartParentLayout.setVerticalGroup(
-            StartParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(StartParentLayout.createSequentialGroup()
+        CommenceParentLayout.setVerticalGroup(
+            CommenceParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CommenceParentLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(StartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CommencePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(664, Short.MAX_VALUE))
         );
 
-        add(StartParent);
+        add(CommenceParent);
 
         SliderParent.setOpaque(false);
         SliderParent.setLayout(new java.awt.BorderLayout());
@@ -309,27 +309,27 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         });
         Slider.add(SliderJour, java.awt.BorderLayout.CENTER);
 
-        Boutons.setToolTipText("");
-        Boutons.setMinimumSize(new java.awt.Dimension(35, 70));
-        Boutons.setOpaque(false);
-        Boutons.setPreferredSize(new java.awt.Dimension(80, 70));
-        Boutons.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
+        BoutonsPanel.setToolTipText("");
+        BoutonsPanel.setMinimumSize(new java.awt.Dimension(35, 70));
+        BoutonsPanel.setOpaque(false);
+        BoutonsPanel.setPreferredSize(new java.awt.Dimension(80, 70));
+        BoutonsPanel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
-        DirectIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        DirectIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/direct_button_35px.png"))); // NOI18N
-        DirectIcon.setToolTipText("Retour en direct");
-        DirectIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+        PlayPauseIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        PlayPauseIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/direct_button_35px.png"))); // NOI18N
+        PlayPauseIcon.setToolTipText("Retour en direct");
+        PlayPauseIcon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                DirectIconMouseEntered(evt);
+                PlayPauseIconMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                DirectIconMouseExited(evt);
+                PlayPauseIconMouseExited(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                DirectIconMouseReleased(evt);
+                PlayPauseIconMouseReleased(evt);
             }
         });
-        Boutons.add(DirectIcon);
+        BoutonsPanel.add(PlayPauseIcon);
 
         FF.setOpaque(false);
         FF.setPreferredSize(new java.awt.Dimension(50, 70));
@@ -358,65 +358,65 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         FFLabel.setPreferredSize(new java.awt.Dimension(14, 20));
         FF.add(FFLabel, java.awt.BorderLayout.PAGE_START);
 
-        Boutons.add(FF);
+        BoutonsPanel.add(FF);
 
-        Slider.add(Boutons, java.awt.BorderLayout.EAST);
+        Slider.add(BoutonsPanel, java.awt.BorderLayout.EAST);
 
         SliderParent.add(Slider, java.awt.BorderLayout.SOUTH);
 
         add(SliderParent);
 
-        TabsParent.setBackground(new java.awt.Color(46, 52, 64));
-        TabsParent.setOpaque(false);
+        MenuGaucheParent.setBackground(new java.awt.Color(46, 52, 64));
+        MenuGaucheParent.setOpaque(false);
 
-        javax.swing.GroupLayout TabsParentLayout = new javax.swing.GroupLayout(TabsParent);
-        TabsParent.setLayout(TabsParentLayout);
-        TabsParentLayout.setHorizontalGroup(
-            TabsParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabsParentLayout.createSequentialGroup()
+        javax.swing.GroupLayout MenuGaucheParentLayout = new javax.swing.GroupLayout(MenuGaucheParent);
+        MenuGaucheParent.setLayout(MenuGaucheParentLayout);
+        MenuGaucheParentLayout.setHorizontalGroup(
+            MenuGaucheParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MenuGaucheParentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(SimulationTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SimulationMenuGauche, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(730, Short.MAX_VALUE))
         );
-        TabsParentLayout.setVerticalGroup(
-            TabsParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TabsParentLayout.createSequentialGroup()
+        MenuGaucheParentLayout.setVerticalGroup(
+            MenuGaucheParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MenuGaucheParentLayout.createSequentialGroup()
                 .addContainerGap(196, Short.MAX_VALUE)
-                .addComponent(SimulationTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SimulationMenuGauche, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(196, Short.MAX_VALUE))
         );
 
-        add(TabsParent);
+        add(MenuGaucheParent);
 
         MenuDroitParent.setOpaque(false);
 
-        SidePanel.setMaximumSize(new java.awt.Dimension(100, 200));
-        SidePanel.setMinimumSize(new java.awt.Dimension(100, 200));
-        SidePanel.setPreferredSize(new java.awt.Dimension(50, 200));
-        SidePanel.setLayout(new java.awt.GridLayout(6, 1, 0, 10));
+        SimulationMenuDroit.setMaximumSize(new java.awt.Dimension(100, 200));
+        SimulationMenuDroit.setMinimumSize(new java.awt.Dimension(100, 200));
+        SimulationMenuDroit.setPreferredSize(new java.awt.Dimension(50, 200));
+        SimulationMenuDroit.setLayout(new java.awt.GridLayout(6, 1, 0, 10));
 
         TogglePaysRegion.setToolTipText("Afficher infomations pays/régions (Q)");
-        SidePanel.add(TogglePaysRegion);
+        SimulationMenuDroit.add(TogglePaysRegion);
 
         ToggleLiens.setToolTipText("Afficher les liens (W)");
-        SidePanel.add(ToggleLiens);
+        SimulationMenuDroit.add(ToggleLiens);
 
         ToggleCouleurs.setToolTipText("Changer les couleurs visuelles (E)");
-        SidePanel.add(ToggleCouleurs);
+        SimulationMenuDroit.add(ToggleCouleurs);
 
         BoutonPhoto.setToolTipText("Prendre une photo de la carte courante (S)");
-        SidePanel.add(BoutonPhoto);
+        SimulationMenuDroit.add(BoutonPhoto);
 
-        Help.setToolTipText("Afficher l'aide");
-        SidePanel.add(Help);
+        AideBouton.setToolTipText("Afficher l'aide");
+        SimulationMenuDroit.add(AideBouton);
 
-        HomeButton.setToolTipText("Quitter la simulation (ESC)");
-        HomeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        HomeBouton.setToolTipText("Quitter la simulation (ESC)");
+        HomeBouton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                HomeButtonMouseReleased(evt);
+                HomeBoutonMouseReleased(evt);
             }
         });
-        SidePanel.add(HomeButton);
+        SimulationMenuDroit.add(HomeBouton);
 
         javax.swing.GroupLayout MenuDroitParentLayout = new javax.swing.GroupLayout(MenuDroitParent);
         MenuDroitParent.setLayout(MenuDroitParentLayout);
@@ -424,14 +424,14 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
             MenuDroitParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuDroitParentLayout.createSequentialGroup()
                 .addContainerGap(1024, Short.MAX_VALUE)
-                .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SimulationMenuDroit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         MenuDroitParentLayout.setVerticalGroup(
             MenuDroitParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuDroitParentLayout.createSequentialGroup()
                 .addContainerGap(196, Short.MAX_VALUE)
-                .addComponent(SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SimulationMenuDroit, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(196, Short.MAX_VALUE))
         );
 
@@ -469,7 +469,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
 
     private void SimulationPanelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SimulationPanelKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            DirectIconMouseReleased(null);
+            PlayPauseIconMouseReleased(null);
         }
         
         if (evt.getKeyCode() == KeyEvent.VK_RIGHT && !estEnDirect) {
@@ -488,22 +488,22 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         }
     }//GEN-LAST:event_SimulationPanelKeyReleased
 
-    private void DirectIconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DirectIconMouseEntered
+    private void PlayPauseIconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlayPauseIconMouseEntered
         mouseOverDirect = true;
         updateDirectIcon();
-    }//GEN-LAST:event_DirectIconMouseEntered
+    }//GEN-LAST:event_PlayPauseIconMouseEntered
 
-    private void DirectIconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DirectIconMouseExited
+    private void PlayPauseIconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlayPauseIconMouseExited
         mouseOverDirect = false;
         updateDirectIcon();
-    }//GEN-LAST:event_DirectIconMouseExited
+    }//GEN-LAST:event_PlayPauseIconMouseExited
 
-    private void DirectIconMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DirectIconMouseReleased
+    private void PlayPauseIconMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlayPauseIconMouseReleased
         setDirect(!estEnDirect);
         
         if (!getScenario().estCommence()) {
             SliderJour.setVisible(true);
-            StartPanel.setVisible(false);
+            CommencePanel.setVisible(false);
             
             getPanel().getAfficheur().onSimulationDemaree();
         }
@@ -517,7 +517,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         if (estEnDirect) {
             SliderJour.setValue(SliderJour.getMaximum());
         }
-    }//GEN-LAST:event_DirectIconMouseReleased
+    }//GEN-LAST:event_PlayPauseIconMouseReleased
 
     private void FastForwardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FastForwardMouseEntered
         mouseOverFF = true;
@@ -533,37 +533,37 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         setVitesse(vitesse + 1);
     }//GEN-LAST:event_FastForwardMouseReleased
 
-    private void HomeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeButtonMouseReleased
+    private void HomeBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeBoutonMouseReleased
         this.HomeButtonReleased(evt);
-    }//GEN-LAST:event_HomeButtonMouseReleased
+    }//GEN-LAST:event_HomeBoutonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton AideBouton;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton BoutonPhoto;
-    private javax.swing.JPanel Boutons;
-    private javax.swing.JLabel DirectIcon;
+    private javax.swing.JPanel BoutonsPanel;
+    private javax.swing.JLabel CommenceIcon;
+    private javax.swing.JLabel CommenceLabel;
+    private javax.swing.JLabel CommenceLabel2;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi CommencePanel;
+    private javax.swing.JPanel CommenceParent;
     private javax.swing.JPanel FF;
     private javax.swing.JLabel FFLabel;
     private javax.swing.JLabel FastForward;
-    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton Help;
-    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HomeButton;
+    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HomeBouton;
     private javax.swing.JPanel MenuDroitParent;
-    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi SidePanel;
+    private javax.swing.JPanel MenuGaucheParent;
+    private javax.swing.JLabel PlayPauseIcon;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi SimulationMenuDroit;
+    private ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche SimulationMenuGauche;
     private ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanel SimulationPanel;
-    private ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche SimulationTabs;
     private javax.swing.JPanel Slider;
     private javax.swing.JSlider SliderJour;
     private javax.swing.JPanel SliderParent;
-    private javax.swing.JLabel StartLabel1;
-    private javax.swing.JLabel StartLabel2;
-    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi StartPanel;
-    private javax.swing.JPanel StartParent;
-    private javax.swing.JPanel TabsParent;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton ToggleCouleurs;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton ToggleLiens;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton TogglePaysRegion;
     private ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel ZoomInfo;
     private javax.swing.JPanel ZoomInfoParent;
-    private javax.swing.JLabel icon;
     // End of variables declaration//GEN-END:variables
 }

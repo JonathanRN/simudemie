@@ -5,6 +5,8 @@
  */
 package ca.ulaval.glo2004.afficheur.MenuPrincipal;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jonathan
@@ -72,7 +74,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
 
     private void TabMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabMenuMousePressed
         if (TabMenu.getSelectedIndex() == TabMenu.getTabCount() - 1) {
-            System.exit(0);
+             System.exit(0);;
         }
     }//GEN-LAST:event_TabMenuMousePressed
 

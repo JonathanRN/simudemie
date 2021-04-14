@@ -34,7 +34,7 @@
         <Property name="text" type="java.lang.String" value="Informations Pays"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JPanel" name="PaysNomPanel">
+    <Container class="javax.swing.JPanel" name="NomPaysPanel">
       <Properties>
         <Property name="opaque" type="boolean" value="false"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -74,7 +74,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="PopTotalePanel">
+    <Container class="javax.swing.JPanel" name="PopTotalePaysPanel">
       <Properties>
         <Property name="opaque" type="boolean" value="false"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -99,7 +99,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="RegionNomPanel">
+    <Container class="javax.swing.JPanel" name="NomRegionPanel">
       <Properties>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
@@ -136,7 +136,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="PopPanel">
+    <Container class="javax.swing.JPanel" name="PopRegionPanel">
       <Properties>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
@@ -145,7 +145,7 @@
         <Property name="horizontalGap" type="int" value="5"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="PopLabel">
+        <Component class="javax.swing.JLabel" name="PopRegionLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pop. r&#xe9;gion"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>

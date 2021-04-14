@@ -17,11 +17,11 @@ public class SimulationBouton extends PanelArrondi {
 
     public SimulationBouton() {
         initComponents();
-        setBackground(new Color(0, 0, 0, 0));
+        setBackground(Couleurs.invisible);
     }
     
     public void setIcon(String path) {
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));
+        BoutonLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(path)));
     }
 
     /**
@@ -33,7 +33,7 @@ public class SimulationBouton extends PanelArrondi {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        BoutonLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(90, 95, 104));
         setMaximumSize(new java.awt.Dimension(50, 50));
@@ -49,9 +49,9 @@ public class SimulationBouton extends PanelArrondi {
         });
         setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_add_new_25px.png"))); // NOI18N
-        add(jLabel1, java.awt.BorderLayout.CENTER);
+        BoutonLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BoutonLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_add_new_25px.png"))); // NOI18N
+        add(BoutonLabel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
@@ -59,11 +59,11 @@ public class SimulationBouton extends PanelArrondi {
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
-        setBackground(new Color(0, 0, 0, 0));
+        setBackground(Couleurs.invisible);
     }//GEN-LAST:event_formMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel BoutonLabel;
     // End of variables declaration//GEN-END:variables
 }

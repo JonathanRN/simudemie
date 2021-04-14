@@ -11,7 +11,7 @@ import ca.ulaval.glo2004.afficheur.MenuPrincipal.objetsUI.ObjetScenarioCarte;
  *
  * @author Jonathan
  */
-public class OngletScenarioCarte extends OngletUI {
+public class OngletCreationScenarioCarte extends OngletUI {
 
     public int getIndexCourant() {
         int index = -1;

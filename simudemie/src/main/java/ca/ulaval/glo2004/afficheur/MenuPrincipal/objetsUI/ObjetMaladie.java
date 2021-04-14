@@ -15,42 +15,42 @@ public class ObjetMaladie extends ObjetUI {
         super(tab);
         initComponents();
         
-        MaladieNom.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
+        NomMaladie.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
         setInfectedProgressBar(0.0d);
         setCuredProgressBar(0.0d);
         setDeadProgressBar(0.0d);
     }
     
     public void setNom(String nom) {
-        MaladieNom.setText(nom);
+        NomMaladie.setText(nom);
     }
     
     public String getNom() {
-        return MaladieNom.getText();
+        return NomMaladie.getText();
     }
     
     public void setInfectedProgressBar(double value) {
-        InfectedProgressBar.setValue(Math.round((float) value));
+        InfectionsBars.setValue(Math.round((float) value));
     }
     
     public void setCuredProgressBar(double value) {
-        CuredProgressBar.setValue(Math.round((float) value));
+        SainsBar.setValue(Math.round((float) value));
     }
     
     public void setDeadProgressBar(double value) {
-        DeadProgressBar.setValue(Math.round((float) value));
+        MortsBar.setValue(Math.round((float) value));
     }
     
     public double getInfectionRate() {
-        return InfectedProgressBar.getValue();
+        return InfectionsBars.getValue();
     }
     
     public double getCuredRate() {
-        return CuredProgressBar.getValue();
+        return SainsBar.getValue();
     }
     
     public double getDeadRate() {
-        return DeadProgressBar.getValue();
+        return MortsBar.getValue();
     }
     
     /**
@@ -62,20 +62,20 @@ public class ObjetMaladie extends ObjetUI {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MaladieNom = new javax.swing.JLabel();
+        NomMaladie = new javax.swing.JLabel();
         DiagramPanel = new javax.swing.JPanel();
         Bars = new javax.swing.JPanel();
-        InfectedProgressBar = new javax.swing.JProgressBar();
-        CuredProgressBar = new javax.swing.JProgressBar();
-        DeadProgressBar = new javax.swing.JProgressBar();
+        InfectionsBars = new javax.swing.JProgressBar();
+        SainsBar = new javax.swing.JProgressBar();
+        MortsBar = new javax.swing.JProgressBar();
 
         setMaximumSize(new java.awt.Dimension(351, 215));
         setMinimumSize(new java.awt.Dimension(351, 215));
         setPreferredSize(new java.awt.Dimension(351, 215));
 
-        MaladieNom.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
-        MaladieNom.setText("Nom de la maladie");
-        MaladieNom.setBorder(javax.swing.BorderFactory.createEmptyBorder(19, 42, 0, 0));
+        NomMaladie.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
+        NomMaladie.setText("Nom de la maladie");
+        NomMaladie.setBorder(javax.swing.BorderFactory.createEmptyBorder(19, 42, 0, 0));
 
         DiagramPanel.setBackground(new java.awt.Color(59, 66, 82));
         DiagramPanel.setMaximumSize(new java.awt.Dimension(349, 85));
@@ -86,26 +86,26 @@ public class ObjetMaladie extends ObjetUI {
         Bars.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 42, 10, 42));
         Bars.setLayout(new java.awt.GridLayout(3, 0, 0, 10));
 
-        InfectedProgressBar.setForeground(new java.awt.Color(191, 97, 106));
-        InfectedProgressBar.setToolTipText("Taux d'infection");
-        InfectedProgressBar.setValue(25);
-        InfectedProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
-        InfectedProgressBar.setBorderPainted(false);
-        Bars.add(InfectedProgressBar);
+        InfectionsBars.setForeground(new java.awt.Color(191, 97, 106));
+        InfectionsBars.setToolTipText("Taux d'infection");
+        InfectionsBars.setValue(25);
+        InfectionsBars.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
+        InfectionsBars.setBorderPainted(false);
+        Bars.add(InfectionsBars);
 
-        CuredProgressBar.setForeground(new java.awt.Color(163, 190, 140));
-        CuredProgressBar.setToolTipText("Taux de guérison");
-        CuredProgressBar.setValue(100);
-        CuredProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
-        CuredProgressBar.setBorderPainted(false);
-        Bars.add(CuredProgressBar);
+        SainsBar.setForeground(new java.awt.Color(163, 190, 140));
+        SainsBar.setToolTipText("Taux de guérison");
+        SainsBar.setValue(100);
+        SainsBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
+        SainsBar.setBorderPainted(false);
+        Bars.add(SainsBar);
 
-        DeadProgressBar.setForeground(new java.awt.Color(180, 142, 173));
-        DeadProgressBar.setToolTipText("Taux de mortalité");
-        DeadProgressBar.setValue(50);
-        DeadProgressBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
-        DeadProgressBar.setBorderPainted(false);
-        Bars.add(DeadProgressBar);
+        MortsBar.setForeground(new java.awt.Color(180, 142, 173));
+        MortsBar.setToolTipText("Taux de mortalité");
+        MortsBar.setValue(50);
+        MortsBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
+        MortsBar.setBorderPainted(false);
+        Bars.add(MortsBar);
 
         DiagramPanel.add(Bars, java.awt.BorderLayout.CENTER);
 
@@ -114,14 +114,14 @@ public class ObjetMaladie extends ObjetUI {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(MaladieNom, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(NomMaladie, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(DiagramPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(MaladieNom)
+                .addComponent(NomMaladie)
                 .addGap(28, 28, 28)
                 .addComponent(DiagramPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -131,10 +131,10 @@ public class ObjetMaladie extends ObjetUI {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Bars;
-    private javax.swing.JProgressBar CuredProgressBar;
-    private javax.swing.JProgressBar DeadProgressBar;
     private javax.swing.JPanel DiagramPanel;
-    private javax.swing.JProgressBar InfectedProgressBar;
-    private javax.swing.JLabel MaladieNom;
+    private javax.swing.JProgressBar InfectionsBars;
+    private javax.swing.JProgressBar MortsBar;
+    private javax.swing.JLabel NomMaladie;
+    private javax.swing.JProgressBar SainsBar;
     // End of variables declaration//GEN-END:variables
 }

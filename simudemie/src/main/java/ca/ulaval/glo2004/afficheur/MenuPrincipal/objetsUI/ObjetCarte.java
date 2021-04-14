@@ -15,19 +15,19 @@ public class ObjetCarte extends ObjetUI {
         super(tab);
         initComponents();
         
-        MapName.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
+        NomCarte.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
     }
     
     public void setMapName(String name) {
-        MapName.setText(name);
+        NomCarte.setText(name);
     }
     
     public String getNomCarte() {
-        return MapName.getText();
+        return NomCarte.getText();
     }
     
     public void setMapImage(ImageIcon image) {
-        MapImage.setIcon(image);
+        ImageCarte.setIcon(image);
     }
 
     /**
@@ -39,8 +39,8 @@ public class ObjetCarte extends ObjetUI {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MapName = new javax.swing.JLabel();
-        MapImage = new javax.swing.JLabel();
+        NomCarte = new javax.swing.JLabel();
+        ImageCarte = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(19, 0, 19, 0));
         setMaximumSize(new java.awt.Dimension(351, 215));
@@ -48,19 +48,19 @@ public class ObjetCarte extends ObjetUI {
         setPreferredSize(new java.awt.Dimension(351, 215));
         setLayout(new java.awt.BorderLayout());
 
-        MapName.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
-        MapName.setText("Nom de la carte");
-        MapName.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 42, 0, 0));
-        add(MapName, java.awt.BorderLayout.NORTH);
+        NomCarte.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
+        NomCarte.setText("Nom de la carte");
+        NomCarte.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 42, 0, 0));
+        add(NomCarte, java.awt.BorderLayout.NORTH);
 
-        MapImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        MapImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/carte_exemple.png"))); // NOI18N
-        add(MapImage, java.awt.BorderLayout.CENTER);
+        ImageCarte.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ImageCarte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/carte_exemple.png"))); // NOI18N
+        add(ImageCarte, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel MapImage;
-    private javax.swing.JLabel MapName;
+    private javax.swing.JLabel ImageCarte;
+    private javax.swing.JLabel NomCarte;
     // End of variables declaration//GEN-END:variables
 }

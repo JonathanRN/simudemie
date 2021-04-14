@@ -36,8 +36,8 @@ public class StatsCartePanel extends javax.swing.JPanel {
         try {
             StatsLabel.setFont(FontRegister.RobotoThin.deriveFont(21f));
             Main.setBackground(Couleurs.pannelArrondi);
-            ModifyButton.setBackground(Couleurs.pannelArrondi);
-            ModifyButton.setFont(FontRegister.RobotoRegular.deriveFont(15f));
+            ModifieBouton.setBackground(Couleurs.pannelArrondi);
+            ModifieBouton.setFont(FontRegister.RobotoRegular.deriveFont(15f));
         }
         catch(Exception e) {
         }
@@ -75,7 +75,7 @@ public class StatsCartePanel extends javax.swing.JPanel {
         br.setMaximumBarWidth(0.2);
         br.setItemMargin(-1);
         br.setBarPainter(new StandardBarPainter());
-        br.setSeriesPaint(0, new Color(163,190,140));
+        br.setSeriesPaint(0, Couleurs.sains);
 
         ChartPanel chartPanel = new ChartPanel(stats);
         chartPanel.setPopupMenu(null);
@@ -98,11 +98,11 @@ public class StatsCartePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         Main = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
-        StatsHeader = new javax.swing.JPanel();
+        TitreStatsPanel = new javax.swing.JPanel();
         StatsLabel = new javax.swing.JLabel();
         StatsPanel = new javax.swing.JPanel();
-        Buttons = new javax.swing.JPanel();
-        ModifyButton = new javax.swing.JButton();
+        BoutonsPanel = new javax.swing.JPanel();
+        ModifieBouton = new javax.swing.JButton();
 
         setOpaque(false);
         setLayout(new java.awt.BorderLayout(0, 25));
@@ -110,14 +110,14 @@ public class StatsCartePanel extends javax.swing.JPanel {
         Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
         Main.setLayout(new java.awt.BorderLayout(0, 10));
 
-        StatsHeader.setOpaque(false);
-        StatsHeader.setLayout(new java.awt.BorderLayout());
+        TitreStatsPanel.setOpaque(false);
+        TitreStatsPanel.setLayout(new java.awt.BorderLayout());
 
         StatsLabel.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
         StatsLabel.setText("Statistiques");
-        StatsHeader.add(StatsLabel, java.awt.BorderLayout.CENTER);
+        TitreStatsPanel.add(StatsLabel, java.awt.BorderLayout.CENTER);
 
-        Main.add(StatsHeader, java.awt.BorderLayout.NORTH);
+        Main.add(TitreStatsPanel, java.awt.BorderLayout.NORTH);
 
         StatsPanel.setOpaque(false);
         StatsPanel.setLayout(new java.awt.BorderLayout());
@@ -125,37 +125,37 @@ public class StatsCartePanel extends javax.swing.JPanel {
 
         add(Main, java.awt.BorderLayout.CENTER);
 
-        Buttons.setOpaque(false);
-        Buttons.setPreferredSize(new java.awt.Dimension(100, 50));
-        Buttons.setLayout(new java.awt.GridLayout(1, 0, 25, 0));
+        BoutonsPanel.setOpaque(false);
+        BoutonsPanel.setPreferredSize(new java.awt.Dimension(100, 50));
+        BoutonsPanel.setLayout(new java.awt.GridLayout(1, 0, 25, 0));
 
-        ModifyButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_pencil_20px.png"))); // NOI18N
-        ModifyButton.setText("Modifier");
-        ModifyButton.setToolTipText("Modifier la carte courante");
-        ModifyButton.setFocusable(false);
-        ModifyButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        ModifieBouton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_pencil_20px.png"))); // NOI18N
+        ModifieBouton.setText("Modifier");
+        ModifieBouton.setToolTipText("Modifier la carte courante");
+        ModifieBouton.setFocusable(false);
+        ModifieBouton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                ModifyButtonMouseReleased(evt);
+                ModifieBoutonMouseReleased(evt);
             }
         });
-        Buttons.add(ModifyButton);
+        BoutonsPanel.add(ModifieBouton);
 
-        add(Buttons, java.awt.BorderLayout.SOUTH);
+        add(BoutonsPanel, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ModifyButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifyButtonMouseReleased
+    private void ModifieBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifieBoutonMouseReleased
         if(onglet.getCourant() != null) {
             onglet.goToCreationCarte();
         }
-    }//GEN-LAST:event_ModifyButtonMouseReleased
+    }//GEN-LAST:event_ModifieBoutonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Buttons;
+    private javax.swing.JPanel BoutonsPanel;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi Main;
-    private javax.swing.JButton ModifyButton;
-    private javax.swing.JPanel StatsHeader;
+    private javax.swing.JButton ModifieBouton;
     private javax.swing.JLabel StatsLabel;
     private javax.swing.JPanel StatsPanel;
+    private javax.swing.JPanel TitreStatsPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -54,7 +54,7 @@ public class ToggleBouton extends PanelArrondi {
     }
     
     public void setIcon(String path) {
-        jLabel1.setIcon(new ImageIcon(getClass().getResource(path)));
+        BoutonLabel.setIcon(new ImageIcon(getClass().getResource(path)));
     }
     
     public void setToggle(boolean toggle) {
@@ -78,7 +78,7 @@ public class ToggleBouton extends PanelArrondi {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        BoutonLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(90, 95, 104));
         setMaximumSize(new java.awt.Dimension(50, 50));
@@ -97,9 +97,9 @@ public class ToggleBouton extends PanelArrondi {
         });
         setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_cursor_25px.png"))); // NOI18N
-        add(jLabel1, java.awt.BorderLayout.CENTER);
+        BoutonLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BoutonLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_cursor_25px.png"))); // NOI18N
+        add(BoutonLabel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
@@ -132,6 +132,6 @@ public class ToggleBouton extends PanelArrondi {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel BoutonLabel;
     // End of variables declaration//GEN-END:variables
 }

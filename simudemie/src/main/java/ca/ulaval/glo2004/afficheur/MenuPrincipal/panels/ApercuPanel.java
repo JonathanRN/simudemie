@@ -19,7 +19,6 @@ import javax.imageio.ImageIO;
  * @author Jonathan
  */
 public class ApercuPanel extends PanelArrondi {
-
     /**
      * Creates new form ScenarioMapPanel
      */
@@ -28,30 +27,30 @@ public class ApercuPanel extends PanelArrondi {
         
         setBackground(Couleurs.pannelArrondi);
         try {
-            MapNameLabel.setFont(FontRegister.RobotoThin.deriveFont(21f));
+            NomCarteLabel.setFont(FontRegister.RobotoThin.deriveFont(21f));
             AideLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         }
         catch(Exception e) {
         }
         
         // Pas besoin en mode creation carte
-        BoutonExport.setVisible(false);
+        ExportCarteBouton.setVisible(false);
         
         setPreviewVisibility(false);
     }
     
     public void setPreviewVisibility(boolean toggle) {
-        ContentParent.setVisible(toggle);
+        ConteneurApercuCartePanel.setVisible(toggle);
     }
     
     public void setCarte(Carte carte) {
-        cartePreview.setCarte(carte);
+        ApercuCarte.setCarte(carte);
     }
     
     private void prendrePhoto() {
-        BufferedImage img = new BufferedImage(cartePreview.getWidth(), cartePreview.getHeight(), BufferedImage.TYPE_INT_RGB);
+        BufferedImage img = new BufferedImage(ApercuCarte.getWidth(), ApercuCarte.getHeight(), BufferedImage.TYPE_INT_RGB);
         
-        cartePreview.paint(img.getGraphics());
+        ApercuCarte.paint(img.getGraphics());
         
         try {
             ImageIO.write(img, "png", new File("saved.png"));
@@ -69,40 +68,40 @@ public class ApercuPanel extends PanelArrondi {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MapPanelHeader = new javax.swing.JPanel();
-        MapNameLabel = new javax.swing.JLabel();
-        BoutonExport = new javax.swing.JLabel();
-        ContentParent = new javax.swing.JPanel();
+        TitreApercuCartePanel = new javax.swing.JPanel();
+        NomCarteLabel = new javax.swing.JLabel();
+        ExportCarteBouton = new javax.swing.JLabel();
+        ConteneurApercuCartePanel = new javax.swing.JPanel();
         AideParent = new javax.swing.JPanel();
         AidePanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         AideLabel = new javax.swing.JLabel();
-        cartePreview = new ca.ulaval.glo2004.afficheur.CreationCarte.panels.CarteApercu();
+        ApercuCarte = new ca.ulaval.glo2004.afficheur.CreationCarte.panels.CarteApercu();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
         setLayout(new java.awt.BorderLayout());
 
-        MapPanelHeader.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        MapPanelHeader.setOpaque(false);
-        MapPanelHeader.setLayout(new java.awt.BorderLayout());
+        TitreApercuCartePanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
+        TitreApercuCartePanel.setOpaque(false);
+        TitreApercuCartePanel.setLayout(new java.awt.BorderLayout());
 
-        MapNameLabel.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
-        MapNameLabel.setText("Aperçu");
-        MapPanelHeader.add(MapNameLabel, java.awt.BorderLayout.CENTER);
+        NomCarteLabel.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
+        NomCarteLabel.setText("Aperçu");
+        TitreApercuCartePanel.add(NomCarteLabel, java.awt.BorderLayout.CENTER);
 
-        BoutonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_unsplash_20px.png"))); // NOI18N
-        BoutonExport.setToolTipText("Exporter la carte en format PNG");
-        BoutonExport.setMaximumSize(new java.awt.Dimension(25, 25));
-        BoutonExport.addMouseListener(new java.awt.event.MouseAdapter() {
+        ExportCarteBouton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_unsplash_20px.png"))); // NOI18N
+        ExportCarteBouton.setToolTipText("Exporter la carte en format PNG");
+        ExportCarteBouton.setMaximumSize(new java.awt.Dimension(25, 25));
+        ExportCarteBouton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                BoutonExportMouseReleased(evt);
+                ExportCarteBoutonMouseReleased(evt);
             }
         });
-        MapPanelHeader.add(BoutonExport, java.awt.BorderLayout.EAST);
+        TitreApercuCartePanel.add(ExportCarteBouton, java.awt.BorderLayout.EAST);
 
-        add(MapPanelHeader, java.awt.BorderLayout.NORTH);
+        add(TitreApercuCartePanel, java.awt.BorderLayout.NORTH);
 
-        ContentParent.setOpaque(false);
-        ContentParent.setLayout(new javax.swing.OverlayLayout(ContentParent));
+        ConteneurApercuCartePanel.setOpaque(false);
+        ConteneurApercuCartePanel.setLayout(new javax.swing.OverlayLayout(ConteneurApercuCartePanel));
 
         AideParent.setOpaque(false);
 
@@ -130,37 +129,37 @@ public class ApercuPanel extends PanelArrondi {
                 .addContainerGap(431, Short.MAX_VALUE))
         );
 
-        ContentParent.add(AideParent);
+        ConteneurApercuCartePanel.add(AideParent);
 
-        javax.swing.GroupLayout cartePreviewLayout = new javax.swing.GroupLayout(cartePreview);
-        cartePreview.setLayout(cartePreviewLayout);
-        cartePreviewLayout.setHorizontalGroup(
-            cartePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout ApercuCarteLayout = new javax.swing.GroupLayout(ApercuCarte);
+        ApercuCarte.setLayout(ApercuCarteLayout);
+        ApercuCarteLayout.setHorizontalGroup(
+            ApercuCarteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 878, Short.MAX_VALUE)
         );
-        cartePreviewLayout.setVerticalGroup(
-            cartePreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        ApercuCarteLayout.setVerticalGroup(
+            ApercuCarteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 472, Short.MAX_VALUE)
         );
 
-        ContentParent.add(cartePreview);
+        ConteneurApercuCartePanel.add(ApercuCarte);
 
-        add(ContentParent, java.awt.BorderLayout.CENTER);
+        add(ConteneurApercuCartePanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
+    private void ExportCarteBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportCarteBoutonMouseReleased
         prendrePhoto();
-    }//GEN-LAST:event_BoutonExportMouseReleased
+    }//GEN-LAST:event_ExportCarteBoutonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AideLabel;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi AidePanel;
     private javax.swing.JPanel AideParent;
-    private javax.swing.JLabel BoutonExport;
-    private javax.swing.JPanel ContentParent;
-    private javax.swing.JLabel MapNameLabel;
-    private javax.swing.JPanel MapPanelHeader;
-    private ca.ulaval.glo2004.afficheur.CreationCarte.panels.CarteApercu cartePreview;
+    private ca.ulaval.glo2004.afficheur.CreationCarte.panels.CarteApercu ApercuCarte;
+    private javax.swing.JPanel ConteneurApercuCartePanel;
+    private javax.swing.JLabel ExportCarteBouton;
+    private javax.swing.JLabel NomCarteLabel;
+    private javax.swing.JPanel TitreApercuCartePanel;
     // End of variables declaration//GEN-END:variables
 }

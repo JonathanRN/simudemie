@@ -20,7 +20,7 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
     public ObjetSimulationVoieLiaison() {
         initComponents();
         
-        Label.setFont(FontRegister.RobotoLight.deriveFont(14f));
+        VoieLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         
         updateIcon();
     }
@@ -31,15 +31,15 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
             texte = "Voie Aérienne";
         }
         
-        Label.setText(texte);
-        Icon.setIcon(new ImageIcon(getClass().getResource("/icons/simulation/lien/" + type + ".png")));        
+        VoieLabel.setText(texte);
+        VoieIcon.setIcon(new ImageIcon(getClass().getResource("/icons/simulation/lien/" + type + ".png")));        
     }
     
     private void updateIcon() {
         String path = "/icons/simulation/mesure/";
         path += checked ? "checked" : "unchecked";
         path += mouseOver ? "_highlight.png" : ".png";
-        Checkbox.setIcon(new ImageIcon(getClass().getResource(path)));
+        Activer.setIcon(new ImageIcon(getClass().getResource(path)));
     }
 
     /**
@@ -51,9 +51,9 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Checkbox = new javax.swing.JLabel();
-        Label = new javax.swing.JLabel();
-        Icon = new javax.swing.JLabel();
+        Activer = new javax.swing.JLabel();
+        VoieLabel = new javax.swing.JLabel();
+        VoieIcon = new javax.swing.JLabel();
 
         setOpaque(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -69,19 +69,19 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
         });
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        Checkbox.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Checkbox.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simulation/mesure/unchecked.png"))); // NOI18N
-        Checkbox.setMaximumSize(new java.awt.Dimension(50, 50));
-        Checkbox.setMinimumSize(new java.awt.Dimension(50, 50));
-        Checkbox.setPreferredSize(new java.awt.Dimension(50, 50));
-        add(Checkbox);
+        Activer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Activer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simulation/mesure/unchecked.png"))); // NOI18N
+        Activer.setMaximumSize(new java.awt.Dimension(50, 50));
+        Activer.setMinimumSize(new java.awt.Dimension(50, 50));
+        Activer.setPreferredSize(new java.awt.Dimension(50, 50));
+        add(Activer);
 
-        Label.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        Label.setText("Voie Terrestre");
-        Label.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 20));
-        Label.setPreferredSize(new java.awt.Dimension(50, 16));
-        add(Label);
-        add(Icon);
+        VoieLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        VoieLabel.setText("Voie Terrestre");
+        VoieLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 20));
+        VoieLabel.setPreferredSize(new java.awt.Dimension(50, 16));
+        add(VoieLabel);
+        add(VoieIcon);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
@@ -104,8 +104,8 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Checkbox;
-    private javax.swing.JLabel Icon;
-    private javax.swing.JLabel Label;
+    private javax.swing.JLabel Activer;
+    private javax.swing.JLabel VoieIcon;
+    private javax.swing.JLabel VoieLabel;
     // End of variables declaration//GEN-END:variables
 }

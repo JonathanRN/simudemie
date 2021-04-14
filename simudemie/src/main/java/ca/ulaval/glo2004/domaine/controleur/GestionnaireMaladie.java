@@ -13,6 +13,7 @@ import ca.ulaval.glo2004.domaine.helper.FileHelper;
  * @author Mick
  */
 public class GestionnaireMaladie extends GestionnaireOnglet<Maladie> {
+    
     protected final String RELATIVE_PATH = "Maladies\\maladies.ser";
     
     private static GestionnaireMaladie instance;
@@ -24,10 +25,7 @@ public class GestionnaireMaladie extends GestionnaireOnglet<Maladie> {
         return instance;
     }
     
-    private GestionnaireMaladie() {
-        fileHelper = new FileHelper(RELATIVE_PATH);
-        charger();
-    }
+    private GestionnaireMaladie() {fileHelper = new FileHelper(RELATIVE_PATH); charger();}
     
     @Override
     public Maladie creer(Object... arguments) {

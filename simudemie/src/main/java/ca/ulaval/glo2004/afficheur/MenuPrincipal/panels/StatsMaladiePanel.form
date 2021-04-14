@@ -37,7 +37,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="StatsHeader">
+        <Container class="javax.swing.JPanel" name="TitreStatsPanel">
           <Properties>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>

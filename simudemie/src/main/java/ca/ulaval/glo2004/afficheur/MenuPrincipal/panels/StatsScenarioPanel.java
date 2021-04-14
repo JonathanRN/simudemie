@@ -40,8 +40,8 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
             StatsLabel.setFont(FontRegister.RobotoThin.deriveFont(21f));
             Main.setBackground(pannel);
             
-            ResumeButton.setBackground(pannel);
-            ResumeButton.setFont(FontRegister.RobotoRegular.deriveFont(15f));
+            ResumeBouton.setBackground(pannel);
+            ResumeBouton.setFont(FontRegister.RobotoRegular.deriveFont(15f));
         }
         catch(Exception e) {
         }
@@ -78,9 +78,9 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         stats.setBackgroundPaint(bgColor);
 
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-        renderer.setSeriesPaint(0, new Color(191,97,106));
-        renderer.setSeriesPaint(1, new Color(163,190,140));
-        renderer.setSeriesPaint(2, new Color(180,142,173));
+        renderer.setSeriesPaint(0, Couleurs.infections);
+        renderer.setSeriesPaint(1, Couleurs.sains);
+        renderer.setSeriesPaint(2, Couleurs.morts);
         renderer.setSeriesStroke(0, new BasicStroke(2.0f));
         renderer.setSeriesStroke(1, new BasicStroke(2.0f));
         renderer.setSeriesStroke(2, new BasicStroke(2.0f));
@@ -116,7 +116,7 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
     }
     
     public JButton getResumeButton() {
-        return ResumeButton;
+        return ResumeBouton;
     }
     
     public void setOnglet(OngletScenario onglet) {
@@ -133,12 +133,12 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         Main = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
-        StatsHeader = new javax.swing.JPanel();
+        TitreStatsPanel = new javax.swing.JPanel();
         StatsLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        ExportStatsLabel = new javax.swing.JLabel();
         StatsPanel = new javax.swing.JPanel();
-        Buttons = new javax.swing.JPanel();
-        ResumeButton = new javax.swing.JButton();
+        BoutonsPanel = new javax.swing.JPanel();
+        ResumeBouton = new javax.swing.JButton();
 
         setOpaque(false);
         setLayout(new java.awt.BorderLayout(0, 25));
@@ -146,18 +146,18 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
         Main.setLayout(new java.awt.BorderLayout(0, 10));
 
-        StatsHeader.setOpaque(false);
-        StatsHeader.setLayout(new java.awt.BorderLayout());
+        TitreStatsPanel.setOpaque(false);
+        TitreStatsPanel.setLayout(new java.awt.BorderLayout());
 
         StatsLabel.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
         StatsLabel.setText("Statistiques");
-        StatsHeader.add(StatsLabel, java.awt.BorderLayout.CENTER);
+        TitreStatsPanel.add(StatsLabel, java.awt.BorderLayout.CENTER);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
-        jLabel1.setToolTipText("Exporter les statistiques du scénario");
-        StatsHeader.add(jLabel1, java.awt.BorderLayout.EAST);
+        ExportStatsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
+        ExportStatsLabel.setToolTipText("Exporter les statistiques du scénario");
+        TitreStatsPanel.add(ExportStatsLabel, java.awt.BorderLayout.EAST);
 
-        Main.add(StatsHeader, java.awt.BorderLayout.NORTH);
+        Main.add(TitreStatsPanel, java.awt.BorderLayout.NORTH);
 
         StatsPanel.setOpaque(false);
         StatsPanel.setLayout(new java.awt.BorderLayout());
@@ -165,38 +165,38 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
 
         add(Main, java.awt.BorderLayout.CENTER);
 
-        Buttons.setOpaque(false);
-        Buttons.setPreferredSize(new java.awt.Dimension(100, 50));
-        Buttons.setLayout(new java.awt.GridLayout(1, 0, 25, 0));
+        BoutonsPanel.setOpaque(false);
+        BoutonsPanel.setPreferredSize(new java.awt.Dimension(100, 50));
+        BoutonsPanel.setLayout(new java.awt.GridLayout(1, 0, 25, 0));
 
-        ResumeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_play_20px.png"))); // NOI18N
-        ResumeButton.setText("Commencer");
-        ResumeButton.setToolTipText("Commencer le scénario");
-        ResumeButton.setFocusable(false);
-        ResumeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        ResumeBouton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_play_20px.png"))); // NOI18N
+        ResumeBouton.setText("Commencer");
+        ResumeBouton.setToolTipText("Commencer le scénario");
+        ResumeBouton.setFocusable(false);
+        ResumeBouton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                ResumeButtonMouseReleased(evt);
+                ResumeBoutonMouseReleased(evt);
             }
         });
-        Buttons.add(ResumeButton);
+        BoutonsPanel.add(ResumeBouton);
 
-        add(Buttons, java.awt.BorderLayout.SOUTH);
+        add(BoutonsPanel, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ResumeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResumeButtonMouseReleased
+    private void ResumeBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResumeBoutonMouseReleased
         if(onglet.getCourant() != null) {
             onglet.onStartSimulation();
         }
-    }//GEN-LAST:event_ResumeButtonMouseReleased
+    }//GEN-LAST:event_ResumeBoutonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Buttons;
+    private javax.swing.JPanel BoutonsPanel;
+    private javax.swing.JLabel ExportStatsLabel;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi Main;
-    private javax.swing.JButton ResumeButton;
-    private javax.swing.JPanel StatsHeader;
+    private javax.swing.JButton ResumeBouton;
     private javax.swing.JLabel StatsLabel;
     private javax.swing.JPanel StatsPanel;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel TitreStatsPanel;
     // End of variables declaration//GEN-END:variables
 }

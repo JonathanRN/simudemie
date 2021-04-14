@@ -15,6 +15,7 @@ import java.awt.Polygon;
  * @author Mick
  */
 public class GestionnaireCarte extends GestionnaireOnglet<Carte> {
+    
     protected final String RELATIVE_PATH = "Cartes\\cartes.ser";
     
     private static GestionnaireCarte instance;
@@ -26,10 +27,7 @@ public class GestionnaireCarte extends GestionnaireOnglet<Carte> {
         return instance;
     }
     
-    private GestionnaireCarte() {
-        fileHelper = new FileHelper(RELATIVE_PATH);
-        charger();
-    }
+    private GestionnaireCarte() {fileHelper = new FileHelper(RELATIVE_PATH); charger();}
     
     @Override
     public Carte creer(Object... arguments) {
@@ -39,11 +37,7 @@ public class GestionnaireCarte extends GestionnaireOnglet<Carte> {
         return carte;
     }
     
-    public Pays getPays(int indexCarte, int indexPays) {
-        return getElement(indexCarte).getPays(indexPays);
-    }
+    public Pays getPays(int indexCarte, int indexPays) {return getElement(indexCarte).getPays(indexPays);}
     
-    public Pays getPays(int indexCarte, Polygon polygon) {
-        return getElement(indexCarte).getPays(polygon);
-    }
+    public Pays getPays(int indexCarte, Polygon polygon) {return getElement(indexCarte).getPays(polygon);}
 }

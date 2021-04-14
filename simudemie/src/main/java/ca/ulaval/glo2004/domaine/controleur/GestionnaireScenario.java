@@ -14,11 +14,11 @@ import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.helper.FileHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import javax.swing.Timer;
 
 
 public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implements ActionListener {
+    
     protected final String RELATIVE_PATH = "Scenarios\\scenarios.ser";
     private Timer timer;    
     private int scenarioCourant;
@@ -42,17 +42,11 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     }
     
     @Override
-    public void actionPerformed(ActionEvent e) {
-        getCourant().avancerJour();
-    }
+    public void actionPerformed(ActionEvent e) {getCourant().avancerJour();}
     
-    public void setIndexCourant(int index) {
-        scenarioCourant = index;
-    }
+    public void setIndexCourant(int index) {scenarioCourant = index;}
     
-    public Scenario getCourant() {
-        return getElement(scenarioCourant);
-    }
+    public Scenario getCourant() {return getElement(scenarioCourant);}
     
     public void creerMesure(int indexMesure, int indexPays, String nom, double tauxAdhesion, double tauxReduction, boolean active) {
         Pays pays = getCourant().getCarteJourCourant().getPays(indexPays);
@@ -72,14 +66,9 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         pays.supprimerMesure(indexMesure);
     }
     
-    public void pause() {
-        timer.stop();
-    }
+    public void pause() {timer.stop();}
     
-    public void resumer() {
-        getCourant().retourEnDirect();
-        timer.restart();
-    }
+    public void resumer() {getCourant().retourEnDirect();timer.restart();}
     
     public void demarrer() {
         if (timer != null && timer.isRunning()) {
@@ -91,22 +80,10 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         getCourant().demarrer();
     }
     
-    public void setCallback(ScenarioCallback scenarioCallback) {
-        getCourant().setCallback(scenarioCallback);
-    }
+    public void setCallback(ScenarioCallback scenarioCallback) {getCourant().setCallback(scenarioCallback);}
     
-    public void setVitesse(int vitesse) {
-        if (timer != null) {
-            timer.setDelay((int)(1f / (float)vitesse * 1000));
-        }
-    }
+    public void setVitesse(int vitesse) {if (timer != null) {timer.setDelay((int)(1f / (float)vitesse * 1000));}}
     
-    public List<Carte> retournerResultats()
-    {
-        //TODO Retourner les résultats finaux
-        return null;
-    }
-
     @Override
     public Scenario creer(Object... arguments) {
         String nom = (String) arguments[0];

@@ -28,13 +28,13 @@ public class OngletMaladie extends OngletUI {
         
         controller = GestionnaireMaladie.getInstance();
         try {        
-            ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
+            MaladiesScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             MaladieLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
-            Mal_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
-            AddMaladieButton.setBackground(Couleurs.sains);
-            DeleteMaladieButton.setBackground(Couleurs.infections);
-            ImportMaladieButton.setBackground(Couleurs.pannelArrondi);
-            BoutonExport.setBackground(Couleurs.pannelArrondi);
+            InformationsMaladieLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
+            AjoutMaladieBouton.setBackground(Couleurs.sains);
+            SupprimeMaladieBouton.setBackground(Couleurs.infections);
+            ImportMaladieBouton.setBackground(Couleurs.pannelArrondi);
+            ExportMaladieBouton.setBackground(Couleurs.pannelArrondi);
         } catch (Exception e) {
         }
     }
@@ -62,7 +62,7 @@ public class OngletMaladie extends OngletUI {
             controller.creer(args);
 
             onClickObjetUI(card);
-            MaladiesContainer.add(card);
+            ConteneurMaladiePanel.add(card);
 
             updateUI();
         }
@@ -75,7 +75,7 @@ public class OngletMaladie extends OngletUI {
         card.setCuredProgressBar(maladie.getTauxGuerison());
         card.setDeadProgressBar(maladie.getTauxMortalite());
         objets.add(card);
-        MaladiesContainer.add(card);
+        ConteneurMaladiePanel.add(card);
         onClickObjetUI(card);
         
         updateUI();
@@ -89,7 +89,7 @@ public class OngletMaladie extends OngletUI {
             if(result == JOptionPane.YES_OPTION) {
                 controller.supprimer(getIndexCourant());
 
-                MaladiesContainer.remove(courant);
+                ConteneurMaladiePanel.remove(courant);
                 objets.remove(courant);
                 updateUI();
 
@@ -123,16 +123,16 @@ public class OngletMaladie extends OngletUI {
     private void initComponents() {
 
         Maladies = new javax.swing.JPanel();
-        MaladieTitle = new javax.swing.JPanel();
+        TitreMaladiePanel = new javax.swing.JPanel();
         MaladieLabel = new javax.swing.JLabel();
-        AddMaladieButton = new javax.swing.JButton();
-        DeleteMaladieButton = new javax.swing.JButton();
-        ImportMaladieButton = new javax.swing.JButton();
-        BoutonExport = new javax.swing.JButton();
-        ScenariosScrollPane = new javax.swing.JScrollPane();
-        MaladiesContainer = new javax.swing.JPanel();
-        Mal_Informations = new javax.swing.JPanel();
-        Mal_InformationsLabel = new javax.swing.JLabel();
+        AjoutMaladieBouton = new javax.swing.JButton();
+        SupprimeMaladieBouton = new javax.swing.JButton();
+        ImportMaladieBouton = new javax.swing.JButton();
+        ExportMaladieBouton = new javax.swing.JButton();
+        MaladiesScrollPane = new javax.swing.JScrollPane();
+        ConteneurMaladiePanel = new javax.swing.JPanel();
+        InfoMaladiePanel = new javax.swing.JPanel();
+        InformationsMaladieLabel = new javax.swing.JLabel();
         Layout = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         statsMaladiePanel1 = new ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.StatsMaladiePanel();
 
@@ -144,143 +144,143 @@ public class OngletMaladie extends OngletUI {
         Maladies.setBorder(javax.swing.BorderFactory.createEmptyBorder(35, 0, 0, 0));
         Maladies.setLayout(new java.awt.BorderLayout());
 
-        MaladieTitle.setBackground(new java.awt.Color(46, 52, 64));
-        MaladieTitle.setMaximumSize(new java.awt.Dimension(974, 50));
-        MaladieTitle.setMinimumSize(new java.awt.Dimension(974, 50));
-        MaladieTitle.setPreferredSize(new java.awt.Dimension(974, 35));
+        TitreMaladiePanel.setBackground(new java.awt.Color(46, 52, 64));
+        TitreMaladiePanel.setMaximumSize(new java.awt.Dimension(974, 50));
+        TitreMaladiePanel.setMinimumSize(new java.awt.Dimension(974, 50));
+        TitreMaladiePanel.setPreferredSize(new java.awt.Dimension(974, 35));
 
         MaladieLabel.setBackground(new java.awt.Color(46, 52, 64));
         MaladieLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         MaladieLabel.setText("Maladies");
         MaladieLabel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        AddMaladieButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        AddMaladieButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_plus_math_20px.png"))); // NOI18N
-        AddMaladieButton.setToolTipText("Créer une nouvelle maladie");
-        AddMaladieButton.setFocusable(false);
-        AddMaladieButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        AddMaladieButton.setMaximumSize(new java.awt.Dimension(75, 30));
-        AddMaladieButton.setMinimumSize(new java.awt.Dimension(75, 30));
-        AddMaladieButton.setPreferredSize(new java.awt.Dimension(100, 36));
-        AddMaladieButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        AjoutMaladieBouton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        AjoutMaladieBouton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_plus_math_20px.png"))); // NOI18N
+        AjoutMaladieBouton.setToolTipText("Créer une nouvelle maladie");
+        AjoutMaladieBouton.setFocusable(false);
+        AjoutMaladieBouton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AjoutMaladieBouton.setMaximumSize(new java.awt.Dimension(75, 30));
+        AjoutMaladieBouton.setMinimumSize(new java.awt.Dimension(75, 30));
+        AjoutMaladieBouton.setPreferredSize(new java.awt.Dimension(100, 36));
+        AjoutMaladieBouton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                AddMaladieButtonMouseReleased(evt);
+                AjoutMaladieBoutonMouseReleased(evt);
             }
         });
 
-        DeleteMaladieButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        DeleteMaladieButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_trash_can_20px.png"))); // NOI18N
-        DeleteMaladieButton.setFocusable(false);
-        DeleteMaladieButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        DeleteMaladieButton.setMaximumSize(new java.awt.Dimension(75, 30));
-        DeleteMaladieButton.setMinimumSize(new java.awt.Dimension(75, 30));
-        DeleteMaladieButton.setPreferredSize(new java.awt.Dimension(100, 36));
-        DeleteMaladieButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        SupprimeMaladieBouton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        SupprimeMaladieBouton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_trash_can_20px.png"))); // NOI18N
+        SupprimeMaladieBouton.setFocusable(false);
+        SupprimeMaladieBouton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        SupprimeMaladieBouton.setMaximumSize(new java.awt.Dimension(75, 30));
+        SupprimeMaladieBouton.setMinimumSize(new java.awt.Dimension(75, 30));
+        SupprimeMaladieBouton.setPreferredSize(new java.awt.Dimension(100, 36));
+        SupprimeMaladieBouton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                DeleteMaladieButtonMouseReleased(evt);
+                SupprimeMaladieBoutonMouseReleased(evt);
             }
         });
 
-        ImportMaladieButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        ImportMaladieButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_installing_updates_20px.png"))); // NOI18N
-        ImportMaladieButton.setToolTipText("Importer une maladie existante");
-        ImportMaladieButton.setFocusable(false);
-        ImportMaladieButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        ImportMaladieButton.setMaximumSize(new java.awt.Dimension(75, 30));
-        ImportMaladieButton.setMinimumSize(new java.awt.Dimension(75, 30));
-        ImportMaladieButton.setPreferredSize(new java.awt.Dimension(100, 36));
-        ImportMaladieButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        ImportMaladieBouton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        ImportMaladieBouton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_installing_updates_20px.png"))); // NOI18N
+        ImportMaladieBouton.setToolTipText("Importer une maladie existante");
+        ImportMaladieBouton.setFocusable(false);
+        ImportMaladieBouton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ImportMaladieBouton.setMaximumSize(new java.awt.Dimension(75, 30));
+        ImportMaladieBouton.setMinimumSize(new java.awt.Dimension(75, 30));
+        ImportMaladieBouton.setPreferredSize(new java.awt.Dimension(100, 36));
+        ImportMaladieBouton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                ImportMaladieButtonMouseReleased(evt);
+                ImportMaladieBoutonMouseReleased(evt);
             }
         });
 
-        BoutonExport.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        BoutonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
-        BoutonExport.setToolTipText("Exporter la maladie courante");
-        BoutonExport.setFocusable(false);
-        BoutonExport.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BoutonExport.setMaximumSize(new java.awt.Dimension(75, 30));
-        BoutonExport.setMinimumSize(new java.awt.Dimension(75, 30));
-        BoutonExport.setPreferredSize(new java.awt.Dimension(100, 36));
-        BoutonExport.addMouseListener(new java.awt.event.MouseAdapter() {
+        ExportMaladieBouton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        ExportMaladieBouton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
+        ExportMaladieBouton.setToolTipText("Exporter la maladie courante");
+        ExportMaladieBouton.setFocusable(false);
+        ExportMaladieBouton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ExportMaladieBouton.setMaximumSize(new java.awt.Dimension(75, 30));
+        ExportMaladieBouton.setMinimumSize(new java.awt.Dimension(75, 30));
+        ExportMaladieBouton.setPreferredSize(new java.awt.Dimension(100, 36));
+        ExportMaladieBouton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                BoutonExportMouseReleased(evt);
+                ExportMaladieBoutonMouseReleased(evt);
             }
         });
 
-        javax.swing.GroupLayout MaladieTitleLayout = new javax.swing.GroupLayout(MaladieTitle);
-        MaladieTitle.setLayout(MaladieTitleLayout);
-        MaladieTitleLayout.setHorizontalGroup(
-            MaladieTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MaladieTitleLayout.createSequentialGroup()
+        javax.swing.GroupLayout TitreMaladiePanelLayout = new javax.swing.GroupLayout(TitreMaladiePanel);
+        TitreMaladiePanel.setLayout(TitreMaladiePanelLayout);
+        TitreMaladiePanelLayout.setHorizontalGroup(
+            TitreMaladiePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TitreMaladiePanelLayout.createSequentialGroup()
                 .addComponent(MaladieLabel)
                 .addGap(101, 101, 101)
-                .addComponent(AddMaladieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AjoutMaladieBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(DeleteMaladieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SupprimeMaladieBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 892, Short.MAX_VALUE)
-                .addComponent(ImportMaladieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ImportMaladieBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(ExportMaladieBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        MaladieTitleLayout.setVerticalGroup(
-            MaladieTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MaladieTitleLayout.createSequentialGroup()
-                .addGroup(MaladieTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(MaladieTitleLayout.createSequentialGroup()
+        TitreMaladiePanelLayout.setVerticalGroup(
+            TitreMaladiePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TitreMaladiePanelLayout.createSequentialGroup()
+                .addGroup(TitreMaladiePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TitreMaladiePanelLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(MaladieLabel))
-                    .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ImportMaladieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddMaladieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DeleteMaladieButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ExportMaladieBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ImportMaladieBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AjoutMaladieBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SupprimeMaladieBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
 
-        Maladies.add(MaladieTitle, java.awt.BorderLayout.NORTH);
+        Maladies.add(TitreMaladiePanel, java.awt.BorderLayout.NORTH);
 
-        ScenariosScrollPane.setBackground(new java.awt.Color(46, 52, 64));
-        ScenariosScrollPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
-        ScenariosScrollPane.setMaximumSize(new java.awt.Dimension(75, 250));
-        ScenariosScrollPane.setMinimumSize(new java.awt.Dimension(75, 250));
-        ScenariosScrollPane.setPreferredSize(new java.awt.Dimension(75, 250));
+        MaladiesScrollPane.setBackground(new java.awt.Color(46, 52, 64));
+        MaladiesScrollPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        MaladiesScrollPane.setMaximumSize(new java.awt.Dimension(75, 250));
+        MaladiesScrollPane.setMinimumSize(new java.awt.Dimension(75, 250));
+        MaladiesScrollPane.setPreferredSize(new java.awt.Dimension(75, 250));
 
-        MaladiesContainer.setBackground(new java.awt.Color(46, 52, 64));
-        MaladiesContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -25, 0, 0));
-        MaladiesContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 25, 5));
-        ScenariosScrollPane.setViewportView(MaladiesContainer);
+        ConteneurMaladiePanel.setBackground(new java.awt.Color(46, 52, 64));
+        ConteneurMaladiePanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -25, 0, 0));
+        ConteneurMaladiePanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 25, 5));
+        MaladiesScrollPane.setViewportView(ConteneurMaladiePanel);
 
-        Maladies.add(ScenariosScrollPane, java.awt.BorderLayout.CENTER);
+        Maladies.add(MaladiesScrollPane, java.awt.BorderLayout.CENTER);
 
         add(Maladies, java.awt.BorderLayout.NORTH);
 
-        Mal_Informations.setBorder(javax.swing.BorderFactory.createEmptyBorder(35, 0, 0, 0));
-        Mal_Informations.setOpaque(false);
-        Mal_Informations.setLayout(new java.awt.BorderLayout());
+        InfoMaladiePanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(35, 0, 0, 0));
+        InfoMaladiePanel.setOpaque(false);
+        InfoMaladiePanel.setLayout(new java.awt.BorderLayout());
 
-        Mal_InformationsLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        Mal_InformationsLabel.setText("Informations");
-        Mal_InformationsLabel.setMaximumSize(new java.awt.Dimension(146, 35));
-        Mal_InformationsLabel.setMinimumSize(new java.awt.Dimension(146, 35));
-        Mal_InformationsLabel.setPreferredSize(new java.awt.Dimension(146, 35));
-        Mal_Informations.add(Mal_InformationsLabel, java.awt.BorderLayout.NORTH);
+        InformationsMaladieLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        InformationsMaladieLabel.setText("Informations");
+        InformationsMaladieLabel.setMaximumSize(new java.awt.Dimension(146, 35));
+        InformationsMaladieLabel.setMinimumSize(new java.awt.Dimension(146, 35));
+        InformationsMaladieLabel.setPreferredSize(new java.awt.Dimension(146, 35));
+        InfoMaladiePanel.add(InformationsMaladieLabel, java.awt.BorderLayout.NORTH);
 
         Layout.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
         Layout.setOpaque(false);
         Layout.setLayout(new java.awt.GridLayout(1, 1));
         Layout.add(statsMaladiePanel1);
 
-        Mal_Informations.add(Layout, java.awt.BorderLayout.CENTER);
+        InfoMaladiePanel.add(Layout, java.awt.BorderLayout.CENTER);
 
-        add(Mal_Informations, java.awt.BorderLayout.CENTER);
+        add(InfoMaladiePanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddScenarioButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseClicked
   
     }//GEN-LAST:event_AddScenarioButtonMouseClicked
 
-    private void ImportMaladieButtonMouseReleased(java.awt.event.MouseEvent evt) {                                                   
+    private void ImportMaladieBoutonMouseReleased(java.awt.event.MouseEvent evt) {                                                   
         int result = fileChooser.showDialog(null, "Importer");
         if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
             try {
@@ -293,7 +293,7 @@ public class OngletMaladie extends OngletUI {
         }
     }                                                 
 
-    private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
+    private void ExportMaladieBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportMaladieBoutonMouseReleased
         if (getCourant() != null) {
             int result = fileChooser.showDialog(null, "Exporter");
             if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
@@ -305,33 +305,33 @@ public class OngletMaladie extends OngletUI {
                 fileChooser.setSelectedFile(null);
             }
         }
-    }//GEN-LAST:event_BoutonExportMouseReleased
+    }//GEN-LAST:event_ExportMaladieBoutonMouseReleased
 
-    private void AddMaladieButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddMaladieButtonMouseReleased
+    private void AjoutMaladieBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjoutMaladieBoutonMouseReleased
         this.ajouterObjetUI();
-    }//GEN-LAST:event_AddMaladieButtonMouseReleased
+    }//GEN-LAST:event_AjoutMaladieBoutonMouseReleased
 
-    private void DeleteMaladieButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteMaladieButtonMouseReleased
+    private void SupprimeMaladieBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupprimeMaladieBoutonMouseReleased
         retirerCourant();
-    }//GEN-LAST:event_DeleteMaladieButtonMouseReleased
+    }//GEN-LAST:event_SupprimeMaladieBoutonMouseReleased
     
     public GestionnaireMaladie getController() {
         return controller;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddMaladieButton;
-    private javax.swing.JButton BoutonExport;
-    private javax.swing.JButton DeleteMaladieButton;
-    private javax.swing.JButton ImportMaladieButton;
+    private javax.swing.JButton AjoutMaladieBouton;
+    private javax.swing.JPanel ConteneurMaladiePanel;
+    private javax.swing.JButton ExportMaladieBouton;
+    private javax.swing.JButton ImportMaladieBouton;
+    private javax.swing.JPanel InfoMaladiePanel;
+    private javax.swing.JLabel InformationsMaladieLabel;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi Layout;
-    private javax.swing.JPanel Mal_Informations;
-    private javax.swing.JLabel Mal_InformationsLabel;
     private javax.swing.JLabel MaladieLabel;
-    private javax.swing.JPanel MaladieTitle;
     private javax.swing.JPanel Maladies;
-    private javax.swing.JPanel MaladiesContainer;
-    private javax.swing.JScrollPane ScenariosScrollPane;
+    private javax.swing.JScrollPane MaladiesScrollPane;
+    private javax.swing.JButton SupprimeMaladieBouton;
+    private javax.swing.JPanel TitreMaladiePanel;
     private ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.StatsMaladiePanel statsMaladiePanel1;
     // End of variables declaration//GEN-END:variables
 }

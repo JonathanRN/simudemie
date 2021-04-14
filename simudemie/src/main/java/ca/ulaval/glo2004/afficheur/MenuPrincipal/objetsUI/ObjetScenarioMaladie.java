@@ -6,17 +6,17 @@
 package ca.ulaval.glo2004.afficheur.MenuPrincipal.objetsUI;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
-import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletScenarioMaladie;
+import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletCreationScenarioMaladie;
 
 
 public class ObjetScenarioMaladie extends ObjetUI {    
     private int index;
     
-    public ObjetScenarioMaladie(OngletScenarioMaladie tab, int index, String nom, double tauxInfection, double tauxGuerison, double tauxMortalite) {
+    public ObjetScenarioMaladie(OngletCreationScenarioMaladie tab, int index, String nom, double tauxInfection, double tauxGuerison, double tauxMortalite) {
         super(tab);
         initComponents();
         
-        MaladieNom.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
+        NomMaladie.setFont(FontRegister.RobotoRegular.deriveFont(21.3062f));
         TauxInfectionLabel.setFont(FontRegister.RobotoLight.deriveFont(12f));
         TauxInfectionValue.setFont(FontRegister.RobotoLight.deriveFont(12f));
         TauxGuerisonLabel.setFont(FontRegister.RobotoLight.deriveFont(12f));
@@ -41,7 +41,7 @@ public class ObjetScenarioMaladie extends ObjetUI {
     }
     
     public void setNom(String nom) {
-        MaladieNom.setText(nom);
+        NomMaladie.setText(nom);
     }
     
     public void setTauxInfection(double value) {
@@ -65,15 +65,15 @@ public class ObjetScenarioMaladie extends ObjetUI {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MaladieNom = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        NomMaladie = new javax.swing.JLabel();
+        InfoObjetPanel = new javax.swing.JPanel();
+        InfectionsPanel = new javax.swing.JPanel();
         TauxInfectionLabel = new javax.swing.JLabel();
         TauxInfectionValue = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        GuerisonsPanel = new javax.swing.JPanel();
         TauxGuerisonLabel = new javax.swing.JLabel();
         TauxGuerisonValue = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        MortalitePanel = new javax.swing.JPanel();
         TauxMortaliteLabel = new javax.swing.JLabel();
         TauxMortaliteValue = new javax.swing.JLabel();
 
@@ -83,17 +83,17 @@ public class ObjetScenarioMaladie extends ObjetUI {
         setPreferredSize(new java.awt.Dimension(224, 150));
         setLayout(new java.awt.BorderLayout(0, 25));
 
-        MaladieNom.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
-        MaladieNom.setText("Nom de la maladie");
-        MaladieNom.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 25, 0, 0));
-        MaladieNom.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        add(MaladieNom, java.awt.BorderLayout.PAGE_START);
+        NomMaladie.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
+        NomMaladie.setText("Nom de la maladie");
+        NomMaladie.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 25, 0, 0));
+        NomMaladie.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        add(NomMaladie, java.awt.BorderLayout.PAGE_START);
 
-        jPanel1.setEnabled(false);
-        jPanel1.setFocusable(false);
-        jPanel1.setLayout(new java.awt.GridLayout(3, 0));
+        InfoObjetPanel.setEnabled(false);
+        InfoObjetPanel.setFocusable(false);
+        InfoObjetPanel.setLayout(new java.awt.GridLayout(3, 0));
 
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+        InfectionsPanel.setLayout(new javax.swing.BoxLayout(InfectionsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         TauxInfectionLabel.setText("Taux d'infection");
         TauxInfectionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 25, 0, 0));
@@ -101,7 +101,7 @@ public class ObjetScenarioMaladie extends ObjetUI {
         TauxInfectionLabel.setMaximumSize(new java.awt.Dimension(150, 20));
         TauxInfectionLabel.setMinimumSize(new java.awt.Dimension(150, 20));
         TauxInfectionLabel.setPreferredSize(new java.awt.Dimension(150, 20));
-        jPanel2.add(TauxInfectionLabel);
+        InfectionsPanel.add(TauxInfectionLabel);
 
         TauxInfectionValue.setText("0");
         TauxInfectionValue.setToolTipText("");
@@ -110,11 +110,11 @@ public class ObjetScenarioMaladie extends ObjetUI {
         TauxInfectionValue.setMaximumSize(new java.awt.Dimension(200, 20));
         TauxInfectionValue.setMinimumSize(new java.awt.Dimension(200, 20));
         TauxInfectionValue.setPreferredSize(new java.awt.Dimension(200, 20));
-        jPanel2.add(TauxInfectionValue);
+        InfectionsPanel.add(TauxInfectionValue);
 
-        jPanel1.add(jPanel2);
+        InfoObjetPanel.add(InfectionsPanel);
 
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+        GuerisonsPanel.setLayout(new javax.swing.BoxLayout(GuerisonsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         TauxGuerisonLabel.setText("Taux de guérison");
         TauxGuerisonLabel.setToolTipText("");
@@ -124,7 +124,7 @@ public class ObjetScenarioMaladie extends ObjetUI {
         TauxGuerisonLabel.setMaximumSize(new java.awt.Dimension(150, 20));
         TauxGuerisonLabel.setMinimumSize(new java.awt.Dimension(150, 20));
         TauxGuerisonLabel.setPreferredSize(new java.awt.Dimension(150, 20));
-        jPanel3.add(TauxGuerisonLabel);
+        GuerisonsPanel.add(TauxGuerisonLabel);
 
         TauxGuerisonValue.setText("0");
         TauxGuerisonValue.setToolTipText("");
@@ -133,11 +133,11 @@ public class ObjetScenarioMaladie extends ObjetUI {
         TauxGuerisonValue.setMaximumSize(new java.awt.Dimension(200, 20));
         TauxGuerisonValue.setMinimumSize(new java.awt.Dimension(200, 20));
         TauxGuerisonValue.setPreferredSize(new java.awt.Dimension(200, 20));
-        jPanel3.add(TauxGuerisonValue);
+        GuerisonsPanel.add(TauxGuerisonValue);
 
-        jPanel1.add(jPanel3);
+        InfoObjetPanel.add(GuerisonsPanel);
 
-        jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.LINE_AXIS));
+        MortalitePanel.setLayout(new javax.swing.BoxLayout(MortalitePanel, javax.swing.BoxLayout.LINE_AXIS));
 
         TauxMortaliteLabel.setText("Taux de mortalité");
         TauxMortaliteLabel.setToolTipText("");
@@ -147,7 +147,7 @@ public class ObjetScenarioMaladie extends ObjetUI {
         TauxMortaliteLabel.setMaximumSize(new java.awt.Dimension(150, 20));
         TauxMortaliteLabel.setMinimumSize(new java.awt.Dimension(150, 20));
         TauxMortaliteLabel.setPreferredSize(new java.awt.Dimension(150, 20));
-        jPanel4.add(TauxMortaliteLabel);
+        MortalitePanel.add(TauxMortaliteLabel);
 
         TauxMortaliteValue.setText("0");
         TauxMortaliteValue.setToolTipText("");
@@ -156,25 +156,25 @@ public class ObjetScenarioMaladie extends ObjetUI {
         TauxMortaliteValue.setMaximumSize(new java.awt.Dimension(200, 20));
         TauxMortaliteValue.setMinimumSize(new java.awt.Dimension(200, 20));
         TauxMortaliteValue.setPreferredSize(new java.awt.Dimension(200, 20));
-        jPanel4.add(TauxMortaliteValue);
+        MortalitePanel.add(TauxMortaliteValue);
 
-        jPanel1.add(jPanel4);
+        InfoObjetPanel.add(MortalitePanel);
 
-        add(jPanel1, java.awt.BorderLayout.CENTER);
+        add(InfoObjetPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel MaladieNom;
+    private javax.swing.JPanel GuerisonsPanel;
+    private javax.swing.JPanel InfectionsPanel;
+    private javax.swing.JPanel InfoObjetPanel;
+    private javax.swing.JPanel MortalitePanel;
+    private javax.swing.JLabel NomMaladie;
     private javax.swing.JLabel TauxGuerisonLabel;
     private javax.swing.JLabel TauxGuerisonValue;
     private javax.swing.JLabel TauxInfectionLabel;
     private javax.swing.JLabel TauxInfectionValue;
     private javax.swing.JLabel TauxMortaliteLabel;
     private javax.swing.JLabel TauxMortaliteValue;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.domaine;
 
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.geom.Path2D;
@@ -22,9 +23,9 @@ public class VoieLiaison implements Externalizable {
     private Path2D.Double ligneCourbe;
     private Point centre;
     private boolean accessible;
-    protected transient final Color Ter = new Color(208, 135, 112);
-    protected transient final Color Mar = new Color(94, 129, 172);
-    protected transient final Color Aer = new Color(143, 188, 187);
+    protected transient final Color Ter = Couleurs.terrestres;
+    protected transient final Color Mar = Couleurs.maritimes;
+    protected transient final Color Aer = Couleurs.aeriens;
 
     public VoieLiaison() {}
     
@@ -68,51 +69,28 @@ public class VoieLiaison implements Externalizable {
     
     public TypeVoie getType() { return type; }
     
+    public void setType(TypeVoie type) {this.type = type;}
+        
     public TypeVoie getTauxPropag() { return type; }
-    
-    public void setType(TypeVoie type) {
-        this.type = type;
-    }
     
     public boolean getAccessible() { return accessible; }
     
-    public void setPaysOrigine(Pays paysOrigine)
-    {
-        this.paysOrigine = paysOrigine;
-    }
+    public void setPaysOrigine(Pays paysOrigine) { this.paysOrigine = paysOrigine; }
     
-    public void setPaysDestination(Pays paysDestination)
-    {
-        this.paysDestination = paysDestination;
-    }
+    public void setPaysDestination(Pays paysDestination) {this.paysDestination = paysDestination;}
     
-    public void setAccessible(boolean accessible)
-    {
-        this.accessible = accessible;
-    }
+    public void setAccessible(boolean accessible){this.accessible = accessible;}
     
-    public void setTauxPropag(double tauxPropag)
-    {
-        this.tauxPropag = tauxPropag;
-    }
+    public void setTauxPropag(double tauxPropag) {this.tauxPropag = tauxPropag;}
     
-    public Path2D.Double getLigne() {
-        return ligneCourbe;
-    }
+    public Path2D.Double getLigne() {return ligneCourbe;}
     
-    public Point getCentre() {
-        return centre;
-    }
+    public void setLigne(Path2D.Double ligne) { ligneCourbe.reset(); ligneCourbe = ligne; }
     
-    public void setCentre(Point centre) {
-        this.centre = centre;
-    }
+    public Point getCentre() {return centre;}
     
-    public void setLigne(Path2D.Double ligne) {
-        ligneCourbe.reset();
-        ligneCourbe = ligne;
-    }
-
+    public void setCentre(Point centre) {this.centre = centre;}
+  
     public Color getCouleur() {
         switch (type) {
             case Terrestre:

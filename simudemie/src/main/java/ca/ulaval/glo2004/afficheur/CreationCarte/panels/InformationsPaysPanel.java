@@ -25,12 +25,12 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
         initComponents();
         
         PopulationTotale = new JSpinner(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 100));
-        PopPanel.add(PopulationTotale, java.awt.BorderLayout.SOUTH);
+        PopRegionPanel.add(PopulationTotale, java.awt.BorderLayout.SOUTH);
         
         InformationsPaysLabel.setFont(FontRegister.RobotoLight.deriveFont(15f));
         PaysNomLabel.setFont(FontRegister.RobotoLight.deriveFont(13f));
         RegionNomLabel.setFont(FontRegister.RobotoLight.deriveFont(13f));
-        PopLabel.setFont(FontRegister.RobotoLight.deriveFont(13f));
+        PopRegionLabel.setFont(FontRegister.RobotoLight.deriveFont(13f));
         PopTotaleLabel.setFont(FontRegister.RobotoLight.deriveFont(13f));
         
         PaysNomTextField.setFont(FontRegister.RobotoLight.deriveFont(12f));
@@ -76,16 +76,16 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         InformationsPaysLabel = new javax.swing.JLabel();
-        PaysNomPanel = new javax.swing.JPanel();
+        NomPaysPanel = new javax.swing.JPanel();
         PaysNomLabel = new javax.swing.JLabel();
         PaysNomTextField = new javax.swing.JTextField();
-        PopTotalePanel = new javax.swing.JPanel();
+        PopTotalePaysPanel = new javax.swing.JPanel();
         PopTotaleLabel = new javax.swing.JLabel();
-        RegionNomPanel = new javax.swing.JPanel();
+        NomRegionPanel = new javax.swing.JPanel();
         RegionNomLabel = new javax.swing.JLabel();
         RegionNomTextField = new javax.swing.JTextField();
-        PopPanel = new javax.swing.JPanel();
-        PopLabel = new javax.swing.JLabel();
+        PopRegionPanel = new javax.swing.JPanel();
+        PopRegionLabel = new javax.swing.JLabel();
         SupprimeBouton = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
@@ -96,51 +96,51 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
         InformationsPaysLabel.setText("Informations Pays");
         add(InformationsPaysLabel);
 
-        PaysNomPanel.setOpaque(false);
-        PaysNomPanel.setPreferredSize(new java.awt.Dimension(200, 30));
-        PaysNomPanel.setLayout(new java.awt.BorderLayout(5, 0));
+        NomPaysPanel.setOpaque(false);
+        NomPaysPanel.setPreferredSize(new java.awt.Dimension(200, 30));
+        NomPaysPanel.setLayout(new java.awt.BorderLayout(5, 0));
 
         PaysNomLabel.setText("Pays");
-        PaysNomPanel.add(PaysNomLabel, java.awt.BorderLayout.NORTH);
+        NomPaysPanel.add(PaysNomLabel, java.awt.BorderLayout.NORTH);
 
         PaysNomTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         PaysNomTextField.setPreferredSize(new java.awt.Dimension(200, 25));
         PaysNomTextField.setSelectionColor(new java.awt.Color(67, 76, 94));
-        PaysNomPanel.add(PaysNomTextField, java.awt.BorderLayout.SOUTH);
+        NomPaysPanel.add(PaysNomTextField, java.awt.BorderLayout.SOUTH);
 
-        add(PaysNomPanel);
+        add(NomPaysPanel);
 
-        PopTotalePanel.setOpaque(false);
-        PopTotalePanel.setPreferredSize(new java.awt.Dimension(74, 30));
-        PopTotalePanel.setLayout(new java.awt.BorderLayout(5, 0));
+        PopTotalePaysPanel.setOpaque(false);
+        PopTotalePaysPanel.setPreferredSize(new java.awt.Dimension(74, 30));
+        PopTotalePaysPanel.setLayout(new java.awt.BorderLayout(5, 0));
 
         PopTotaleLabel.setText("Pop. totale  :");
         PopTotaleLabel.setToolTipText("");
-        PopTotalePanel.add(PopTotaleLabel, java.awt.BorderLayout.NORTH);
+        PopTotalePaysPanel.add(PopTotaleLabel, java.awt.BorderLayout.NORTH);
 
-        add(PopTotalePanel);
+        add(PopTotalePaysPanel);
 
-        RegionNomPanel.setOpaque(false);
-        RegionNomPanel.setLayout(new java.awt.BorderLayout(5, 0));
+        NomRegionPanel.setOpaque(false);
+        NomRegionPanel.setLayout(new java.awt.BorderLayout(5, 0));
 
         RegionNomLabel.setText("Région");
-        RegionNomPanel.add(RegionNomLabel, java.awt.BorderLayout.NORTH);
+        NomRegionPanel.add(RegionNomLabel, java.awt.BorderLayout.NORTH);
 
         RegionNomTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         RegionNomTextField.setPreferredSize(new java.awt.Dimension(200, 25));
         RegionNomTextField.setSelectionColor(new java.awt.Color(67, 76, 94));
-        RegionNomPanel.add(RegionNomTextField, java.awt.BorderLayout.SOUTH);
+        NomRegionPanel.add(RegionNomTextField, java.awt.BorderLayout.SOUTH);
 
-        add(RegionNomPanel);
+        add(NomRegionPanel);
 
-        PopPanel.setOpaque(false);
-        PopPanel.setLayout(new java.awt.BorderLayout(5, 0));
+        PopRegionPanel.setOpaque(false);
+        PopRegionPanel.setLayout(new java.awt.BorderLayout(5, 0));
 
-        PopLabel.setText("Pop. région");
-        PopLabel.setToolTipText("");
-        PopPanel.add(PopLabel, java.awt.BorderLayout.NORTH);
+        PopRegionLabel.setText("Pop. région");
+        PopRegionLabel.setToolTipText("");
+        PopRegionPanel.add(PopRegionLabel, java.awt.BorderLayout.NORTH);
 
-        add(PopPanel);
+        add(PopRegionPanel);
 
         SupprimeBouton.setText("Retirer Pays");
         SupprimeBouton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -158,15 +158,15 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel InformationsPaysLabel;
+    private javax.swing.JPanel NomPaysPanel;
+    private javax.swing.JPanel NomRegionPanel;
     private javax.swing.JLabel PaysNomLabel;
-    private javax.swing.JPanel PaysNomPanel;
     private javax.swing.JTextField PaysNomTextField;
-    private javax.swing.JLabel PopLabel;
-    private javax.swing.JPanel PopPanel;
+    private javax.swing.JLabel PopRegionLabel;
+    private javax.swing.JPanel PopRegionPanel;
     private javax.swing.JLabel PopTotaleLabel;
-    private javax.swing.JPanel PopTotalePanel;
+    private javax.swing.JPanel PopTotalePaysPanel;
     private javax.swing.JLabel RegionNomLabel;
-    private javax.swing.JPanel RegionNomPanel;
     private javax.swing.JTextField RegionNomTextField;
     private javax.swing.JButton SupprimeBouton;
     // End of variables declaration//GEN-END:variables

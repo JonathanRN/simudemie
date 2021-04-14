@@ -45,7 +45,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="MaladieTitle">
+        <Container class="javax.swing.JPanel" name="TitreMaladiePanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="40" green="34" red="2e" type="rgb"/>
@@ -72,13 +72,13 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="MaladieLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-                      <Component id="AddMaladieButton" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="AjoutMaladieBouton" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="DeleteMaladieButton" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="SupprimeMaladieBouton" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace pref="892" max="32767" attributes="0"/>
-                      <Component id="ImportMaladieButton" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="ImportMaladieBouton" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BoutonExport" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="ExportMaladieBouton" min="-2" pref="75" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -90,10 +90,10 @@
                               <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                               <Component id="MaladieLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="BoutonExport" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="ImportMaladieButton" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="AddMaladieButton" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="DeleteMaladieButton" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="ExportMaladieBouton" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="ImportMaladieBouton" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="AjoutMaladieBouton" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="SupprimeMaladieBouton" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   </Group>
@@ -113,7 +113,7 @@
                 <Property name="verticalAlignment" type="int" value="3"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="AddMaladieButton">
+            <Component class="javax.swing.JButton" name="AjoutMaladieBouton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -135,10 +135,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AddMaladieButtonMouseReleased"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AjoutMaladieBoutonMouseReleased"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="DeleteMaladieButton">
+            <Component class="javax.swing.JButton" name="SupprimeMaladieBouton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -159,10 +159,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DeleteMaladieButtonMouseReleased"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SupprimeMaladieBoutonMouseReleased"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="ImportMaladieButton">
+            <Component class="javax.swing.JButton" name="ImportMaladieBouton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -184,10 +184,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ImportMaladieButtonMouseReleased"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ImportMaladieBoutonMouseReleased"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="BoutonExport">
+            <Component class="javax.swing.JButton" name="ExportMaladieBouton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -209,12 +209,12 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BoutonExportMouseReleased"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ExportMaladieBoutonMouseReleased"/>
               </Events>
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JScrollPane" name="ScenariosScrollPane">
+        <Container class="javax.swing.JScrollPane" name="MaladiesScrollPane">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="40" green="34" red="2e" type="rgb"/>
@@ -242,7 +242,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="MaladiesContainer">
+            <Container class="javax.swing.JPanel" name="ConteneurMaladiePanel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="40" green="34" red="2e" type="rgb"/>
@@ -263,7 +263,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="Mal_Informations">
+    <Container class="javax.swing.JPanel" name="InfoMaladiePanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -280,7 +280,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="Mal_InformationsLabel">
+        <Component class="javax.swing.JLabel" name="InformationsMaladieLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="24" style="1"/>

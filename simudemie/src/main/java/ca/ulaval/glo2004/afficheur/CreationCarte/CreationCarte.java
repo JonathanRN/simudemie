@@ -15,10 +15,10 @@ import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel;
 import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletCarte;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
+import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
-import java.awt.Color;
 import java.awt.Polygon;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -41,9 +41,12 @@ public class CreationCarte extends javax.swing.JPanel {
         this.onglet = onglet;
         initComponents();
         
+        nomCarte.setText("Carte :   " + getCarte().getNom());
+        nomCarte.setFont(FontRegister.RobotoLight.deriveFont(17f));
+        
         InformationsPanel.setBackground(Couleurs.titleBar);
         InformationsPanel.setVisible(false);
-        StartParent.setVisible(false);
+        IndiceCommenceParent.setVisible(false);
         
         BoutonSelection.init(this, new Selection(this), "icons8_cursor_25px");
         BoutonCrayon.init(this, new Creation(this), "icons8_pen_25px");
@@ -77,7 +80,7 @@ public class CreationCarte extends javax.swing.JPanel {
     }
     
     public JPanel getPopup() {
-        return StartParent;
+        return IndiceCommenceParent;
     }
     
     public ZoomInfoPanel getZoomPopup() {
@@ -186,8 +189,8 @@ public class CreationCarte extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        StartParent = new javax.swing.JPanel();
-        StartPanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
+        IndiceCommenceParent = new javax.swing.JPanel();
+        IndiceCommencePanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         StartLabel1 = new javax.swing.JLabel();
         StartLabel2 = new javax.swing.JLabel();
         ToolBarParent = new javax.swing.JPanel();
@@ -203,6 +206,7 @@ public class CreationCarte extends javax.swing.JPanel {
         BoutonRedo = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
         BoutonQuitterParent = new javax.swing.JPanel();
         BoutonQuitter = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
+        nomCarte = new javax.swing.JLabel();
         ZoomPanelParent = new javax.swing.JPanel();
         ZoomInfo = new ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel();
         InformationsPanelParent = new javax.swing.JPanel();
@@ -212,43 +216,43 @@ public class CreationCarte extends javax.swing.JPanel {
         setBackground(new java.awt.Color(46, 52, 64));
         setLayout(new javax.swing.OverlayLayout(this));
 
-        StartParent.setOpaque(false);
+        IndiceCommenceParent.setOpaque(false);
 
-        StartPanel.setMaximumSize(new java.awt.Dimension(715, 50));
-        StartPanel.setMinimumSize(new java.awt.Dimension(715, 50));
-        StartPanel.setPreferredSize(new java.awt.Dimension(715, 50));
-        StartPanel.setLayout(new java.awt.GridLayout(2, 0));
+        IndiceCommencePanel.setMaximumSize(new java.awt.Dimension(715, 50));
+        IndiceCommencePanel.setMinimumSize(new java.awt.Dimension(715, 50));
+        IndiceCommencePanel.setPreferredSize(new java.awt.Dimension(715, 50));
+        IndiceCommencePanel.setLayout(new java.awt.GridLayout(2, 0));
 
         StartLabel1.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         StartLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         StartLabel1.setText("Cliquez pour placer un point.");
         StartLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 10));
-        StartPanel.add(StartLabel1);
+        IndiceCommencePanel.add(StartLabel1);
 
         StartLabel2.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
         StartLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         StartLabel2.setText("Puis appuyez sur ESPACE pour créer le polygone.");
         StartLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 0, 10));
-        StartPanel.add(StartLabel2);
+        IndiceCommencePanel.add(StartLabel2);
 
-        javax.swing.GroupLayout StartParentLayout = new javax.swing.GroupLayout(StartParent);
-        StartParent.setLayout(StartParentLayout);
-        StartParentLayout.setHorizontalGroup(
-            StartParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StartParentLayout.createSequentialGroup()
+        javax.swing.GroupLayout IndiceCommenceParentLayout = new javax.swing.GroupLayout(IndiceCommenceParent);
+        IndiceCommenceParent.setLayout(IndiceCommenceParentLayout);
+        IndiceCommenceParentLayout.setHorizontalGroup(
+            IndiceCommenceParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IndiceCommenceParentLayout.createSequentialGroup()
                 .addContainerGap(292, Short.MAX_VALUE)
-                .addComponent(StartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(IndiceCommencePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(293, Short.MAX_VALUE))
         );
-        StartParentLayout.setVerticalGroup(
-            StartParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(StartParentLayout.createSequentialGroup()
+        IndiceCommenceParentLayout.setVerticalGroup(
+            IndiceCommenceParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(IndiceCommenceParentLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(StartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(IndiceCommencePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(661, Short.MAX_VALUE))
         );
 
-        add(StartParent);
+        add(IndiceCommenceParent);
 
         ToolBarParent.setOpaque(false);
         ToolBarParent.setLayout(new java.awt.BorderLayout());
@@ -316,6 +320,7 @@ public class CreationCarte extends javax.swing.JPanel {
 
         BoutonQuitter.setToolTipText("Retour à l'accueil");
         BoutonQuitterParent.add(BoutonQuitter, java.awt.BorderLayout.EAST);
+        BoutonQuitterParent.add(nomCarte, java.awt.BorderLayout.CENTER);
 
         ToolBar.add(BoutonQuitterParent);
 
@@ -394,15 +399,16 @@ public class CreationCarte extends javax.swing.JPanel {
     private javax.swing.JPanel BoutonUndoParent;
     private javax.swing.JPanel BoutonsPrincipauxParent;
     private ca.ulaval.glo2004.afficheur.CreationCarte.panels.CreationCartePanel CreationCartePanel;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi IndiceCommencePanel;
+    private javax.swing.JPanel IndiceCommenceParent;
     private javax.swing.JPanel InformationsPanel;
     private javax.swing.JPanel InformationsPanelParent;
     private javax.swing.JLabel StartLabel1;
     private javax.swing.JLabel StartLabel2;
-    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi StartPanel;
-    private javax.swing.JPanel StartParent;
     private javax.swing.JPanel ToolBar;
     private javax.swing.JPanel ToolBarParent;
     private ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel ZoomInfo;
     private javax.swing.JPanel ZoomPanelParent;
+    private javax.swing.JLabel nomCarte;
     // End of variables declaration//GEN-END:variables
 }

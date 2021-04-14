@@ -30,16 +30,16 @@
           <Group type="102" attributes="0">
               <EmptySpace min="42" pref="42" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="SimulationName" min="-2" pref="303" max="-2" attributes="0"/>
-                  <Component id="Day" min="-2" pref="117" max="-2" attributes="0"/>
+                  <Component id="NomSimulation" min="-2" pref="303" max="-2" attributes="0"/>
+                  <Component id="Jour" min="-2" pref="117" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Component id="MapName" min="-2" max="-2" attributes="0"/>
+              <Component id="NomCarte" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="VirusName" min="-2" max="-2" attributes="0"/>
+              <Component id="NomVirus" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
           </Group>
           <Component id="DiagramPanel" alignment="0" max="32767" attributes="0"/>
@@ -49,15 +49,15 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Component id="SimulationName" min="-2" pref="31" max="-2" attributes="0"/>
+              <Component id="NomSimulation" min="-2" pref="31" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-              <Component id="Day" min="-2" max="-2" attributes="0"/>
+              <Component id="Jour" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Component id="DiagramPanel" min="-2" pref="74" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="MapName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="VirusName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="NomCarte" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="NomVirus" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
@@ -65,7 +65,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="SimulationName">
+    <Component class="javax.swing.JLabel" name="NomSimulation">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="21" style="1"/>
@@ -73,7 +73,7 @@
         <Property name="text" type="java.lang.String" value="Nom de la simulation"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="Day">
+    <Component class="javax.swing.JLabel" name="Jour">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="16" style="0"/>
@@ -128,7 +128,7 @@
             <Property name="rows" type="int" value="3"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JProgressBar" name="InfectedProgressBar">
+            <Component class="javax.swing.JProgressBar" name="InfectionsBar">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="6a" green="61" red="bf" type="rgb"/>
@@ -142,7 +142,7 @@
                 <Property name="string" type="java.lang.String" value="Infect&#xe9;s"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JProgressBar" name="CuredProgressBar">
+            <Component class="javax.swing.JProgressBar" name="SainsBar">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="8c" green="be" red="a3" type="rgb"/>
@@ -156,7 +156,7 @@
                 <Property name="string" type="java.lang.String" value="Gu&#xe9;ris"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JProgressBar" name="DeadProgressBar">
+            <Component class="javax.swing.JProgressBar" name="MortsBar">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ad" green="8e" red="b4" type="rgb"/>
@@ -174,7 +174,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="MapName">
+    <Component class="javax.swing.JLabel" name="NomCarte">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="1"/>
@@ -182,7 +182,7 @@
         <Property name="text" type="java.lang.String" value="Nom de la carte"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="VirusName">
+    <Component class="javax.swing.JLabel" name="NomVirus">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="15" style="1"/>

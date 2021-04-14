@@ -53,7 +53,7 @@ public class Region implements Externalizable {
     }
     
     
-    public void contaminer(double taux, int cptJours, int incubation)
+    public void contaminerPopulation(double taux, int cptJours, int incubation)
     {
         //Nous ajoutons les nouveaux infectés dans un vecteur pour ajouter une dose de réalisme.
         //Lorsque l'élimination et guérison de la pop ont lieu, ces méthodes s'appliquent sur la 
@@ -74,7 +74,7 @@ public class Region implements Externalizable {
         }
     }
     
-    public void guerirPop(double taux, int cptJours, int incubation)
+    public void guerirPopulation(double taux, int cptJours, int incubation)
     {
         //Les premières guerisons ont lieu 2 semaines après la 1ere infection
         if (cptJours > 14){
@@ -84,7 +84,7 @@ public class Region implements Externalizable {
         }
     }
     
-    public void vaccinationPop(double taux, int vaccinationParJour)
+    public void vaccinerPopulation(double taux, int vaccinationParJour)
     {
         int nouveauxImmune = (int)((float)vaccinationParJour * taux);
         setPopImmune(this.getPopImmunisee() + nouveauxImmune);
@@ -92,9 +92,7 @@ public class Region implements Externalizable {
     
     public String getNom(){return nom;}
     
-    public void setPopTotale(int pop) {
-        this.populationSaine = pop;
-    }
+    public void setPopTotale(int pop) {this.populationSaine = pop;}
     
     public int getPopTotale() { return populationSaine + populationInfectee + populationImmune; }
     
@@ -112,70 +110,48 @@ public class Region implements Externalizable {
     
     
     public float getPourcentageInfectee() {
-        if (this.getPopTotale() <= 0) {
-            return 0;
-        }
+        if (this.getPopTotale() <= 0) {return 0;}
+        
         return ((float)this.getPopInfectee() / (float)this.getPopTotale()) * 100f;
     }
     
     public float getPourcentageSaine() {
-        if (this.getPopTotale() <= 0) {
-            return 0;
-        }
+        if (this.getPopTotale() <= 0) {return 0;}
+    
         return ((float)this.getPopSaine() / (float)this.getPopTotale()) * 100f;
     }
     
     public float getPourcentageDecedee() {
-        if (this.getPopTotale() <= 0) {
-            return 0;
-        }
+        if (this.getPopTotale() <= 0) {return 0;}
+        
         return ((float)this.getPopDecedee() / (float)this.getPopInitiale()) * 100f;
     }
     
     public float getPourcentageImmune() {
-        if (this.getPopTotale() <= 0) {
-            return 0;
-        }
+        if (this.getPopTotale() <= 0) {return 0;}
+        
         return ((float)this.getPopImmunisee() / (float)this.getPopTotale()) * 100f;
     }
     
-    public Polygon getPolygone() {
-        return polygone;
-    }
+    public Polygon getPolygone() {return polygone;}
     
-    public void setNom(String nom)
-    {
-        this.nom = nom;
-    }
+    public void setNom(String nom) {this.nom = nom;}
     
-    public void setPopSaine(int populationSaine)
-    {        
-        this.populationSaine = clamp(populationSaine, 0, this.getPopTotale());
-    }
+    public void setPopInitiale(int popInitiale) {this.popInitiale = popInitiale;}
     
-    private void setPopImmune(int populationImmune)
-    {
-        this.populationImmune = populationImmune;
-    }
+    public int getPopInitiale() {return popInitiale;}    
+    
+    public void setPopSaine(int populationSaine){this.populationSaine = clamp(populationSaine, 0, this.getPopTotale());}
+    
+    private void setPopImmune(int populationImmune) {this.populationImmune = populationImmune;}
         
-    public void setPopInfectee(int populationInfectee)
-    {
-        this.populationInfectee = clamp(populationInfectee, 0, this.getPopTotale());
-    }
+    public void setPopInfectee(int populationInfectee) {this.populationInfectee = clamp(populationInfectee, 0, this.getPopTotale());}
     
-    public void setPopDecedee(int populationDecedee)
-    {
-        this.populationDecedee = clamp(populationDecedee, 0, this.getPopInitiale());
-    }
+    public void setPopDecedee(int populationDecedee) {this.populationDecedee = clamp(populationDecedee, 0, this.getPopInitiale());}
 
-    public void setTauxContaInterRegion(double tauxContaInterRegion) {
-        this.tauxContaInterRegion = tauxContaInterRegion;
-    }
+    public void setTauxContaInterRegion(double tauxContaInterRegion) {this.tauxContaInterRegion = tauxContaInterRegion;}
 
-    public void setTauxContaIntraRegion(double tauxContaIntraRegion) {
-        this.tauxContaIntraRegion = tauxContaIntraRegion;
-    }
-    
+    public void setTauxContaIntraRegion(double tauxContaIntraRegion) {this.tauxContaIntraRegion = tauxContaIntraRegion;}
     
     private int contaminationBinomiale(double tauxPropag, int incubation) {
         
@@ -245,18 +221,8 @@ public class Region implements Externalizable {
     }
 
     // https://stackoverflow.com/questions/16656651/does-java-have-a-clamp-function
-    private int clamp(int value, int min, int max) {
-        return value > max ? max : value < min ? min : value;
-    }
+    private int clamp(int value, int min, int max) {return value > max ? max : value < min ? min : value;}
        
-    public void setPopInitiale(int popInitiale) {
-        this.popInitiale = popInitiale;
-    }
-    
-    public int getPopInitiale() {
-        return popInitiale;
-    }    
-
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeUTF(nom);

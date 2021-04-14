@@ -26,7 +26,7 @@
     <Property name="verticalGap" type="int" value="20"/>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="LienLabels">
+    <Container class="javax.swing.JPanel" name="InformationsLiens">
       <Properties>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
@@ -48,12 +48,12 @@
             <Property name="text" type="java.lang.String" value="Informations Lien"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="LienOrigineLabel">
+        <Component class="javax.swing.JLabel" name="OrigineLienLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Origine : "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="LienDestinationLabel">
+        <Component class="javax.swing.JLabel" name="DestinationLienLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Dest. :"/>
           </Properties>

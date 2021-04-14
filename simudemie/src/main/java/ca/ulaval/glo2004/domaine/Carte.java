@@ -22,9 +22,7 @@ public class Carte implements Externalizable {
 
     public Carte() {}
     
-    public Carte(String nom) {
-        this.nom = nom;
-    }    
+    public Carte(String nom) {this.nom = nom;}    
 
     public Carte(Carte carteJourCourant) {
         this.nom = carteJourCourant.nom;
@@ -133,9 +131,7 @@ public class Carte implements Externalizable {
         }
     }
     
-    public ArrayList<VoieLiaison> getVoies() {
-        return frontieres;
-    }
+    public ArrayList<VoieLiaison> getVoies() {return frontieres;}
     
     public ArrayList<VoieLiaison.TypeVoie> getVoiesDisponibles(Pays origine, Pays destination) {
         ArrayList<VoieLiaison.TypeVoie> voies = new ArrayList<>();
@@ -175,9 +171,7 @@ public class Carte implements Externalizable {
         return voies;
     }
     
-    public Pays getPays(int index) {
-        return listePays.get(index);
-    }
+    public Pays getPays(int index) {return listePays.get(index);}
     
     public Pays getPays(Polygon p) {
         for (Pays pays : listePays) {

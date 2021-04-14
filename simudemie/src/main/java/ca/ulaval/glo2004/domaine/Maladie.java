@@ -50,36 +50,17 @@ public class Maladie implements Externalizable {
 
     public int getIncubation(){return incubation;}
 
+    public void setNom(String nom) {this.nom = nom;}
     
-    public void setNom(String nom)
-    {
-        this.nom = nom;
-    }
-    
-    public void setTauxInfection(double tauxInfection)
-    {
-        this.tauxInfection = tauxInfection;
-    }
+    public void setTauxInfection(double tauxInfection) {this.tauxInfection = tauxInfection;}
         
-    public void setTauxMortalite(double tauxMortalite)
-    {
-        this.tauxMortalite = tauxMortalite;
-    }
+    public void setTauxMortalite(double tauxMortalite) {this.tauxMortalite = tauxMortalite;}
     
-    public void setTauxGuerison(double tauxGuerison)
-    {
-        this.tauxGuerison = tauxGuerison;
-    }
+    public void setTauxGuerison(double tauxGuerison) {this.tauxGuerison = tauxGuerison;}
     
-    public void setImmunitePossible(boolean immunitePossible)
-    {
-        this.immunitePossible = immunitePossible;
-    }
+    public void setImmunitePossible(boolean immunitePossible) {this.immunitePossible = immunitePossible;}
     
-    public void setIncubation(int incubation)
-    {
-        this.incubation = incubation;
-    }
+    public void setIncubation(int incubation) {this.incubation = incubation;}
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
@@ -96,6 +77,5 @@ public class Maladie implements Externalizable {
         tauxMortalite = in.readDouble();
         tauxGuerison = in.readDouble();
     }
-    
-     
+   
 }

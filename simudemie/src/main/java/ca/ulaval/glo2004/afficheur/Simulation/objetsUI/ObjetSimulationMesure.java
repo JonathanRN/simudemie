@@ -39,8 +39,8 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         
         try {
             NomMesureTextField.setFont(FontRegister.RobotoLight.deriveFont(14f));
-            ReductionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
-            AdhesionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            TauxReductionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            TauxAdhesionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         }
         catch (Exception e) {
         }
@@ -60,28 +60,28 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         this.edition = edition;
         
         NomMesureTextField.setEnabled(edition);
-        Reduction.setEnabled(edition);
-        Adhesion.setEnabled(edition);
+        TauxReduction.setEnabled(edition);
+        TauxAdhesion.setEnabled(edition);
         
         updateEditerIcon(mouseOver);
     }
     
     public void chargerMesure(Mesure mesure) {
         NomMesureTextField.setText(mesure.getNom());
-        Adhesion.setValue(mesure.getTauxAdhesion());
-        Reduction.setValue(mesure.getTauxReductionProp());
+        TauxAdhesion.setValue(mesure.getTauxAdhesion());
+        TauxReduction.setValue(mesure.getTauxReductionProp());
         setActif(mesure.getActive(), false);
         setEdition(false, false);
     }
     
     public void sauvegarderMesure() {
         try {
-            Adhesion.commitEdit();
-            Reduction.commitEdit();
+            TauxAdhesion.commitEdit();
+            TauxReduction.commitEdit();
         } catch(ParseException pe) {
         }
         
-        GestionnaireScenario.getInstance().creerMesure(index, simulationTabs.getIndexPays(), NomMesureTextField.getText(), (double) Adhesion.getValue(), (double) Reduction.getValue(), estActif);
+        GestionnaireScenario.getInstance().creerMesure(index, simulationTabs.getIndexPays(), NomMesureTextField.getText(), (double) TauxAdhesion.getValue(), (double) TauxReduction.getValue(), estActif);
     }
     
     private void updateEditerIcon(boolean actif) {
@@ -89,7 +89,7 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         String path = "/icons/simulation/mesure/";
         path += edition ? "save" : "editer";
         path += actif ? "_highlight.png" : ".png";
-        Editer.setIcon(new ImageIcon(getClass().getResource(path)));
+        Modifie.setIcon(new ImageIcon(getClass().getResource(path)));
         conteneur.getRootPane().repaint();
     }
     
@@ -119,51 +119,51 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Header = new javax.swing.JPanel();
+        TitreMesurePanel = new javax.swing.JPanel();
         NomMesureTextField = new javax.swing.JTextField();
-        Boutons = new javax.swing.JPanel();
-        Editer = new javax.swing.JLabel();
+        BoutonsPanel = new javax.swing.JPanel();
+        Modifie = new javax.swing.JLabel();
         Supprimer = new javax.swing.JLabel();
         Activer = new javax.swing.JLabel();
-        ReductionPanel = new javax.swing.JPanel();
-        ReductionLabel = new javax.swing.JLabel();
-        Reduction = new javax.swing.JSpinner();
-        TauxAdhesion = new javax.swing.JPanel();
-        AdhesionLabel = new javax.swing.JLabel();
-        Adhesion = new javax.swing.JSpinner();
+        TauxReductionPanel = new javax.swing.JPanel();
+        TauxReductionLabel = new javax.swing.JLabel();
+        TauxReduction = new javax.swing.JSpinner();
+        TauxAdhesionPanel = new javax.swing.JPanel();
+        TauxAdhesionLabel = new javax.swing.JLabel();
+        TauxAdhesion = new javax.swing.JSpinner();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
         setMaximumSize(new java.awt.Dimension(32767, 100));
         setOpaque(false);
         setLayout(new java.awt.GridLayout(3, 0));
 
-        Header.setOpaque(false);
-        Header.setLayout(new java.awt.BorderLayout());
+        TitreMesurePanel.setOpaque(false);
+        TitreMesurePanel.setLayout(new java.awt.BorderLayout());
 
         NomMesureTextField.setText("Nom de la mesure");
         NomMesureTextField.setSelectionColor(new java.awt.Color(136, 192, 208));
-        Header.add(NomMesureTextField, java.awt.BorderLayout.CENTER);
+        TitreMesurePanel.add(NomMesureTextField, java.awt.BorderLayout.CENTER);
 
-        Boutons.setOpaque(false);
-        Boutons.setLayout(new java.awt.GridLayout(1, 3));
+        BoutonsPanel.setOpaque(false);
+        BoutonsPanel.setLayout(new java.awt.GridLayout(1, 3));
 
-        Editer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Editer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simulation/mesure/editer.png"))); // NOI18N
-        Editer.setMaximumSize(new java.awt.Dimension(30, 30));
-        Editer.setMinimumSize(new java.awt.Dimension(30, 30));
-        Editer.setPreferredSize(new java.awt.Dimension(30, 30));
-        Editer.addMouseListener(new java.awt.event.MouseAdapter() {
+        Modifie.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Modifie.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simulation/mesure/editer.png"))); // NOI18N
+        Modifie.setMaximumSize(new java.awt.Dimension(30, 30));
+        Modifie.setMinimumSize(new java.awt.Dimension(30, 30));
+        Modifie.setPreferredSize(new java.awt.Dimension(30, 30));
+        Modifie.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                EditerMouseEntered(evt);
+                ModifieMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                EditerMouseExited(evt);
+                ModifieMouseExited(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                EditerMouseReleased(evt);
+                ModifieMouseReleased(evt);
             }
         });
-        Boutons.add(Editer);
+        BoutonsPanel.add(Modifie);
 
         Supprimer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Supprimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simulation/mesure/supprimer.png"))); // NOI18N
@@ -181,7 +181,7 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
                 SupprimerMouseReleased(evt);
             }
         });
-        Boutons.add(Supprimer);
+        BoutonsPanel.add(Supprimer);
 
         Activer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Activer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simulation/mesure/unchecked.png"))); // NOI18N
@@ -199,45 +199,45 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
                 ActiverMouseReleased(evt);
             }
         });
-        Boutons.add(Activer);
+        BoutonsPanel.add(Activer);
 
-        Header.add(Boutons, java.awt.BorderLayout.LINE_END);
+        TitreMesurePanel.add(BoutonsPanel, java.awt.BorderLayout.LINE_END);
 
-        add(Header);
+        add(TitreMesurePanel);
 
-        ReductionPanel.setOpaque(false);
-        ReductionPanel.setLayout(new java.awt.BorderLayout());
+        TauxReductionPanel.setOpaque(false);
+        TauxReductionPanel.setLayout(new java.awt.BorderLayout());
 
-        ReductionLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        ReductionLabel.setText("Taux réduction inf. : ");
-        ReductionPanel.add(ReductionLabel, java.awt.BorderLayout.WEST);
+        TauxReductionLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        TauxReductionLabel.setText("Taux réduction inf. : ");
+        TauxReductionPanel.add(TauxReductionLabel, java.awt.BorderLayout.WEST);
 
-        Reduction.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
-        ReductionPanel.add(Reduction, java.awt.BorderLayout.CENTER);
+        TauxReduction.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
+        TauxReductionPanel.add(TauxReduction, java.awt.BorderLayout.CENTER);
 
-        add(ReductionPanel);
+        add(TauxReductionPanel);
 
-        TauxAdhesion.setOpaque(false);
-        TauxAdhesion.setLayout(new java.awt.BorderLayout());
+        TauxAdhesionPanel.setOpaque(false);
+        TauxAdhesionPanel.setLayout(new java.awt.BorderLayout());
 
-        AdhesionLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        AdhesionLabel.setText("Taux d'adhésion :");
-        AdhesionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
-        TauxAdhesion.add(AdhesionLabel, java.awt.BorderLayout.WEST);
+        TauxAdhesionLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        TauxAdhesionLabel.setText("Taux d'adhésion :");
+        TauxAdhesionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
+        TauxAdhesionPanel.add(TauxAdhesionLabel, java.awt.BorderLayout.WEST);
 
-        Adhesion.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
-        TauxAdhesion.add(Adhesion, java.awt.BorderLayout.CENTER);
+        TauxAdhesion.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
+        TauxAdhesionPanel.add(TauxAdhesion, java.awt.BorderLayout.CENTER);
 
-        add(TauxAdhesion);
+        add(TauxAdhesionPanel);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void EditerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditerMouseEntered
+    private void ModifieMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifieMouseEntered
         updateEditerIcon(true);
-    }//GEN-LAST:event_EditerMouseEntered
+    }//GEN-LAST:event_ModifieMouseEntered
 
-    private void EditerMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditerMouseExited
+    private void ModifieMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifieMouseExited
         updateEditerIcon(false);
-    }//GEN-LAST:event_EditerMouseExited
+    }//GEN-LAST:event_ModifieMouseExited
 
     private void ActiverMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActiverMouseEntered
         updateActifIcon(true);
@@ -269,12 +269,12 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_SupprimerMouseReleased
 
-    private void EditerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditerMouseReleased
+    private void ModifieMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifieMouseReleased
         setEdition(!edition, mouseOverEdition);
         if(!edition) {
             sauvegarderMesure();
         }
-    }//GEN-LAST:event_EditerMouseReleased
+    }//GEN-LAST:event_ModifieMouseReleased
 
     private void ActiverMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActiverMouseReleased
         setActif(!estActif, mouseOverActif);
@@ -284,16 +284,16 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Activer;
-    private javax.swing.JSpinner Adhesion;
-    private javax.swing.JLabel AdhesionLabel;
-    private javax.swing.JPanel Boutons;
-    private javax.swing.JLabel Editer;
-    private javax.swing.JPanel Header;
+    private javax.swing.JPanel BoutonsPanel;
+    private javax.swing.JLabel Modifie;
     private javax.swing.JTextField NomMesureTextField;
-    private javax.swing.JSpinner Reduction;
-    private javax.swing.JLabel ReductionLabel;
-    private javax.swing.JPanel ReductionPanel;
     private javax.swing.JLabel Supprimer;
-    private javax.swing.JPanel TauxAdhesion;
+    private javax.swing.JSpinner TauxAdhesion;
+    private javax.swing.JLabel TauxAdhesionLabel;
+    private javax.swing.JPanel TauxAdhesionPanel;
+    private javax.swing.JSpinner TauxReduction;
+    private javax.swing.JLabel TauxReductionLabel;
+    private javax.swing.JPanel TauxReductionPanel;
+    private javax.swing.JPanel TitreMesurePanel;
     // End of variables declaration//GEN-END:variables
 }

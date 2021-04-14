@@ -23,9 +23,7 @@ public class Pays implements Externalizable {
 
     public Pays() {}
     
-    public Pays(Polygon polygone) {
-        this.polygone = new Polygon(polygone.xpoints, polygone.ypoints, polygone.npoints);
-    }
+    public Pays(Polygon polygone) {this.polygone = new Polygon(polygone.xpoints, polygone.ypoints, polygone.npoints);}
 
     public Pays(Pays pays) {
         this.nom = pays.nom;
@@ -42,10 +40,10 @@ public class Pays implements Externalizable {
             this.listeRegions.add(new Region(region));
         }
         
-//        this.vaccins.clear();
-//        for (Vaccin vaccin : pays.vaccins) {
-//            this.vaccins.add(new Vaccin(vaccin));
-//        }
+//      this.vaccins.clear();
+//      for (Vaccin vaccin : pays.vaccins) {
+//          this.vaccins.add(new Vaccin(vaccin));
+//      }
     }
     
     
@@ -65,8 +63,8 @@ public class Pays implements Externalizable {
                     tauxInfAjuste = tauxInfAjuste * (m.getTauxAdhesion() / 100.0 * m.getTauxReductionProp() / 100.0);
                 }
             }
-            region.contaminer(tauxInfAjuste, cptJours, incubation);
-            region.guerirPop(tauxGuerison, cptJours, incubation);
+            region.contaminerPopulation(tauxInfAjuste, cptJours, incubation);
+            region.guerirPopulation(tauxGuerison, cptJours, incubation);
             region.eliminerPopulation(tauxMortalite, cptJours, incubation);
         }
         
@@ -134,39 +132,23 @@ public class Pays implements Externalizable {
         }
     }
     
-    public ArrayList<Region> getRegions() {
-        return listeRegions;
-    }
+    public ArrayList<Region> getRegions() {return listeRegions;}
     
-    public Region getRegion(Polygon p) {
-        return listeRegions.stream().filter(x -> x.getPolygone().equals(p)).findFirst().get();
-    }
+    public Region getRegion(Polygon p) {return listeRegions.stream().filter(x -> x.getPolygone().equals(p)).findFirst().get();}
         
-    public String getNom(){ return nom; }
+    public String getNom(){return nom;}
     
-    public int getPopInfectee() {
-        return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopInfectee()));
-    }
+    public int getPopInfectee() {return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopInfectee()));}
     
-    public int getPopSaine() {
-        return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopSaine()));
-    }
+    public int getPopSaine() {return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopSaine()));}
     
-    public int getPopDecedee() {
-        return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopDecedee()));
-    }
+    public int getPopDecedee() {return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopDecedee()));}
     
-    public int getPopTotale() {
-        return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopTotale()));
-    }
+    public int getPopTotale() {return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopTotale()));}
     
-    public int getPopImmune() {
-        return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopImmunisee()));
-    }
+    public int getPopImmune() {return listeRegions.stream().collect(Collectors.summingInt(x -> x.getPopImmunisee()));}
     
-    public int getPopInitiale() {
-        return popInitiale;
-    }
+    public int getPopInitiale() {return popInitiale;}
     
     public float getPourcentageInfectee() {
         if (this.getPopTotale() <= 0) {
@@ -189,38 +171,24 @@ public class Pays implements Externalizable {
         return ((float)this.getPopDecedee() / (float)this.getPopInitiale()) * 100f;
     }
     
-    public Polygon getPolygone() { return polygone; };
-    
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-    
-    public void setPopInitiale(int popInitiale) {
-        this.popInitiale = popInitiale;
-    }
-    
-    public ArrayList<Mesure> getMesures() {
-        return mesures;
-    }
-    
     public Mesure getMesure(int index) {
-        if(index >= mesures.size()) {
-            return null;
-        }
+        if(index >= mesures.size()) { return null;}
         return mesures.get(index);
     }
     
-    public void setMesure(int index, Mesure mesure) {
-        mesures.set(index, mesure);
-    }
+    public ArrayList<Mesure> getMesures() {return mesures;}
     
-    public void ajouterMesure(Mesure mesure) {
-        mesures.add(mesure);
-    }
+    public Polygon getPolygone() {return polygone;};
     
-    public void supprimerMesure(int index) {
-        mesures.remove(index);
-    }
+    public void setNom(String nom) {this.nom = nom;}
+    
+    public void setPopInitiale(int popInitiale) {this.popInitiale = popInitiale;}
+    
+    public void setMesure(int index, Mesure mesure) {mesures.set(index, mesure);}
+    
+    public void ajouterMesure(Mesure mesure) {mesures.add(mesure);}
+    
+    public void supprimerMesure(int index) {mesures.remove(index);}
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {

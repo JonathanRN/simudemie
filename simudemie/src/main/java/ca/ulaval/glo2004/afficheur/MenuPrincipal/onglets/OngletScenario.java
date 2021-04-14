@@ -33,20 +33,20 @@ public class OngletScenario extends OngletUI {
             CreationScenarioPanel.setOngletScenario(this);
             
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
-            ScenariosLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
-            Sce_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
-            AddScenarioButton.setBackground(Couleurs.sains);
-            BoutonDelete.setBackground(Couleurs.infections);
-            ImportScenarioButton.setBackground(Couleurs.pannelArrondi);
-            BoutonExport.setBackground(Couleurs.pannelArrondi);
+            TitreScenariosLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
+            InformationsScenarioLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
+            AjoutScenarionBouton.setBackground(Couleurs.sains);
+            SupprimeScenarioBouton.setBackground(Couleurs.infections);
+            ImportScenarioBouton.setBackground(Couleurs.pannelArrondi);
+            ExportScenarionBouton.setBackground(Couleurs.pannelArrondi);
             
-            scenarioStatsPanel1.setOnglet(this);
+            StatsScenarioPanel1.setOnglet(this);
         } catch (Exception e) {
         }
     }
     
     public void init() {
-        scenarioStatsPanel1.setOnglet(this);
+        StatsScenarioPanel1.setOnglet(this);
         
         for(Scenario scenario : GestionnaireScenario.getInstance().getList()) {
             ajouterCard(scenario);
@@ -62,13 +62,12 @@ public class OngletScenario extends OngletUI {
         super.onClickObjetUI(objet);
         Scenario scenario = GestionnaireScenario.getInstance().getElement(this.getIndexCourant());
         
-        scenarioStatsPanel1.getResumeButton().setText(getScenarioCourant().estCommence() ? "Résumer" : "Commencer");
-        scenarioStatsPanel1.setDataset(scenario);
+        StatsScenarioPanel1.getResumeButton().setText(getScenarioCourant().estCommence() ? "Résumer" : "Commencer");
+        StatsScenarioPanel1.setDataset(scenario);
         
         if (scenario != null) {
-            scenarioMapPanel2.setPreviewVisibility(true);
-            scenarioMapPanel2.setCarte(scenario.getCarteJourCourant());
-            
+            ApercuScenarioCartePanel.setPreviewVisibility(true);
+            ApercuScenarioCartePanel.setCarte(scenario.getCarteJourCourant());
             ObjetScenario obj = (ObjetScenario) objet;
             obj.setInfectedPercent((float)scenario.getCarteDernierJour().getPourcentageInfectee() * 100f);
             obj.setCuredPercent((float)scenario.getCarteDernierJour().getPourcentageSaine() * 100f);
@@ -94,7 +93,7 @@ public class OngletScenario extends OngletUI {
         card.setDeadPercent(0);
         
         objets.add(card);
-        ProjectPanelContainer.add(card);
+        ConteneurScenarioPanel.add(card);
         
         onClickObjetUI(card);
         
@@ -108,15 +107,15 @@ public class OngletScenario extends OngletUI {
 
             if(result == JOptionPane.YES_OPTION && objets.size() > 0) {
                 GestionnaireScenario.getInstance().supprimer(getIndexCourant());
-                ProjectPanelContainer.remove(courant);
+                ConteneurScenarioPanel.remove(courant);
                 updateUI();
                 
                 super.retirerCourant();
             }
             
             if (objets.isEmpty()) {
-                scenarioMapPanel2.setPreviewVisibility(false);
-                scenarioStatsPanel1.setDataset(null);
+                ApercuScenarioCartePanel.setPreviewVisibility(false);
+                StatsScenarioPanel1.setDataset(null);
             }
         }
     }
@@ -153,21 +152,21 @@ public class OngletScenario extends OngletUI {
 
         CreationScenarioPanel = new ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.CreationScenarioPanel();
         Main = new javax.swing.JPanel();
-        Scenarios = new javax.swing.JPanel();
-        ScenariosTitle = new javax.swing.JPanel();
-        ScenariosLabel = new javax.swing.JLabel();
-        AddScenarioButton = new javax.swing.JButton();
-        ImportScenarioButton = new javax.swing.JButton();
-        BoutonExport = new javax.swing.JButton();
-        BoutonDelete = new javax.swing.JButton();
+        ScenariosPanel = new javax.swing.JPanel();
+        TitreScenarioPanel = new javax.swing.JPanel();
+        TitreScenariosLabel = new javax.swing.JLabel();
+        AjoutScenarionBouton = new javax.swing.JButton();
+        ImportScenarioBouton = new javax.swing.JButton();
+        ExportScenarionBouton = new javax.swing.JButton();
+        SupprimeScenarioBouton = new javax.swing.JButton();
         ScenariosScrollPane = new javax.swing.JScrollPane();
-        ProjectPanelContainer = new javax.swing.JPanel();
-        Sce_Informations = new javax.swing.JPanel();
-        Sce_InformationsLabel = new javax.swing.JLabel();
+        ConteneurScenarioPanel = new javax.swing.JPanel();
+        InformationsScenarioPanel = new javax.swing.JPanel();
+        InformationsScenarioLabel = new javax.swing.JLabel();
         Layout = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
-        jPanel1 = new javax.swing.JPanel();
-        scenarioMapPanel2 = new ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.ApercuPanel();
-        scenarioStatsPanel1 = new ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.StatsScenarioPanel();
+        ApercuScenarioPanel = new javax.swing.JPanel();
+        ApercuScenarioCartePanel = new ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.ApercuPanel();
+        StatsScenarioPanel1 = new ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.StatsScenarioPanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
         setOpaque(false);
@@ -178,107 +177,107 @@ public class OngletScenario extends OngletUI {
         Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 35, 35));
         Main.setLayout(new java.awt.BorderLayout());
 
-        Scenarios.setBackground(new java.awt.Color(46, 52, 64));
-        Scenarios.setBorder(javax.swing.BorderFactory.createEmptyBorder(35, 0, 0, 0));
-        Scenarios.setLayout(new java.awt.BorderLayout());
+        ScenariosPanel.setBackground(new java.awt.Color(46, 52, 64));
+        ScenariosPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(35, 0, 0, 0));
+        ScenariosPanel.setLayout(new java.awt.BorderLayout());
 
-        ScenariosTitle.setBackground(new java.awt.Color(46, 52, 64));
-        ScenariosTitle.setMaximumSize(new java.awt.Dimension(974, 50));
-        ScenariosTitle.setMinimumSize(new java.awt.Dimension(974, 50));
-        ScenariosTitle.setPreferredSize(new java.awt.Dimension(974, 35));
+        TitreScenarioPanel.setBackground(new java.awt.Color(46, 52, 64));
+        TitreScenarioPanel.setMaximumSize(new java.awt.Dimension(974, 50));
+        TitreScenarioPanel.setMinimumSize(new java.awt.Dimension(974, 50));
+        TitreScenarioPanel.setPreferredSize(new java.awt.Dimension(974, 35));
 
-        ScenariosLabel.setBackground(new java.awt.Color(46, 52, 64));
-        ScenariosLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        ScenariosLabel.setText("Scénarios");
-        ScenariosLabel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        TitreScenariosLabel.setBackground(new java.awt.Color(46, 52, 64));
+        TitreScenariosLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        TitreScenariosLabel.setText("Scénarios");
+        TitreScenariosLabel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        AddScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        AddScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_plus_math_20px.png"))); // NOI18N
-        AddScenarioButton.setToolTipText("Créer un nouveau scénario");
-        AddScenarioButton.setFocusable(false);
-        AddScenarioButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        AddScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
-        AddScenarioButton.setMinimumSize(new java.awt.Dimension(75, 30));
-        AddScenarioButton.setPreferredSize(new java.awt.Dimension(100, 36));
-        AddScenarioButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        AjoutScenarionBouton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        AjoutScenarionBouton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_plus_math_20px.png"))); // NOI18N
+        AjoutScenarionBouton.setToolTipText("Créer un nouveau scénario");
+        AjoutScenarionBouton.setFocusable(false);
+        AjoutScenarionBouton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AjoutScenarionBouton.setMaximumSize(new java.awt.Dimension(75, 30));
+        AjoutScenarionBouton.setMinimumSize(new java.awt.Dimension(75, 30));
+        AjoutScenarionBouton.setPreferredSize(new java.awt.Dimension(100, 36));
+        AjoutScenarionBouton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                AddScenarioButtonMouseReleased(evt);
+                AjoutScenarionBoutonMouseReleased(evt);
             }
         });
 
-        ImportScenarioButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        ImportScenarioButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_installing_updates_20px.png"))); // NOI18N
-        ImportScenarioButton.setToolTipText("Importer un scénario existant");
-        ImportScenarioButton.setFocusable(false);
-        ImportScenarioButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        ImportScenarioButton.setMaximumSize(new java.awt.Dimension(75, 30));
-        ImportScenarioButton.setMinimumSize(new java.awt.Dimension(75, 30));
-        ImportScenarioButton.setPreferredSize(new java.awt.Dimension(100, 36));
-        ImportScenarioButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        ImportScenarioBouton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        ImportScenarioBouton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_installing_updates_20px.png"))); // NOI18N
+        ImportScenarioBouton.setToolTipText("Importer un scénario existant");
+        ImportScenarioBouton.setFocusable(false);
+        ImportScenarioBouton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ImportScenarioBouton.setMaximumSize(new java.awt.Dimension(75, 30));
+        ImportScenarioBouton.setMinimumSize(new java.awt.Dimension(75, 30));
+        ImportScenarioBouton.setPreferredSize(new java.awt.Dimension(100, 36));
+        ImportScenarioBouton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                ImportScenarioButtonMouseReleased(evt);
+                ImportScenarioBoutonMouseReleased(evt);
             }
         });
 
-        BoutonExport.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        BoutonExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
-        BoutonExport.setToolTipText("Exporter le scénario courant");
-        BoutonExport.setFocusable(false);
-        BoutonExport.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BoutonExport.setMaximumSize(new java.awt.Dimension(75, 30));
-        BoutonExport.setMinimumSize(new java.awt.Dimension(75, 30));
-        BoutonExport.setPreferredSize(new java.awt.Dimension(100, 36));
-        BoutonExport.addMouseListener(new java.awt.event.MouseAdapter() {
+        ExportScenarionBouton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        ExportScenarionBouton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
+        ExportScenarionBouton.setToolTipText("Exporter le scénario courant");
+        ExportScenarionBouton.setFocusable(false);
+        ExportScenarionBouton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ExportScenarionBouton.setMaximumSize(new java.awt.Dimension(75, 30));
+        ExportScenarionBouton.setMinimumSize(new java.awt.Dimension(75, 30));
+        ExportScenarionBouton.setPreferredSize(new java.awt.Dimension(100, 36));
+        ExportScenarionBouton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                BoutonExportMouseReleased(evt);
+                ExportScenarionBoutonMouseReleased(evt);
             }
         });
 
-        BoutonDelete.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        BoutonDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_trash_can_20px.png"))); // NOI18N
-        BoutonDelete.setToolTipText("Supprimer le scénario courant");
-        BoutonDelete.setFocusable(false);
-        BoutonDelete.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BoutonDelete.setMaximumSize(new java.awt.Dimension(75, 30));
-        BoutonDelete.setMinimumSize(new java.awt.Dimension(75, 30));
-        BoutonDelete.setPreferredSize(new java.awt.Dimension(100, 36));
-        BoutonDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+        SupprimeScenarioBouton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        SupprimeScenarioBouton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_trash_can_20px.png"))); // NOI18N
+        SupprimeScenarioBouton.setToolTipText("Supprimer le scénario courant");
+        SupprimeScenarioBouton.setFocusable(false);
+        SupprimeScenarioBouton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        SupprimeScenarioBouton.setMaximumSize(new java.awt.Dimension(75, 30));
+        SupprimeScenarioBouton.setMinimumSize(new java.awt.Dimension(75, 30));
+        SupprimeScenarioBouton.setPreferredSize(new java.awt.Dimension(100, 36));
+        SupprimeScenarioBouton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                BoutonDeleteMouseReleased(evt);
+                SupprimeScenarioBoutonMouseReleased(evt);
             }
         });
 
-        javax.swing.GroupLayout ScenariosTitleLayout = new javax.swing.GroupLayout(ScenariosTitle);
-        ScenariosTitle.setLayout(ScenariosTitleLayout);
-        ScenariosTitleLayout.setHorizontalGroup(
-            ScenariosTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ScenariosTitleLayout.createSequentialGroup()
-                .addComponent(ScenariosLabel)
+        javax.swing.GroupLayout TitreScenarioPanelLayout = new javax.swing.GroupLayout(TitreScenarioPanel);
+        TitreScenarioPanel.setLayout(TitreScenarioPanelLayout);
+        TitreScenarioPanelLayout.setHorizontalGroup(
+            TitreScenarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TitreScenarioPanelLayout.createSequentialGroup()
+                .addComponent(TitreScenariosLabel)
                 .addGap(90, 90, 90)
-                .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AjoutScenarionBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BoutonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SupprimeScenarioBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 915, Short.MAX_VALUE)
-                .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ImportScenarioBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ExportScenarionBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
-        ScenariosTitleLayout.setVerticalGroup(
-            ScenariosTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ScenariosTitleLayout.createSequentialGroup()
-                .addGroup(ScenariosTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ScenariosTitleLayout.createSequentialGroup()
+        TitreScenarioPanelLayout.setVerticalGroup(
+            TitreScenarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TitreScenarioPanelLayout.createSequentialGroup()
+                .addGroup(TitreScenarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TitreScenarioPanelLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(ScenariosLabel))
-                    .addComponent(BoutonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ImportScenarioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BoutonExport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(TitreScenariosLabel))
+                    .addComponent(SupprimeScenarioBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AjoutScenarionBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ImportScenarioBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ExportScenarionBouton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
         );
 
-        Scenarios.add(ScenariosTitle, java.awt.BorderLayout.NORTH);
+        ScenariosPanel.add(TitreScenarioPanel, java.awt.BorderLayout.NORTH);
 
         ScenariosScrollPane.setBackground(new java.awt.Color(46, 52, 64));
         ScenariosScrollPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
@@ -286,55 +285,55 @@ public class OngletScenario extends OngletUI {
         ScenariosScrollPane.setMinimumSize(new java.awt.Dimension(75, 250));
         ScenariosScrollPane.setPreferredSize(new java.awt.Dimension(75, 250));
 
-        ProjectPanelContainer.setBackground(new java.awt.Color(46, 52, 64));
-        ProjectPanelContainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -25, 0, 0));
-        ProjectPanelContainer.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 25, 5));
-        ScenariosScrollPane.setViewportView(ProjectPanelContainer);
+        ConteneurScenarioPanel.setBackground(new java.awt.Color(46, 52, 64));
+        ConteneurScenarioPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, -25, 0, 0));
+        ConteneurScenarioPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 25, 5));
+        ScenariosScrollPane.setViewportView(ConteneurScenarioPanel);
 
-        Scenarios.add(ScenariosScrollPane, java.awt.BorderLayout.CENTER);
+        ScenariosPanel.add(ScenariosScrollPane, java.awt.BorderLayout.CENTER);
 
-        Main.add(Scenarios, java.awt.BorderLayout.NORTH);
+        Main.add(ScenariosPanel, java.awt.BorderLayout.NORTH);
 
-        Sce_Informations.setBorder(javax.swing.BorderFactory.createEmptyBorder(35, 0, 0, 0));
-        Sce_Informations.setOpaque(false);
-        Sce_Informations.setLayout(new java.awt.BorderLayout());
+        InformationsScenarioPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(35, 0, 0, 0));
+        InformationsScenarioPanel.setOpaque(false);
+        InformationsScenarioPanel.setLayout(new java.awt.BorderLayout());
 
-        Sce_InformationsLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        Sce_InformationsLabel.setText("Informations");
-        Sce_InformationsLabel.setMaximumSize(new java.awt.Dimension(146, 35));
-        Sce_InformationsLabel.setMinimumSize(new java.awt.Dimension(146, 35));
-        Sce_InformationsLabel.setPreferredSize(new java.awt.Dimension(146, 35));
-        Sce_Informations.add(Sce_InformationsLabel, java.awt.BorderLayout.NORTH);
+        InformationsScenarioLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        InformationsScenarioLabel.setText("Informations");
+        InformationsScenarioLabel.setMaximumSize(new java.awt.Dimension(146, 35));
+        InformationsScenarioLabel.setMinimumSize(new java.awt.Dimension(146, 35));
+        InformationsScenarioLabel.setPreferredSize(new java.awt.Dimension(146, 35));
+        InformationsScenarioPanel.add(InformationsScenarioLabel, java.awt.BorderLayout.NORTH);
 
         Layout.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
         Layout.setOpaque(false);
         Layout.setLayout(new java.awt.GridLayout(1, 2, 25, 0));
 
-        jPanel1.setOpaque(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(207, 58));
-        jPanel1.setLayout(new javax.swing.OverlayLayout(jPanel1));
-        jPanel1.add(scenarioMapPanel2);
+        ApercuScenarioPanel.setOpaque(false);
+        ApercuScenarioPanel.setPreferredSize(new java.awt.Dimension(207, 58));
+        ApercuScenarioPanel.setLayout(new javax.swing.OverlayLayout(ApercuScenarioPanel));
+        ApercuScenarioPanel.add(ApercuScenarioCartePanel);
 
-        Layout.add(jPanel1);
-        Layout.add(scenarioStatsPanel1);
+        Layout.add(ApercuScenarioPanel);
+        Layout.add(StatsScenarioPanel1);
 
-        Sce_Informations.add(Layout, java.awt.BorderLayout.CENTER);
+        InformationsScenarioPanel.add(Layout, java.awt.BorderLayout.CENTER);
 
-        Main.add(Sce_Informations, java.awt.BorderLayout.CENTER);
+        Main.add(InformationsScenarioPanel, java.awt.BorderLayout.CENTER);
 
         add(Main);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AddScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddScenarioButtonMouseReleased
+    private void AjoutScenarionBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjoutScenarionBoutonMouseReleased
         if (contientMaladieEtCarte()) {
             this.ajouterObjetUI();
         } else {
             JOptionPane.showMessageDialog(this, "Vous devez avoir au moins une maladie et une carte dans votre répertoire.",
                     "", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_AddScenarioButtonMouseReleased
+    }//GEN-LAST:event_AjoutScenarionBoutonMouseReleased
 
-    private void ImportScenarioButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioButtonMouseReleased
+    private void ImportScenarioBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ImportScenarioBoutonMouseReleased
         int result = fileChooser.showDialog(null, "Importer");
         if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
             try {
@@ -345,13 +344,13 @@ public class OngletScenario extends OngletUI {
             }
             fileChooser.setSelectedFile(null);
         }
-    }//GEN-LAST:event_ImportScenarioButtonMouseReleased
+    }//GEN-LAST:event_ImportScenarioBoutonMouseReleased
 
-    private void BoutonDeleteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonDeleteMouseReleased
+    private void SupprimeScenarioBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupprimeScenarioBoutonMouseReleased
         retirerCourant();
-    }//GEN-LAST:event_BoutonDeleteMouseReleased
+    }//GEN-LAST:event_SupprimeScenarioBoutonMouseReleased
 
-    private void BoutonExportMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonExportMouseReleased
+    private void ExportScenarionBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportScenarionBoutonMouseReleased
         if(getCourant() != null) {
             int result = fileChooser.showDialog(null, "Exporter");
             if(fileChooser.getSelectedFile() != null && result == JFileChooser.OPEN_DIALOG) {
@@ -363,25 +362,25 @@ public class OngletScenario extends OngletUI {
                 fileChooser.setSelectedFile(null);
             }
         }
-    }//GEN-LAST:event_BoutonExportMouseReleased
+    }//GEN-LAST:event_ExportScenarionBoutonMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddScenarioButton;
-    private javax.swing.JButton BoutonDelete;
-    private javax.swing.JButton BoutonExport;
+    private javax.swing.JButton AjoutScenarionBouton;
+    private ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.ApercuPanel ApercuScenarioCartePanel;
+    private javax.swing.JPanel ApercuScenarioPanel;
+    private javax.swing.JPanel ConteneurScenarioPanel;
     private ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.CreationScenarioPanel CreationScenarioPanel;
-    private javax.swing.JButton ImportScenarioButton;
+    private javax.swing.JButton ExportScenarionBouton;
+    private javax.swing.JButton ImportScenarioBouton;
+    private javax.swing.JLabel InformationsScenarioLabel;
+    private javax.swing.JPanel InformationsScenarioPanel;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi Layout;
     private javax.swing.JPanel Main;
-    private javax.swing.JPanel ProjectPanelContainer;
-    private javax.swing.JPanel Sce_Informations;
-    private javax.swing.JLabel Sce_InformationsLabel;
-    private javax.swing.JPanel Scenarios;
-    private javax.swing.JLabel ScenariosLabel;
+    private javax.swing.JPanel ScenariosPanel;
     private javax.swing.JScrollPane ScenariosScrollPane;
-    private javax.swing.JPanel ScenariosTitle;
-    private javax.swing.JPanel jPanel1;
-    private ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.ApercuPanel scenarioMapPanel2;
-    private ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.StatsScenarioPanel scenarioStatsPanel1;
+    private ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.StatsScenarioPanel StatsScenarioPanel1;
+    private javax.swing.JButton SupprimeScenarioBouton;
+    private javax.swing.JPanel TitreScenarioPanel;
+    private javax.swing.JLabel TitreScenariosLabel;
     // End of variables declaration//GEN-END:variables
 }

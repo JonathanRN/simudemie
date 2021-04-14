@@ -155,7 +155,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
     private void initComponents() {
 
         Main = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
-        StatsHeader = new javax.swing.JPanel();
+        TitreStatsPanel = new javax.swing.JPanel();
         MaladieInput = new javax.swing.JTextField();
         Parent = new javax.swing.JPanel();
 
@@ -170,8 +170,8 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 25, 15));
         Main.setLayout(new java.awt.BorderLayout());
 
-        StatsHeader.setOpaque(false);
-        StatsHeader.setLayout(new java.awt.BorderLayout());
+        TitreStatsPanel.setOpaque(false);
+        TitreStatsPanel.setLayout(new java.awt.BorderLayout());
 
         MaladieInput.setBackground(new java.awt.Color(71, 76, 88));
         MaladieInput.setFont(new java.awt.Font("Dialog", 0, 21)); // NOI18N
@@ -182,10 +182,10 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
                 MaladieInputKeyReleased(evt);
             }
         });
-        StatsHeader.add(MaladieInput, java.awt.BorderLayout.CENTER);
+        TitreStatsPanel.add(MaladieInput, java.awt.BorderLayout.CENTER);
         MaladieInput.getAccessibleContext().setAccessibleName("");
 
-        Main.add(StatsHeader, java.awt.BorderLayout.NORTH);
+        Main.add(TitreStatsPanel, java.awt.BorderLayout.NORTH);
 
         Parent.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 0, 0));
         Parent.setOpaque(false);
@@ -225,7 +225,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi Main;
     private javax.swing.JTextField MaladieInput;
     private javax.swing.JPanel Parent;
-    private javax.swing.JPanel StatsHeader;
+    private javax.swing.JPanel TitreStatsPanel;
     // End of variables declaration//GEN-END:variables
 
     @Override

@@ -47,7 +47,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
             
             BoutonLiens.init(this, "icons8_chain_25px");
             LiensTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
-            SPLiens.getViewport().setOpaque(false);
+            LiensScrollPane.getViewport().setOpaque(false);
             
             onToggleClick(BoutonMesures);
         }
@@ -79,9 +79,9 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     }
     
     public void loadMesures() {
-        ContenuMesures.removeAll();
-        ContenuMesures.getParent().validate();
-        ContenuMesures.getRootPane().repaint();
+        ConteneurMesuresPanel.removeAll();
+        ConteneurMesuresPanel.getParent().validate();
+        ConteneurMesuresPanel.getRootPane().repaint();
 
         for (Mesure m : simulation.getScenario().getCarteJourCourant().getPays(indexPays).getMesures()) {
             addMesure(m);
@@ -90,9 +90,9 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     
     public void loadLiens() {
         voies.clear();
-        ContenuLiens.removeAll();
-        ContenuLiens.getParent().validate();
-        ContenuLiens.getRootPane().repaint();
+        ConteneurLiensPanel.removeAll();
+        ConteneurLiensPanel.getParent().validate();
+        ConteneurLiensPanel.getRootPane().repaint();
         
         Carte carte = simulation.getScenario().getCarteJourCourant();
         for (VoieLiaison voie : carte.getVoies()) {
@@ -102,14 +102,14 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
                 if (!voies.contains(voie.getType())) {
                     ObjetSimulationVoieLiaison sml = new ObjetSimulationVoieLiaison();
                     sml.setTypeVoie(voie.getType());
-                    ContenuLiens.add(sml);
+                    ConteneurLiensPanel.add(sml);
                     voies.add(voie.getType());
                 }
             }
         }
         
-        ContenuLiens.getParent().validate();
-        ContenuLiens.getRootPane().repaint();
+        ConteneurLiensPanel.getParent().validate();
+        ConteneurLiensPanel.getRootPane().repaint();
     }
     
     public void onToggleClick(ToggleBouton toggle) {        
@@ -141,13 +141,13 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     }
 
     private ObjetSimulationMesure addMesure(Mesure mesure) {
-        ObjetSimulationMesure panel = new ObjetSimulationMesure(ContenuMesures, this, ContenuMesures.getComponentCount());
+        ObjetSimulationMesure panel = new ObjetSimulationMesure(ConteneurMesuresPanel, this, ConteneurMesuresPanel.getComponentCount());
         if(mesure != null) {
             panel.chargerMesure(new Mesure(mesure));
         }
-        ContenuMesures.add(panel);
-        ContenuMesures.getParent().validate();
-        ContenuMesures.getRootPane().repaint();
+        ConteneurMesuresPanel.add(panel);
+        ConteneurMesuresPanel.getParent().validate();
+        ConteneurMesuresPanel.getRootPane().repaint();
         return panel;
     }
     
@@ -169,12 +169,12 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         MesuresTitre = new javax.swing.JLabel();
         AjouterMesure = new javax.swing.JLabel();
         MesuresActives = new javax.swing.JScrollPane();
-        ContenuMesures = new javax.swing.JPanel();
+        ConteneurMesuresPanel = new javax.swing.JPanel();
         LiensPanel = new javax.swing.JPanel();
-        Titre1 = new javax.swing.JPanel();
+        TitreOngletPanel = new javax.swing.JPanel();
         LiensTitre = new javax.swing.JLabel();
-        SPLiens = new javax.swing.JScrollPane();
-        ContenuLiens = new javax.swing.JPanel();
+        LiensScrollPane = new javax.swing.JScrollPane();
+        ConteneurLiensPanel = new javax.swing.JPanel();
 
         setLayout(new javax.swing.OverlayLayout(this));
 
@@ -228,10 +228,10 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         MesuresActives.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         MesuresActives.setOpaque(false);
 
-        ContenuMesures.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        ContenuMesures.setOpaque(false);
-        ContenuMesures.setLayout(new javax.swing.BoxLayout(ContenuMesures, javax.swing.BoxLayout.Y_AXIS));
-        MesuresActives.setViewportView(ContenuMesures);
+        ConteneurMesuresPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        ConteneurMesuresPanel.setOpaque(false);
+        ConteneurMesuresPanel.setLayout(new javax.swing.BoxLayout(ConteneurMesuresPanel, javax.swing.BoxLayout.Y_AXIS));
+        MesuresActives.setViewportView(ConteneurMesuresPanel);
 
         MesuresPanel.add(MesuresActives, java.awt.BorderLayout.CENTER);
 
@@ -241,26 +241,26 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         LiensPanel.setOpaque(false);
         LiensPanel.setLayout(new java.awt.BorderLayout());
 
-        Titre1.setOpaque(false);
-        Titre1.setLayout(new java.awt.BorderLayout());
+        TitreOngletPanel.setOpaque(false);
+        TitreOngletPanel.setLayout(new java.awt.BorderLayout());
 
         LiensTitre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         LiensTitre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LiensTitre.setText("Fermeture des voies");
         LiensTitre.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 40));
         LiensTitre.setPreferredSize(new java.awt.Dimension(62, 30));
-        Titre1.add(LiensTitre, java.awt.BorderLayout.CENTER);
+        TitreOngletPanel.add(LiensTitre, java.awt.BorderLayout.CENTER);
 
-        LiensPanel.add(Titre1, java.awt.BorderLayout.PAGE_START);
+        LiensPanel.add(TitreOngletPanel, java.awt.BorderLayout.PAGE_START);
 
-        SPLiens.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        SPLiens.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        LiensScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        LiensScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        ContenuLiens.setOpaque(false);
-        ContenuLiens.setLayout(new java.awt.GridLayout(3, 0));
-        SPLiens.setViewportView(ContenuLiens);
+        ConteneurLiensPanel.setOpaque(false);
+        ConteneurLiensPanel.setLayout(new java.awt.GridLayout(3, 0));
+        LiensScrollPane.setViewportView(ConteneurLiensPanel);
 
-        LiensPanel.add(SPLiens, java.awt.BorderLayout.CENTER);
+        LiensPanel.add(LiensScrollPane, java.awt.BorderLayout.CENTER);
 
         add(LiensPanel);
     }// </editor-fold>//GEN-END:initComponents
@@ -287,18 +287,18 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     private javax.swing.JLabel AjouterMesure;
     private ca.ulaval.glo2004.afficheur.boutons.ToggleBouton BoutonLiens;
     private ca.ulaval.glo2004.afficheur.boutons.ToggleBouton BoutonMesures;
-    private javax.swing.JPanel ContenuLiens;
-    private javax.swing.JPanel ContenuMesures;
+    private javax.swing.JPanel ConteneurLiensPanel;
+    private javax.swing.JPanel ConteneurMesuresPanel;
     private javax.swing.JPanel LiensPanel;
+    private javax.swing.JScrollPane LiensScrollPane;
     private javax.swing.JLabel LiensTitre;
     private javax.swing.JScrollPane MesuresActives;
     private javax.swing.JPanel MesuresPanel;
     private javax.swing.JLabel MesuresTitre;
-    private javax.swing.JScrollPane SPLiens;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi SidePanel;
     private javax.swing.JPanel SidePanelParent;
     private javax.swing.JPanel Titre;
-    private javax.swing.JPanel Titre1;
+    private javax.swing.JPanel TitreOngletPanel;
     // End of variables declaration//GEN-END:variables
 
     @Override

@@ -11,7 +11,7 @@ import ca.ulaval.glo2004.afficheur.MenuPrincipal.objetsUI.ObjetScenarioMaladie;
  *
  * @author Jonathan
  */
-public class OngletScenarioMaladie extends OngletUI {
+public class OngletCreationScenarioMaladie extends OngletUI {
         
     public int getIndexCourant() {
         int index = -1;

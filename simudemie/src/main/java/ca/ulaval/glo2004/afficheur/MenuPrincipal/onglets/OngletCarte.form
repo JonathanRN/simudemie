@@ -45,7 +45,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="MapTitlePanel">
+        <Container class="javax.swing.JPanel" name="TitreCartePanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="40" green="34" red="2e" type="rgb"/>
@@ -70,15 +70,15 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="MapsLabel" min="-2" max="-2" attributes="0"/>
+                      <Component id="CartesLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
-                      <Component id="AddMapButton" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="AjoutCarteBouton" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="DeleteMapButton" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="SupprimeCarteBouton" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace pref="462" max="32767" attributes="0"/>
-                      <Component id="ImportMapButton" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="ImportCarteBouton" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BoutonExport" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="ExportCarteBouton" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -89,12 +89,12 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                              <Component id="MapsLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="CartesLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="AddMapButton" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="ImportMapButton" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="BoutonExport" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="DeleteMapButton" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="AjoutCarteBouton" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="ImportCarteBouton" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="ExportCarteBouton" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="SupprimeCarteBouton" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   </Group>
@@ -102,7 +102,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="MapsLabel">
+            <Component class="javax.swing.JLabel" name="CartesLabel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="40" green="34" red="2e" type="rgb"/>
@@ -114,7 +114,7 @@
                 <Property name="verticalAlignment" type="int" value="3"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="AddMapButton">
+            <Component class="javax.swing.JButton" name="AjoutCarteBouton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -136,10 +136,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AddMapButtonMouseReleased"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AjoutCarteBoutonMouseReleased"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="DeleteMapButton">
+            <Component class="javax.swing.JButton" name="SupprimeCarteBouton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -161,10 +161,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DeleteMapButtonMouseReleased"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SupprimeCarteBoutonMouseReleased"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="ImportMapButton">
+            <Component class="javax.swing.JButton" name="ImportCarteBouton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -186,10 +186,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ImportMapButtonMouseReleased"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ImportCarteBoutonMouseReleased"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="BoutonExport">
+            <Component class="javax.swing.JButton" name="ExportCarteBouton">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="24" style="0"/>
@@ -211,12 +211,12 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BoutonExportMouseReleased"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ExportCarteBoutonMouseReleased"/>
               </Events>
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JScrollPane" name="MapsScrollPane">
+        <Container class="javax.swing.JScrollPane" name="CartesScrollPane">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="40" green="34" red="2e" type="rgb"/>
@@ -244,7 +244,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="MapPanelContainer">
+            <Container class="javax.swing.JPanel" name="ConteneurCartePanel">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="40" green="34" red="2e" type="rgb"/>
@@ -265,7 +265,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="Map_Informations">
+    <Container class="javax.swing.JPanel" name="InformationsOngletCartePanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -282,7 +282,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="Map_InformationsLabel">
+        <Component class="javax.swing.JLabel" name="InformationCarteLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="24" style="1"/>
@@ -325,9 +325,9 @@
             <Property name="rows" type="int" value="1"/>
           </Layout>
           <SubComponents>
-            <Component class="ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.ApercuPanel" name="scenarioMapPanel1">
+            <Component class="ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.ApercuPanel" name="ApercuCartePanel">
             </Component>
-            <Component class="ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.StatsCartePanel" name="mapStatsPanel1">
+            <Component class="ca.ulaval.glo2004.afficheur.MenuPrincipal.panels.StatsCartePanel" name="StatsCartePanel1">
             </Component>
           </SubComponents>
         </Container>

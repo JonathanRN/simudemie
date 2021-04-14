@@ -49,7 +49,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="StartParent">
+    <Container class="javax.swing.JPanel" name="CommenceParent">
       <Properties>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
@@ -59,7 +59,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="138" max="32767" attributes="0"/>
-                  <Component id="StartPanel" min="-2" pref="803" max="-2" attributes="0"/>
+                  <Component id="CommencePanel" min="-2" pref="803" max="-2" attributes="0"/>
                   <EmptySpace pref="139" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -68,14 +68,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="StartPanel" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="CommencePanel" min="-2" pref="50" max="-2" attributes="0"/>
                   <EmptySpace pref="664" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi" name="StartPanel">
+        <Container class="ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi" name="CommencePanel">
           <Properties>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[715, 50]"/>
@@ -92,7 +92,7 @@
             <Property name="axis" type="int" value="0"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="StartLabel1">
+            <Component class="javax.swing.JLabel" name="CommenceLabel">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="15" style="0"/>
@@ -106,7 +106,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="icon">
+            <Component class="javax.swing.JLabel" name="CommenceIcon">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="15" style="0"/>
@@ -116,7 +116,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="StartLabel2">
+            <Component class="javax.swing.JLabel" name="CommenceLabel2">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="15" style="0"/>
@@ -184,7 +184,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Container class="javax.swing.JPanel" name="Boutons">
+            <Container class="javax.swing.JPanel" name="BoutonsPanel">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -207,7 +207,7 @@
                 <Property name="rows" type="int" value="1"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="DirectIcon">
+                <Component class="javax.swing.JLabel" name="PlayPauseIcon">
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -216,9 +216,9 @@
                     <Property name="toolTipText" type="java.lang.String" value="Retour en direct"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DirectIconMouseEntered"/>
-                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DirectIconMouseExited"/>
-                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DirectIconMouseReleased"/>
+                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PlayPauseIconMouseEntered"/>
+                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PlayPauseIconMouseExited"/>
+                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="PlayPauseIconMouseReleased"/>
                   </Events>
                 </Component>
                 <Container class="javax.swing.JPanel" name="FF">
@@ -276,7 +276,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="TabsParent">
+    <Container class="javax.swing.JPanel" name="MenuGaucheParent">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="40" green="34" red="2e" type="rgb"/>
@@ -289,7 +289,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="SimulationTabs" min="-2" pref="344" max="-2" attributes="0"/>
+                  <Component id="SimulationMenuGauche" min="-2" pref="344" max="-2" attributes="0"/>
                   <EmptySpace pref="730" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -298,14 +298,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace pref="196" max="32767" attributes="0"/>
-                  <Component id="SimulationTabs" min="-2" pref="352" max="-2" attributes="0"/>
+                  <Component id="SimulationMenuGauche" min="-2" pref="352" max="-2" attributes="0"/>
                   <EmptySpace pref="196" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche" name="SimulationTabs">
+        <Component class="ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche" name="SimulationMenuGauche">
         </Component>
       </SubComponents>
     </Container>
@@ -319,7 +319,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="1024" max="32767" attributes="0"/>
-                  <Component id="SidePanel" min="-2" max="-2" attributes="0"/>
+                  <Component id="SimulationMenuDroit" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -328,14 +328,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace pref="196" max="32767" attributes="0"/>
-                  <Component id="SidePanel" min="-2" pref="352" max="-2" attributes="0"/>
+                  <Component id="SimulationMenuDroit" min="-2" pref="352" max="-2" attributes="0"/>
                   <EmptySpace pref="196" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi" name="SidePanel">
+        <Container class="ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi" name="SimulationMenuDroit">
           <Properties>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[100, 200]"/>
@@ -374,17 +374,17 @@
                 <Property name="toolTipText" type="java.lang.String" value="Prendre une photo de la carte courante (S)"/>
               </Properties>
             </Component>
-            <Component class="ca.ulaval.glo2004.afficheur.boutons.SimulationBouton" name="Help">
+            <Component class="ca.ulaval.glo2004.afficheur.boutons.SimulationBouton" name="AideBouton">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Afficher l&apos;aide"/>
               </Properties>
             </Component>
-            <Component class="ca.ulaval.glo2004.afficheur.boutons.SimulationBouton" name="HomeButton">
+            <Component class="ca.ulaval.glo2004.afficheur.boutons.SimulationBouton" name="HomeBouton">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Quitter la simulation (ESC)"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="HomeButtonMouseReleased"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="HomeBoutonMouseReleased"/>
               </Events>
             </Component>
           </SubComponents>

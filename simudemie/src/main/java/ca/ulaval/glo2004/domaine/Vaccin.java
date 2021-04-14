@@ -7,6 +7,7 @@ package ca.ulaval.glo2004.domaine;
 
 
 public class Vaccin {
+    
     private String nom;
     private double tauxImmunisation;
     private int vaccinationQuotidienne;
@@ -34,38 +35,21 @@ public class Vaccin {
         this.tauxAdhesion = vaccin.tauxAdhesion;
     }
 
-    public String getNom() {
-        return nom;
-    }
+    public String getNom() {return nom;}
 
-    public double getTauxAdhesion() {
-        return tauxAdhesion;
-    }
+    public double getTauxAdhesion() {return tauxAdhesion;}
 
-    public double getTauxImmunisation() {
-        return tauxImmunisation;
-    }
+    public double getTauxImmunisation() {return tauxImmunisation;}
 
-    public int getVaccinationQuotidienne() {
-        return vaccinationQuotidienne;
-    }
+    public int getVaccinationQuotidienne() {return vaccinationQuotidienne;}
     
+    public void setNom(String nom) {this.nom = nom;}
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+    public void setTauxAdhesion(double tauxAdhesion) {this.tauxAdhesion = tauxAdhesion;}
 
-    public void setTauxAdhesion(double tauxAdhesion) {
-        this.tauxAdhesion = tauxAdhesion;
-    }
+    public void setTauxImmunisation(double tauxImmunisation) {this.tauxImmunisation = tauxImmunisation;}
 
-    public void setTauxImmunisation(double tauxImmunisation) {
-        this.tauxImmunisation = tauxImmunisation;
-    }
-
-    public void setVaccinationQuotidienne(int vaccinationQuotidienne) {
-        this.vaccinationQuotidienne = vaccinationQuotidienne;
-    }
+    public void setVaccinationQuotidienne(int vaccinationQuotidienne) {this.vaccinationQuotidienne = vaccinationQuotidienne;}
     
     
 }

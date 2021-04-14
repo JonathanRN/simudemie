@@ -23,7 +23,7 @@
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="MapPanelHeader">
+    <Container class="javax.swing.JPanel" name="TitreApercuCartePanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -40,7 +40,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="MapNameLabel">
+        <Component class="javax.swing.JLabel" name="NomCarteLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="21" style="1"/>
@@ -53,7 +53,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="BoutonExport">
+        <Component class="javax.swing.JLabel" name="ExportCarteBouton">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icons/icons8_unsplash_20px.png"/>
@@ -64,7 +64,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BoutonExportMouseReleased"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ExportCarteBoutonMouseReleased"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -74,7 +74,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="ContentParent">
+    <Container class="javax.swing.JPanel" name="ConteneurApercuCartePanel">
       <Properties>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
@@ -136,7 +136,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="ca.ulaval.glo2004.afficheur.CreationCarte.panels.CarteApercu" name="cartePreview">
+        <Container class="ca.ulaval.glo2004.afficheur.CreationCarte.panels.CarteApercu" name="ApercuCarte">
 
           <Layout>
             <DimensionLayout dim="0">
@@ -154,11 +154,11 @@
       </SubComponents>
       <LayoutCode>
         <CodeStatement>
-          <CodeExpression id="1_ContentParent">
-            <CodeVariable name="ContentParent" type="8194" declaredType="javax.swing.JPanel"/>
+          <CodeExpression id="1_ConteneurApercuCartePanel">
+            <CodeVariable name="ConteneurApercuCartePanel" type="8194" declaredType="javax.swing.JPanel"/>
             <ExpressionOrigin>
               <ExpressionProvider type="ComponentRef">
-                <ComponentRef name="ContentParent"/>
+                <ComponentRef name="ConteneurApercuCartePanel"/>
               </ExpressionProvider>
             </ExpressionOrigin>
           </CodeExpression>
@@ -172,7 +172,7 @@
                   <CodeConstructor class="javax.swing.OverlayLayout" parameterTypes="java.awt.Container"/>
                 </ExpressionProvider>
                 <Parameters>
-                  <CodeExpression id="1_ContentParent"/>
+                  <CodeExpression id="1_ConteneurApercuCartePanel"/>
                 </Parameters>
               </ExpressionOrigin>
             </CodeExpression>

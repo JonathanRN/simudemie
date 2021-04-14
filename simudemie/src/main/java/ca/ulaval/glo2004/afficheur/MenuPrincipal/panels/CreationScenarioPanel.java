@@ -8,8 +8,8 @@ package ca.ulaval.glo2004.afficheur.MenuPrincipal.panels;
 import ca.ulaval.glo2004.afficheur.MenuPrincipal.objetsUI.ObjetScenarioCarte;
 import ca.ulaval.glo2004.afficheur.MenuPrincipal.objetsUI.ObjetScenarioMaladie;
 import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletScenario;
-import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletScenarioCarte;
-import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletScenarioMaladie;
+import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletCreationScenarioCarte;
+import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletCreationScenarioMaladie;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Carte;
@@ -34,8 +34,8 @@ import javax.swing.JPanel;
  */
 public class CreationScenarioPanel extends javax.swing.JPanel implements AdjustmentListener {
     
-    private OngletScenarioCarte ongletScenarioCarte;
-    private OngletScenarioMaladie ongletScenarioMaladie;
+    private OngletCreationScenarioCarte ongletScenarioCarte;
+    private OngletCreationScenarioMaladie ongletScenarioMaladie;
     
     private OngletScenario ongletScenario;
     
@@ -43,18 +43,18 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
         initComponents();
         
         try {
-            ongletScenarioCarte = new OngletScenarioCarte();
-            ongletScenarioMaladie = new OngletScenarioMaladie();
+            ongletScenarioCarte = new OngletCreationScenarioCarte();
+            ongletScenarioMaladie = new OngletCreationScenarioMaladie();
 
             setBackground(Couleurs.fondNoir);
             BackgroundArrondi.setBackground(Couleurs.bg);
-            CartesContainer.setBackground(Couleurs.bg);
-            MaladiesContainer.setBackground(Couleurs.bg);
+            ConteneurCartesPanel.setBackground(Couleurs.bg);
+            ConteneurMaladiesPanel.setBackground(Couleurs.bg);
 
-            Annuler.setFont(FontRegister.RobotoRegular.deriveFont(15f));
-            Annuler.setBackground(Couleurs.bg);
-            Creer.setFont(FontRegister.RobotoRegular.deriveFont(15f));
-            Creer.setBackground(Couleurs.bg);
+            AnnulerBouton.setFont(FontRegister.RobotoRegular.deriveFont(15f));
+            AnnulerBouton.setBackground(Couleurs.bg);
+            CreerBouton.setFont(FontRegister.RobotoRegular.deriveFont(15f));
+            CreerBouton.setBackground(Couleurs.bg);
 
             CartesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
             MaladiesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
@@ -74,7 +74,7 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
     }
 
     public JPanel getCartesContainer() {
-        return CartesContainer;
+        return ConteneurCartesPanel;
     }
 
     public void setOngletScenario(OngletScenario ongletScenario) {
@@ -82,19 +82,19 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
     }
     
     public void addCarte(ObjetScenarioCarte objetScenarioCarte) {
-        if(CartesContainer.getComponentCount() != 0) {
-            CartesContainer.add(getFiller(25));
+        if(ConteneurCartesPanel.getComponentCount() != 0) {
+            ConteneurCartesPanel.add(getFiller(25));
         }
-        CartesContainer.add(objetScenarioCarte);
+        ConteneurCartesPanel.add(objetScenarioCarte);
         CartesScrollPane.revalidate();
         CartesScrollPane.repaint();
     }
     
     public void addMaladie(ObjetScenarioMaladie objetScenarioMaladie) {
-        if(MaladiesContainer.getComponentCount() != 0) {
-            MaladiesContainer.add(getFiller(25));
+        if(ConteneurMaladiesPanel.getComponentCount() != 0) {
+            ConteneurMaladiesPanel.add(getFiller(25));
         }
-        MaladiesContainer.add(objetScenarioMaladie);
+        ConteneurMaladiesPanel.add(objetScenarioMaladie);
         MaladiesScrollPane.revalidate();
         MaladiesScrollPane.repaint();
     }
@@ -104,7 +104,7 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
     }
     
     private void loadCartes() {
-        CartesContainer.removeAll();
+        ConteneurCartesPanel.removeAll();
         ongletScenarioCarte.clear();
         
         List<Carte> cartes = GestionnaireCarte.getInstance().getList();
@@ -118,7 +118,7 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
     }
     
     private void loadMaladies() {
-        MaladiesContainer.removeAll();
+        ConteneurMaladiesPanel.removeAll();
         ongletScenarioMaladie.clear();
         
         List<Maladie> maladies = GestionnaireMaladie.getInstance().getList();
@@ -140,17 +140,17 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Parent = new javax.swing.JPanel();
+        CreationScenarioPanel = new javax.swing.JPanel();
         BackgroundArrondi = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         SimulationInput = new javax.swing.JTextField();
-        ScrollPanes = new javax.swing.JPanel();
+        CreationScenarioScrollPanes = new javax.swing.JPanel();
         CartesScrollPane = new javax.swing.JScrollPane();
-        CartesContainer = new javax.swing.JPanel();
+        ConteneurCartesPanel = new javax.swing.JPanel();
         MaladiesScrollPane = new javax.swing.JScrollPane();
-        MaladiesContainer = new javax.swing.JPanel();
-        Boutons = new javax.swing.JPanel();
-        Annuler = new javax.swing.JButton();
-        Creer = new javax.swing.JButton();
+        ConteneurMaladiesPanel = new javax.swing.JPanel();
+        BoutonsPanel = new javax.swing.JPanel();
+        AnnulerBouton = new javax.swing.JButton();
+        CreerBouton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setRequestFocusEnabled(false);
@@ -161,7 +161,7 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
         });
         setLayout(new javax.swing.OverlayLayout(this));
 
-        Parent.setOpaque(false);
+        CreationScenarioPanel.setOpaque(false);
 
         BackgroundArrondi.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         BackgroundArrondi.setLayout(new java.awt.BorderLayout(15, 0));
@@ -177,9 +177,9 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
         });
         BackgroundArrondi.add(SimulationInput, java.awt.BorderLayout.NORTH);
 
-        ScrollPanes.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
-        ScrollPanes.setOpaque(false);
-        ScrollPanes.setLayout(new java.awt.GridLayout(1, 2, 20, 0));
+        CreationScenarioScrollPanes.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        CreationScenarioScrollPanes.setOpaque(false);
+        CreationScenarioScrollPanes.setLayout(new java.awt.GridLayout(1, 2, 20, 0));
 
         CartesScrollPane.setBackground(new java.awt.Color(46, 52, 64));
         CartesScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -189,11 +189,11 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
         CartesScrollPane.setOpaque(false);
         CartesScrollPane.setPreferredSize(new java.awt.Dimension(75, 250));
 
-        CartesContainer.setBackground(new java.awt.Color(46, 52, 64));
-        CartesContainer.setLayout(new javax.swing.BoxLayout(CartesContainer, javax.swing.BoxLayout.Y_AXIS));
-        CartesScrollPane.setViewportView(CartesContainer);
+        ConteneurCartesPanel.setBackground(new java.awt.Color(46, 52, 64));
+        ConteneurCartesPanel.setLayout(new javax.swing.BoxLayout(ConteneurCartesPanel, javax.swing.BoxLayout.Y_AXIS));
+        CartesScrollPane.setViewportView(ConteneurCartesPanel);
 
-        ScrollPanes.add(CartesScrollPane);
+        CreationScenarioScrollPanes.add(CartesScrollPane);
 
         MaladiesScrollPane.setBackground(new java.awt.Color(46, 52, 64));
         MaladiesScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -203,57 +203,57 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
         MaladiesScrollPane.setOpaque(false);
         MaladiesScrollPane.setPreferredSize(new java.awt.Dimension(75, 250));
 
-        MaladiesContainer.setBackground(new java.awt.Color(46, 52, 64));
-        MaladiesContainer.setLayout(new javax.swing.BoxLayout(MaladiesContainer, javax.swing.BoxLayout.Y_AXIS));
-        MaladiesScrollPane.setViewportView(MaladiesContainer);
+        ConteneurMaladiesPanel.setBackground(new java.awt.Color(46, 52, 64));
+        ConteneurMaladiesPanel.setLayout(new javax.swing.BoxLayout(ConteneurMaladiesPanel, javax.swing.BoxLayout.Y_AXIS));
+        MaladiesScrollPane.setViewportView(ConteneurMaladiesPanel);
 
-        ScrollPanes.add(MaladiesScrollPane);
+        CreationScenarioScrollPanes.add(MaladiesScrollPane);
 
-        BackgroundArrondi.add(ScrollPanes, java.awt.BorderLayout.CENTER);
+        BackgroundArrondi.add(CreationScenarioScrollPanes, java.awt.BorderLayout.CENTER);
 
-        Boutons.setOpaque(false);
-        Boutons.setLayout(new java.awt.GridLayout(1, 2, 15, 0));
+        BoutonsPanel.setOpaque(false);
+        BoutonsPanel.setLayout(new java.awt.GridLayout(1, 2, 15, 0));
 
-        Annuler.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_multiply_20px.png"))); // NOI18N
-        Annuler.setText("Annuler");
-        Annuler.addMouseListener(new java.awt.event.MouseAdapter() {
+        AnnulerBouton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_multiply_20px.png"))); // NOI18N
+        AnnulerBouton.setText("Annuler");
+        AnnulerBouton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                AnnulerMouseReleased(evt);
+                AnnulerBoutonMouseReleased(evt);
             }
         });
-        Boutons.add(Annuler);
+        BoutonsPanel.add(AnnulerBouton);
 
-        Creer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_checkmark_20px.png"))); // NOI18N
-        Creer.setText("Créer");
-        Creer.addMouseListener(new java.awt.event.MouseAdapter() {
+        CreerBouton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_checkmark_20px.png"))); // NOI18N
+        CreerBouton.setText("Créer");
+        CreerBouton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                CreerMouseReleased(evt);
+                CreerBoutonMouseReleased(evt);
             }
         });
-        Boutons.add(Creer);
+        BoutonsPanel.add(CreerBouton);
 
-        javax.swing.GroupLayout ParentLayout = new javax.swing.GroupLayout(Parent);
-        Parent.setLayout(ParentLayout);
-        ParentLayout.setHorizontalGroup(
-            ParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ParentLayout.createSequentialGroup()
+        javax.swing.GroupLayout CreationScenarioPanelLayout = new javax.swing.GroupLayout(CreationScenarioPanel);
+        CreationScenarioPanel.setLayout(CreationScenarioPanelLayout);
+        CreationScenarioPanelLayout.setHorizontalGroup(
+            CreationScenarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CreationScenarioPanelLayout.createSequentialGroup()
                 .addContainerGap(280, Short.MAX_VALUE)
-                .addGroup(ParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(CreationScenarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(BackgroundArrondi, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
-                    .addComponent(Boutons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BoutonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(280, Short.MAX_VALUE))
         );
-        ParentLayout.setVerticalGroup(
-            ParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ParentLayout.createSequentialGroup()
+        CreationScenarioPanelLayout.setVerticalGroup(
+            CreationScenarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CreationScenarioPanelLayout.createSequentialGroup()
                 .addContainerGap(110, Short.MAX_VALUE)
                 .addComponent(BackgroundArrondi, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(Boutons, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BoutonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(172, Short.MAX_VALUE))
         );
 
-        add(Parent);
+        add(CreationScenarioPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void SimulationInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SimulationInputKeyReleased
@@ -268,30 +268,30 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
         this.getRootPane().repaint();
     }//GEN-LAST:event_formMouseMoved
 
-    private void AnnulerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnnulerMouseReleased
+    private void AnnulerBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnnulerBoutonMouseReleased
         this.setVisible(false);
-    }//GEN-LAST:event_AnnulerMouseReleased
+    }//GEN-LAST:event_AnnulerBoutonMouseReleased
 
-    private void CreerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreerMouseReleased
+    private void CreerBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreerBoutonMouseReleased
         Object[] args = { SimulationInput.getText(), ongletScenarioCarte.getIndexCourant(), ongletScenarioMaladie.getIndexCourant() };
         Scenario scenario = GestionnaireScenario.getInstance().creer(args);
         ongletScenario.ajouterCard(scenario);
         
         this.setVisible(false);
-    }//GEN-LAST:event_CreerMouseReleased
+    }//GEN-LAST:event_CreerBoutonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Annuler;
+    private javax.swing.JButton AnnulerBouton;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi BackgroundArrondi;
-    private javax.swing.JPanel Boutons;
-    private javax.swing.JPanel CartesContainer;
+    private javax.swing.JPanel BoutonsPanel;
     private javax.swing.JScrollPane CartesScrollPane;
-    private javax.swing.JButton Creer;
-    private javax.swing.JPanel MaladiesContainer;
+    private javax.swing.JPanel ConteneurCartesPanel;
+    private javax.swing.JPanel ConteneurMaladiesPanel;
+    private javax.swing.JPanel CreationScenarioPanel;
+    private javax.swing.JPanel CreationScenarioScrollPanes;
+    private javax.swing.JButton CreerBouton;
     private javax.swing.JScrollPane MaladiesScrollPane;
-    private javax.swing.JPanel Parent;
-    private javax.swing.JPanel ScrollPanes;
     private javax.swing.JTextField SimulationInput;
     // End of variables declaration//GEN-END:variables
 

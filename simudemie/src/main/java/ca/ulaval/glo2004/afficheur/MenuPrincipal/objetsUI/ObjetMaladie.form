@@ -28,7 +28,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="MaladieNom" min="-2" pref="250" max="-2" attributes="0"/>
+              <Component id="NomMaladie" min="-2" pref="250" max="-2" attributes="0"/>
               <EmptySpace min="101" max="32767" attributes="0"/>
           </Group>
           <Component id="DiagramPanel" max="32767" attributes="0"/>
@@ -37,7 +37,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Component id="MaladieNom" min="-2" max="-2" attributes="0"/>
+              <Component id="NomMaladie" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="DiagramPanel" min="-2" pref="95" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -46,7 +46,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="MaladieNom">
+    <Component class="javax.swing.JLabel" name="NomMaladie">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="21" style="1"/>
@@ -97,7 +97,7 @@
             <Property name="verticalGap" type="int" value="10"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JProgressBar" name="InfectedProgressBar">
+            <Component class="javax.swing.JProgressBar" name="InfectionsBars">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="6a" green="61" red="bf" type="rgb"/>
@@ -112,7 +112,7 @@
                 <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JProgressBar" name="CuredProgressBar">
+            <Component class="javax.swing.JProgressBar" name="SainsBar">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="8c" green="be" red="a3" type="rgb"/>
@@ -127,7 +127,7 @@
                 <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JProgressBar" name="DeadProgressBar">
+            <Component class="javax.swing.JProgressBar" name="MortsBar">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ad" green="8e" red="b4" type="rgb"/>

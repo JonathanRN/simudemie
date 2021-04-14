@@ -32,7 +32,7 @@ public class PreviewCarte extends Mode {
         
         for (VoieLiaison voie : carte.getVoies()) {
             g.setColor(voie.getCouleur());
-            g.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
+            g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
             g.draw(voie.getLigne());
         }
         

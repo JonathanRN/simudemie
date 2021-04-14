@@ -8,6 +8,7 @@ package ca.ulaval.glo2004.afficheur.panels;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetMaladie;
 import ca.ulaval.glo2004.afficheur.onglets.OngletMaladie;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -40,7 +41,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
             MaladieInput.setFont(FontRegister.RobotoThin.deriveFont(21f));
             init();
             showFields(false);
-            Main.setBackground(new Color(216, 222, 233, 38));
+            Main.setBackground(Couleurs.pannelArrondi);
         }
         catch(Exception e) {
         }
@@ -153,7 +154,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Main = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        Main = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         StatsHeader = new javax.swing.JPanel();
         MaladieInput = new javax.swing.JTextField();
         Parent = new javax.swing.JPanel();
@@ -221,7 +222,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private ca.ulaval.glo2004.afficheur.PanelArrondi Main;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi Main;
     private javax.swing.JTextField MaladieInput;
     private javax.swing.JPanel Parent;
     private javax.swing.JPanel StatsHeader;

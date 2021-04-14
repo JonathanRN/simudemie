@@ -8,6 +8,7 @@ package ca.ulaval.glo2004.afficheur.onglets;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetMaladie;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireMaladie;
 import java.awt.Color;
@@ -30,10 +31,10 @@ public class OngletMaladie extends OngletUI {
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             MaladieLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             Mal_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
-            AddMaladieButton.setBackground(new Color(163,190,140));
-            DeleteMaladieButton.setBackground(new Color(191, 97, 106));
-            ImportMaladieButton.setBackground(new Color(216, 222, 233, 38));
-            BoutonExport.setBackground(new Color(216, 222, 233, 38));
+            AddMaladieButton.setBackground(Couleurs.sains);
+            DeleteMaladieButton.setBackground(Couleurs.infections);
+            ImportMaladieButton.setBackground(Couleurs.pannelArrondi);
+            BoutonExport.setBackground(Couleurs.pannelArrondi);
         } catch (Exception e) {
         }
     }
@@ -132,7 +133,7 @@ public class OngletMaladie extends OngletUI {
         MaladiesContainer = new javax.swing.JPanel();
         Mal_Informations = new javax.swing.JPanel();
         Mal_InformationsLabel = new javax.swing.JLabel();
-        Layout = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        Layout = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         statsMaladiePanel1 = new ca.ulaval.glo2004.afficheur.panels.StatsMaladiePanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
@@ -321,7 +322,7 @@ public class OngletMaladie extends OngletUI {
     private javax.swing.JButton BoutonExport;
     private javax.swing.JButton DeleteMaladieButton;
     private javax.swing.JButton ImportMaladieButton;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi Layout;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi Layout;
     private javax.swing.JPanel Mal_Informations;
     private javax.swing.JLabel Mal_InformationsLabel;
     private javax.swing.JLabel MaladieLabel;

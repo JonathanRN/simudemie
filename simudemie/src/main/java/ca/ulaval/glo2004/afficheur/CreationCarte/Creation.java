@@ -6,6 +6,7 @@
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
 import ca.ulaval.glo2004.afficheur.carteActions.DragPointAction;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -50,7 +51,7 @@ public class Creation extends Mode {
             paintLignes(g, couleurLigne, polygoneSousSouris);
         }
         
-        g.setColor(Color.white);
+        g.setColor(Couleurs.blanc);
         for (Polygon p : creationCarte.getPolygones()) {
             if (!creationCarte.getPanel().estRegionUnique(p)) {
                 paintPointPolygone(g, p);

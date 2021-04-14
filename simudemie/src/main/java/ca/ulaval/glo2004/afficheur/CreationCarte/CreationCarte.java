@@ -9,6 +9,7 @@ import ca.ulaval.glo2004.afficheur.BoutonToggle;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.ZoomInfoPanel;
 import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
@@ -35,7 +36,7 @@ public class CreationCarte extends javax.swing.JPanel {
         this.onglet = onglet;
         initComponents();
         
-        InformationsPanel.setBackground(new Color(59, 66, 82));
+        InformationsPanel.setBackground(Couleurs.titleBar);
         InformationsPanel.setVisible(false);
         StartParent.setVisible(false);
         
@@ -181,7 +182,7 @@ public class CreationCarte extends javax.swing.JPanel {
     private void initComponents() {
 
         StartParent = new javax.swing.JPanel();
-        StartPanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        StartPanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         StartLabel1 = new javax.swing.JLabel();
         StartLabel2 = new javax.swing.JLabel();
         ToolBarParent = new javax.swing.JPanel();
@@ -392,7 +393,7 @@ public class CreationCarte extends javax.swing.JPanel {
     private javax.swing.JPanel InformationsPanelParent;
     private javax.swing.JLabel StartLabel1;
     private javax.swing.JLabel StartLabel2;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi StartPanel;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi StartPanel;
     private javax.swing.JPanel StartParent;
     private javax.swing.JPanel ToolBar;
     private javax.swing.JPanel ToolBarParent;

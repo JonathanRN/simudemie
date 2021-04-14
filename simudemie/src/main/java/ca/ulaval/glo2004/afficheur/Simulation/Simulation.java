@@ -197,7 +197,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         ZoomInfoParent = new javax.swing.JPanel();
         ZoomInfo = new ca.ulaval.glo2004.afficheur.ZoomInfoPanel();
         StartParent = new javax.swing.JPanel();
-        StartPanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        StartPanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         StartLabel1 = new javax.swing.JLabel();
         icon = new javax.swing.JLabel();
         StartLabel2 = new javax.swing.JLabel();
@@ -212,7 +212,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         TabsParent = new javax.swing.JPanel();
         SimulationTabs = new ca.ulaval.glo2004.afficheur.Simulation.SimulationTabs();
         MenuDroitParent = new javax.swing.JPanel();
-        SidePanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        SidePanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         TogglePaysRegion = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         ToggleLiens = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         ToggleCouleurs = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
@@ -546,7 +546,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton Help;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HomeButton;
     private javax.swing.JPanel MenuDroitParent;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi SidePanel;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi SidePanel;
     private ca.ulaval.glo2004.afficheur.Simulation.SimulationPanel SimulationPanel;
     private ca.ulaval.glo2004.afficheur.Simulation.SimulationTabs SimulationTabs;
     private javax.swing.JPanel Slider;
@@ -554,7 +554,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private javax.swing.JPanel SliderParent;
     private javax.swing.JLabel StartLabel1;
     private javax.swing.JLabel StartLabel2;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi StartPanel;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi StartPanel;
     private javax.swing.JPanel StartParent;
     private javax.swing.JPanel TabsParent;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton ToggleCouleurs;

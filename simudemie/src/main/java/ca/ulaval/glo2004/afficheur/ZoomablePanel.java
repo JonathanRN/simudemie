@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur;
 
+import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;

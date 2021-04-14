@@ -6,6 +6,7 @@
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
 import ca.ulaval.glo2004.afficheur.carteActions.AjouterLienAction;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
 import java.awt.BasicStroke;
@@ -47,30 +48,30 @@ public class LienPays extends Mode {
     public void paint(Graphics2D g) {        
         for (Pays pays : listePays) {
             Polygon p = pays.getPolygone();
-            g.setColor(couleurFill);
+            g.setColor(couleurRempli);
             g.fillPolygon(p);
-            g.setStroke(new BasicStroke(1));
+            g.setStroke(new BasicStroke(2));
             paintLignes(g, Color.black, p);
         }
         
         if (highlight != null) {
-            g.setStroke(new BasicStroke(1));
+            g.setStroke(new BasicStroke(2));
             paintLignes(g, couleurLigne, highlight);
         }
         
         if (path != null) {
             // todo couleur du type selectionne
             g.setColor(couleurLigne);
-            g.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
+            g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
             g.draw(path);          
         }
         
         for (int i = 0; i < voies.size(); i++) {
             g.setColor(voies.get(i).getCouleur());
-            g.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
+            g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
             g.draw(voies.get(i).getLigne());
             
-            g.setColor(Color.white);
+            g.setColor(Couleurs.blanc);
             g.fillOval((int)points.get(i).x - taillePoint/2, (int)points.get(i).y - taillePoint/2, taillePoint, taillePoint);
         }
         
@@ -80,7 +81,7 @@ public class LienPays extends Mode {
         }
         
         if (pointSelectionne != null) {
-            g.setColor(Color.green);
+            g.setColor(Couleurs.selectionneBorder);
             g.fillOval(pointSelectionne.x - taillePoint/2, pointSelectionne.y - taillePoint/2, taillePoint, taillePoint);
         }
         

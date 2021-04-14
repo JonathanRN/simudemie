@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
 import java.awt.BorderLayout;
@@ -80,7 +81,7 @@ public class Selection extends Mode {
     @Override
     public void paint(Graphics2D g) {        
         for (Polygon p : creationCarte.getPolygones()) {
-            g.setColor(couleurFill);
+            g.setColor(couleurRempli);
             g.fillPolygon(p);
             
             paintLignes(g, Color.black, p);
@@ -89,7 +90,7 @@ public class Selection extends Mode {
         super.paint(g);
         
         if (selectionne != null) {
-            paintLignes(g, Color.green, selectionne);
+            paintLignes(g, Couleurs.selectionneBorder, selectionne);
         }
     }
     

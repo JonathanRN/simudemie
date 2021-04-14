@@ -6,6 +6,7 @@
 package ca.ulaval.glo2004.afficheur.Simulation;
 
 import ca.ulaval.glo2004.afficheur.CreationCarte.Mode;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Region;
@@ -54,7 +55,7 @@ public class SimulationAfficheur extends Mode {
         polygones = carte.getPolygonesRegions();
         
         for (Polygon p : afficherInfosPays ? carte.getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
-            g.setColor(this.getCouleurPolygone(p, new Color(191, 97, 106)));
+            g.setColor(this.getCouleurPolygone(p, Couleurs.infections));
             g.fillPolygon(p);
             this.paintLignes(g, Color.black, p);
         }
@@ -63,24 +64,24 @@ public class SimulationAfficheur extends Mode {
         updateHighlight(souris);
         
         if (regionInfectee != null) {
-            g.setColor(Color.red);
-            this.paintLignes(g, Color.red, regionInfectee.getPolygone());
+            g.setColor(Couleurs.infections);
+            this.paintLignes(g, Couleurs.infections, regionInfectee.getPolygone());
         }
         
         if (selectionne != null) {
             g.setStroke(new BasicStroke(2));
-            this.paintLignes(g, Color.green, selectionne.getPolygone());
+            this.paintLignes(g, Couleurs.immunisations, selectionne.getPolygone());
         }
         
         if(afficherLiens) {
             for (VoieLiaison voie : carte.getVoies()) {
                 g.setColor(voie.getCouleur());
-                g.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
+                g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
                 g.draw(voie.getLigne());
             }
         }
         
-        g.setStroke(new BasicStroke(1));
+        g.setStroke(new BasicStroke(2));
 
         
         if (highlight != null) {
@@ -180,7 +181,7 @@ public class SimulationAfficheur extends Mode {
     }
     
     private int drawNom(String nom, Graphics2D g, float zoomFactor) {
-        g.setColor(Color.white);
+        g.setColor(Couleurs.blanc);
         g.setFont(FontRegister.RobotoLight.deriveFont(18f / zoomFactor));
         
         FontMetrics metrics = g.getFontMetrics(g.getFont());
@@ -238,7 +239,7 @@ public class SimulationAfficheur extends Mode {
             pourcent = region.getPourcentageInfectee() / 100f;
         }
         
-        Color c1 = couleurFill;
+        Color c1 = Couleurs.remplissageNoTransp;
         Color c2 = color;
         return new Color(
             interpoler(c1.getRed(), c2.getRed(), pourcent) / 255,

@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Carte;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -23,8 +24,8 @@ public class Mode {
     protected Polygon highlight;
     
     protected int taillePoint = 20;
-    protected final Color couleurLigne = new Color(136, 192, 208);
-    protected final Color couleurFill = new Color(85, 91, 100, 100);
+    protected final Color couleurLigne = Couleurs.selectionneBorder;
+    protected final Color couleurRempli = Couleurs.remplissage;
     protected CreationCarte creationCarte;
     protected ArrayList<Line2D.Double> lignesInvalides = new ArrayList<>(); 
     protected Carte carte;
@@ -85,7 +86,7 @@ public class Mode {
     }
     
     protected void paintPolygones(Graphics2D g) {
-        g.setColor(couleurFill);
+        g.setColor(couleurRempli);
         for (Polygon p : carte.getPolygonesRegions()) {
             g.fillPolygon(p);
         }

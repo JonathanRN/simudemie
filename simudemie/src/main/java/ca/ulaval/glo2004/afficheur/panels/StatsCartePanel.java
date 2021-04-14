@@ -7,6 +7,7 @@ package ca.ulaval.glo2004.afficheur.panels;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.onglets.OngletCarte;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;
 import java.awt.BorderLayout;
@@ -27,15 +28,15 @@ import org.jfree.data.category.DefaultCategoryDataset;
 public class StatsCartePanel extends javax.swing.JPanel {
     
     private OngletCarte onglet;
-    private Color bgColor = new Color(71, 76, 88);
+    private Color bgColor = Couleurs.pannelArrondiNoTransp;
     
     public StatsCartePanel() {
         initComponents();
         
         try {
             StatsLabel.setFont(FontRegister.RobotoThin.deriveFont(21f));
-            Main.setBackground(new Color(216, 222, 233, 38));
-            ModifyButton.setBackground(new Color(216, 222, 233, 38));
+            Main.setBackground(Couleurs.pannelArrondi);
+            ModifyButton.setBackground(Couleurs.pannelArrondi);
             ModifyButton.setFont(FontRegister.RobotoRegular.deriveFont(15f));
         }
         catch(Exception e) {
@@ -64,11 +65,11 @@ public class StatsCartePanel extends javax.swing.JPanel {
         CategoryPlot plot = stats.getCategoryPlot();
         plot.setBackgroundPaint(bgColor);
         plot.getDomainAxis().setLabelFont(FontRegister.RobotoRegular.deriveFont(14f));
-        plot.getDomainAxis().setTickLabelPaint(Color.white);
-        plot.getDomainAxis().setLabelPaint(Color.white);
+        plot.getDomainAxis().setTickLabelPaint(Couleurs.blanc);
+        plot.getDomainAxis().setLabelPaint(Couleurs.blanc);
         plot.getRangeAxis().setLabelFont(FontRegister.RobotoRegular.deriveFont(14f));
-        plot.getRangeAxis().setTickLabelPaint(Color.white);
-        plot.getRangeAxis().setLabelPaint(Color.white);
+        plot.getRangeAxis().setTickLabelPaint(Couleurs.blanc);
+        plot.getRangeAxis().setLabelPaint(Couleurs.blanc);
         
         BarRenderer br = (BarRenderer) plot.getRenderer();
         br.setMaximumBarWidth(0.2);
@@ -96,7 +97,7 @@ public class StatsCartePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Main = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        Main = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         StatsHeader = new javax.swing.JPanel();
         StatsLabel = new javax.swing.JLabel();
         StatsPanel = new javax.swing.JPanel();
@@ -151,7 +152,7 @@ public class StatsCartePanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Buttons;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi Main;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi Main;
     private javax.swing.JButton ModifyButton;
     private javax.swing.JPanel StatsHeader;
     private javax.swing.JLabel StatsLabel;

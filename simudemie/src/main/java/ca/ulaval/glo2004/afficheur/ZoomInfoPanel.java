@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur;
 
+import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

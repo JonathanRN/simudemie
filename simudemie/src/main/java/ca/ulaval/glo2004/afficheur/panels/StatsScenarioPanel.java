@@ -7,6 +7,7 @@ package ca.ulaval.glo2004.afficheur.panels;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Scenario;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
@@ -29,16 +30,17 @@ import org.jfree.data.xy.XYSeriesCollection;
 public class StatsScenarioPanel extends javax.swing.JPanel {
 
     private OngletScenario onglet;
-    private Color bgColor = new Color(71, 76, 88);
+    private Color bgColor = Couleurs.pannelArrondiNoTransp;
+    private Color pannel = Couleurs.pannelArrondi;
     
     public StatsScenarioPanel() {
         initComponents();
         
         try {
             StatsLabel.setFont(FontRegister.RobotoThin.deriveFont(21f));
-            Main.setBackground(new Color(216, 222, 233, 38));
+            Main.setBackground(pannel);
             
-            ResumeButton.setBackground(new Color(216, 222, 233, 38));
+            ResumeButton.setBackground(pannel);
             ResumeButton.setFont(FontRegister.RobotoRegular.deriveFont(15f));
         }
         catch(Exception e) {
@@ -87,18 +89,18 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         plot.setRenderer(renderer);
         plot.setBackgroundPaint(bgColor);
         plot.setRangeGridlinesVisible(true);
-        plot.setRangeGridlinePaint(Color.white);
+        plot.setRangeGridlinePaint(Couleurs.blanc);
         plot.setDomainGridlinesVisible(true);
-        plot.setDomainGridlinePaint(Color.white);
+        plot.setDomainGridlinePaint(Couleurs.blanc);
         plot.getDomainAxis().setLabelFont(FontRegister.RobotoRegular.deriveFont(14f));
-        plot.getDomainAxis().setTickLabelPaint(Color.white);
-        plot.getDomainAxis().setLabelPaint(Color.white);
+        plot.getDomainAxis().setTickLabelPaint(Couleurs.blanc);
+        plot.getDomainAxis().setLabelPaint(Couleurs.blanc);
         plot.getRangeAxis().setLabelFont(FontRegister.RobotoRegular.deriveFont(14f));
-        plot.getRangeAxis().setTickLabelPaint(Color.white);
-        plot.getRangeAxis().setLabelPaint(Color.white);
+        plot.getRangeAxis().setTickLabelPaint(Couleurs.blanc);
+        plot.getRangeAxis().setLabelPaint(Couleurs.blanc);
 
         stats.getLegend().setFrame(BlockBorder.NONE);
-        stats.getLegend().setItemPaint(Color.white);
+        stats.getLegend().setItemPaint(Couleurs.blanc);
         stats.getLegend().setBackgroundPaint(bgColor);
 
         ChartPanel chartPanel = new ChartPanel(stats);
@@ -130,7 +132,7 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Main = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        Main = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         StatsHeader = new javax.swing.JPanel();
         StatsLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -190,7 +192,7 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Buttons;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi Main;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi Main;
     private javax.swing.JButton ResumeButton;
     private javax.swing.JPanel StatsHeader;
     private javax.swing.JLabel StatsLabel;

@@ -15,14 +15,14 @@ import javax.swing.JRootPane;
  * @author Jonathan
  */
 public class CustomTitlePaneUI extends FlatTitlePane {
-    
+   
     public CustomTitlePaneUI(JRootPane rootPane) {
         super(rootPane);
     }
     
     @Override
     protected void paintComponent(Graphics g) {
-        g.setColor(new Color(59, 66, 82));
+        g.setColor(Couleurs.titleBar);
 	g.fillRect(0, 0, getWidth(), getHeight());
     }
 }

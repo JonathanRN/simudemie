@@ -6,7 +6,8 @@
 package ca.ulaval.glo2004.afficheur.Simulation;
 
 import ca.ulaval.glo2004.afficheur.BoutonToggle;
-import ca.ulaval.glo2004.afficheur.PanelArrondi;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
+import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Mesure;
@@ -33,7 +34,7 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
         
         try {
             updateBoutonAjouter(false, AjouterMesure);
-            setBackground(new Color(76, 86, 106, 100));
+            setBackground(Couleurs.sideMenuTransp);
             
             BoutonMesures.init(this, "icons8_wash_your_hands_30px");
             MesuresActives.getViewport().setOpaque(false);
@@ -157,7 +158,7 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
     private void initComponents() {
 
         SidePanelParent = new javax.swing.JPanel();
-        SidePanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        SidePanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         BoutonMesures = new ca.ulaval.glo2004.afficheur.BoutonToggle();
         BoutonLiens = new ca.ulaval.glo2004.afficheur.BoutonToggle();
         MesuresPanel = new javax.swing.JPanel();
@@ -291,7 +292,7 @@ public class SimulationTabs extends PanelArrondi implements AdjustmentListener {
     private javax.swing.JPanel MesuresPanel;
     private javax.swing.JLabel MesuresTitre;
     private javax.swing.JScrollPane SPLiens;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi SidePanel;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi SidePanel;
     private javax.swing.JPanel SidePanelParent;
     private javax.swing.JPanel Titre;
     private javax.swing.JPanel Titre1;

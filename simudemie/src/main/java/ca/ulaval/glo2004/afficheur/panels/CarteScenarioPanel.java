@@ -5,7 +5,8 @@
  */
 package ca.ulaval.glo2004.afficheur.panels;
 
-import ca.ulaval.glo2004.afficheur.PanelArrondi;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
+import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Carte;
 import java.awt.Color;
@@ -25,7 +26,7 @@ public class CarteScenarioPanel extends PanelArrondi {
     public CarteScenarioPanel() {
         initComponents();
         
-        setBackground(new Color(216, 222, 233, 38));
+        setBackground(Couleurs.pannelArrondi);
         try {
             MapNameLabel.setFont(FontRegister.RobotoThin.deriveFont(21f));
             AideLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
@@ -73,7 +74,7 @@ public class CarteScenarioPanel extends PanelArrondi {
         BoutonExport = new javax.swing.JLabel();
         ContentParent = new javax.swing.JPanel();
         AideParent = new javax.swing.JPanel();
-        AidePanel = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        AidePanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         AideLabel = new javax.swing.JLabel();
         cartePreview = new ca.ulaval.glo2004.afficheur.CreationCarte.CartePreview();
 
@@ -154,7 +155,7 @@ public class CarteScenarioPanel extends PanelArrondi {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AideLabel;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi AidePanel;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi AidePanel;
     private javax.swing.JPanel AideParent;
     private javax.swing.JLabel BoutonExport;
     private javax.swing.JPanel ContentParent;

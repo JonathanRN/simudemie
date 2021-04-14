@@ -29,7 +29,7 @@ public class CustomSliderUI extends FlatSliderUI {
         super.paintThumb(g);
         
         Graphics2D g2d = (Graphics2D)g;
-        g2d.setColor(Color.white);
+        g2d.setColor(Couleurs.blanc);
         g2d.setFont(FontRegister.RobotoLight.deriveFont(15f));
         
         String jour = String.format("Jour %s", this.slider.getValue());

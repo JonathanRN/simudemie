@@ -110,7 +110,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="ca.ulaval.glo2004.afficheur.PanelArrondi" name="AidePanel">
+            <Container class="ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi" name="AidePanel">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
               <SubComponents>

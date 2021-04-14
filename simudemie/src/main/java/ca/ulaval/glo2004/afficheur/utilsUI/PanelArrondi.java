@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004.afficheur;
+package ca.ulaval.glo2004.afficheur.utilsUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,7 +20,7 @@ import javax.swing.SwingUtilities;
 public class PanelArrondi extends javax.swing.JPanel {
     
     private Color bgColor, borderColor;
-    protected final Color defaultColor = new Color(216, 222, 233, 38);
+    protected final Color pannel = Couleurs.pannelArrondi;
     /**
      * Creates new form RoundedPanel
      */

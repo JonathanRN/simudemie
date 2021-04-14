@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.CreationCarte;
 
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -37,7 +38,7 @@ public class Region extends Mode {
         super.paint(g);
         
         if (line != null) {
-            g.setColor(Color.yellow);
+            g.setColor(Couleurs.mesures);
             g.drawLine((int)line.x1, (int)line.y1, (int)line.x2, (int)line.y2);
             
             for (Polygon p : creationCarte.getPolygones()) {

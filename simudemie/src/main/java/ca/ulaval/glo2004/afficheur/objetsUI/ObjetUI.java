@@ -1,7 +1,8 @@
 package ca.ulaval.glo2004.afficheur.objetsUI;
 
-import ca.ulaval.glo2004.afficheur.PanelArrondi;
+import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import ca.ulaval.glo2004.afficheur.onglets.OngletUI;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import java.awt.Color;
 
 public abstract class ObjetUI extends PanelArrondi {
@@ -14,18 +15,18 @@ public abstract class ObjetUI extends PanelArrondi {
         initComponents();
         
         // Rend le panel translucide
-        setBackground(defaultColor);
+        setBackground(pannel);
     }
     
     public void setToggled(boolean toggled) {
         this.toggled = toggled;
         if (toggled) {
-            setBackground(new Color(104,125,135));
-            setBorderColor(new Color(136, 192, 208));
+            setBackground(Couleurs.selectionne);
+            setBorderColor(Couleurs.selectionneBorder);
         }
         else {
-            setBackground(defaultColor);
-            setBorderColor(defaultColor);
+            setBackground(pannel);
+            setBorderColor(pannel);
         }
     }
 
@@ -64,13 +65,13 @@ public abstract class ObjetUI extends PanelArrondi {
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
         if (!toggled) {
-            setBackground(new Color(104,125,135));
+            setBackground(Couleurs.selectionne);
         }
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
         if (!toggled) {
-            setBackground(defaultColor);
+            setBackground(pannel);
         }
     }//GEN-LAST:event_formMouseExited
 

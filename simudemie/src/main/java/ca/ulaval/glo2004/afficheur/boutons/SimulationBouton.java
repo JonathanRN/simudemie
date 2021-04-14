@@ -5,7 +5,8 @@
  */
 package ca.ulaval.glo2004.afficheur.boutons;
 
-import ca.ulaval.glo2004.afficheur.PanelArrondi;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
+import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import java.awt.Color;
 
 /**
@@ -54,7 +55,7 @@ public class SimulationBouton extends PanelArrondi {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-        setBackground(new Color(128, 134, 143));
+        setBackground(Couleurs.pannelArrondi);
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited

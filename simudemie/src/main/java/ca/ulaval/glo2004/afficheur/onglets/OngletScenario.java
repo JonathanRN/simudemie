@@ -9,6 +9,7 @@ import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetScenario;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireMaladie;
@@ -34,10 +35,10 @@ public class OngletScenario extends OngletUI {
             ScenariosScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             ScenariosLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             Sce_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
-            AddScenarioButton.setBackground(new Color(163,190,140));
-            BoutonDelete.setBackground(new Color(191, 97, 106));
-            ImportScenarioButton.setBackground(new Color(216, 222, 233, 38));
-            BoutonExport.setBackground(new Color(216, 222, 233, 38));
+            AddScenarioButton.setBackground(Couleurs.sains);
+            BoutonDelete.setBackground(Couleurs.infections);
+            ImportScenarioButton.setBackground(Couleurs.pannelArrondi);
+            BoutonExport.setBackground(Couleurs.pannelArrondi);
             
             scenarioStatsPanel1.setOnglet(this);
         } catch (Exception e) {
@@ -163,7 +164,7 @@ public class OngletScenario extends OngletUI {
         ProjectPanelContainer = new javax.swing.JPanel();
         Sce_Informations = new javax.swing.JPanel();
         Sce_InformationsLabel = new javax.swing.JLabel();
-        Layout = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        Layout = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         jPanel1 = new javax.swing.JPanel();
         scenarioMapPanel2 = new ca.ulaval.glo2004.afficheur.panels.CarteScenarioPanel();
         scenarioStatsPanel1 = new ca.ulaval.glo2004.afficheur.panels.StatsScenarioPanel();
@@ -370,7 +371,7 @@ public class OngletScenario extends OngletUI {
     private javax.swing.JButton BoutonExport;
     private ca.ulaval.glo2004.afficheur.panels.CreationScenarioPanel CreationScenarioPanel;
     private javax.swing.JButton ImportScenarioButton;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi Layout;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi Layout;
     private javax.swing.JPanel Main;
     private javax.swing.JPanel ProjectPanelContainer;
     private javax.swing.JPanel Sce_Informations;

@@ -5,9 +5,11 @@
  */
 package ca.ulaval.glo2004.afficheur;
 
+import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
 import ca.ulaval.glo2004.afficheur.CreationCarte.Mode;
 import ca.ulaval.glo2004.afficheur.Simulation.SimulationTabs;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
@@ -20,16 +22,16 @@ public class BoutonToggle extends PanelArrondi {
     private Mode mode;
     private CreationCarte creation;
     private SimulationTabs simulationTabs;
-    private final Color base, highlight;
+    private final Color invisible, selectionne;
     private boolean mouseOver;
     private boolean estToggle;
     private boolean actif;
     
     public BoutonToggle() {
         initComponents();
-        base = new Color(0, 0, 0, 0);
-        highlight = new Color(128, 134, 143);
-        setBackground(base);
+        invisible = Couleurs.invisible;
+        selectionne = Couleurs.pannelArrondi;
+        setBackground(invisible);
         setActif(true);
     }
     
@@ -57,9 +59,9 @@ public class BoutonToggle extends PanelArrondi {
     
     public void setToggle(boolean toggle) {
         estToggle = toggle;
-        Color couleur = base;
+        Color couleur = invisible;
         if (toggle || mouseOver) {
-            couleur = highlight;
+            couleur = selectionne;
         }
         
         setBackground(couleur);
@@ -103,14 +105,14 @@ public class BoutonToggle extends PanelArrondi {
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
         mouseOver = true;
         if (!estToggle && actif) {
-            setBackground(highlight);
+            setBackground(selectionne);
         }
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
         mouseOver = false;
         if (!estToggle && actif) {
-            setBackground(base);
+            setBackground(invisible);
         }
     }//GEN-LAST:event_formMouseExited
 

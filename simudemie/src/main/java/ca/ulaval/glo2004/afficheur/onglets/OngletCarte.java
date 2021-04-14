@@ -9,6 +9,7 @@ import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetCarte;
 import ca.ulaval.glo2004.afficheur.objetsUI.ObjetUI;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import java.awt.Color;
@@ -32,10 +33,10 @@ public class OngletCarte extends OngletUI {
             MapsScrollPane.getHorizontalScrollBar().setUnitIncrement(10);
             MapsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
             Map_InformationsLabel.setFont(FontRegister.RobotoThin.deriveFont(25f));
-            AddMapButton.setBackground(new Color(163,190,140));
-            DeleteMapButton.setBackground(new Color(191, 97, 106));
-            ImportMapButton.setBackground(new Color(216, 222, 233, 38));
-            BoutonExport.setBackground(new Color(216, 222, 233, 38));
+            AddMapButton.setBackground(Couleurs.sains);
+            DeleteMapButton.setBackground(Couleurs.infections);
+            ImportMapButton.setBackground(Couleurs.pannelArrondi);
+            BoutonExport.setBackground(Couleurs.pannelArrondi);
             
             Layout.setOpaque(false);
         }
@@ -140,7 +141,7 @@ public class OngletCarte extends OngletUI {
         MapPanelContainer = new javax.swing.JPanel();
         Map_Informations = new javax.swing.JPanel();
         Map_InformationsLabel = new javax.swing.JLabel();
-        Layout = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        Layout = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         scenarioMapPanel1 = new ca.ulaval.glo2004.afficheur.panels.CarteScenarioPanel();
         mapStatsPanel1 = new ca.ulaval.glo2004.afficheur.panels.StatsCartePanel();
 
@@ -328,7 +329,7 @@ public class OngletCarte extends OngletUI {
     private javax.swing.JPanel Cartes;
     private javax.swing.JButton DeleteMapButton;
     private javax.swing.JButton ImportMapButton;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi Layout;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi Layout;
     private javax.swing.JPanel MapPanelContainer;
     private javax.swing.JPanel MapTitlePanel;
     private javax.swing.JPanel Map_Informations;

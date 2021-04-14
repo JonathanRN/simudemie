@@ -10,6 +10,7 @@ import ca.ulaval.glo2004.afficheur.objetsScenario.ObjetScenarioMaladie;
 import ca.ulaval.glo2004.afficheur.onglets.OngletScenario;
 import ca.ulaval.glo2004.afficheur.onglets.OngletScenarioCarte;
 import ca.ulaval.glo2004.afficheur.onglets.OngletScenarioMaladie;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Maladie;
@@ -45,16 +46,15 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
             ongletScenarioCarte = new OngletScenarioCarte();
             ongletScenarioMaladie = new OngletScenarioMaladie();
 
-            setBackground(new Color(0, 0, 0, 150));
-            Color bg = new Color(71, 76, 88);
-            BackgroundArrondi.setBackground(bg);
-            CartesContainer.setBackground(bg);
-            MaladiesContainer.setBackground(bg);
+            setBackground(Couleurs.fondNoir);
+            BackgroundArrondi.setBackground(Couleurs.bg);
+            CartesContainer.setBackground(Couleurs.bg);
+            MaladiesContainer.setBackground(Couleurs.bg);
 
             Annuler.setFont(FontRegister.RobotoRegular.deriveFont(15f));
-            Annuler.setBackground(bg);
+            Annuler.setBackground(Couleurs.bg);
             Creer.setFont(FontRegister.RobotoRegular.deriveFont(15f));
-            Creer.setBackground(bg);
+            Creer.setBackground(Couleurs.bg);
 
             CartesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
             MaladiesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
@@ -141,7 +141,7 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
     private void initComponents() {
 
         Parent = new javax.swing.JPanel();
-        BackgroundArrondi = new ca.ulaval.glo2004.afficheur.PanelArrondi();
+        BackgroundArrondi = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         SimulationInput = new javax.swing.JTextField();
         ScrollPanes = new javax.swing.JPanel();
         CartesScrollPane = new javax.swing.JScrollPane();
@@ -283,7 +283,7 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Annuler;
-    private ca.ulaval.glo2004.afficheur.PanelArrondi BackgroundArrondi;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi BackgroundArrondi;
     private javax.swing.JPanel Boutons;
     private javax.swing.JPanel CartesContainer;
     private javax.swing.JScrollPane CartesScrollPane;

@@ -22,11 +22,12 @@ public class Mesure implements Externalizable {
     
     public Mesure() {}
     
-    public Mesure(String nom, double tauxAdhesion, double tauxReductionProp, boolean active)
+    public Mesure(String nom, double tauxAdhesion, double tauxReductionProp, int seuilActivation, boolean active)
     {
         this.nom = nom; 
         this.tauxAdhesion = tauxAdhesion;
         this.tauxReductionProp = tauxReductionProp;
+        this.seuilActivation = seuilActivation;
         this.active = active;
     }
     
@@ -35,6 +36,7 @@ public class Mesure implements Externalizable {
         this.nom = mesure.nom; 
         this.tauxAdhesion = mesure.tauxAdhesion;
         this.tauxReductionProp = mesure.tauxReductionProp;
+        this.seuilActivation = mesure.seuilActivation;
         this.active = mesure.active;
     }
     
@@ -64,6 +66,7 @@ public class Mesure implements Externalizable {
         out.writeUTF(nom);
         out.writeDouble(tauxAdhesion);
         out.writeDouble(tauxReductionProp);
+        out.writeInt(seuilActivation);
         out.writeBoolean(active);
     }
 
@@ -72,6 +75,7 @@ public class Mesure implements Externalizable {
         nom = in.readUTF();
         tauxAdhesion = in.readDouble();
         tauxReductionProp = in.readDouble();
+        seuilActivation = in.readInt();
         active = in.readBoolean();
     }
 }

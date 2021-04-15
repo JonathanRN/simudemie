@@ -49,15 +49,16 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     
     public Scenario getCourant() {return getElement(scenarioCourant);}
     
-    public void creerMesure(int indexMesure, int indexPays, String nom, double tauxAdhesion, double tauxReduction, boolean active) {
+    public void creerMesure(int indexMesure, int indexPays, String nom, double tauxAdhesion, double tauxReduction, int seuilActivation, boolean active) {
         Pays pays = getCourant().getCarteJourCourant().getPays(indexPays);
         Mesure mesure = pays.getMesure(indexMesure);
         if (mesure == null) {
-            pays.ajouterMesure(new Mesure(nom, tauxAdhesion, tauxReduction, active));
+            pays.ajouterMesure(new Mesure(nom, tauxAdhesion, tauxReduction, seuilActivation, active));
         } else {
             mesure.setNom(nom);
             mesure.setTauxAdhesion(tauxAdhesion);
             mesure.setTauxReductionProp(tauxReduction);
+            mesure.setSeuilActivation(seuilActivation);
             mesure.setActive(active);
         }
     }
@@ -71,6 +72,7 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         Vaccin vaccinGlobal = getCourant().getVaccin(nom);
         Vaccin vaccinPays = getCourant().getCarteJourCourant().getPays(indexPays).getVaccin(nom);
         Vaccin vaccin = new Vaccin(nom, tauxImmunisation, tauxAdhesion, vaccinationQuotidienne, active);
+        
         if(vaccinGlobal == null) {
             getCourant().ajouterVaccin(vaccin);
         } else if(vaccinPays == null) {
@@ -78,6 +80,12 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         } else if(vaccinPays.getTauxImmunisation() ==  tauxImmunisation) {
             vaccinPays.setTauxAdhesion(tauxAdhesion);
             vaccinPays.setVaccinationQuotidienne(vaccinationQuotidienne);
+            if(active) {
+                for(Vaccin v : getCourant().getCarteJourCourant().getPays(indexPays).getVaccins()) {
+                    v.setActive(false);
+                }
+            }
+            vaccinPays.setActive(active);
         } else {
             // Le taux d'immunisation a changé, on doit donc appliquer le nouveau taux à tous les pays
             for(Pays pays : getCourant().getCarteJourCourant().getListePays()) {
@@ -86,6 +94,7 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
                     vaccin.setTauxImmunisation(tauxImmunisation);
                 }
             }
+            vaccinGlobal.setTauxImmunisation(tauxImmunisation);
         }
     }
     

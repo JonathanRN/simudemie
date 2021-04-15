@@ -35,14 +35,6 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         this.index = index;
         initComponents();
         
-        try {
-            NomMesureTextField.setFont(FontRegister.RobotoLight.deriveFont(14f));
-            TauxReductionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
-            TauxAdhesionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
-        }
-        catch (Exception e) {
-        }
-        
         // Met tout de suite en mode edition lors de la creation
         setEdition(true, false);
         setActif(true, false);
@@ -60,6 +52,7 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         NomMesureTextField.setEnabled(edition);
         TauxReduction.setEnabled(edition);
         TauxAdhesion.setEnabled(edition);
+        SeuilActivation.setEnabled(edition);
         
         updateEditerIcon(mouseOver);
     }
@@ -68,6 +61,7 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         NomMesureTextField.setText(mesure.getNom());
         TauxAdhesion.setValue(mesure.getTauxAdhesion());
         TauxReduction.setValue(mesure.getTauxReductionProp());
+        SeuilActivation.setValue(mesure.getSeuilActivation());
         setActif(mesure.getActive(), false);
         setEdition(false, false);
     }
@@ -76,10 +70,11 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         try {
             TauxAdhesion.commitEdit();
             TauxReduction.commitEdit();
+            SeuilActivation.commitEdit();
         } catch(ParseException pe) {
         }
         
-        GestionnaireScenario.getInstance().creerMesure(index, simulationTabs.getIndexPays(), NomMesureTextField.getText(), (double) TauxAdhesion.getValue(), (double) TauxReduction.getValue(), estActif);
+        GestionnaireScenario.getInstance().creerMesure(index, simulationTabs.getIndexPays(), NomMesureTextField.getText(), (double) TauxAdhesion.getValue(), (double) TauxReduction.getValue(), (int) SeuilActivation.getValue(), estActif);
     }
     
     private void updateEditerIcon(boolean actif) {
@@ -129,15 +124,19 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         TauxAdhesionPanel = new javax.swing.JPanel();
         TauxAdhesionLabel = new javax.swing.JLabel();
         TauxAdhesion = new javax.swing.JSpinner();
+        SeuilActivationPanel = new javax.swing.JPanel();
+        SeuilActivationLabel = new javax.swing.JLabel();
+        SeuilActivation = new javax.swing.JSpinner();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
         setMaximumSize(new java.awt.Dimension(32767, 100));
         setOpaque(false);
-        setLayout(new java.awt.GridLayout(3, 0));
+        setLayout(new java.awt.GridLayout(4, 1));
 
         TitreMesurePanel.setOpaque(false);
         TitreMesurePanel.setLayout(new java.awt.BorderLayout());
 
+        NomMesureTextField.setFont(FontRegister.RobotoLight.deriveFont(14f));
         NomMesureTextField.setText("Nom de la mesure");
         NomMesureTextField.setSelectionColor(new java.awt.Color(136, 192, 208));
         TitreMesurePanel.add(NomMesureTextField, java.awt.BorderLayout.CENTER);
@@ -204,10 +203,14 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         add(TitreMesurePanel);
 
         TauxReductionPanel.setOpaque(false);
-        TauxReductionPanel.setLayout(new java.awt.BorderLayout());
+        TauxReductionPanel.setLayout(new java.awt.BorderLayout(25, 0));
 
-        TauxReductionLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        TauxReductionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         TauxReductionLabel.setText("Taux réduction inf. : ");
+        TauxReductionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
+        TauxReductionLabel.setMaximumSize(new java.awt.Dimension(200, 19));
+        TauxReductionLabel.setMinimumSize(new java.awt.Dimension(200, 19));
+        TauxReductionLabel.setPreferredSize(new java.awt.Dimension(200, 19));
         TauxReductionPanel.add(TauxReductionLabel, java.awt.BorderLayout.WEST);
 
         TauxReduction.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
@@ -216,17 +219,36 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         add(TauxReductionPanel);
 
         TauxAdhesionPanel.setOpaque(false);
-        TauxAdhesionPanel.setLayout(new java.awt.BorderLayout());
+        TauxAdhesionPanel.setLayout(new java.awt.BorderLayout(25, 0));
 
-        TauxAdhesionLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        TauxAdhesionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         TauxAdhesionLabel.setText("Taux d'adhésion :");
         TauxAdhesionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
+        TauxAdhesionLabel.setMaximumSize(new java.awt.Dimension(200, 19));
+        TauxAdhesionLabel.setMinimumSize(new java.awt.Dimension(200, 19));
+        TauxAdhesionLabel.setPreferredSize(new java.awt.Dimension(200, 19));
         TauxAdhesionPanel.add(TauxAdhesionLabel, java.awt.BorderLayout.WEST);
 
         TauxAdhesion.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
         TauxAdhesionPanel.add(TauxAdhesion, java.awt.BorderLayout.CENTER);
 
         add(TauxAdhesionPanel);
+
+        SeuilActivationPanel.setOpaque(false);
+        SeuilActivationPanel.setLayout(new java.awt.BorderLayout(25, 0));
+
+        SeuilActivationLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+        SeuilActivationLabel.setText("Sueil d'activation (%) :");
+        SeuilActivationLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
+        SeuilActivationLabel.setMaximumSize(new java.awt.Dimension(200, 19));
+        SeuilActivationLabel.setMinimumSize(new java.awt.Dimension(200, 19));
+        SeuilActivationLabel.setPreferredSize(new java.awt.Dimension(200, 19));
+        SeuilActivationPanel.add(SeuilActivationLabel, java.awt.BorderLayout.WEST);
+
+        SeuilActivation.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
+        SeuilActivationPanel.add(SeuilActivation, java.awt.BorderLayout.CENTER);
+
+        add(SeuilActivationPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ModifieMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifieMouseEntered
@@ -285,6 +307,9 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
     private javax.swing.JPanel BoutonsPanel;
     private javax.swing.JLabel Modifie;
     private javax.swing.JTextField NomMesureTextField;
+    private javax.swing.JSpinner SeuilActivation;
+    private javax.swing.JLabel SeuilActivationLabel;
+    private javax.swing.JPanel SeuilActivationPanel;
     private javax.swing.JLabel Supprimer;
     private javax.swing.JSpinner TauxAdhesion;
     private javax.swing.JLabel TauxAdhesionLabel;

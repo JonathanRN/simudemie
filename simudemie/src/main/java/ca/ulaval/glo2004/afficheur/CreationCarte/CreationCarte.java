@@ -181,9 +181,11 @@ public class CreationCarte extends javax.swing.JPanel {
         if (estValide) {
             switch(result) {
                 case JOptionPane.YES_OPTION:
+                    mode.onDesactive();
                     GestionnaireCarte.getInstance().sauvegarder();
                     onglet.onRevenirSurOnglet();
                 case JOptionPane.NO_OPTION:
+                    mode.onDesactive();
                     GestionnaireCarte.getInstance().charger();
                     FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
                     frame.returnToHome();
@@ -198,6 +200,7 @@ public class CreationCarte extends javax.swing.JPanel {
         else {
             switch(result) {
                 case JOptionPane.YES_OPTION:
+                    mode.onDesactive();
                     FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
                     frame.returnToHome();
                     onglet.retirerSansConfirmation();

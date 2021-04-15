@@ -7,7 +7,6 @@ package ca.ulaval.glo2004.afficheur.CreationCarte.mode;
 
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
 import ca.ulaval.glo2004.afficheur.CreationCarte.panels.InformationsPaysPanel;
-import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
 import java.awt.BorderLayout;
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
  */
 public class Selection extends Mode {
     
-    private Polygon selectionne;
+    private Polygon selectionne, precedent;
     private InformationsPaysPanel panel;
     
     public Selection(CreationCarte panel) {
@@ -35,6 +34,8 @@ public class Selection extends Mode {
     public void onDesactive() {
         super.onDesactive();
         
+        precedent = selectionne;
+        panel.Desactive();
         creationCarte.getInformationsPanel().setVisible(false);
         creationCarte.getInformationsPanel().remove(panel);
     }
@@ -51,12 +52,7 @@ public class Selection extends Mode {
     
     @Override
     public void onMouseReleased(Point point) {
-        if (selectionne != null) {
-            try {
-                saveInfos(selectionne);
-            } catch (ParseException ex) {
-            }
-        }
+        precedent = selectionne;
         
         selectionne = null;
         for (Polygon p : creationCarte.getPolygones()) {
@@ -70,11 +66,10 @@ public class Selection extends Mode {
         if (selectionne != null) {
             Pays pays = creationCarte.getPays(selectionne);
             ca.ulaval.glo2004.domaine.Region region = creationCarte.getPanel().getRegion(pays, selectionne);
-            
-            panel.setNomPays(pays.getNom());
-            panel.setNomRegion(region.getNom());
-            panel.setPopTotale(pays.getPopTotale());
-            panel.setPopRegion(region.getPopTotale());
+            panel.Active(pays, region);
+        }
+        else {
+            panel.Desactive();
         }
         
         super.onMouseReleased(point);
@@ -96,13 +91,11 @@ public class Selection extends Mode {
         }
     }
     
-    private void saveInfos(Polygon p) throws ParseException {
-        Pays pays = creationCarte.getPays(p);
-        ca.ulaval.glo2004.domaine.Region region = creationCarte.getPanel().getRegion(pays, p);
-        
-        if (!(pays.getNom().equals(panel.getNomPays())) ||
-            !(region.getNom().equals(panel.getNomRegion()) ||
-            region.getPopTotale() != panel.getPopRegion())) {
+    public void saveInfos() throws ParseException {
+        if (precedent != null) {
+            Pays pays = creationCarte.getPays(precedent);
+            ca.ulaval.glo2004.domaine.Region region = creationCarte.getPanel().getRegion(pays, precedent);
+
             pays.setNom(panel.getNomPays());
             region.setNom(panel.getNomRegion());
             region.setPopTotale(panel.getPopRegion());

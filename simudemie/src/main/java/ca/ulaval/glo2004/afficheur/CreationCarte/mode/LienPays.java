@@ -231,6 +231,11 @@ public class LienPays extends Mode {
     @Override
     public void onUndo() {
         super.onUndo();
+        
+        if (creationCarte.getInformationsPanel().isVisible()) {
+            creationCarte.getInformationsPanel().setVisible(false);
+            pointSelectionne = null;
+        }
         recalculeVoies();
     }
     

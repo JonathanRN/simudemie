@@ -151,10 +151,21 @@ public class CreationCarte extends javax.swing.JPanel {
     }
     
     private void quitter() {
+        boolean estValide = true;
+        String message = "Retourner au menu principal.\nVoulez-vous sauvegarder vos modifications?";
+        int messageType = JOptionPane.QUESTION_MESSAGE;
+        int optionType = JOptionPane.YES_NO_CANCEL_OPTION;
+        if (getCarte().getListePays().size() <= 0) {
+            message = "La carte ne contient aucun pays et sera supprimée si vous quittez.\nRetourner au menu?";
+            estValide = false;
+            messageType = JOptionPane.WARNING_MESSAGE;
+            optionType = JOptionPane.YES_NO_OPTION;
+        }
+        
         JOptionPane optionPane = new JOptionPane();
-        optionPane.setMessage("Retourner au menu principal.\nVoulez-vous sauvegarder vos modifications?");
-        optionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
-        optionPane.setOptionType(JOptionPane.YES_NO_CANCEL_OPTION);
+        optionPane.setMessage(message);
+        optionPane.setMessageType(messageType);
+        optionPane.setOptionType(optionType);
         
         int result = JOptionPane.showOptionDialog(
             SwingUtilities.windowForComponent(this),
@@ -167,21 +178,37 @@ public class CreationCarte extends javax.swing.JPanel {
             optionPane.getInitialValue());
         
         
-        switch(result) {
-            case JOptionPane.YES_OPTION:
-                GestionnaireCarte.getInstance().sauvegarder();
-                onglet.onRevenirSurOnglet();
-            case JOptionPane.NO_OPTION:
-                GestionnaireCarte.getInstance().charger();
-                FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
-                frame.returnToHome();
-                onglet.onRevenirSurOnglet();
-                break;
-            default:
-                onToggleClick(toggleCourant);
-                BoutonQuitter.setToggle(false);
-                break;
-        }        
+        if (estValide) {
+            switch(result) {
+                case JOptionPane.YES_OPTION:
+                    GestionnaireCarte.getInstance().sauvegarder();
+                    onglet.onRevenirSurOnglet();
+                case JOptionPane.NO_OPTION:
+                    GestionnaireCarte.getInstance().charger();
+                    FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
+                    frame.returnToHome();
+                    onglet.onRevenirSurOnglet();
+                    break;
+                default:
+                    onToggleClick(toggleCourant);
+                    BoutonQuitter.setToggle(false);
+                    break;
+            }
+        }
+        else {
+            switch(result) {
+                case JOptionPane.YES_OPTION:
+                    FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
+                    frame.returnToHome();
+                    onglet.retirerSansConfirmation();
+                    onglet.onRevenirSurOnglet();
+                    break;
+                default:
+                   onToggleClick(toggleCourant);
+                   BoutonQuitter.setToggle(false);
+                   break;
+            }
+        }
     }
     
     /**

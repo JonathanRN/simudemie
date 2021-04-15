@@ -63,10 +63,12 @@ public abstract class OngletUI extends javax.swing.JPanel {
             courant.setToggled(false);
         }
         
-        courant = objet;
-        
-        // Voir dans la liste et toggle le bon avec le bon index
-        courant.setToggled(true);
+        if (objet != null) {
+            courant = objet;
+
+            // Voir dans la liste et toggle le bon avec le bon index
+            courant.setToggled(true);
+        }
     }
     
     public void onRevenirSurOnglet() {

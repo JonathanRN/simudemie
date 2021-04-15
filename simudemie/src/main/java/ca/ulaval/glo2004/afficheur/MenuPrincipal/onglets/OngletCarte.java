@@ -12,7 +12,6 @@ import ca.ulaval.glo2004.afficheur.MenuPrincipal.objetsUI.ObjetUI;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
-import java.awt.Color;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -85,23 +84,26 @@ public class OngletCarte extends OngletUI {
         updateUI();
     }
     
+    public void retirerSansConfirmation() {
+        GestionnaireCarte.getInstance().supprimer(getIndexCourant());
+        objets.remove(courant);
+        ConteneurCartePanel.remove(courant);
+        updateUI();
+        super.retirerCourant();
+        
+        if (objets.isEmpty()) {
+            ApercuCartePanel.setPreviewVisibility(false);
+            StatsCartePanel1.setDataset(null);
+        }
+    }
+    
     @Override
     public void retirerCourant() {
         if(objets.size() > 0) {
             int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer cette carte?", "", JOptionPane.WARNING_MESSAGE);
 
             if(result == JOptionPane.YES_OPTION) {
-                GestionnaireCarte.getInstance().supprimer(getIndexCourant());
-                objets.remove(courant);
-                ConteneurCartePanel.remove(courant);
-                updateUI();
-
-                super.retirerCourant();
-            }
-            
-            if (objets.isEmpty()) {
-                ApercuCartePanel.setPreviewVisibility(false);
-                StatsCartePanel1.setDataset(null);
+                retirerSansConfirmation();
             }
         }
     }
@@ -110,10 +112,12 @@ public class OngletCarte extends OngletUI {
     public void onClickObjetUI(ObjetUI objet) {
         super.onClickObjetUI(objet);
         
-        ApercuCartePanel.setPreviewVisibility(true);
-        Carte carte = GestionnaireCarte.getInstance().getElement(this.getIndexCourant());
-        ApercuCartePanel.setCarte(carte);
-        StatsCartePanel1.setDataset(carte);
+        if (objet != null) {
+            ApercuCartePanel.setPreviewVisibility(true);
+            Carte carte = GestionnaireCarte.getInstance().getElement(this.getIndexCourant());
+            ApercuCartePanel.setCarte(carte);
+            StatsCartePanel1.setDataset(carte);
+        }
     }
     
     public void goToCreationCarte() {

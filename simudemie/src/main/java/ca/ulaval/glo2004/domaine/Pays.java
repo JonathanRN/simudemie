@@ -84,15 +84,15 @@ public class Pays implements Externalizable {
         }
     }
     
-//    public void vaccination(){
-//        if(!this.vaccins.isEmpty()){
-//            for (Region r : listeRegions){
-//                for (Vaccin v : vaccins){
-//                    r.vaccinationPop(v.getTauxImmunisation(), v.getVaccinationQuotidienne());
-//                }
-//            }
-//        }
-//    }
+    public void vaccination(){
+        if(!this.vaccins.isEmpty()){
+            for (Region r : listeRegions){
+                for (Vaccin v : vaccins){
+                    r.vaccinationPop(v.getTauxImmunisation(), (int)(v.getVaccinationQuotidienne()/this.getListeRegions().size());
+                }
+            }
+        }
+    }
     
     public void contaminerInterRegions()
     //Pour chaque région infectée, si le nombre d'infection est superieure à 25, il y a une chance sur deux de contaminer 

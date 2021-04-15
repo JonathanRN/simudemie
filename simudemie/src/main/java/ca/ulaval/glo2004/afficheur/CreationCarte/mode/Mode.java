@@ -73,6 +73,12 @@ public class Mode {
         updateHighlight(point);
     }
     
+    public void onUndo() {
+    }
+    
+    public void onRedo() {
+    }
+    
     public boolean estPolygoneValide(Polygon g) {
         updateLignesInvalides(g);
         return lignesInvalides.isEmpty();

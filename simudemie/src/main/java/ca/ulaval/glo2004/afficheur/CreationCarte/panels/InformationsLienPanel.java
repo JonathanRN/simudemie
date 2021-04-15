@@ -25,9 +25,11 @@ public class InformationsLienPanel extends javax.swing.JPanel implements ActionL
     private JButton terrestre, maritime, aerien;
     
     private final LienPays lienPays;
+    private final CreationCartePanel panel;
     
-    public InformationsLienPanel(Carte carte, LienPays lienPays) {
+    public InformationsLienPanel(Carte carte, LienPays lienPays, CreationCartePanel panel) {
         this.carte = carte;
+        this.panel = panel;
         this.lienPays = lienPays;
         initComponents();
         
@@ -93,6 +95,7 @@ public class InformationsLienPanel extends javax.swing.JPanel implements ActionL
     
     private void setVoie(VoieLiaison.TypeVoie voie) {
         lien.setType(voie);
+        panel.sauvegarderEtat();
     }
 
     /**

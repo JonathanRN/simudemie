@@ -15,6 +15,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 public class VoieLiaison implements Externalizable {
+    private static final long serialVersionUID = 1;
     
     private Pays paysOrigine;
     private Pays paysDestination;
@@ -71,7 +72,7 @@ public class VoieLiaison implements Externalizable {
     
     public void setType(TypeVoie type) {this.type = type;}
         
-    public TypeVoie getTauxPropag() { return type; }
+    public double getTauxPropag() { return tauxPropag; }
     
     public boolean getAccessible() { return accessible; }
     

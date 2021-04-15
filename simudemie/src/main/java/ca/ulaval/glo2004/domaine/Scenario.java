@@ -18,6 +18,7 @@ import java.util.List;
  * @author Mick
  */
 public class Scenario implements Externalizable {
+    private static final long serialVersionUID = 1;   
     
     private String nom;
     private final List<Carte> cartes = new ArrayList<>();

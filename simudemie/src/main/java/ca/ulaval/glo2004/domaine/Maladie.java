@@ -12,23 +12,26 @@ import java.io.ObjectOutput;
 
 
 public class Maladie implements Externalizable {
+    private static final long serialVersionUID = 1;
 
     private String nom;
     private double tauxInfection;
     private double tauxMortalite;
     private double tauxGuerison;
-    private boolean immunitePossible = false;
     private int incubation = 14;
+    private boolean immunitePossible = false;
     
     
     public Maladie() {}
     
-    public Maladie(String nom, double tauxInfection, double tauxMortalite, double tauxGuerison)
+    public Maladie(String nom, double tauxInfection, double tauxMortalite, double tauxGuerison, int incubation, boolean immunitePossible)
     {
         this.nom = nom;
         this.tauxInfection = tauxInfection;
         this.tauxMortalite = tauxMortalite;
         this.tauxGuerison = tauxGuerison;
+        this.incubation = incubation;
+        this.immunitePossible = immunitePossible;
     }
     
     public Maladie(Maladie maladie) {
@@ -36,6 +39,8 @@ public class Maladie implements Externalizable {
         this.tauxInfection = maladie.tauxInfection;
         this.tauxGuerison = maladie.tauxGuerison;
         this.tauxMortalite = maladie.tauxMortalite;
+        this.incubation = maladie.incubation;
+        this.immunitePossible = maladie.immunitePossible;
     }
     
     public String getNom(){return nom;}
@@ -68,6 +73,8 @@ public class Maladie implements Externalizable {
         out.writeDouble(tauxInfection);
         out.writeDouble(tauxMortalite);
         out.writeDouble(tauxGuerison);
+        out.writeInt(incubation);
+        out.writeBoolean(immunitePossible);
     }
 
     @Override
@@ -76,6 +83,8 @@ public class Maladie implements Externalizable {
         tauxInfection = in.readDouble();
         tauxMortalite = in.readDouble();
         tauxGuerison = in.readDouble();
+        incubation = in.readInt();
+        immunitePossible = in.readBoolean();
     }
    
 }

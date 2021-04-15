@@ -58,7 +58,7 @@ public class OngletMaladie extends OngletUI {
             card.setNom(nomMaladie);
             objets.add(card);
 
-            Object[] args = { objets.size() - 1, card.getNom(), 0.0, 0.0, 0.0 };
+            Object[] args = { objets.size() - 1, card.getNom(), 0.0, 0.0, 0.0, 14, false};
             controller.creer(args);
 
             onClickObjetUI(card);
@@ -110,6 +110,8 @@ public class OngletMaladie extends OngletUI {
         statsMaladiePanel1.setNomMaladie(maladie.getNom());
         statsMaladiePanel1.setInfectionInput(maladie.getTauxInfection());
         statsMaladiePanel1.setCuredInput(maladie.getTauxGuerison());
+        statsMaladiePanel1.setIncubationInput(maladie.getIncubation());
+        statsMaladiePanel1.setImmunizationCheckbox(maladie.getImmunitePossible());
         statsMaladiePanel1.showFields(true);
     }
 

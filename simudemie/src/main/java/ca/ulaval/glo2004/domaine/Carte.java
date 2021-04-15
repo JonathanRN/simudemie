@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class Carte implements Externalizable {
+    private static final long serialVersionUID = 1;
     
     private String nom;
     private final ArrayList<Pays> listePays = new ArrayList<>();
@@ -80,35 +81,30 @@ public class Carte implements Externalizable {
 
             for (Pays p : listePays)
             {
-                if (p.getPolygone().equals(voie.getPaysOrigine().getPolygone())){
+                if (p.getNom().equals(voie.getPaysOrigine().getNom())){
                     paysOrigine = p;
                 }
-                if (p.getPolygone().equals(voie.getPaysDestination().getPolygone())){
+                if (p.getNom().equals(voie.getPaysDestination().getNom())){
                     paysDestination = p;
                 }
             }
             
             //Pour les pays d'origine et destination, si la population d'une région 0 est supérieur à 0,
             //on 'tente' d'infecter le pays de destination (on le set à 1).
-//            if (paysOrigine.listeRegions.get(0).getPopInfectee() > 0 && paysDestination.listeRegions.get(0).getPopInfectee() == 0 )
-//            {
-//                double prob = Math.random();
-//                if (prob < 0.1 || (prob < 0.3 && paysDestination.getPopInfectee() > 1000)){
-//                    //Selection de la region 0 (la region ou se situe la voie - "theoriquement")
-//                    paysDestination.listeRegions.get(0).setPopInfectee(1); 
-//                    paysDestination.listeRegions.get(0).setPopSaine(paysDestination.listeRegions.get(0).getPopSaine() - 1); 
-//                }
-//            }
-//            
-//            if (paysDestination.listeRegions.get(0).getPopInfectee() > 0 && paysOrigine.listeRegions.get(0).getPopInfectee() == 0)
-//            {
-//                double prob = Math.random();
-//                if (prob < 0.1 || (prob < 0.3 && paysDestination.getPopInfectee() > 1000)){
-//                    //Selection de la region 0 (la region ou se situe la voie - "theoriquement")
-//                    paysOrigine.listeRegions.get(0).setPopInfectee(paysOrigine.listeRegions.get(0).getPopInfectee()+1);
-//                    paysOrigine.listeRegions.get(0).setPopSaine(paysOrigine.listeRegions.get(0).getPopSaine() - 1);
-//                }
-//            }
+            if (paysOrigine.getPopInfectee() > 0 && paysDestination.getPopInfectee() == 0){
+                contaminerParVoie(paysOrigine, paysDestination, voie.getTauxPropag());
+            }else if (paysDestination.getPopInfectee() > 0 && paysOrigine.getPopInfectee() == 0){
+                contaminerParVoie(paysDestination, paysOrigine, voie.getTauxPropag());
+            }
+        }
+    }
+    
+    public void contaminerParVoie(Pays paysO, Pays paysD, double tauxPropag)
+    {
+        double prob = Math.random();
+        if (prob < tauxPropag || (prob < tauxPropag + 0.2 && paysD.getPopInfectee() > 1000)){
+            paysD.listeRegions.get(0).setPopInfectee(1); 
+            paysD.listeRegions.get(0).setPopSaine(paysD.listeRegions.get(0).getPopSaine() - 1); 
         }
     }
     

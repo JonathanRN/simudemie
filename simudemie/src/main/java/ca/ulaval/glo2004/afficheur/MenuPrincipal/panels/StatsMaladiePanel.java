@@ -13,9 +13,6 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.ParseException;
-import javax.swing.JLabel;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -24,65 +21,26 @@ import javax.swing.event.ChangeListener;
  * @author Jonathan
  */
 public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListener, KeyListener {
-    
-    private JLabel InfectionLabel;
-    private JSpinner InfectionInput;
-    private JLabel CuredLabel;
-    private JSpinner CuredInput;
-    private JLabel DeadLabel;
-    private JSpinner DeadInput;
-        
     private OngletMaladie onglet;
     
     public StatsMaladiePanel() {
         initComponents();
+        showFields(false);
         
         try {
-            MaladieInput.setFont(FontRegister.RobotoThin.deriveFont(21f));
             init();
-            showFields(false);
-            Main.setBackground(Couleurs.pannelArrondi);
         }
         catch(Exception e) {
         }
     }
     
     private void init() {        
-        InfectionLabel = new javax.swing.JLabel();
-        InfectionLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        InfectionLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        InfectionLabel.setText("Taux d'infection");
-        InfectionLabel.setToolTipText("");
-        Parent.add(InfectionLabel);
-        
-        InfectionInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 99.9, 0.5));
-        Parent.add(InfectionInput);
-
-        CuredLabel = new javax.swing.JLabel();
-        CuredLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        CuredLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        CuredLabel.setText("Taux de guérison");
-        CuredLabel.setToolTipText("");
-        Parent.add(CuredLabel);
-
-        CuredInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 100, 0.5));
-        Parent.add(CuredInput);
-
-        DeadLabel = new javax.swing.JLabel();
-        DeadLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        DeadLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        DeadLabel.setText("Taux de mortalité");
-        DeadLabel.setToolTipText("");
-        Parent.add(DeadLabel);
-
-        DeadInput = new JSpinner(new SpinnerNumberModel(0.0f, 0, 100, 0.5));
-        Parent.add(DeadInput);
-        
         InfectionInput.addChangeListener(this);
         CuredInput.addChangeListener(this);
         DeadInput.addChangeListener(this);
         MaladieInput.addKeyListener(this);
-        
+        IncubationInput.addChangeListener(this);
+        ImmunizationCheckbox.addChangeListener(this);
     }
     
     public void setNomMaladie(String nom) {
@@ -101,6 +59,14 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         DeadInput.setValue(value);
     }
     
+    public void setIncubationInput(int value) {
+        IncubationInput.setValue(value);
+    }
+    
+    public void setImmunizationCheckbox(boolean value) {
+        ImmunizationCheckbox.setSelected(value);
+    }
+    
     public double getInfectionInput() {
         commitEdit();
         return (double) InfectionInput.getValue();
@@ -116,11 +82,21 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         return (double) DeadInput.getValue();
     }
     
+    public int getIncubationInput() {
+        commitEdit();
+        return (int) IncubationInput.getValue();
+    }
+    
+    public boolean isImmunizationChecked() {
+        return ImmunizationCheckbox.isSelected();
+    }
+    
     private void commitEdit() {
         try {
             InfectionInput.commitEdit();
             CuredInput.commitEdit();
             DeadInput.commitEdit();
+            IncubationInput.commitEdit();
         } catch(ParseException pe) {
         }
     }
@@ -130,7 +106,16 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
     }
     
     private void sauvegarderMaladie() {
-        Object[] args = { onglet.getIndexCourant(), MaladieInput.getText(), getInfectionInput(), getDeadInput(), getCuredInput() };
+        Object[] args = { 
+            onglet.getIndexCourant(),
+            MaladieInput.getText(),
+            getInfectionInput(),
+            getDeadInput(),
+            getCuredInput(),
+            getIncubationInput(),
+            isImmunizationChecked()
+        };
+
         onglet.getController().creer(args);
         
         ObjetMaladie objetMaladie = (ObjetMaladie)onglet.getCourant();
@@ -158,6 +143,16 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         TitreStatsPanel = new javax.swing.JPanel();
         MaladieInput = new javax.swing.JTextField();
         Parent = new javax.swing.JPanel();
+        InfectionLabel = new javax.swing.JLabel();
+        InfectionInput = new javax.swing.JSpinner();
+        CuredLabel = new javax.swing.JLabel();
+        CuredInput = new javax.swing.JSpinner();
+        DeadLabel = new javax.swing.JLabel();
+        DeadInput = new javax.swing.JSpinner();
+        IncubationLabel = new javax.swing.JLabel();
+        IncubationInput = new javax.swing.JSpinner();
+        ImmunizationLabel = new javax.swing.JLabel();
+        ImmunizationCheckbox = new javax.swing.JCheckBox();
 
         setOpaque(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -167,6 +162,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         });
         setLayout(new java.awt.GridLayout(1, 2, 20, 0));
 
+        Main.setBackground(Couleurs.pannelArrondi);
         Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 25, 15));
         Main.setLayout(new java.awt.BorderLayout());
 
@@ -174,7 +170,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         TitreStatsPanel.setLayout(new java.awt.BorderLayout());
 
         MaladieInput.setBackground(new java.awt.Color(71, 76, 88));
-        MaladieInput.setFont(new java.awt.Font("Dialog", 0, 21)); // NOI18N
+        MaladieInput.setFont(FontRegister.RobotoThin.deriveFont(21f));
         MaladieInput.setText("Nom de la maladie");
         MaladieInput.setToolTipText("");
         MaladieInput.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -187,9 +183,52 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
 
         Main.add(TitreStatsPanel, java.awt.BorderLayout.NORTH);
 
-        Parent.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 0, 0));
+        Parent.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 0, 0, 0));
         Parent.setOpaque(false);
-        Parent.setLayout(new java.awt.GridLayout(6, 0, 0, 5));
+        Parent.setLayout(new java.awt.GridLayout(5, 2, 0, 10));
+
+        InfectionLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        InfectionLabel.setText("Taux d'infection");
+        Parent.add(InfectionLabel);
+
+        InfectionInput.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 99.99d, 0.5d));
+        InfectionInput.setOpaque(true);
+        Parent.add(InfectionInput);
+
+        CuredLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        CuredLabel.setText("Taux de guérison");
+        Parent.add(CuredLabel);
+
+        CuredInput.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 0.5d));
+        CuredInput.setOpaque(true);
+        Parent.add(CuredInput);
+
+        DeadLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        DeadLabel.setText("Taux de mortalité");
+        Parent.add(DeadLabel);
+
+        DeadInput.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 0.5d));
+        DeadInput.setMaximumSize(new java.awt.Dimension(64, 22));
+        DeadInput.setOpaque(true);
+        Parent.add(DeadInput);
+
+        IncubationLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        IncubationLabel.setText("Temps d'incubation");
+        Parent.add(IncubationLabel);
+
+        IncubationInput.setModel(new javax.swing.SpinnerNumberModel(14, 0, 31, 1));
+        IncubationInput.setOpaque(true);
+        Parent.add(IncubationInput);
+
+        ImmunizationLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        ImmunizationLabel.setText("Possibilité d'immunisation");
+        Parent.add(ImmunizationLabel);
+
+        ImmunizationCheckbox.setBackground(Couleurs.pannelArrondiNoTransp);
+        ImmunizationCheckbox.setToolTipText("");
+        ImmunizationCheckbox.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        Parent.add(ImmunizationCheckbox);
+
         Main.add(Parent, java.awt.BorderLayout.CENTER);
 
         add(Main);
@@ -199,11 +238,15 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         InfectionLabel.setVisible(enabled);
         CuredLabel.setVisible(enabled);
         DeadLabel.setVisible(enabled);
+        IncubationLabel.setVisible(enabled);
+        ImmunizationLabel.setVisible(enabled);
         
         MaladieInput.setVisible(enabled);
         InfectionInput.setVisible(enabled);
         CuredInput.setVisible(enabled);
         DeadInput.setVisible(enabled);
+        IncubationInput.setVisible(enabled);
+        ImmunizationCheckbox.setVisible(enabled);
         
         updateUI();
     }
@@ -222,6 +265,16 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSpinner CuredInput;
+    private javax.swing.JLabel CuredLabel;
+    private javax.swing.JSpinner DeadInput;
+    private javax.swing.JLabel DeadLabel;
+    private javax.swing.JCheckBox ImmunizationCheckbox;
+    private javax.swing.JLabel ImmunizationLabel;
+    private javax.swing.JSpinner IncubationInput;
+    private javax.swing.JLabel IncubationLabel;
+    private javax.swing.JSpinner InfectionInput;
+    private javax.swing.JLabel InfectionLabel;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi Main;
     private javax.swing.JTextField MaladieInput;
     private javax.swing.JPanel Parent;

@@ -30,7 +30,7 @@ public class LienPays extends Mode {
     private InformationsLienPanel panel;
     
     private ArrayList<Pays> listePays = new ArrayList<>();
-    private Point initial, initialDrag;
+    private Point centrePaysOrigine, drag;
     
     private ArrayList<VoieLiaison> voies = new ArrayList<>();
     private ArrayList<Point> points = new ArrayList<>();
@@ -61,7 +61,6 @@ public class LienPays extends Mode {
         }
         
         if (path != null) {
-            // todo couleur du type selectionne
             g.setColor(couleurLigne);
             g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
             g.draw(path);          
@@ -113,20 +112,20 @@ public class LienPays extends Mode {
     public void onMousePressed(Point point) {
         super.onMousePressed(point);
         path = null;
-        initial = null;
+        centrePaysOrigine = null;
         for (Pays pays : listePays) {
             Polygon p = pays.getPolygone();
             if (p.contains(point)) {
                 Point centre = getCentrePolygone(p);
-                initial = centre;
+                centrePaysOrigine = centre;
                 origine = pays;
             }
         }
         
-        initialDrag = null;
+        drag = null;
         for (Point p : points) {
             if (p.distance(point) <= taillePoint / 2) {
-                initialDrag = p;
+                drag = p;
                 return;
             }
         }
@@ -135,16 +134,16 @@ public class LienPays extends Mode {
     @Override
     public void onMouseDragged(Point point) {
         super.onMouseDragged(point);
-        if (initial != null) {
+        if (centrePaysOrigine != null) {
             path = new Path2D.Double();
-            path.moveTo(initial.x, initial.y);
+            path.moveTo(centrePaysOrigine.x, centrePaysOrigine.y);
             path.lineTo(point.x, point.y);
         }
         
-        if (initialDrag != null) {
+        if (drag != null) {
             creationCarte.getInformationsPanel().setVisible(false);
             
-            VoieLiaison voie = voies.get(points.indexOf(initialDrag));
+            VoieLiaison voie = voies.get(points.indexOf(drag));
             Path2D.Double ligne = new Path2D.Double();
             Point centre = getCentrePolygone(voie.getPaysOrigine().getPolygone());
             ligne.moveTo(centre.x, centre.y);
@@ -152,7 +151,7 @@ public class LienPays extends Mode {
             
             voie.setLigne(ligne);
             voie.setCentre(point);
-            initialDrag.setLocation(point);
+            drag.setLocation(point);            
         }
     }
 
@@ -174,7 +173,7 @@ public class LienPays extends Mode {
             panel.setLien(voie);
         }
         
-        if (initial == null) {
+        if (centrePaysOrigine == null) {
             return;
         }
         
@@ -186,10 +185,10 @@ public class LienPays extends Mode {
             if (!origine.equals(destination) && p.contains(point) && !nonUtilisees.isEmpty()) {
                 Point centre = getCentrePolygone(p);
                 path = new Path2D.Double();
-                path.moveTo(initial.x, initial.y);
+                path.moveTo(centrePaysOrigine.x, centrePaysOrigine.y);
                 path.lineTo(centre.x, centre.y);
                 
-                Point centreLigne = this.getCentreLigne(new Line2D.Double(initial.x, initial.y, centre.x, centre.y));
+                Point centreLigne = this.getCentreLigne(new Line2D.Double(centrePaysOrigine.x, centrePaysOrigine.y, centre.x, centre.y));
                 
                 VoieLiaison voie = new VoieLiaison(nonUtilisees.get(0), origine, destination, path, centreLigne);
                 creationCarte.getPanel().ajouterLien(voie);
@@ -209,10 +208,33 @@ public class LienPays extends Mode {
         
         creationCarte.getInformationsPanel().setVisible(false);
         
-        panel = new InformationsLienPanel(carte, this);
+        panel = new InformationsLienPanel(carte, this, creationCarte.getPanel());
         creationCarte.getInformationsPanel().add(panel, BorderLayout.NORTH);
         
         // Update toutes les voies dans le cas ou les points on bouges
+        recalculeVoies();
+    }
+
+    @Override
+    public void onDesactive() {
+        pointSelectionne = null;
+        creationCarte.getInformationsPanel().setVisible(false);
+        creationCarte.getInformationsPanel().remove(panel);
+    }
+
+    @Override
+    public void onRedo() {
+        super.onRedo();
+        recalculeVoies();
+    }
+
+    @Override
+    public void onUndo() {
+        super.onUndo();
+        recalculeVoies();
+    }
+    
+    private void recalculeVoies() {
         for (VoieLiaison voie : carte.getVoies()) {
             Path2D.Double ligne = new Path2D.Double();
             Point centreOrigine = getCentrePolygone(voie.getPaysOrigine().getPolygone());
@@ -227,16 +249,8 @@ public class LienPays extends Mode {
         updateVoies();
         updatePoints();
     }
-
-    @Override
-    public void onDesactive() {
-        pointSelectionne = null;
-        creationCarte.getInformationsPanel().setVisible(false);
-        creationCarte.getInformationsPanel().remove(panel);
-    }
     
     public void onLienSupprime(VoieLiaison lien) {
-        // todo: faire en carte action
         carte.retirerVoie(lien);
         creationCarte.getInformationsPanel().setVisible(false);
         
@@ -244,8 +258,7 @@ public class LienPays extends Mode {
         updatePoints();
         
         pointSelectionne = null;
-        
-        creationCarte.repaint();
+        creationCarte.getPanel().sauvegarderEtat();
     }
     
     private void updateVoies() {

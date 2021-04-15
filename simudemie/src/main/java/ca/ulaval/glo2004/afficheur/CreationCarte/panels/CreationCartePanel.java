@@ -76,7 +76,7 @@ public class CreationCartePanel extends ZoomablePanel {
         pointeur++;
         
         creationCarte.setRedoActif(false);
-        creationCarte.setUndoActif(true);
+        creationCarte.setUndoActif(etats.size() > 1);
         creationCarte.repaint();
         
         System.out.println("Sauvegarde " + pointeur);
@@ -164,6 +164,8 @@ public class CreationCartePanel extends ZoomablePanel {
             
             creationCarte.setRedoActif(true);
             
+            creationCarte.getMode().onUndo();
+            
             creationCarte.repaint();
             System.out.println("Undo " + pointeur);
         }
@@ -180,6 +182,8 @@ public class CreationCartePanel extends ZoomablePanel {
             }
             
             creationCarte.setUndoActif(true);
+            
+            creationCarte.getMode().onRedo();
             
             creationCarte.repaint();
             System.out.println("Redo " + pointeur);

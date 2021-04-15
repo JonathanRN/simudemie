@@ -10,6 +10,7 @@ import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.MenuPrincipal.objetsUI.ObjetScenario;
 import ca.ulaval.glo2004.afficheur.MenuPrincipal.objetsUI.ObjetUI;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
+import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireMaladie;

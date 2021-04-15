@@ -16,8 +16,9 @@ public class Vaccin implements Externalizable {
     
     private String nom;
     private double tauxImmunisation;
-    private int vaccinationQuotidienne;
     private double tauxAdhesion = 1.0;
+    private int vaccinationQuotidienne;
+    private boolean active;    
     
     public Vaccin() {}
     
@@ -27,50 +28,56 @@ public class Vaccin implements Externalizable {
         this.vaccinationQuotidienne = vaccinationQuotidienne;
     }
     
-    public Vaccin(String nom, double tauxImmunisation, double tauxAdhesion, int vaccinationQuotidienne) {
+    public Vaccin(String nom, double tauxImmunisation, double tauxAdhesion, int vaccinationQuotidienne, boolean active) {
         this.nom = nom;
         this.tauxImmunisation = tauxImmunisation;
-        this.vaccinationQuotidienne = vaccinationQuotidienne;
         this.tauxAdhesion = tauxAdhesion;
+        this.vaccinationQuotidienne = vaccinationQuotidienne;
+        this.active = active;
     }
     
     public Vaccin(Vaccin vaccin){
         this.nom = vaccin.nom;
         this.tauxImmunisation = vaccin.tauxImmunisation;
-        this.vaccinationQuotidienne = vaccin.vaccinationQuotidienne;
         this.tauxAdhesion = vaccin.tauxAdhesion;
+        this.vaccinationQuotidienne = vaccin.vaccinationQuotidienne;
+        this.active = vaccin.active;
     }
 
     public String getNom() {return nom;}
+    
+    public double getTauxImmunisation() {return tauxImmunisation;}
 
     public double getTauxAdhesion() {return tauxAdhesion;}
 
-    public double getTauxImmunisation() {return tauxImmunisation;}
-
     public int getVaccinationQuotidienne() {return vaccinationQuotidienne;}
     
+    public boolean getActive() {return active;}
+    
     public void setNom(String nom) {this.nom = nom;}
+    
+    public void setTauxImmunisation(double tauxImmunisation) {this.tauxImmunisation = tauxImmunisation;}
 
     public void setTauxAdhesion(double tauxAdhesion) {this.tauxAdhesion = tauxAdhesion;}
 
-    public void setTauxImmunisation(double tauxImmunisation) {this.tauxImmunisation = tauxImmunisation;}
-
     public void setVaccinationQuotidienne(int vaccinationQuotidienne) {this.vaccinationQuotidienne = vaccinationQuotidienne;}
+    
+    public void setActive(boolean active) {this.active = active;}
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeUTF(nom);
         out.writeDouble(tauxImmunisation);
-        out.writeInt(vaccinationQuotidienne);
         out.writeDouble(tauxAdhesion);
+        out.writeInt(vaccinationQuotidienne);
     }
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         nom = in.readUTF();
         tauxImmunisation = in.readDouble();
-        vaccinationQuotidienne = in.readInt();
         tauxAdhesion = in.readDouble();
+        vaccinationQuotidienne = in.readInt();
     }
     
     

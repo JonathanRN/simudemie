@@ -11,7 +11,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 
-public class Mesure implements Externalizable{
+public class Mesure implements Externalizable {
     private static final long serialVersionUID = 1;
       
     private String nom;
@@ -44,19 +44,20 @@ public class Mesure implements Externalizable{
     
     public double getTauxReductionProp(){return tauxReductionProp;}
     
-    public boolean getActive() {return active;}
-    
     public int getSeuilActivation(){return seuilActivation;}
+    
+    public boolean getActive() {return active;}
     
     public void setNom(String nom) {this.nom = nom;}
     
     public void setTauxAdhesion(double tauxAdhesion){this.tauxAdhesion = tauxAdhesion;}
         
     public void setTauxReductionProp(double tauxReductionProp){this.tauxReductionProp = tauxReductionProp;}
+        
+    public void setSeuilActivation(int seuil){this.seuilActivation = seuil;}
     
     public void setActive(boolean active) {this.active = active;}
-    
-    public void setSeuilActivation(int seuil){this.seuilActivation = seuil;}
+
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {

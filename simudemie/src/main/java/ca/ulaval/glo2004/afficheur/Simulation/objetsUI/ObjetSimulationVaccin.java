@@ -7,38 +7,40 @@ package ca.ulaval.glo2004.afficheur.Simulation.objetsUI;
 
 import ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
-import ca.ulaval.glo2004.domaine.Mesure;
+import ca.ulaval.glo2004.domaine.Vaccin;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.text.ParseException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+
 /**
  *
  * @author Jonathan
  */
-public class ObjetSimulationMesure extends javax.swing.JPanel {
+public class ObjetSimulationVaccin extends javax.swing.JPanel {
     
     private JPanel conteneur;
     private SimulationPanelGauche simulationTabs;
     private boolean edition, mouseOverEdition, mouseOverActif, estActif;
     private int index;
     
-    public ObjetSimulationMesure() {
+    public ObjetSimulationVaccin() {
         initComponents();
     }
     
-    public ObjetSimulationMesure(JPanel conteneur, SimulationPanelGauche simulationTabs, int index) {
+    public ObjetSimulationVaccin(JPanel conteneur, SimulationPanelGauche simulationTabs, int index) {
         this.conteneur = conteneur;
         this.simulationTabs = simulationTabs;
         this.index = index;
         initComponents();
         
         try {
-            NomMesureTextField.setFont(FontRegister.RobotoLight.deriveFont(14f));
-            TauxReductionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            NomVaccinTextField.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            TauxImmunisationLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
             TauxAdhesionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            VaccinationQuotLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         }
         catch (Exception e) {
         }
@@ -57,29 +59,32 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
     private void setEdition(boolean edition, boolean mouseOver) {
         this.edition = edition;
         
-        NomMesureTextField.setEnabled(edition);
-        TauxReduction.setEnabled(edition);
+        NomVaccinTextField.setEnabled(edition);
+        TauxImmunisation.setEnabled(edition);
         TauxAdhesion.setEnabled(edition);
+        VaccinationQuot.setEnabled(edition);
         
         updateEditerIcon(mouseOver);
     }
     
-    public void chargerMesure(Mesure mesure) {
-        NomMesureTextField.setText(mesure.getNom());
-        TauxAdhesion.setValue(mesure.getTauxAdhesion());
-        TauxReduction.setValue(mesure.getTauxReductionProp());
-        setActif(mesure.getActive(), false);
+    public void chargerVaccin(Vaccin vaccin) {
+        NomVaccinTextField.setText(vaccin.getNom());
+        TauxAdhesion.setValue(vaccin.getTauxAdhesion());
+        TauxImmunisation.setValue(vaccin.getTauxImmunisation());
+        VaccinationQuot.setValue(vaccin.getVaccinationQuotidienne());
+        setActif(vaccin.getActive(), false);
         setEdition(false, false);
     }
     
-    public void sauvegarderMesure() {
+    public void sauvegarderVaccin() {
         try {
             TauxAdhesion.commitEdit();
-            TauxReduction.commitEdit();
+            TauxImmunisation.commitEdit();
+            VaccinationQuot.commitEdit();
         } catch(ParseException pe) {
         }
         
-        GestionnaireScenario.getInstance().creerMesure(index, simulationTabs.getIndexPays(), NomMesureTextField.getText(), (double) TauxAdhesion.getValue(), (double) TauxReduction.getValue(), estActif);
+        GestionnaireScenario.getInstance().creerVaccin(index, simulationTabs.getIndexPays(), NomVaccinTextField.getText(), (double) TauxAdhesion.getValue(), (double) TauxImmunisation.getValue(), (int) VaccinationQuot.getValue(), estActif);
     }
     
     private void updateEditerIcon(boolean actif) {
@@ -117,30 +122,51 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        TitreMesurePanel = new javax.swing.JPanel();
-        NomMesureTextField = new javax.swing.JTextField();
+        VaccinsPanel = new javax.swing.JPanel();
+        TitreVaccinsPanel1 = new javax.swing.JPanel();
+        NomVaccinTextField = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
         BoutonsPanel = new javax.swing.JPanel();
         Modifie = new javax.swing.JLabel();
         Supprimer = new javax.swing.JLabel();
         Activer = new javax.swing.JLabel();
-        TauxReductionPanel = new javax.swing.JPanel();
-        TauxReductionLabel = new javax.swing.JLabel();
-        TauxReduction = new javax.swing.JSpinner();
+        TauxImmunisationPanel = new javax.swing.JPanel();
+        TauxImmunisationLabel = new javax.swing.JLabel();
+        TauxImmunisation = new javax.swing.JSpinner();
         TauxAdhesionPanel = new javax.swing.JPanel();
         TauxAdhesionLabel = new javax.swing.JLabel();
         TauxAdhesion = new javax.swing.JSpinner();
+        VaccinationQuotPanel = new javax.swing.JPanel();
+        VaccinationQuotLabel = new javax.swing.JLabel();
+        VaccinationQuot = new javax.swing.JSpinner();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
         setMaximumSize(new java.awt.Dimension(32767, 100));
         setOpaque(false);
-        setLayout(new java.awt.GridLayout(3, 0));
+        setLayout(new java.awt.GridLayout(4, 0));
 
-        TitreMesurePanel.setOpaque(false);
-        TitreMesurePanel.setLayout(new java.awt.BorderLayout());
+        VaccinsPanel.setOpaque(false);
+        VaccinsPanel.setLayout(new java.awt.BorderLayout());
 
-        NomMesureTextField.setText("Nom de la mesure");
-        NomMesureTextField.setSelectionColor(new java.awt.Color(136, 192, 208));
-        TitreMesurePanel.add(NomMesureTextField, java.awt.BorderLayout.CENTER);
+        TitreVaccinsPanel1.setLayout(new javax.swing.OverlayLayout(TitreVaccinsPanel1));
+
+        NomVaccinTextField.setText("Nom du vaccin");
+        NomVaccinTextField.setMinimumSize(new java.awt.Dimension(118, 24));
+        NomVaccinTextField.setPreferredSize(new java.awt.Dimension(118, 24));
+        NomVaccinTextField.setSelectionColor(new java.awt.Color(136, 192, 208));
+        NomVaccinTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NomVaccinTextFieldActionPerformed(evt);
+            }
+        });
+        TitreVaccinsPanel1.add(NomVaccinTextField);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setMinimumSize(new java.awt.Dimension(118, 24));
+        jComboBox1.setPreferredSize(new java.awt.Dimension(118, 26));
+        TitreVaccinsPanel1.add(jComboBox1);
+
+        VaccinsPanel.add(TitreVaccinsPanel1, java.awt.BorderLayout.LINE_START);
 
         BoutonsPanel.setOpaque(false);
         BoutonsPanel.setLayout(new java.awt.GridLayout(1, 3));
@@ -199,27 +225,27 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         });
         BoutonsPanel.add(Activer);
 
-        TitreMesurePanel.add(BoutonsPanel, java.awt.BorderLayout.LINE_END);
+        VaccinsPanel.add(BoutonsPanel, java.awt.BorderLayout.LINE_END);
 
-        add(TitreMesurePanel);
+        add(VaccinsPanel);
 
-        TauxReductionPanel.setOpaque(false);
-        TauxReductionPanel.setLayout(new java.awt.BorderLayout());
+        TauxImmunisationPanel.setOpaque(false);
+        TauxImmunisationPanel.setLayout(new java.awt.BorderLayout());
 
-        TauxReductionLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        TauxReductionLabel.setText("Taux réduction inf. : ");
-        TauxReductionPanel.add(TauxReductionLabel, java.awt.BorderLayout.WEST);
+        TauxImmunisationLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        TauxImmunisationLabel.setText("Taux d'efficacité :                                         ");
+        TauxImmunisationPanel.add(TauxImmunisationLabel, java.awt.BorderLayout.WEST);
 
-        TauxReduction.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
-        TauxReductionPanel.add(TauxReduction, java.awt.BorderLayout.CENTER);
+        TauxImmunisation.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
+        TauxImmunisationPanel.add(TauxImmunisation, java.awt.BorderLayout.CENTER);
 
-        add(TauxReductionPanel);
+        add(TauxImmunisationPanel);
 
         TauxAdhesionPanel.setOpaque(false);
         TauxAdhesionPanel.setLayout(new java.awt.BorderLayout());
 
         TauxAdhesionLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        TauxAdhesionLabel.setText("Taux d'adhésion :");
+        TauxAdhesionLabel.setText("Taux d'adhésion :                                    ");
         TauxAdhesionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
         TauxAdhesionPanel.add(TauxAdhesionLabel, java.awt.BorderLayout.WEST);
 
@@ -227,6 +253,21 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         TauxAdhesionPanel.add(TauxAdhesion, java.awt.BorderLayout.CENTER);
 
         add(TauxAdhesionPanel);
+
+        VaccinationQuotPanel.setMinimumSize(new java.awt.Dimension(347, 26));
+        VaccinationQuotPanel.setOpaque(false);
+        VaccinationQuotPanel.setPreferredSize(new java.awt.Dimension(347, 26));
+        VaccinationQuotPanel.setLayout(new java.awt.BorderLayout());
+
+        VaccinationQuotLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        VaccinationQuotLabel.setText("Vaccination par j. :                                   ");
+        VaccinationQuotLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
+        VaccinationQuotPanel.add(VaccinationQuotLabel, java.awt.BorderLayout.WEST);
+
+        VaccinationQuot.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1000));
+        VaccinationQuotPanel.add(VaccinationQuot, java.awt.BorderLayout.CENTER);
+
+        add(VaccinationQuotPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void ModifieMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifieMouseEntered
@@ -254,13 +295,13 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
     }//GEN-LAST:event_SupprimerMouseExited
 
     private void SupprimerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupprimerMouseReleased
-        int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer " + "\"" + NomMesureTextField.getText() + "\"?", "", JOptionPane.WARNING_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer " + "\"" + NomVaccinTextField.getText() + "\"?", "", JOptionPane.WARNING_MESSAGE);
 
         if(result == JOptionPane.YES_OPTION) {
-            GestionnaireScenario.getInstance().supprimerMesure(index, simulationTabs.getIndexPays());
+            GestionnaireScenario.getInstance().supprimerVaccin(index, simulationTabs.getIndexPays());
             conteneur.remove(this);
             
-            simulationTabs.loadMesures();
+            simulationTabs.loadVaccins();
             
             conteneur.getParent().validate();
             conteneur.getRootPane().repaint();
@@ -270,28 +311,37 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
     private void ModifieMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifieMouseReleased
         setEdition(!edition, mouseOverEdition);
         if(!edition) {
-            sauvegarderMesure();
+            sauvegarderVaccin();
         }
     }//GEN-LAST:event_ModifieMouseReleased
 
     private void ActiverMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActiverMouseReleased
         setActif(!estActif, mouseOverActif);
-        sauvegarderMesure();
+        sauvegarderVaccin();
     }//GEN-LAST:event_ActiverMouseReleased
+
+    private void NomVaccinTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomVaccinTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NomVaccinTextFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Activer;
     private javax.swing.JPanel BoutonsPanel;
     private javax.swing.JLabel Modifie;
-    private javax.swing.JTextField NomMesureTextField;
+    private javax.swing.JTextField NomVaccinTextField;
     private javax.swing.JLabel Supprimer;
     private javax.swing.JSpinner TauxAdhesion;
     private javax.swing.JLabel TauxAdhesionLabel;
     private javax.swing.JPanel TauxAdhesionPanel;
-    private javax.swing.JSpinner TauxReduction;
-    private javax.swing.JLabel TauxReductionLabel;
-    private javax.swing.JPanel TauxReductionPanel;
-    private javax.swing.JPanel TitreMesurePanel;
+    private javax.swing.JSpinner TauxImmunisation;
+    private javax.swing.JLabel TauxImmunisationLabel;
+    private javax.swing.JPanel TauxImmunisationPanel;
+    private javax.swing.JPanel TitreVaccinsPanel1;
+    private javax.swing.JSpinner VaccinationQuot;
+    private javax.swing.JLabel VaccinationQuotLabel;
+    private javax.swing.JPanel VaccinationQuotPanel;
+    private javax.swing.JPanel VaccinsPanel;
+    private javax.swing.JComboBox<String> jComboBox1;
     // End of variables declaration//GEN-END:variables
 }

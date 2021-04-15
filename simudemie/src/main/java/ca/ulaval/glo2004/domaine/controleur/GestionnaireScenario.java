@@ -59,7 +59,7 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
             mesure.setTauxReductionProp(tauxReduction);
             mesure.setActive(active);
         }
-    }       
+    }
     
     public void supprimerMesure(int indexMesure, int indexPays) {
         Pays pays = getCourant().getCarteJourCourant().getPays(indexPays);

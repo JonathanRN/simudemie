@@ -8,14 +8,15 @@ package ca.ulaval.glo2004.afficheur.Simulation.panels;
 import ca.ulaval.glo2004.afficheur.Simulation.objetsUI.ObjetSimulationMesure;
 import ca.ulaval.glo2004.afficheur.Simulation.objetsUI.ObjetSimulationVoieLiaison;
 import ca.ulaval.glo2004.afficheur.Simulation.Simulation;
+import ca.ulaval.glo2004.afficheur.Simulation.objetsUI.ObjetSimulationVaccin;
 import ca.ulaval.glo2004.afficheur.boutons.ToggleBouton;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Mesure;
+import ca.ulaval.glo2004.domaine.Vaccin;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
-import java.awt.Color;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.util.ArrayList;
@@ -84,6 +85,12 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         else if (toggleCourant.equals(BoutonLiens)) {
             loadLiens();
         }
+        else if (toggleCourant.equals(BoutonVaccins)) {
+            loadVaccins();
+        }
+        else if (toggleCourant.equals(BoutonStats)) {
+           // loadStats();
+        }
     }
     
     public void loadMesures() {
@@ -118,6 +125,16 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         
         ConteneurLiensPanel.getParent().validate();
         ConteneurLiensPanel.getRootPane().repaint();
+    }
+    
+    public void loadVaccins() {
+    ConteneurVaccinsPanel.removeAll();
+    ConteneurVaccinsPanel.getParent().validate();
+    ConteneurVaccinsPanel.getRootPane().repaint();
+
+    for (Vaccin v : simulation.getScenario().getCarteJourCourant().getPays(indexPays).getVaccins()) {
+            addVaccin(v);
+        }
     }
     
     public void onToggleClick(ToggleBouton toggle) {        
@@ -158,6 +175,17 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         ConteneurMesuresPanel.add(panel);
         ConteneurMesuresPanel.getParent().validate();
         ConteneurMesuresPanel.getRootPane().repaint();
+        return panel;
+    }
+    
+    private ObjetSimulationVaccin addVaccin(Vaccin vaccin) {
+        ObjetSimulationVaccin panel = new ObjetSimulationVaccin(ConteneurVaccinsPanel, this, ConteneurVaccinsPanel.getComponentCount());
+//        if(vaccin != null) {
+//            panel.chargerVaccin(new Vaccin(vaccin));
+//        }
+        ConteneurVaccinsPanel.add(panel);
+        ConteneurVaccinsPanel.getParent().validate();
+        ConteneurVaccinsPanel.getRootPane().repaint();
         return panel;
     }
     
@@ -329,7 +357,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
 
         ConteneurVaccinsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         ConteneurVaccinsPanel.setOpaque(false);
-        ConteneurVaccinsPanel.setLayout(new javax.swing.BoxLayout(ConteneurVaccinsPanel, javax.swing.BoxLayout.Y_AXIS));
+        ConteneurVaccinsPanel.setLayout(new java.awt.GridLayout());
         VaccinsScrollPane.setViewportView(ConteneurVaccinsPanel);
 
         VaccinsPanel.add(VaccinsScrollPane, java.awt.BorderLayout.CENTER);

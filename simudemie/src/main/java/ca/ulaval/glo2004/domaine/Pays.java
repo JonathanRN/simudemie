@@ -18,7 +18,7 @@ public class Pays implements Externalizable {
     private String nom;
     private Polygon polygone;
     private int popInitiale; 
-    //private ArrayList<Vaccin> vaccins = new ArrayList<>(); //Au cas ou il y aurait plusieurs vaccins - a voir
+    private ArrayList<Vaccin> vaccins = new ArrayList<>();
     private ArrayList<Mesure> mesures = new ArrayList<>();
     public ArrayList<Region> listeRegions = new ArrayList<>();
 
@@ -88,7 +88,7 @@ public class Pays implements Externalizable {
         if(!this.vaccins.isEmpty()){
             for (Region r : listeRegions){
                 for (Vaccin v : vaccins){
-                    r.vaccinationPop(v.getTauxImmunisation(), (int)(v.getVaccinationQuotidienne()/this.getListeRegions().size());
+                    //r.vaccinationPop(v.getTauxImmunisation(), (int)(v.getVaccinationQuotidienne()/this.getListeRegions().size());
                 }
             }
         }
@@ -179,6 +179,18 @@ public class Pays implements Externalizable {
     
     public ArrayList<Mesure> getMesures() {return mesures;}
     
+    public Vaccin getVaccin(String nom) {
+        Vaccin vaccin = null;
+        for(Vaccin v : vaccins) {
+            if(v.getNom().equals(nom)) {
+                vaccin = v;
+            }
+        }
+        return vaccin;
+    }
+    
+    public ArrayList<Vaccin> getVaccins() { return vaccins; }
+    
     public Polygon getPolygone() {return polygone;};
     
     public ArrayList<Region> getListeRegions(){return listeRegions;}
@@ -192,22 +204,52 @@ public class Pays implements Externalizable {
     public void ajouterMesure(Mesure mesure) {mesures.add(mesure);}
     
     public void supprimerMesure(int index) {mesures.remove(index);}
+    
+    public void ajouterVaccin(Vaccin vaccin) { vaccins.add(vaccin); }
+    
+    public void supprimerVaccin(String nom) { vaccins.removeIf(v -> v.getNom().equals(nom));}
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeUTF(nom);
         out.writeObject(polygone);
         out.writeInt(popInitiale);
-        out.writeObject(mesures);
-        out.writeObject(listeRegions);
+        out.writeInt(mesures.size());
+        for(Mesure m : mesures) {
+            out.writeObject(m);
+        }
+        out.writeInt(listeRegions.size());
+        for(Region r : listeRegions) {
+            out.writeObject(r);
+        }
+        out.writeInt(vaccins.size());
+        for(Vaccin v : vaccins) {
+            out.writeObject(v);
+        }
     }
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        mesures.clear();
+        listeRegions.clear();
+        vaccins.clear();
+        
         nom = in.readUTF();
         polygone = (Polygon) in.readObject();
         popInitiale = in.readInt();
-        mesures = (ArrayList<Mesure>) in.readObject();
-        listeRegions = (ArrayList<Region>) in.readObject();
+        int mesuresSize = in.readInt();
+        for(int index = 0; index < mesuresSize; index++) {
+            mesures.add((Mesure) in.readObject());
+        }
+        
+        int listeRegionsSize = in.readInt();
+        for(int index = 0; index < listeRegionsSize; index++) {
+            listeRegions.add((Region) in.readObject());
+        }
+        
+        int vaccinsSize = in.readInt();
+        for(int index = 0; index < vaccinsSize; index++) {
+            vaccins.add((Vaccin) in.readObject());
+        }
     }
 }

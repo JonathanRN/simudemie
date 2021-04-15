@@ -11,6 +11,7 @@ import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.Mesure;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Scenario;
+import ca.ulaval.glo2004.domaine.Vaccin;
 import ca.ulaval.glo2004.domaine.helper.FileHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -64,6 +65,47 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     public void supprimerMesure(int indexMesure, int indexPays) {
         Pays pays = getCourant().getCarteJourCourant().getPays(indexPays);
         pays.supprimerMesure(indexMesure);
+    }
+    
+    public void creerVaccin(int indexPays, String nom, double tauxImmunisation, double tauxAdhesion, int vaccinationQuotidienne, boolean active) {
+        Vaccin vaccinGlobal = getCourant().getVaccin(nom);
+        Vaccin vaccinPays = getCourant().getCarteJourCourant().getPays(indexPays).getVaccin(nom);
+        Vaccin vaccin = new Vaccin(nom, tauxImmunisation, tauxAdhesion, vaccinationQuotidienne, active);
+        if(vaccinGlobal == null) {
+            getCourant().ajouterVaccin(vaccin);
+        } else if(vaccinPays == null) {
+            getCourant().getCarteJourCourant().getPays(indexPays).ajouterVaccin(vaccin);
+        } else if(vaccinPays.getTauxImmunisation() ==  tauxImmunisation) {
+            vaccinPays.setTauxAdhesion(tauxAdhesion);
+            vaccinPays.setVaccinationQuotidienne(vaccinationQuotidienne);
+        } else {
+            // Le taux d'immunisation a changé, on doit donc appliquer le nouveau taux à tous les pays
+            for(Pays pays : getCourant().getCarteJourCourant().getListePays()) {
+                vaccin = pays.getVaccin(nom);
+                if(vaccin != null) {
+                    vaccin.setTauxImmunisation(tauxImmunisation);
+                }
+            }
+        }
+    }
+    
+    public boolean supprimerVaccin(int indexPays, String nom) {
+        boolean vaccinActiveElsewhere = false;
+        getCourant().getCarteJourCourant().getPays(indexPays).supprimerVaccin(nom);
+
+        for(Pays pays : getCourant().getCarteJourCourant().getListePays()) {
+            Vaccin vaccin = pays.getVaccin(nom);
+            if(vaccin != null && vaccin.getActive()) {
+                vaccinActiveElsewhere = true;
+                break;
+            }
+        }
+        
+        if(!vaccinActiveElsewhere) {
+            getCourant().supprimerVaccin(nom);
+        }
+        
+        return vaccinActiveElsewhere;
     }
     
     public void pause() {timer.stop();}

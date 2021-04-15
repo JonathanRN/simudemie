@@ -24,6 +24,7 @@ public class Scenario implements Externalizable {
     private final List<Carte> cartes = new ArrayList<>();
     private int indexCourant;
     private boolean estCommence;
+    private List<Vaccin> vaccins = new ArrayList<>();
     
     transient private ScenarioCallback scenarioCallback;
     
@@ -54,6 +55,19 @@ public class Scenario implements Externalizable {
     public List<Carte> getListeCartes() {return cartes;}
     
     public String getNom() {return nom;}
+    
+    public Vaccin getVaccin(String nom) {
+        return vaccins.stream()
+                .filter(v -> v.getNom().equals(nom))
+                .findFirst()
+                .orElse(null);
+    }
+    
+    public List<Vaccin> getVaccins() { return vaccins; }
+    
+    public void ajouterVaccin(Vaccin vaccin) { vaccins.add(vaccin); }
+    
+    public void supprimerVaccin(String nom) { vaccins.removeIf(v -> v.getNom().equals(nom)); }
     
     public void setNom(String nom) {this.nom = nom;}
     
@@ -96,11 +110,17 @@ public class Scenario implements Externalizable {
         }
         out.writeInt(indexCourant);
         out.writeBoolean(estCommence);
+        out.writeInt(vaccins.size());
+        for(Vaccin v : vaccins) {
+            out.writeObject(v);
+        }
     }
 
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         cartes.clear();
+        vaccins.clear();
+        
         nom = in.readUTF();
         int cartesSize = in.readInt();
         for(int index = 0; index < cartesSize; index++) {
@@ -108,5 +128,9 @@ public class Scenario implements Externalizable {
         }
         indexCourant = in.readInt();
         estCommence = in.readBoolean();
+        int vaccinsSize = in.readInt();
+        for(int index = 0; index < vaccinsSize; index++) {
+            vaccins.add((Vaccin) in.readObject());
+        }
     }
 }

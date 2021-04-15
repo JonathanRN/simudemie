@@ -84,7 +84,7 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         } catch(ParseException pe) {
         }
         
-        GestionnaireScenario.getInstance().creerVaccin(index, simulationTabs.getIndexPays(), NomVaccinTextField.getText(), (double) TauxAdhesion.getValue(), (double) TauxImmunisation.getValue(), (int) VaccinationQuot.getValue(), estActif);
+        GestionnaireScenario.getInstance().creerVaccin(simulationTabs.getIndexPays(), NomVaccinTextField.getText(), (double) TauxAdhesion.getValue(), (double) TauxImmunisation.getValue(), (int) VaccinationQuot.getValue(), estActif);
     }
     
     private void updateEditerIcon(boolean actif) {
@@ -298,7 +298,7 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer " + "\"" + NomVaccinTextField.getText() + "\"?", "", JOptionPane.WARNING_MESSAGE);
 
         if(result == JOptionPane.YES_OPTION) {
-            GestionnaireScenario.getInstance().supprimerVaccin(index, simulationTabs.getIndexPays());
+            GestionnaireScenario.getInstance().supprimerVaccin(simulationTabs.getIndexPays(), "NOM DE LA MALADIE");
             conteneur.remove(this);
             
             simulationTabs.loadVaccins();

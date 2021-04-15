@@ -138,7 +138,7 @@ public class OngletScenario extends OngletUI {
     
     private boolean contientMaladieEtCarte() {
         return GestionnaireMaladie.getInstance().getList().size() > 0 &&
-                GestionnaireCarte.getInstance().getList().size() > 0;
+                GestionnaireCarte.getInstance().getList().size() > 0 ;
     }
     
     /**

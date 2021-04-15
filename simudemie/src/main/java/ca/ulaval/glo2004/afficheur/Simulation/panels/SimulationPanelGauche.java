@@ -49,6 +49,14 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
             LiensTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             LiensScrollPane.getViewport().setOpaque(false);
             
+            BoutonVaccins.init(this, "icons8_syringe_30px");
+            VaccinsScrollPane.getViewport().setOpaque(false);
+            VaccinsTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            
+            BoutonStats.init(this, "icons8_bar_chart_30px");
+            StatsScrollPane.getViewport().setOpaque(false);
+            StatsTitreLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            
             onToggleClick(BoutonMesures);
         }
         catch(Exception e) {
@@ -125,6 +133,8 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         
         MesuresPanel.setVisible(toggle.equals(BoutonMesures));
         LiensPanel.setVisible(toggle.equals(BoutonLiens));
+        VaccinsPanel.setVisible(toggle.equals(BoutonVaccins));
+        StatsPanel.setVisible(toggle.equals(BoutonStats));
         
         loadElements();
         
@@ -164,6 +174,8 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         SidePanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         BoutonMesures = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
         BoutonLiens = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
+        BoutonVaccins = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
+        BoutonStats = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
         MesuresPanel = new javax.swing.JPanel();
         Titre = new javax.swing.JPanel();
         MesuresTitre = new javax.swing.JLabel();
@@ -175,6 +187,18 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         LiensTitre = new javax.swing.JLabel();
         LiensScrollPane = new javax.swing.JScrollPane();
         ConteneurLiensPanel = new javax.swing.JPanel();
+        VaccinsPanel = new javax.swing.JPanel();
+        TitrePanel = new javax.swing.JPanel();
+        VaccinsTitre = new javax.swing.JLabel();
+        AjouterVaccins = new javax.swing.JLabel();
+        VaccinsScrollPane = new javax.swing.JScrollPane();
+        ConteneurVaccinsPanel = new javax.swing.JPanel();
+        StatsPanel = new javax.swing.JPanel();
+        TitreStatsPanel = new javax.swing.JPanel();
+        StatsTitreLabel = new javax.swing.JLabel();
+        ExportStats = new javax.swing.JLabel();
+        StatsScrollPane = new javax.swing.JScrollPane();
+        ConteneurStatsPanel = new javax.swing.JPanel();
 
         setLayout(new javax.swing.OverlayLayout(this));
 
@@ -187,6 +211,8 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         SidePanel.setLayout(new java.awt.GridLayout(6, 1, 0, 10));
         SidePanel.add(BoutonMesures);
         SidePanel.add(BoutonLiens);
+        SidePanel.add(BoutonVaccins);
+        SidePanel.add(BoutonStats);
 
         SidePanelParent.add(SidePanel, java.awt.BorderLayout.WEST);
 
@@ -263,6 +289,96 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         LiensPanel.add(LiensScrollPane, java.awt.BorderLayout.CENTER);
 
         add(LiensPanel);
+
+        VaccinsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 0, 0));
+        VaccinsPanel.setLayout(new java.awt.BorderLayout());
+
+        TitrePanel.setMinimumSize(new java.awt.Dimension(77, 33));
+        TitrePanel.setOpaque(false);
+        TitrePanel.setPreferredSize(new java.awt.Dimension(102, 30));
+        TitrePanel.setLayout(new java.awt.BorderLayout());
+
+        VaccinsTitre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        VaccinsTitre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        VaccinsTitre.setText("Vaccins");
+        VaccinsTitre.setPreferredSize(new java.awt.Dimension(62, 30));
+        TitrePanel.add(VaccinsTitre, java.awt.BorderLayout.CENTER);
+
+        AjouterVaccins.setFont(new java.awt.Font("Dialog", 0, 25)); // NOI18N
+        AjouterVaccins.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AjouterVaccins.setText("+");
+        AjouterVaccins.setPreferredSize(new java.awt.Dimension(40, 30));
+        AjouterVaccins.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AjouterVaccinsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AjouterVaccinsMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                AjouterVaccinsMouseReleased(evt);
+            }
+        });
+        TitrePanel.add(AjouterVaccins, java.awt.BorderLayout.EAST);
+
+        VaccinsPanel.add(TitrePanel, java.awt.BorderLayout.PAGE_START);
+
+        VaccinsScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        VaccinsScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        VaccinsScrollPane.setOpaque(false);
+
+        ConteneurVaccinsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        ConteneurVaccinsPanel.setOpaque(false);
+        ConteneurVaccinsPanel.setLayout(new javax.swing.BoxLayout(ConteneurVaccinsPanel, javax.swing.BoxLayout.Y_AXIS));
+        VaccinsScrollPane.setViewportView(ConteneurVaccinsPanel);
+
+        VaccinsPanel.add(VaccinsScrollPane, java.awt.BorderLayout.CENTER);
+
+        add(VaccinsPanel);
+
+        StatsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 0, 0));
+        StatsPanel.setLayout(new java.awt.BorderLayout());
+
+        TitreStatsPanel.setOpaque(false);
+        TitreStatsPanel.setLayout(new java.awt.BorderLayout());
+
+        StatsTitreLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        StatsTitreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        StatsTitreLabel.setText("Statistiques");
+        StatsTitreLabel.setPreferredSize(new java.awt.Dimension(62, 30));
+        TitreStatsPanel.add(StatsTitreLabel, java.awt.BorderLayout.CENTER);
+
+        ExportStats.setFont(new java.awt.Font("Dialog", 0, 25)); // NOI18N
+        ExportStats.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ExportStats.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
+        ExportStats.setPreferredSize(new java.awt.Dimension(40, 30));
+        ExportStats.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ExportStatsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ExportStatsMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ExportStatsMouseReleased(evt);
+            }
+        });
+        TitreStatsPanel.add(ExportStats, java.awt.BorderLayout.EAST);
+
+        StatsPanel.add(TitreStatsPanel, java.awt.BorderLayout.PAGE_START);
+
+        StatsScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        StatsScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        StatsScrollPane.setOpaque(false);
+
+        ConteneurStatsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        ConteneurStatsPanel.setOpaque(false);
+        ConteneurStatsPanel.setLayout(new javax.swing.BoxLayout(ConteneurStatsPanel, javax.swing.BoxLayout.Y_AXIS));
+        StatsScrollPane.setViewportView(ConteneurStatsPanel);
+
+        StatsPanel.add(StatsScrollPane, java.awt.BorderLayout.CENTER);
+
+        add(StatsPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void AjouterMesureMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterMesureMouseEntered
@@ -282,13 +398,43 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         panel.sauvegarderMesure();
     }//GEN-LAST:event_AjouterMesureMouseReleased
 
+    private void AjouterVaccinsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterVaccinsMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AjouterVaccinsMouseEntered
+
+    private void AjouterVaccinsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterVaccinsMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AjouterVaccinsMouseExited
+
+    private void AjouterVaccinsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterVaccinsMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AjouterVaccinsMouseReleased
+
+    private void ExportStatsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportStatsMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ExportStatsMouseEntered
+
+    private void ExportStatsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportStatsMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ExportStatsMouseExited
+
+    private void ExportStatsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportStatsMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ExportStatsMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AjouterMesure;
+    private javax.swing.JLabel AjouterVaccins;
     private ca.ulaval.glo2004.afficheur.boutons.ToggleBouton BoutonLiens;
     private ca.ulaval.glo2004.afficheur.boutons.ToggleBouton BoutonMesures;
+    private ca.ulaval.glo2004.afficheur.boutons.ToggleBouton BoutonStats;
+    private ca.ulaval.glo2004.afficheur.boutons.ToggleBouton BoutonVaccins;
     private javax.swing.JPanel ConteneurLiensPanel;
     private javax.swing.JPanel ConteneurMesuresPanel;
+    private javax.swing.JPanel ConteneurStatsPanel;
+    private javax.swing.JPanel ConteneurVaccinsPanel;
+    private javax.swing.JLabel ExportStats;
     private javax.swing.JPanel LiensPanel;
     private javax.swing.JScrollPane LiensScrollPane;
     private javax.swing.JLabel LiensTitre;
@@ -297,8 +443,16 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     private javax.swing.JLabel MesuresTitre;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi SidePanel;
     private javax.swing.JPanel SidePanelParent;
+    private javax.swing.JPanel StatsPanel;
+    private javax.swing.JScrollPane StatsScrollPane;
+    private javax.swing.JLabel StatsTitreLabel;
     private javax.swing.JPanel Titre;
     private javax.swing.JPanel TitreOngletPanel;
+    private javax.swing.JPanel TitrePanel;
+    private javax.swing.JPanel TitreStatsPanel;
+    private javax.swing.JPanel VaccinsPanel;
+    private javax.swing.JScrollPane VaccinsScrollPane;
+    private javax.swing.JLabel VaccinsTitre;
     // End of variables declaration//GEN-END:variables
 
     @Override

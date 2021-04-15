@@ -39,7 +39,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         CuredInput.addChangeListener(this);
         DeadInput.addChangeListener(this);
         MaladieInput.addKeyListener(this);
-        IncubationInput.addKeyListener(this);
+        IncubationInput.addChangeListener(this);
         ImmunizationCheckbox.addChangeListener(this);
     }
     
@@ -183,7 +183,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
 
         Main.add(TitreStatsPanel, java.awt.BorderLayout.NORTH);
 
-        Parent.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 0, 0, 0));
+        Parent.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 0, 0, 0));
         Parent.setOpaque(false);
         Parent.setLayout(new java.awt.GridLayout(5, 2, 0, 10));
 
@@ -191,16 +191,16 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         InfectionLabel.setText("Taux d'infection");
         Parent.add(InfectionLabel);
 
-        InfectionInput.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 0.5d));
-        InfectionInput.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        InfectionInput.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 99.99d, 0.5d));
+        InfectionInput.setOpaque(true);
         Parent.add(InfectionInput);
-        InfectionInput.getAccessibleContext().setAccessibleName("");
 
         CuredLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
         CuredLabel.setText("Taux de guérison");
         Parent.add(CuredLabel);
 
         CuredInput.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 0.5d));
+        CuredInput.setOpaque(true);
         Parent.add(CuredInput);
 
         DeadLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
@@ -209,6 +209,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
 
         DeadInput.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 0.5d));
         DeadInput.setMaximumSize(new java.awt.Dimension(64, 22));
+        DeadInput.setOpaque(true);
         Parent.add(DeadInput);
 
         IncubationLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
@@ -216,6 +217,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         Parent.add(IncubationLabel);
 
         IncubationInput.setModel(new javax.swing.SpinnerNumberModel(14, 0, 31, 1));
+        IncubationInput.setOpaque(true);
         Parent.add(IncubationInput);
 
         ImmunizationLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));

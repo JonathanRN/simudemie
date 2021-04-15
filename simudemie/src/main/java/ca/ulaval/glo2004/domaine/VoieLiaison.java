@@ -71,7 +71,7 @@ public class VoieLiaison implements Externalizable {
     
     public void setType(TypeVoie type) {this.type = type;}
         
-    public TypeVoie getTauxPropag() { return type; }
+    public double getTauxPropag() { return tauxPropag; }
     
     public boolean getAccessible() { return accessible; }
     

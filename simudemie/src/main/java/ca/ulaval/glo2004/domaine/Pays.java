@@ -104,7 +104,7 @@ public class Pays implements Externalizable {
                 for( Region f : listeRegions)
                 {
                     double prob = Math.random();
-                    if(!r.equals(f) && prob > r.getTauxContaInterRegion()){
+                    if(!r.equals(f) && prob < r.getTauxContaInterRegion()){
                         int voyageursInfectes = (int)((float)r.getPopInfectee() * 0.01);
                         f.setPopInfectee(f.getPopInfectee()+ voyageursInfectes);
                         f.setPopSaine(f.getPopSaine() - voyageursInfectes);
@@ -179,6 +179,8 @@ public class Pays implements Externalizable {
     public ArrayList<Mesure> getMesures() {return mesures;}
     
     public Polygon getPolygone() {return polygone;};
+    
+    public ArrayList<Region> getListeRegions(){return listeRegions;}
     
     public void setNom(String nom) {this.nom = nom;}
     

@@ -207,7 +207,7 @@ public class Region implements Externalizable {
             nbInfectes = (int)(this.getPopInfectee()/(cpt*0.2));
             
         }else{
-            nbInfectes = (int)(this.getPopInfectee()/(incubation*0.5));
+            nbInfectes = (int)(this.getPopInfectee()/(incubation*0.25));
             
         }
         

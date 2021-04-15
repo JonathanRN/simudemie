@@ -17,6 +17,7 @@ import java.util.Vector;
 
 
 public class Region implements Externalizable {
+    private static final long serialVersionUID = 1;   
     
     private String nom;
     private int populationSaine;

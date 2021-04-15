@@ -12,6 +12,7 @@ import java.io.ObjectOutput;
 
 
 public class Maladie implements Externalizable {
+    private static final long serialVersionUID = 1;
 
     private String nom;
     private double tauxInfection;

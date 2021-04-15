@@ -15,6 +15,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
 public class VoieLiaison implements Externalizable {
+    private static final long serialVersionUID = 1;
     
     private Pays paysOrigine;
     private Pays paysDestination;

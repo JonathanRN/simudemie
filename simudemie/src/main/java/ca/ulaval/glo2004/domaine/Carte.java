@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class Carte implements Externalizable {
+    private static final long serialVersionUID = 1;
     
     private String nom;
     private final ArrayList<Pays> listePays = new ArrayList<>();

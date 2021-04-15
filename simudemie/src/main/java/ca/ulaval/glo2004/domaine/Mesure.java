@@ -12,7 +12,8 @@ import java.io.ObjectOutput;
 
 
 public class Mesure implements Externalizable{
-    
+    private static final long serialVersionUID = 1;
+      
     private String nom;
     private int seuilActivation;
     private double tauxAdhesion;

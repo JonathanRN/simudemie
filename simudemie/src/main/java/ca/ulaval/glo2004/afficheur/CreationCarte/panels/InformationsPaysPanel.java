@@ -7,6 +7,8 @@ package ca.ulaval.glo2004.afficheur.CreationCarte.panels;
 
 import ca.ulaval.glo2004.afficheur.CreationCarte.mode.Selection;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
+import ca.ulaval.glo2004.domaine.Pays;
+import ca.ulaval.glo2004.domaine.Region;
 import java.text.ParseException;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -19,6 +21,9 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
     
     private final JSpinner PopulationTotale;
     private final Selection selection;
+    
+    private String ancienNomPays, ancienNomRegion;
+    private int anciennePop;
     
     public InformationsPaysPanel(Selection selection) {
         this.selection = selection;
@@ -35,6 +40,33 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
         
         PaysNomTextField.setFont(FontRegister.RobotoLight.deriveFont(12f));
         RegionNomTextField.setFont(FontRegister.RobotoLight.deriveFont(12f));
+    }
+    
+    public void Active(Pays pays, Region region) {
+        setNomPays(pays.getNom());
+        setNomRegion(region.getNom());
+        setPopTotale(pays.getPopTotale());
+        setPopRegion(region.getPopTotale());
+        
+        ancienNomPays = getNomPays();
+        ancienNomRegion = getNomRegion();
+        try {
+            anciennePop = getPopRegion();
+        } catch (ParseException ex) {
+        }
+    }
+    
+    public void Desactive() {
+        try {
+            // On detecte s'il y a eu au moins une modification
+            if (!ancienNomPays.equals(getNomPays()) ||
+                !ancienNomRegion.equals(getNomRegion()) ||
+                anciennePop != getPopRegion()) {
+                selection.saveInfos();
+            }
+        }
+        catch (ParseException ex) {
+        }
     }
     
     public String getNomPays() {
@@ -154,7 +186,6 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
     private void SupprimeBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupprimeBoutonMouseReleased
         selection.onPaysSupprime();
     }//GEN-LAST:event_SupprimeBoutonMouseReleased
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel InformationsPaysLabel;

@@ -95,7 +95,7 @@ public class InformationsLienPanel extends javax.swing.JPanel implements ActionL
     
     private void setVoie(VoieLiaison.TypeVoie voie) {
         lien.setType(voie);
-        panel.sauvegarderEtat();
+        panel.sauvegarderEtat("Changement voie " + voie.name());
     }
 
     /**

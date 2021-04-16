@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.ulaval.glo2004.afficheur.utilsUI;
+package ca.ulaval.glo2004.afficheur.CreationCarte.panels;
 
+import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
+import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -13,28 +15,25 @@ import javax.swing.Timer;
  *
  * @author Jonathan
  */
-public class ZoomInfoPanel extends PanelArrondi implements ActionListener {
-    
+public class UndoRedoActionPanel extends PanelArrondi implements ActionListener {
+
     private final Timer timer;
     
-    public ZoomInfoPanel() {
+    public UndoRedoActionPanel() {
         initComponents();
         timer = new Timer(3000, this);
         
         if (FontRegister.RobotoLight != null) {
-            ZoomLabel.setFont(FontRegister.RobotoLight.deriveFont(24f));
+            Label.setFont(FontRegister.RobotoLight.deriveFont(18f));
         }
         
         this.setVisible(false);
     }
     
-    public void onMouseWheel(double zoomFactor) {
-        if (!this.isVisible()) {
-            this.setVisible(true);
-        }
-        
-        ZoomLabel.setText(String.format("%.2fx", zoomFactor));
-        
+    public void setTexte(String texte) {
+        Label.setText(texte);
+        this.setVisible(true);
+        repaint();
         timer.restart();
     }
 
@@ -47,24 +46,23 @@ public class ZoomInfoPanel extends PanelArrondi implements ActionListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ZoomLabel = new javax.swing.JLabel();
+        Label = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
-        ZoomLabel.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        ZoomLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ZoomLabel.setText("1.00x");
-        ZoomLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 8, 3, 8));
-        add(ZoomLabel, java.awt.BorderLayout.CENTER);
+        Label.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        Label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Label.setText("Undo: Déplacement pays");
+        Label.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 8, 3, 8));
+        add(Label, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ZoomLabel;
-    // End of variables declaration//GEN-END:variables
 
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setVisible(false);
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Label;
+    // End of variables declaration//GEN-END:variables
 }

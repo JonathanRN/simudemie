@@ -94,13 +94,15 @@ public class Selection extends Mode {
 //                }
 //            }
             
+            int deltaX = initialDrag.x - updateDrag.x;
+            int deltaY = initialDrag.y - updateDrag.y;
             if (polygoneDansPolygone) {
-                translateDraggedRegions(initialDrag.x - updateDrag.x, initialDrag.y - updateDrag.y);
+                translateDraggedRegions(deltaX, deltaY);
             }
             else {
                 // Tout est beau, on peut sauvegarder
-                if (!polygoneDansPolygone) {
-                    creationCarte.getPanel().sauvegarderEtat();
+                if (!polygoneDansPolygone && deltaX != 0 && deltaY != 0) {
+                    creationCarte.getPanel().sauvegarderEtat("Déplacement " + creationCarte.getCarte().getPays(dragged).getNom());
                 }
             }
         }
@@ -179,7 +181,7 @@ public class Selection extends Mode {
                 region.setPopTotale(panel.getPopRegion());
             } catch (ParseException ex) {
             }
-            creationCarte.getPanel().sauvegarderEtat();
+            creationCarte.getPanel().sauvegarderEtat("Changement infos " + region.getNom());
         }
     }
 
@@ -196,7 +198,7 @@ public class Selection extends Mode {
         
         carte.retirerPays(pays);
         
-        creationCarte.getPanel().sauvegarderEtat();
+        creationCarte.getPanel().sauvegarderEtat("Suppression " + pays.getNom());
         
         creationCarte.getInformationsPanel().setVisible(false);
         

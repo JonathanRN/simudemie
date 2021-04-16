@@ -29,10 +29,12 @@ public class CreationCartePanel extends ZoomablePanel {
     private class Etat {
         private final Polygon courant;
         private final Carte carte;
+        private final String action;
 
-        public Etat(Polygon courant, Carte carte) {
+        public Etat(Polygon courant, Carte carte, String action) {
             this.courant = new Polygon(courant.xpoints, courant.ypoints, courant.npoints);
             this.carte = new Carte(carte);
+            this.action = action;
         }
         
         public Polygon getCourant() {
@@ -41,6 +43,10 @@ public class CreationCartePanel extends ZoomablePanel {
         
         public Carte getCarte() {
             return carte;
+        }
+        
+        public String getAction() {
+            return action;
         }
     }
     
@@ -63,23 +69,25 @@ public class CreationCartePanel extends ZoomablePanel {
         this.creationCarte = creationCarte;
         
         // Il faut avoir l'etat initial
-        sauvegarderEtat();
+        sauvegarderEtat("");
     }
     
-    public void sauvegarderEtat() {
+    public void sauvegarderEtat(String action) {
         // On supprime tout ce qui etait apres cet etat
         for (int i = etats.size() - 1; i > pointeur; i--) {
             etats.remove(i);
         }
         
-        etats.push(new Etat(courant, creationCarte.getCarte()));
+        etats.push(new Etat(courant, creationCarte.getCarte(), action));
         pointeur++;
         
         creationCarte.setRedoActif(false);
         creationCarte.setUndoActif(etats.size() > 1);
         creationCarte.repaint();
         
-        System.out.println("Sauvegarde " + pointeur);
+        if (!action.isEmpty()) {
+            creationCarte.setUndoRedoAction(action);
+        }
     }
     
     public void placerPoint(int x, int y) {
@@ -89,7 +97,7 @@ public class CreationCartePanel extends ZoomablePanel {
         // Place le point seulement s'il est valide
         if (creationCarte.getMode().estPolygoneValide(testeur)) {
             courant.addPoint(x, y);
-            sauvegarderEtat();
+            sauvegarderEtat("Placer point " + courant.npoints);
         }
     }
     
@@ -101,7 +109,7 @@ public class CreationCartePanel extends ZoomablePanel {
             creationCarte.getCarte().ajouterPays(pays);
             
             courant.reset();
-            sauvegarderEtat();
+            sauvegarderEtat("Créer nouveau pays");
                         
             creationCarte.getPopup().setVisible(false);
         }
@@ -114,7 +122,7 @@ public class CreationCartePanel extends ZoomablePanel {
     public void ajouterLien(VoieLiaison voie) {
         creationCarte.getCarte().ajouterVoie(voie);
         
-        sauvegarderEtat();
+        sauvegarderEtat("Ajout lien");
     }
     
     public void splitPays(Polygon p, PolygoneDivise divise) {
@@ -135,7 +143,7 @@ public class CreationCartePanel extends ZoomablePanel {
         
         pays.retirerRegion(pays.getRegions().stream().filter(x -> x.getPolygone().equals(p)).findFirst().get());
         
-        sauvegarderEtat();
+        sauvegarderEtat("Séparation " + pays.getNom());
     }
     
     public boolean estRegionUnique(Polygon p) {
@@ -154,6 +162,7 @@ public class CreationCartePanel extends ZoomablePanel {
     
     public void undo() {
         if (pointeur > 0) {
+            creationCarte.setUndoRedoAction("Undo: " + etats.get(pointeur).getAction());
             Etat undo = etats.get(--pointeur);
             creationCarte.chargerCarte(undo.getCarte());
             courant = new Polygon(undo.getCourant().xpoints, undo.getCourant().ypoints, undo.getCourant().npoints);
@@ -167,7 +176,6 @@ public class CreationCartePanel extends ZoomablePanel {
             creationCarte.getMode().onUndo();
             
             creationCarte.repaint();
-            System.out.println("Undo " + pointeur);
         }
     }
     
@@ -176,6 +184,7 @@ public class CreationCartePanel extends ZoomablePanel {
             Etat redo = etats.get(++pointeur);
             creationCarte.chargerCarte(redo.getCarte());
             courant = new Polygon(redo.getCourant().xpoints, redo.getCourant().ypoints, redo.getCourant().npoints);
+            creationCarte.setUndoRedoAction("Redo: " + redo.getAction());
             
             if (pointeur >= etats.size() - 1) {
                 creationCarte.setRedoActif(false);
@@ -186,7 +195,6 @@ public class CreationCartePanel extends ZoomablePanel {
             creationCarte.getMode().onRedo();
             
             creationCarte.repaint();
-            System.out.println("Redo " + pointeur);
         }
     }
     

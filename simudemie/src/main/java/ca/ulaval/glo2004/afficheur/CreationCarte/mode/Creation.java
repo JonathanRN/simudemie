@@ -101,7 +101,7 @@ public class Creation extends Mode {
                 lignesInvalides.clear();
             }
             else if (indexSousSouris != -1) {
-                creationCarte.getPanel().sauvegarderEtat();
+                creationCarte.getPanel().sauvegarderEtat("Déplacement point");
             }
             
             polygoneSousSouris.invalidate();

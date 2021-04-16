@@ -71,6 +71,10 @@ public class CreationCarte extends javax.swing.JPanel {
         CreationCartePanel.setCreationCarte(this);
     }
     
+    public void setUndoRedoAction(String texte) {
+        UndoRedoAction.setTexte(texte);
+    }
+    
     public void setUndoActif(boolean actif) {
         BoutonUndo.setActif(actif);
     }
@@ -243,6 +247,7 @@ public class CreationCarte extends javax.swing.JPanel {
         nomCarte = new javax.swing.JLabel();
         ZoomPanelParent = new javax.swing.JPanel();
         ZoomInfo = new ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel();
+        UndoRedoAction = new ca.ulaval.glo2004.afficheur.CreationCarte.panels.UndoRedoActionPanel();
         InformationsPanelParent = new javax.swing.JPanel();
         InformationsPanel = new javax.swing.JPanel();
         CreationCartePanel = new ca.ulaval.glo2004.afficheur.CreationCarte.panels.CreationCartePanel();
@@ -274,9 +279,9 @@ public class CreationCarte extends javax.swing.JPanel {
         IndiceCommenceParentLayout.setHorizontalGroup(
             IndiceCommenceParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, IndiceCommenceParentLayout.createSequentialGroup()
-                .addContainerGap(339, Short.MAX_VALUE)
+                .addContainerGap(343, Short.MAX_VALUE)
                 .addComponent(IndiceCommencePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(338, Short.MAX_VALUE))
+                .addContainerGap(343, Short.MAX_VALUE))
         );
         IndiceCommenceParentLayout.setVerticalGroup(
             IndiceCommenceParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,14 +374,20 @@ public class CreationCarte extends javax.swing.JPanel {
             .addGroup(ZoomPanelParentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1048, Short.MAX_VALUE))
+                .addContainerGap(1057, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ZoomPanelParentLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(UndoRedoAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ZoomPanelParentLayout.setVerticalGroup(
             ZoomPanelParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ZoomPanelParentLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ZoomInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(629, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 584, Short.MAX_VALUE)
+                .addComponent(UndoRedoAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         ToolBarParent.add(ZoomPanelParent, java.awt.BorderLayout.CENTER);
@@ -397,7 +408,7 @@ public class CreationCarte extends javax.swing.JPanel {
         CreationCartePanel.setLayout(CreationCartePanelLayout);
         CreationCartePanelLayout.setHorizontalGroup(
             CreationCartePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1048, Short.MAX_VALUE)
+            .addGap(0, 1057, Short.MAX_VALUE)
         );
         CreationCartePanelLayout.setVerticalGroup(
             CreationCartePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,6 +452,7 @@ public class CreationCarte extends javax.swing.JPanel {
     private javax.swing.JLabel StartLabel2;
     private javax.swing.JPanel ToolBar;
     private javax.swing.JPanel ToolBarParent;
+    private ca.ulaval.glo2004.afficheur.CreationCarte.panels.UndoRedoActionPanel UndoRedoAction;
     private ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel ZoomInfo;
     private javax.swing.JPanel ZoomPanelParent;
     private javax.swing.JLabel nomCarte;

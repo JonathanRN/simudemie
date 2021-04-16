@@ -37,7 +37,11 @@ public class Mode {
         this.carte = creationCarte.getCarte();
     }
     
-    public void paint(Graphics2D g) {        
+    public void paint(Graphics2D g) {
+        if (creationCarte != null && creationCarte.getPanel().getCourant().npoints >= 2) {
+            paintLignes(g, couleurLigne, creationCarte.getPanel().getCourant());
+        }
+        
         if (highlight != null) {
             paintLignes(g, couleurLigne, highlight);
         }

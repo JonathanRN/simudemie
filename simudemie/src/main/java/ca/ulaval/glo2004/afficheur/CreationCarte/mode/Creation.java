@@ -40,11 +40,7 @@ public class Creation extends Mode {
     }
     
     @Override
-    public void paint(Graphics2D g) {
-        if (creationCarte.getPanel().getCourant().npoints >= 2) {
-            paintLignes(g, couleurLigne, creationCarte.getPanel().getCourant());
-        }
-        
+    public void paint(Graphics2D g) {        
         paintPolygones(g);
         
         if (polygoneSousSouris != null) {

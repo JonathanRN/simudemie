@@ -263,7 +263,7 @@ public class LienPays extends Mode {
         updatePoints();
         
         pointSelectionne = null;
-        creationCarte.getPanel().sauvegarderEtat();
+        creationCarte.getPanel().sauvegarderEtat("Suppression lien " + lien.getPaysOrigine().getNom() + " -> " + lien.getPaysDestination().getNom());
     }
     
     private void updateVoies() {

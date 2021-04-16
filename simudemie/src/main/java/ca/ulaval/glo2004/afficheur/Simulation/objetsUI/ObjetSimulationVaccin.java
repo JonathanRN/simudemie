@@ -141,10 +141,10 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         VaccinationQuot = new javax.swing.JSpinner();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
-        setMaximumSize(new java.awt.Dimension(32767, 150));
-        setMinimumSize(new java.awt.Dimension(208, 150));
+        setMaximumSize(new java.awt.Dimension(32767, 155));
+        setMinimumSize(new java.awt.Dimension(208, 155));
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(208, 105));
+        setPreferredSize(new java.awt.Dimension(208, 155));
         setLayout(new java.awt.GridLayout(4, 0));
 
         VaccinsPanel.setOpaque(false);
@@ -232,7 +232,7 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         add(VaccinsPanel);
 
         TauxImmunisationPanel.setOpaque(false);
-        TauxImmunisationPanel.setLayout(new java.awt.BorderLayout());
+        TauxImmunisationPanel.setLayout(new java.awt.BorderLayout(0, 5));
 
         TauxImmunisationLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         TauxImmunisationLabel.setText("Taux d'efficacité :");
@@ -245,7 +245,7 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         add(TauxImmunisationPanel);
 
         TauxAdhesionPanel.setOpaque(false);
-        TauxAdhesionPanel.setLayout(new java.awt.BorderLayout());
+        TauxAdhesionPanel.setLayout(new java.awt.BorderLayout(0, 5));
 
         TauxAdhesionLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         TauxAdhesionLabel.setText("Taux d'adhésion :");

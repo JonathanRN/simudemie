@@ -127,7 +127,15 @@ public class Selection extends Mode {
 
     @Override
     public void onMouseDragged(Point point) {
-        if (dragged != null) {
+        if (dragged == null) {
+            for (Pays p : carte.getListePays()) {
+                if (p.getPolygone().contains(point.x, point.y)) {
+                    dragged = p.getPolygone();
+                }
+            }
+        }
+        
+        if (dragged != null && updateDrag != null) {
             translateDraggedRegions(point.x - updateDrag.x, point.y - updateDrag.y);
             updateDrag = point;
             
@@ -196,10 +204,8 @@ public class Selection extends Mode {
     public void onMousePressed(Point point) {
         initialDrag = null;
         updateDrag = null;
-        dragged = null;
         for (Pays p : carte.getListePays()) {
             if (p.getPolygone().contains(point.x, point.y)) {
-                dragged = p.getPolygone();
                 updateDrag = point;
                 initialDrag = point;
             }

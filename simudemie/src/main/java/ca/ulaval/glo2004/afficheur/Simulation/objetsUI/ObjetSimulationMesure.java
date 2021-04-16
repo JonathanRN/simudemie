@@ -129,8 +129,10 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         SeuilActivation = new javax.swing.JSpinner();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
-        setMaximumSize(new java.awt.Dimension(32767, 100));
+        setMaximumSize(new java.awt.Dimension(32767, 135));
+        setMinimumSize(new java.awt.Dimension(208, 135));
         setOpaque(false);
+        setPreferredSize(new java.awt.Dimension(208, 135));
         setLayout(new java.awt.GridLayout(4, 1));
 
         TitreMesurePanel.setOpaque(false);
@@ -203,11 +205,11 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         add(TitreMesurePanel);
 
         TauxReductionPanel.setOpaque(false);
-        TauxReductionPanel.setLayout(new java.awt.BorderLayout(25, 0));
+        TauxReductionPanel.setLayout(new java.awt.BorderLayout());
 
         TauxReductionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         TauxReductionLabel.setText("Taux réduction inf. : ");
-        TauxReductionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
+        TauxReductionLabel.setToolTipText("");
         TauxReductionLabel.setMaximumSize(new java.awt.Dimension(200, 19));
         TauxReductionLabel.setMinimumSize(new java.awt.Dimension(200, 19));
         TauxReductionLabel.setPreferredSize(new java.awt.Dimension(200, 19));
@@ -219,11 +221,10 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         add(TauxReductionPanel);
 
         TauxAdhesionPanel.setOpaque(false);
-        TauxAdhesionPanel.setLayout(new java.awt.BorderLayout(25, 0));
+        TauxAdhesionPanel.setLayout(new java.awt.BorderLayout());
 
         TauxAdhesionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         TauxAdhesionLabel.setText("Taux d'adhésion :");
-        TauxAdhesionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
         TauxAdhesionLabel.setMaximumSize(new java.awt.Dimension(200, 19));
         TauxAdhesionLabel.setMinimumSize(new java.awt.Dimension(200, 19));
         TauxAdhesionLabel.setPreferredSize(new java.awt.Dimension(200, 19));
@@ -235,11 +236,10 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         add(TauxAdhesionPanel);
 
         SeuilActivationPanel.setOpaque(false);
-        SeuilActivationPanel.setLayout(new java.awt.BorderLayout(25, 0));
+        SeuilActivationPanel.setLayout(new java.awt.BorderLayout());
 
         SeuilActivationLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         SeuilActivationLabel.setText("Sueil d'activation (%) :");
-        SeuilActivationLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
         SeuilActivationLabel.setMaximumSize(new java.awt.Dimension(200, 19));
         SeuilActivationLabel.setMinimumSize(new java.awt.Dimension(200, 19));
         SeuilActivationLabel.setPreferredSize(new java.awt.Dimension(200, 19));

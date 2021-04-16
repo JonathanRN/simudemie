@@ -179,10 +179,11 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     }
     
     private ObjetSimulationVaccin addVaccin(Vaccin vaccin) {
+        
         ObjetSimulationVaccin panel = new ObjetSimulationVaccin(ConteneurVaccinsPanel, this, ConteneurVaccinsPanel.getComponentCount());
-//        if(vaccin != null) {
-//            panel.chargerVaccin(new Vaccin(vaccin));
-//        }
+        if(vaccin != null) {
+            panel.chargerVaccin(new Vaccin(vaccin));
+        }
         ConteneurVaccinsPanel.add(panel);
         ConteneurVaccinsPanel.getParent().validate();
         ConteneurVaccinsPanel.getRootPane().repaint();
@@ -201,8 +202,8 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         SidePanelParent = new javax.swing.JPanel();
         SidePanel = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         BoutonMesures = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
-        BoutonLiens = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
         BoutonVaccins = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
+        BoutonLiens = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
         BoutonStats = new ca.ulaval.glo2004.afficheur.boutons.ToggleBouton();
         MesuresPanel = new javax.swing.JPanel();
         Titre = new javax.swing.JPanel();
@@ -236,10 +237,10 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         SidePanel.setMaximumSize(new java.awt.Dimension(100, 200));
         SidePanel.setMinimumSize(new java.awt.Dimension(100, 200));
         SidePanel.setPreferredSize(new java.awt.Dimension(50, 200));
-        SidePanel.setLayout(new java.awt.GridLayout(6, 1, 0, 10));
+        SidePanel.setLayout(new java.awt.GridLayout(4, 1));
         SidePanel.add(BoutonMesures);
-        SidePanel.add(BoutonLiens);
         SidePanel.add(BoutonVaccins);
+        SidePanel.add(BoutonLiens);
         SidePanel.add(BoutonStats);
 
         SidePanelParent.add(SidePanel, java.awt.BorderLayout.WEST);
@@ -319,6 +320,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         add(LiensPanel);
 
         VaccinsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 0, 0));
+        VaccinsPanel.setOpaque(false);
         VaccinsPanel.setLayout(new java.awt.BorderLayout());
 
         TitrePanel.setMinimumSize(new java.awt.Dimension(77, 33));
@@ -357,7 +359,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
 
         ConteneurVaccinsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         ConteneurVaccinsPanel.setOpaque(false);
-        ConteneurVaccinsPanel.setLayout(new java.awt.GridLayout());
+        ConteneurVaccinsPanel.setLayout(new javax.swing.BoxLayout(ConteneurVaccinsPanel, javax.swing.BoxLayout.Y_AXIS));
         VaccinsScrollPane.setViewportView(ConteneurVaccinsPanel);
 
         VaccinsPanel.add(VaccinsScrollPane, java.awt.BorderLayout.CENTER);
@@ -365,6 +367,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         add(VaccinsPanel);
 
         StatsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 0, 0));
+        StatsPanel.setOpaque(false);
         StatsPanel.setLayout(new java.awt.BorderLayout());
 
         TitreStatsPanel.setOpaque(false);
@@ -427,15 +430,20 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     }//GEN-LAST:event_AjouterMesureMouseReleased
 
     private void AjouterVaccinsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterVaccinsMouseEntered
-        // TODO add your handling code here:
+        updateBoutonAjouter(true, (JLabel)evt.getSource());
+        this.getRootPane().repaint();     
     }//GEN-LAST:event_AjouterVaccinsMouseEntered
 
     private void AjouterVaccinsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterVaccinsMouseExited
-        // TODO add your handling code here:
+        updateBoutonAjouter(false, (JLabel)evt.getSource());
+        this.getRootPane().repaint();        
     }//GEN-LAST:event_AjouterVaccinsMouseExited
 
     private void AjouterVaccinsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AjouterVaccinsMouseReleased
-        // TODO add your handling code here:
+        ObjetSimulationVaccin panel = addVaccin(null);
+        
+        // On veut créer le vaccin immédiatement, mais seulement quand on appuie +
+        panel.sauvegarderVaccin();
     }//GEN-LAST:event_AjouterVaccinsMouseReleased
 
     private void ExportStatsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportStatsMouseEntered

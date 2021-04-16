@@ -351,9 +351,13 @@
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="1"/>
             <Property name="rows" type="int" value="6"/>
-            <Property name="verticalGap" type="int" value="10"/>
           </Layout>
           <SubComponents>
+            <Component class="ca.ulaval.glo2004.afficheur.boutons.SimulationBouton" name="MaladieBouton">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Modifier la maladie"/>
+              </Properties>
+            </Component>
             <Component class="ca.ulaval.glo2004.afficheur.boutons.SimulationBouton" name="TogglePaysRegion">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Afficher infomations pays/r&#xe9;gions (Q)"/>
@@ -372,11 +376,6 @@
             <Component class="ca.ulaval.glo2004.afficheur.boutons.SimulationBouton" name="BoutonPhoto">
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Prendre une photo de la carte courante (S)"/>
-              </Properties>
-            </Component>
-            <Component class="ca.ulaval.glo2004.afficheur.boutons.SimulationBouton" name="AideBouton">
-              <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="Afficher l&apos;aide"/>
               </Properties>
             </Component>
             <Component class="ca.ulaval.glo2004.afficheur.boutons.SimulationBouton" name="HomeBouton">

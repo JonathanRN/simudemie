@@ -73,7 +73,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         ToggleLiens.setIcon("/icons/icons8_chain_25px.png");
         ToggleCouleurs.setIcon("/icons/simulation/icons8_radar_plot_25px_inf.png");
         BoutonPhoto.setIcon("/icons/simulation/icons8_unsplash_25px.png");
-        AideBouton.setIcon("/icons/simulation/icons8_help_25px.png");
+        MaladieBouton.setIcon("/icons/simulation/icons8_help_25px.png");
         HomeBouton.setIcon("/icons/icons8_home_25px_1.png");
     }
     
@@ -215,11 +215,11 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         SimulationMenuGauche = new ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche();
         MenuDroitParent = new javax.swing.JPanel();
         SimulationMenuDroit = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
+        MaladieBouton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         TogglePaysRegion = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         ToggleLiens = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         ToggleCouleurs = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         BoutonPhoto = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
-        AideBouton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         HomeBouton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         SimulationPanel = new ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanel();
 
@@ -393,7 +393,10 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         SimulationMenuDroit.setMaximumSize(new java.awt.Dimension(100, 200));
         SimulationMenuDroit.setMinimumSize(new java.awt.Dimension(100, 200));
         SimulationMenuDroit.setPreferredSize(new java.awt.Dimension(50, 200));
-        SimulationMenuDroit.setLayout(new java.awt.GridLayout(6, 1, 0, 10));
+        SimulationMenuDroit.setLayout(new java.awt.GridLayout(6, 1));
+
+        MaladieBouton.setToolTipText("Modifier la maladie");
+        SimulationMenuDroit.add(MaladieBouton);
 
         TogglePaysRegion.setToolTipText("Afficher infomations pays/régions (Q)");
         SimulationMenuDroit.add(TogglePaysRegion);
@@ -406,9 +409,6 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
 
         BoutonPhoto.setToolTipText("Prendre une photo de la carte courante (S)");
         SimulationMenuDroit.add(BoutonPhoto);
-
-        AideBouton.setToolTipText("Afficher l'aide");
-        SimulationMenuDroit.add(AideBouton);
 
         HomeBouton.setToolTipText("Quitter la simulation (ESC)");
         HomeBouton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -539,7 +539,6 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton AideBouton;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton BoutonPhoto;
     private javax.swing.JPanel BoutonsPanel;
     private javax.swing.JLabel CommenceIcon;
@@ -551,6 +550,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private javax.swing.JLabel FFLabel;
     private javax.swing.JLabel FastForward;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HomeBouton;
+    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton MaladieBouton;
     private javax.swing.JPanel MenuDroitParent;
     private javax.swing.JPanel MenuGaucheParent;
     private javax.swing.JLabel PlayPauseIcon;

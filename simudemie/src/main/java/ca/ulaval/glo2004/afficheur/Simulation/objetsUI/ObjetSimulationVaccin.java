@@ -125,7 +125,7 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         VaccinsPanel = new javax.swing.JPanel();
         TitreVaccinsPanel1 = new javax.swing.JPanel();
         NomVaccinTextField = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ListeVaccins = new javax.swing.JComboBox<>();
         BoutonsPanel = new javax.swing.JPanel();
         Modifie = new javax.swing.JLabel();
         Supprimer = new javax.swing.JLabel();
@@ -141,8 +141,10 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         VaccinationQuot = new javax.swing.JSpinner();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
-        setMaximumSize(new java.awt.Dimension(32767, 100));
+        setMaximumSize(new java.awt.Dimension(32767, 105));
+        setMinimumSize(new java.awt.Dimension(208, 105));
         setOpaque(false);
+        setPreferredSize(new java.awt.Dimension(208, 105));
         setLayout(new java.awt.GridLayout(4, 0));
 
         VaccinsPanel.setOpaque(false);
@@ -161,12 +163,12 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         });
         TitreVaccinsPanel1.add(NomVaccinTextField);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setMinimumSize(new java.awt.Dimension(118, 24));
-        jComboBox1.setPreferredSize(new java.awt.Dimension(118, 26));
-        TitreVaccinsPanel1.add(jComboBox1);
+        ListeVaccins.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ListeVaccins.setMinimumSize(new java.awt.Dimension(118, 24));
+        ListeVaccins.setPreferredSize(new java.awt.Dimension(118, 26));
+        TitreVaccinsPanel1.add(ListeVaccins);
 
-        VaccinsPanel.add(TitreVaccinsPanel1, java.awt.BorderLayout.LINE_START);
+        VaccinsPanel.add(TitreVaccinsPanel1, java.awt.BorderLayout.CENTER);
 
         BoutonsPanel.setOpaque(false);
         BoutonsPanel.setLayout(new java.awt.GridLayout(1, 3));
@@ -233,7 +235,7 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         TauxImmunisationPanel.setLayout(new java.awt.BorderLayout());
 
         TauxImmunisationLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        TauxImmunisationLabel.setText("Taux d'efficacité :                                         ");
+        TauxImmunisationLabel.setText("Taux d'efficacité :");
         TauxImmunisationPanel.add(TauxImmunisationLabel, java.awt.BorderLayout.WEST);
 
         TauxImmunisation.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
@@ -245,8 +247,7 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         TauxAdhesionPanel.setLayout(new java.awt.BorderLayout());
 
         TauxAdhesionLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        TauxAdhesionLabel.setText("Taux d'adhésion :                                    ");
-        TauxAdhesionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
+        TauxAdhesionLabel.setText("Taux d'adhésion :");
         TauxAdhesionPanel.add(TauxAdhesionLabel, java.awt.BorderLayout.WEST);
 
         TauxAdhesion.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
@@ -260,8 +261,8 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         VaccinationQuotPanel.setLayout(new java.awt.BorderLayout());
 
         VaccinationQuotLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        VaccinationQuotLabel.setText("Vaccination par j. :                                   ");
-        VaccinationQuotLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 17));
+        VaccinationQuotLabel.setText("Vacc. par jour :     ");
+        VaccinationQuotLabel.setToolTipText("");
         VaccinationQuotPanel.add(VaccinationQuotLabel, java.awt.BorderLayout.WEST);
 
         VaccinationQuot.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1000));
@@ -298,13 +299,22 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         int result = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer " + "\"" + NomVaccinTextField.getText() + "\"?", "", JOptionPane.WARNING_MESSAGE);
 
         if(result == JOptionPane.YES_OPTION) {
-            GestionnaireScenario.getInstance().supprimerVaccin(simulationTabs.getIndexPays(), "NOM DE LA MALADIE");
-            conteneur.remove(this);
             
-            simulationTabs.loadVaccins();
+            boolean estActifAilleurs = GestionnaireScenario.getInstance().supprimerVaccin(simulationTabs.getIndexPays(), NomVaccinTextField.getText());
             
-            conteneur.getParent().validate();
-            conteneur.getRootPane().repaint();
+            if (estActifAilleurs)
+            {
+                JOptionPane.showMessageDialog(this, NomVaccinTextField.getText() + " est actif ailleurs.", "",  JOptionPane.WARNING_MESSAGE);
+            }
+            else 
+            {
+                conteneur.remove(this);
+
+                simulationTabs.loadVaccins();
+
+                conteneur.getParent().validate();
+                conteneur.getRootPane().repaint();    
+            } 
         }
     }//GEN-LAST:event_SupprimerMouseReleased
 
@@ -328,6 +338,7 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Activer;
     private javax.swing.JPanel BoutonsPanel;
+    private javax.swing.JComboBox<String> ListeVaccins;
     private javax.swing.JLabel Modifie;
     private javax.swing.JTextField NomVaccinTextField;
     private javax.swing.JLabel Supprimer;
@@ -342,6 +353,5 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
     private javax.swing.JLabel VaccinationQuotLabel;
     private javax.swing.JPanel VaccinationQuotPanel;
     private javax.swing.JPanel VaccinsPanel;
-    private javax.swing.JComboBox<String> jComboBox1;
     // End of variables declaration//GEN-END:variables
 }

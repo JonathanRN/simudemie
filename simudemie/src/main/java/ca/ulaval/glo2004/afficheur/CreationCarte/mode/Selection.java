@@ -35,7 +35,9 @@ public class Selection extends Mode {
         super.onDesactive();
         
         precedent = selectionne;
-        panel.Desactive();
+        if (precedent != null) {
+            panel.Desactive();
+        }
         creationCarte.getInformationsPanel().setVisible(false);
         creationCarte.getInformationsPanel().remove(panel);
     }
@@ -64,6 +66,11 @@ public class Selection extends Mode {
         creationCarte.getInformationsPanel().setVisible(selectionne != null);
         
         if (selectionne != null) {
+            if (precedent != null && !precedent.equals(selectionne)) {
+                // Force un check de sauvegarde dans le cas ou l'on click pays -> pays
+                panel.Desactive();
+            }
+            
             Pays pays = creationCarte.getPays(selectionne);
             ca.ulaval.glo2004.domaine.Region region = creationCarte.getPanel().getRegion(pays, selectionne);
             panel.Active(pays, region);
@@ -90,6 +97,24 @@ public class Selection extends Mode {
             paintLignes(g, Color.green, selectionne);
         }
     }
+
+    @Override
+    public void onRedo() {
+        super.onRedo();
+        if (creationCarte.getInformationsPanel().isVisible()) {
+            creationCarte.getInformationsPanel().setVisible(false);
+            selectionne = null;
+        }
+    }
+    
+    @Override
+    public void onUndo() {
+        super.onUndo();
+        if (creationCarte.getInformationsPanel().isVisible()) {
+            creationCarte.getInformationsPanel().setVisible(false);
+            selectionne = null;
+        }
+    }
     
     public void saveInfos() throws ParseException {
         if (precedent != null) {
@@ -98,8 +123,10 @@ public class Selection extends Mode {
 
             pays.setNom(panel.getNomPays());
             region.setNom(panel.getNomRegion());
-            region.setPopTotale(panel.getPopRegion());
-
+            try {
+                region.setPopTotale(panel.getPopRegion());
+            } catch (ParseException ex) {
+            }
             creationCarte.getPanel().sauvegarderEtat();
         }
     }

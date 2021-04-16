@@ -251,7 +251,7 @@ public class Carte implements Externalizable {
         return (float)getPopulationDecedee() / (float)getPopulationInitiale();
     }
 
-    public float getPopulationImmune() {
+    public int getPopulationImmune() {
         return listePays.stream().collect(Collectors.summingInt(x -> x.getPopImmune()));
     }
     

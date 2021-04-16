@@ -199,21 +199,21 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         Parent.setLayout(new java.awt.GridLayout(5, 2, 0, 10));
 
         InfectionLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        InfectionLabel.setText("Taux d'infection");
+        InfectionLabel.setText("Taux d'infection (%)");
         Parent.add(InfectionLabel);
 
         InfectionInput.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 99.99d, 0.5d));
         Parent.add(InfectionInput);
 
         CuredLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        CuredLabel.setText("Taux de guérison");
+        CuredLabel.setText("Taux de guérison (%)");
         Parent.add(CuredLabel);
 
         CuredInput.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 0.5d));
         Parent.add(CuredInput);
 
         DeadLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        DeadLabel.setText("Taux de mortalité");
+        DeadLabel.setText("Taux de mortalité (%)");
         Parent.add(DeadLabel);
 
         DeadInput.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 0.5d));
@@ -221,7 +221,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         Parent.add(DeadInput);
 
         IncubationLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        IncubationLabel.setText("Temps d'incubation");
+        IncubationLabel.setText("Temps d'incubation ");
         Parent.add(IncubationLabel);
 
         IncubationInput.setModel(new javax.swing.SpinnerNumberModel(14, 0, 31, 1));

@@ -93,9 +93,11 @@ public class SimulationAfficheur extends Mode {
                 y = drawStats(pays.getPopInfectee(),
                         pays.getPopSaine(),
                         pays.getPopDecedee(),
+                        pays.getPopImmune(),
                         pays.getPourcentageInfectee(),
                         pays.getPourcentageSaine(),
                         pays.getPourcentageDecedee(),
+                        pays.getPourcentageImmunisee(),
                         g,
                         zoomFactor,
                         y);
@@ -108,9 +110,11 @@ public class SimulationAfficheur extends Mode {
                 y = drawStats(region.getPopInfectee(),
                         region.getPopSaine(),
                         region.getPopDecedee(),
+                        region.getPopImmunisee(),
                         region.getPourcentageInfectee(),
                         region.getPourcentageSaine(),
                         region.getPourcentageDecedee(),
+                        region.getPourcentageImmune(),
                         g,
                         zoomFactor,
                         y);
@@ -204,15 +208,16 @@ public class SimulationAfficheur extends Mode {
         return (int)offsetY;
     }
     
-    private int drawStats(int infectes, int retablis, int morts, float pourInf, float pourRet, float pourMorts, Graphics2D g, float zoomFactor, int offset) {
+    private int drawStats(int infectes, int retablis, int morts, int immunises, float pourInf, float pourRet, float pourMorts, float pourImm, Graphics2D g, float zoomFactor, int offset) {
         float x = souris.x + sourisOffset.x / zoomFactor;
         int offsetY = (int)(offset + 20 / zoomFactor);
         
         g.drawString(String.format("%s infectés (%.2f%%)", infectes, pourInf), x, offsetY);
         g.drawString(String.format("%s sains (%.2f%%)", retablis, pourRet), x, offsetY + 20 / zoomFactor);
         g.drawString(String.format("%s morts (%.2f%%)", morts, pourMorts), x, offsetY + 40 / zoomFactor);
+        g.drawString(String.format("%s immunisés (%.2f%%)", immunises, pourImm), x, offsetY + 60 / zoomFactor);
         
-        return (int)(offsetY + 40 / zoomFactor);
+        return (int)(offsetY + 60 / zoomFactor);
     }
     
     private void drawFooter(String texte, Graphics2D g, float zoomFactor, int offset) {

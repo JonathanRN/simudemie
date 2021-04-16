@@ -175,6 +175,13 @@ public class Pays implements Externalizable {
         return ((float)this.getPopDecedee() / (float)this.getPopInitiale()) * 100f;
     }
     
+    public float getPourcentageImmunisee() {
+        if (this.getPopTotale() <= 0) {
+            return 0;
+        }
+        return ((float)this.getPopImmune() / (float)this.getPopInitiale()) * 100f;
+    }
+    
     public Mesure getMesure(int index) {
         if(index >= mesures.size()) { return null;}
         return mesures.get(index);

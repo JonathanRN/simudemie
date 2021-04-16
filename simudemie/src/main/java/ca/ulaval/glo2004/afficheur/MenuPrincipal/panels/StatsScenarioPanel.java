@@ -69,10 +69,16 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
             decedes.add(i, scenario.getListeCartes().get(i).getPopulationDecedee());
         }
         
+        XYSeries immunises = new XYSeries("Immunisés");
+        for (int i = 0; i < scenario.getTotalJours(); i++) {
+            immunises.add(i, scenario.getListeCartes().get(i).getPopulationImmune());
+        }
+        
         XYSeriesCollection collection = new XYSeriesCollection();
         collection.addSeries(infectes);
         collection.addSeries(sains);
         collection.addSeries(decedes);
+        collection.addSeries(immunises);
                 
         JFreeChart stats = ChartFactory.createXYLineChart(null, "Jours", "Population", collection, PlotOrientation.VERTICAL, true, true, false);
         stats.setBackgroundPaint(bgColor);
@@ -81,9 +87,11 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         renderer.setSeriesPaint(0, Couleurs.infections);
         renderer.setSeriesPaint(1, Couleurs.sains);
         renderer.setSeriesPaint(2, Couleurs.morts);
+        renderer.setSeriesPaint(3, Couleurs.immunisations);
         renderer.setSeriesStroke(0, new BasicStroke(2.0f));
         renderer.setSeriesStroke(1, new BasicStroke(2.0f));
         renderer.setSeriesStroke(2, new BasicStroke(2.0f));
+        renderer.setSeriesStroke(3, new BasicStroke(2.0f));
 
         XYPlot plot = stats.getXYPlot();
         plot.setRenderer(renderer);

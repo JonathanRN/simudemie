@@ -73,6 +73,7 @@ public class OngletScenario extends OngletUI {
             obj.setInfectedPercent((float)scenario.getCarteDernierJour().getPourcentageInfectee() * 100f);
             obj.setCuredPercent((float)scenario.getCarteDernierJour().getPourcentageSaine() * 100f);
             obj.setDeadPercent((float)scenario.getCarteDernierJour().getPourcentageDecedee() * 100f);
+            obj.setImmunedPercent(((float)scenario.getCarteDernierJour().getPourcentageImmune() * 100f));
         }
     }
     
@@ -90,7 +91,7 @@ public class OngletScenario extends OngletUI {
         card.setVirusName(scenario.getCarteJourCourant().getMaladie().getNom());
         card.setInfectedPercent(0);
         card.setCuredPercent(0);
-        //card.setImmunedPercent(0);
+        card.setImmunedPercent(0);
         card.setDeadPercent(0);
         
         objets.add(card);

@@ -7,6 +7,7 @@ package ca.ulaval.glo2004.afficheur.MenuPrincipal.objetsUI;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletScenario;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 
 /**
  * Adapte depuis https://stackoverflow.com/questions/15025092/border-with-rounded-corners-transparency
@@ -55,9 +56,9 @@ public class ObjetScenario extends ObjetUI {
         SainsBar.setValue((int)percent);
     }
     
-//    public void setImmunedPercent(int percent) {
-//        ImmunedProgressBar.setValue(percent);
-//    }
+    public void setImmunedPercent(float percent) {
+        ImmuniseBar.setValue((int)percent);
+    }
     
     public void setDeadPercent(float percent) {
         MortsBar.setValue((int)percent);
@@ -79,6 +80,7 @@ public class ObjetScenario extends ObjetUI {
         InfectionsBar = new javax.swing.JProgressBar();
         SainsBar = new javax.swing.JProgressBar();
         MortsBar = new javax.swing.JProgressBar();
+        ImmuniseBar = new javax.swing.JProgressBar();
         NomCarte = new javax.swing.JLabel();
         NomVirus = new javax.swing.JLabel();
 
@@ -103,25 +105,32 @@ public class ObjetScenario extends ObjetUI {
 
         Bars.setBackground(new java.awt.Color(59, 66, 82));
         Bars.setBorder(javax.swing.BorderFactory.createEmptyBorder(6, 42, 4, 42));
-        Bars.setLayout(new java.awt.GridLayout(3, 1));
+        Bars.setLayout(new java.awt.GridLayout(4, 1));
 
-        InfectionsBar.setForeground(new java.awt.Color(191, 97, 106));
+        InfectionsBar.setForeground(Couleurs.infections);
         InfectionsBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
         InfectionsBar.setBorderPainted(false);
         InfectionsBar.setString("Infectés");
         Bars.add(InfectionsBar);
 
-        SainsBar.setForeground(new java.awt.Color(163, 190, 140));
+        SainsBar.setForeground(Couleurs.sains);
         SainsBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
         SainsBar.setBorderPainted(false);
         SainsBar.setString("Guéris");
         Bars.add(SainsBar);
 
-        MortsBar.setForeground(new java.awt.Color(180, 142, 173));
+        MortsBar.setForeground(Couleurs.morts);
         MortsBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
         MortsBar.setBorderPainted(false);
         MortsBar.setString("Morts");
         Bars.add(MortsBar);
+
+        ImmuniseBar.setForeground(Couleurs.immunisations);
+        ImmuniseBar.setToolTipText("");
+        ImmuniseBar.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 3, 0));
+        ImmuniseBar.setBorderPainted(false);
+        ImmuniseBar.setString("Immunise");
+        Bars.add(ImmuniseBar);
 
         DiagramPanel.add(Bars, java.awt.BorderLayout.CENTER);
 
@@ -171,6 +180,7 @@ public class ObjetScenario extends ObjetUI {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Bars;
     private javax.swing.JPanel DiagramPanel;
+    private javax.swing.JProgressBar ImmuniseBar;
     private javax.swing.JProgressBar InfectionsBar;
     private javax.swing.JLabel Jour;
     private javax.swing.JProgressBar MortsBar;

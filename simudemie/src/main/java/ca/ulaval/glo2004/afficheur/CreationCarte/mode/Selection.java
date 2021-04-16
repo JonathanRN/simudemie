@@ -82,12 +82,26 @@ public class Selection extends Mode {
         }
         
         if (dragged != null) {
-            if (!lignesInvalides.isEmpty()) {
-                dragged.translate(initialDrag.x - updateDrag.x, initialDrag.y - updateDrag.y);
-                lignesInvalides.clear();
+            // Check si tous les points du polygone qu'on drag ne se trouvent pas dans un autre polygone
+            // Sauf les regions qui sont dans lui-meme
+            boolean polygoneDansPolygone = false;
+//            for (int i = 0; i < dragged.npoints; i++) {
+//                for (Polygon p : creationCarte.getPolygones()) {
+//                    if (!creationCarte.getCarte().getPays(p).getPolygone().equals(dragged) && p.contains(dragged.xpoints[i], dragged.ypoints[i])) {
+//                        polygoneDansPolygone = true;
+//                        break;
+//                    }
+//                }
+//            }
+            
+            if (polygoneDansPolygone) {
+                translateDraggedRegions(initialDrag.x - updateDrag.x, initialDrag.y - updateDrag.y);
             }
             else {
-                creationCarte.getPanel().sauvegarderEtat();
+                // Tout est beau, on peut sauvegarder
+                if (!polygoneDansPolygone) {
+                    creationCarte.getPanel().sauvegarderEtat();
+                }
             }
         }
         
@@ -97,10 +111,8 @@ public class Selection extends Mode {
     @Override
     public void onMouseDragged(Point point) {
         if (dragged != null) {
-            dragged.translate(point.x - updateDrag.x, point.y - updateDrag.y);
-            updateDrag = point;
-            
-            updateLignesInvalides(dragged);
+            translateDraggedRegions(point.x - updateDrag.x, point.y - updateDrag.y);
+            updateDrag = point;            
         }
         
         super.onMouseDragged(point);
@@ -190,5 +202,12 @@ public class Selection extends Mode {
         
         selectionne = null;
         creationCarte.repaint();
+    }
+    
+    private void translateDraggedRegions(int x, int y) {
+        // Il faut parcourir toutes les regions du pays pour le deplacer
+        for (Polygon region : creationCarte.getCarte().getPays(dragged).getRegions().stream().map(a -> a.getPolygone()).collect(Collectors.toList())) {
+            region.translate(x, y);
+        }
     }
 }

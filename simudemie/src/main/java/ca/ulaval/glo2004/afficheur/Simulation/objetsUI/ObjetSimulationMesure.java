@@ -129,10 +129,10 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         SeuilActivation = new javax.swing.JSpinner();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
-        setMaximumSize(new java.awt.Dimension(32767, 135));
-        setMinimumSize(new java.awt.Dimension(208, 135));
+        setMaximumSize(new java.awt.Dimension(32767, 155));
+        setMinimumSize(new java.awt.Dimension(208, 155));
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(208, 135));
+        setPreferredSize(new java.awt.Dimension(208, 155));
         setLayout(new java.awt.GridLayout(4, 1));
 
         TitreMesurePanel.setOpaque(false);
@@ -205,7 +205,7 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         add(TitreMesurePanel);
 
         TauxReductionPanel.setOpaque(false);
-        TauxReductionPanel.setLayout(new java.awt.BorderLayout());
+        TauxReductionPanel.setLayout(new java.awt.BorderLayout(0, 5));
 
         TauxReductionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         TauxReductionLabel.setText("Taux réduction inf. : ");
@@ -221,7 +221,7 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         add(TauxReductionPanel);
 
         TauxAdhesionPanel.setOpaque(false);
-        TauxAdhesionPanel.setLayout(new java.awt.BorderLayout());
+        TauxAdhesionPanel.setLayout(new java.awt.BorderLayout(0, 5));
 
         TauxAdhesionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         TauxAdhesionLabel.setText("Taux d'adhésion :");
@@ -236,10 +236,10 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         add(TauxAdhesionPanel);
 
         SeuilActivationPanel.setOpaque(false);
-        SeuilActivationPanel.setLayout(new java.awt.BorderLayout());
+        SeuilActivationPanel.setLayout(new java.awt.BorderLayout(0, 5));
 
         SeuilActivationLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
-        SeuilActivationLabel.setText("Seuil d'activation (%) :");
+        SeuilActivationLabel.setText("Seuil d'activ. (%) :");
         SeuilActivationLabel.setMaximumSize(new java.awt.Dimension(200, 19));
         SeuilActivationLabel.setMinimumSize(new java.awt.Dimension(130, 19));
         SeuilActivationLabel.setPreferredSize(new java.awt.Dimension(130, 19));

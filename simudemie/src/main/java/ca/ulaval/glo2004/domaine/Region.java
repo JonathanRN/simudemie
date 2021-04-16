@@ -34,7 +34,11 @@ public class Region implements Externalizable {
     
     public Region(Polygon polygone) {
         this.polygone = new Polygon(polygone.xpoints, polygone.ypoints, polygone.npoints);
-        setPopTotale(100000);
+    }
+    
+        public Region(Polygon polygone, int popSaine) {
+        this.polygone = new Polygon(polygone.xpoints, polygone.ypoints, polygone.npoints);
+        this.populationSaine = popSaine;
     }
 
     public Region(Region region) {
@@ -84,10 +88,10 @@ public class Region implements Externalizable {
         }
     }
     
-    public void vaccinerPopulation(double taux, int vaccinationParJour)
+    public void vaccinerPopulation(double taux, double vaccinationParJour)
     {
-        int nouveauxImmune = (int)((float)vaccinationParJour * taux);
-        setPopImmune(this.getPopImmunisee() + nouveauxImmune);
+        int nouveauxImmune = (int)(this.getPopSaine() * taux * vaccinationParJour);
+        this.setPopImmune(this.getPopImmunisee() + nouveauxImmune);
     }
     
     public String getNom(){return nom;}

@@ -13,7 +13,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.ParseException;
 import javax.swing.BorderFactory;
-import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -25,10 +24,10 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
     private OngletMaladie onglet;
     
     public StatsMaladiePanel() {
-        initComponents();
-        showFields(false);
-        
+ 
         try {
+            initComponents();
+            showFields(false);
             init();
         }
         catch(Exception e) {
@@ -221,7 +220,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         Parent.add(DeadInput);
 
         IncubationLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        IncubationLabel.setText("Temps d'incubation ");
+        IncubationLabel.setText("Temps d'incubation (jours)");
         Parent.add(IncubationLabel);
 
         IncubationInput.setModel(new javax.swing.SpinnerNumberModel(14, 0, 31, 1));

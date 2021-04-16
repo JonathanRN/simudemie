@@ -6,6 +6,7 @@
 package ca.ulaval.glo2004.afficheur.Simulation.objetsUI;
 
 import ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Mesure;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
@@ -35,6 +36,13 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         this.index = index;
         initComponents();
         
+        try {
+            TauxReduction.getEditor().getComponent(0).setBackground(Couleurs.sideMenuNoTransp);
+            TauxAdhesion.getEditor().getComponent(0).setBackground(Couleurs.sideMenuNoTransp);
+            SeuilActivation.getEditor().getComponent(0).setBackground(Couleurs.sideMenuNoTransp);
+        }
+        catch (Exception e) {
+        }
         // Met tout de suite en mode edition lors de la creation
         setEdition(true, false);
         setActif(true, false);
@@ -138,6 +146,7 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         TitreMesurePanel.setOpaque(false);
         TitreMesurePanel.setLayout(new java.awt.BorderLayout());
 
+        NomMesureTextField.setBackground(Couleurs.sideMenuNoTransp);
         NomMesureTextField.setFont(FontRegister.RobotoLight.deriveFont(14f));
         NomMesureTextField.setText("Nom de la mesure");
         NomMesureTextField.setSelectionColor(new java.awt.Color(136, 192, 208));

@@ -15,14 +15,26 @@ import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Mesure;
+import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.Vaccin;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
 import ca.ulaval.glo2004.domaine.VoieLiaison.TypeVoie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.block.BlockBorder;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -36,27 +48,32 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     private ArrayList<TypeVoie> voies = new ArrayList<>();
     
     public SimulationPanelGauche() {
-        initComponents();
         
         try {
+            initComponents();
             updateBoutonAjouter(false, AjouterMesure);
             setBackground(Couleurs.sideMenuTransp);
+            SidePanel.setBackground(Couleurs.sideMenuLessTransp);
             
             BoutonMesures.init(this, "icons8_wash_your_hands_30px");
+            BoutonMesures.setBackground(Couleurs.sideMenuLessTransp);
             MesuresActives.getViewport().setOpaque(false);
             MesuresActives.getVerticalScrollBar().setUnitIncrement(15);
             MesuresActives.getVerticalScrollBar().addAdjustmentListener(this);
             MesuresTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
             BoutonLiens.init(this, "icons8_chain_25px");
+            BoutonLiens.setBackground(Couleurs.sideMenuLessTransp);
             LiensTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             LiensScrollPane.getViewport().setOpaque(false);
             
             BoutonVaccins.init(this, "icons8_syringe_30px");
+            BoutonVaccins.setBackground(Couleurs.sideMenuLessTransp);
             VaccinsScrollPane.getViewport().setOpaque(false);
             VaccinsTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
             BoutonStats.init(this, "icons8_bar_chart_30px");
+            BoutonStats.setBackground(Couleurs.sideMenuLessTransp);
             StatsScrollPane.getViewport().setOpaque(false);
             StatsTitreLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
@@ -91,7 +108,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
             loadVaccins();
         }
         else if (toggleCourant.equals(BoutonStats)) {
-           // loadStats();
+            loadStats();
         }
     }
     
@@ -130,13 +147,91 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     }
     
     public void loadVaccins() {
-    ConteneurVaccinsPanel.removeAll();
-    ConteneurVaccinsPanel.getParent().validate();
-    ConteneurVaccinsPanel.getRootPane().repaint();
+        ConteneurVaccinsPanel.removeAll();
+        ConteneurVaccinsPanel.getParent().validate();
+        ConteneurVaccinsPanel.getRootPane().repaint();
 
-    for (Vaccin v : GestionnaireScenario.getInstance().getVaccins(indexPays)) {
-            addVaccin(v);
-        }
+        for (Vaccin v : GestionnaireScenario.getInstance().getVaccins(indexPays)) {
+                addVaccin(v);
+            }
+    }
+    
+    public void loadStats() {
+        ConteneurStatsPanel.removeAll();
+        ConteneurStatsPanel.getParent().validate();
+        ConteneurStatsPanel.getRootPane().repaint();
+        
+        Scenario scenario = simulation.getScenario();
+        
+//        if (scenario == null) {
+//            return;
+//        }
+//        
+//        XYSeries infectes = new XYSeries("Infectés");
+//        for (int i = 0; i < scenario.getTotalJours(); i++) {
+//            infectes.add(i, scenario.getListeCartes().get(i).getPopulationInfectee());
+//        }
+//        
+//        XYSeries sains = new XYSeries("Sains");
+//        for (int i = 0; i < scenario.getTotalJours(); i++) {
+//            sains.add(i, scenario.getListeCartes().get(i).getPopulationSaine());
+//        }
+//        
+//        XYSeries decedes = new XYSeries("Décédés");
+//        for (int i = 0; i < scenario.getTotalJours(); i++) {
+//            decedes.add(i, scenario.getListeCartes().get(i).getPopulationDecedee());
+//        }
+//        
+//        XYSeries immunises = new XYSeries("Immunisés");
+//        for (int i = 0; i < scenario.getTotalJours(); i++) {
+//            immunises.add(i, scenario.getListeCartes().get(i).getPopulationImmune());
+//        }
+//        
+//        XYSeriesCollection collection = new XYSeriesCollection();
+//        collection.addSeries(infectes);
+//        collection.addSeries(sains);
+//        collection.addSeries(decedes);
+//        collection.addSeries(immunises);
+//                
+//        JFreeChart stats = ChartFactory.createXYLineChart(null, "Jours", "Population", collection, PlotOrientation.VERTICAL, true, true, false);
+//        stats.setBackgroundPaint(Couleurs.sideMenuTransp);
+//
+//        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+//        renderer.setSeriesPaint(0, Couleurs.infections);
+//        renderer.setSeriesPaint(1, Couleurs.sains);
+//        renderer.setSeriesPaint(2, Couleurs.morts);
+//        renderer.setSeriesPaint(3, Couleurs.immunisations);
+//        renderer.setSeriesStroke(0, new BasicStroke(2.0f));
+//        renderer.setSeriesStroke(1, new BasicStroke(2.0f));
+//        renderer.setSeriesStroke(2, new BasicStroke(2.0f));
+//        renderer.setSeriesStroke(3, new BasicStroke(2.0f));
+//
+//        XYPlot plot = stats.getXYPlot();
+//        plot.setRenderer(renderer);
+//        plot.setBackgroundPaint(Couleurs.sideMenuTransp);
+//        plot.setRangeGridlinesVisible(true);
+//        plot.setRangeGridlinePaint(Couleurs.blanc);
+//        plot.setDomainGridlinesVisible(true);
+//        plot.setDomainGridlinePaint(Couleurs.blanc);
+//        plot.getDomainAxis().setLabelFont(FontRegister.RobotoRegular.deriveFont(14f));
+//        plot.getDomainAxis().setTickLabelPaint(Couleurs.blanc);
+//        plot.getDomainAxis().setLabelPaint(Couleurs.blanc);
+//        plot.getRangeAxis().setLabelFont(FontRegister.RobotoRegular.deriveFont(14f));
+//        plot.getRangeAxis().setTickLabelPaint(Couleurs.blanc);
+//        plot.getRangeAxis().setLabelPaint(Couleurs.blanc);
+//
+//        stats.getLegend().setFrame(BlockBorder.NONE);
+//        stats.getLegend().setItemPaint(Couleurs.blanc);
+//        stats.getLegend().setBackgroundPaint(Couleurs.sideMenuTransp);
+//
+//        ChartPanel chartPanel = new ChartPanel(stats);
+//        chartPanel.setPopupMenu(null);
+//        chartPanel.setDomainZoomable(false);
+//        chartPanel.setRangeZoomable(false);
+//        chartPanel.setDisplayToolTips(false);
+//        
+//        ConteneurStatsPanel.add(chartPanel, BorderLayout.CENTER);
+//        ConteneurStatsPanel.validate();
     }
     
     public void onToggleClick(ToggleBouton toggle) {        
@@ -427,7 +522,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
 
         ConteneurStatsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         ConteneurStatsPanel.setOpaque(false);
-        ConteneurStatsPanel.setLayout(new javax.swing.BoxLayout(ConteneurStatsPanel, javax.swing.BoxLayout.Y_AXIS));
+        ConteneurStatsPanel.setLayout(new java.awt.BorderLayout());
         StatsScrollPane.setViewportView(ConteneurStatsPanel);
 
         StatsPanel.add(StatsScrollPane, java.awt.BorderLayout.CENTER);

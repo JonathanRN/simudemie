@@ -319,7 +319,7 @@
         <Component class="javax.swing.JSpinner" name="VaccinationQuot">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="0.0" maximum="99.99" minimum="0.0" numberType="java.lang.Double" stepSize="0.5" type="number"/>
+              <SpinnerModel initial="0.0" maximum="100.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.2" type="number"/>
             </Property>
           </Properties>
           <Constraints>

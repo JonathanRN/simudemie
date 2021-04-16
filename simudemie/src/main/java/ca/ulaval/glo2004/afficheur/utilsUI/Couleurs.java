@@ -47,6 +47,8 @@ public final class Couleurs {
     public static Color titleBar = new Color(59, 66, 82);
     public static Color sideMenu = new Color(76, 86, 106);
     public static Color sideMenuTransp = new Color(76, 86, 106, 100);
+    public static Color sideMenuLessTransp = new Color(76, 86, 106, 120);
+    public static Color sideMenuNoTransp = new Color(64,73,90);
     public static Color pannelArrondi = new Color(216, 222, 233, 30);
     public static Color pannelArrondiNoTransp = new Color(66, 72, 83);
     public static Color pannelArrondiNo = new Color(90, 95, 104);

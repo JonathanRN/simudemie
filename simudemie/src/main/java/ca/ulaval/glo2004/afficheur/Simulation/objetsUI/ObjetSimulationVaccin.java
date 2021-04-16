@@ -6,6 +6,7 @@
 package ca.ulaval.glo2004.afficheur.Simulation.objetsUI;
 
 import ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Vaccin;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
@@ -38,9 +39,13 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         
         try {
             NomVaccinTextField.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            NomVaccinTextField.setBackground(Couleurs.sideMenuNoTransp);
             TauxImmunisationLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            TauxImmunisation.getEditor().getComponent(0).setBackground(Couleurs.sideMenuNoTransp);
             TauxAdhesionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            TauxAdhesion.getEditor().getComponent(0).setBackground(Couleurs.sideMenuNoTransp);
             VaccinationQuotLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            VaccinationQuot.getEditor().getComponent(0).setBackground(Couleurs.sideMenuNoTransp);
         }
         catch (Exception e) {
         }
@@ -268,7 +273,7 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         VaccinationQuotLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 15));
         VaccinationQuotPanel.add(VaccinationQuotLabel, java.awt.BorderLayout.WEST);
 
-        VaccinationQuot.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 99.99d, 0.5d));
+        VaccinationQuot.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 0.2d));
         VaccinationQuotPanel.add(VaccinationQuot, java.awt.BorderLayout.CENTER);
 
         add(VaccinationQuotPanel);

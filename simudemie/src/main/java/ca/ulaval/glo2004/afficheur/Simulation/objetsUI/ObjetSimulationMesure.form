@@ -45,6 +45,9 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="NomMesureTextField">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="Couleurs.sideMenuNoTransp" type="code"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="FontRegister.RobotoLight.deriveFont(14f)" type="code"/>
             </Property>

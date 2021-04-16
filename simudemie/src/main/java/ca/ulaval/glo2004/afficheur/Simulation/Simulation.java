@@ -10,6 +10,7 @@ import ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanel;
 import ca.ulaval.glo2004.afficheur.FramePrincipal;
 import ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel;
 import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletScenario;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
@@ -43,6 +44,15 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         initComponents();
         SimulationMenuGauche.setSimulation(this);
         toggleSimulationTabs(false);
+        
+        SimulationMenuDroit.setBackground(Couleurs.sideMenuLessTransp);
+                  
+        MaladieBouton.setBackground(Couleurs.sideMenuLessTransp);
+        TogglePaysRegion.setBackground(Couleurs.sideMenuLessTransp);
+        ToggleLiens.setBackground(Couleurs.sideMenuLessTransp);
+        ToggleCouleurs.setBackground(Couleurs.sideMenuLessTransp);
+        BoutonPhoto.setBackground(Couleurs.sideMenuLessTransp);
+        HomeBouton.setBackground(Couleurs.sideMenuLessTransp);
         
         initBoutonsGeneraux();
         

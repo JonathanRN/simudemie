@@ -11,7 +11,6 @@ import ca.ulaval.glo2004.afficheur.MenuPrincipal.objetsUI.ObjetUI;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Maladie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireMaladie;
-import java.awt.Color;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 

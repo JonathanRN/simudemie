@@ -6,12 +6,14 @@
 package ca.ulaval.glo2004.afficheur.CreationCarte.panels;
 
 import ca.ulaval.glo2004.afficheur.CreationCarte.mode.Selection;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Region;
 import java.text.ParseException;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -30,6 +32,7 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
         initComponents();
         
         PopulationTotale = new JSpinner(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 100));
+        PopulationTotale.getEditor().getComponent(0).setBackground(Couleurs.sideMenuNoTransp);
         PopRegionPanel.add(PopulationTotale, java.awt.BorderLayout.SOUTH);
         
         InformationsPaysLabel.setFont(FontRegister.RobotoLight.deriveFont(15f));
@@ -39,7 +42,11 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
         PopTotaleLabel.setFont(FontRegister.RobotoLight.deriveFont(13f));
         
         PaysNomTextField.setFont(FontRegister.RobotoLight.deriveFont(12f));
+        PaysNomTextField.setBackground(Couleurs.sideMenuNoTransp);
         RegionNomTextField.setFont(FontRegister.RobotoLight.deriveFont(12f));
+        RegionNomTextField.setBackground(Couleurs.sideMenuNoTransp);
+        
+        SupprimeBouton.setBackground(Couleurs.sideMenuNoTransp); 
     }
     
     public void Active(Pays pays, Region region) {
@@ -136,6 +143,7 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
         NomPaysPanel.add(PaysNomLabel, java.awt.BorderLayout.NORTH);
 
         PaysNomTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        PaysNomTextField.setOpaque(false);
         PaysNomTextField.setPreferredSize(new java.awt.Dimension(200, 25));
         PaysNomTextField.setSelectionColor(new java.awt.Color(67, 76, 94));
         NomPaysPanel.add(PaysNomTextField, java.awt.BorderLayout.SOUTH);
@@ -159,6 +167,7 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
         NomRegionPanel.add(RegionNomLabel, java.awt.BorderLayout.NORTH);
 
         RegionNomTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        RegionNomTextField.setOpaque(false);
         RegionNomTextField.setPreferredSize(new java.awt.Dimension(200, 25));
         RegionNomTextField.setSelectionColor(new java.awt.Color(67, 76, 94));
         NomRegionPanel.add(RegionNomTextField, java.awt.BorderLayout.SOUTH);

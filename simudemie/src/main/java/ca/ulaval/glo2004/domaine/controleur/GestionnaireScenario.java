@@ -15,6 +15,8 @@ import ca.ulaval.glo2004.domaine.Vaccin;
 import ca.ulaval.glo2004.domaine.helper.FileHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.Timer;
 
 
@@ -96,6 +98,25 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
             }
             vaccinGlobal.setTauxImmunisation(tauxImmunisation);
         }
+    }
+    
+    /**
+     *  Pour chaque vaccins existant globalement, si une version de ce vaccin existe dans un pays,
+     *  on l'ajoute à la liste, sinon on ajoute la version globale.
+     * @param indexPays
+     * @return la liste des vaccins parcourus
+     */
+    public List<Vaccin> getVaccins(int indexPays) {
+        List<Vaccin> vaccins = new ArrayList<>();
+        for(Vaccin vaccin : getCourant().getVaccins()) {
+            Vaccin vaccinPays = getCourant().getCarteJourCourant().getPays(indexPays).getVaccin(vaccin.getNom());
+            if(vaccinPays != null) {
+                vaccins.add(vaccinPays);
+            } else {
+                vaccins.add(vaccin);
+            }
+        }
+        return vaccins;
     }
     
     public boolean supprimerVaccin(int indexPays, String nom) {

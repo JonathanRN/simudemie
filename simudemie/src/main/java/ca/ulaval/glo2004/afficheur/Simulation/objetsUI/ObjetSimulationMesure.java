@@ -239,7 +239,7 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         SeuilActivationPanel.setLayout(new java.awt.BorderLayout());
 
         SeuilActivationLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
-        SeuilActivationLabel.setText("Sueil d'activation (%) :");
+        SeuilActivationLabel.setText("Seuil d'activation (%) :");
         SeuilActivationLabel.setMaximumSize(new java.awt.Dimension(200, 19));
         SeuilActivationLabel.setMinimumSize(new java.awt.Dimension(200, 19));
         SeuilActivationLabel.setPreferredSize(new java.awt.Dimension(200, 19));

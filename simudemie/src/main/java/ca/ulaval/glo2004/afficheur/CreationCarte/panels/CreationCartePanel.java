@@ -19,6 +19,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Stack;
 import javax.swing.SwingUtilities;
+import java.math.*;
 
 /**
  *
@@ -135,12 +136,16 @@ public class CreationCartePanel extends ZoomablePanel {
         polygones.add(index, divise.getGauche());
         polygones.add(index + 1, divise.getDroit());
 
-        int popPaysInitiale = pays.getPopTotale();
-        int nbRegions = pays.getListeRegions().size()+1;
-        int nbPopSaine = (int)(popPaysInitiale / nbRegions);
+        int popPaysInitiale = pays.getRegions().stream().filter(x -> x.getPolygone().equals(p)).findFirst().get().getPopSaine();
+        int nbPopSaine = (int)(popPaysInitiale / 2);
+        int nbPopSaineImpaire = (int)(popPaysInitiale / 2);
         
+        if (popPaysInitiale % 2 != 0){
+            nbPopSaineImpaire += 1;
+        }
+            
         Region regionGauche = new Region(divise.getGauche(), nbPopSaine);
-        Region regionDroite = new Region(divise.getDroit(), nbPopSaine);
+        Region regionDroite = new Region(divise.getDroit(), nbPopSaineImpaire);
         
         pays.ajouterRegion(regionGauche);
         pays.ajouterRegion(regionDroite);

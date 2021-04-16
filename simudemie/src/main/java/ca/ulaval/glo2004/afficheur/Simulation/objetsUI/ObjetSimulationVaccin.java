@@ -141,8 +141,8 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         VaccinationQuot = new javax.swing.JSpinner();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
-        setMaximumSize(new java.awt.Dimension(32767, 105));
-        setMinimumSize(new java.awt.Dimension(208, 105));
+        setMaximumSize(new java.awt.Dimension(32767, 150));
+        setMinimumSize(new java.awt.Dimension(208, 150));
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(208, 105));
         setLayout(new java.awt.GridLayout(4, 0));
@@ -236,6 +236,7 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
 
         TauxImmunisationLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         TauxImmunisationLabel.setText("Taux d'efficacité :");
+        TauxImmunisationLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 15));
         TauxImmunisationPanel.add(TauxImmunisationLabel, java.awt.BorderLayout.WEST);
 
         TauxImmunisation.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
@@ -248,6 +249,7 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
 
         TauxAdhesionLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         TauxAdhesionLabel.setText("Taux d'adhésion :");
+        TauxAdhesionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 15));
         TauxAdhesionPanel.add(TauxAdhesionLabel, java.awt.BorderLayout.WEST);
 
         TauxAdhesion.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
@@ -261,8 +263,9 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         VaccinationQuotPanel.setLayout(new java.awt.BorderLayout());
 
         VaccinationQuotLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        VaccinationQuotLabel.setText("Vacc. par jour :     ");
+        VaccinationQuotLabel.setText("Vacc. par jour (%) :");
         VaccinationQuotLabel.setToolTipText("");
+        VaccinationQuotLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 15));
         VaccinationQuotPanel.add(VaccinationQuotLabel, java.awt.BorderLayout.WEST);
 
         VaccinationQuot.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 99.99d, 0.5d));

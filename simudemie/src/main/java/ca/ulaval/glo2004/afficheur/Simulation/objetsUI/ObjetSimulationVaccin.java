@@ -47,7 +47,7 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         
         // Met tout de suite en mode edition lors de la creation
         setEdition(true, false);
-        setActif(true, false);
+        setActif(false, false);
     }
     
     private void setActif(boolean actif, boolean mouseOver) {
@@ -69,8 +69,8 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
     
     public void chargerVaccin(Vaccin vaccin) {
         NomVaccinTextField.setText(vaccin.getNom());
-        TauxAdhesion.setValue(vaccin.getTauxAdhesion());
         TauxImmunisation.setValue(vaccin.getTauxImmunisation());
+        TauxAdhesion.setValue(vaccin.getTauxAdhesion());
         VaccinationQuot.setValue(vaccin.getVaccinationQuotidienne());
         setActif(vaccin.getActive(), false);
         setEdition(false, false);
@@ -78,13 +78,13 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
     
     public void sauvegarderVaccin() {
         try {
-            TauxAdhesion.commitEdit();
             TauxImmunisation.commitEdit();
+            TauxAdhesion.commitEdit();
             VaccinationQuot.commitEdit();
         } catch(ParseException pe) {
         }
         
-        GestionnaireScenario.getInstance().creerVaccin(simulationTabs.getIndexPays(), NomVaccinTextField.getText(), (double) TauxAdhesion.getValue(), (double) TauxImmunisation.getValue(), (int) VaccinationQuot.getValue(), estActif);
+        GestionnaireScenario.getInstance().creerVaccin(simulationTabs.getIndexPays(), NomVaccinTextField.getText(), (double) TauxImmunisation.getValue(), (double) TauxAdhesion.getValue(), (int) VaccinationQuot.getValue(), estActif);
     }
     
     private void updateEditerIcon(boolean actif) {

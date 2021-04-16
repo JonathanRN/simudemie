@@ -123,7 +123,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         JOptionPane optionPane = new JOptionPane();
         optionPane.setMessage("Retourner au menu principal?");
         optionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
-        optionPane.setOptionType(JOptionPane.YES_NO_CANCEL_OPTION);
+        optionPane.setOptionType(JOptionPane.YES_NO_OPTION);
         
         int result = JOptionPane.showOptionDialog(
             SwingUtilities.windowForComponent(this),

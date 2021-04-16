@@ -79,13 +79,18 @@ public class Region implements Externalizable {
         }
     }
     
-    public void guerirPopulation(double taux, int cptJours, int incubation)
+    public void guerirPopulation(double taux, int cptJours, int incubation, boolean immunitePossible)
     {
         //Les premières guerisons ont lieu 2 semaines après la 1ere infection
         if (cptJours > 14){
             int gueris = (int)(this.listeInfections.get(cptJours - incubation) * taux);
-            setPopSaine(this.getPopSaine() + gueris);
-            setPopInfectee(this.getPopInfectee() - gueris);   
+            if (immunitePossible){
+                setPopImmune(this.getPopImmunisee() + gueris);
+                setPopInfectee(this.getPopInfectee() - gueris); 
+            }else{
+                setPopSaine(this.getPopSaine() + gueris);
+                setPopInfectee(this.getPopInfectee() - gueris);                   
+            }
         }
     }
     

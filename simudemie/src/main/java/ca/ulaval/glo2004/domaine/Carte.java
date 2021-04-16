@@ -61,7 +61,7 @@ public class Carte implements Externalizable {
     public void avancerJour(int cptJours) {
         //Pour chaque pays, nous effectuons la méthode avancerJour qui contamine/guéri/éliminer la population
         for (Pays pays : listePays){
-            pays.avancerJournee(maladie.getTauxInfection(), maladie.getTauxMortalite(), maladie.getTauxGuerison(), cptJours, this.maladie.getIncubation());
+            pays.avancerJournee(maladie.getTauxInfection(), maladie.getTauxMortalite(), maladie.getTauxGuerison(), cptJours, maladie.getIncubation(), maladie.getImmunitePossible());
         }
         this.contaminerInterPays();
     }

@@ -48,7 +48,7 @@ public class Pays implements Externalizable {
     }
     
     
-    public void avancerJournee(double tauxInf, double tauxMortalite, double tauxGuerison, int cptJours, int incubation)
+    public void avancerJournee(double tauxInf, double tauxMortalite, double tauxGuerison, int cptJours, int incubation, boolean immunitePossible)
     {
         tauxInf /= 100d;
         tauxMortalite /= 100d;
@@ -68,7 +68,7 @@ public class Pays implements Externalizable {
                 }
             }
             region.contaminerPopulation(tauxInfAjuste, cptJours, incubation);
-            region.guerirPopulation(tauxGuerison, cptJours, incubation);
+            region.guerirPopulation(tauxGuerison, cptJours, incubation, immunitePossible);
             region.eliminerPopulation(tauxMortalite, cptJours, incubation);
         }
         
@@ -179,7 +179,7 @@ public class Pays implements Externalizable {
         if (this.getPopTotale() <= 0) {
             return 0;
         }
-        return ((float)this.getPopImmune() / (float)this.getPopInitiale()) * 100f;
+        return ((float)this.getPopImmune() / (float)this.getPopTotale()) * 100f;
     }
     
     public Mesure getMesure(int index) {

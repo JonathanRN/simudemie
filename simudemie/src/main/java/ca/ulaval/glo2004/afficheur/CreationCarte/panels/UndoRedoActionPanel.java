@@ -33,7 +33,6 @@ public class UndoRedoActionPanel extends PanelArrondi implements ActionListener 
     public void setTexte(String texte) {
         Label.setText(texte);
         this.setVisible(true);
-        repaint();
         timer.restart();
     }
 

@@ -221,9 +221,7 @@ public class CreationCartePanel extends ZoomablePanel {
         }        
     }
     
-    private void centrerVueSurPolygones(Carte carte) {
-        this.getParent().setVisible(!carte.getListePays().isEmpty());
-        
+    private void centrerVueSurPolygones(Carte carte) {        
         if (!carte.getListePays().isEmpty()) {
             // Get les bounds du premier pays sur la carte
             Rectangle2D rect = carte.getListePays().get(0).getPolygone().getBounds2D();

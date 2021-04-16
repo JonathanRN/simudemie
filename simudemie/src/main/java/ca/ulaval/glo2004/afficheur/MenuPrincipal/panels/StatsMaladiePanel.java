@@ -9,10 +9,11 @@ import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.MenuPrincipal.objetsUI.ObjetMaladie;
 import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletMaladie;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.ParseException;
+import javax.swing.BorderFactory;
+import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -36,10 +37,19 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
     
     private void init() {        
         InfectionInput.addChangeListener(this);
+        InfectionInput.getEditor().getComponent(0).setBackground(Couleurs.pannelArrondiNoTransp);
+        InfectionInput.setBorder(BorderFactory.createEmptyBorder());
         CuredInput.addChangeListener(this);
+        CuredInput.getEditor().getComponent(0).setBackground(Couleurs.pannelArrondiNoTransp);
+        CuredInput.setBorder(BorderFactory.createEmptyBorder());
         DeadInput.addChangeListener(this);
+        DeadInput.getEditor().getComponent(0).setBackground(Couleurs.pannelArrondiNoTransp);
+        DeadInput.setBorder(BorderFactory.createEmptyBorder());
         MaladieInput.addKeyListener(this);
+        MaladieInput.setBackground(Couleurs.pannelArrondiNoTransp);
         IncubationInput.addChangeListener(this);
+        IncubationInput.getEditor().getComponent(0).setBackground(Couleurs.pannelArrondiNoTransp);
+        IncubationInput.setBorder(BorderFactory.createEmptyBorder());
         ImmunizationCheckbox.addChangeListener(this);
     }
     
@@ -163,7 +173,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         setLayout(new java.awt.GridLayout(1, 2, 20, 0));
 
         Main.setBackground(Couleurs.pannelArrondi);
-        Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 25, 15));
+        Main.setBorder(javax.swing.BorderFactory.createEmptyBorder(25, 25, 25, 25));
         Main.setLayout(new java.awt.BorderLayout());
 
         TitreStatsPanel.setOpaque(false);
@@ -173,6 +183,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         MaladieInput.setFont(FontRegister.RobotoThin.deriveFont(21f));
         MaladieInput.setText("Nom de la maladie");
         MaladieInput.setToolTipText("");
+        MaladieInput.setOpaque(false);
         MaladieInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 MaladieInputKeyReleased(evt);
@@ -183,7 +194,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
 
         Main.add(TitreStatsPanel, java.awt.BorderLayout.NORTH);
 
-        Parent.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 0, 0, 0));
+        Parent.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 15, 0, 15));
         Parent.setOpaque(false);
         Parent.setLayout(new java.awt.GridLayout(5, 2, 0, 10));
 
@@ -192,7 +203,6 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         Parent.add(InfectionLabel);
 
         InfectionInput.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 99.99d, 0.5d));
-        InfectionInput.setOpaque(true);
         Parent.add(InfectionInput);
 
         CuredLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
@@ -200,7 +210,6 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         Parent.add(CuredLabel);
 
         CuredInput.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 0.5d));
-        CuredInput.setOpaque(true);
         Parent.add(CuredInput);
 
         DeadLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
@@ -209,7 +218,6 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
 
         DeadInput.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 100.0d, 0.5d));
         DeadInput.setMaximumSize(new java.awt.Dimension(64, 22));
-        DeadInput.setOpaque(true);
         Parent.add(DeadInput);
 
         IncubationLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
@@ -217,7 +225,6 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         Parent.add(IncubationLabel);
 
         IncubationInput.setModel(new javax.swing.SpinnerNumberModel(14, 0, 31, 1));
-        IncubationInput.setOpaque(true);
         Parent.add(IncubationInput);
 
         ImmunizationLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));

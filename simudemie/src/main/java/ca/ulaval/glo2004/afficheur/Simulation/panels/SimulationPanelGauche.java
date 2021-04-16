@@ -17,6 +17,7 @@ import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Mesure;
 import ca.ulaval.glo2004.domaine.Vaccin;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
+import ca.ulaval.glo2004.domaine.VoieLiaison.TypeVoie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
@@ -32,7 +33,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     private ToggleBouton toggleCourant;
     private Simulation simulation;
     private int indexPays;
-    private ArrayList<VoieLiaison.TypeVoie> voies = new ArrayList<>();
+    private ArrayList<TypeVoie> voies = new ArrayList<>();
     
     public SimulationPanelGauche() {
         initComponents();
@@ -214,6 +215,9 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         LiensPanel = new javax.swing.JPanel();
         TitreOngletPanel = new javax.swing.JPanel();
         LiensTitre = new javax.swing.JLabel();
+        TransmissionInterRegionPanel = new javax.swing.JPanel();
+        TransmissionInterRegionLabel = new javax.swing.JLabel();
+        TransmissionInterRegion = new javax.swing.JSpinner();
         LiensScrollPane = new javax.swing.JScrollPane();
         ConteneurLiensPanel = new javax.swing.JPanel();
         VaccinsPanel = new javax.swing.JPanel();
@@ -305,6 +309,25 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         LiensTitre.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 40));
         LiensTitre.setPreferredSize(new java.awt.Dimension(62, 30));
         TitreOngletPanel.add(LiensTitre, java.awt.BorderLayout.CENTER);
+
+        TransmissionInterRegionPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 10, 10));
+        TransmissionInterRegionPanel.setOpaque(false);
+        TransmissionInterRegionPanel.setLayout(new javax.swing.BoxLayout(TransmissionInterRegionPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        TransmissionInterRegionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+        TransmissionInterRegionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TransmissionInterRegionLabel.setText("Prob. de transmission inter-région :");
+        TransmissionInterRegionLabel.setAlignmentX(0.5F);
+        TransmissionInterRegionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        TransmissionInterRegionLabel.setMaximumSize(new java.awt.Dimension(200, 19));
+        TransmissionInterRegionLabel.setMinimumSize(new java.awt.Dimension(200, 19));
+        TransmissionInterRegionLabel.setPreferredSize(new java.awt.Dimension(200, 19));
+        TransmissionInterRegionPanel.add(TransmissionInterRegionLabel);
+
+        TransmissionInterRegion.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 99.9d, 0.5d));
+        TransmissionInterRegionPanel.add(TransmissionInterRegion);
+
+        TitreOngletPanel.add(TransmissionInterRegionPanel, java.awt.BorderLayout.PAGE_END);
 
         LiensPanel.add(TitreOngletPanel, java.awt.BorderLayout.PAGE_START);
 
@@ -486,6 +509,9 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     private javax.swing.JPanel TitreOngletPanel;
     private javax.swing.JPanel TitrePanel;
     private javax.swing.JPanel TitreStatsPanel;
+    private javax.swing.JSpinner TransmissionInterRegion;
+    private javax.swing.JLabel TransmissionInterRegionLabel;
+    private javax.swing.JPanel TransmissionInterRegionPanel;
     private javax.swing.JPanel VaccinsPanel;
     private javax.swing.JScrollPane VaccinsScrollPane;
     private javax.swing.JLabel VaccinsTitre;

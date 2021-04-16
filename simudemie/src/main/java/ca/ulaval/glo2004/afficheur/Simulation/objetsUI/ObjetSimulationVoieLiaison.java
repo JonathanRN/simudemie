@@ -7,6 +7,8 @@ package ca.ulaval.glo2004.afficheur.Simulation.objetsUI;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
+import ca.ulaval.glo2004.domaine.VoieLiaison.TypeVoie;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import javax.swing.ImageIcon;
 
 /**
@@ -15,6 +17,7 @@ import javax.swing.ImageIcon;
  */
 public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
     
+    private TypeVoie type;
     private boolean mouseOver, checked = true;
         
     public ObjetSimulationVoieLiaison() {
@@ -23,9 +26,10 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
         updateIcon();
     }
     
-    public void setTypeVoie(VoieLiaison.TypeVoie type) {
+    public void setTypeVoie(TypeVoie type) {
+        this.type = type;
         String texte = "Voie " + type;        
-        if (type == VoieLiaison.TypeVoie.Aerien) {
+        if (type == TypeVoie.Aerien) {
             texte = "Voie Aérienne";
         }
         
@@ -57,7 +61,9 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
         TransmissionLabel = new javax.swing.JLabel();
         Transmission = new javax.swing.JSpinner();
 
+        setMinimumSize(new java.awt.Dimension(288, 60));
         setOpaque(false);
+        setPreferredSize(new java.awt.Dimension(288, 60));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 formMouseEntered(evt);
@@ -69,9 +75,12 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
                 formMouseReleased(evt);
             }
         });
-        setLayout(new java.awt.GridLayout(2, 0));
+        setLayout(new java.awt.GridLayout(2, 0, 0, -20));
 
+        jPanel1.setMinimumSize(new java.awt.Dimension(141, 35));
         jPanel1.setOpaque(false);
+        jPanel1.setPreferredSize(new java.awt.Dimension(100, 35));
+        jPanel1.setRequestFocusEnabled(false);
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
         Activer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -91,7 +100,9 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
         add(jPanel1);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 10, 10));
+        jPanel3.setMinimumSize(new java.awt.Dimension(288, 35));
         jPanel3.setOpaque(false);
+        jPanel3.setPreferredSize(new java.awt.Dimension(288, 35));
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
 
         TransmissionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
@@ -123,7 +134,7 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseExited
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
-        checked = !checked;
+        checked = !checked; 
         updateIcon();
         this.getRootPane().repaint();
     }//GEN-LAST:event_formMouseReleased

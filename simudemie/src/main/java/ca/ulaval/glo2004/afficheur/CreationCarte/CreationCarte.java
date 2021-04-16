@@ -16,7 +16,6 @@ import ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel;
 import ca.ulaval.glo2004.afficheur.MenuPrincipal.onglets.OngletCarte;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
-import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;

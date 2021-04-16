@@ -19,7 +19,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Stack;
 import javax.swing.SwingUtilities;
-import java.math.*;
 
 /**
  *
@@ -190,7 +189,7 @@ public class CreationCartePanel extends ZoomablePanel {
     }
     
     public void redo() {
-        if (pointeur < etats.size()) {
+        if (pointeur < etats.size() - 1) {
             Etat redo = etats.get(++pointeur);
             creationCarte.chargerCarte(redo.getCarte());
             courant = new Polygon(redo.getCourant().xpoints, redo.getCourant().ypoints, redo.getCourant().npoints);
@@ -275,6 +274,15 @@ public class CreationCartePanel extends ZoomablePanel {
     }//GEN-LAST:event_formMouseReleased
     
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        if ((evt.getModifiers() & KeyEvent.CTRL_MASK) != 0) {
+            if (evt.getKeyCode() == KeyEvent.VK_Z) {
+                undo();
+            }
+            else if (evt.getKeyCode() == KeyEvent.VK_Y) {
+                redo();
+            }
+        }
+        
         if (evt.getKeyCode() == KeyEvent.VK_1) {
             creationCarte.onToggleClick(1);
         }

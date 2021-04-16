@@ -283,6 +283,9 @@ public class Selection extends Mode {
         if (creationCarte.getInformationsPanel().isVisible()) {
             creationCarte.getInformationsPanel().setVisible(false);
             selectionne = null;
+            if (highlight != null) {
+                highlight = null;
+            }
         }
     }
     
@@ -292,6 +295,9 @@ public class Selection extends Mode {
         if (creationCarte.getInformationsPanel().isVisible()) {
             creationCarte.getInformationsPanel().setVisible(false);
             selectionne = null;
+            if (highlight != null) {
+                highlight = null;
+            }
         }
     }
     

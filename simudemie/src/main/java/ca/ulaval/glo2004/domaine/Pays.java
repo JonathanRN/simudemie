@@ -61,7 +61,10 @@ public class Pays implements Externalizable {
             for (Mesure m : mesures)
             {
                 if (m.getActive()) {
-                    tauxInfAjuste = tauxInfAjuste * (m.getTauxAdhesion() / 100.0 * m.getTauxReductionProp() / 100.0);
+                    tauxInfAjuste = tauxInfAjuste - (m.getTauxAdhesion() / 100.0 * m.getTauxReductionProp() / 100.0);
+                    if (tauxInfAjuste < 0){
+                        tauxInfAjuste = 0.01;
+                    }
                 }
             }
             region.contaminerPopulation(tauxInfAjuste, cptJours, incubation);

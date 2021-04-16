@@ -70,7 +70,7 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         pays.supprimerMesure(indexMesure);
     }
     
-    public void creerVaccin(int indexPays, String nom, double tauxImmunisation, double tauxAdhesion, int vaccinationQuotidienne, boolean active) {
+    public void creerVaccin(int indexPays, String nom, double tauxImmunisation, double tauxAdhesion, double vaccinationQuotidienne, boolean active) {
         Vaccin vaccinGlobal = getCourant().getVaccin(nom);
         Vaccin vaccinPays = getCourant().getCarteJourCourant().getPays(indexPays).getVaccin(nom);
         Vaccin vaccin = new Vaccin(nom, tauxImmunisation, tauxAdhesion, vaccinationQuotidienne, active);

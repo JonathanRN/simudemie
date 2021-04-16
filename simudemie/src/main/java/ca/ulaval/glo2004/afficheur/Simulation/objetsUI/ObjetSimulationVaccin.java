@@ -84,7 +84,7 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         } catch(ParseException pe) {
         }
         
-        GestionnaireScenario.getInstance().creerVaccin(simulationTabs.getIndexPays(), NomVaccinTextField.getText(), (double) TauxImmunisation.getValue(), (double) TauxAdhesion.getValue(), (int) VaccinationQuot.getValue(), estActif);
+        GestionnaireScenario.getInstance().creerVaccin(simulationTabs.getIndexPays(), NomVaccinTextField.getText(), (double) TauxImmunisation.getValue(), (double) TauxAdhesion.getValue(), (double) VaccinationQuot.getValue(), estActif);
     }
     
     private void updateEditerIcon(boolean actif) {
@@ -265,7 +265,7 @@ public class ObjetSimulationVaccin extends javax.swing.JPanel {
         VaccinationQuotLabel.setToolTipText("");
         VaccinationQuotPanel.add(VaccinationQuotLabel, java.awt.BorderLayout.WEST);
 
-        VaccinationQuot.setModel(new javax.swing.SpinnerNumberModel(0, 0, 10, 1000));
+        VaccinationQuot.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 99.99d, 0.5d));
         VaccinationQuotPanel.add(VaccinationQuot, java.awt.BorderLayout.CENTER);
 
         add(VaccinationQuotPanel);

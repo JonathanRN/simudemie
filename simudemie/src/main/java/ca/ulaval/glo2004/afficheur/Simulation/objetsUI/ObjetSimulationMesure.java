@@ -211,8 +211,8 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         TauxReductionLabel.setText("Taux réduction inf. : ");
         TauxReductionLabel.setToolTipText("");
         TauxReductionLabel.setMaximumSize(new java.awt.Dimension(200, 19));
-        TauxReductionLabel.setMinimumSize(new java.awt.Dimension(200, 19));
-        TauxReductionLabel.setPreferredSize(new java.awt.Dimension(200, 19));
+        TauxReductionLabel.setMinimumSize(new java.awt.Dimension(130, 19));
+        TauxReductionLabel.setPreferredSize(new java.awt.Dimension(130, 19));
         TauxReductionPanel.add(TauxReductionLabel, java.awt.BorderLayout.WEST);
 
         TauxReduction.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
@@ -226,8 +226,8 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         TauxAdhesionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         TauxAdhesionLabel.setText("Taux d'adhésion :");
         TauxAdhesionLabel.setMaximumSize(new java.awt.Dimension(200, 19));
-        TauxAdhesionLabel.setMinimumSize(new java.awt.Dimension(200, 19));
-        TauxAdhesionLabel.setPreferredSize(new java.awt.Dimension(200, 19));
+        TauxAdhesionLabel.setMinimumSize(new java.awt.Dimension(130, 19));
+        TauxAdhesionLabel.setPreferredSize(new java.awt.Dimension(130, 19));
         TauxAdhesionPanel.add(TauxAdhesionLabel, java.awt.BorderLayout.WEST);
 
         TauxAdhesion.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
@@ -241,8 +241,8 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         SeuilActivationLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         SeuilActivationLabel.setText("Seuil d'activation (%) :");
         SeuilActivationLabel.setMaximumSize(new java.awt.Dimension(200, 19));
-        SeuilActivationLabel.setMinimumSize(new java.awt.Dimension(200, 19));
-        SeuilActivationLabel.setPreferredSize(new java.awt.Dimension(200, 19));
+        SeuilActivationLabel.setMinimumSize(new java.awt.Dimension(130, 19));
+        SeuilActivationLabel.setPreferredSize(new java.awt.Dimension(130, 19));
         SeuilActivationPanel.add(SeuilActivationLabel, java.awt.BorderLayout.WEST);
 
         SeuilActivation.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));

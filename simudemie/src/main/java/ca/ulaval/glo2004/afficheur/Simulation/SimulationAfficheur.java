@@ -33,6 +33,7 @@ public class SimulationAfficheur extends Mode {
     private Point souris;
     private boolean afficherInfosPays = false;
     private boolean afficherLiens = true;
+    private int afficherCouleurs = 1;
     
     private Region regionInfectee;
     
@@ -55,7 +56,22 @@ public class SimulationAfficheur extends Mode {
         polygones = carte.getPolygonesRegions();
         
         for (Polygon p : afficherInfosPays ? carte.getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
-            g.setColor(this.getCouleurPolygone(p, Couleurs.infections));
+            if (afficherCouleurs == 1)
+                {
+                    g.setColor(this.getCouleurPolygone(p, Couleurs.infections));
+                }
+            if (afficherCouleurs == 2)
+                {
+                    g.setColor(this.getCouleurPolygone(p, Couleurs.sains));
+                }
+            if (afficherCouleurs == 3)
+                {
+                    g.setColor(this.getCouleurPolygone(p, Couleurs.morts));
+                }
+            if (afficherCouleurs == 4)
+                {
+                    g.setColor(this.getCouleurPolygone(p, Couleurs.immunisations));  
+                }   
             g.fillPolygon(p);
             this.paintLignes(g, Color.black, p);
         }
@@ -172,6 +188,29 @@ public class SimulationAfficheur extends Mode {
         afficherLiens = !afficherLiens;
     }
     
+    public void onSwapCouleurs() {
+        if (afficherCouleurs == 1)
+            {
+                afficherCouleurs = 2;
+                return;
+            }
+        if (afficherCouleurs == 2)
+            {
+                afficherCouleurs = 3;
+                return;
+            }
+        if (afficherCouleurs == 3)
+            {
+                afficherCouleurs = 4; 
+                return;
+            }
+        if (afficherCouleurs == 4)
+            {
+                afficherCouleurs = 1;
+                return;
+            }   
+    }
+    
     public int getPaysSelectionne() {
         return indexSelectionne;
     }
@@ -235,13 +274,43 @@ public class SimulationAfficheur extends Mode {
     private Color getCouleurPolygone(Polygon p, Color color) {
         Pays pays = carte.getPays(p);
         float pourcent = 1;
-        
+   
         if (afficherInfosPays) {
-            pourcent = pays.getPourcentageInfectee() / 100f;
+            if (afficherCouleurs == 1)
+                {
+                    pourcent = pays.getPourcentageInfectee() / 100f;
+                }
+            if (afficherCouleurs == 2)
+                {
+                    pourcent = pays.getPourcentageSaine() / 100f;
+                }
+            if (afficherCouleurs == 3)
+                {
+                    pourcent = pays.getPourcentageDecedee() / 100f;
+                }
+            if (afficherCouleurs == 4)
+                {
+                    pourcent = pays.getPourcentageImmunisee() / 100f;   
+                }   
         }
         else {
             Region region = pays.getRegion(p);
-            pourcent = region.getPourcentageInfectee() / 100f;
+            if (afficherCouleurs == 1)
+                {
+                    pourcent = region.getPourcentageInfectee() / 100f;
+                }
+            if (afficherCouleurs == 2)
+                {
+                    pourcent = region.getPourcentageSaine() / 100f;
+                }
+            if (afficherCouleurs == 3)
+                {
+                    pourcent = region.getPourcentageDecedee() / 100f;
+                }
+            if (afficherCouleurs == 4)
+                {
+                    pourcent = region.getPourcentageImmune() / 100f;    
+                }                 
         }
         
         Color c1 = Couleurs.remplissageNoTransp;

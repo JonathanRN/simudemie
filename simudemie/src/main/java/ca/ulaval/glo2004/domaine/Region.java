@@ -34,7 +34,11 @@ public class Region implements Externalizable {
     
     public Region(Polygon polygone) {
         this.polygone = new Polygon(polygone.xpoints, polygone.ypoints, polygone.npoints);
-        setPopTotale(100000);
+    }
+    
+        public Region(Polygon polygone, int popSaine) {
+        this.polygone = new Polygon(polygone.xpoints, polygone.ypoints, polygone.npoints);
+        this.populationSaine = popSaine;
     }
 
     public Region(Region region) {

@@ -135,14 +135,19 @@ public class CreationCartePanel extends ZoomablePanel {
         polygones.add(index, divise.getGauche());
         polygones.add(index + 1, divise.getDroit());
 
-        Region regionGauche = new Region(divise.getGauche());
-        Region regionDroite = new Region(divise.getDroit());
+        int popPaysInitiale = pays.getPopTotale();
+        int nbRegions = pays.getListeRegions().size()+1;
+        int nbPopSaine = (int)(popPaysInitiale / nbRegions);
+        
+        Region regionGauche = new Region(divise.getGauche(), nbPopSaine);
+        Region regionDroite = new Region(divise.getDroit(), nbPopSaine);
         
         pays.ajouterRegion(regionGauche);
         pays.ajouterRegion(regionDroite);
         
         pays.retirerRegion(pays.getRegions().stream().filter(x -> x.getPolygone().equals(p)).findFirst().get());
         
+
         sauvegarderEtat("Séparation " + pays.getNom());
     }
     

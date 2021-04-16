@@ -443,7 +443,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         ObjetSimulationVaccin panel = addVaccin(null);
         
         // On veut créer le vaccin immédiatement, mais seulement quand on appuie +
-        panel.sauvegarderVaccin();
+        //panel.sauvegarderVaccin();
     }//GEN-LAST:event_AjouterVaccinsMouseReleased
 
     private void ExportStatsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportStatsMouseEntered

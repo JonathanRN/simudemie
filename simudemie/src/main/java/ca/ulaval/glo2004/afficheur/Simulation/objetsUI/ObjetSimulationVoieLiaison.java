@@ -20,8 +20,6 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
     public ObjetSimulationVoieLiaison() {
         initComponents();
         
-        VoieLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
-        
         updateIcon();
     }
     
@@ -32,7 +30,7 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
         }
         
         VoieLabel.setText(texte);
-        VoieIcon.setIcon(new ImageIcon(getClass().getResource("/icons/simulation/lien/" + type + ".png")));        
+        VoieIcon1.setIcon(new ImageIcon(getClass().getResource("/icons/simulation/lien/" + type + ".png")));        
     }
     
     private void updateIcon() {
@@ -51,9 +49,16 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        TransmissionInterRegionLabel = new javax.swing.JLabel();
+        TransmissionInterRegion = new javax.swing.JSpinner();
+        jPanel1 = new javax.swing.JPanel();
         Activer = new javax.swing.JLabel();
         VoieLabel = new javax.swing.JLabel();
-        VoieIcon = new javax.swing.JLabel();
+        VoieIcon1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        TransmissionLabel = new javax.swing.JLabel();
+        Transmission = new javax.swing.JSpinner();
 
         setOpaque(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -67,21 +72,56 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
                 formMouseReleased(evt);
             }
         });
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
+        setLayout(new java.awt.GridLayout(5, 0));
+
+        jPanel2.setOpaque(false);
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
+        TransmissionInterRegionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+        TransmissionInterRegionLabel.setText("Prob. transmission inter-région :");
+        TransmissionInterRegionLabel.setMaximumSize(new java.awt.Dimension(200, 19));
+        TransmissionInterRegionLabel.setMinimumSize(new java.awt.Dimension(200, 19));
+        TransmissionInterRegionLabel.setPreferredSize(new java.awt.Dimension(200, 19));
+        jPanel2.add(TransmissionInterRegionLabel);
+
+        TransmissionInterRegion.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 99.9d, 0.5d));
+        jPanel2.add(TransmissionInterRegion);
+
+        add(jPanel2);
+
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
         Activer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Activer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simulation/mesure/unchecked.png"))); // NOI18N
         Activer.setMaximumSize(new java.awt.Dimension(50, 50));
         Activer.setMinimumSize(new java.awt.Dimension(50, 50));
         Activer.setPreferredSize(new java.awt.Dimension(50, 50));
-        add(Activer);
+        jPanel1.add(Activer);
 
-        VoieLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        VoieLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         VoieLabel.setText("Voie Terrestre");
         VoieLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 20));
         VoieLabel.setPreferredSize(new java.awt.Dimension(50, 16));
-        add(VoieLabel);
-        add(VoieIcon);
+        jPanel1.add(VoieLabel);
+        jPanel1.add(VoieIcon1);
+
+        add(jPanel1);
+
+        jPanel3.setOpaque(false);
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+
+        TransmissionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+        TransmissionLabel.setText("Probabilité de transmission :");
+        TransmissionLabel.setMaximumSize(new java.awt.Dimension(200, 19));
+        TransmissionLabel.setMinimumSize(new java.awt.Dimension(200, 19));
+        TransmissionLabel.setPreferredSize(new java.awt.Dimension(200, 19));
+        jPanel3.add(TransmissionLabel);
+
+        Transmission.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 99.9d, 0.5d));
+        jPanel3.add(Transmission);
+
+        add(jPanel3);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
@@ -105,7 +145,14 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Activer;
-    private javax.swing.JLabel VoieIcon;
+    private javax.swing.JSpinner Transmission;
+    private javax.swing.JSpinner TransmissionInterRegion;
+    private javax.swing.JLabel TransmissionInterRegionLabel;
+    private javax.swing.JLabel TransmissionLabel;
+    private javax.swing.JLabel VoieIcon1;
     private javax.swing.JLabel VoieLabel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

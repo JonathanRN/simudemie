@@ -96,8 +96,9 @@ public class Region implements Externalizable {
     
     public void vaccinerPopulation(double taux, double vaccinationParJour)
     {
-        int nouveauxImmune = (int)(this.getPopSaine() * taux * vaccinationParJour);
+        int nouveauxImmune = (int)(this.getPopSaine() * taux/100 * vaccinationParJour/100);
         this.setPopImmune(this.getPopImmunisee() + nouveauxImmune);
+        this.setPopSaine(this.getPopSaine()- nouveauxImmune);
     }
     
     public String getNom(){return nom;}

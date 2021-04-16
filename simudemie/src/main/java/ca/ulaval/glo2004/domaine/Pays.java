@@ -41,10 +41,10 @@ public class Pays implements Externalizable {
             this.listeRegions.add(new Region(region));
         }
         
-//      this.vaccins.clear();
-//      for (Vaccin vaccin : pays.vaccins) {
-//          this.vaccins.add(new Vaccin(vaccin));
-//      }
+      this.vaccins.clear();
+      for (Vaccin vaccin : pays.vaccins) {
+          this.vaccins.add(new Vaccin(vaccin));
+      }
     }
     
     
@@ -74,7 +74,7 @@ public class Pays implements Externalizable {
         
         contaminerInterRegions();
         seuilAtteint();
-        //vaccination();
+        vaccination();
     }
     
     public void seuilAtteint(){

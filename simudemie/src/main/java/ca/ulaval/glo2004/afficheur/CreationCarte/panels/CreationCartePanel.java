@@ -122,7 +122,7 @@ public class CreationCartePanel extends ZoomablePanel {
     public void ajouterLien(VoieLiaison voie) {
         creationCarte.getCarte().ajouterVoie(voie);
         
-        sauvegarderEtat("Ajout lien");
+        sauvegarderEtat("Ajout lien " + voie.getType().name() + ", " + voie.getPaysOrigine().getNom() + " -> " + voie.getPaysDestination().getNom());
     }
     
     public void splitPays(Polygon p, PolygoneDivise divise) {

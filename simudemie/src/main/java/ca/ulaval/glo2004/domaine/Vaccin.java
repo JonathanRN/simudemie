@@ -17,18 +17,18 @@ public class Vaccin implements Externalizable {
     private String nom;
     private double tauxImmunisation;
     private double tauxAdhesion = 1.0;
-    private int vaccinationQuotidienne;
+    private double vaccinationQuotidienne;
     private boolean active;    
     
     public Vaccin() {}
     
-    public Vaccin(String nom, double tauxImmunisation, int vaccinationQuotidienne) {
+    public Vaccin(String nom, double tauxImmunisation, double vaccinationQuotidienne) {
         this.nom = nom;
         this.tauxImmunisation = tauxImmunisation;
         this.vaccinationQuotidienne = vaccinationQuotidienne;
     }
     
-    public Vaccin(String nom, double tauxImmunisation, double tauxAdhesion, int vaccinationQuotidienne, boolean active) {
+    public Vaccin(String nom, double tauxImmunisation, double tauxAdhesion, double vaccinationQuotidienne, boolean active) {
         this.nom = nom;
         this.tauxImmunisation = tauxImmunisation;
         this.tauxAdhesion = tauxAdhesion;
@@ -50,7 +50,7 @@ public class Vaccin implements Externalizable {
 
     public double getTauxAdhesion() {return tauxAdhesion;}
 
-    public int getVaccinationQuotidienne() {return vaccinationQuotidienne;}
+    public double getVaccinationQuotidienne() {return vaccinationQuotidienne;}
     
     public boolean getActive() {return active;}
     
@@ -60,7 +60,7 @@ public class Vaccin implements Externalizable {
 
     public void setTauxAdhesion(double tauxAdhesion) {this.tauxAdhesion = tauxAdhesion;}
 
-    public void setVaccinationQuotidienne(int vaccinationQuotidienne) {this.vaccinationQuotidienne = vaccinationQuotidienne;}
+    public void setVaccinationQuotidienne(double vaccinationQuotidienne) {this.vaccinationQuotidienne = vaccinationQuotidienne;}
     
     public void setActive(boolean active) {this.active = active;}
 
@@ -69,7 +69,7 @@ public class Vaccin implements Externalizable {
         out.writeUTF(nom);
         out.writeDouble(tauxImmunisation);
         out.writeDouble(tauxAdhesion);
-        out.writeInt(vaccinationQuotidienne);
+        out.writeDouble(vaccinationQuotidienne);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class Vaccin implements Externalizable {
         nom = in.readUTF();
         tauxImmunisation = in.readDouble();
         tauxAdhesion = in.readDouble();
-        vaccinationQuotidienne = in.readInt();
+        vaccinationQuotidienne = in.readDouble();
     }
     
     

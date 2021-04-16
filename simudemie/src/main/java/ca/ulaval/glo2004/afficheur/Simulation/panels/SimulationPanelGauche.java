@@ -17,6 +17,7 @@ import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Mesure;
 import ca.ulaval.glo2004.domaine.Vaccin;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.util.ArrayList;
@@ -132,7 +133,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     ConteneurVaccinsPanel.getParent().validate();
     ConteneurVaccinsPanel.getRootPane().repaint();
 
-    for (Vaccin v : simulation.getScenario().getCarteJourCourant().getPays(indexPays).getVaccins()) {
+    for (Vaccin v : GestionnaireScenario.getInstance().getVaccins(indexPays)) {
             addVaccin(v);
         }
     }
@@ -179,7 +180,6 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     }
     
     private ObjetSimulationVaccin addVaccin(Vaccin vaccin) {
-        
         ObjetSimulationVaccin panel = new ObjetSimulationVaccin(ConteneurVaccinsPanel, this, ConteneurVaccinsPanel.getComponentCount());
         if(vaccin != null) {
             panel.chargerVaccin(new Vaccin(vaccin));

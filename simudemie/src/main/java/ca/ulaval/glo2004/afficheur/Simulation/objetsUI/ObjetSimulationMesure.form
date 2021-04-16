@@ -162,10 +162,10 @@
               <Dimension value="[200, 19]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 19]"/>
+              <Dimension value="[130, 19]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 19]"/>
+              <Dimension value="[130, 19]"/>
             </Property>
           </Properties>
           <Constraints>
@@ -205,10 +205,10 @@
               <Dimension value="[200, 19]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 19]"/>
+              <Dimension value="[130, 19]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 19]"/>
+              <Dimension value="[130, 19]"/>
             </Property>
           </Properties>
           <Constraints>
@@ -248,10 +248,10 @@
               <Dimension value="[200, 19]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 19]"/>
+              <Dimension value="[130, 19]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 19]"/>
+              <Dimension value="[130, 19]"/>
             </Property>
           </Properties>
           <Constraints>

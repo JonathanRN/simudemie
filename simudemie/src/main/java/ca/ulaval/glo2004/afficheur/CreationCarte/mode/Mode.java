@@ -189,6 +189,24 @@ public class Mode {
         }
         return areaSegments;
     }
+    
+    protected Point getCentrePolygone(Polygon p) {
+        double x = 0.;
+        double y = 0.;
+        for (int i = 0; i < p.npoints; i++){
+            x += p.xpoints[i];
+            y += p.ypoints[i];
+        }
+
+        x = x / p.npoints;
+        y = y / p.npoints;
+
+        return new Point((int)x, (int)y);
+    }
+    
+    protected Point getCentreLigne(Line2D.Double line) {
+        return new Point(((int)line.x1 + (int)line.x2) / 2, ((int)line.y1 + (int)line.y2) / 2);
+    }
 
     protected void updateHighlight(Point point) {
         highlight = null;

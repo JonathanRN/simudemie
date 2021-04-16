@@ -16,6 +16,8 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
+import java.awt.geom.Line2D;
+import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 import java.text.ParseException;
 import java.util.stream.Collectors;
@@ -33,6 +35,8 @@ public class Selection extends Mode {
     private final int boundsOffset = 100;
     private Rectangle2D intersection;
     private int snapPosition;
+    private Pays snapOrigine;
+    private Pays snapDestination;
         
     public Selection(CreationCarte panel) {
         this.setCreationCarte(panel);
@@ -108,6 +112,21 @@ public class Selection extends Mode {
                         translateDraggedRegions(0, (int)intersection.getMinY() - (int)dragged.getBounds2D().getMinY());
                         break;
                 }
+                
+                // Ajouter un lien terrestre, seulement s'il en a pas
+                Path2D.Double path = new Path2D.Double();
+                
+                Point centreOrg = this.getCentrePolygone(snapOrigine.getPolygone());
+                Point centreDest = this.getCentrePolygone(snapDestination.getPolygone());
+                
+                path.moveTo(centreOrg.x, centreOrg.y);
+                path.lineTo(centreDest.x, centreDest.y);
+                Point centreLigne = getCentreLigne(new Line2D.Double(centreOrg.x, centreOrg.y, centreDest.x, centreDest.y));
+                VoieLiaison voie = new VoieLiaison(VoieLiaison.TypeVoie.Terrestre, snapOrigine, snapDestination, path, centreLigne);
+                
+                // Important de call ajouter voie sur la carte directement, pour ne pas creer 2 sauvegardes pour rien
+                carte.ajouterVoie(voie);
+                
                 creationCarte.getPanel().sauvegarderEtat("Snap " + creationCarte.getCarte().getPays(dragged).getNom());
             }
             // Drag normal
@@ -131,6 +150,7 @@ public class Selection extends Mode {
             for (Pays p : carte.getListePays()) {
                 if (p.getPolygone().contains(point.x, point.y)) {
                     dragged = p.getPolygone();
+                    snapOrigine = p;
                 }
             }
         }
@@ -146,6 +166,7 @@ public class Selection extends Mode {
                     Rectangle2D largeBounds = new Rectangle((int)bounds.getX() - boundsOffset/2, (int)bounds.getY() - boundsOffset/2, (int)bounds.getWidth() + boundsOffset, (int)bounds.getHeight() + boundsOffset);
                     if (dragged.getBounds2D().intersects(largeBounds)) {
                         setCoteIntersection(largeBounds);
+                        snapDestination = p;
                     }
                 }
             }

@@ -109,6 +109,7 @@ public class VoieLiaison implements Externalizable {
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeObject(paysOrigine);
         out.writeObject(paysDestination);
+        out.writeDouble(tauxPropag);
         out.writeObject(type);
         out.writeObject(ligneCourbe);
         out.writeObject(centre);
@@ -119,6 +120,7 @@ public class VoieLiaison implements Externalizable {
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         paysOrigine = (Pays) in.readObject();
         paysDestination = (Pays) in.readObject();
+        tauxPropag = in.readDouble();
         type = (TypeVoie) in.readObject();
         ligneCourbe = (Path2D.Double) in.readObject();
         centre = (Point) in.readObject();

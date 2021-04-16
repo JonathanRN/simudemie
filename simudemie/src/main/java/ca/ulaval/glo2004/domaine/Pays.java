@@ -252,4 +252,19 @@ public class Pays implements Externalizable {
             vaccins.add((Vaccin) in.readObject());
         }
     }
+
+    public boolean estEgal(Pays pays) {
+        Polygon p2 = pays.getPolygone();
+        boolean equal = p2.npoints == polygone.npoints;
+        
+        for(int index = 0; index < p2.npoints && equal; index++) {
+            if(this.polygone.xpoints[index] != p2.xpoints[index] ||
+                    this.polygone.ypoints[index] != p2.ypoints[index]) {
+                equal = false;
+            }
+        }
+        
+        return equal;
+    }
+
 }

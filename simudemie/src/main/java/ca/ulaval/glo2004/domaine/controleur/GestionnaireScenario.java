@@ -86,11 +86,14 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         } else if(vaccinPays.getTauxImmunisation() ==  tauxImmunisation) {
             vaccinPays.setTauxAdhesion(tauxAdhesion);
             vaccinPays.setVaccinationQuotidienne(vaccinationQuotidienne);
+            // Si on veut un vaccin à la fois
+            /*
             if(active) {
                 for(Vaccin v : getCourant().getCarteJourCourant().getPays(indexPays).getVaccins()) {
                     v.setActive(false);
                 }
             }
+            */
             vaccinPays.setActive(active);
         } else {
             // Le taux d'immunisation a changé, on doit donc appliquer le nouveau taux à tous les pays

@@ -173,6 +173,10 @@ public class Carte implements Externalizable {
         return voies;
     }
     
+    public boolean peutSnapPays(Pays origine, Pays destination) {
+        return getVoiesDisponibles(origine, destination).contains(VoieLiaison.TypeVoie.Terrestre);
+    }
+    
     public Pays getPays(int index) {return listePays.get(index);}
     
     public Pays getPays(Polygon p) {

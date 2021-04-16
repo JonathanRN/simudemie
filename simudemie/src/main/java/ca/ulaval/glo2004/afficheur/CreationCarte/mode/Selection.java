@@ -113,19 +113,21 @@ public class Selection extends Mode {
                         break;
                 }
                 
-                // Ajouter un lien terrestre, seulement s'il en a pas
-                Path2D.Double path = new Path2D.Double();
-                
-                Point centreOrg = this.getCentrePolygone(snapOrigine.getPolygone());
-                Point centreDest = this.getCentrePolygone(snapDestination.getPolygone());
-                
-                path.moveTo(centreOrg.x, centreOrg.y);
-                path.lineTo(centreDest.x, centreDest.y);
-                Point centreLigne = getCentreLigne(new Line2D.Double(centreOrg.x, centreOrg.y, centreDest.x, centreDest.y));
-                VoieLiaison voie = new VoieLiaison(VoieLiaison.TypeVoie.Terrestre, snapOrigine, snapDestination, path, centreLigne);
-                
-                // Important de call ajouter voie sur la carte directement, pour ne pas creer 2 sauvegardes pour rien
-                carte.ajouterVoie(voie);
+                if (carte.peutSnapPays(snapOrigine, snapDestination)) {
+                    // Ajouter un lien terrestre, seulement s'il en a pas
+                    Path2D.Double path = new Path2D.Double();
+
+                    Point centreOrg = this.getCentrePolygone(snapOrigine.getPolygone());
+                    Point centreDest = this.getCentrePolygone(snapDestination.getPolygone());
+
+                    path.moveTo(centreOrg.x, centreOrg.y);
+                    path.lineTo(centreDest.x, centreDest.y);
+                    Point centreLigne = getCentreLigne(new Line2D.Double(centreOrg.x, centreOrg.y, centreDest.x, centreDest.y));
+                    VoieLiaison voie = new VoieLiaison(VoieLiaison.TypeVoie.Terrestre, snapOrigine, snapDestination, path, centreLigne);
+
+                    // Important de call ajouter voie sur la carte directement, pour ne pas creer 2 sauvegardes pour rien
+                    carte.ajouterVoie(voie);
+                }
                 
                 creationCarte.getPanel().sauvegarderEtat("Snap " + creationCarte.getCarte().getPays(dragged).getNom());
             }

@@ -14,8 +14,11 @@ import ca.ulaval.glo2004.domaine.Region;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Stack;
 import javax.swing.SwingUtilities;
@@ -67,6 +70,7 @@ public class CreationCartePanel extends ZoomablePanel {
     
     public void setCreationCarte(CreationCarte creationCarte) {
         this.creationCarte = creationCarte;
+        this.centrerVueSurPolygones(creationCarte.getCarte());
         
         // Il faut avoir l'etat initial
         sauvegarderEtat("");
@@ -215,6 +219,23 @@ public class CreationCartePanel extends ZoomablePanel {
         if (creationCarte != null) {
             creationCarte.getMode().paint(graphics);
         }        
+    }
+    
+    private void centrerVueSurPolygones(Carte carte) {
+        this.getParent().setVisible(!carte.getListePays().isEmpty());
+        
+        if (!carte.getListePays().isEmpty()) {
+            // Get les bounds du premier pays sur la carte
+            Rectangle2D rect = carte.getListePays().get(0).getPolygone().getBounds2D();
+
+            int x = (getWidth()/2) - (int)rect.getCenterX();
+            int y = (getHeight()/2) - (int)rect.getCenterY();
+
+            setZoom(1, new Point2D.Double(getWidth()/2, getHeight()/2));
+            setPos(new Point(x, y));
+        }
+        
+        repaint();
     }
 
     @SuppressWarnings("unchecked")

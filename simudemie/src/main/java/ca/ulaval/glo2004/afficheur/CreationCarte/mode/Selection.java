@@ -132,7 +132,7 @@ public class Selection extends Mode {
                 creationCarte.getPanel().sauvegarderEtat("Snap " + creationCarte.getCarte().getPays(dragged).getNom());
             }
             // Drag normal
-            else {
+            else if (initialDrag != null && updateDrag != null) {
                 int deltaX = initialDrag.x - updateDrag.x;
                 int deltaY = initialDrag.y - updateDrag.y;
                 if (deltaX != 0 && deltaY != 0) {
@@ -173,7 +173,7 @@ public class Selection extends Mode {
                 }
             }
         }
-        
+                
         super.onMouseDragged(point);
     }
     
@@ -340,7 +340,6 @@ public class Selection extends Mode {
     private void translateDraggedRegions(int x, int y) {
         // Il faut parcourir toutes les regions du pays pour le deplacer
         Pays pays = creationCarte.getCarte().getPays(dragged);
-        pays.getPolygone().translate(x, y);
         for (Polygon region : pays.getRegions().stream().map(a -> a.getPolygone()).collect(Collectors.toList())) {
             region.translate(x, y);
         }

@@ -66,11 +66,9 @@ public class LienPays extends Mode {
             g.draw(path);          
         }
         
+        super.paint(g);
+        
         for (int i = 0; i < voies.size(); i++) {
-            g.setColor(voies.get(i).getCouleur());
-            g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
-            g.draw(voies.get(i).getLigne());
-            
             g.setColor(Couleurs.blanc);
             g.fillOval((int)points.get(i).x - taillePoint/2, (int)points.get(i).y - taillePoint/2, taillePoint, taillePoint);
         }
@@ -84,8 +82,6 @@ public class LienPays extends Mode {
             g.setColor(Couleurs.selectionneBorder);
             g.fillOval(pointSelectionne.x - taillePoint/2, pointSelectionne.y - taillePoint/2, taillePoint, taillePoint);
         }
-        
-        super.paint(g);
     }
 
     @Override
@@ -212,7 +208,8 @@ public class LienPays extends Mode {
         creationCarte.getInformationsPanel().add(panel, BorderLayout.NORTH);
         
         // Update toutes les voies dans le cas ou les points on bouges
-        recalculeVoies();
+        updateVoies();
+        updatePoints();
     }
 
     @Override
@@ -225,7 +222,8 @@ public class LienPays extends Mode {
     @Override
     public void onRedo() {
         super.onRedo();
-        recalculeVoies();
+        updateVoies();
+        updatePoints();
     }
 
     @Override
@@ -236,21 +234,6 @@ public class LienPays extends Mode {
             creationCarte.getInformationsPanel().setVisible(false);
             pointSelectionne = null;
         }
-        recalculeVoies();
-    }
-    
-    private void recalculeVoies() {
-        for (VoieLiaison voie : carte.getVoies()) {
-            Path2D.Double ligne = new Path2D.Double();
-            Point centreOrigine = getCentrePolygone(voie.getPaysOrigine().getPolygone());
-            Point centreDestination = getCentrePolygone(voie.getPaysDestination().getPolygone());
-            
-            ligne.moveTo(centreOrigine.x, centreOrigine.y);
-            ligne.curveTo(voie.getCentre().x, voie.getCentre().y, voie.getCentre().x, voie.getCentre().y, centreDestination.x, centreDestination.y);
-
-            voie.setLigne(ligne);
-        }
-        
         updateVoies();
         updatePoints();
     }

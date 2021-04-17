@@ -8,6 +8,7 @@ package ca.ulaval.glo2004.afficheur.CreationCarte.mode;
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Carte;
+import ca.ulaval.glo2004.domaine.VoieLiaison;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -15,6 +16,7 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Line2D;
+import java.awt.geom.Path2D;
 import java.awt.geom.PathIterator;
 import java.util.ArrayList;
 
@@ -47,6 +49,13 @@ public class Mode {
         }
         
         paintLignes(g, Color.red, lignesInvalides);
+        
+        recalculeVoies();
+        for (int i = 0; i < carte.getVoies().size(); i++) {
+            g.setColor(carte.getVoies().get(i).getCouleur());
+            g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
+            g.draw(carte.getVoies().get(i).getLigne());
+        }
     }
     
     public void onActive() {
@@ -86,6 +95,19 @@ public class Mode {
     public boolean estPolygoneValide(Polygon g) {
         updateLignesInvalides(g);
         return lignesInvalides.isEmpty();
+    }
+    
+    protected void recalculeVoies() {
+        for (VoieLiaison voie : carte.getVoies()) {
+            Path2D.Double ligne = new Path2D.Double();
+            Point centreOrigine = getCentrePolygone(voie.getPaysOrigine().getPolygone());
+            Point centreDestination = getCentrePolygone(voie.getPaysDestination().getPolygone());
+            
+            ligne.moveTo(centreOrigine.x, centreOrigine.y);
+            ligne.curveTo(voie.getCentre().x, voie.getCentre().y, voie.getCentre().x, voie.getCentre().y, centreDestination.x, centreDestination.y);
+
+            voie.setLigne(ligne);
+        }
     }
     
     protected void paintPointPolygone(Graphics2D g, Polygon p) {

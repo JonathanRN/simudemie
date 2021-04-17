@@ -158,7 +158,10 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         CuredInput = new javax.swing.JSpinner();
         DeadLabel = new javax.swing.JLabel();
         DeadInput = new javax.swing.JSpinner();
+        IncubationParent = new javax.swing.JPanel();
         IncubationLabel = new javax.swing.JLabel();
+        IncubationAideParent = new javax.swing.JPanel();
+        IncubationAide = new javax.swing.JLabel();
         IncubationInput = new javax.swing.JSpinner();
         ImmunizationLabel = new javax.swing.JLabel();
         ImmunizationCheckbox = new javax.swing.JCheckBox();
@@ -219,9 +222,25 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         DeadInput.setMaximumSize(new java.awt.Dimension(64, 22));
         Parent.add(DeadInput);
 
+        IncubationParent.setOpaque(false);
+        IncubationParent.setLayout(new java.awt.BorderLayout());
+
         IncubationLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
         IncubationLabel.setText("Temps d'incubation (jours)");
-        Parent.add(IncubationLabel);
+        IncubationParent.add(IncubationLabel, java.awt.BorderLayout.WEST);
+
+        IncubationAideParent.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 0));
+        IncubationAideParent.setOpaque(false);
+        IncubationAideParent.setLayout(new java.awt.BorderLayout());
+
+        IncubationAide.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        IncubationAide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_help_20px.png"))); // NOI18N
+        IncubationAide.setToolTipText("TODO: CHANGER LE TOOLTIP DANS IncubationAide Label");
+        IncubationAideParent.add(IncubationAide, java.awt.BorderLayout.CENTER);
+
+        IncubationParent.add(IncubationAideParent, java.awt.BorderLayout.CENTER);
+
+        Parent.add(IncubationParent);
 
         IncubationInput.setModel(new javax.swing.SpinnerNumberModel(14, 0, 31, 1));
         Parent.add(IncubationInput);
@@ -229,7 +248,6 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         ImmunizationLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
         ImmunizationLabel.setText("Immunité suite à une première infection");
         Parent.add(ImmunizationLabel);
-        ImmunizationLabel.getAccessibleContext().setAccessibleName("Immunité suite à une première infection");
 
         ImmunizationCheckbox.setBackground(Couleurs.pannelArrondiNoTransp);
         ImmunizationCheckbox.setToolTipText("");
@@ -278,8 +296,11 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
     private javax.swing.JLabel DeadLabel;
     private javax.swing.JCheckBox ImmunizationCheckbox;
     private javax.swing.JLabel ImmunizationLabel;
+    private javax.swing.JLabel IncubationAide;
+    private javax.swing.JPanel IncubationAideParent;
     private javax.swing.JSpinner IncubationInput;
     private javax.swing.JLabel IncubationLabel;
+    private javax.swing.JPanel IncubationParent;
     private javax.swing.JSpinner InfectionInput;
     private javax.swing.JLabel InfectionLabel;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi Main;

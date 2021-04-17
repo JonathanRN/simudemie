@@ -33,13 +33,12 @@ public class Region implements Externalizable {
     public Region() {}
     
     public Region(Polygon polygone) {
-        //this.polygone = new Polygon(polygone.xpoints, polygone.ypoints, polygone.npoints);
         this.polygone = polygone;
         setPopTotale(1000000);
     }
     
-        public Region(Polygon polygone, int popSaine) {
-        this.polygone = new Polygon(polygone.xpoints, polygone.ypoints, polygone.npoints);
+    public Region(Polygon polygone, int popSaine) {
+        this.polygone = polygone;
         this.populationSaine = popSaine;
     }
 
@@ -55,7 +54,7 @@ public class Region implements Externalizable {
             this.listeInfections.add(infections);
         }
 
-        this.polygone = new Polygon(region.polygone.xpoints, region.polygone.ypoints, region.polygone.npoints);
+        this.polygone = region.polygone;
     }
     
     

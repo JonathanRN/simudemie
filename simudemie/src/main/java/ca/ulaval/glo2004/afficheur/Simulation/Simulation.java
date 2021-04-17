@@ -46,13 +46,6 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         toggleSimulationTabs(false);
         
         SimulationMenuDroit.setBackground(Couleurs.sideMenuLessTransp);
-                  
-        MaladieBouton.setBackground(Couleurs.sideMenuLessTransp);
-        TogglePaysRegion.setBackground(Couleurs.sideMenuLessTransp);
-        ToggleLiens.setBackground(Couleurs.sideMenuLessTransp);
-        ToggleCouleurs.setBackground(Couleurs.sideMenuLessTransp);
-        BoutonPhoto.setBackground(Couleurs.sideMenuLessTransp);
-        HomeBouton.setBackground(Couleurs.sideMenuLessTransp);
         
         initBoutonsGeneraux();
         
@@ -90,11 +83,6 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     
     public void toggleSimulationTabs(boolean actif) {
         SimulationMenuGauche.setVisible(actif);
-        //NomPays.setVisible(actif);
-    }
-    
-    public void setNomPays(String nom) {
-        //NomPays.setText("Pays : " + nom);
     }
     
     public SimulationPanelGauche getSimulationTabs() {

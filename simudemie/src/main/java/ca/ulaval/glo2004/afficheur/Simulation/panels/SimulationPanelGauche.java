@@ -20,21 +20,10 @@ import ca.ulaval.glo2004.domaine.Vaccin;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
 import ca.ulaval.glo2004.domaine.VoieLiaison.TypeVoie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
-import java.awt.BasicStroke;
-import java.awt.BorderLayout;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.util.ArrayList;
 import javax.swing.JLabel;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.block.BlockBorder;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -52,6 +41,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         try {
             initComponents();
             updateBoutonAjouter(false, AjouterMesure);
+            updateBoutonAjouter(false, AjouterVaccins);
             setBackground(Couleurs.sideMenuTransp);
             SidePanel.setBackground(Couleurs.sideMenuLessTransp);
             
@@ -162,76 +152,6 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         ConteneurStatsPanel.getRootPane().repaint();
         
         Scenario scenario = simulation.getScenario();
-        
-//        if (scenario == null) {
-//            return;
-//        }
-//        
-//        XYSeries infectes = new XYSeries("Infectés");
-//        for (int i = 0; i < scenario.getTotalJours(); i++) {
-//            infectes.add(i, scenario.getListeCartes().get(i).getPopulationInfectee());
-//        }
-//        
-//        XYSeries sains = new XYSeries("Sains");
-//        for (int i = 0; i < scenario.getTotalJours(); i++) {
-//            sains.add(i, scenario.getListeCartes().get(i).getPopulationSaine());
-//        }
-//        
-//        XYSeries decedes = new XYSeries("Décédés");
-//        for (int i = 0; i < scenario.getTotalJours(); i++) {
-//            decedes.add(i, scenario.getListeCartes().get(i).getPopulationDecedee());
-//        }
-//        
-//        XYSeries immunises = new XYSeries("Immunisés");
-//        for (int i = 0; i < scenario.getTotalJours(); i++) {
-//            immunises.add(i, scenario.getListeCartes().get(i).getPopulationImmune());
-//        }
-//        
-//        XYSeriesCollection collection = new XYSeriesCollection();
-//        collection.addSeries(infectes);
-//        collection.addSeries(sains);
-//        collection.addSeries(decedes);
-//        collection.addSeries(immunises);
-//                
-//        JFreeChart stats = ChartFactory.createXYLineChart(null, "Jours", "Population", collection, PlotOrientation.VERTICAL, true, true, false);
-//        stats.setBackgroundPaint(Couleurs.sideMenuTransp);
-//
-//        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-//        renderer.setSeriesPaint(0, Couleurs.infections);
-//        renderer.setSeriesPaint(1, Couleurs.sains);
-//        renderer.setSeriesPaint(2, Couleurs.morts);
-//        renderer.setSeriesPaint(3, Couleurs.immunisations);
-//        renderer.setSeriesStroke(0, new BasicStroke(2.0f));
-//        renderer.setSeriesStroke(1, new BasicStroke(2.0f));
-//        renderer.setSeriesStroke(2, new BasicStroke(2.0f));
-//        renderer.setSeriesStroke(3, new BasicStroke(2.0f));
-//
-//        XYPlot plot = stats.getXYPlot();
-//        plot.setRenderer(renderer);
-//        plot.setBackgroundPaint(Couleurs.sideMenuTransp);
-//        plot.setRangeGridlinesVisible(true);
-//        plot.setRangeGridlinePaint(Couleurs.blanc);
-//        plot.setDomainGridlinesVisible(true);
-//        plot.setDomainGridlinePaint(Couleurs.blanc);
-//        plot.getDomainAxis().setLabelFont(FontRegister.RobotoRegular.deriveFont(14f));
-//        plot.getDomainAxis().setTickLabelPaint(Couleurs.blanc);
-//        plot.getDomainAxis().setLabelPaint(Couleurs.blanc);
-//        plot.getRangeAxis().setLabelFont(FontRegister.RobotoRegular.deriveFont(14f));
-//        plot.getRangeAxis().setTickLabelPaint(Couleurs.blanc);
-//        plot.getRangeAxis().setLabelPaint(Couleurs.blanc);
-//
-//        stats.getLegend().setFrame(BlockBorder.NONE);
-//        stats.getLegend().setItemPaint(Couleurs.blanc);
-//        stats.getLegend().setBackgroundPaint(Couleurs.sideMenuTransp);
-//
-//        ChartPanel chartPanel = new ChartPanel(stats);
-//        chartPanel.setPopupMenu(null);
-//        chartPanel.setDomainZoomable(false);
-//        chartPanel.setRangeZoomable(false);
-//        chartPanel.setDisplayToolTips(false);
-//        
-//        ConteneurStatsPanel.add(chartPanel, BorderLayout.CENTER);
-//        ConteneurStatsPanel.validate();
     }
     
     public void onToggleClick(ToggleBouton toggle) {        

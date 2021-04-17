@@ -56,22 +56,22 @@ public class SimulationAfficheur extends Mode {
         polygones = carte.getPolygonesRegions();
         
         for (Polygon p : afficherInfosPays ? carte.getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
-            if (afficherCouleurs == 1)
-                {
-                    g.setColor(this.getCouleurPolygone(p, Couleurs.infections));
-                }
-            if (afficherCouleurs == 2)
-                {
-                    g.setColor(this.getCouleurPolygone(p, Couleurs.sains));
-                }
-            if (afficherCouleurs == 3)
-                {
-                    g.setColor(this.getCouleurPolygone(p, Couleurs.morts));
-                }
-            if (afficherCouleurs == 4)
-                {
-                    g.setColor(this.getCouleurPolygone(p, Couleurs.immunisations));  
-                }   
+            Color couleur = Couleurs.infections;
+            switch (afficherCouleurs) {
+                case 1:
+                   couleur = Couleurs.infections;
+                    break;
+                case 2:
+                   couleur = Couleurs.sains;
+                    break;
+                case 3:
+                   couleur = Couleurs.morts;
+                    break;
+                case 4:
+                   couleur = Couleurs.immunisations;
+                    break;
+            }
+            g.setColor(this.getCouleurPolygone(p, couleur));
             g.fillPolygon(p);
             this.paintLignes(g, Color.black, p);
         }
@@ -189,26 +189,10 @@ public class SimulationAfficheur extends Mode {
     }
     
     public void onSwapCouleurs() {
-        if (afficherCouleurs == 1)
-            {
-                afficherCouleurs = 2;
-                return;
-            }
-        if (afficherCouleurs == 2)
-            {
-                afficherCouleurs = 3;
-                return;
-            }
-        if (afficherCouleurs == 3)
-            {
-                afficherCouleurs = 4; 
-                return;
-            }
-        if (afficherCouleurs == 4)
-            {
-                afficherCouleurs = 1;
-                return;
-            }   
+        afficherCouleurs++;
+        if (afficherCouleurs > 4) {
+            afficherCouleurs = 1;
+        }
     }
     
     public int getPaysSelectionne() {

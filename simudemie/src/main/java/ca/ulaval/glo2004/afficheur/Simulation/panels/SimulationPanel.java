@@ -156,16 +156,18 @@ public class SimulationPanel extends ZoomablePanel {
     }//GEN-LAST:event_formMouseDragged
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
-        if (evt.getKeyCode() == KeyEvent.VK_Q) {
-            afficheur.onSwapInformations();
-            repaint();
-        } else if(evt.getKeyCode() == KeyEvent.VK_W) {
-            afficheur.onSwapLinks();
-            repaint();
-        } else if(evt.getKeyCode() == KeyEvent.VK_E) {
-            afficheur.onSwapCouleurs();
-            repaint();
+        switch (evt.getKeyCode()) {
+            case KeyEvent.VK_Q:
+                afficheur.onSwapInformations();
+                break;
+            case KeyEvent.VK_W:
+                afficheur.onSwapLinks();
+                break;
+            case KeyEvent.VK_E:
+                afficheur.onSwapCouleurs();
+                break;
         }
+        repaint();
     }//GEN-LAST:event_formKeyReleased
 
 

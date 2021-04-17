@@ -7,7 +7,6 @@ package ca.ulaval.glo2004.afficheur.boutons;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
-import java.awt.Color;
 
 /**
  *
@@ -17,7 +16,7 @@ public class SimulationBouton extends PanelArrondi {
 
     public SimulationBouton() {
         initComponents();
-        setBackground(Couleurs.invisible);
+        super.setBackground(Couleurs.invisible);
     }
     
     public void setIcon(String path) {

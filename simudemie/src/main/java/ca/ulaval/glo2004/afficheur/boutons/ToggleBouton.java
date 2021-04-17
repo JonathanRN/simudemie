@@ -22,23 +22,18 @@ public class ToggleBouton extends PanelArrondi {
     private Mode mode;
     private CreationCarte creation;
     private SimulationPanelGauche simulationTabs;
-    private final Color invisible, selectionne;
     private boolean mouseOver;
     private boolean estToggle;
     private boolean actif;
     
     public ToggleBouton() {
         initComponents();
-        invisible = Couleurs.invisible;
-        selectionne = Couleurs.pannelArrondi;
-        setBackground(invisible);
         setActif(true);
     }
     
     public void init(CreationCarte creation, Mode mode, String path) {
         this.creation = creation;
-        this.mode = mode;
-        
+        this.mode = mode;        
         setIcon("/icons/" + path + ".png");
     }
     
@@ -59,9 +54,9 @@ public class ToggleBouton extends PanelArrondi {
     
     public void setToggle(boolean toggle) {
         estToggle = toggle;
-        Color couleur = invisible;
+        Color couleur = Couleurs.invisible;
         if (toggle || mouseOver) {
-            couleur = selectionne;
+            couleur = Couleurs.pannelArrondi;
         }
         
         setBackground(couleur);
@@ -80,7 +75,6 @@ public class ToggleBouton extends PanelArrondi {
 
         BoutonLabel = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(90, 95, 104));
         setMaximumSize(new java.awt.Dimension(50, 50));
         setMinimumSize(new java.awt.Dimension(50, 50));
         setPreferredSize(new java.awt.Dimension(50, 50));
@@ -105,14 +99,14 @@ public class ToggleBouton extends PanelArrondi {
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
         mouseOver = true;
         if (!estToggle && actif) {
-            setBackground(selectionne);
+            setBackground(Couleurs.pannelArrondi);
         }
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
         mouseOver = false;
         if (!estToggle && actif) {
-            setBackground(invisible);
+            setBackground(Couleurs.invisible);
         }
     }//GEN-LAST:event_formMouseExited
 

@@ -227,8 +227,9 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         Parent.add(IncubationInput);
 
         ImmunizationLabel.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        ImmunizationLabel.setText("Possibilité d'immunisation");
+        ImmunizationLabel.setText("Immunité suite à une première infection");
         Parent.add(ImmunizationLabel);
+        ImmunizationLabel.getAccessibleContext().setAccessibleName("Immunité suite à une première infection");
 
         ImmunizationCheckbox.setBackground(Couleurs.pannelArrondiNoTransp);
         ImmunizationCheckbox.setToolTipText("");

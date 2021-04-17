@@ -167,8 +167,11 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="FontRegister.RobotoThin.deriveFont(15f)" type="code"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Possibilit&#xe9; d&apos;immunisation"/>
+                <Property name="text" type="java.lang.String" value="Immunit&#xe9; suite &#xe0; une premi&#xe8;re infection"/>
               </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Immunit&#xe9; suite &#xe0; une premi&#xe8;re infection"/>
+              </AccessibilityProperties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="ImmunizationCheckbox">
               <Properties>

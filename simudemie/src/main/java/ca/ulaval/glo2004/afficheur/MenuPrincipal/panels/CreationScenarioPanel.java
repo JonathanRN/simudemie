@@ -46,15 +46,16 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
             ongletScenarioCarte = new OngletCreationScenarioCarte();
             ongletScenarioMaladie = new OngletCreationScenarioMaladie();
 
+            SimulationInput.setFont(FontRegister.RobotoRegular.deriveFont(18f));
             setBackground(Couleurs.fondNoir);
-            BackgroundArrondi.setBackground(Couleurs.bg);
-            ConteneurCartesPanel.setBackground(Couleurs.bg);
-            ConteneurMaladiesPanel.setBackground(Couleurs.bg);
+            BackgroundArrondi.setBackground(Couleurs.pannelArrondi);
+            ConteneurCartesPanel.setBackground(Couleurs.pannelArrondiNoTransp);
+            ConteneurMaladiesPanel.setBackground(Couleurs.pannelArrondiNoTransp);
 
             AnnulerBouton.setFont(FontRegister.RobotoRegular.deriveFont(15f));
-            AnnulerBouton.setBackground(Couleurs.bg);
+            AnnulerBouton.setBackground(Couleurs.pannelArrondiNoTransp);
             CreerBouton.setFont(FontRegister.RobotoRegular.deriveFont(15f));
-            CreerBouton.setBackground(Couleurs.bg);
+            CreerBouton.setBackground(Couleurs.pannelArrondiNoTransp);
 
             CartesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
             MaladiesScrollPane.getVerticalScrollBar().setUnitIncrement(20);
@@ -62,6 +63,8 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
             // Gestion pour le bogue de refresh sur le scroll
             CartesScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
             MaladiesScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
+            MaladiesScrollPane.setBackground(Couleurs.pannelArrondi);
+            CartesScrollPane.setBackground(Couleurs.pannelArrondi);
         }
         catch (Exception e) {
         }
@@ -186,10 +189,10 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
         CartesScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         CartesScrollPane.setMaximumSize(new java.awt.Dimension(75, 250));
         CartesScrollPane.setMinimumSize(new java.awt.Dimension(75, 250));
-        CartesScrollPane.setOpaque(false);
         CartesScrollPane.setPreferredSize(new java.awt.Dimension(75, 250));
 
-        ConteneurCartesPanel.setBackground(new java.awt.Color(46, 52, 64));
+        ConteneurCartesPanel.setBackground(Couleurs.pannelArrondi);
+        ConteneurCartesPanel.setOpaque(false);
         ConteneurCartesPanel.setLayout(new javax.swing.BoxLayout(ConteneurCartesPanel, javax.swing.BoxLayout.Y_AXIS));
         CartesScrollPane.setViewportView(ConteneurCartesPanel);
 
@@ -200,10 +203,10 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
         MaladiesScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         MaladiesScrollPane.setMaximumSize(new java.awt.Dimension(75, 250));
         MaladiesScrollPane.setMinimumSize(new java.awt.Dimension(75, 250));
-        MaladiesScrollPane.setOpaque(false);
         MaladiesScrollPane.setPreferredSize(new java.awt.Dimension(75, 250));
 
-        ConteneurMaladiesPanel.setBackground(new java.awt.Color(46, 52, 64));
+        ConteneurMaladiesPanel.setBackground(Couleurs.pannelArrondi);
+        ConteneurMaladiesPanel.setOpaque(false);
         ConteneurMaladiesPanel.setLayout(new javax.swing.BoxLayout(ConteneurMaladiesPanel, javax.swing.BoxLayout.Y_AXIS));
         MaladiesScrollPane.setViewportView(ConteneurMaladiesPanel);
 

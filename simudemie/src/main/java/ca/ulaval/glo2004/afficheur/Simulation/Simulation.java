@@ -63,6 +63,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         FFLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         CommenceLabel.setFont(FontRegister.RobotoLight.deriveFont(15f));
         CommenceLabel2.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        CommencePanel.setBackground(Couleurs.sideMenuTransp);
         
         SimulationPanel.setSimulation(this);
         

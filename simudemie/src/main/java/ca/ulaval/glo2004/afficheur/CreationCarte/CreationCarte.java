@@ -47,6 +47,7 @@ public class CreationCarte extends JPanel {
         InformationsPanel.setBackground(Couleurs.sideMenuTransp);
         InformationsPanel.setVisible(false);
         IndiceCommenceParent.setVisible(false);
+        IndiceCommencePanel.setBackground(Couleurs.sideMenuTransp);
         
         BoutonSelection.init(this, new Selection(this), "icons8_cursor_25px");
         BoutonCrayon.init(this, new Creation(this), "icons8_pen_25px");

@@ -33,15 +33,18 @@ public class InformationsLienPanel extends javax.swing.JPanel implements ActionL
         this.lienPays = lienPays;
         initComponents();
         
-        InformationsLienLabel.setFont(FontRegister.RobotoLight.deriveFont(17f));
-        OrigineLienLabel.setFont(FontRegister.RobotoLight.deriveFont(15f));
-        DestinationLienLabel.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        InformationsLienLabel.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        OrigineLienLabel.setFont(FontRegister.RobotoLight.deriveFont(13f));
+        DestinationLienLabel.setFont(FontRegister.RobotoLight.deriveFont(13f));
+        TypeLienLabel.setFont(FontRegister.RobotoLight.deriveFont(13f));
+        ChoisirLienLabel.setFont(FontRegister.RobotoLight.deriveFont(13f));
     }
     
     public void setLien(VoieLiaison lien) {
         this.lien = lien;
         OrigineLienLabel.setText("Origine : " + lien.getPaysOrigine().getNom());
         DestinationLienLabel.setText("Dest. : " + lien.getPaysDestination().getNom());
+        TypeLienLabel.setText("Type : " + lien.getType());
         
         // Supprime tous anciens
         BoutonsLiens.removeAll();
@@ -107,23 +110,29 @@ public class InformationsLienPanel extends javax.swing.JPanel implements ActionL
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        InformationsLiens = new javax.swing.JPanel();
         InformationsLienLabel = new javax.swing.JLabel();
+        InformationsLiens = new javax.swing.JPanel();
         OrigineLienLabel = new javax.swing.JLabel();
         DestinationLienLabel = new javax.swing.JLabel();
+        TypeLienLabel = new javax.swing.JLabel();
+        ChangerTypePanel = new javax.swing.JPanel();
+        ChoisirLienLabel = new javax.swing.JLabel();
         BoutonsLiens = new javax.swing.JPanel();
+        BoutonRetirerPanel = new javax.swing.JPanel();
         SupprimeBouton = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
+        setMinimumSize(new java.awt.Dimension(113, 310));
         setOpaque(false);
-        setLayout(new java.awt.BorderLayout(0, 20));
-
-        InformationsLiens.setOpaque(false);
-        InformationsLiens.setLayout(new java.awt.GridLayout(3, 0, 0, 10));
+        setPreferredSize(new java.awt.Dimension(113, 310));
+        setLayout(new java.awt.GridLayout(5, 1, 0, 10));
 
         InformationsLienLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         InformationsLienLabel.setText("Informations Lien");
-        InformationsLiens.add(InformationsLienLabel);
+        add(InformationsLienLabel);
+
+        InformationsLiens.setOpaque(false);
+        InformationsLiens.setLayout(new java.awt.GridLayout(3, 0));
 
         OrigineLienLabel.setText("Origine : ");
         InformationsLiens.add(OrigineLienLabel);
@@ -131,12 +140,27 @@ public class InformationsLienPanel extends javax.swing.JPanel implements ActionL
         DestinationLienLabel.setText("Dest. :");
         InformationsLiens.add(DestinationLienLabel);
 
-        add(InformationsLiens, java.awt.BorderLayout.NORTH);
+        TypeLienLabel.setText("Type :");
+        InformationsLiens.add(TypeLienLabel);
+
+        add(InformationsLiens);
+
+        ChangerTypePanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 1, 1, 1));
+        ChangerTypePanel.setOpaque(false);
+        ChangerTypePanel.setLayout(new java.awt.BorderLayout());
+
+        ChoisirLienLabel.setText("Changer de type :");
+        ChangerTypePanel.add(ChoisirLienLabel, java.awt.BorderLayout.CENTER);
+
+        add(ChangerTypePanel);
 
         BoutonsLiens.setFocusable(false);
         BoutonsLiens.setOpaque(false);
-        BoutonsLiens.setLayout(new java.awt.GridLayout(3, 0, 0, 5));
-        add(BoutonsLiens, java.awt.BorderLayout.CENTER);
+        BoutonsLiens.setLayout(new java.awt.GridLayout(2, 0, 0, 5));
+        add(BoutonsLiens);
+
+        BoutonRetirerPanel.setOpaque(false);
+        BoutonRetirerPanel.setLayout(new java.awt.BorderLayout());
 
         SupprimeBouton.setText("Retirer Lien");
         SupprimeBouton.setFocusable(false);
@@ -145,7 +169,9 @@ public class InformationsLienPanel extends javax.swing.JPanel implements ActionL
                 SupprimeBoutonMouseReleased(evt);
             }
         });
-        add(SupprimeBouton, java.awt.BorderLayout.SOUTH);
+        BoutonRetirerPanel.add(SupprimeBouton, java.awt.BorderLayout.SOUTH);
+
+        add(BoutonRetirerPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void SupprimeBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupprimeBoutonMouseReleased
@@ -154,11 +180,15 @@ public class InformationsLienPanel extends javax.swing.JPanel implements ActionL
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel BoutonRetirerPanel;
     private javax.swing.JPanel BoutonsLiens;
+    private javax.swing.JPanel ChangerTypePanel;
+    private javax.swing.JLabel ChoisirLienLabel;
     private javax.swing.JLabel DestinationLienLabel;
     private javax.swing.JLabel InformationsLienLabel;
     private javax.swing.JPanel InformationsLiens;
     private javax.swing.JLabel OrigineLienLabel;
     private javax.swing.JButton SupprimeBouton;
+    private javax.swing.JLabel TypeLienLabel;
     // End of variables declaration//GEN-END:variables
 }

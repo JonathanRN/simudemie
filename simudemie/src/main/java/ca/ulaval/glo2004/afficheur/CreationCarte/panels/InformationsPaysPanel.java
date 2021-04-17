@@ -46,7 +46,6 @@ public class InformationsPaysPanel extends javax.swing.JPanel {
         RegionNomTextField.setFont(FontRegister.RobotoLight.deriveFont(12f));
         RegionNomTextField.setBackground(Couleurs.sideMenuNoTransp);
         
-        SupprimeBouton.setBackground(Couleurs.sideMenuNoTransp); 
     }
     
     public void Active(Pays pays, Region region) {

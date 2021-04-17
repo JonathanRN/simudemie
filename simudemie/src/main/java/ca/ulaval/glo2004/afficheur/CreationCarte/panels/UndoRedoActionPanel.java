@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.afficheur.CreationCarte.panels;
 
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import java.awt.event.ActionEvent;
@@ -25,6 +26,7 @@ public class UndoRedoActionPanel extends PanelArrondi implements ActionListener 
         
         if (FontRegister.RobotoLight != null) {
             Label.setFont(FontRegister.RobotoLight.deriveFont(18f));
+            this.setBackground(Couleurs.sideMenuTransp);
         }
         
         this.setVisible(false);

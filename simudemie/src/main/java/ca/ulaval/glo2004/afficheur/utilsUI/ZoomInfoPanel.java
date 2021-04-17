@@ -23,6 +23,7 @@ public class ZoomInfoPanel extends PanelArrondi implements ActionListener {
         
         if (FontRegister.RobotoLight != null) {
             ZoomLabel.setFont(FontRegister.RobotoLight.deriveFont(24f));
+            this.setBackground(Couleurs.sideMenuTransp);
         }
         
         this.setVisible(false);

@@ -7,6 +7,7 @@ package ca.ulaval.glo2004.afficheur.CreationCarte.mode;
 
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
+import ca.ulaval.glo2004.domaine.Pays;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -48,9 +49,9 @@ public class Creation extends Mode {
         }
         
         g.setColor(Couleurs.blanc);
-        for (Polygon p : creationCarte.getPolygones()) {
-            if (!creationCarte.getPanel().estRegionUnique(p)) {
-                paintPointPolygone(g, p);
+        for (Pays pays : carte.getListePays()) {
+            if (pays.getListeRegions().size() == 1) {
+                paintPointPolygone(g, pays.getListeRegions().get(0).getPolygone());
             }
         }
         

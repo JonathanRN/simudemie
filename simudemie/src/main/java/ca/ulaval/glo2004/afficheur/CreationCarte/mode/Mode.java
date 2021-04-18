@@ -8,16 +8,20 @@ package ca.ulaval.glo2004.afficheur.CreationCarte.mode;
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Carte;
+import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.Shape;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Area;
 import java.awt.geom.Line2D;
 import java.awt.geom.Path2D;
 import java.awt.geom.PathIterator;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 /**
@@ -39,7 +43,7 @@ public class Mode {
         this.carte = creationCarte.getCarte();
     }
     
-    public void paint(Graphics2D g) {
+    public void paint(Graphics2D g) {        
         if (creationCarte != null && creationCarte.getPanel().getCourant().npoints >= 2) {
             paintLignes(g, couleurLigne, creationCarte.getPanel().getCourant());
         }
@@ -51,11 +55,7 @@ public class Mode {
         paintLignes(g, Color.red, lignesInvalides);
         
         recalculeVoies();
-        for (int i = 0; i < carte.getVoies().size(); i++) {
-            g.setColor(carte.getVoies().get(i).getCouleur());
-            g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
-            g.draw(carte.getVoies().get(i).getLigne());
-        }
+        paintVoies(g);
     }
     
     public void onActive() {
@@ -100,13 +100,21 @@ public class Mode {
     protected void recalculeVoies() {
         for (VoieLiaison voie : carte.getVoies()) {
             Path2D.Double ligne = new Path2D.Double();
-            Point centreOrigine = getCentrePolygone(voie.getPaysOrigine().getPolygone());
-            Point centreDestination = getCentrePolygone(voie.getPaysDestination().getPolygone());
+            Point centreOrigine = getCentrePays(voie.getPaysOrigine());
+            Point centreDestination = getCentrePays(voie.getPaysDestination());
             
             ligne.moveTo(centreOrigine.x, centreOrigine.y);
             ligne.curveTo(voie.getCentre().x, voie.getCentre().y, voie.getCentre().x, voie.getCentre().y, centreDestination.x, centreDestination.y);
 
             voie.setLigne(ligne);
+        }
+    }
+    
+    protected void paintVoies(Graphics2D g) {
+        for (int i = 0; i < carte.getVoies().size(); i++) {
+            g.setColor(carte.getVoies().get(i).getCouleur());
+            g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
+            g.draw(carte.getVoies().get(i).getLigne());
         }
     }
     
@@ -120,9 +128,10 @@ public class Mode {
     }
     
     protected void paintPolygones(Graphics2D g) {
-        g.setColor(couleurRempli);
         for (Polygon p : carte.getPolygonesRegions()) {
+            g.setColor(couleurRempli);
             g.fillPolygon(p);
+            paintLignes(g, Color.black, p);
         }
     }
     
@@ -134,10 +143,10 @@ public class Mode {
         }
     }
     
-    protected void paintLignes(Graphics2D g, Color c, Polygon p) {
+    protected void paintLignes(Graphics2D g, Color c, Shape s) {
         g.setColor(c);
         g.setStroke(new BasicStroke(2));
-        for(Line2D.Double line : getPolygonLines(p)) {
+        for(Line2D.Double line : getPolygonLines(s)) {
             g.drawLine((int)line.x1, (int)line.y1, (int)line.x2, (int)line.y2);
         }
     }
@@ -176,12 +185,12 @@ public class Mode {
         lignesInvalides = getLignesInvalides(g);
     }
     
-    protected ArrayList<Line2D.Double> getPolygonLines(Polygon po) {
+    protected ArrayList<Line2D.Double> getPolygonLines(Shape s) {
         ArrayList<double[]> areaPoints = new ArrayList<>();
         ArrayList<Line2D.Double> areaSegments = new ArrayList<>();
         double[] coords = new double[6];
 
-        for (PathIterator pi = po.getPathIterator(null); !pi.isDone(); pi.next()) {
+        for (PathIterator pi = s.getPathIterator(null); !pi.isDone(); pi.next()) {
             // The type will be SEG_LINETO, SEG_MOVETO, or SEG_CLOSE
             // Because the Area is composed of straight lines
             int type = pi.currentSegment(coords);
@@ -216,18 +225,13 @@ public class Mode {
         return areaSegments;
     }
     
-    protected Point getCentrePolygone(Polygon p) {
-        double x = 0.;
-        double y = 0.;
-        for (int i = 0; i < p.npoints; i++){
-            x += p.xpoints[i];
-            y += p.ypoints[i];
+    protected Point getCentrePays(Pays pays) {
+        Area area = new Area();
+        for (ca.ulaval.glo2004.domaine.Region r : pays.getListeRegions()) {
+            area.add(new Area(r.getPolygone()));
         }
-
-        x = x / p.npoints;
-        y = y / p.npoints;
-
-        return new Point((int)x, (int)y);
+        Rectangle2D bounds = area.getBounds2D();
+        return new Point((int)bounds.getCenterX(), (int)bounds.getCenterY());
     }
     
     protected Point getCentreLigne(Line2D.Double line) {

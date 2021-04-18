@@ -12,7 +12,6 @@ import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Polygon;
@@ -38,7 +37,7 @@ public class LienPays extends Mode {
     private Point pointSelectionne, pointHighlight;
     private Pays origine;
     private Path2D.Double path = new Path2D.Double();
-    private Polygon highlight;
+    private final ArrayList<Polygon> highlight = new ArrayList<>();
     
     public LienPays(CreationCarte panel) {
         this.setCreationCarte(panel);
@@ -47,17 +46,13 @@ public class LienPays extends Mode {
 
     @Override
     public void paint(Graphics2D g) {        
-        for (Pays pays : listePays) {
-            Polygon p = pays.getPolygone();
-            g.setColor(couleurRempli);
-            g.fillPolygon(p);
-            g.setStroke(new BasicStroke(2));
-            paintLignes(g, Color.black, p);
-        }
+        paintPolygones(g);
         
-        if (highlight != null) {
+        if (!highlight.isEmpty()) {
             g.setStroke(new BasicStroke(2));
-            paintLignes(g, couleurLigne, highlight);
+            for (Polygon h : highlight) {
+                paintLignes(g, couleurLigne, h);
+            }
         }
         
         if (path != null) {
@@ -95,11 +90,10 @@ public class LienPays extends Mode {
             }
         }
         
-        highlight = null;
-        for (Polygon p : listePays.stream().map(x -> x.getPolygone()).collect(Collectors.toList())) {
-            if (p.contains(point)) {
-                highlight = p;
-                break;
+        highlight.clear();
+        for (Pays pays : carte.getListePays()) {
+            if (pays.contient(point.x, point.y)) {
+                highlight.addAll(pays.getListeRegions().stream().map(x -> x.getPolygone()).collect(Collectors.toList()));
             }
         }
     }
@@ -109,10 +103,10 @@ public class LienPays extends Mode {
         super.onMousePressed(point);
         path = null;
         centrePaysOrigine = null;
-        for (Pays pays : listePays) {
-            Polygon p = pays.getPolygone();
+        for (Polygon p : carte.getPolygonesRegions()) {
             if (p.contains(point)) {
-                Point centre = getCentrePolygone(p);
+                Pays pays = carte.getPays(p);
+                Point centre = getCentrePays(pays);
                 centrePaysOrigine = centre;
                 origine = pays;
             }
@@ -141,7 +135,7 @@ public class LienPays extends Mode {
             
             VoieLiaison voie = voies.get(points.indexOf(drag));
             Path2D.Double ligne = new Path2D.Double();
-            Point centre = getCentrePolygone(voie.getPaysOrigine().getPolygone());
+            Point centre = getCentrePays(voie.getPaysOrigine());
             ligne.moveTo(centre.x, centre.y);
             ligne.curveTo(point.x, point.y, point.x, point.y, voie.getLigne().getCurrentPoint().getX(), voie.getLigne().getCurrentPoint().getY());
             
@@ -175,11 +169,10 @@ public class LienPays extends Mode {
         
         path = null;
         for (Pays destination : listePays) {
-            Polygon p = destination.getPolygone();
             ArrayList<VoieLiaison.TypeVoie> nonUtilisees = carte.getVoiesDisponibles(origine, destination);
             
-            if (!origine.equals(destination) && p.contains(point) && !nonUtilisees.isEmpty()) {
-                Point centre = getCentrePolygone(p);
+            if (!origine.equals(destination) && destination.contient(point.x, point.y) && !nonUtilisees.isEmpty()) {
+                Point centre = getCentrePays(destination);
                 path = new Path2D.Double();
                 path.moveTo(centrePaysOrigine.x, centrePaysOrigine.y);
                 path.lineTo(centre.x, centre.y);

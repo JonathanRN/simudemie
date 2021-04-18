@@ -28,7 +28,8 @@ import java.util.stream.Collectors;
  */
 public class Selection extends Mode {
     
-    private Polygon selectionne, precedent, dragged;
+    private Polygon selectionne, precedent;
+    private Rectangle2D draggedBounds;
     private InformationsPaysPanel panel;
     
     private Point updateDrag, initialDrag;
@@ -91,25 +92,25 @@ public class Selection extends Mode {
             panel.Desactive();
         }
         
-        if (dragged != null) {
+        if (draggedBounds != null) {
             // Snap!
             if (intersection != null) {
                 switch (snapPosition) {
                     // Gauche
                     case 0:
-                        translateDraggedRegions((int)intersection.getMaxX() - (int)dragged.getBounds2D().getMaxX(), 0);
+                        translateDraggedRegions((int)intersection.getMaxX() - (int)draggedBounds.getMaxX(), 0);
                         break;
                     // Haut
                     case 1:
-                        translateDraggedRegions(0, (int)intersection.getMaxY() - (int)dragged.getBounds2D().getMaxY());
+                        translateDraggedRegions(0, (int)intersection.getMaxY() - (int)draggedBounds.getMaxY());
                        break;
                     // Droite
                     case 2:
-                        translateDraggedRegions((int)intersection.getMinX() - (int)dragged.getBounds2D().getMinX(), 0);
+                        translateDraggedRegions((int)intersection.getMinX() - (int)draggedBounds.getMinX(), 0);
                         break;
                     // Bas
                     case 3:
-                        translateDraggedRegions(0, (int)intersection.getMinY() - (int)dragged.getBounds2D().getMinY());
+                        translateDraggedRegions(0, (int)intersection.getMinY() - (int)draggedBounds.getMinY());
                         break;
                 }
                 
@@ -117,8 +118,8 @@ public class Selection extends Mode {
                     // Ajouter un lien terrestre, seulement s'il en a pas
                     Path2D.Double path = new Path2D.Double();
 
-                    Point centreOrg = this.getCentrePolygone(snapOrigine.getPolygone());
-                    Point centreDest = this.getCentrePolygone(snapDestination.getPolygone());
+                    Point centreOrg = this.getCentrePays(snapOrigine);
+                    Point centreDest = this.getCentrePays(snapDestination);
 
                     path.moveTo(centreOrg.x, centreOrg.y);
                     path.lineTo(centreDest.x, centreDest.y);
@@ -129,17 +130,17 @@ public class Selection extends Mode {
                     carte.ajouterVoie(voie);
                 }
                 
-                creationCarte.getPanel().sauvegarderEtat("Snap " + creationCarte.getCarte().getPays(dragged).getNom());
+                creationCarte.getPanel().sauvegarderEtat("Snap " + snapOrigine.getNom());
             }
             // Drag normal
             else if (initialDrag != null && updateDrag != null) {
                 int deltaX = initialDrag.x - updateDrag.x;
                 int deltaY = initialDrag.y - updateDrag.y;
                 if (deltaX != 0 && deltaY != 0) {
-                    creationCarte.getPanel().sauvegarderEtat("Déplacement " + creationCarte.getCarte().getPays(dragged).getNom());
+                    creationCarte.getPanel().sauvegarderEtat("Déplacement " + snapOrigine.getNom());
                 }
             }
-            dragged = null;
+            draggedBounds = null;
             intersection = null;
         }
         
@@ -148,27 +149,27 @@ public class Selection extends Mode {
 
     @Override
     public void onMouseDragged(Point point) {
-        if (dragged == null) {
-            for (Pays p : carte.getListePays()) {
-                if (p.getPolygone().contains(point.x, point.y)) {
-                    dragged = p.getPolygone();
-                    snapOrigine = p;
-                }
+        for (Pays p : carte.getListePays()) {
+            if (p.contient(point.x, point.y)) {
+                draggedBounds = p.getBounds();
+                snapOrigine = p;
+                break;
             }
         }
         
-        if (dragged != null && updateDrag != null) {
+        if (draggedBounds != null && updateDrag != null) {
             translateDraggedRegions(point.x - updateDrag.x, point.y - updateDrag.y);
             updateDrag = point;
             
             intersection = null;
             for (Pays p : carte.getListePays()) {
-                if (!carte.getPays(dragged).estEgal(p)) {
-                    Rectangle2D bounds = p.getPolygone().getBounds();
+                if (!snapOrigine.equals(p)) {
+                    Rectangle2D bounds = p.getBounds();
                     Rectangle2D largeBounds = new Rectangle((int)bounds.getX() - boundsOffset/2, (int)bounds.getY() - boundsOffset/2, (int)bounds.getWidth() + boundsOffset, (int)bounds.getHeight() + boundsOffset);
-                    if (dragged.getBounds2D().intersects(largeBounds)) {
+                    if (draggedBounds.intersects(largeBounds)) {
                         setCoteIntersection(largeBounds);
                         snapDestination = p;
+                        break;
                     }
                 }
             }
@@ -178,7 +179,7 @@ public class Selection extends Mode {
     }
     
     private void setCoteIntersection(Rectangle2D largeBounds) {
-        intersection = dragged.getBounds2D().createIntersection(largeBounds);
+        intersection = draggedBounds.createIntersection(largeBounds);
                         
         // Trouver le cote le plus pres de lintersection
         // 0 = left, 1 = top, 2 = right, 3 = down
@@ -228,7 +229,7 @@ public class Selection extends Mode {
         initialDrag = null;
         updateDrag = null;
         for (Pays p : carte.getListePays()) {
-            if (p.getPolygone().contains(point.x, point.y)) {
+            if (p.contient(point.x, point.y)) {
                 updateDrag = point;
                 initialDrag = point;
             }
@@ -238,14 +239,8 @@ public class Selection extends Mode {
     }
     
     @Override
-    public void paint(Graphics2D g) {        
-        for (Polygon p : creationCarte.getPolygones()) {
-            g.setColor(couleurRempli);
-            g.fillPolygon(p);
-            
-            paintLignes(g, Color.black, p);
-        }
-        
+    public void paint(Graphics2D g) {
+        paintPolygones(g);
         super.paint(g);
         
         if (selectionne != null) {
@@ -253,10 +248,10 @@ public class Selection extends Mode {
         }
         
         // Draw les bounds pour le snap
-        if (dragged != null) {
-            for (Pays p : carte.getListePays()) {
-                Rectangle2D bounds = p.getPolygone().getBounds2D();
-                if (carte.getPays(dragged).estEgal(p)) {
+        if (draggedBounds != null) {
+            for (Pays pays : carte.getListePays()) {
+                Rectangle2D bounds = pays.getBounds();
+                if (snapOrigine.equals(pays)) {
                     g.setColor(Color.green);
                     g.setStroke(new BasicStroke(2f));
                     g.drawRect((int)bounds.getX(), (int)bounds.getY(), (int)bounds.getWidth(), (int)bounds.getHeight());
@@ -339,9 +334,8 @@ public class Selection extends Mode {
     
     private void translateDraggedRegions(int x, int y) {
         // Il faut parcourir toutes les regions du pays pour le deplacer
-        Pays pays = creationCarte.getCarte().getPays(dragged);
-        for (Polygon region : pays.getRegions().stream().map(a -> a.getPolygone()).collect(Collectors.toList())) {
-            region.translate(x, y);
+        for (ca.ulaval.glo2004.domaine.Region region : snapOrigine.getListeRegions()) {
+            region.getPolygone().translate(x, y);
         }
     }
 }

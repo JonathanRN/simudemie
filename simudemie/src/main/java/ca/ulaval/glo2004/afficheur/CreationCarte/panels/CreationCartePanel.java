@@ -108,8 +108,8 @@ public class CreationCartePanel extends ZoomablePanel {
     public void creerPolygone() {
         // Dessine le polygone seulement s'il est valide
         if (creationCarte.getMode().estPolygoneValide(getCourant())) {
-            Pays pays = new Pays(getCourant());
-            pays.ajouterRegion(new ca.ulaval.glo2004.domaine.Region(pays.getPolygone()));
+            Pays pays = new Pays();
+            pays.ajouterRegion(new ca.ulaval.glo2004.domaine.Region(courant));
             creationCarte.getCarte().ajouterPays(pays);
             
             courant.reset();
@@ -139,7 +139,7 @@ public class CreationCartePanel extends ZoomablePanel {
         polygones.add(index, divise.getGauche());
         polygones.add(index + 1, divise.getDroit());
 
-        int popPaysInitiale = pays.getRegions().stream().filter(x -> x.getPolygone().equals(p)).findFirst().get().getPopSaine();
+        int popPaysInitiale = pays.getListeRegions().stream().filter(x -> x.getPolygone().equals(p)).findFirst().get().getPopSaine();
         int nbPopSaine = (int)(popPaysInitiale / 2);
         int nbPopSaineImpaire = (int)(popPaysInitiale / 2);
         
@@ -153,7 +153,7 @@ public class CreationCartePanel extends ZoomablePanel {
         pays.ajouterRegion(regionGauche);
         pays.ajouterRegion(regionDroite);
         
-        pays.retirerRegion(pays.getRegions().stream().filter(x -> x.getPolygone().equals(p)).findFirst().get());
+        pays.retirerRegion(pays.getListeRegions().stream().filter(x -> x.getPolygone().equals(p)).findFirst().get());
         
 
         sauvegarderEtat("Séparation " + pays.getNom());
@@ -161,11 +161,11 @@ public class CreationCartePanel extends ZoomablePanel {
     
     public boolean estRegionUnique(Polygon p) {
         Pays pays = creationCarte.getPays(p);
-        return pays != null && pays.getRegions().size() > 1;
+        return pays != null && pays.getListeRegions().size() > 1;
     }
     
     public ca.ulaval.glo2004.domaine.Region getRegion(Pays pays, Polygon p) {
-        for (Region r : pays.getRegions()) {
+        for (Region r : pays.getListeRegions()) {
             if (r.getPolygone().equals(p)) {
                 return r;
             }
@@ -224,7 +224,7 @@ public class CreationCartePanel extends ZoomablePanel {
     private void centrerVueSurPolygones(Carte carte) {        
         if (!carte.getListePays().isEmpty()) {
             // Get les bounds du premier pays sur la carte
-            Rectangle2D rect = carte.getListePays().get(0).getPolygone().getBounds2D();
+            Rectangle2D rect = carte.getListePays().get(0).getListeRegions().get(0).getPolygone().getBounds2D();
 
             int x = (getWidth()/2) - (int)rect.getCenterX();
             int y = (getHeight()/2) - (int)rect.getCenterY();

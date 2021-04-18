@@ -10,8 +10,6 @@ import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Region;
-import ca.ulaval.glo2004.domaine.VoieLiaison;
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
@@ -27,14 +25,16 @@ import java.util.stream.Collectors;
 public class SimulationAfficheur extends Mode {
     
     private int indexSelectionne;
-    private Pays selectionne;
     private final Simulation simulation;
-    private ArrayList<Polygon> polygones;
     private Point souris;
     private boolean afficherInfosPays = false;
     private boolean afficherLiens = true;
     private int afficherCouleurs = 1;
+    private final ArrayList<Polygon> highlight = new ArrayList<>();
+    private final ArrayList<Polygon> selectionne = new ArrayList<>();
     
+    private Pays paysHighlight;
+    private Region regionHighlight;
     private Region regionInfectee;
     
     private final Point sourisOffset = new Point(20, 5);
@@ -44,7 +44,7 @@ public class SimulationAfficheur extends Mode {
         
         if (!simulation.getScenario().estCommence()) {
             // Il faut toujours avoir une region de selectionne
-            regionInfectee = simulation.getScenario().getCarteJourCourant().getPays(0).getRegions().get(0);            
+            regionInfectee = simulation.getScenario().getCarteJourCourant().getPays(0).getListeRegions().get(0);            
         }
     }
     
@@ -53,14 +53,11 @@ public class SimulationAfficheur extends Mode {
         // Rafraichit toujours la carte courante
         // dans les cas ou l'on charge une ancienne carte
         carte = simulation.getScenario().getCarteJourCourant();
-        polygones = carte.getPolygonesRegions();
+        updateHighlight(souris);
         
-        for (Polygon p : afficherInfosPays ? carte.getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
+        for (Pays pays : carte.getListePays()) {
             Color couleur = Couleurs.infections;
             switch (afficherCouleurs) {
-                case 1:
-                   couleur = Couleurs.infections;
-                    break;
                 case 2:
                    couleur = Couleurs.sains;
                     break;
@@ -71,66 +68,69 @@ public class SimulationAfficheur extends Mode {
                    couleur = Couleurs.immunisations;
                     break;
             }
-            g.setColor(this.getCouleurPolygone(p, couleur));
-            g.fillPolygon(p);
-            this.paintLignes(g, Color.black, p);
+            for (Region r : pays.getListeRegions()) {
+                if (afficherInfosPays) {
+                    g.setColor(this.getCouleurPolygone(pays, couleur));
+                }
+                else {
+                    g.setColor(this.getCouleurPolygone(r, couleur));
+                }
+                g.fillPolygon(r.getPolygone());
+                paintLignes(g, Color.black, r.getPolygone());
+            }
         }
-
-        super.paint(g);
-        updateHighlight(souris);
         
+        // Highlight
+        for (Polygon p : highlight) {
+            this.paintLignes(g, couleurLigne, p);
+        }
+        
+        // Selectionne
+        for (Polygon p : selectionne) {
+            this.paintLignes(g, Color.green, p);
+        }
+        
+        // Region infectee initiale
         if (regionInfectee != null) {
             g.setColor(Couleurs.infections);
             this.paintLignes(g, Couleurs.infections, regionInfectee.getPolygone());
         }
         
-        if (selectionne != null) {
-            g.setStroke(new BasicStroke(2));
-            this.paintLignes(g, Couleurs.immunisations, selectionne.getPolygone());
+        // Liens
+        if (afficherLiens) {
+            this.paintVoies(g);
         }
         
-        if(afficherLiens) {
-            for (VoieLiaison voie : carte.getVoies()) {
-                g.setColor(voie.getCouleur());
-                g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));
-                g.draw(voie.getLigne());
-            }
-        }
-        
-        g.setStroke(new BasicStroke(2));
-
-        
-        if (highlight != null) {
+        // Infos
+        if (!highlight.isEmpty()) {
             float zoomFactor = simulation.getPanel().getZoomFactor();
-            Pays pays = carte.getPays(highlight);
-            if (afficherInfosPays) {
-                int y = drawNom(pays.getNom(), g, zoomFactor);
-                y = drawPopulation(pays.getPopTotale(), g, zoomFactor, y);
-                y = drawStats(pays.getPopInfectee(),
-                        pays.getPopSaine(),
-                        pays.getPopDecedee(),
-                        pays.getPopImmune(),
-                        pays.getPourcentageInfectee(),
-                        pays.getPourcentageSaine(),
-                        pays.getPourcentageDecedee(),
-                        pays.getPourcentageImmunisee(),
+            if (afficherInfosPays && paysHighlight != null) {
+                int y = drawNom(paysHighlight.getNom(), g, zoomFactor);
+                y = drawPopulation(paysHighlight.getPopTotale(), g, zoomFactor, y);
+                y = drawStats(paysHighlight.getPopInfectee(),
+                        paysHighlight.getPopSaine(),
+                        paysHighlight.getPopDecedee(),
+                        paysHighlight.getPopImmune(),
+                        paysHighlight.getPourcentageInfectee(),
+                        paysHighlight.getPourcentageSaine(),
+                        paysHighlight.getPourcentageDecedee(),
+                        paysHighlight.getPourcentageImmunisee(),
                         g,
                         zoomFactor,
                         y);
                 drawFooter("Appuyez sur Q pour voir les infos. sur la région", g, zoomFactor, y);
             }
-            else {
-                Region region = pays.getRegion(highlight);
-                int y = drawNom(region.getNom(), g, zoomFactor);
-                y = drawPopulation(region.getPopTotale(), g, zoomFactor, y);
-                y = drawStats(region.getPopInfectee(),
-                        region.getPopSaine(),
-                        region.getPopDecedee(),
-                        region.getPopImmunisee(),
-                        region.getPourcentageInfectee(),
-                        region.getPourcentageSaine(),
-                        region.getPourcentageDecedee(),
-                        region.getPourcentageImmune(),
+            else if (regionHighlight != null) {
+                int y = drawNom(regionHighlight.getNom(), g, zoomFactor);
+                y = drawPopulation(regionHighlight.getPopTotale(), g, zoomFactor, y);
+                y = drawStats(regionHighlight.getPopInfectee(),
+                        regionHighlight.getPopSaine(),
+                        regionHighlight.getPopDecedee(),
+                        regionHighlight.getPopImmunisee(),
+                        regionHighlight.getPourcentageInfectee(),
+                        regionHighlight.getPourcentageSaine(),
+                        regionHighlight.getPourcentageDecedee(),
+                        regionHighlight.getPourcentageImmune(),
                         g,
                         zoomFactor,
                         y);
@@ -141,7 +141,7 @@ public class SimulationAfficheur extends Mode {
 
     @Override
     public void onMouseMoved(Point point) {
-        souris = point;
+        souris = point;        
     }
 
     @Override
@@ -149,31 +149,48 @@ public class SimulationAfficheur extends Mode {
         super.onMouseReleased(point);
         
         indexSelectionne = -1;
-        selectionne = null;
-        for (Polygon p : polygones) {
-            if (p.contains(point.x, point.y)) {
+        selectionne.clear();
+        int index = 0;
+        for (Pays pays : carte.getListePays()) {
+            if (pays.contient(point.x, point.y)) {
                 if (simulation.getScenario().estCommence()) {
-                    selectionne = carte.getPays(p);
-                    indexSelectionne = carte.getListePays().indexOf(selectionne);
+                    indexSelectionne = index;
+                    selectionne.addAll(pays.getListeRegions().stream().map(x -> x.getPolygone()).collect(Collectors.toList()));
                 }
                 else {
-                    regionInfectee = carte.getPays(p).getRegion(p);
+                    for (Region r : pays.getListeRegions()) {
+                        if (r.getPolygone().contains(point)) {
+                            regionInfectee = r;
+                        }
+                    }
                 }
+                break;
             }
+            index++;
         }
     }
     
     @Override
     protected void updateHighlight(Point point) {
-        highlight = null;
+        highlight.clear();
         if (point == null) {
             return;
         }
         
-        for (Polygon p : afficherInfosPays ? carte.getListePays().stream().map(x -> x.getPolygone()).collect(Collectors.toList()) : polygones) {
-            if (p.contains(point.x, point.y)) {
-                highlight = p;
-                break;
+        for (Pays pays : carte.getListePays()) {
+            if (pays.contient(point.x, point.y)) {
+                if (afficherInfosPays) {
+                    paysHighlight = pays;
+                    highlight.addAll(pays.getListeRegions().stream().map(x -> x.getPolygone()).collect(Collectors.toList()));
+                }
+                else {
+                    for (Region r : pays.getListeRegions()) {
+                        if (r.getPolygone().contains(point)) {
+                            highlight.add(r.getPolygone());
+                            regionHighlight = r;
+                        }
+                    }
+                }
             }
         }
     }
@@ -210,15 +227,11 @@ public class SimulationAfficheur extends Mode {
     private int drawNom(String nom, Graphics2D g, float zoomFactor) {
         g.setColor(Couleurs.blanc);
         g.setFont(FontRegister.RobotoLight.deriveFont(18f / zoomFactor));
-        
-        FontMetrics metrics = g.getFontMetrics(g.getFont());
-        int width = metrics.stringWidth(nom);
-        
+                
         float x = souris.x + sourisOffset.x / zoomFactor;
         float y = souris.y + sourisOffset.y / zoomFactor;
         int offsetY = (int)(y + 8 / zoomFactor);
         g.drawString(nom, x, y);
-        g.drawLine((int)x, offsetY, width + (int)x, offsetY);
         return offsetY;
     }
     
@@ -246,55 +259,25 @@ public class SimulationAfficheur extends Mode {
     private void drawFooter(String texte, Graphics2D g, float zoomFactor, int offset) {
         float x = souris.x + sourisOffset.x / zoomFactor;
         int offsetY = (int)(offset + 25 / zoomFactor);
-        g.setFont(FontRegister.RobotoLight.deriveFont(13f / zoomFactor));
-        
-        FontMetrics metrics = g.getFontMetrics(g.getFont());
-        int width = metrics.stringWidth(texte);
-        
+        g.setFont(FontRegister.RobotoLight.deriveFont(13f / zoomFactor));        
         g.drawString(texte, x, offsetY);
-        g.drawLine((int)x, (int)(offsetY + 5 / zoomFactor), width + (int)x, (int)(offsetY + 5 / zoomFactor));
     }
     
-    private Color getCouleurPolygone(Polygon p, Color color) {
-        Pays pays = carte.getPays(p);
+    private Color getCouleurPolygone(Pays pays, Color color) {
         float pourcent = 1;
-   
-        if (afficherInfosPays) {
-            if (afficherCouleurs == 1)
-                {
-                    pourcent = pays.getPourcentageInfectee() / 100f;
-                }
-            if (afficherCouleurs == 2)
-                {
-                    pourcent = pays.getPourcentageSaine() / 100f;
-                }
-            if (afficherCouleurs == 3)
-                {
-                    pourcent = pays.getPourcentageDecedee() / 100f;
-                }
-            if (afficherCouleurs == 4)
-                {
-                    pourcent = pays.getPourcentageImmunisee() / 100f;   
-                }   
-        }
-        else {
-            Region region = pays.getRegion(p);
-            if (afficherCouleurs == 1)
-                {
-                    pourcent = region.getPourcentageInfectee() / 100f;
-                }
-            if (afficherCouleurs == 2)
-                {
-                    pourcent = region.getPourcentageSaine() / 100f;
-                }
-            if (afficherCouleurs == 3)
-                {
-                    pourcent = region.getPourcentageDecedee() / 100f;
-                }
-            if (afficherCouleurs == 4)
-                {
-                    pourcent = region.getPourcentageImmune() / 100f;    
-                }                 
+        switch (afficherCouleurs) {
+            case 1:
+                pourcent = pays.getPourcentageInfectee() / 100f;
+                break;
+            case 2:
+                pourcent = pays.getPourcentageSaine() / 100f;
+                break;
+            case 3:
+                pourcent = pays.getPourcentageDecedee() / 100f;
+                break;
+            case 4:
+                pourcent = pays.getPourcentageImmunisee() / 100f;
+                break;
         }
         
         Color c1 = Couleurs.remplissageNoTransp;
@@ -306,8 +289,33 @@ public class SimulationAfficheur extends Mode {
         );
     }
     
-    private float interpoler(float v1, float v2, float p)
-    {
+    private Color getCouleurPolygone(Region region, Color color) {
+        float pourcent = 1;
+        switch (afficherCouleurs) {
+            case 1:
+                pourcent = region.getPourcentageInfectee() / 100f;
+                break;
+            case 2:
+                pourcent = region.getPourcentageSaine() / 100f;
+                break;
+            case 3:
+                pourcent = region.getPourcentageDecedee() / 100f;
+                break;
+            case 4:
+                pourcent = region.getPourcentageImmune() / 100f;
+                break;
+        }
+        
+        Color c1 = Couleurs.remplissageNoTransp;
+        Color c2 = color;
+        return new Color(
+            interpoler(c1.getRed(), c2.getRed(), pourcent) / 255,
+            interpoler(c1.getGreen(), c2.getGreen(), pourcent) / 255,
+            interpoler(c1.getBlue(), c2.getBlue(), pourcent) / 255
+        );
+    }
+    
+    private float interpoler(float v1, float v2, float p) {
         return (v2 - v1) * p + v1;
     }
 }

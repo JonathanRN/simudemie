@@ -134,7 +134,6 @@ public class SimulationPanel extends ZoomablePanel {
             simulation.toggleSimulationTabs(selectionne != -1);
             if (selectionne != -1) {
                 simulation.getSimulationTabs().setIndexPays(selectionne);
-                //simulation.setNomPays(selectionne.getNom());
             }
         }
         

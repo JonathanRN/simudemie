@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package ca.ulaval.glo2004.domaine;
+import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -16,19 +19,13 @@ public class Pays implements Externalizable {
     private static final long serialVersionUID = 1;   
     
     private String nom;
-    private Polygon polygone;
-    private int popInitiale; 
+    private int popInitiale;
     private ArrayList<Vaccin> vaccins = new ArrayList<>();
     private ArrayList<Mesure> mesures = new ArrayList<>();
     public ArrayList<Region> listeRegions = new ArrayList<>();
 
-    public Pays() {}
-    
-    public Pays(Polygon polygone) {this.polygone = new Polygon(polygone.xpoints, polygone.ypoints, polygone.npoints);}
-
     public Pays(Pays pays) {
         this.nom = pays.nom;
-        this.polygone = new Polygon(pays.polygone.xpoints, pays.polygone.ypoints, pays.polygone.npoints);
         this.popInitiale = pays.popInitiale;
         
         this.mesures.clear();
@@ -41,15 +38,16 @@ public class Pays implements Externalizable {
             this.listeRegions.add(new Region(region));
         }
         
-      this.vaccins.clear();
-      for (Vaccin vaccin : pays.vaccins) {
-          this.vaccins.add(new Vaccin(vaccin));
-      }
+        this.vaccins.clear();
+        for (Vaccin vaccin : pays.vaccins) {
+            this.vaccins.add(new Vaccin(vaccin));
+        }
+    }
+
+    public Pays() {
     }
     
-    
-    public void avancerJournee(double tauxInf, double tauxMortalite, double tauxGuerison, int cptJours, int incubation, boolean immunitePossible)
-    {
+    public void avancerJournee(double tauxInf, double tauxMortalite, double tauxGuerison, int cptJours, int incubation, boolean immunitePossible) {
         tauxInf /= 100d;
         tauxMortalite /= 100d;
         tauxGuerison /= 100d;
@@ -135,9 +133,7 @@ public class Pays implements Externalizable {
         } catch (Exception e) {
         }
     }
-    
-    public ArrayList<Region> getRegions() {return listeRegions;}
-    
+        
     public Region getRegion(Polygon p) {return listeRegions.stream().filter(x -> x.getPolygone().equals(p)).findFirst().get();}
         
     public String getNom(){return nom;}
@@ -201,8 +197,6 @@ public class Pays implements Externalizable {
     
     public ArrayList<Vaccin> getVaccins() { return vaccins; }
     
-    public Polygon getPolygone() {return polygone;};
-    
     public ArrayList<Region> getListeRegions(){return listeRegions;}
     
     public void setNom(String nom) {this.nom = nom;}
@@ -222,7 +216,6 @@ public class Pays implements Externalizable {
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeUTF(nom);
-        out.writeObject(polygone);
         out.writeInt(popInitiale);
         out.writeInt(mesures.size());
         for(Mesure m : mesures) {
@@ -245,7 +238,6 @@ public class Pays implements Externalizable {
         vaccins.clear();
         
         nom = in.readUTF();
-        polygone = (Polygon) in.readObject();
         popInitiale = in.readInt();
         int mesuresSize = in.readInt();
         for(int index = 0; index < mesuresSize; index++) {
@@ -263,18 +255,32 @@ public class Pays implements Externalizable {
         }
     }
 
-    public boolean estEgal(Pays pays) {
-        Polygon p2 = pays.getPolygone();
-        boolean equal = p2.npoints == polygone.npoints;
-        
-        for(int index = 0; index < p2.npoints && equal; index++) {
-            if(this.polygone.xpoints[index] != p2.xpoints[index] ||
-                    this.polygone.ypoints[index] != p2.ypoints[index]) {
-                equal = false;
+    @Override
+    public boolean equals(Object obj) {
+        Pays autre = (Pays)obj;
+        // Devrait relativement est correct...
+        return this.nom.equals(autre.nom) && this.listeRegions.equals(autre.listeRegions) && this.mesures.equals(autre.mesures);
+    }
+    
+    public boolean contient(int x, int y) {
+        for (Region r : listeRegions) {
+            if (r.getPolygone().contains(x, y)) {
+                return true;
             }
         }
-        
-        return equal;
+        return false;
     }
-
+    
+    public Rectangle2D getBounds() {
+        Rectangle2D bounds = null;
+        for (Region r : listeRegions) {
+            if (bounds == null) {
+                bounds = r.getPolygone().getBounds2D();
+            }
+            else {
+                bounds.add(r.getPolygone().getBounds2D());
+            }
+        }
+        return bounds;
+    }
 }

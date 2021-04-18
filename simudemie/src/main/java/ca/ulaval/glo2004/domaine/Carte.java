@@ -181,14 +181,9 @@ public class Carte implements Externalizable {
     
     public Pays getPays(Polygon p) {
         for (Pays pays : listePays) {
-            if (pays.getPolygone().equals(p)) {
-                return pays;
-            }
-            else {
-                for (Region r : pays.getRegions()) {
-                    if (r.getPolygone().equals(p)) {
-                        return pays;
-                    }
+            for (Region r : pays.getListeRegions()) {
+                if (r.getPolygone().equals(p)) {
+                    return pays;
                 }
             }
         }
@@ -198,7 +193,7 @@ public class Carte implements Externalizable {
     public ArrayList<Polygon> getPolygonesRegions() {
         ArrayList<Polygon> polygones = new ArrayList<>();
         for (Pays pays : getListePays()) {
-            polygones.addAll(pays.getRegions().stream().map(x -> x.getPolygone()).collect(Collectors.toList()));
+            polygones.addAll(pays.getListeRegions().stream().map(x -> x.getPolygone()).collect(Collectors.toList()));
         }
         return polygones;
     }

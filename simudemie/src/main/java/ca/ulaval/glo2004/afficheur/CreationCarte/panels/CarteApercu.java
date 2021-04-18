@@ -41,7 +41,7 @@ public class CarteApercu extends ZoomablePanel {
         
         if (!carte.getListePays().isEmpty()) {
             // Get les bounds du premier pays sur la carte
-            Rectangle2D rect = carte.getListePays().get(0).getPolygone().getBounds2D();
+            Rectangle2D rect = carte.getListePays().get(0).getListeRegions().get(0).getPolygone().getBounds2D();
 
             int x = (getWidth()/2) - (int)rect.getCenterX();
             int y = (getHeight()/2) - (int)rect.getCenterY();

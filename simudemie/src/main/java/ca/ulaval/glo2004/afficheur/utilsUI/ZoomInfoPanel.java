@@ -67,5 +67,6 @@ public class ZoomInfoPanel extends PanelArrondi implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setVisible(false);
+        repaint();
     }
 }

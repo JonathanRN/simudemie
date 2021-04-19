@@ -5,7 +5,9 @@
  */
 package ca.ulaval.glo2004.afficheur.CreationCarte.mode;
 
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Carte;
+import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -18,14 +20,41 @@ import java.awt.Polygon;
  */
 public class ApercuCarte extends Mode {
     
+    public int afficherCouleurs = 1;
+    public boolean mode = true;
+    
     public ApercuCarte(Carte carte) {
         this.carte = carte;
     }
 
     @Override
     public void paint(Graphics2D g) {
-        paintPolygones(g);
         
+        if (mode){
+            Color couleur = Couleurs.infections;
+            for (Pays pays : carte.getListePays()) {
+                switch (afficherCouleurs) {
+                    case 2:
+                       couleur = Couleurs.sains;
+                        break;
+                    case 3:
+                       couleur = Couleurs.morts;
+                        break;
+                    case 4:
+                       couleur = Couleurs.immunisations;
+                        break;
+                    }
+
+                for (ca.ulaval.glo2004.domaine.Region r : pays.getListeRegions()) {
+                    g.setColor(this.getCouleurPolygone(r, couleur));
+                    g.fillPolygon(r.getPolygone());
+                    paintLignes(g, Color.black, r.getPolygone());
+                }
+            }  
+        }
+        if (!mode){
+            paintPolygones(g);
+        }
         for (Polygon p : carte.getPolygonesRegions()) {
             paintLignes(g, Color.black, p);
         }
@@ -37,5 +66,35 @@ public class ApercuCarte extends Mode {
         }
         
         super.paint(g);
+    }
+    
+    private Color getCouleurPolygone(ca.ulaval.glo2004.domaine.Region region, Color color) {
+        float pourcent = 1;
+        switch (afficherCouleurs) {
+            case 1:
+                pourcent = region.getPourcentageInfectee() / 100f;
+                break;
+            case 2:
+                pourcent = region.getPourcentageSaine() / 100f;
+                break;
+            case 3:
+                pourcent = region.getPourcentageDecedee() / 100f;
+                break;
+            case 4:
+                pourcent = region.getPourcentageImmune() / 100f;
+                break;
+        }
+
+        Color c1 = Couleurs.remplissageNoTransp;
+        Color c2 = color;
+        return new Color(
+            interpoler(c1.getRed(), c2.getRed(), pourcent) / 255,
+            interpoler(c1.getGreen(), c2.getGreen(), pourcent) / 255,
+            interpoler(c1.getBlue(), c2.getBlue(), pourcent) / 255
+        );
+    }
+   
+    private float interpoler(float v1, float v2, float p) {
+        return (v2 - v1) * p + v1;
     }
 }

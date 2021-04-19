@@ -235,7 +235,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
 
         IncubationAide.setFont(FontRegister.RobotoThin.deriveFont(15f));
         IncubationAide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_help_20px.png"))); // NOI18N
-        IncubationAide.setToolTipText("TODO: CHANGER LE TOOLTIP DANS IncubationAide Label");
+        IncubationAide.setToolTipText("période (en jour) qui s'écoule entre la contamination d'un individu et sa guérison/son décès");
         IncubationAideParent.add(IncubationAide, java.awt.BorderLayout.CENTER);
 
         IncubationParent.add(IncubationAideParent, java.awt.BorderLayout.CENTER);
@@ -271,6 +271,7 @@ public class StatsMaladiePanel extends javax.swing.JPanel implements ChangeListe
         CuredInput.setVisible(enabled);
         DeadInput.setVisible(enabled);
         IncubationInput.setVisible(enabled);
+        IncubationAide.setVisible(enabled);
         ImmunizationCheckbox.setVisible(enabled);
         
         updateUI();

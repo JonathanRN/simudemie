@@ -192,7 +192,7 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icons/icons8_help_20px.png"/>
                         </Property>
-                        <Property name="toolTipText" type="java.lang.String" value="TODO: CHANGER LE TOOLTIP DANS IncubationAide Label"/>
+                        <Property name="toolTipText" type="java.lang.String" value="p&#xe9;riode (en jour) qui s&apos;&#xe9;coule entre la contamination d&apos;un individu et sa gu&#xe9;rison/son d&#xe9;c&#xe8;s"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

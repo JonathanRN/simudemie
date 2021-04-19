@@ -24,7 +24,7 @@ public class ApercuPanel extends PanelArrondi {
     public ApercuPanel() {
         initComponents();
         
-        setBackground(Couleurs.pannelArrondi);
+        super.setBackground(Couleurs.pannelArrondi);
         try {
             NomCarteLabel.setFont(FontRegister.RobotoThin.deriveFont(21f));
             AideLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
@@ -130,6 +130,12 @@ public class ApercuPanel extends PanelArrondi {
 
         ConteneurApercuCartePanel.add(AideParent);
 
+        ApercuCarte.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ApercuCarteMouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout ApercuCarteLayout = new javax.swing.GroupLayout(ApercuCarte);
         ApercuCarte.setLayout(ApercuCarteLayout);
         ApercuCarteLayout.setHorizontalGroup(
@@ -149,6 +155,12 @@ public class ApercuPanel extends PanelArrondi {
     private void ExportCarteBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportCarteBoutonMouseReleased
         prendrePhoto();
     }//GEN-LAST:event_ExportCarteBoutonMouseReleased
+
+    private void ApercuCarteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ApercuCarteMouseReleased
+        if (AidePanel.isVisible()){
+           AidePanel.setVisible(false);
+        }
+    }//GEN-LAST:event_ApercuCarteMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -111,6 +111,7 @@ public class SimulationPanel extends ZoomablePanel {
         
         simulation.getZoomPopup().onMouseWheel(zoomFactor);
         
+        simulation.repaint();
         repaint();
     }//GEN-LAST:event_formMouseWheelMoved
 

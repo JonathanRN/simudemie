@@ -47,6 +47,22 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         
         SimulationMenuDroit.setBackground(Couleurs.sideMenuLessTransp);
         
+        AidePanel.setVisible(false);
+        AidePanel.setBackground(Couleurs.fondNoir);
+        AidePanelEnfant.setBackground(Couleurs.sideMenuLessTransp);
+        
+        AideTitleLabel.setFont(FontRegister.RobotoRegular.deriveFont(21f));
+        Commandes.setFont(FontRegister.RobotoLight.deriveFont(17f));
+        CommandesSouris.setFont(FontRegister.RobotoLight.deriveFont(17f));
+        ClickGauche.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        ClickDroit.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        MouseWheel.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        Space.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        PaysRegion.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        Liens.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        Couleurs1.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        Photo.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        
         initBoutonsGeneraux();
         
         // Cacher par default, tant que la simulation n'est pas commencee
@@ -73,11 +89,9 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     }
     
     private void initBoutonsGeneraux() {
-        //TogglePaysRegion.setIcon("/icons/simulation/icons8_home_25px_1.png");
-        ToggleLiens.setIcon("/icons/icons8_chain_25px.png");
-        ToggleCouleurs.setIcon("/icons/simulation/icons8_radar_plot_25px_inf.png");
+        MaladieBouton.setIcon("/icons/simulation/icons8_microorganisms_25px.png");
         BoutonPhoto.setIcon("/icons/simulation/icons8_unsplash_25px.png");
-        MaladieBouton.setIcon("/icons/simulation/icons8_help_25px.png");
+        AideBouton.setIcon("/icons/simulation/icons8_help_25px.png");
         HomeBouton.setIcon("/icons/icons8_home_25px_1.png");
     }
     
@@ -142,9 +156,20 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
             FramePrincipal frame = (FramePrincipal)SwingUtilities.windowForComponent(this);
             frame.returnToHome();
             onglet.onRevenirSurOnglet();
-        }
+        } 
     }
-    
+    public void AideBoutonReleased(MouseEvent evt) {
+        if (!AidePanel.isVisible()) {
+            setDirect(false);
+            AidePanel.setVisible(true);
+            updateUI();
+        }
+        else {
+            AidePanel.setVisible(false);
+            updateUI();
+        }
+        
+    }
     private void updateDirectIcon() {
         String path = "/icons/";
         path += estEnDirect ? "pause_button_35px" : "direct_button_35px" ;
@@ -195,6 +220,21 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        AidePanel = new javax.swing.JPanel();
+        AidePanelEnfant = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
+        AideTitlePanel = new javax.swing.JPanel();
+        AideTitleLabel = new javax.swing.JLabel();
+        InformationsPanel = new javax.swing.JPanel();
+        CommandesSouris = new javax.swing.JLabel();
+        ClickGauche = new javax.swing.JLabel();
+        ClickDroit = new javax.swing.JLabel();
+        MouseWheel = new javax.swing.JLabel();
+        Commandes = new javax.swing.JLabel();
+        Space = new javax.swing.JLabel();
+        PaysRegion = new javax.swing.JLabel();
+        Liens = new javax.swing.JLabel();
+        Couleurs1 = new javax.swing.JLabel();
+        Photo = new javax.swing.JLabel();
         ZoomInfoParent = new javax.swing.JPanel();
         ZoomInfo = new ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel();
         CommenceParent = new javax.swing.JPanel();
@@ -215,15 +255,108 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         MenuDroitParent = new javax.swing.JPanel();
         SimulationMenuDroit = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         MaladieBouton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
-        TogglePaysRegion = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
-        ToggleLiens = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
-        ToggleCouleurs = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         BoutonPhoto = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
+        AideBouton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         HomeBouton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
         SimulationPanel = new ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
         setLayout(new javax.swing.OverlayLayout(this));
+
+        AidePanel.setOpaque(false);
+        AidePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                AidePanelMouseReleased(evt);
+            }
+        });
+
+        AidePanelEnfant.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        AidePanelEnfant.setLayout(new java.awt.BorderLayout());
+
+        AideTitlePanel.setOpaque(false);
+        AideTitlePanel.setLayout(new java.awt.BorderLayout());
+
+        AideTitleLabel.setFont(new java.awt.Font("Dialog", 0, 21)); // NOI18N
+        AideTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AideTitleLabel.setText("Aide");
+        AideTitleLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        AideTitlePanel.add(AideTitleLabel, java.awt.BorderLayout.CENTER);
+
+        AidePanelEnfant.add(AideTitlePanel, java.awt.BorderLayout.NORTH);
+
+        InformationsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 1));
+        InformationsPanel.setOpaque(false);
+        InformationsPanel.setLayout(new java.awt.GridLayout(10, 0));
+
+        CommandesSouris.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        CommandesSouris.setText("Commandes Souris");
+        CommandesSouris.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 10));
+        InformationsPanel.add(CommandesSouris);
+
+        ClickGauche.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        ClickGauche.setText("Cliquez sur un pays pour afficher le menu d'intervention");
+        ClickGauche.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
+        InformationsPanel.add(ClickGauche);
+
+        ClickDroit.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        ClickDroit.setText("Maintenez le clic droit et glisser pour vous déplacer sur la carte");
+        ClickDroit.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
+        InformationsPanel.add(ClickDroit);
+
+        MouseWheel.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        MouseWheel.setText("Scroll up/down pour zoom");
+        MouseWheel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
+        InformationsPanel.add(MouseWheel);
+
+        Commandes.setFont(new java.awt.Font("Dialog", 0, 17)); // NOI18N
+        Commandes.setText("Raccourcis clavier ");
+        InformationsPanel.add(Commandes);
+
+        Space.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        Space.setText("Appuyez sur [ ESPACE ] pour mettre la simulation en direct/pause");
+        Space.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
+        InformationsPanel.add(Space);
+
+        PaysRegion.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        PaysRegion.setText("Appuyez sur [ Q ] pour changer l'information affichée (Pays/Région)");
+        PaysRegion.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
+        InformationsPanel.add(PaysRegion);
+
+        Liens.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        Liens.setText("Appuyez sur [ W ] pour afficher les liens entre les pays");
+        Liens.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
+        InformationsPanel.add(Liens);
+
+        Couleurs1.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        Couleurs1.setText("Appuyez sur [ E ] pour changer la représentation des couleurs");
+        Couleurs1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
+        InformationsPanel.add(Couleurs1);
+
+        Photo.setFont(new java.awt.Font("Dialog", 0, 15)); // NOI18N
+        Photo.setText("Appuyez sur [ S ] pour effectuer une capture d'écran ");
+        Photo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
+        InformationsPanel.add(Photo);
+
+        AidePanelEnfant.add(InformationsPanel, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout AidePanelLayout = new javax.swing.GroupLayout(AidePanel);
+        AidePanel.setLayout(AidePanelLayout);
+        AidePanelLayout.setHorizontalGroup(
+            AidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AidePanelLayout.createSequentialGroup()
+                .addContainerGap(342, Short.MAX_VALUE)
+                .addComponent(AidePanelEnfant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(342, Short.MAX_VALUE))
+        );
+        AidePanelLayout.setVerticalGroup(
+            AidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AidePanelLayout.createSequentialGroup()
+                .addContainerGap(250, Short.MAX_VALUE)
+                .addComponent(AidePanelEnfant, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(250, Short.MAX_VALUE))
+        );
+
+        add(AidePanel);
 
         ZoomInfoParent.setOpaque(false);
 
@@ -392,22 +525,21 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         SimulationMenuDroit.setMaximumSize(new java.awt.Dimension(100, 200));
         SimulationMenuDroit.setMinimumSize(new java.awt.Dimension(100, 200));
         SimulationMenuDroit.setPreferredSize(new java.awt.Dimension(50, 200));
-        SimulationMenuDroit.setLayout(new java.awt.GridLayout(6, 1));
+        SimulationMenuDroit.setLayout(new java.awt.GridLayout(4, 1));
 
         MaladieBouton.setToolTipText("Modifier la maladie");
         SimulationMenuDroit.add(MaladieBouton);
 
-        TogglePaysRegion.setToolTipText("Afficher infomations pays/régions (Q)");
-        SimulationMenuDroit.add(TogglePaysRegion);
-
-        ToggleLiens.setToolTipText("Afficher les liens (W)");
-        SimulationMenuDroit.add(ToggleLiens);
-
-        ToggleCouleurs.setToolTipText("Changer les couleurs visuelles (E)");
-        SimulationMenuDroit.add(ToggleCouleurs);
-
         BoutonPhoto.setToolTipText("Prendre une photo de la carte courante (S)");
         SimulationMenuDroit.add(BoutonPhoto);
+
+        AideBouton.setToolTipText("Aide");
+        AideBouton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                AideBoutonMouseReleased(evt);
+            }
+        });
+        SimulationMenuDroit.add(AideBouton);
 
         HomeBouton.setToolTipText("Quitter la simulation (ESC)");
         HomeBouton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -536,22 +668,48 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         this.HomeButtonReleased(evt);
     }//GEN-LAST:event_HomeBoutonMouseReleased
 
+    private void AideBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AideBoutonMouseReleased
+        this.AideBoutonReleased(evt);
+    }//GEN-LAST:event_AideBoutonMouseReleased
+
+    private void AidePanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AidePanelMouseReleased
+        if (AidePanel.isVisible()) {
+            AidePanel.setVisible(false);
+            updateUI();
+        }
+    }//GEN-LAST:event_AidePanelMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton AideBouton;
+    private javax.swing.JPanel AidePanel;
+    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi AidePanelEnfant;
+    private javax.swing.JLabel AideTitleLabel;
+    private javax.swing.JPanel AideTitlePanel;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton BoutonPhoto;
     private javax.swing.JPanel BoutonsPanel;
+    private javax.swing.JLabel ClickDroit;
+    private javax.swing.JLabel ClickGauche;
+    private javax.swing.JLabel Commandes;
+    private javax.swing.JLabel CommandesSouris;
     private javax.swing.JLabel CommenceIcon;
     private javax.swing.JLabel CommenceLabel;
     private javax.swing.JLabel CommenceLabel2;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi CommencePanel;
     private javax.swing.JPanel CommenceParent;
+    private javax.swing.JLabel Couleurs1;
     private javax.swing.JPanel FF;
     private javax.swing.JLabel FFLabel;
     private javax.swing.JLabel FastForward;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HomeBouton;
+    private javax.swing.JPanel InformationsPanel;
+    private javax.swing.JLabel Liens;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton MaladieBouton;
     private javax.swing.JPanel MenuDroitParent;
     private javax.swing.JPanel MenuGaucheParent;
+    private javax.swing.JLabel MouseWheel;
+    private javax.swing.JLabel PaysRegion;
+    private javax.swing.JLabel Photo;
     private javax.swing.JLabel PlayPauseIcon;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi SimulationMenuDroit;
     private ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche SimulationMenuGauche;
@@ -559,9 +717,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private javax.swing.JPanel Slider;
     private javax.swing.JSlider SliderJour;
     private javax.swing.JPanel SliderParent;
-    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton ToggleCouleurs;
-    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton ToggleLiens;
-    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton TogglePaysRegion;
+    private javax.swing.JLabel Space;
     private ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel ZoomInfo;
     private javax.swing.JPanel ZoomInfoParent;
     // End of variables declaration//GEN-END:variables

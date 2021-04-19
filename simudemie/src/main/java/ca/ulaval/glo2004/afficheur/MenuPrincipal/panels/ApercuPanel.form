@@ -137,6 +137,9 @@
           </SubComponents>
         </Container>
         <Container class="ca.ulaval.glo2004.afficheur.CreationCarte.panels.CarteApercu" name="ApercuCarte">
+          <Events>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ApercuCarteMouseReleased"/>
+          </Events>
 
           <Layout>
             <DimensionLayout dim="0">

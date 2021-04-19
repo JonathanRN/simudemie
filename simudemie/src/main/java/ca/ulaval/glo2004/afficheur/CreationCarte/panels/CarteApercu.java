@@ -6,6 +6,7 @@
 package ca.ulaval.glo2004.afficheur.CreationCarte.panels;
 
 import ca.ulaval.glo2004.afficheur.CreationCarte.mode.ApercuCarte;
+import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.ZoomablePanel;
 import ca.ulaval.glo2004.domaine.Carte;
 import java.awt.Graphics;
@@ -24,7 +25,7 @@ public class CarteApercu extends ZoomablePanel {
     private ApercuCarte prisePhotoMode;
     
     public CarteApercu() {
-        initComponents();        
+        initComponents();
     }
     
     public void setCarte(Carte carte) {
@@ -112,6 +113,12 @@ public class CarteApercu extends ZoomablePanel {
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         if (SwingUtilities.isRightMouseButton(evt)) {
             mouseReleased(evt);
+        }
+        if (SwingUtilities.isLeftMouseButton(evt) && prisePhotoMode.mode) {
+            prisePhotoMode.afficherCouleurs++;
+            if (prisePhotoMode.afficherCouleurs > 4) {
+                prisePhotoMode.afficherCouleurs = 1;
+            }
         }
         this.getRootPane().repaint();
     }//GEN-LAST:event_formMouseReleased

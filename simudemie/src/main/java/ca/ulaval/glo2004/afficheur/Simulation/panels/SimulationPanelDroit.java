@@ -6,11 +6,9 @@
 package ca.ulaval.glo2004.afficheur.Simulation.panels;
 
 import ca.ulaval.glo2004.afficheur.Simulation.Simulation;
-import ca.ulaval.glo2004.afficheur.boutons.ToggleBouton;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
-import ca.ulaval.glo2004.domaine.Maladie;
 
 
 /**
@@ -19,9 +17,7 @@ import ca.ulaval.glo2004.domaine.Maladie;
  */
 public class SimulationPanelDroit extends PanelArrondi {
     
-        private ToggleBouton toggleCourant;
-        private Simulation simulation;
-        private Maladie maladie;
+    private Simulation simulation;
 
     public SimulationPanelDroit() {
         
@@ -66,12 +62,12 @@ public class SimulationPanelDroit extends PanelArrondi {
     }
     
     public void onToggleMaladie() {
-            MaladiePanel.setVisible(true);
-            simulation.toggleMenuDroitMaladie(true);
-            MaladieBouton.setToggle(true);
-            
-            loadElements();
-            repaint();
+        MaladiePanel.setVisible(true);
+        simulation.toggleMenuDroitMaladie(true);
+        MaladieBouton.setToggle(true);
+
+        loadElements();
+        repaint();
     }
    
 
@@ -193,6 +189,7 @@ public class SimulationPanelDroit extends PanelArrondi {
 
     private void BoutonPhotoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonPhotoMouseReleased
         unToggleMaladie();
+        simulation.prendrePhoto();
     }//GEN-LAST:event_BoutonPhotoMouseReleased
 
 

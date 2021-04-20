@@ -166,6 +166,9 @@ public class SimulationPanel extends ZoomablePanel {
             case KeyEvent.VK_E:
                 afficheur.onSwapCouleurs();
                 break;
+            case KeyEvent.VK_S:
+                simulation.prendrePhoto();
+                break;
         }
         repaint();
     }//GEN-LAST:event_formKeyReleased

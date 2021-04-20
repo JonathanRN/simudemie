@@ -16,6 +16,9 @@ import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -190,6 +193,17 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         updateFastForwardIcon();
         
         GestionnaireScenario.getInstance().setVitesse(vitesse);
+    }
+    
+    public void prendrePhoto() {
+        BufferedImage img = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        paint(img.getGraphics());
+        
+        try {
+            ImageIO.write(img, "png", new File("saved.png"));
+        }
+        catch (Exception e) {
+        }
     }
     
     @Override

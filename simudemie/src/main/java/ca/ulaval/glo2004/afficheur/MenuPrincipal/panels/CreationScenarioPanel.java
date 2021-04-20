@@ -18,7 +18,6 @@ import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireCarte;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireMaladie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.AdjustmentEvent;
@@ -46,9 +45,11 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
             ongletScenarioCarte = new OngletCreationScenarioCarte();
             ongletScenarioMaladie = new OngletCreationScenarioMaladie();
 
-            SimulationInput.setFont(FontRegister.RobotoRegular.deriveFont(18f));
+            SimulationInput.setFont(FontRegister.RobotoRegular.deriveFont(16f));
+            SelectNomLabel.setFont(FontRegister.RobotoRegular.deriveFont(18f));
+            SelectObjetLabel.setFont(FontRegister.RobotoRegular.deriveFont(18f));
             super.setBackground(Couleurs.fondNoir);
-            BackgroundArrondi.setBackground(Couleurs.pannelArrondi);
+            BackgroundArrondi.setBackground(Couleurs.pannelArrondiNoTransp);
             ConteneurCartesPanel.setBackground(Couleurs.pannelArrondiNoTransp);
             ConteneurMaladiesPanel.setBackground(Couleurs.pannelArrondiNoTransp);
 
@@ -62,9 +63,9 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
 
             CartesScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
             MaladiesScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
-            MaladiesScrollPane.setBackground(Couleurs.pannelArrondi);
+            MaladiesScrollPane.setBackground(Couleurs.pannelArrondiNoTransp);
             MaladiesScrollPane.getViewport().setOpaque(false);
-            CartesScrollPane.setBackground(Couleurs.pannelArrondi);
+            CartesScrollPane.setBackground(Couleurs.pannelArrondiNoTransp);
             CartesScrollPane.getViewport().setOpaque(false);
         }
         catch (Exception e) {
@@ -146,7 +147,10 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
 
         CreationScenarioPanel = new javax.swing.JPanel();
         BackgroundArrondi = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
+        NomPanel = new javax.swing.JPanel();
+        SelectNomLabel = new javax.swing.JLabel();
         SimulationInput = new javax.swing.JTextField();
+        SelectObjetLabel = new javax.swing.JLabel();
         CreationScenarioScrollPanes = new javax.swing.JPanel();
         CartesScrollPane = new javax.swing.JScrollPane();
         ConteneurCartesPanel = new javax.swing.JPanel();
@@ -170,16 +174,32 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
         BackgroundArrondi.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         BackgroundArrondi.setLayout(new java.awt.BorderLayout(15, 0));
 
+        NomPanel.setOpaque(false);
+        NomPanel.setLayout(new java.awt.GridLayout(3, 0));
+
+        SelectNomLabel.setText("Entrez le nom de ce nouveau scénario ");
+        NomPanel.add(SelectNomLabel);
+
         SimulationInput.setBackground(new java.awt.Color(71, 76, 88));
         SimulationInput.setFont(new java.awt.Font("Dialog", 0, 21)); // NOI18N
-        SimulationInput.setText("Nom de la simulation");
-        SimulationInput.setToolTipText("");
+        SimulationInput.setToolTipText("Nom de la simulation");
+        SimulationInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SimulationInputActionPerformed(evt);
+            }
+        });
         SimulationInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 SimulationInputKeyReleased(evt);
             }
         });
-        BackgroundArrondi.add(SimulationInput, java.awt.BorderLayout.NORTH);
+        NomPanel.add(SimulationInput);
+
+        SelectObjetLabel.setText("Choisir la carte et la maladie");
+        SelectObjetLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 1, 1, 1));
+        NomPanel.add(SelectObjetLabel);
+
+        BackgroundArrondi.add(NomPanel, java.awt.BorderLayout.PAGE_START);
 
         CreationScenarioScrollPanes.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 0, 0));
         CreationScenarioScrollPanes.setOpaque(false);
@@ -252,11 +272,11 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
         CreationScenarioPanelLayout.setVerticalGroup(
             CreationScenarioPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CreationScenarioPanelLayout.createSequentialGroup()
-                .addContainerGap(110, Short.MAX_VALUE)
+                .addContainerGap(150, Short.MAX_VALUE)
                 .addComponent(BackgroundArrondi, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BoutonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         add(CreationScenarioPanel);
@@ -265,7 +285,6 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
     private void SimulationInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SimulationInputKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             this.requestFocusInWindow();
-            updateUI();
         }
     }//GEN-LAST:event_SimulationInputKeyReleased
 
@@ -279,12 +298,21 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
     }//GEN-LAST:event_AnnulerBoutonMouseReleased
 
     private void CreerBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreerBoutonMouseReleased
+        if (!SimulationInput.getText().isEmpty()){ 
         Object[] args = { SimulationInput.getText(), ongletScenarioCarte.getIndexCourant(), ongletScenarioMaladie.getIndexCourant() };
         Scenario scenario = GestionnaireScenario.getInstance().creer(args);
         ongletScenario.ajouterCard(scenario);
         
-        this.setVisible(false);
+        this.setVisible(false);   
+        }
+        else { 
+          SimulationInput.requestFocus();
+        }
     }//GEN-LAST:event_CreerBoutonMouseReleased
+
+    private void SimulationInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SimulationInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SimulationInputActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -298,6 +326,9 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
     private javax.swing.JPanel CreationScenarioScrollPanes;
     private javax.swing.JButton CreerBouton;
     private javax.swing.JScrollPane MaladiesScrollPane;
+    private javax.swing.JPanel NomPanel;
+    private javax.swing.JLabel SelectNomLabel;
+    private javax.swing.JLabel SelectObjetLabel;
     private javax.swing.JTextField SimulationInput;
     // End of variables declaration//GEN-END:variables
 

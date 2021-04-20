@@ -69,6 +69,7 @@ public class SimulationPanelDroit extends PanelArrondi {
     public void onToggleMaladie() {
         MaladiePanel.setVisible(true);
         simulation.toggleMenuDroitMaladie(true);
+        simulation.setDirect(false);
         MaladieBouton.setToggle(true);
 
         loadMaladie();

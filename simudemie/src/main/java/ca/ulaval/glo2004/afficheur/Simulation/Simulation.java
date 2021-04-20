@@ -223,6 +223,11 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     
     @Override
     public void onChargerJour(int jour) {
+        if(SimulationMenuDroit.isVisible()) {
+            SimulationMenuDroit.loadMaladie();
+            repaint();
+        }
+        
         // On recharge le UI dans le cas que ca change
         if (SimulationMenuGauche.isVisible()) {
             SimulationMenuGauche.loadElements();

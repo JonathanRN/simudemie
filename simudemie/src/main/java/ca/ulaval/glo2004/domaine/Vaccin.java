@@ -78,7 +78,5 @@ public class Vaccin implements Externalizable {
         tauxImmunisation = in.readDouble();
         tauxAdhesion = in.readDouble();
         vaccinationQuotidienne = in.readDouble();
-    }
-    
-    
+    } 
 }

@@ -41,7 +41,6 @@ public class Region extends Mode {
         
         if (line != null) {
             g.setColor(Couleurs.mesures);
-            g.setStroke(new BasicStroke (2));
             g.drawLine((int)line.x1, (int)line.y1, (int)line.x2, (int)line.y2);
             
             for (Polygon p : creationCarte.getPolygones()) {

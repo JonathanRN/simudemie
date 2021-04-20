@@ -80,7 +80,7 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         
         if(vaccinGlobal == null) {
             getCourant().getCarteJourCourant().getPays(indexPays).ajouterVaccin(new Vaccin(vaccin));
-            vaccin.setTauxAdhesion(0);
+            vaccin.setTauxAdhesion(0.01);
             vaccin.setVaccinationQuotidienne(0);
             vaccin.setActive(false);
             getCourant().ajouterVaccin(vaccin);

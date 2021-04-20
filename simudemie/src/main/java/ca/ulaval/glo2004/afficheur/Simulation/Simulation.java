@@ -158,6 +158,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
             onglet.onRevenirSurOnglet();
         } 
     }
+    
     public void AideBoutonReleased(MouseEvent evt) {
         if (!AidePanel.isVisible()) {
             setDirect(false);
@@ -170,6 +171,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         }
         
     }
+    
     private void updateDirectIcon() {
         String path = "/icons/";
         path += estEnDirect ? "pause_button_35px" : "direct_button_35px" ;
@@ -201,6 +203,12 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         SliderJour.setValue(SliderJour.getMaximum());
 
         SimulationMenuGauche.updateMesures();
+        
+        if (SimulationMenuGauche.isVisible()) {
+            SimulationMenuGauche.onAvancerJour(jour);
+        }
+        
+
         repaint();
     }
     
@@ -209,6 +217,8 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         // On recharge le UI dans le cas que ca change
         if (SimulationMenuGauche.isVisible()) {
             SimulationMenuGauche.loadElements();
+            SimulationMenuGauche.onChargerJour(jour);
+            repaint();
         }
     }
     

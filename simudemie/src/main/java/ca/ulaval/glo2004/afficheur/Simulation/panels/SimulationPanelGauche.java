@@ -54,7 +54,6 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     private int ancienJour;
         
     public SimulationPanelGauche() {
-        
         try {
             initComponents();
             updateBoutonAjouter(false, AjouterMesure);

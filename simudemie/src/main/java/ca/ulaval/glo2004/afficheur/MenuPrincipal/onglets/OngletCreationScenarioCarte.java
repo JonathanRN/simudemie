@@ -45,6 +45,7 @@ public class OngletCreationScenarioCarte extends OngletUI {
 
         setBackground(new java.awt.Color(46, 52, 64));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 50, 35, 35));
+        setOpaque(false);
         setLayout(new java.awt.BorderLayout());
     }// </editor-fold>//GEN-END:initComponents
 

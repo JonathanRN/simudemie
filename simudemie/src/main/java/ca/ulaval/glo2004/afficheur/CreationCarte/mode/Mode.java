@@ -132,6 +132,7 @@ public class Mode {
         for (Polygon p : carte.getPolygonesRegions()) {
             g.setColor(couleurRempli);
             g.fillPolygon(p);
+            paintLignes(g, Color.black, p);
         }
     }
     

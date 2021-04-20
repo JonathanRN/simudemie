@@ -52,16 +52,16 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         AidePanelEnfant.setBackground(Couleurs.sideMenuLessTransp);
         
         AideTitleLabel.setFont(FontRegister.RobotoRegular.deriveFont(21f));
-        Commandes.setFont(FontRegister.RobotoLight.deriveFont(17f));
-        CommandesSouris.setFont(FontRegister.RobotoLight.deriveFont(17f));
-        ClickGauche.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        ClickDroit.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        MouseWheel.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        Space.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        PaysRegion.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        Liens.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        Couleurs1.setFont(FontRegister.RobotoThin.deriveFont(15f));
-        Photo.setFont(FontRegister.RobotoThin.deriveFont(15f));
+        Commandes.setFont(FontRegister.RobotoRegular.deriveFont(17f));
+        CommandesSouris.setFont(FontRegister.RobotoRegular.deriveFont(17f));
+        ClickGauche.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        ClickDroit.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        MouseWheel.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        Space.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        PaysRegion.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        Liens.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        Couleurs1.setFont(FontRegister.RobotoLight.deriveFont(15f));
+        Photo.setFont(FontRegister.RobotoLight.deriveFont(15f));
         
         initBoutonsGeneraux();
         

@@ -42,28 +42,24 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
             initComponents();
             updateBoutonAjouter(false, AjouterMesure);
             updateBoutonAjouter(false, AjouterVaccins);
-            setBackground(Couleurs.sideMenuTransp);
+            super.setBackground(Couleurs.sideMenuTransp);
             SidePanel.setBackground(Couleurs.sideMenuLessTransp);
             
             BoutonMesures.init(this, "icons8_wash_your_hands_30px");
-            BoutonMesures.setBackground(Couleurs.sideMenuLessTransp);
             MesuresActives.getViewport().setOpaque(false);
             MesuresActives.getVerticalScrollBar().setUnitIncrement(15);
             MesuresActives.getVerticalScrollBar().addAdjustmentListener(this);
             MesuresTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
             BoutonLiens.init(this, "icons8_chain_25px");
-            BoutonLiens.setBackground(Couleurs.sideMenuLessTransp);
             LiensTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             LiensScrollPane.getViewport().setOpaque(false);
             
             BoutonVaccins.init(this, "icons8_syringe_30px");
-            BoutonVaccins.setBackground(Couleurs.sideMenuLessTransp);
             VaccinsScrollPane.getViewport().setOpaque(false);
             VaccinsTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
             BoutonStats.init(this, "icons8_bar_chart_30px");
-            BoutonStats.setBackground(Couleurs.sideMenuLessTransp);
             StatsScrollPane.getViewport().setOpaque(false);
             StatsTitreLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
             

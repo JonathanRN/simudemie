@@ -199,7 +199,8 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     public void onAvancerJour(int jour) {
         SliderJour.setMaximum(jour);
         SliderJour.setValue(SliderJour.getMaximum());
-        
+
+        SimulationMenuGauche.updateMesures();
         repaint();
     }
     
@@ -207,7 +208,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     public void onChargerJour(int jour) {
         // On recharge le UI dans le cas que ca change
         if (SimulationMenuGauche.isVisible()) {
-            SimulationMenuGauche.loadMesures();
+            SimulationMenuGauche.loadElements();
         }
     }
     

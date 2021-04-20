@@ -52,6 +52,7 @@ public class Pays implements Externalizable {
         tauxMortalite /= 100d;
         tauxGuerison /= 100d;
         
+        seuilAtteint();
         double tauxInfAjuste = tauxInf;
         for (Region region : listeRegions)
         {
@@ -71,27 +72,31 @@ public class Pays implements Externalizable {
         }
         
         contaminerInterRegions();
-        seuilAtteint();
         vaccination();
     }
     
     public void seuilAtteint(){
         for (Mesure m : mesures){
-            if (this.getPourcentageInfectee() >= m.getSeuilActivation()){
-                m.setActive(true);
-            }else{
-                m.setActive(false);
-            }
+            setMesureActiveIfOverSeuil(m);
         }
     }
     
+    public boolean setMesureActiveIfOverSeuil(Mesure mesure) {
+        boolean active;
+        if (this.getPourcentageInfectee() >= mesure.getSeuilActivation()){
+            active = true;
+        } else  {
+            active = false;
+        }
+        mesure.setActive(active);
+        return active;
+    }
+    
     public void vaccination(){
-        if(!this.vaccins.isEmpty()){
-            for (Region r : listeRegions){
-                for (Vaccin v : vaccins){
-                    if(v.getActive()) {
-                        r.vaccinerPopulation(v.getTauxImmunisation(), v.getVaccinationQuotidienne());
-                    }
+        for (Vaccin v : vaccins) {
+            if(v.getActive()) {
+                for (Region r : listeRegions) {
+                    r.vaccinerPopulation(v.getTauxImmunisation(), v.getVaccinationQuotidienne());
                 }
             }
         }

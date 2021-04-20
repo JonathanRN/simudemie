@@ -51,18 +51,21 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     
     public Scenario getCourant() {return getElement(scenarioCourant);}
     
-    public void creerMesure(int indexMesure, int indexPays, String nom, double tauxAdhesion, double tauxReduction, int seuilActivation, boolean active) {
+    // retourne true
+    public boolean creerMesure(int indexMesure, int indexPays, String nom, double tauxAdhesion, double tauxReduction, int seuilActivation) {
         Pays pays = getCourant().getCarteJourCourant().getPays(indexPays);
         Mesure mesure = pays.getMesure(indexMesure);
         if (mesure == null) {
-            pays.ajouterMesure(new Mesure(nom, tauxAdhesion, tauxReduction, seuilActivation, active));
+            mesure = new Mesure(nom, tauxAdhesion, tauxReduction, seuilActivation);
+            pays.ajouterMesure(mesure);
         } else {
             mesure.setNom(nom);
             mesure.setTauxAdhesion(tauxAdhesion);
             mesure.setTauxReductionProp(tauxReduction);
             mesure.setSeuilActivation(seuilActivation);
-            mesure.setActive(active);
         }
+        
+        return pays.setMesureActiveIfOverSeuil(mesure);
     }
     
     public void supprimerMesure(int indexMesure, int indexPays) {

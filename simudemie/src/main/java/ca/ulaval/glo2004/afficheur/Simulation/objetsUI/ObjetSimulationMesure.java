@@ -45,13 +45,12 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         }
         // Met tout de suite en mode edition lors de la creation
         setEdition(true, false);
-        setActif(true, false);
+        setActif(false);
     }
     
-    private void setActif(boolean actif, boolean mouseOver) {
+    public void setActif(boolean actif) {
         estActif = actif;
-        
-        updateActifIcon(mouseOver);
+        updateActifIcon();
     }
     
     private void setEdition(boolean edition, boolean mouseOver) {
@@ -70,7 +69,7 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         TauxAdhesion.setValue(mesure.getTauxAdhesion());
         TauxReduction.setValue(mesure.getTauxReductionProp());
         SeuilActivation.setValue(mesure.getSeuilActivation());
-        setActif(mesure.getActive(), false);
+        setActif(mesure.getActive());
         setEdition(false, false);
     }
     
@@ -82,7 +81,13 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         } catch(ParseException pe) {
         }
         
-        GestionnaireScenario.getInstance().creerMesure(index, simulationTabs.getIndexPays(), NomMesureTextField.getText(), (double) TauxAdhesion.getValue(), (double) TauxReduction.getValue(), (int) SeuilActivation.getValue(), estActif);
+        boolean active = GestionnaireScenario.getInstance().creerMesure(index, simulationTabs.getIndexPays(),
+                                                            NomMesureTextField.getText(),
+                                                            (double) TauxAdhesion.getValue(),
+                                                            (double) TauxReduction.getValue(),
+                                                            (int) SeuilActivation.getValue()
+                                                        );
+        setActif(active);
     }
     
     private void updateEditerIcon(boolean actif) {
@@ -102,11 +107,9 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         conteneur.getRootPane().repaint();
     }
     
-    private void updateActifIcon(boolean actif) {
-        mouseOverActif = actif;
+    private void updateActifIcon() {
         String path = "/icons/simulation/mesure/";
-        path += estActif ? "checked" : "unchecked";
-        path += actif ? "_highlight.png" : ".png";
+        path += (estActif ? "green" : "red") + "_circle_20px.png";
         Activer.setIcon(new ImageIcon(getClass().getResource(path)));
         conteneur.getRootPane().repaint();
     }
@@ -192,21 +195,10 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         BoutonsPanel.add(Supprimer);
 
         Activer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Activer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simulation/mesure/unchecked.png"))); // NOI18N
+        Activer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simulation/mesure/red_circle_20px.png"))); // NOI18N
         Activer.setMaximumSize(new java.awt.Dimension(30, 30));
         Activer.setMinimumSize(new java.awt.Dimension(30, 30));
         Activer.setPreferredSize(new java.awt.Dimension(30, 30));
-        Activer.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ActiverMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                ActiverMouseExited(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                ActiverMouseReleased(evt);
-            }
-        });
         BoutonsPanel.add(Activer);
 
         TitreMesurePanel.add(BoutonsPanel, java.awt.BorderLayout.LINE_END);
@@ -268,14 +260,6 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
         updateEditerIcon(false);
     }//GEN-LAST:event_ModifieMouseExited
 
-    private void ActiverMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActiverMouseEntered
-        updateActifIcon(true);
-    }//GEN-LAST:event_ActiverMouseEntered
-
-    private void ActiverMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActiverMouseExited
-        updateActifIcon(false);
-    }//GEN-LAST:event_ActiverMouseExited
-
     private void SupprimerMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupprimerMouseEntered
         updateSupprimerIcon(true);
     }//GEN-LAST:event_SupprimerMouseEntered
@@ -304,11 +288,6 @@ public class ObjetSimulationMesure extends javax.swing.JPanel {
             sauvegarderMesure();
         }
     }//GEN-LAST:event_ModifieMouseReleased
-
-    private void ActiverMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActiverMouseReleased
-        setActif(!estActif, mouseOverActif);
-        sauvegarderMesure();
-    }//GEN-LAST:event_ActiverMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

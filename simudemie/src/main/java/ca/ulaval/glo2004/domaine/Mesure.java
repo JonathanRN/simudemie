@@ -20,15 +20,17 @@ public class Mesure implements Externalizable {
     private double tauxReductionProp;
     private boolean active;
     
-    public Mesure() {}
+    public Mesure() {
+        active = false;
+    }
     
-    public Mesure(String nom, double tauxAdhesion, double tauxReductionProp, int seuilActivation, boolean active)
+    public Mesure(String nom, double tauxAdhesion, double tauxReductionProp, int seuilActivation)
     {
         this.nom = nom; 
         this.tauxAdhesion = tauxAdhesion;
         this.tauxReductionProp = tauxReductionProp;
         this.seuilActivation = seuilActivation;
-        this.active = active;
+        this.active = false;
     }
     
     public Mesure(Mesure mesure)

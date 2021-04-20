@@ -20,9 +20,11 @@ import ca.ulaval.glo2004.domaine.Vaccin;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
 import ca.ulaval.glo2004.domaine.VoieLiaison.TypeVoie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
+import java.awt.Component;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JLabel;
 
 /**
@@ -105,6 +107,14 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
 
         for (Mesure m : simulation.getScenario().getCarteJourCourant().getPays(indexPays).getMesures()) {
             addMesure(m);
+        }
+    }
+    
+    public void updateMesures() {
+        ArrayList<Mesure> mesures = simulation.getScenario().getCarteJourCourant().getPays(indexPays).getMesures();
+        for(int index = 0; index < mesures.size(); index++) {
+            ObjetSimulationMesure osm = (ObjetSimulationMesure) ConteneurMesuresPanel.getComponent(index);
+            osm.setActif(mesures.get(index).getActive());
         }
     }
     

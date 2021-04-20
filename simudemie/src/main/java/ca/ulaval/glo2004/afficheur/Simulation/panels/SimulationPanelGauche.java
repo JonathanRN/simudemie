@@ -24,6 +24,7 @@ import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.Component;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.util.ArrayList;
@@ -75,6 +76,8 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
             
             BoutonVaccins.init(this, "icons8_syringe_30px");
             VaccinsScrollPane.getViewport().setOpaque(false);
+            VaccinsScrollPane.getVerticalScrollBar().setUnitIncrement(15);
+            VaccinsScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
             VaccinsTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
             BoutonStats.init(this, "icons8_bar_chart_30px");

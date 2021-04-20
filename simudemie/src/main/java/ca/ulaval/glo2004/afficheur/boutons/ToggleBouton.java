@@ -44,6 +44,8 @@ public class ToggleBouton extends PanelArrondi {
         setIcon("/icons/simulation/" + path + ".png");
     }
     
+    public boolean getToggle() {return estToggle;}
+        
     public void setActif(boolean actif) {
         this.actif = actif;
         this.setVisible(actif);

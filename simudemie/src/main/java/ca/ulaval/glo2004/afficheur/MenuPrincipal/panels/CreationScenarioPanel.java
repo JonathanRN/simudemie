@@ -46,8 +46,8 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
             ongletScenarioMaladie = new OngletCreationScenarioMaladie();
 
             SimulationInput.setFont(FontRegister.RobotoRegular.deriveFont(16f));
-            SelectNomLabel.setFont(FontRegister.RobotoRegular.deriveFont(18f));
-            SelectObjetLabel.setFont(FontRegister.RobotoRegular.deriveFont(18f));
+            SelectNomLabel.setFont(FontRegister.RobotoLight.deriveFont(18f));
+            SelectObjetLabel.setFont(FontRegister.RobotoLight.deriveFont(18f));
             super.setBackground(Couleurs.fondNoir);
             BackgroundArrondi.setBackground(Couleurs.pannelArrondiNoTransp);
             ConteneurCartesPanel.setBackground(Couleurs.pannelArrondiNoTransp);
@@ -303,6 +303,7 @@ public class CreationScenarioPanel extends javax.swing.JPanel implements Adjustm
         Scenario scenario = GestionnaireScenario.getInstance().creer(args);
         ongletScenario.ajouterCard(scenario);
         
+        SimulationInput.setText("");
         this.setVisible(false);   
         }
         else { 

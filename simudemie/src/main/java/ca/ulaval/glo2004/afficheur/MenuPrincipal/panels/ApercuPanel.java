@@ -9,9 +9,6 @@ import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Carte;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -44,18 +41,6 @@ public class ApercuPanel extends PanelArrondi {
     
     public void setCarte(Carte carte, boolean mode) {
         ApercuCarte.setCarte(carte, mode);
-    }
-    
-    private void prendrePhoto() {
-        BufferedImage img = new BufferedImage(ApercuCarte.getWidth(), ApercuCarte.getHeight(), BufferedImage.TYPE_INT_RGB);
-        
-        ApercuCarte.paint(img.getGraphics());
-        
-        try {
-            ImageIO.write(img, "png", new File("saved.png"));
-        }
-        catch (Exception e) {
-        }
     }
 
     /**
@@ -153,7 +138,7 @@ public class ApercuPanel extends PanelArrondi {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ExportCarteBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportCarteBoutonMouseReleased
-        prendrePhoto();
+        //prendrePhoto();
     }//GEN-LAST:event_ExportCarteBoutonMouseReleased
 
     private void ApercuCarteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ApercuCarteMouseReleased

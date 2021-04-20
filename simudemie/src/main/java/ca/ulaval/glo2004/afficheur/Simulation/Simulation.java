@@ -16,6 +16,9 @@ import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -32,7 +35,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private final GestionnaireScenario gestionnaire;
     private final int index;
     private boolean estCommence;
-    private OngletScenario onglet;
+    public OngletScenario onglet;
     
     public Simulation(int index, OngletScenario onglet) {
         this.onglet = onglet;
@@ -43,10 +46,10 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         
         initComponents();
         SimulationMenuGauche.setSimulation(this);
-        toggleSimulationTabs(false);
+        SimulationMenuDroit.setSimulation(this);
+        toggleSimulationTabs(false);  
         
-        SimulationMenuDroit.setBackground(Couleurs.sideMenuLessTransp);
-        
+        //Aide Panel Init
         AidePanel.setVisible(false);
         AidePanel.setBackground(Couleurs.fondNoir);
         AidePanelEnfant.setBackground(Couleurs.sideMenuLessTransp);
@@ -62,8 +65,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         Liens.setFont(FontRegister.RobotoLight.deriveFont(15f));
         Couleurs1.setFont(FontRegister.RobotoLight.deriveFont(15f));
         Photo.setFont(FontRegister.RobotoLight.deriveFont(15f));
-        
-        initBoutonsGeneraux();
+       
         
         // Cacher par default, tant que la simulation n'est pas commencee
         SliderJour.setVisible(false);
@@ -88,15 +90,12 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         setVitesse(1);
     }
     
-    private void initBoutonsGeneraux() {
-        MaladieBouton.setIcon("/icons/simulation/icons8_microorganisms_25px.png");
-        BoutonPhoto.setIcon("/icons/simulation/icons8_unsplash_25px.png");
-        AideBouton.setIcon("/icons/simulation/icons8_help_25px.png");
-        HomeBouton.setIcon("/icons/icons8_home_25px_1.png");
-    }
-    
     public void toggleSimulationTabs(boolean actif) {
         SimulationMenuGauche.setVisible(actif);
+    }
+    
+    public void toggleMenuDroitMaladie (boolean actif) {
+        SimulationMenuDroit.setOpaque(actif);
     }
     
     public SimulationPanelGauche getSimulationTabs() {
@@ -169,7 +168,6 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
             AidePanel.setVisible(false);
             updateUI();
         }
-        
     }
     
     private void updateDirectIcon() {
@@ -195,6 +193,17 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         updateFastForwardIcon();
         
         GestionnaireScenario.getInstance().setVitesse(vitesse);
+    }
+    
+    public void prendrePhoto() {
+        BufferedImage img = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        paint(img.getGraphics());
+        
+        try {
+            ImageIO.write(img, "png", new File("saved.png"));
+        }
+        catch (Exception e) {
+        }
     }
     
     @Override
@@ -235,6 +244,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         AidePanelEnfant = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
         AideTitlePanel = new javax.swing.JPanel();
         AideTitleLabel = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         InformationsPanel = new javax.swing.JPanel();
         CommandesSouris = new javax.swing.JLabel();
         ClickGauche = new javax.swing.JLabel();
@@ -264,11 +274,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         MenuGaucheParent = new javax.swing.JPanel();
         SimulationMenuGauche = new ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche();
         MenuDroitParent = new javax.swing.JPanel();
-        SimulationMenuDroit = new ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi();
-        MaladieBouton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
-        BoutonPhoto = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
-        AideBouton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
-        HomeBouton = new ca.ulaval.glo2004.afficheur.boutons.SimulationBouton();
+        SimulationMenuDroit = new ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelDroit();
         SimulationPanel = new ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanel();
 
         setBackground(new java.awt.Color(46, 52, 64));
@@ -290,8 +296,10 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         AideTitleLabel.setFont(new java.awt.Font("Dialog", 0, 21)); // NOI18N
         AideTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AideTitleLabel.setText("Aide");
+        AideTitleLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
         AideTitleLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         AideTitlePanel.add(AideTitleLabel, java.awt.BorderLayout.CENTER);
+        AideTitlePanel.add(jSeparator1, java.awt.BorderLayout.PAGE_END);
 
         AidePanelEnfant.add(AideTitlePanel, java.awt.BorderLayout.NORTH);
 
@@ -355,9 +363,9 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         AidePanelLayout.setHorizontalGroup(
             AidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AidePanelLayout.createSequentialGroup()
-                .addContainerGap(342, Short.MAX_VALUE)
+                .addContainerGap(271, Short.MAX_VALUE)
                 .addComponent(AidePanelEnfant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(342, Short.MAX_VALUE))
+                .addContainerGap(316, Short.MAX_VALUE))
         );
         AidePanelLayout.setVerticalGroup(
             AidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -511,6 +519,7 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
 
         MenuGaucheParent.setBackground(new java.awt.Color(46, 52, 64));
         MenuGaucheParent.setOpaque(false);
+        MenuGaucheParent.setPreferredSize(new java.awt.Dimension(1080, 780));
 
         javax.swing.GroupLayout MenuGaucheParentLayout = new javax.swing.GroupLayout(MenuGaucheParent);
         MenuGaucheParent.setLayout(MenuGaucheParentLayout);
@@ -531,50 +540,27 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
 
         add(MenuGaucheParent);
 
+        MenuDroitParent.setBackground(new java.awt.Color(46, 52, 64));
         MenuDroitParent.setOpaque(false);
 
-        SimulationMenuDroit.setMaximumSize(new java.awt.Dimension(100, 200));
-        SimulationMenuDroit.setMinimumSize(new java.awt.Dimension(100, 200));
-        SimulationMenuDroit.setPreferredSize(new java.awt.Dimension(50, 200));
-        SimulationMenuDroit.setLayout(new java.awt.GridLayout(4, 1));
-
-        MaladieBouton.setToolTipText("Modifier la maladie");
-        SimulationMenuDroit.add(MaladieBouton);
-
-        BoutonPhoto.setToolTipText("Prendre une photo de la carte courante (S)");
-        SimulationMenuDroit.add(BoutonPhoto);
-
-        AideBouton.setToolTipText("Aide");
-        AideBouton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                AideBoutonMouseReleased(evt);
-            }
-        });
-        SimulationMenuDroit.add(AideBouton);
-
-        HomeBouton.setToolTipText("Quitter la simulation (ESC)");
-        HomeBouton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                HomeBoutonMouseReleased(evt);
-            }
-        });
-        SimulationMenuDroit.add(HomeBouton);
+        SimulationMenuDroit.setMinimumSize(new java.awt.Dimension(127, 200));
+        SimulationMenuDroit.setOpaque(false);
 
         javax.swing.GroupLayout MenuDroitParentLayout = new javax.swing.GroupLayout(MenuDroitParent);
         MenuDroitParent.setLayout(MenuDroitParentLayout);
         MenuDroitParentLayout.setHorizontalGroup(
             MenuDroitParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuDroitParentLayout.createSequentialGroup()
-                .addContainerGap(1024, Short.MAX_VALUE)
-                .addComponent(SimulationMenuDroit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(730, Short.MAX_VALUE)
+                .addComponent(SimulationMenuDroit, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         MenuDroitParentLayout.setVerticalGroup(
             MenuDroitParentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuDroitParentLayout.createSequentialGroup()
-                .addContainerGap(196, Short.MAX_VALUE)
+                .addGap(0, 196, Short.MAX_VALUE)
                 .addComponent(SimulationMenuDroit, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addGap(0, 196, Short.MAX_VALUE))
         );
 
         add(MenuDroitParent);
@@ -675,14 +661,6 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         setVitesse(vitesse + 1);
     }//GEN-LAST:event_FastForwardMouseReleased
 
-    private void HomeBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeBoutonMouseReleased
-        this.HomeButtonReleased(evt);
-    }//GEN-LAST:event_HomeBoutonMouseReleased
-
-    private void AideBoutonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AideBoutonMouseReleased
-        this.AideBoutonReleased(evt);
-    }//GEN-LAST:event_AideBoutonMouseReleased
-
     private void AidePanelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AidePanelMouseReleased
         if (AidePanel.isVisible()) {
             AidePanel.setVisible(false);
@@ -692,12 +670,10 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton AideBouton;
     private javax.swing.JPanel AidePanel;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi AidePanelEnfant;
     private javax.swing.JLabel AideTitleLabel;
     private javax.swing.JPanel AideTitlePanel;
-    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton BoutonPhoto;
     private javax.swing.JPanel BoutonsPanel;
     private javax.swing.JLabel ClickDroit;
     private javax.swing.JLabel ClickGauche;
@@ -712,17 +688,15 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private javax.swing.JPanel FF;
     private javax.swing.JLabel FFLabel;
     private javax.swing.JLabel FastForward;
-    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HomeBouton;
     private javax.swing.JPanel InformationsPanel;
     private javax.swing.JLabel Liens;
-    private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton MaladieBouton;
     private javax.swing.JPanel MenuDroitParent;
     private javax.swing.JPanel MenuGaucheParent;
     private javax.swing.JLabel MouseWheel;
     private javax.swing.JLabel PaysRegion;
     private javax.swing.JLabel Photo;
     private javax.swing.JLabel PlayPauseIcon;
-    private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi SimulationMenuDroit;
+    private ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelDroit SimulationMenuDroit;
     private ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanelGauche SimulationMenuGauche;
     private ca.ulaval.glo2004.afficheur.Simulation.panels.SimulationPanel SimulationPanel;
     private javax.swing.JPanel Slider;
@@ -731,5 +705,6 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private javax.swing.JLabel Space;
     private ca.ulaval.glo2004.afficheur.utilsUI.ZoomInfoPanel ZoomInfo;
     private javax.swing.JPanel ZoomInfoParent;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

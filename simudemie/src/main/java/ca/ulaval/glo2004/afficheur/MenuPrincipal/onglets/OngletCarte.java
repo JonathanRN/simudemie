@@ -115,7 +115,7 @@ public class OngletCarte extends OngletUI {
         if (objet != null) {
             ApercuCartePanel.setPreviewVisibility(true);
             Carte carte = GestionnaireCarte.getInstance().getElement(this.getIndexCourant());
-            ApercuCartePanel.setCarte(carte);
+            ApercuCartePanel.setCarte(carte, false);
             StatsCartePanel1.setDataset(carte);
         }
     }

@@ -15,18 +15,18 @@ public abstract class ObjetUI extends PanelArrondi {
         initComponents();
         
         // Rend le panel translucide
-        setBackground(pannel);
+        super.setBackground(pannel);
     }
     
     public void setToggled(boolean toggled) {
         this.toggled = toggled;
         if (toggled) {
-            setBackground(Couleurs.selectionne);
-            setBorderColor(Couleurs.selectionneBorder);
+            super.setBackground(Couleurs.selectionne);
+            super.setBorderColor(Couleurs.selectionneBorder);
         }
         else {
-            setBackground(pannel);
-            setBorderColor(pannel);
+            super.setBackground(pannel);
+            super.setBorderColor(pannel);
         }
     }
 

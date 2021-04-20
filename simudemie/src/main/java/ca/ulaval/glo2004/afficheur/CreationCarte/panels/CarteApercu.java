@@ -6,7 +6,6 @@
 package ca.ulaval.glo2004.afficheur.CreationCarte.panels;
 
 import ca.ulaval.glo2004.afficheur.CreationCarte.mode.ApercuCarte;
-import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.ZoomablePanel;
 import ca.ulaval.glo2004.domaine.Carte;
 import java.awt.Graphics;
@@ -24,14 +23,17 @@ public class CarteApercu extends ZoomablePanel {
     
     private ApercuCarte prisePhotoMode;
     
+    
     public CarteApercu() {
         initComponents();
     }
     
-    public void setCarte(Carte carte) {
+    public void setCarte(Carte carte, boolean mode) {
         prisePhotoMode = null;
+   
         if (carte != null) {
             prisePhotoMode = new ApercuCarte(carte);
+            prisePhotoMode.setMode(mode);
             
             centrerVueSurPolygones(carte);
         }
@@ -114,7 +116,7 @@ public class CarteApercu extends ZoomablePanel {
         if (SwingUtilities.isRightMouseButton(evt)) {
             mouseReleased(evt);
         }
-        if (SwingUtilities.isLeftMouseButton(evt) && prisePhotoMode.mode) {
+        if (SwingUtilities.isLeftMouseButton(evt) && prisePhotoMode.modeOnglet) {
             prisePhotoMode.afficherCouleurs++;
             if (prisePhotoMode.afficherCouleurs > 4) {
                 prisePhotoMode.afficherCouleurs = 1;

@@ -42,8 +42,8 @@ public class ApercuPanel extends PanelArrondi {
         ConteneurApercuCartePanel.setVisible(toggle);
     }
     
-    public void setCarte(Carte carte) {
-        ApercuCarte.setCarte(carte);
+    public void setCarte(Carte carte, boolean mode) {
+        ApercuCarte.setCarte(carte, mode);
     }
     
     private void prendrePhoto() {

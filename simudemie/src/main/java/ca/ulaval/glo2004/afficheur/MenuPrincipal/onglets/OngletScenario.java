@@ -68,7 +68,7 @@ public class OngletScenario extends OngletUI {
         
         if (scenario != null) {
             ApercuScenarioCartePanel.setPreviewVisibility(true);
-            ApercuScenarioCartePanel.setCarte(scenario.getCarteJourCourant());
+            ApercuScenarioCartePanel.setCarte(scenario.getCarteJourCourant(), true);
             ObjetScenario obj = (ObjetScenario) objet;
             obj.setInfectedPercent((float)scenario.getCarteDernierJour().getPourcentageInfectee() * 100f);
             obj.setCuredPercent((float)scenario.getCarteDernierJour().getPourcentageSaine() * 100f);

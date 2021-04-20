@@ -54,11 +54,11 @@ public class SimulationBouton extends PanelArrondi {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-        setBackground(Couleurs.pannelArrondi);
+        super.setBackground(Couleurs.pannelArrondi);
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
-        setBackground(Couleurs.invisible);
+        super.setBackground(Couleurs.invisible);
     }//GEN-LAST:event_formMouseExited
 
 

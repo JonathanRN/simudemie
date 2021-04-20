@@ -21,16 +21,20 @@ import java.awt.Polygon;
 public class ApercuCarte extends Mode {
     
     public int afficherCouleurs = 1;
-    public boolean mode = true;
+    public boolean modeOnglet = false;
     
     public ApercuCarte(Carte carte) {
         this.carte = carte;
     }
-
+    
+    public void setMode(boolean mode) { 
+        modeOnglet = mode;
+    }
+    
     @Override
     public void paint(Graphics2D g) {
         
-        if (mode){
+        if (modeOnglet){
             Color couleur = Couleurs.infections;
             for (Pays pays : carte.getListePays()) {
                 switch (afficherCouleurs) {
@@ -52,7 +56,7 @@ public class ApercuCarte extends Mode {
                 }
             }  
         }
-        if (!mode){
+        else {
             paintPolygones(g);
         }
         for (Polygon p : carte.getPolygonesRegions()) {

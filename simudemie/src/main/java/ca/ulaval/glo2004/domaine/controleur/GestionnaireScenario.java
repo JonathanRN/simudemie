@@ -51,7 +51,15 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     
     public Scenario getCourant() {return getElement(scenarioCourant);}
     
-    // retourne true
+    public void modifierMaladie(String nom, double tauxInfection, double tauxGuerison, double tauxMortalite) {
+        Maladie maladie = new Maladie(getCourant().getCarteJourCourant().getMaladie());
+        maladie.setNom(nom);
+        maladie.setTauxInfection(tauxInfection);
+        maladie.setTauxGuerison(tauxGuerison);
+        maladie.setTauxMortalite(tauxMortalite);
+        getCourant().getCarteJourCourant().setMaladie(maladie);
+    }
+    
     public boolean creerMesure(int indexMesure, int indexPays, String nom, double tauxAdhesion, double tauxReduction, int seuilActivation) {
         Pays pays = getCourant().getCarteJourCourant().getPays(indexPays);
         Mesure mesure = pays.getMesure(indexMesure);

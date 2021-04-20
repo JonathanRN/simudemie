@@ -89,7 +89,9 @@ public class Pays implements Externalizable {
         if(!this.vaccins.isEmpty()){
             for (Region r : listeRegions){
                 for (Vaccin v : vaccins){
-                    r.vaccinerPopulation(v.getTauxImmunisation(), v.getVaccinationQuotidienne());
+                    if(v.getActive()) {
+                        r.vaccinerPopulation(v.getTauxImmunisation(), v.getVaccinationQuotidienne());
+                    }
                 }
             }
         }

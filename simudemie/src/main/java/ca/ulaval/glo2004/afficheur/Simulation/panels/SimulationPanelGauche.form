@@ -447,10 +447,13 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JScrollPane" name="StatsScrollPane">
+        <Container class="javax.swing.JPanel" name="ConteneurStatsPanel">
           <Properties>
-            <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
-            <Property name="verticalScrollBarPolicy" type="int" value="22"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                <EmptyBorder bottom="5" left="5" right="5" top="5"/>
+              </Border>
+            </Property>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
           <Constraints>
@@ -459,21 +462,7 @@
             </Constraint>
           </Constraints>
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Container class="javax.swing.JPanel" name="ConteneurStatsPanel">
-              <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                    <EmptyBorder bottom="5" left="5" right="5" top="5"/>
-                  </Border>
-                </Property>
-                <Property name="opaque" type="boolean" value="false"/>
-              </Properties>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
-            </Container>
-          </SubComponents>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
         </Container>
       </SubComponents>
     </Container>

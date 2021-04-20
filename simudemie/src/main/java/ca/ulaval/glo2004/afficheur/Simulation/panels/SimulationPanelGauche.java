@@ -15,15 +15,27 @@ import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Mesure;
+import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.Vaccin;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
 import ca.ulaval.glo2004.domaine.VoieLiaison.TypeVoie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.block.BlockBorder;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -36,6 +48,11 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     private int indexPays;
     private ArrayList<TypeVoie> voies = new ArrayList<>();
     
+    // Stats
+    private JFreeChart stats;
+    private XYSeries infectes, sains, decedes, immunises;
+    private int ancienJour;
+        
     public SimulationPanelGauche() {
         
         try {
@@ -60,7 +77,6 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
             VaccinsTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
             BoutonStats.init(this, "icons8_bar_chart_30px");
-            StatsScrollPane.getViewport().setOpaque(false);
             StatsTitreLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
             onToggleClick(BoutonMesures);
@@ -81,6 +97,59 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         this.indexPays = indexPays;
         
         loadElements();
+    }
+    
+    public void onAvancerJour(int jour) {
+        // Ne rien faire si l'on est pas sur l'onglet stats
+        if (!toggleCourant.equals(BoutonStats)) {
+            return;
+        }
+        
+        // Dans le cas ou l'on revient dans le temps, puis play
+        if (jour - ancienJour != 0) {
+            for (int i = ancienJour; i <= jour; i++) {
+                ajouterStats(i);
+            }
+        }
+        else {
+            ajouterStats(jour);
+        }
+        
+        ancienJour = jour;
+    }
+    
+    public void onChargerJour(int jour) {
+        // Ne rien faire si l'on est pas sur l'onglet stats
+        if (!toggleCourant.equals(BoutonStats)) {
+            return;
+        }
+        
+        if (ancienJour > jour) {
+            // On doit retirer tout jour entre l'ancien et le jour charge
+            for (int i = ancienJour; i > jour; i--) {
+                infectes.remove(infectes.getItemCount() - 1);
+                sains.remove(sains.getItemCount() - 1);
+                decedes.remove(decedes.getItemCount() - 1);
+                immunises.remove(immunises.getItemCount() - 1);
+            }
+        }
+        else if (ancienJour < jour) {
+            for (int i = ancienJour; i <= jour; i++) {
+                ajouterStats(i);
+            }
+        }
+        stats.fireChartChanged();
+        ancienJour = jour;
+    }
+    
+    private void ajouterStats(int jour) {
+        Carte carte = simulation.getScenario().getListeCartes().get(jour);
+        Pays pays = carte.getListePays().get(indexPays);
+
+        infectes.add(jour, pays.getPourcentageInfectee());
+        sains.add(jour, pays.getPourcentageSaine());
+        decedes.add(jour, pays.getPourcentageDecedee());
+        immunises.add(jour, pays.getPourcentageImmunisee());
     }
     
     public void loadElements() {
@@ -144,10 +213,63 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     
     public void loadStats() {
         ConteneurStatsPanel.removeAll();
-        ConteneurStatsPanel.getParent().validate();
-        ConteneurStatsPanel.getRootPane().repaint();
         
         Scenario scenario = simulation.getScenario();
+        
+        // Ajout des stats jusqu'au jour courant
+        infectes = new XYSeries("Infectés");
+        sains = new XYSeries("Sains");
+        decedes = new XYSeries("Décédés");
+        immunises = new XYSeries("Immunisés");
+        
+        for (int i = 0; i < scenario.getIndexJourCourant(); i++) {
+            ajouterStats(i);
+        }
+        
+        XYSeriesCollection collection = new XYSeriesCollection();
+        collection.addSeries(infectes);
+        collection.addSeries(sains);
+        collection.addSeries(decedes);
+        collection.addSeries(immunises);
+        
+        stats = ChartFactory.createXYLineChart(null, "Jours", "", collection, PlotOrientation.VERTICAL, true, true, false);
+        stats.setBackgroundPaint(Couleurs.titleBar);
+        stats.getLegend().setFrame(BlockBorder.NONE);
+        stats.getLegend().setItemPaint(Couleurs.blanc);
+        stats.getLegend().setBackgroundPaint(Couleurs.titleBar);
+
+        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+        renderer.setSeriesPaint(0, Couleurs.infections);
+        renderer.setSeriesPaint(1, Couleurs.sains);
+        renderer.setSeriesPaint(2, Couleurs.morts);
+        renderer.setSeriesPaint(3, Couleurs.immunisations);
+        renderer.setSeriesStroke(0, new BasicStroke(2.0f));
+        renderer.setSeriesStroke(1, new BasicStroke(2.0f));
+        renderer.setSeriesStroke(2, new BasicStroke(2.0f));
+        renderer.setSeriesStroke(3, new BasicStroke(2.0f));
+
+        XYPlot plot = stats.getXYPlot();
+        plot.setRenderer(renderer);
+        plot.setBackgroundPaint(Couleurs.titleBar);
+        plot.setRangeGridlinesVisible(true);
+        plot.setRangeGridlinePaint(Couleurs.blanc);
+        plot.setDomainGridlinesVisible(true);
+        plot.setDomainGridlinePaint(Couleurs.blanc);
+        plot.getDomainAxis().setLabelFont(FontRegister.RobotoRegular.deriveFont(14f));
+        plot.getDomainAxis().setTickLabelPaint(Couleurs.blanc);
+        plot.getDomainAxis().setLabelPaint(Couleurs.blanc);
+        plot.getRangeAxis().setTickLabelPaint(Couleurs.blanc);
+
+        ChartPanel chartPanel = new ChartPanel(stats);
+        chartPanel.setPopupMenu(null);
+        chartPanel.setDomainZoomable(false);
+        chartPanel.setRangeZoomable(false);
+        chartPanel.setDisplayToolTips(false);
+        
+        ConteneurStatsPanel.add(chartPanel, BorderLayout.CENTER);
+        
+        ConteneurStatsPanel.validate();
+        ConteneurStatsPanel.getRootPane().repaint();
     }
     
     public void onToggleClick(ToggleBouton toggle) {        
@@ -241,7 +363,6 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         TitreStatsPanel = new javax.swing.JPanel();
         StatsTitreLabel = new javax.swing.JLabel();
         ExportStats = new javax.swing.JLabel();
-        StatsScrollPane = new javax.swing.JScrollPane();
         ConteneurStatsPanel = new javax.swing.JPanel();
 
         setLayout(new javax.swing.OverlayLayout(this));
@@ -432,16 +553,10 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
 
         StatsPanel.add(TitreStatsPanel, java.awt.BorderLayout.PAGE_START);
 
-        StatsScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        StatsScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        StatsScrollPane.setOpaque(false);
-
         ConteneurStatsPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         ConteneurStatsPanel.setOpaque(false);
         ConteneurStatsPanel.setLayout(new java.awt.BorderLayout());
-        StatsScrollPane.setViewportView(ConteneurStatsPanel);
-
-        StatsPanel.add(StatsScrollPane, java.awt.BorderLayout.CENTER);
+        StatsPanel.add(ConteneurStatsPanel, java.awt.BorderLayout.CENTER);
 
         add(StatsPanel);
     }// </editor-fold>//GEN-END:initComponents
@@ -514,7 +629,6 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi SidePanel;
     private javax.swing.JPanel SidePanelParent;
     private javax.swing.JPanel StatsPanel;
-    private javax.swing.JScrollPane StatsScrollPane;
     private javax.swing.JLabel StatsTitreLabel;
     private javax.swing.JPanel Titre;
     private javax.swing.JPanel TitreOngletPanel;

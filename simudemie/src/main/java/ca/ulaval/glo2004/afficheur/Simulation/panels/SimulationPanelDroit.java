@@ -9,6 +9,11 @@ import ca.ulaval.glo2004.afficheur.Simulation.Simulation;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
+import ca.ulaval.glo2004.domaine.Maladie;
+import ca.ulaval.glo2004.domaine.Mesure;
+import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
+import java.text.ParseException;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -17,7 +22,9 @@ import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
  */
 public class SimulationPanelDroit extends PanelArrondi {
     
-    private Simulation simulation;
+        private Simulation simulation;
+        private Maladie maladie;
+        private boolean edition, mouseOverEdition;
 
     public SimulationPanelDroit() {
         
@@ -32,27 +39,25 @@ public class SimulationPanelDroit extends PanelArrondi {
             BoutonPhoto.setIcon("/icons/simulation/icons8_unsplash_25px.png");
             AideBouton.setIcon("/icons/simulation/icons8_help_25px.png");
             HomeBouton.setIcon("/icons/icons8_home_25px_1.png");
+            
+            TauxInfection.getEditor().getComponent(0).setBackground(Couleurs.sideMenuNoTransp);
+            TauxGuerison.getEditor().getComponent(0).setBackground(Couleurs.sideMenuNoTransp);
+            TauxMortalite.getEditor().getComponent(0).setBackground(Couleurs.sideMenuNoTransp);
            
         }
         catch(Exception e) {
         }
+        setEdition(true, false);
     }
 
     public void setSimulation(Simulation simulation) {
         this.simulation = simulation;
     }
-    public void loadElements() {
-        if (MaladieBouton.getToggle()) {
-            loadMaladie();
-        }
+  
+    public void loadMaladie() {
+        chargerMaladie(simulation.getScenario().getCarteJourCourant().getMaladie());
     }
     
-    public void loadMaladie() {
-        ConteneurMaladiePanel.removeAll();
-        ConteneurMaladiePanel.getParent().validate();
-        ConteneurMaladiePanel.getRootPane().repaint();
-
-    }
     
     public void unToggleMaladie() {
         MaladiePanel.setVisible(false);
@@ -66,11 +71,52 @@ public class SimulationPanelDroit extends PanelArrondi {
         simulation.toggleMenuDroitMaladie(true);
         MaladieBouton.setToggle(true);
 
-        loadElements();
+        loadMaladie();
         repaint();
     }
    
-
+    private void setEdition(boolean edition, boolean mouseOver) {
+        this.edition = edition;
+        
+        NomMaladieTextField.setEnabled(edition);
+        TauxInfection.setEnabled(edition);
+        TauxGuerison.setEnabled(edition);
+        TauxMortalite.setEnabled(edition);
+        
+        updateEditerIcon(mouseOver);
+    }
+    
+    public void chargerMaladie(Maladie maladie) {
+        NomMaladieTextField.setText(maladie.getNom());
+        TauxInfection.setValue(maladie.getTauxInfection());
+        TauxGuerison.setValue(maladie.getTauxGuerison());
+        TauxMortalite.setValue(maladie.getTauxMortalite());
+        setEdition(false, false);
+    }
+ 
+    
+    public void sauvegarderMaladie() {
+        try {
+            TauxGuerison.commitEdit();
+            TauxInfection.commitEdit();
+            TauxMortalite.commitEdit();
+        } catch(ParseException pe) {
+        }       
+        GestionnaireScenario.getInstance().modifierMaladie(
+                                                            NomMaladieTextField.getText(),
+                                                            (double) TauxInfection.getValue(),
+                                                            (double) TauxGuerison.getValue(),
+                                                            (double) TauxMortalite.getValue()
+                                                        );
+    }
+    
+    private void updateEditerIcon(boolean actif) {
+        mouseOverEdition = actif;
+        String path = "/icons/simulation/mesure/";
+        path += edition ? "save" : "editer";
+        path += actif ? "_highlight.png" : ".png";
+        Modifie.setIcon(new ImageIcon(getClass().getResource(path)));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,6 +136,20 @@ public class SimulationPanelDroit extends PanelArrondi {
         Titre = new javax.swing.JPanel();
         MaladieTitre = new javax.swing.JLabel();
         ConteneurMaladiePanel = new javax.swing.JPanel();
+        MaladiePanel1 = new javax.swing.JPanel();
+        TitreMaladiePanel = new javax.swing.JPanel();
+        NomMaladieTextField = new javax.swing.JTextField();
+        BoutonsPanel = new javax.swing.JPanel();
+        Modifie = new javax.swing.JLabel();
+        TauxInfectionPanel = new javax.swing.JPanel();
+        TauxInfectionLabel = new javax.swing.JLabel();
+        TauxInfection = new javax.swing.JSpinner();
+        TauxGuerisonPanel = new javax.swing.JPanel();
+        TauxGuerisonLabel = new javax.swing.JLabel();
+        TauxGuerison = new javax.swing.JSpinner();
+        TauxMortalitePanel = new javax.swing.JPanel();
+        TauxMortaliteLabel = new javax.swing.JLabel();
+        TauxMortalite = new javax.swing.JSpinner();
 
         setMinimumSize(new java.awt.Dimension(334, 200));
         setPreferredSize(new java.awt.Dimension(334, 200));
@@ -152,18 +212,103 @@ public class SimulationPanelDroit extends PanelArrondi {
 
         MaladiePanel.add(Titre, java.awt.BorderLayout.PAGE_START);
 
+        ConteneurMaladiePanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         ConteneurMaladiePanel.setOpaque(false);
+        ConteneurMaladiePanel.setLayout(new java.awt.GridLayout());
 
-        javax.swing.GroupLayout ConteneurMaladiePanelLayout = new javax.swing.GroupLayout(ConteneurMaladiePanel);
-        ConteneurMaladiePanel.setLayout(ConteneurMaladiePanelLayout);
-        ConteneurMaladiePanelLayout.setHorizontalGroup(
-            ConteneurMaladiePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        ConteneurMaladiePanelLayout.setVerticalGroup(
-            ConteneurMaladiePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
-        );
+        MaladiePanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 15, 0));
+        MaladiePanel1.setMaximumSize(new java.awt.Dimension(32767, 155));
+        MaladiePanel1.setMinimumSize(new java.awt.Dimension(208, 155));
+        MaladiePanel1.setOpaque(false);
+        MaladiePanel1.setPreferredSize(new java.awt.Dimension(208, 155));
+        MaladiePanel1.setLayout(new java.awt.GridLayout(4, 1));
+
+        TitreMaladiePanel.setOpaque(false);
+        TitreMaladiePanel.setLayout(new java.awt.BorderLayout());
+
+        NomMaladieTextField.setBackground(Couleurs.sideMenuNoTransp);
+        NomMaladieTextField.setFont(FontRegister.RobotoLight.deriveFont(14f));
+        NomMaladieTextField.setText("Nom de la maladie");
+        NomMaladieTextField.setSelectionColor(new java.awt.Color(136, 192, 208));
+        NomMaladieTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NomMaladieTextFieldActionPerformed(evt);
+            }
+        });
+        TitreMaladiePanel.add(NomMaladieTextField, java.awt.BorderLayout.CENTER);
+
+        BoutonsPanel.setOpaque(false);
+        BoutonsPanel.setLayout(new java.awt.GridLayout(1, 3));
+
+        Modifie.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Modifie.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simulation/mesure/editer.png"))); // NOI18N
+        Modifie.setMaximumSize(new java.awt.Dimension(30, 30));
+        Modifie.setMinimumSize(new java.awt.Dimension(30, 30));
+        Modifie.setPreferredSize(new java.awt.Dimension(30, 30));
+        Modifie.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ModifieMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ModifieMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ModifieMouseReleased(evt);
+            }
+        });
+        BoutonsPanel.add(Modifie);
+
+        TitreMaladiePanel.add(BoutonsPanel, java.awt.BorderLayout.LINE_END);
+
+        MaladiePanel1.add(TitreMaladiePanel);
+
+        TauxInfectionPanel.setOpaque(false);
+        TauxInfectionPanel.setLayout(new java.awt.BorderLayout(0, 5));
+
+        TauxInfectionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+        TauxInfectionLabel.setText("Taux infection : ");
+        TauxInfectionLabel.setToolTipText("");
+        TauxInfectionLabel.setMaximumSize(new java.awt.Dimension(200, 19));
+        TauxInfectionLabel.setMinimumSize(new java.awt.Dimension(130, 19));
+        TauxInfectionLabel.setPreferredSize(new java.awt.Dimension(130, 19));
+        TauxInfectionPanel.add(TauxInfectionLabel, java.awt.BorderLayout.WEST);
+
+        TauxInfection.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
+        TauxInfectionPanel.add(TauxInfection, java.awt.BorderLayout.CENTER);
+
+        MaladiePanel1.add(TauxInfectionPanel);
+
+        TauxGuerisonPanel.setOpaque(false);
+        TauxGuerisonPanel.setLayout(new java.awt.BorderLayout(0, 5));
+
+        TauxGuerisonLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+        TauxGuerisonLabel.setText("Taux de guérison :");
+        TauxGuerisonLabel.setMaximumSize(new java.awt.Dimension(200, 19));
+        TauxGuerisonLabel.setMinimumSize(new java.awt.Dimension(130, 19));
+        TauxGuerisonLabel.setPreferredSize(new java.awt.Dimension(130, 19));
+        TauxGuerisonPanel.add(TauxGuerisonLabel, java.awt.BorderLayout.WEST);
+
+        TauxGuerison.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.9d, 0.5d));
+        TauxGuerisonPanel.add(TauxGuerison, java.awt.BorderLayout.CENTER);
+
+        MaladiePanel1.add(TauxGuerisonPanel);
+
+        TauxMortalitePanel.setOpaque(false);
+        TauxMortalitePanel.setLayout(new java.awt.BorderLayout(0, 5));
+
+        TauxMortaliteLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+        TauxMortaliteLabel.setText("Taux de mortalité :");
+        TauxMortaliteLabel.setMaximumSize(new java.awt.Dimension(200, 19));
+        TauxMortaliteLabel.setMinimumSize(new java.awt.Dimension(130, 19));
+        TauxMortaliteLabel.setPreferredSize(new java.awt.Dimension(130, 19));
+        TauxMortalitePanel.add(TauxMortaliteLabel, java.awt.BorderLayout.WEST);
+
+        TauxMortalite.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.01d, 99.0d, 1.0d));
+        TauxMortalitePanel.add(TauxMortalite, java.awt.BorderLayout.CENTER);
+
+        MaladiePanel1.add(TauxMortalitePanel);
+
+        ConteneurMaladiePanel.add(MaladiePanel1);
 
         MaladiePanel.add(ConteneurMaladiePanel, java.awt.BorderLayout.CENTER);
 
@@ -189,21 +334,53 @@ public class SimulationPanelDroit extends PanelArrondi {
 
     private void BoutonPhotoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonPhotoMouseReleased
         unToggleMaladie();
-        simulation.prendrePhoto();
     }//GEN-LAST:event_BoutonPhotoMouseReleased
+
+    private void NomMaladieTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomMaladieTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NomMaladieTextFieldActionPerformed
+
+    private void ModifieMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifieMouseEntered
+        updateEditerIcon(true);
+    }//GEN-LAST:event_ModifieMouseEntered
+
+    private void ModifieMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifieMouseExited
+        updateEditerIcon(false);
+    }//GEN-LAST:event_ModifieMouseExited
+
+    private void ModifieMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModifieMouseReleased
+        setEdition(!edition, mouseOverEdition);
+        if(!edition) {
+            sauvegarderMaladie();
+        }
+    }//GEN-LAST:event_ModifieMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton AideBouton;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton BoutonPhoto;
+    private javax.swing.JPanel BoutonsPanel;
     private javax.swing.JPanel ConteneurMaladiePanel;
     private ca.ulaval.glo2004.afficheur.boutons.SimulationBouton HomeBouton;
     private ca.ulaval.glo2004.afficheur.boutons.ToggleBouton MaladieBouton;
     private javax.swing.JPanel MaladiePanel;
+    private javax.swing.JPanel MaladiePanel1;
     private javax.swing.JLabel MaladieTitre;
+    private javax.swing.JLabel Modifie;
+    private javax.swing.JTextField NomMaladieTextField;
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi SidePanel;
     private javax.swing.JPanel SidePanelParent;
+    private javax.swing.JSpinner TauxGuerison;
+    private javax.swing.JLabel TauxGuerisonLabel;
+    private javax.swing.JPanel TauxGuerisonPanel;
+    private javax.swing.JSpinner TauxInfection;
+    private javax.swing.JLabel TauxInfectionLabel;
+    private javax.swing.JPanel TauxInfectionPanel;
+    private javax.swing.JSpinner TauxMortalite;
+    private javax.swing.JLabel TauxMortaliteLabel;
+    private javax.swing.JPanel TauxMortalitePanel;
     private javax.swing.JPanel Titre;
+    private javax.swing.JPanel TitreMaladiePanel;
     // End of variables declaration//GEN-END:variables
 
 }

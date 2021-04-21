@@ -197,6 +197,10 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         
         Carte carte = simulation.getScenario().getCarteJourCourant();
         for (VoieLiaison voie : carte.getVoies()) {
+            System.out.println("Pays origine: " + voie.getPaysOrigine().getNom());
+            System.out.println(voie.getPaysOrigine().equals(carte.getPays(indexPays)));
+            System.out.println("Pays destination: " + voie.getPaysOrigine().getNom());
+            System.out.println(voie.getPaysDestination().equals(carte.getPays(indexPays)));
             if (voie.getPaysOrigine().equals(carte.getPays(indexPays)) ||
                 voie.getPaysDestination().equals(carte.getPays(indexPays))) {
                 

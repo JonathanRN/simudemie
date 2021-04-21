@@ -13,6 +13,7 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.util.Objects;
 import java.util.Vector;
 
 
@@ -264,4 +265,24 @@ public class Region implements Externalizable {
         }
         popInitiale = in.readInt();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        final Region other = (Region) obj;
+        
+        if(polygone.npoints != other.polygone.npoints) {
+            return false;
+        }
+        
+        for(int index = 0; index < polygone.npoints; index++) {
+            if(polygone.xpoints[index] != other.polygone.xpoints[index] ||
+                    polygone.ypoints[index] != other.polygone.ypoints[index]) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    
 }

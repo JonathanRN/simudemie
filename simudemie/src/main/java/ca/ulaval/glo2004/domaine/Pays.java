@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Pays implements Externalizable {
@@ -263,10 +264,18 @@ public class Pays implements Externalizable {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 11 * hash + nom.hashCode();
+        hash = 11 * hash + listeRegions.hashCode();
+        return hash;
+    }
+    
+    @Override
     public boolean equals(Object obj) {
         Pays autre = (Pays)obj;
         // Devrait relativement est correct...
-        return this.nom.equals(autre.nom) && this.listeRegions.equals(autre.listeRegions) && this.mesures.equals(autre.mesures);
+        return nom.equals(autre.nom) && listeRegions.equals(autre.listeRegions);
     }
     
     public boolean contient(int x, int y) {

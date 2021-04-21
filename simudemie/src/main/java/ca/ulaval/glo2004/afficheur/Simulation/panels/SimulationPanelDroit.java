@@ -335,6 +335,7 @@ public class SimulationPanelDroit extends PanelArrondi {
 
     private void BoutonPhotoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BoutonPhotoMouseReleased
         unToggleMaladie();
+        simulation.prendrePhoto();
     }//GEN-LAST:event_BoutonPhotoMouseReleased
 
     private void NomMaladieTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomMaladieTextFieldActionPerformed

@@ -20,8 +20,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -35,7 +37,9 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     private final GestionnaireScenario gestionnaire;
     private final int index;
     private boolean estCommence;
+    private JFileChooser fileChooser;
     public OngletScenario onglet;
+    
     
     public Simulation(int index, OngletScenario onglet) {
         this.onglet = onglet;
@@ -43,6 +47,11 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         this.gestionnaire = GestionnaireScenario.getInstance();
         gestionnaire.setIndexCourant(index);
         gestionnaire.setCallback(this);
+        
+        fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("png", "png");
+        fileChooser.setFileFilter(filter);
+        fileChooser.setAcceptAllFileFilterUsed(false);
         
         initComponents();
         SimulationMenuGauche.setSimulation(this);
@@ -196,13 +205,21 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
     }
     
     public void prendrePhoto() {
-        BufferedImage img = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-        paint(img.getGraphics());
-        
-        try {
-            ImageIO.write(img, "png", new File("saved.png"));
-        }
-        catch (Exception e) {
+        int result = fileChooser.showDialog(null, "Capture d'écran");
+        if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
+            BufferedImage img = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+            paintAll(img.getGraphics());
+            
+            String path = fileChooser.getSelectedFile().getAbsolutePath();
+            if(!path.endsWith(".png")) {
+                path += ".png";
+            }
+            
+            try {
+                ImageIO.write(img, "png", new File(path));
+            }
+            catch (Exception e) {
+            }
         }
     }
     

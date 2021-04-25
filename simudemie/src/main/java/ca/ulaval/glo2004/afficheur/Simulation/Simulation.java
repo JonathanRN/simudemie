@@ -247,7 +247,6 @@ public class Simulation extends javax.swing.JPanel implements ScenarioCallback {
         
         // On recharge le UI dans le cas que ca change
         if (SimulationMenuGauche.isVisible()) {
-            SimulationMenuGauche.loadElements();
             SimulationMenuGauche.onChargerJour(jour);
             repaint();
         }

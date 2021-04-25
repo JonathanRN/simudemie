@@ -103,6 +103,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     
     public void setSimulation(Simulation simulation) {
         this.simulation = simulation;
+        ancienJour = simulation.getScenario().getIndexJourCourant();
     }
     
     public int getIndexPays() {
@@ -150,7 +151,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
             }
         }
         else if (ancienJour < jour) {
-            for (int i = ancienJour; i <= jour; i++) {
+            for (int i = ancienJour; i < jour; i++) {
                 ajouterStats(i);
             }
         }
@@ -235,8 +236,8 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         ConteneurVaccinsPanel.getRootPane().repaint();
 
         for (Vaccin v : GestionnaireScenario.getInstance().getVaccins(indexPays)) {
-                addVaccin(v);
-            }
+            addVaccin(v);
+        }
     }
     
     public void loadStats() {

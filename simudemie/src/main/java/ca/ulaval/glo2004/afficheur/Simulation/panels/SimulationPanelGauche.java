@@ -21,17 +21,23 @@ import ca.ulaval.glo2004.domaine.Vaccin;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
 import ca.ulaval.glo2004.domaine.VoieLiaison.TypeVoie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
-import java.awt.Component;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.plot.PlotOrientation;
@@ -55,6 +61,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     private JFreeChart stats;
     private XYSeries infectes, sains, decedes, immunises;
     private int ancienJour;
+    private JFileChooser fileChooser;
         
     public SimulationPanelGauche() {
         try {
@@ -63,6 +70,11 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
             updateBoutonAjouter(false, AjouterVaccins);
             super.setBackground(Couleurs.sideMenuTransp);
             SidePanel.setBackground(Couleurs.sideMenuLessTransp);
+            
+            fileChooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("png", "png");
+            fileChooser.setFileFilter(filter);
+            fileChooser.setAcceptAllFileFilterUsed(false);
             
             BoutonMesures.init(this, "icons8_wash_your_hands_30px");
             MesuresActives.getViewport().setOpaque(false);
@@ -620,7 +632,19 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     }//GEN-LAST:event_ExportStatsMouseExited
 
     private void ExportStatsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportStatsMouseReleased
-        // TODO add your handling code here:
+        int result = fileChooser.showDialog(null, "Exporter statistiques");
+        if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
+            try {
+                String path = fileChooser.getSelectedFile().getAbsolutePath();
+                if(!path.endsWith(".png")) {
+                    path += ".png";
+                }
+
+                ChartUtilities.saveChartAsPNG(new File(path), stats, 600, 400);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_ExportStatsMouseReleased
 
 

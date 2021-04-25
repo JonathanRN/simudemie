@@ -12,9 +12,14 @@ import ca.ulaval.glo2004.domaine.Scenario;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.plot.PlotOrientation;
@@ -33,6 +38,9 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
     private Color bgColor = Couleurs.pannelArrondiNoTransp;
     private Color pannel = Couleurs.pannelArrondi;
     
+    private JFreeChart stats;
+    private JFileChooser fileChooser;
+    
     public StatsScenarioPanel() {
         initComponents();
         
@@ -42,6 +50,11 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
             
             ResumeBouton.setBackground(pannel);
             ResumeBouton.setFont(FontRegister.RobotoRegular.deriveFont(15f));
+            
+            fileChooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("png", "png");
+            fileChooser.setFileFilter(filter);
+            fileChooser.setAcceptAllFileFilterUsed(false);
         }
         catch(Exception e) {
         }
@@ -80,7 +93,7 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
         collection.addSeries(decedes);
         collection.addSeries(immunises);
                 
-        JFreeChart stats = ChartFactory.createXYLineChart(null, "Jours", "Population", collection, PlotOrientation.VERTICAL, true, true, false);
+        stats = ChartFactory.createXYLineChart(null, "Jours", "Population", collection, PlotOrientation.VERTICAL, true, true, false);
         stats.setBackgroundPaint(bgColor);
 
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
@@ -163,6 +176,11 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
 
         ExportStatsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8_upload_20px.png"))); // NOI18N
         ExportStatsLabel.setToolTipText("Exporter les statistiques du scénario");
+        ExportStatsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                ExportStatsLabelMouseReleased(evt);
+            }
+        });
         TitreStatsPanel.add(ExportStatsLabel, java.awt.BorderLayout.EAST);
 
         Main.add(TitreStatsPanel, java.awt.BorderLayout.NORTH);
@@ -196,6 +214,22 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
             onglet.onStartSimulation();
         }
     }//GEN-LAST:event_ResumeBoutonMouseReleased
+
+    private void ExportStatsLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportStatsLabelMouseReleased
+        int result = fileChooser.showDialog(null, "Exporter statistiques");
+        if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
+            try {
+                String path = fileChooser.getSelectedFile().getAbsolutePath();
+                if(!path.endsWith(".png")) {
+                    path += ".png";
+                }
+
+                ChartUtilities.saveChartAsPNG(new File(path), stats, 600, 400);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_ExportStatsLabelMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

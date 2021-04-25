@@ -247,7 +247,9 @@ public class Region implements Externalizable {
         for(Integer i : listeInfections) {
             out.writeInt(i);
         }
-        out.writeInt(popInitiale);
+        out.writeInt(populationImmune);
+        out.writeDouble(tauxContaInterRegion);
+        out.writeDouble(tauxContaIntraRegion);
     }
 
     @Override
@@ -263,7 +265,9 @@ public class Region implements Externalizable {
         for(int index = 0; index < listeInfectionsSize; index++) {
             listeInfections.add(in.readInt());
         }
-        popInitiale = in.readInt();
+        populationImmune = in.readInt();
+        tauxContaInterRegion = in.readDouble();
+        tauxContaIntraRegion = in.readDouble();
     }
 
     @Override

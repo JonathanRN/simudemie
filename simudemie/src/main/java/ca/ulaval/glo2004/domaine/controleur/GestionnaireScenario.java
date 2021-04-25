@@ -158,7 +158,10 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     
     public void pause() {timer.stop();}
     
-    public void resumer() {getCourant().retourEnDirect();timer.restart();}
+    public void resumer() {
+        getCourant().retourEnDirect();
+        timer.restart();
+    }
     
     public void demarrer() {
         if (timer != null && timer.isRunning()) {
@@ -172,7 +175,11 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
     
     public void setCallback(ScenarioCallback scenarioCallback) {getCourant().setCallback(scenarioCallback);}
     
-    public void setVitesse(int vitesse) {if (timer != null) {timer.setDelay((int)(1f / (float)vitesse * 1000));}}
+    public void setVitesse(int vitesse) {
+        if (timer != null) {
+            timer.setDelay((int)(1f / (float)vitesse * 1000));
+        }
+    }
     
     @Override
     public Scenario creer(Object... arguments) {

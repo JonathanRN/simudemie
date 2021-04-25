@@ -40,7 +40,9 @@ public class Scenario implements Externalizable {
     
     public void initialisePopInit() {cartes.get(0).initiliserPopInit();}
     
-    public void setCallback(ScenarioCallback cb) {this.scenarioCallback = cb;}
+    public void setCallback(ScenarioCallback cb) {
+        this.scenarioCallback = cb;
+    }
     
     public boolean estCommence() {return estCommence;}
     
@@ -85,9 +87,14 @@ public class Scenario implements Externalizable {
         }
     }
     
-    public void demarrer() {estCommence = true; retourEnDirect();}
+    public void demarrer() {
+        estCommence = true;
+        retourEnDirect();
+    }
     
-    public void retourEnDirect() {indexCourant = getTotalJours();}
+    public void retourEnDirect() {
+        indexCourant = getTotalJours();
+    }
     
     public int avancerJour() {
         // Ajoute une nouvelle journee selon les nouvelles donnees modifies de la carte courante

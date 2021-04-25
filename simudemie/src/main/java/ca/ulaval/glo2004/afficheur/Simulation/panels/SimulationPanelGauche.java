@@ -55,7 +55,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     private ToggleBouton toggleCourant;
     private Simulation simulation;
     private int indexPays;
-    private ArrayList<TypeVoie> voies = new ArrayList<>();
+    private ArrayList<VoieLiaison> voies = new ArrayList<>();
     
     // Stats
     private JFreeChart stats;
@@ -91,6 +91,9 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
             VaccinsScrollPane.getVerticalScrollBar().setUnitIncrement(15);
             VaccinsScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
             VaccinsTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            
+            LiensScrollPane.getVerticalScrollBar().setUnitIncrement(15);
+            LiensScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
             
             BoutonStats.init(this, "icons8_bar_chart_30px");
             StatsTitreLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
@@ -210,24 +213,32 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         
         Carte carte = simulation.getScenario().getCarteJourCourant();
         for (VoieLiaison voie : carte.getVoies()) {
-            System.out.println("Pays origine: " + voie.getPaysOrigine().getNom());
-            System.out.println(voie.getPaysOrigine().equals(carte.getPays(indexPays)));
-            System.out.println("Pays destination: " + voie.getPaysOrigine().getNom());
-            System.out.println(voie.getPaysDestination().equals(carte.getPays(indexPays)));
             if (voie.getPaysOrigine().equals(carte.getPays(indexPays)) ||
                 voie.getPaysDestination().equals(carte.getPays(indexPays))) {
                 
-                if (!voies.contains(voie.getType())) {
-                    ObjetSimulationVoieLiaison sml = new ObjetSimulationVoieLiaison();
-                    sml.setTypeVoie(voie.getType());
-                    ConteneurLiensPanel.add(sml);
-                    voies.add(voie.getType());
+                if (!voies.contains(voie)) {
+                    addVoie(voie);
                 }
             }
         }
+        System.out.println("------------------------");
         
         ConteneurLiensPanel.getParent().validate();
         ConteneurLiensPanel.getRootPane().repaint();
+    }
+    
+    private void addVoie(VoieLiaison voie) {
+        ObjetSimulationVoieLiaison osl = new ObjetSimulationVoieLiaison(voie.getPaysOrigine().getNom(),
+                                                                        voie.getPaysDestination().getNom(),
+                                                                        voie.getType(),
+                                                                        voie.getAccessible(),
+                                                                        voie.getTauxPropag());
+        System.out.println(osl);
+        ConteneurLiensPanel.add(osl);
+        ConteneurLiensPanel.getParent().validate();
+        ConteneurLiensPanel.getRootPane().repaint();
+        System.out.println(ConteneurLiensPanel.getComponents().length);
+        voies.add(voie);
     }
     
     public void loadVaccins() {
@@ -493,8 +504,9 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         LiensPanel.add(TitreOngletPanel, java.awt.BorderLayout.PAGE_START);
 
         LiensScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        LiensScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        LiensScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+        ConteneurLiensPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         ConteneurLiensPanel.setOpaque(false);
         ConteneurLiensPanel.setLayout(new java.awt.GridLayout(3, 0));
         LiensScrollPane.setViewportView(ConteneurLiensPanel);

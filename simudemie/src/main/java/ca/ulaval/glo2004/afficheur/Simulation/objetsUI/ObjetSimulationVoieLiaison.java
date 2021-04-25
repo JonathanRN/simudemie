@@ -6,10 +6,12 @@
 package ca.ulaval.glo2004.afficheur.Simulation.objetsUI;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
-import ca.ulaval.glo2004.domaine.VoieLiaison;
 import ca.ulaval.glo2004.domaine.VoieLiaison.TypeVoie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
+import java.text.ParseException;
 import javax.swing.ImageIcon;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -18,11 +20,25 @@ import javax.swing.ImageIcon;
 public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
     
     private TypeVoie type;
+    
     private boolean mouseOver, checked = true;
         
-    public ObjetSimulationVoieLiaison() {
+    public ObjetSimulationVoieLiaison(String paysOrigine, String paysDestination, TypeVoie type, boolean accessible, double tauxPropag) {
         initComponents();
         
+        
+        PaysOrigineLabel.setText(paysOrigine);
+        PaysDestinationLabel.setText(paysDestination);
+        setTypeVoie(type);
+        checked = accessible;
+        Transmission.setValue(tauxPropag);
+        
+        Transmission.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                sauvegarder();
+            }
+        });
         updateIcon();
     }
     
@@ -44,6 +60,20 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
         Activer.setIcon(new ImageIcon(getClass().getResource(path)));
     }
 
+    private void sauvegarder() {
+        try {
+            Transmission.commitEdit();
+        } catch(ParseException pe) {
+        }
+        
+        GestionnaireScenario.getInstance().modifierLien(PaysOrigineLabel.getText(), PaysDestinationLabel.getText(), type, checked, (double) Transmission.getValue());
+    }
+    
+    @Override
+    public String toString() {
+        return PaysOrigineLabel.getText() + " -> " + PaysDestinationLabel.getText() + " : " + type;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,6 +83,10 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        PaysOrigineLabel = new javax.swing.JLabel();
+        PaysIcon = new javax.swing.JLabel();
+        PaysDestinationLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         Activer = new javax.swing.JLabel();
         VoieLabel = new javax.swing.JLabel();
@@ -75,7 +109,31 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
                 formMouseReleased(evt);
             }
         });
-        setLayout(new java.awt.GridLayout(2, 0, 0, -20));
+        setLayout(new java.awt.GridLayout(3, 0, 0, -20));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 17, 1, 1));
+        jPanel2.setMinimumSize(new java.awt.Dimension(141, 35));
+        jPanel2.setOpaque(false);
+        jPanel2.setPreferredSize(new java.awt.Dimension(100, 35));
+        jPanel2.setRequestFocusEnabled(false);
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+
+        PaysOrigineLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+        PaysOrigineLabel.setText("Pays A");
+        PaysOrigineLabel.setPreferredSize(new java.awt.Dimension(50, 16));
+        jPanel2.add(PaysOrigineLabel);
+
+        PaysIcon.setFont(FontRegister.RobotoLight.deriveFont(14f));
+        PaysIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simulation/lien/arrow_24px.png"))); // NOI18N
+        PaysIcon.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
+        jPanel2.add(PaysIcon);
+
+        PaysDestinationLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+        PaysDestinationLabel.setText("Pays B");
+        jPanel2.add(PaysDestinationLabel);
+
+        add(jPanel2);
+        jPanel2.getAccessibleContext().setAccessibleDescription("");
 
         jPanel1.setMinimumSize(new java.awt.Dimension(141, 35));
         jPanel1.setOpaque(false);
@@ -136,17 +194,21 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         checked = !checked; 
         updateIcon();
+        sauvegarder();
         this.getRootPane().repaint();
     }//GEN-LAST:event_formMouseReleased
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Activer;
+    private javax.swing.JLabel PaysDestinationLabel;
+    private javax.swing.JLabel PaysIcon;
+    private javax.swing.JLabel PaysOrigineLabel;
     private javax.swing.JSpinner Transmission;
     private javax.swing.JLabel TransmissionLabel;
     private javax.swing.JLabel VoieIcon1;
     private javax.swing.JLabel VoieLabel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

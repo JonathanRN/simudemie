@@ -5,6 +5,7 @@
  */
 package ca.ulaval.glo2004.domaine;
 
+import ca.ulaval.glo2004.domaine.VoieLiaison.TypeVoie;
 import java.awt.Polygon;
 import java.io.Externalizable;
 import java.io.IOException;
@@ -134,6 +135,14 @@ public class Carte implements Externalizable {
     }
     
     public ArrayList<VoieLiaison> getVoies() {return frontieres;}
+    
+    public VoieLiaison getVoie(String paysOrigine, String paysDestination, TypeVoie type) {
+        return getVoies()
+                    .stream()
+                    .filter(v -> v.getPaysOrigine().getNom().equals(paysOrigine) &&
+                                 v.getPaysDestination().getNom().equals(paysDestination) &&
+                                 v.getType() == type).findFirst().orElse(null);
+    }
     
     public ArrayList<VoieLiaison.TypeVoie> getVoiesDisponibles(Pays origine, Pays destination) {
         ArrayList<VoieLiaison.TypeVoie> voies = new ArrayList<>();

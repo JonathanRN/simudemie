@@ -12,6 +12,8 @@ import ca.ulaval.glo2004.domaine.Mesure;
 import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.Vaccin;
+import ca.ulaval.glo2004.domaine.VoieLiaison;
+import ca.ulaval.glo2004.domaine.VoieLiaison.TypeVoie;
 import ca.ulaval.glo2004.domaine.helper.FileHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -154,6 +156,12 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         }
         
         return vaccinActiveElsewhere;
+    }
+    
+    public void modifierLien(String paysOrigine, String paysDestination, TypeVoie type, boolean accessible, double tauxPropag) {
+        VoieLiaison voie = getCourant().getCarteJourCourant().getVoie(paysOrigine, paysDestination, type);
+        voie.setAccessible(accessible);
+        voie.setTauxPropag(tauxPropag);
     }
     
     public void pause() {timer.stop();}

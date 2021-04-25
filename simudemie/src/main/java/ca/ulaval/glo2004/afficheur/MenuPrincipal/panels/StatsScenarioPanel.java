@@ -216,6 +216,8 @@ public class StatsScenarioPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_ResumeBoutonMouseReleased
 
     private void ExportStatsLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportStatsLabelMouseReleased
+        if(onglet.getCourant() == null) return;
+        
         int result = fileChooser.showDialog(null, "Exporter statistiques");
         if(fileChooser.getSelectedFile() != null  && result == JFileChooser.OPEN_DIALOG) {
             try {

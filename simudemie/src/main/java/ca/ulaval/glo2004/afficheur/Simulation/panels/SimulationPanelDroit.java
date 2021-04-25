@@ -10,7 +10,6 @@ import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
 import ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi;
 import ca.ulaval.glo2004.domaine.Maladie;
-import ca.ulaval.glo2004.domaine.Mesure;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.text.ParseException;
 import javax.swing.ImageIcon;
@@ -23,7 +22,6 @@ import javax.swing.ImageIcon;
 public class SimulationPanelDroit extends PanelArrondi {
     
         private Simulation simulation;
-        private Maladie maladie;
         private boolean edition, mouseOverEdition;
 
     public SimulationPanelDroit() {
@@ -43,7 +41,6 @@ public class SimulationPanelDroit extends PanelArrondi {
             TauxInfection.getEditor().getComponent(0).setBackground(Couleurs.sideMenuNoTransp);
             TauxGuerison.getEditor().getComponent(0).setBackground(Couleurs.sideMenuNoTransp);
             TauxMortalite.getEditor().getComponent(0).setBackground(Couleurs.sideMenuNoTransp);
-           
         }
         catch(Exception e) {
         }

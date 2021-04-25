@@ -118,6 +118,7 @@ public class OngletScenario extends OngletUI {
             if (objets.isEmpty()) {
                 ApercuScenarioCartePanel.setPreviewVisibility(false);
                 StatsScenarioPanel1.setDataset(null);
+                //ExportStatsLabel.setVisible(false);
             }
         }
     }

@@ -55,7 +55,6 @@ public class Mode {
         
         paintLignes(g, Color.red, lignesInvalides);
         
-        recalculeVoies();
         paintVoies(g);
     }
     
@@ -112,6 +111,7 @@ public class Mode {
     }
     
     protected void paintVoies(Graphics2D g) {
+        recalculeVoies();
         for (int i = 0; i < carte.getVoies().size(); i++) {
             g.setColor(carte.getVoies().get(i).getCouleur());
             g.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f));

@@ -6,7 +6,6 @@
 package ca.ulaval.glo2004.afficheur.CreationCarte.mode;
 
 import ca.ulaval.glo2004.afficheur.CreationCarte.CreationCarte;
-import ca.ulaval.glo2004.afficheur.Simulation.Simulation;
 import ca.ulaval.glo2004.afficheur.utilsUI.Couleurs;
 import ca.ulaval.glo2004.domaine.Carte;
 import ca.ulaval.glo2004.domaine.Pays;

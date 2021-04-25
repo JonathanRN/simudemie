@@ -58,9 +58,8 @@ public class VoieLiaison implements Externalizable {
         this.paysDestination = new Pays(voie.paysDestination);
         this.tauxPropag = voie.tauxPropag;
         
-        // todo voir si modifications dans carte change ici
-        this.ligneCourbe = voie.ligneCourbe;
-        this.centre = voie.centre;
+        this.ligneCourbe = new Path2D.Double(voie.ligneCourbe);
+        this.centre = new Point(voie.centre);
         this.accessible = voie.accessible;
     }
         
@@ -84,9 +83,14 @@ public class VoieLiaison implements Externalizable {
     
     public void setTauxPropag(double tauxPropag) {this.tauxPropag = tauxPropag;}
     
-    public Path2D.Double getLigne() {return ligneCourbe;}
+    public Path2D.Double getLigne() {
+        return ligneCourbe;
+    }
     
-    public void setLigne(Path2D.Double ligne) { ligneCourbe.reset(); ligneCourbe = ligne; }
+    public void setLigne(Path2D.Double ligne) {
+        ligneCourbe.reset();
+        ligneCourbe = ligne;
+    }
     
     public Point getCentre() {return centre;}
     

@@ -142,6 +142,7 @@ public class Selection extends Mode {
             }
             draggedBounds = null;
             intersection = null;
+            snapOrigine = null;
         }
         
         super.onMouseReleased(point);
@@ -152,7 +153,9 @@ public class Selection extends Mode {
         for (Pays p : carte.getListePays()) {
             if (p.contient(point.x, point.y)) {
                 draggedBounds = p.getBounds();
-                snapOrigine = p;
+                if (snapOrigine == null) {
+                    snapOrigine = p;
+                }
                 break;
             }
         }
@@ -275,6 +278,7 @@ public class Selection extends Mode {
     @Override
     public void onRedo() {
         super.onRedo();
+        
         if (creationCarte.getInformationsPanel().isVisible()) {
             creationCarte.getInformationsPanel().setVisible(false);
             selectionne = null;
@@ -287,6 +291,7 @@ public class Selection extends Mode {
     @Override
     public void onUndo() {
         super.onUndo();
+
         if (creationCarte.getInformationsPanel().isVisible()) {
             creationCarte.getInformationsPanel().setVisible(false);
             selectionne = null;

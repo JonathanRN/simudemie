@@ -164,6 +164,10 @@ public class GestionnaireScenario extends GestionnaireOnglet<Scenario> implement
         voie.setTauxPropag(tauxPropag);
     }
     
+    public void modifierTauxContaInterRegion(int indexPays, double tauxContaInterRegion) {
+        getCourant().getCarteJourCourant().getPays(indexPays).setTauxContaInterRegion(tauxContaInterRegion);
+    }
+    
     public void pause() {timer.stop();}
     
     public void resumer() {

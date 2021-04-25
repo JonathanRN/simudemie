@@ -27,9 +27,12 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -94,10 +97,27 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
             BoutonStats.init(this, "icons8_bar_chart_30px");
             StatsTitreLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
+            TransmissionInterRegion.addChangeListener(new ChangeListener() {
+                @Override
+                public void stateChanged(ChangeEvent e) {
+                    sauvegarderInterRegion();
+                }
+            });
+            
             onToggleClick(BoutonMesures);
         }
         catch(Exception e) {
         }
+    }
+    
+    private void sauvegarderInterRegion() {
+        try {
+            TransmissionInterRegion.commitEdit();
+        } catch(ParseException pe) {
+            
+        }
+        
+        GestionnaireScenario.getInstance().modifierTauxContaInterRegion(indexPays, (double) TransmissionInterRegion.getValue());
     }
     
     public void setSimulation(Simulation simulation) {
@@ -173,6 +193,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
             loadMesures();
         }
         else if (toggleCourant.equals(BoutonLiens)) {
+            loadTransmissionInterRegion();
             loadLiens();
         }
         else if (toggleCourant.equals(BoutonVaccins)) {
@@ -201,11 +222,17 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         }
     }
     
+    public void loadTransmissionInterRegion() {
+        double tauxContaInterRegion = simulation.getScenario().getCarteJourCourant().getPays(indexPays).getTauxContaInterRegion();
+        TransmissionInterRegion.setValue(tauxContaInterRegion);
+    }
+    
     public void loadLiens() {
         voies.clear();
         ConteneurLiensPanel.removeAll();
         ConteneurLiensPanel.getParent().validate();
         ConteneurLiensPanel.getRootPane().repaint();
+
         
         Carte carte = simulation.getScenario().getCarteJourCourant();
         for (VoieLiaison voie : carte.getVoies()) {
@@ -217,23 +244,14 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
                 }
             }
         }
-        System.out.println("------------------------");
         
         ConteneurLiensPanel.getParent().validate();
         ConteneurLiensPanel.getRootPane().repaint();
     }
     
     private void addVoie(VoieLiaison voie) {
-        ObjetSimulationVoieLiaison osl = new ObjetSimulationVoieLiaison(voie.getPaysOrigine().getNom(),
-                                                                        voie.getPaysDestination().getNom(),
-                                                                        voie.getType(),
-                                                                        voie.getAccessible(),
-                                                                        voie.getTauxPropag());
-        System.out.println(osl);
+        ObjetSimulationVoieLiaison osl = new ObjetSimulationVoieLiaison(voie);
         ConteneurLiensPanel.add(osl);
-        ConteneurLiensPanel.getParent().validate();
-        ConteneurLiensPanel.getRootPane().repaint();
-        System.out.println(ConteneurLiensPanel.getComponents().length);
         voies.add(voie);
     }
     
@@ -503,8 +521,12 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         LiensScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         ConteneurLiensPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        ConteneurLiensPanel.setMaximumSize(new java.awt.Dimension(10, 10));
+        ConteneurLiensPanel.setMinimumSize(new java.awt.Dimension(10, 10));
+        ConteneurLiensPanel.setName(""); // NOI18N
         ConteneurLiensPanel.setOpaque(false);
-        ConteneurLiensPanel.setLayout(new java.awt.GridLayout(3, 0));
+        ConteneurLiensPanel.setPreferredSize(new java.awt.Dimension(10, 10));
+        ConteneurLiensPanel.setLayout(new javax.swing.BoxLayout(ConteneurLiensPanel, javax.swing.BoxLayout.Y_AXIS));
         LiensScrollPane.setViewportView(ConteneurLiensPanel);
 
         LiensPanel.add(LiensScrollPane, java.awt.BorderLayout.CENTER);

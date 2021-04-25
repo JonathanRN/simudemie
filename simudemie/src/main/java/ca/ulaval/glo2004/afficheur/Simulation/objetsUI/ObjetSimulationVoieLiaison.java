@@ -6,6 +6,7 @@
 package ca.ulaval.glo2004.afficheur.Simulation.objetsUI;
 
 import ca.ulaval.glo2004.afficheur.utilsUI.FontRegister;
+import ca.ulaval.glo2004.domaine.VoieLiaison;
 import ca.ulaval.glo2004.domaine.VoieLiaison.TypeVoie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.text.ParseException;
@@ -23,15 +24,14 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
     
     private boolean mouseOver, checked = true;
         
-    public ObjetSimulationVoieLiaison(String paysOrigine, String paysDestination, TypeVoie type, boolean accessible, double tauxPropag) {
+    public ObjetSimulationVoieLiaison(VoieLiaison voie) {
         initComponents();
         
-        
-        PaysOrigineLabel.setText(paysOrigine);
-        PaysDestinationLabel.setText(paysDestination);
-        setTypeVoie(type);
-        checked = accessible;
-        Transmission.setValue(tauxPropag);
+        PaysOrigineLabel.setText(voie.getPaysOrigine().getNom());
+        PaysDestinationLabel.setText(voie.getPaysDestination().getNom());
+        setTypeVoie(voie.getType());
+        checked = voie.getAccessible();
+        Transmission.setValue(voie.getTauxPropag());
         
         Transmission.addChangeListener(new ChangeListener() {
             @Override

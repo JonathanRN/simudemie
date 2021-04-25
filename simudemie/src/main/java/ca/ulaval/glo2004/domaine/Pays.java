@@ -221,6 +221,16 @@ public class Pays implements Externalizable {
     
     public void supprimerVaccin(String nom) { vaccins.removeIf(v -> v.getNom().equals(nom));}
 
+    public void setTauxContaInterRegion(double tauxContaInterRegion) {
+        for(Region r : listeRegions) {
+           r.setTauxContaInterRegion(tauxContaInterRegion);
+        }
+    }
+    
+    public double getTauxContaInterRegion() {
+        return listeRegions.get(0).getTauxContaInterRegion();
+    }
+    
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeUTF(nom);

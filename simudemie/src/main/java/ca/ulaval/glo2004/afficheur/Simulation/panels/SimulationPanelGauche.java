@@ -19,7 +19,6 @@ import ca.ulaval.glo2004.domaine.Pays;
 import ca.ulaval.glo2004.domaine.Scenario;
 import ca.ulaval.glo2004.domaine.Vaccin;
 import ca.ulaval.glo2004.domaine.VoieLiaison;
-import ca.ulaval.glo2004.domaine.VoieLiaison.TypeVoie;
 import ca.ulaval.glo2004.domaine.controleur.GestionnaireScenario;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
@@ -81,16 +80,15 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
             MesuresActives.getVerticalScrollBar().addAdjustmentListener(this);
             MesuresTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
-            BoutonLiens.init(this, "icons8_chain_25px");
-            LiensTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
-            LiensScrollPane.getViewport().setOpaque(false);
-            
             BoutonVaccins.init(this, "icons8_syringe_30px");
             VaccinsScrollPane.getViewport().setOpaque(false);
             VaccinsScrollPane.getVerticalScrollBar().setUnitIncrement(15);
             VaccinsScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
             VaccinsTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
+            BoutonLiens.init(this, "icons8_chain_25px");
+            LiensTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            LiensScrollPane.getViewport().setOpaque(false);
             LiensScrollPane.getVerticalScrollBar().setUnitIncrement(15);
             LiensScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
             
@@ -104,9 +102,15 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
                 }
             });
             
-            onToggleClick(BoutonMesures);
+            // On active par defaut l'onglet de mesures
+            toggleCourant = BoutonMesures;
+            MesuresPanel.setVisible(true);
+            LiensPanel.setVisible(false);
+            VaccinsPanel.setVisible(false);
+            StatsPanel.setVisible(false);
         }
         catch(Exception e) {
+            e.printStackTrace();
         }
     }
     
@@ -232,7 +236,6 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         ConteneurLiensPanel.removeAll();
         ConteneurLiensPanel.getParent().validate();
         ConteneurLiensPanel.getRootPane().repaint();
-
         
         Carte carte = simulation.getScenario().getCarteJourCourant();
         for (VoieLiaison voie : carte.getVoies()) {
@@ -244,15 +247,15 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
                 }
             }
         }
-        
-        ConteneurLiensPanel.getParent().validate();
-        ConteneurLiensPanel.getRootPane().repaint();
     }
     
     private void addVoie(VoieLiaison voie) {
         ObjetSimulationVoieLiaison osl = new ObjetSimulationVoieLiaison(voie);
-        ConteneurLiensPanel.add(osl);
         voies.add(voie);
+        
+        ConteneurLiensPanel.add(osl);
+        ConteneurLiensPanel.getParent().validate();
+        ConteneurLiensPanel.getRootPane().repaint();
     }
     
     public void loadVaccins() {
@@ -496,7 +499,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         LiensTitre.setPreferredSize(new java.awt.Dimension(62, 30));
         TitreOngletPanel.add(LiensTitre, java.awt.BorderLayout.CENTER);
 
-        TransmissionInterRegionPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 10, 10));
+        TransmissionInterRegionPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         TransmissionInterRegionPanel.setOpaque(false);
         TransmissionInterRegionPanel.setLayout(new javax.swing.BoxLayout(TransmissionInterRegionPanel, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -519,13 +522,9 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
 
         LiensScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         LiensScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        LiensScrollPane.setOpaque(false);
 
-        ConteneurLiensPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        ConteneurLiensPanel.setMaximumSize(new java.awt.Dimension(10, 10));
-        ConteneurLiensPanel.setMinimumSize(new java.awt.Dimension(10, 10));
-        ConteneurLiensPanel.setName(""); // NOI18N
         ConteneurLiensPanel.setOpaque(false);
-        ConteneurLiensPanel.setPreferredSize(new java.awt.Dimension(10, 10));
         ConteneurLiensPanel.setLayout(new javax.swing.BoxLayout(ConteneurLiensPanel, javax.swing.BoxLayout.Y_AXIS));
         LiensScrollPane.setViewportView(ConteneurLiensPanel);
 

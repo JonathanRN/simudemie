@@ -27,19 +27,24 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
     public ObjetSimulationVoieLiaison(VoieLiaison voie) {
         initComponents();
         
-        PaysOrigineLabel.setText(voie.getPaysOrigine().getNom());
-        PaysDestinationLabel.setText(voie.getPaysDestination().getNom());
-        setTypeVoie(voie.getType());
-        checked = voie.getAccessible();
-        Transmission.setValue(voie.getTauxPropag());
-        
-        Transmission.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                sauvegarder();
-            }
-        });
-        updateIcon();
+        try {
+            PaysOrigineLabel.setText(voie.getPaysOrigine().getNom());
+            PaysDestinationLabel.setText(voie.getPaysDestination().getNom());
+            setTypeVoie(voie.getType());
+            checked = voie.getAccessible();
+            Transmission.setValue(voie.getTauxPropag());
+
+            Transmission.addChangeListener(new ChangeListener() {
+                @Override
+                public void stateChanged(ChangeEvent e) {
+                    sauvegarder();
+                }
+            });
+            updateIcon();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     public void setTypeVoie(TypeVoie type) {
@@ -83,21 +88,22 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
+        Pays = new javax.swing.JPanel();
         PaysOrigineLabel = new javax.swing.JLabel();
         PaysIcon = new javax.swing.JLabel();
         PaysDestinationLabel = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        Voie = new javax.swing.JPanel();
         Activer = new javax.swing.JLabel();
         VoieLabel = new javax.swing.JLabel();
         VoieIcon1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        Prob = new javax.swing.JPanel();
         TransmissionLabel = new javax.swing.JLabel();
         Transmission = new javax.swing.JSpinner();
 
-        setMinimumSize(new java.awt.Dimension(288, 60));
+        setMaximumSize(new java.awt.Dimension(276, 106));
+        setMinimumSize(new java.awt.Dimension(276, 106));
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(288, 60));
+        setPreferredSize(new java.awt.Dimension(276, 106));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 formMouseEntered(evt);
@@ -109,74 +115,70 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
                 formMouseReleased(evt);
             }
         });
-        setLayout(new java.awt.GridLayout(3, 0, 0, -20));
+        setLayout(new java.awt.GridLayout(3, 0));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 17, 1, 1));
-        jPanel2.setMinimumSize(new java.awt.Dimension(141, 35));
-        jPanel2.setOpaque(false);
-        jPanel2.setPreferredSize(new java.awt.Dimension(100, 35));
-        jPanel2.setRequestFocusEnabled(false);
-        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.LINE_AXIS));
+        Pays.setMinimumSize(new java.awt.Dimension(141, 35));
+        Pays.setOpaque(false);
+        Pays.setPreferredSize(new java.awt.Dimension(100, 35));
+        Pays.setRequestFocusEnabled(false);
+        Pays.setLayout(new javax.swing.BoxLayout(Pays, javax.swing.BoxLayout.LINE_AXIS));
 
         PaysOrigineLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         PaysOrigineLabel.setText("Pays A");
         PaysOrigineLabel.setPreferredSize(new java.awt.Dimension(50, 16));
-        jPanel2.add(PaysOrigineLabel);
+        Pays.add(PaysOrigineLabel);
 
         PaysIcon.setFont(FontRegister.RobotoLight.deriveFont(14f));
         PaysIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simulation/lien/arrow_24px.png"))); // NOI18N
         PaysIcon.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 10));
-        jPanel2.add(PaysIcon);
+        Pays.add(PaysIcon);
 
         PaysDestinationLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         PaysDestinationLabel.setText("Pays B");
-        jPanel2.add(PaysDestinationLabel);
+        Pays.add(PaysDestinationLabel);
 
-        add(jPanel2);
-        jPanel2.getAccessibleContext().setAccessibleDescription("");
+        add(Pays);
+        Pays.getAccessibleContext().setAccessibleDescription("");
 
-        jPanel1.setMinimumSize(new java.awt.Dimension(141, 35));
-        jPanel1.setOpaque(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(100, 35));
-        jPanel1.setRequestFocusEnabled(false);
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+        Voie.setMinimumSize(new java.awt.Dimension(141, 35));
+        Voie.setOpaque(false);
+        Voie.setPreferredSize(new java.awt.Dimension(100, 35));
+        Voie.setRequestFocusEnabled(false);
+        Voie.setLayout(new javax.swing.BoxLayout(Voie, javax.swing.BoxLayout.LINE_AXIS));
 
-        Activer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Activer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/simulation/mesure/unchecked.png"))); // NOI18N
         Activer.setMaximumSize(new java.awt.Dimension(50, 50));
         Activer.setMinimumSize(new java.awt.Dimension(50, 50));
-        Activer.setPreferredSize(new java.awt.Dimension(50, 50));
-        jPanel1.add(Activer);
+        Activer.setPreferredSize(new java.awt.Dimension(30, 50));
+        Voie.add(Activer);
 
         VoieLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
         VoieLabel.setText("Voie Terrestre");
         VoieLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 20));
         VoieLabel.setPreferredSize(new java.awt.Dimension(50, 16));
-        jPanel1.add(VoieLabel);
-        jPanel1.add(VoieIcon1);
+        Voie.add(VoieLabel);
+        Voie.add(VoieIcon1);
 
-        add(jPanel1);
+        add(Voie);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 0, 10, 10));
-        jPanel3.setMinimumSize(new java.awt.Dimension(288, 35));
-        jPanel3.setOpaque(false);
-        jPanel3.setPreferredSize(new java.awt.Dimension(288, 35));
-        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));
+        Prob.setMinimumSize(new java.awt.Dimension(288, 35));
+        Prob.setOpaque(false);
+        Prob.setPreferredSize(new java.awt.Dimension(288, 35));
+        Prob.setLayout(new javax.swing.BoxLayout(Prob, javax.swing.BoxLayout.LINE_AXIS));
 
         TransmissionLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
-        TransmissionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TransmissionLabel.setText("Probabilité de transmission :");
         TransmissionLabel.setAlignmentX(0.5F);
         TransmissionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         TransmissionLabel.setMaximumSize(new java.awt.Dimension(200, 19));
         TransmissionLabel.setMinimumSize(new java.awt.Dimension(200, 19));
         TransmissionLabel.setPreferredSize(new java.awt.Dimension(200, 19));
-        jPanel3.add(TransmissionLabel);
+        Prob.add(TransmissionLabel);
 
         Transmission.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 99.9d, 0.5d));
-        jPanel3.add(Transmission);
+        Prob.add(Transmission);
 
-        add(jPanel3);
+        add(Prob);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
@@ -200,15 +202,15 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Activer;
+    private javax.swing.JPanel Pays;
     private javax.swing.JLabel PaysDestinationLabel;
     private javax.swing.JLabel PaysIcon;
     private javax.swing.JLabel PaysOrigineLabel;
+    private javax.swing.JPanel Prob;
     private javax.swing.JSpinner Transmission;
     private javax.swing.JLabel TransmissionLabel;
+    private javax.swing.JPanel Voie;
     private javax.swing.JLabel VoieIcon1;
     private javax.swing.JLabel VoieLabel;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

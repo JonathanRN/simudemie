@@ -100,6 +100,7 @@ public class ObjetSimulationVoieLiaison extends javax.swing.JPanel {
         TransmissionLabel = new javax.swing.JLabel();
         Transmission = new javax.swing.JSpinner();
 
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 15, 0));
         setMaximumSize(new java.awt.Dimension(276, 106));
         setMinimumSize(new java.awt.Dimension(276, 106));
         setOpaque(false);

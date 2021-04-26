@@ -93,7 +93,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
             LiensScrollPane.getVerticalScrollBar().addAdjustmentListener(this);
             
             BoutonStats.init(this, "icons8_bar_chart_30px");
-            StatsTitreLabel.setFont(FontRegister.RobotoLight.deriveFont(14f));
+            StatsTitre.setFont(FontRegister.RobotoLight.deriveFont(14f));
             
             TransmissionInterRegion.addChangeListener(new ChangeListener() {
                 @Override
@@ -209,6 +209,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     }
     
     public void loadMesures() {
+        MesuresTitre.setText("Mesures : " + simulation.getScenario().getCarteJourCourant().getPays(indexPays).getNom());
         ConteneurMesuresPanel.removeAll();
         ConteneurMesuresPanel.getParent().validate();
         ConteneurMesuresPanel.getRootPane().repaint();
@@ -232,6 +233,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     }
     
     public void loadLiens() {
+        LiensTitre.setText("Liens : " + simulation.getScenario().getCarteJourCourant().getPays(indexPays).getNom());
         voies.clear();
         ConteneurLiensPanel.removeAll();
         ConteneurLiensPanel.getParent().validate();
@@ -259,6 +261,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     }
     
     public void loadVaccins() {
+        VaccinsTitre.setText("Vaccins : " + simulation.getScenario().getCarteJourCourant().getPays(indexPays).getNom());
         ConteneurVaccinsPanel.removeAll();
         ConteneurVaccinsPanel.getParent().validate();
         ConteneurVaccinsPanel.getRootPane().repaint();
@@ -269,6 +272,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     }
     
     public void loadStats() {
+        StatsTitre.setText("Statistiques : " + simulation.getScenario().getCarteJourCourant().getPays(indexPays).getNom());
         ConteneurStatsPanel.removeAll();
         
         Scenario scenario = simulation.getScenario();
@@ -418,7 +422,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         ConteneurVaccinsPanel = new javax.swing.JPanel();
         StatsPanel = new javax.swing.JPanel();
         TitreStatsPanel = new javax.swing.JPanel();
-        StatsTitreLabel = new javax.swing.JLabel();
+        StatsTitre = new javax.swing.JLabel();
         ExportStats = new javax.swing.JLabel();
         ConteneurStatsPanel = new javax.swing.JPanel();
 
@@ -586,11 +590,11 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
         TitreStatsPanel.setOpaque(false);
         TitreStatsPanel.setLayout(new java.awt.BorderLayout());
 
-        StatsTitreLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        StatsTitreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        StatsTitreLabel.setText("Statistiques");
-        StatsTitreLabel.setPreferredSize(new java.awt.Dimension(62, 30));
-        TitreStatsPanel.add(StatsTitreLabel, java.awt.BorderLayout.CENTER);
+        StatsTitre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        StatsTitre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        StatsTitre.setText("Statistiques");
+        StatsTitre.setPreferredSize(new java.awt.Dimension(62, 30));
+        TitreStatsPanel.add(StatsTitre, java.awt.BorderLayout.CENTER);
 
         ExportStats.setFont(new java.awt.Font("Dialog", 0, 25)); // NOI18N
         ExportStats.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -699,7 +703,7 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     private ca.ulaval.glo2004.afficheur.utilsUI.PanelArrondi SidePanel;
     private javax.swing.JPanel SidePanelParent;
     private javax.swing.JPanel StatsPanel;
-    private javax.swing.JLabel StatsTitreLabel;
+    private javax.swing.JLabel StatsTitre;
     private javax.swing.JPanel Titre;
     private javax.swing.JPanel TitreOngletPanel;
     private javax.swing.JPanel TitrePanel;

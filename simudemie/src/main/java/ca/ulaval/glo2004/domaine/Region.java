@@ -13,7 +13,6 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import java.util.Objects;
 import java.util.Vector;
 
 
@@ -64,7 +63,7 @@ public class Region implements Externalizable {
         //Nous ajoutons les nouveaux infectés dans un vecteur pour ajouter une dose de réalisme.
         //Lorsque l'élimination et guérison de la pop ont lieu, ces méthodes s'appliquent sur la 
         //pop infectée d'il y a 2 semaines (inspiré du Covid - période d'incubation d'environ 2 semaines)
-        int nouveauxInfectes = (int)(contaminationBinomiale(taux, incubation)/2);
+        int nouveauxInfectes = (int)Math.ceil(contaminationBinomiale(taux, incubation)/2f);
         this.listeInfections.add(nouveauxInfectes);
         setPopInfectee(this.getPopInfectee() + nouveauxInfectes);
         setPopSaine(this.getPopSaine() - nouveauxInfectes);
@@ -74,7 +73,7 @@ public class Region implements Externalizable {
     {
         //Les premières infections ont lieu 2 semaines après la 1ere infection
         if (cptJours > 14 && getPopInfectee() > 0f){
-            int deces = (int)(this.listeInfections.get(cptJours - incubation) * taux);
+            int deces = (int)Math.ceil(this.listeInfections.get(cptJours - incubation) * taux);
             setPopDecedee(this.getPopDecedee() + deces);
             setPopInfectee(this.getPopInfectee() - deces);
         }
@@ -84,7 +83,7 @@ public class Region implements Externalizable {
     {
         //Les premières guerisons ont lieu 2 semaines après la 1ere infection
         if (cptJours > 14){
-            int gueris = (int)(this.listeInfections.get(cptJours - incubation) * taux);
+            int gueris = (int)Math.ceil(this.listeInfections.get(cptJours - incubation) * taux);
             if (immunitePossible){
                 setPopImmune(this.getPopImmunisee() + gueris);
                 setPopInfectee(this.getPopInfectee() - gueris); 

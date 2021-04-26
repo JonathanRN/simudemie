@@ -140,6 +140,10 @@ public class SimulationPanelGauche extends PanelArrondi implements AdjustmentLis
     }
     
     public void onAvancerJour(int jour) {
+        if (toggleCourant.equals(BoutonMesures)) {
+            updateMesures();
+        }
+        
         // Ne rien faire si l'on est pas sur l'onglet stats
         if (!toggleCourant.equals(BoutonStats)) {
             return;
